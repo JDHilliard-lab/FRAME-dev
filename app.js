@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.00';
+const APP_VERSION = '20.01';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -28699,7 +28699,8 @@ function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     const fam = _fontCss(a.capFont, 'serif');
     const byFile = a.capSource === 'filename';
     cap.textContent = _dsResolveCaptionText(a);
-    cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + Math.max(8, 0.0165 * hh) + 'px; font-style:italic; color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:' + fam + '; cursor:' + (byFile ? 'default' : 'text') + '; z-index:20; white-space:pre-wrap;font-kerning:none;';
+    const capPx = byFile ? _capCodeFitPx(cap.textContent, Math.max(8, 0.0165 * hh), bw, fam) : Math.max(8, 0.0165 * hh);
+    cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + capPx + 'px; font-style:italic;' + (byFile ? ' white-space:nowrap; display:flex; justify-content:' + (align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center') + ';' : '') + ' color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:' + fam + '; cursor:' + (byFile ? 'default' : 'text') + '; z-index:20;' + (byFile ? 'font-kerning:none;' : ' white-space:pre-wrap;font-kerning:none;');
     cap.title = byFile ? 'Caption follows the image\u2019s file name \u2014 change it in the gear popup\u2019s Caption section' : 'Double-click to edit the caption';
     if (byFile) { page.appendChild(cap); return; }
     cap.ondblclick = (e) => {
@@ -29548,6 +29549,9 @@ function _layoutRichLines(t, boxWpx, PH, measure) {
             cur.tokens.push({ text: txt, r: tok.r, x: cur.w, w: w, fs: st.fs, heavy: st.heavy, ital: st.ital });
             cur.w += w; cur.fs = Math.max(cur.fs, st.fs);
         });
+        // The last line of a paragraph (20.01): justify leaves it alone, as the editor's
+        // CSS does (text-align-last), not only the last line of the whole box.
+        cur.paraEnd = true;
         lines.push(cur);
     });
     return lines;
@@ -29589,7 +29593,7 @@ function _drawRichTextPdf(doc, t, x, y, w, PH) {
         // legacy plain-text path used for body-copy paragraphs. The LAST
         // line of the block is left as-is (standard typographic convention;
         // also avoids ugly single-word stretching on a short final line).
-        if (justify && li < lines.length - 1 && line.tokens.length > 1) {
+        if (justify && li < lines.length - 1 && !(line.paraEnd && t.align !== 'justify-all') && line.tokens.length > 1) {
             const slack = w - line.w;
             const gaps = line.tokens.filter(tk => !tk.text.trim());
             if (slack > 0.5 && gaps.length) {
@@ -45006,6 +45010,19 @@ function _softShadowDataUrl(wPt, hPt, ell) {
         _shadowCache[key] = out; return out;
     } catch (e) { return null; }
 }
+const CAP_CODE_MIN_PT = 6;
+// The screen half of the same rule: the size (px) an image-code caption is drawn at so it
+// fits `boxW`, from `basePx` down to the same floor as the PDF, measured in the caption face.
+function _capCodeFitPx(text, basePx, boxW, fam) {
+    let px = basePx;
+    try {
+        const cx = _richMeasureCtx(); if (!cx) return px;
+        const floor = basePx * CAP_CODE_MIN_PT / 9;
+        cx.font = 'italic ' + px + 'px ' + fam;
+        while (px > floor && cx.measureText(text).width > boxW) { px -= basePx / 18; cx.font = 'italic ' + px + 'px ' + fam; }
+    } catch (e) {}
+    return px;
+}
 function _drawAnnCaption(doc, a, x, y, pw, ph) {
     const capText = _dsResolveCaptionText(a);
     if (!a.showCaption || !capText.trim()) return;
@@ -45013,6 +45030,14 @@ function _drawAnnCaption(doc, a, x, y, pw, ph) {
         doc.setFont(_font(_fontToken(a.capFont, 'serif')), 'italic'); doc.setFontSize(9); doc.setTextColor(138, 138, 138);
         const align = a.capAlign || 'center';
         let tx = x; if (align === 'center') tx = x + pw / 2; else if (align === 'right') tx = x + pw;
+        // AN IMAGE CODE IS NEVER BROKEN (20.01): it has no spaces, so splitTextToSize cut it
+        // mid-code ("DMM.010.00"). One line, stepped down to fit the box, as on screen.
+        if (a.capSource === 'filename') {
+            const t1 = capText.trim(); let fs = 9;
+            while (fs > CAP_CODE_MIN_PT && doc.getTextWidth(t1) > pw) { fs -= 0.5; doc.setFontSize(fs); }
+            doc.text(t1, tx, y + ph + 12, { align: align });
+            return;
+        }
         const lines = doc.splitTextToSize(capText.trim(), pw);
         doc.text(lines, tx, y + ph + 12, { align: align, maxWidth: pw });
     } catch (e) {}
@@ -49452,7 +49477,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
+                body: `<strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
+<strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
 <strong>19.98</strong> <b>Budget sketch</b> on the floor plan. The add bar has a <b>Size</b> (the standard sizes from the budgeting guide, 11 x 14 to 40 x 50, both ways round) and a <b>Sketch</b> button: while it is on, every click on the plan drops a new piece of the chosen type and size right there, and an <b>Area</b> field names where they go. The pieces are priced by the rate card as they land, and a budget line under the bar shows the total against the budget. Esc or Sketch again stops. + Add code takes the size too.<br><br>
 <strong>19.97</strong> The rate card has <b>add-ons</b>, from the studio's budgeting guide: premium frame (a Larson-Juhl or Universal Arquati moulding), non-glare glass (read off the Glass field, entered at 30x40 and scaled to each piece's area), moisture sealant (pieces in a bath, restroom, spa, pool or locker room, with a Sealant tick per piece on the Pricing tab), oversize (past 40x50) and a buffer percent on every estimate. Each one applies by itself from what the piece already says, and the Pricing tab lists what each piece took. Wallcovering and window film price per square foot alone: leave the base blank.<br><br>
@@ -59460,7 +59486,7 @@ async function exportElevSVG(opts) {
 // Sizes are INCHES both ways (the project unit is converted); pages are addressed by
 // KEY (`_deckPageKey`), items by code, walls by `elev.id`, never an index. A write is
 // one undo entry. Failures come back as `{ error }`, never a modal: nobody is watching.
-const FRAME_API_VERSION = 1;
+const FRAME_API_VERSION = 2;
 function _apiErr(msg) { return { error: msg }; }
 function _apiAfterEdit() {
     try { if (typeof scheduleAutosave === 'function') scheduleAutosave(); } catch (e) {}
@@ -59489,6 +59515,9 @@ async function _apiFile(src, name) {
 function _apiLoadImage(url) {
     return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = () => rej(new Error('image did not decode')); im.src = url; });
 }
+// A page whose words and pictures are its own: a layout page, or a fixed page drawn from
+// elements (cover, understanding, narrative, strategy, slogan). 20.01.
+function _apiFillable(d) { return !!d && (d.kind === 'layout' || (d.kind === 'fixed' && d.page && Array.isArray(d.page.elements))); }
 // The text and image slots of a layout page, in the order a template lists them.
 function _apiSlots(desc) {
     const key = _deckPageKey(desc);
@@ -59522,7 +59551,7 @@ const FRAME_API = {
     listPages() {
         const out = []; let n = 1;
         (_deckPageList() || []).forEach(d => {
-            out.push({ key: _deckPageKey(d), kind: d.kind, label: _dsPageLabel(d), page: n, span: _deckPageSpan(d), editable: d.kind === 'layout' });
+            out.push({ key: _deckPageKey(d), kind: d.kind, label: _dsPageLabel(d), page: n, span: _deckPageSpan(d), editable: _apiFillable(d) });
             n += _deckPageSpan(d);
         });
         return out;
@@ -59539,12 +59568,12 @@ const FRAME_API = {
     describePage(key) {
         const d = _apiPage(key);
         if (!d) return _apiErr('no page ' + key);
-        if (d.kind !== 'layout') return { key: key, kind: d.kind, label: _dsPageLabel(d), texts: [], images: [] };
+        if (!_apiFillable(d)) return { key: key, kind: d.kind, label: _dsPageLabel(d), texts: [], images: [] };
         const s = _apiSlots(d);
         return {
             key: key, kind: d.kind, label: _dsPageLabel(d),
             texts: s.texts.map((o, n) => ({ slot: n, text: o.e.text || '', x: o.e.x, y: o.e.y, w: o.e.w, font: o.e.font || '', size: o.e.size })),
-            images: s.shapes.map((a, n) => ({ slot: n, x: a.x, y: a.y, w: a.w, h: a.h, filled: !!a.dataUrl, fileName: a.fileName || '' })),
+            images: s.shapes.map((a, n) => ({ slot: n, x: a.x, y: a.y, w: a.w, h: a.h, filled: !!a.dataUrl, fileName: a.fileName || '', caption: a.showCaption ? _dsResolveCaptionText(a) : '' })),
         };
     },
 
@@ -59647,7 +59676,7 @@ const FRAME_API = {
     async fillPage(key, fill, _o) {
         const d = _apiPage(key);
         if (!d) return _apiErr('no page ' + key);
-        if (d.kind !== 'layout') return _apiErr(key + ' is not a layout page');
+        if (!_apiFillable(d)) return _apiErr(key + ' has no slots to fill (a layout page, or the cover, understanding, narrative, strategy or slogan)');
         const s = _apiSlots(d); fill = fill || {};
         const each = (v, fn) => { if (!v) return; Object.keys(v).forEach(k => { if (v[k] != null) fn(+k, v[k]); }); };
         const bad = [];
@@ -59657,8 +59686,12 @@ const FRAME_API = {
             delete o.e.runs;   // rich runs would keep printing the template's words
         });
         const jobs = [];
+        // 20.01: `false` takes an unused slot off the page (an empty grey box never prints well).
+        // Removed after the fills, so the slot numbers above still mean the template's.
+        const drop = [];
         each(fill.images, (n, v) => {
             const a = s.shapes[n]; if (!a) { bad.push('image slot ' + n); return; }
+            if (v === false) { drop.push(a); return; }
             const src = (v && typeof v === 'object' && !(typeof Blob !== 'undefined' && v instanceof Blob)) ? v : { image: v };
             jobs.push((async () => {
                 const file = await _apiFile(src.image, src.name);
@@ -59669,13 +59702,97 @@ const FRAME_API = {
                 const sc = Math.min(1, 1400 / Math.max(im.naturalWidth || 1, im.naturalHeight || 1));
                 const cnv = document.createElement('canvas'); cnv.width = Math.max(1, Math.round((im.naturalWidth || 1) * sc)); cnv.height = Math.max(1, Math.round((im.naturalHeight || 1) * sc));
                 let durl = url;
-                try { const cx = cnv.getContext('2d'); if (cx) { cx.drawImage(im, 0, 0, cnv.width, cnv.height); durl = /png/i.test(file.type) ? cnv.toDataURL('image/png') : cnv.toDataURL('image/jpeg', 0.85); } } catch (e) { durl = url; }
+                // A PNG stays a PNG only where its transparency is real (20.01): a pool of PNG
+                // photographs made a 96 MB project of a 15-page concept deck.
+                try { const cx = cnv.getContext('2d'); if (cx) { cx.drawImage(im, 0, 0, cnv.width, cnv.height); durl = (/png/i.test(file.type) && _imageDataHasAlpha(cx, cnv.width, cnv.height)) ? cnv.toDataURL('image/png') : cnv.toDataURL('image/jpeg', /png/i.test(file.type) ? 0.92 : 0.85); } } catch (e) { durl = url; }
                 _dsSetShapeImage(a, durl, im, file);
+                // 20.01: `fit: 'whole'` shrinks the box around the picture INSIDE its slot,
+                // centred (artwork is never cropped); `caption: 'code'` prints the image
+                // code under it, any other string prints that text.
+                if (src.fit === 'whole') {
+                    const w0 = a.w || 0.25, h0 = a.h || _dsShapeRatioH(w0, a.aspect), asp = a.aspect || 1;
+                    let w = w0, h = _dsShapeRatioH(w0, asp);
+                    if (h > h0) { h = h0; w = h0 / _dsShapeRatioH(1, asp); }
+                    a.x = (a.x || 0) + (w0 - w) / 2; a.y = (a.y || 0) + (h0 - h) / 2; a.w = w; a.h = h;
+                    a.fit = 'cover'; a.lockAspect = true; a.lockRatio = asp;
+                }
+                if (src.caption) {
+                    a.showCaption = true;
+                    if (src.caption === 'code') a.capSource = 'filename';
+                    else { a.capSource = 'text'; a.caption = String(src.caption); }
+                }
             })());
         });
         await Promise.all(jobs);
+        if (drop.length) { const list = (editorialContent.annotations || {})[s.key] || []; drop.forEach(a => { const i = list.indexOf(a); if (i >= 0) list.splice(i, 1); }); }
         if (!(_o && _o.noHistory)) { pushHistory(); _apiAfterEdit(); }
         return bad.length ? _apiErr('missing ' + bad.join(', ')) : { key: key };
+    },
+
+    // The Project tab's fields (20.01): { name, client, attn, date, code, version, location }.
+    // Written into the same inputs a designer types in, so the cover, footer and save agree.
+    setProject(fields) {
+        fields = fields || {};
+        const map = { name: 'g_projName', client: 'g_client', attn: 'g_attn', date: 'g_date', code: 'specPdfCode', version: 'specPdfVersion', location: 'specPdfLocation' };
+        const done = [];
+        Object.keys(fields).forEach(k => {
+            const el = map[k] && document.getElementById(map[k]); if (!el || fields[k] == null) return;
+            el.value = String(fields[k]); done.push(k);
+            try { el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); } catch (e) {}
+        });
+        const bad = Object.keys(fields).filter(k => !map[k]);
+        _apiAfterEdit();
+        return bad.length ? _apiErr('unknown field ' + bad.join(', ') + ' (name, client, attn, date, code, version, location)') : { set: done };
+    },
+    // Which standard pages print (20.01): { cover, timeline, understanding, narrative,
+    // strategy, frameRec, floorplanKey, spec, slogan, contacts } true/false. The Project
+    // tab's tick boxes, so the same one undo entry and the same saved map.
+    setPages(inc) {
+        inc = inc || {};
+        const bad = Object.keys(inc).filter(k => !DECK_INCLUDE_PAGES.some(p => p.key === k));
+        if (bad.length) return _apiErr('unknown page ' + bad.join(', ') + ' (' + DECK_INCLUDE_PAGES.map(p => p.key).join(', ') + ')');
+        Object.keys(inc).forEach(k => { const e = document.getElementById('specInc_' + k); if (e) e.checked = !!inc[k]; });
+        _dsIncludeChanged();
+        _apiAfterEdit();
+        return { pages: _dsInclude() };
+    },
+    // A page's line on the contents page (20.01): { hide: true|false, label: 'text' }.
+    setContentsEntry(key, o) {
+        const d = _apiPage(key); if (!d) return _apiErr('no page ' + key);
+        o = o || {};
+        if ('hide' in o) setTocOverride([key], 'hide', !!o.hide);
+        if ('label' in o) setTocOverride([key], 'label', o.label || '');
+        pushHistory(); _apiAfterEdit();
+        return { key: key };
+    },
+    // The studio directory the Thank You page picks from (20.01): [{name, role, team}].
+    async listContacts() { return (await _loadRepoContacts()).map(c => ({ name: c.name, role: c.role, team: c.team })); },
+    // The Thank You page's people, in print order (20.01): names from the directory, or
+    // { name, role, email, phone } for someone not in it. Replaces the list.
+    async setContacts(people) {
+        const dir = await _loadRepoContacts();
+        const out = [], bad = [];
+        (people || []).forEach(p => {
+            if (p && typeof p === 'object') { out.push({ name: p.name || '', role: p.role || '', email: p.email || '', phone: p.phone || '' }); return; }
+            const c = dir.find(x => String(x.name).toLowerCase() === String(p).trim().toLowerCase());
+            if (c) out.push({ name: c.name, role: c.role, email: c.email, phone: c.phone }); else bad.push(String(p));
+        });
+        if (bad.length) return _apiErr('not in the directory: ' + bad.join(', ') + ' (listContacts, or pass {name, role, email, phone})');
+        editorialContent.contacts = _contactsSerialize(out);
+        editorialContent.contactsHidden = []; editorialContent.contactsV = 2; delete editorialContent.contactsOrder;
+        pushHistory(); _apiAfterEdit();
+        return { contacts: out.map(c => c.name) };
+    },
+    // A layout page out of the deck (20.01). Fixed pages are switched off with setPages.
+    removePage(key) {
+        const d = _apiPage(key); if (!d) return _apiErr('no page ' + key);
+        if (d.kind !== 'layout' || !d.page) return _apiErr(key + ' is not a layout page; switch a standard page off with setPages');
+        const list = editorialContent.layoutPages || [], i = list.indexOf(d.page);
+        if (i < 0) return _apiErr('no page ' + key);
+        list.splice(i, 1);
+        if (editorialContent.annotations) delete editorialContent.annotations[key];
+        pushHistory(); _apiAfterEdit();
+        return { removed: key };
     },
 
     // ── Output ──
@@ -59697,7 +59814,10 @@ const FRAME_API = {
     // printed a placeholder instead of a wall).
     async exportPDF() {
         if (window._specPdfBusy) return _apiErr('a PDF is already being built');
-        const r = await exportSpecPagePDF({ returnPdf: true });
+        // The same options Generate PDF passes (applySpecPdfModal), or the footer loses its
+        // location, code and version and the file its name (20.01).
+        const pe = document.getElementById('specPdfPreset');
+        const r = await exportSpecPagePDF({ returnPdf: true, all: true, meta: _deckFooterMeta(), include: _dsInclude(), preset: pe ? String(pe.value || '').trim() : '' });
         return r || _apiErr('nothing was built (no pieces in the project?)');
     },
     // The project file text (what Save Project writes) and the way back in.

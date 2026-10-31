@@ -2411,6 +2411,20 @@ run but passes alone is usually load timing: rerun before chasing it.
   returned code), prices through `setRowPrice` (cost = quote, sell = fixed), stamps `stdItem` (what `{custom}` leaves out)
   and `orderQty`, which `_priceQty` reads only when the walls give 0. A blank token prints `[token]`, never ''. `**bold**`
   is `<b>` in the rich copy (`_bsCopyMail`) and stripped in plain text and mailto.
+- **THE DECK DRIVER (20.01, `tools/frame-driver.js`, skill `.claude/skills/build-deck`).** Node, no dependencies:
+  serves the tree + `/__file?p=` on 127.0.0.1, runs headless Chrome over CDP, takes `call <fn> '<json>'` /
+  `render` / `pdf` / `save` / `sheet` / `eval` / `stop`; state in `FRAME_DRIVER_STATE` (default tmp). A `{$file}`
+  argument is LOADED AS AN IMAGE and handed on at most 3000 px (Chrome refuses to `fetch` the 50 MB+ print
+  originals). FRAME_API 2 adds `setProject`, `setPages`, `removePage`, `setContentsEntry`, `listContacts`,
+  `setContacts`, fixed pages in `describePage`/`fillPage` (`_apiFillable`), image `{fit:'whole', caption:'code'}`,
+  `false` to remove a slot, `caption` in `describePage`; an API PNG stays PNG only with real alpha. `exportPDF` passes
+  what Generate PDF passes (`meta`, `include`, `all`, `preset`), or the footer loses location/code/version.
+  `test_frame_driver` runs real Chrome (skips with none).
+- **A JUSTIFIED PARAGRAPH'S LAST LINE IS NOT STRETCHED (20.01).** `_layoutRichLines` marks `paraEnd` on each
+  hard line's last line; `_drawRichTextPdf` skips it unless `justify-all`, as the editor's CSS does.
+- **AN IMAGE-CODE CAPTION IS ONE LINE (20.01, `_drawAnnCaption`, `_capCodeFitPx`, `CAP_CODE_MIN_PT`).** jsPDF's
+  `splitTextToSize` cut a code with no spaces mid-code while `CanvasPdfRec` (which never breaks a word) showed it whole;
+  a `capSource: 'filename'` caption steps down to fit the box (floor 6pt) in the PDF and on screen.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
