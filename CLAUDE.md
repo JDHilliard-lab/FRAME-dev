@@ -2392,6 +2392,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   stored only when it differs, the Pricing tab's tick), oversize past 40x50 either way, `buffer` % on the whole estimate.
   Never on a flat graphic (per sq ft alone). `setRateCard(list, asOf, addons)`: undefined KEEPS the card's add-ons.
   No amounts in the code (public site).
+- **THE BUDGET SKETCH (19.98, `_fpSketchOn`, `_fpSketchDrop`, `_dsFpSketchClick`, `_fpSizeFields`, `_fpBudgetStrip`,
+  `FP_SKETCH_SIZES`).** The floor plan add bar has a Size (standard sizes both ways round; never on a flat graphic) and
+  Sketch: while on, every plan click mints a piece of the bar's type and size pinned there, ONE undo per click (mint
+  `quiet`, found by the `_fpSketchNew` marker, never by the returned code). Stays armed until Esc, Sketch again, or
+  arming a code/line; it counts as armed for crosshair, loupe and line deselect. Budget line reads `_dashBudgetInfo`.
+  The bar WRAPS to two rows (the tools panel is ~250px; one row squeezed the type picker to 12px).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

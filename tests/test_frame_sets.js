@@ -263,7 +263,7 @@ check('EXACT ASK: the Items row is #, Item code, Cat, Line (a pen), Frames (a fr
   const pen = t.querySelector('.fp-line-btn'), frm = t.querySelector('.fp-frames-btn');
   if (!pen || !pen.querySelector('svg path')) throw new Error('no pen button');
   if (!frm || !frm.querySelector('svg rect')) throw new Error('no frame button');
-  if (t.querySelectorAll('select').length !== 2) throw new Error('row still carries a line-type select');   // type picker + category chip
+  if (t.querySelectorAll('select').length !== 3) throw new Error('row still carries a line-type select');   // type picker + size (19.98, the budget sketch) + category chip
   t.remove();
 });
 

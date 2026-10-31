@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.97';
+const APP_VERSION = '19.98';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -27690,6 +27690,13 @@ document.addEventListener('keydown', (e) => {
     if (_fpLineStart) _fpLineStart = null; else _fpLineArmId = null;
     try { _fpLoupeHide(); _dsRenderCenter(); _dsRenderTools(); } catch (err) {}
 });
+// Esc puts the budget sketch down (19.98).
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || !_fpSketchOn) return;
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    try { _fpSketchToggle(false); } catch (err) {}
+});
 // What a line is called in its settings popup and in Layers. An elbow with no
 // waypoints (and no legacy pts) is a two-point zig-zag, not a multi-point path.
 function _dsLineLabel(a) {
@@ -32594,7 +32601,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
         // interaction keeps working, now at the true PDF position.
         const img = document.createElement('img');
         img.id = 'dsFpPlanImg'; img.src = lv.imageData; img.draggable = false;
-        img.style.cssText = 'display:block; width:100%; height:100%; opacity:0; user-select:none; -webkit-user-drag:none; cursor:' + ((_fpArmedId || _fpLineArmId) ? 'crosshair' : 'default') + ';';
+        img.style.cssText = 'display:block; width:100%; height:100%; opacity:0; user-select:none; -webkit-user-drag:none; cursor:' + ((_fpArmedId || _fpLineArmId || _fpSketchOn) ? 'crosshair' : 'default') + ';';
         img.onclick = _dsFpPlace;
         wrap.appendChild(img);
         // Wall-line overlay (SVG): every group's line at PDF stroke weight,
@@ -32610,7 +32617,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
         _fpWallLinesPaint();
         // The loupe tracks whenever ANY placement tool is armed — dropping a pin on the
         // right side of a door matters as much as starting a line on the right wall.
-        if (_fpArmedId || _fpLineArmId) {
+        if (_fpArmedId || _fpLineArmId || _fpSketchOn) {
             img.onmousemove = _dsFpPointerMove;
             img.onmouseleave = _fpLoupeHide;
         } else {
@@ -32780,7 +32787,7 @@ function _fpLoupeHide() {
 // tracks, and a wall line in progress also updates its dashed preview.
 function _dsFpPointerMove(e) {
     if (_fpLineArmId && _fpLineStart) { _dsFpLineMove(e); return; }   // that path shows the loupe itself
-    if (_fpArmedId || _fpLineArmId) _fpLoupeShow(e);
+    if (_fpArmedId || _fpLineArmId || _fpSketchOn) _fpLoupeShow(e);
 }
 function _dsFpLineDown(e) {
     if (!_fpLineArmId) return;
@@ -32907,7 +32914,7 @@ function _fpWallLinesPaint() {
     const NS = 'http://www.w3.org/2000/svg';
     Array.from(svg.childNodes).forEach(n => { if (n.id !== 'dsFpLinePreview') svg.removeChild(n); });
     if (c.wrap) c.wrap.querySelectorAll('.fp-line-end').forEach(n => n.remove());
-    const armed = !!(_fpArmedId || _fpLineArmId);
+    const armed = !!(_fpArmedId || _fpLineArmId || _fpSketchOn);
     if (armed) _fpSelLine = null;
     if (_fpSelLine && _fpSelLine.lv !== _deckLvlOf(lv)) _fpSelLine = null;
     const mk = (s, attrs) => { const ln = document.createElementNS(NS, 'line'); ln.setAttribute('x1', s[0] * 100); ln.setAttribute('y1', s[1] * 100); ln.setAttribute('x2', s[2] * 100); ln.setAttribute('y2', s[3] * 100); Object.keys(attrs).forEach(k => ln.setAttribute(k, attrs[k])); ln.setAttribute('vector-effect', 'non-scaling-stroke'); return ln; };
@@ -33050,7 +33057,14 @@ function _dsFpNorm(e) {
     const r = img.getBoundingClientRect(); if (!r.width || !r.height) return null;
     return { x: Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)), y: Math.max(0, Math.min(1, (e.clientY - r.top) / r.height)) };
 }
+// 19.98: while sketching, a click on the plan is a new piece (the tool stays armed)
+function _dsFpSketchClick(e) {
+    const n = _dsFpNorm(e); if (!n) return;
+    _fpSketchDrop((_dsPages[_dsIndex] && _dsPages[_dsIndex].level) || 0, n.x, n.y);
+    _dsRefresh(); _dsRenderTools();
+}
 function _dsFpPlace(e) {
+    if (_fpSketchOn && !_fpArmedId && !_fpLineArmId) return _dsFpSketchClick(e);
     if (!_fpArmedId) { if (_fpSelLine) _fpLineSelect(null); return; }
     const n = _dsFpNorm(e); if (!n) return;
     const g = _fpFindGroup(_fpArmedId); if (!g) return;
@@ -33159,7 +33173,7 @@ function _dsFpRemove(key) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRefresh();
 }
-function _dsFpArm(key) { _fpArmedId = (_fpArmedId === key) ? null : key; _dsRenderTools(); _dsRenderCenter(); }
+function _dsFpArm(key) { _fpArmedId = (_fpArmedId === key) ? null : key; if (_fpArmedId) _fpSketchOn = false; _dsRenderTools(); _dsRenderCenter(); }
 function _dsFpSetCategory(key, cat) {
     const g = _fpFindGroup(key); if (!g) return;
     g.rows.forEach(r => { r.category = cat || ''; });
@@ -33822,6 +33836,7 @@ function _fpPanelItems(t, desc) {
     _returnBarInto(_rb, 'deck');
     t.appendChild(_rb);
     t.appendChild(_fpAddCodesBar(desc));
+    t.appendChild(_fpBudgetStrip());
 
     const groups = _fpGroups();
     if (!groups.length) {
@@ -33888,7 +33903,7 @@ function _fpPickLineStyle(g, lvl, v) {
             _fpSetWall(r2, lvl, { wallLine: one, wallPanels: parseInt(v, 10) || 1 });
         }
     });
-    _fpLineArmId = g.key; _fpArmedId = null; _fpLineStart = null;
+    _fpLineArmId = g.key; _fpArmedId = null; _fpLineStart = null; _fpSketchOn = false;
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
 }
@@ -33922,6 +33937,73 @@ const FP_FRAME_SETS = [
     { n: 4, label: 'Quad' }, { n: 5, label: '5 set' }, { n: 7, label: '7 set' },
 ];
 let _fpAddType = null;     // last type picked, so a run of EGD codes needs one choice
+// ── THE BUDGET SKETCH (19.98) ──
+// The studio's budget estimate starts from a bare floor plan: put a piece on each focal
+// wall, give it a type and a standard size, and price it. Here that is the floor plan's own
+// add bar: a Size (the Budgeting guide's standard sizes, both ways round), an Area, and
+// SKETCH, which leaves the plan armed so every click mints a new piece of that type and
+// size where it lands (`_fpSketchDrop`: one undo per click). The pieces are ordinary rows,
+// priced by the rate card like any other, and the budget line under the bar reads the same
+// totals as the Production button (`_dashBudgetInfo`). All three choices are module state.
+const FP_SKETCH_SIZES = [[11, 14], [16, 20], [24, 36], [32, 36], [30, 40], [40, 50]];
+let _fpAddSize = '';          // '' = the default size, else 'WxH' in inches
+let _fpSketchOn = false;
+let _fpSketchArea = '';
+function _fpSketchToggle(on) {
+    _fpSketchOn = on == null ? !_fpSketchOn : !!on;
+    if (_fpSketchOn) { _fpArmedId = null; _fpLineArmId = null; _fpLineStart = null; }
+    else if (typeof _fpLoupeHide === 'function') _fpLoupeHide();
+    _dsRenderTools(); _dsRenderCenter();
+}
+// The bar's Size as row fields (in the dashboard's unit); nothing for a flat graphic, whose
+// size is the wall or the glass.
+function _fpSizeFields(cat) {
+    const m = /^(\d+(?:\.\d+)?)x(\d+(?:\.\d+)?)$/.exec(_fpAddSize || '');
+    if (!m || _isFlatGraphic(_catCodeInfo(cat).product)) return {};
+    const f = unitFactor('in', dashUnit);
+    return { extW: dashFmt(parseFloat(m[1]) * f), extH: dashFmt(parseFloat(m[2]) * f) };
+}
+// Mint one piece of the bar's type and size, pinned at (x, y) on plan `lvl`. Found again
+// by a marker, never by the returned code (the settle can renumber: see dashNewFromPhotos).
+function _fpSketchDrop(lvl, x, y) {
+    const cat = _fpAddType || ((_artCats().find(c => c && c.key) || {}).key) || '';
+    const mark = Object.assign({ _fpSketchNew: true }, _fpSizeFields(cat));
+    if (String(_fpSketchArea || '').trim()) mark.location = String(_fpSketchArea).trim();
+    _fpAddCodes(cat, 1, { quiet: true, mark: mark });
+    const r = dashProjectData.find(x => x && x._fpSketchNew);
+    if (!r) return null;
+    delete r._fpSketchNew;
+    _fpSetPin(r, lvl, x, y);
+    if (typeof renderDashTable === 'function') renderDashTable();
+    if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    return r.id;
+}
+// The budget line under the add bar: what the pieces sell for against the budget, or how
+// to get there (a rate card) when nothing is priced yet.
+function _fpBudgetStrip() {
+    const d = document.createElement('div'); d.id = 'fpBudgetStrip';
+    d.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:-2px 0 8px; font-size:var(--fs-65); color:var(--text-muted);';
+    const t = _priceTotals();
+    const info = _dashBudgetInfo(null);
+    const txt = document.createElement('span'); txt.style.cssText = 'flex:1 1 auto; min-width:0;';
+    if (info) {
+        txt.textContent = 'Budget: ' + info.text + (t.unpriced.length ? ' · ' + t.unpriced.length + ' not priced' : '');
+        txt.title = info.tip;
+        if (info.over) txt.style.color = 'var(--warn)';
+        const areas = Object.keys(t.byArea);
+        if (areas.length > 1) txt.title += ' By area: ' + areas.map(a => a + ' ' + _money(t.byArea[a].sell)).join(', ') + '.';
+    } else txt.textContent = _rateCard() ? 'Nothing priced yet: the rate card has no rate for these products.' : 'No rate card yet: pieces price once it has rates.';
+    d.appendChild(txt);
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'action-btn btn-secondary';
+    b.style.cssText = 'flex:0 0 auto; width:auto; height:22px; padding:0 8px; font-size:var(--fs-60);';
+    b.textContent = info ? 'Prices' : 'Rate card…';
+    b.title = info ? 'Open Production, Pricing' : 'Base and per sq ft by product, plus add-ons';
+    b.onclick = () => { if (info) openProduction('pricing'); else openRateCard(); };
+    d.appendChild(b);
+    return d;
+}
 let _fpAddSet = 1;
 function _fpAddCodesBar(desc) {
     const bar = document.createElement('div');
@@ -33942,14 +34024,44 @@ function _fpAddCodesBar(desc) {
     add.style.cssText = 'flex:0 0 auto; width:auto; height:26px; padding:0 10px; font-size:var(--fs-65);';
     add.textContent = '+ Add code';
     add.onclick = () => {
-        const code = _fpAddCodes(tSel.value, 1);
+        _fpSketchOn = false;
+        const code = _fpAddCodes(tSel.value, 1, { mark: _fpSizeFields(tSel.value) });
         if (code) { _fpArmedId = code; _fpLineArmId = null; }
         _dsRefresh(); _dsRenderTools(); _dsRenderCenter();
         if (code) _toast('Added ' + code, (floorplanLevels.some(l => l && l.imageData) || floorplanImageData) ? 'Click the plan to pin it, or add the next one.' : 'Pin it once a plan image is in.');
     };
-    bar.appendChild(tSel); bar.appendChild(add);
-    return bar;
+    // 19.98: the size a new piece starts at, and Sketch (every plan click is a new piece)
+    const zSel = document.createElement('select'); zSel.id = 'fpAddSize';
+    zSel.title = 'Size for new pieces: the standard sizes from the budgeting guide (past 40 x 50 is oversize). Flat graphics keep their own.';
+    zSel.style.cssText = 'flex:1 1 0; min-width:0; ' + sty;
+    [['', 'Size']].concat(FP_SKETCH_SIZES.reduce((a, z) => a.concat([[z[0] + 'x' + z[1], z[0] + ' x ' + z[1]], [z[1] + 'x' + z[0], z[1] + ' x ' + z[0]]]), [])).forEach(([v, l]) => {
+        const o = document.createElement('option'); o.value = v; o.textContent = l; if (v === _fpAddSize) o.selected = true; zSel.appendChild(o);
+    });
+    zSel.onchange = () => { _fpAddSize = zSel.value; };
+    const sk = document.createElement('button'); sk.id = 'fpSketchBtn';
+    sk.className = 'action-btn btn-secondary' + (_fpSketchOn ? ' active' : '');
+    sk.style.cssText = 'flex:0 0 auto; width:auto; height:26px; padding:0 8px; font-size:var(--fs-65);';
+    sk.textContent = 'Sketch';
+    sk.title = _fpSketchOn ? 'Sketching: each click on the plan adds a piece of this type and size. Click to stop.' : 'Budget sketch: each click on the plan adds a piece of this type and size, priced from the rate card';
+    sk.onclick = () => _fpSketchToggle();
+    // two rows: type + Add code, then size + Sketch (the tools panel is ~250px wide)
+    bar.style.flexWrap = 'wrap';
+    const brk = document.createElement('div'); brk.style.cssText = 'flex:0 0 100%; height:0;';
+    bar.appendChild(tSel); bar.appendChild(add); bar.appendChild(brk); bar.appendChild(zSel); bar.appendChild(sk);
+    if (!_fpSketchOn) return bar;
+    // while sketching, an Area line: every new piece gets it as its location
+    const wrap = document.createElement('div');
+    wrap.appendChild(bar); bar.style.marginBottom = '4px';
+    const al = document.createElement('label'); al.style.cssText = 'display:flex; gap:5px; align-items:center; margin-bottom:8px; font-size:var(--fs-65); color:var(--text-muted);';
+    al.textContent = 'Area';
+    const ai = document.createElement('input'); ai.type = 'text'; ai.id = 'fpSketchArea'; ai.value = _fpSketchArea; ai.placeholder = 'e.g. Lobby';
+    ai.style.cssText = 'flex:1 1 60px; min-width:0; height:24px;';
+    ai.title = 'Location for the pieces you drop next, so the budget totals by area';
+    ai.oninput = () => { _fpSketchArea = ai.value; };
+    al.appendChild(ai); wrap.appendChild(al);
+    return wrap;
 }
+
 // Mint one placement: N dashboard rows sharing a code, typed and categorised. Returns the
 // placement code. Rows go to the END of the schedule (the dashboard's + Add inserts after
 // the selection, but from the floorplan there is no selection to be next to).
@@ -49193,7 +49305,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
             { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Edit</strong> &gt; <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
             { title: 'Bulk Images', body: `In the Frame Dashboard, under <strong>Import</strong>. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
-            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size.` },
+            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size. For a first budget from a bare floor plan, use <strong>Sketch</strong> on the plan's add bar: pick a type and a <strong>Size</strong>, and every click drops a priced piece.` },
             { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Export</strong> &gt; <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
@@ -49340,7 +49452,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.97</strong> The rate card has <b>add-ons</b>, from the studio's budgeting guide: premium frame (a Larson-Juhl or Universal Arquati moulding), non-glare glass (read off the Glass field, entered at 30x40 and scaled to each piece's area), moisture sealant (pieces in a bath, restroom, spa, pool or locker room, with a Sealant tick per piece on the Pricing tab), oversize (past 40x50) and a buffer percent on every estimate. Each one applies by itself from what the piece already says, and the Pricing tab lists what each piece took. Wallcovering and window film price per square foot alone: leave the base blank.<br><br>
+                body: `<strong>19.98</strong> <b>Budget sketch</b> on the floor plan. The add bar has a <b>Size</b> (the standard sizes from the budgeting guide, 11 x 14 to 40 x 50, both ways round) and a <b>Sketch</b> button: while it is on, every click on the plan drops a new piece of the chosen type and size right there, and an <b>Area</b> field names where they go. The pieces are priced by the rate card as they land, and a budget line under the bar shows the total against the budget. Esc or Sketch again stops. + Add code takes the size too.<br><br>
+<strong>19.97</strong> The rate card has <b>add-ons</b>, from the studio's budgeting guide: premium frame (a Larson-Juhl or Universal Arquati moulding), non-glare glass (read off the Glass field, entered at 30x40 and scaled to each piece's area), moisture sealant (pieces in a bath, restroom, spa, pool or locker room, with a Sealant tick per piece on the Pricing tab), oversize (past 40x50) and a buffer percent on every estimate. Each one applies by itself from what the piece already says, and the Pricing tab lists what each piece took. Wallcovering and window film price per square foot alone: leave the base blank.<br><br>
 <strong>19.96</strong> Quotes come out in the company's own formats. On the Pricing tab, <b>RFQ</b> writes the 2026 quote template's front sheet (columns A to AN, the header, the mount formulas for art and image size, shipping and totals, file named YYMMDD_CLIENT_Project_RFQ.xlsx) and <b>RFI</b> writes the same sheet without prices, for vendors, leaving originals, commissions and found objects off. The production pack now carries each vendor's RFI in that layout too. <b>Salesforce CSV</b> now writes the Quote Import Template's 11 columns: vendor codes (Duggal DG00, Bruce White BW00 ...), markup as a plain number, no special characters. Prices follow the house formula: sell = cost x (1.8731 + the artist royalty), royalty 0% on an F image code, 10% on PEN, 5% otherwise, with a Royalty column for a piece the client owns. A Markup typed on the Pricing tab replaces the 1.8731, never the royalty, and the margin is after royalties.<br><br>
 <strong>19.95</strong> Production has its own button in the Frame Dashboard toolbar. It opens samples, vendors, prices and the budget, and issues in one place, and once anything is priced it shows the budget itself. A number on it counts what needs a look (a rejected sample still in use, a quote out of date) and a click opens that tab. Samples left the Edit menu and Prices &amp; budget left the Export menu; Production pack stays under Export. Ctrl+K finds each Production tab, Help has an entry, and the tour stops at the button.<br><br>
 <strong>19.94</strong> The price follows the size. Estimates are worked out from the rate card and each piece&#8217;s overall size every time, so shrinking an oversized frame moves the budget on that keystroke. A quote remembers the size it was for: resize the piece and the estimate for the new size stands in, flagged to re-quote, and going back to the quoted size brings the quote back. The Update estimates button is gone, since there is nothing left to update.<br><br>
@@ -60947,7 +61060,7 @@ function openRateCard() {
     const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;';
     const saveLocal = _prodBtn('Keep as my rate card', () => { setRateCard(read(), di.value, readAddons()); _rateCardSaveLocal(); _toast('Rate card kept', 'New projects on this computer can start from it.'); }, true, 'Save these rates on this computer for your next projects');
     const cancel = _prodBtn('Cancel', () => m.remove(), true); cancel.setAttribute('data-modal-close', '');
-    const ok = _prodBtn('Save', () => { setRateCard(read(), di.value, readAddons()); m.remove(); _prodShow(); }, false);
+    const ok = _prodBtn('Save', () => { setRateCard(read(), di.value, readAddons()); m.remove(); _prodShow(); if (document.getElementById('fpBudgetStrip')) _dsRenderTools(); }, false);
     foot.appendChild(saveLocal); foot.appendChild(cancel); foot.appendChild(ok);
     card.appendChild(foot);
     m.appendChild(card); document.body.appendChild(m);
