@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.94';
+const APP_VERSION = '19.95';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -531,6 +531,9 @@ const FRAME_TOUR = [
     { ch: 2, view: 'dashboard', target: '#dash-frame-visual', prep: () => switchView('dashboard'),
       title: 'Drop the artwork in',
       body: 'Drag an image file onto the preview to give the piece its artwork. The file name becomes its image code. Revised images later? Import > Bulk Images on this page swaps many at once by matching names.' },
+    { ch: 2, view: 'dashboard', target: ['#dashProdBtn', '.table-container'], prep: () => switchView('dashboard'),
+      title: 'Production and the budget',
+      body: 'This button opens Production: frame and mat samples, vendors and the production pack, prices and the budget, and what changed since the last issue. Once pieces are priced it shows the budget itself, and it moves as you change a size. A number on it means something needs a look.' },
     { ch: 2, view: 'dashboard', target: ['#dashPushSelector', '#dashRightPane'], prep: () => switchView('dashboard'),
       title: 'Push to Wall',
       body: 'Pick a wall here and press Send to hang the selected piece on it. You can also add pieces from the Elevation side, which is next.' },
@@ -33615,8 +33618,6 @@ function openDashMenu(btn, which) {
             { head: '' },
             { label: 'Item codes', hint: 'add, rename and order codes', onClick: () => _jumpToCodes() },
             { label: 'Links…', hint: 'linked pictures: update, relink', onClick: () => openLinksPanel() },
-            { head: '' },
-            { label: 'Frame & mat samples…', hint: 'what to order, what the client approved', onClick: () => openProduction('samples') },
         ],
         import: [
             { label: 'Import CSV…', hint: 'a database exported from FRAME', onClick: () => { const f = document.getElementById('csvImport'); if (f) f.click(); } },
@@ -33629,7 +33630,6 @@ function openDashMenu(btn, which) {
             { label: 'InDesign Script', hint: 'AutoFrameSpecs.jsx', onClick: () => downloadInDesignScript() },
             { head: '' },
             { label: 'Production pack…', hint: 'RFI and contact sheet per vendor, purchases', onClick: () => openProduction('vendors') },
-            { label: 'Prices & budget…', hint: 'quote to Excel and Salesforce, import prices', onClick: () => openProduction('pricing') },
         ],
     };
     if (!menus[which]) return null;
@@ -40534,6 +40534,8 @@ function _jumpEntries() {
     try {
         if (_catPlaces().length) out.push({ group: 'Views', title: 'Catalogue overview', sub: 'every placement and option', go: [{ kind: 'run', label: 'Open', run: openCatalogueOverview }], hay: 'catalogue overview options images missing' });
     } catch (e) {}
+    // 19.95: Production is a window, not a view, but it is reached from anywhere here.
+    PROD_TABS.forEach(t => out.push({ group: 'Views', title: 'Production: ' + t[1], sub: t[2], go: [{ kind: 'run', label: 'Open', run: () => openProduction(t[0]) }], hay: 'production ' + t[1] + ' ' + t[2] + (t[0] === 'pricing' ? ' budget quote excel salesforce' : '') }));
     [['dashboard', '1  Frame Dashboard'], ['elevation', '2  Elevation'], ['deck', '3  Deck']].forEach(v => {
         out.push({ group: 'Views', title: v[1], sub: 'view', go: [{ kind: 'view', label: 'Open', view: v[0] }], hay: v[1] + ' view tab' });
     });
@@ -49191,6 +49193,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
             { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Edit</strong> &gt; <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
             { title: 'Bulk Images', body: `In the Frame Dashboard, under <strong>Import</strong>. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
+            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name.` },
             { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Export</strong> &gt; <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
@@ -49337,7 +49340,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.94</strong> The price follows the size. Estimates are worked out from the rate card and each piece&#8217;s overall size every time, so shrinking an oversized frame moves the budget on that keystroke. A quote remembers the size it was for: resize the piece and the estimate for the new size stands in, flagged to re-quote, and going back to the quoted size brings the quote back. The Update estimates button is gone, since there is nothing left to update.<br><br>
+                body: `<strong>19.95</strong> Production has its own button in the Frame Dashboard toolbar. It opens samples, vendors, prices and the budget, and issues in one place, and once anything is priced it shows the budget itself. A number on it counts what needs a look (a rejected sample still in use, a quote out of date) and a click opens that tab. Samples left the Edit menu and Prices &amp; budget left the Export menu; Production pack stays under Export. Ctrl+K finds each Production tab, Help has an entry, and the tour stops at the button.<br><br>
+<strong>19.94</strong> The price follows the size. Estimates are worked out from the rate card and each piece&#8217;s overall size every time, so shrinking an oversized frame moves the budget on that keystroke. A quote remembers the size it was for: resize the piece and the estimate for the new size stands in, flagged to re-quote, and going back to the quoted size brings the quote back. The Update estimates button is gone, since there is nothing left to update.<br><br>
 <strong>19.93</strong> The item toolbar shows the budget while you choose art: what the pieces sell for against the budget, how much is left, and the selected piece against its allowance. It turns amber when either is passed, appears once anything is priced or a budget is set, and a click opens Prices &amp; budget.<br><br>
 <strong>19.92</strong> Contact sheets in the production pack show each picture at its print file's shape with the piece's own crop (as the deck shows it), not the source image as it came. The Vendors and Issues tabs keep their dropdowns on one line.<br><br>
 <strong>19.91</strong> <strong>Prices &amp; budget</strong> (Frame Dashboard, Export menu, or the Pricing tab of the Production window). Each piece can carry a unit cost, a sell price (or cost times the project markup) and an allowance, with totals, margin, allowances, budget left and a total per area. Every price says where it came from and when: a price you type or import is a dated quote; an estimate comes from the <strong>Rate card</strong> (base plus per square foot by product, dated), and <strong>Update estimates</strong> refreshes estimates when rates change without touching a quote. Quotes older than 90 days are flagged. <strong>Export to Excel</strong> writes a real .xlsx with live formulas (lines, totals, budget left) and the rate card; edit it in Excel and <strong>Import prices</strong> reads it back by item code (an .xlsx or .csv, columns by name, so adding columns is fine). <strong>Salesforce CSV</strong> gives one quote line per piece for Salesforce's import. Prices never print in the deck, but they are saved in the project file, so think before sending the project file itself to a client.<br><br>
@@ -60483,11 +60487,14 @@ async function importPricesFile(file) {
     try { _prodShow(); } catch (e) {}
     return res;
 }
-// ── THE BUDGET ON THE DASHBOARD (19.93) ──
-// Art is chosen on the dashboard, so that is where the money shows: one chip in the item
-// toolbar with what the pieces sell for against the budget, and the selected piece against
-// its allowance. Hidden until something is priced or a budget is set; a click opens
-// Production > Pricing. Screen only: nothing here reaches a deck page.
+// ── THE PRODUCTION BUTTON IS THE BUDGET (19.93, 19.95) ──
+// Art is chosen on the dashboard, so that is where the money shows. ONE button in the item
+// toolbar (#dashProdBtn) is the way into Production (it replaced the Edit and Export menu
+// entries for samples and prices, which nobody looked for there) and its own readout:
+// "Production" until something is priced or a budget is set, then sell against the budget
+// and the selected piece against its allowance, amber when either is passed. A count says
+// what needs attention (a rejected sample still in use, a quote out of date for its size or
+// its age), and the click opens the tab it is about. Screen only: never reaches a deck page.
 function _dashBudgetInfo(sel) {
     const t = _priceTotals();
     if (!t.priced && t.budget == null) return null;
@@ -60510,17 +60517,32 @@ function _dashBudgetInfo(sel) {
     }
     if (t.over.length) tip += ' ' + t.over.length + (t.over.length === 1 ? ' piece is' : ' pieces are') + ' over allowance.';
     if (t.resized.length) tip += ' ' + t.resized.length + ' resized since quoted (' + t.resized.join(', ') + '): re-quote.';
-    return { text: text, tip: tip + ' Click for Pricing.', over: over || pieceOver };
+    return { text: text, tip: tip, over: over || pieceOver };
+}
+// What needs a look, and which tab it is on: samples first (a rejected moulding still on a
+// piece is the costliest mistake), then prices out of date for their size or age.
+function _dashProdAttention() {
+    let samples = []; try { samples = _samplePreflight(); } catch (e) {}
+    let t = { resized: [], stale: [] }; try { t = _priceTotals(); } catch (e) {}
+    const n = samples.length + t.resized.length + t.stale.length;
+    const lines = samples.map(i => i.text);
+    if (t.resized.length) lines.push(t.resized.length + ' resized since quoted: re-quote');
+    if (t.stale.length) lines.push(t.stale.length + ' quote' + (t.stale.length === 1 ? '' : 's') + ' over ' + PRICE_STALE_DAYS + ' days old');
+    return { n: n, tab: samples.length ? 'samples' : 'pricing', lines: lines };
 }
 function _dashBudgetSync(sel) {
-    const el = document.getElementById('dashBudgetChip'); if (!el) return;
+    const el = document.getElementById('dashProdBtn'); if (!el) return;
     if (sel === undefined) sel = dashProjectData[dashSelectedRowIndex];
     let info = null; try { info = _dashBudgetInfo(sel); } catch (e) {}
-    el.style.display = info ? '' : 'none';
-    if (!info) return;
-    el.textContent = info.text;
-    el.title = info.tip;
-    if (info.over) el.setAttribute('data-over', '1'); else el.removeAttribute('data-over');
+    const att = _dashProdAttention();
+    const lab = el.querySelector('.prod-btn-label'), bad = el.querySelector('.prod-btn-badge');
+    if (lab) lab.textContent = info ? info.text : 'Production';
+    if (bad) { bad.textContent = att.n ? String(att.n) : ''; bad.style.display = att.n ? '' : 'none'; }
+    el.setAttribute('data-tab', att.n ? att.tab : 'pricing');
+    el.title = 'Production: samples, vendors and the production pack, prices and budget, issues.'
+        + (info ? ' ' + info.tip : ' Nothing priced yet.')
+        + (att.n ? ' Needs a look: ' + att.lines.join('; ') + '.' : '');
+    if (info && info.over) el.setAttribute('data-over', '1'); else el.removeAttribute('data-over');
 }
 function _prodPricingInto(body) {
     const pr = _pricing();

@@ -37,10 +37,11 @@ const bar = addBtn && addBtn.closest('.pane-header');
 
 check('EXACT BUG: the toolbar is six controls, not thirteen', () => {
   if (!bar) throw new Error('toolbar not found');
-  // 19.93: the budget chip (#dashBudgetChip) is a READOUT that opens Pricing, not an action; it is
-  // not counted. Any other new button still fails here.
-  const btns = bar.querySelectorAll('button:not(#dashBudgetChip)');
-  if (btns.length !== 6) throw new Error(btns.length + ' buttons in the toolbar, want 6');
+  // 19.95: the seventh is the Production button (#dashProdBtn), which REPLACED two menu
+  // entries (samples, prices) and carries the budget readout. Any other new button still fails.
+  const btns = bar.querySelectorAll('button');
+  if (btns.length !== 7) throw new Error(btns.length + ' buttons in the toolbar, want 7');
+  if (!bar.querySelector('#dashProdBtn')) throw new Error('the seventh should be the Production button');
 });
 
 check('+ Add Item is the primary button (not btn-secondary)', () => {
@@ -65,10 +66,10 @@ check('the CSV file input is still in the page (Import CSV clicks it)', () => {
 
 // Each menu item must call the function its old button called. Stub them, click.
 const EXPECT = {
-  edit: [['Move To', 'openMoveToModal'], ['Bulk Edit', 'openBulkEditModal'], ['Duplicate as Series', 'openDuplicateSeriesModal'], ['Item codes', '_jumpToCodes'], ['Links', 'openLinksPanel'], ['Frame & mat samples', 'openProduction']],   // 19.74 added Links; 19.87 samples
+  edit: [['Move To', 'openMoveToModal'], ['Bulk Edit', 'openBulkEditModal'], ['Duplicate as Series', 'openDuplicateSeriesModal'], ['Item codes', '_jumpToCodes'], ['Links', 'openLinksPanel']],   // 19.74 added Links; samples (19.87) moved to the Production button in 19.95
   // 19.26: New items from photos joins Import (a new action goes in a menu, not a button).
   import: [['Import CSV', null], ['Bulk Images', 'openBulkReplaceModal'], ['New items from photos', 'dashNewFromPhotos']],
-  export: [['Export Database', 'exportDashCSV'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript'], ['Production pack', 'openProduction'], ['Prices & budget', 'openProduction']],   // 19.89 production pack; 19.91 prices
+  export: [['Export Database', 'exportDashCSV'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript'], ['Production pack', 'openProduction']],   // 19.89 production pack; prices (19.91) moved to the Production button in 19.95
 };
 const BTN = { edit: 'dashEditMenuBtn', import: 'dashImportMenuBtn', export: 'dashExportMenuBtn' };
 

@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.94">
+    <link rel="stylesheet" href="style.css?v=19.95">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -140,7 +140,9 @@
                             <button class="action-btn btn-secondary dash-menu-btn" id="dashEditMenuBtn" style="width:auto; display:flex; align-items:center;" aria-haspopup="menu" onclick="openDashMenu(this, 'edit')" title="Move To, Bulk Edit, Duplicate as Series, item codes">Edit<svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                         </div>
                         <div style="display:flex; gap:5px; align-items: center;">
-                            <button class="action-btn btn-secondary dash-budget-chip" id="dashBudgetChip" style="width:auto; display:none; padding:0 9px;" onclick="openProduction('pricing')"></button>
+                            <!-- 19.95: THE PRODUCTION BUTTON (samples, vendors, prices and budget, issues), and once
+                                 anything is priced, the budget itself. _dashBudgetSync fills it. -->
+                            <button class="action-btn btn-secondary dash-prod-btn" id="dashProdBtn" style="width:auto; padding:0 9px; display:flex; align-items:center; gap:6px;" data-tab="pricing" onclick="openProduction(this.getAttribute('data-tab') || 'pricing')"><span class="prod-btn-label">Production</span><span class="nav-badge prod-btn-badge" style="display:none;"></span></button>
                             <input type="file" id="csvImport" accept=".csv" style="display:none;" onchange="importDashCSV(event)">
                             <button class="action-btn btn-secondary dash-menu-btn" id="dashImportMenuBtn" style="width:auto; display:flex; align-items:center;" aria-haspopup="menu" onclick="openDashMenu(this, 'import')" title="Import CSV, Bulk Images">Import<svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                             <button class="action-btn btn-secondary dash-menu-btn" id="dashExportMenuBtn" style="width:auto; display:flex; align-items:center;" aria-haspopup="menu" onclick="openDashMenu(this, 'export')" title="Export Database, Batch PNGs, InDesign Script">Export<svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
@@ -2250,9 +2252,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.94';</script>
-<script src="templates.js?v=19.94"></script>
-<script src="app.js?v=19.94"></script>
+<script>window.FRAME_HTML_VERSION = '19.95';</script>
+<script src="templates.js?v=19.95"></script>
+<script src="app.js?v=19.95"></script>
 
 </body>
 </html>
