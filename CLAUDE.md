@@ -2398,6 +2398,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `quiet`, found by the `_fpSketchNew` marker, never by the returned code). Stays armed until Esc, Sketch again, or
   arming a code/line; it counts as armed for crosshair, loupe and line deselect. Budget line reads `_dashBudgetInfo`.
   The bar WRAPS to two rows (the tools panel is ~250px; one row squeezed the type picker to 12px).
+- **COMMERCIAL INVOICES (19.99, Production > Shipping, `editorialContent.shipments`, one writer `setShipment`,
+  `_shipLines`, `_shipPort`, `_commercialInvoicePdf`).** An invoice names its pieces by row id; every line is DERIVED
+  (`_shipDesc`, `_shipHs` from `SHIP_HS`, qty `_priceQty`, value cost or sell via `_priceRow`) under the line's own
+  typed fields (`sh.lines[id]`, blank deletes; unticking a piece drops its override). Port = typed, else Talia's route
+  table, else BLANK (never a guess). Address book and signer are localStorage (`SHIP_BOOK_KEY`, `SHIP_SIGNER_KEY`):
+  no names or tax ids in the code. Lines print bare numbers; the currency is stated once.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

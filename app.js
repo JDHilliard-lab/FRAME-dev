@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.98';
+const APP_VERSION = '19.99';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -40647,7 +40647,7 @@ function _jumpEntries() {
         if (_catPlaces().length) out.push({ group: 'Views', title: 'Catalogue overview', sub: 'every placement and option', go: [{ kind: 'run', label: 'Open', run: openCatalogueOverview }], hay: 'catalogue overview options images missing' });
     } catch (e) {}
     // 19.95: Production is a window, not a view, but it is reached from anywhere here.
-    PROD_TABS.forEach(t => out.push({ group: 'Views', title: 'Production: ' + t[1], sub: t[2], go: [{ kind: 'run', label: 'Open', run: () => openProduction(t[0]) }], hay: 'production ' + t[1] + ' ' + t[2] + (t[0] === 'pricing' ? ' budget quote excel salesforce' : '') }));
+    PROD_TABS.forEach(t => out.push({ group: 'Views', title: 'Production: ' + t[1], sub: t[2], go: [{ kind: 'run', label: 'Open', run: () => openProduction(t[0]) }], hay: 'production ' + t[1] + ' ' + t[2] + (t[0] === 'pricing' ? ' budget quote excel salesforce' : t[0] === 'shipping' ? ' commercial invoice customs border hs code' : '') }));
     [['dashboard', '1  Frame Dashboard'], ['elevation', '2  Elevation'], ['deck', '3  Deck']].forEach(v => {
         out.push({ group: 'Views', title: v[1], sub: 'view', go: [{ kind: 'view', label: 'Open', view: v[0] }], hay: v[1] + ' view tab' });
     });
@@ -49305,7 +49305,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
             { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Edit</strong> &gt; <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
             { title: 'Bulk Images', body: `In the Frame Dashboard, under <strong>Import</strong>. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
-            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size. For a first budget from a bare floor plan, use <strong>Sketch</strong> on the plan's add bar: pick a type and a <strong>Size</strong>, and every click drops a priced piece.` },
+            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with five tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce), <strong>Issues</strong> (what changed since the deck last went out) and <strong>Shipping</strong> (commercial invoices across the Canada and USA border, lines from the pieces). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size. For a first budget from a bare floor plan, use <strong>Sketch</strong> on the plan's add bar: pick a type and a <strong>Size</strong>, and every click drops a priced piece.` },
             { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Export</strong> &gt; <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
@@ -49452,7 +49452,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.98</strong> <b>Budget sketch</b> on the floor plan. The add bar has a <b>Size</b> (the standard sizes from the budgeting guide, 11 x 14 to 40 x 50, both ways round) and a <b>Sketch</b> button: while it is on, every click on the plan drops a new piece of the chosen type and size right there, and an <b>Area</b> field names where they go. The pieces are priced by the rate card as they land, and a budget line under the bar shows the total against the budget. Esc or Sketch again stops. + Add code takes the size too.<br><br>
+                body: `<strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
+<strong>19.98</strong> <b>Budget sketch</b> on the floor plan. The add bar has a <b>Size</b> (the standard sizes from the budgeting guide, 11 x 14 to 40 x 50, both ways round) and a <b>Sketch</b> button: while it is on, every click on the plan drops a new piece of the chosen type and size right there, and an <b>Area</b> field names where they go. The pieces are priced by the rate card as they land, and a budget line under the bar shows the total against the budget. Esc or Sketch again stops. + Add code takes the size too.<br><br>
 <strong>19.97</strong> The rate card has <b>add-ons</b>, from the studio's budgeting guide: premium frame (a Larson-Juhl or Universal Arquati moulding), non-glare glass (read off the Glass field, entered at 30x40 and scaled to each piece's area), moisture sealant (pieces in a bath, restroom, spa, pool or locker room, with a Sealant tick per piece on the Pricing tab), oversize (past 40x50) and a buffer percent on every estimate. Each one applies by itself from what the piece already says, and the Pricing tab lists what each piece took. Wallcovering and window film price per square foot alone: leave the base blank.<br><br>
 <strong>19.96</strong> Quotes come out in the company's own formats. On the Pricing tab, <b>RFQ</b> writes the 2026 quote template's front sheet (columns A to AN, the header, the mount formulas for art and image size, shipping and totals, file named YYMMDD_CLIENT_Project_RFQ.xlsx) and <b>RFI</b> writes the same sheet without prices, for vendors, leaving originals, commissions and found objects off. The production pack now carries each vendor's RFI in that layout too. <b>Salesforce CSV</b> now writes the Quote Import Template's 11 columns: vendor codes (Duggal DG00, Bruce White BW00 ...), markup as a plain number, no special characters. Prices follow the house formula: sell = cost x (1.8731 + the artist royalty), royalty 0% on an F image code, 10% on PEN, 5% otherwise, with a Royalty column for a piece the client owns. A Markup typed on the Pricing tab replaces the 1.8731, never the royalty, and the margin is after royalties.<br><br>
 <strong>19.95</strong> Production has its own button in the Frame Dashboard toolbar. It opens samples, vendors, prices and the budget, and issues in one place, and once anything is priced it shows the budget itself. A number on it counts what needs a look (a rejected sample still in use, a quote out of date) and a click opens that tab. Samples left the Edit menu and Prices &amp; budget left the Export menu; Production pack stays under Export. Ctrl+K finds each Production tab, Help has an entry, and the tour stops at the button.<br><br>
@@ -61066,11 +61067,366 @@ function openRateCard() {
     m.appendChild(card); document.body.appendChild(m);
 }
 
+// ── COMMERCIAL INVOICES (19.99) ──────────────────────────────────────────────
+// Cross-border shipments, Canada and the USA, from the team's Commercial Invoice
+// Assistant: the lines were typed again from the deck for every crossing. Here an invoice
+// is a record in the project (`editorialContent.shipments`, one writer `setShipment`) that
+// names its pieces by row id; each line is DERIVED from the piece (description, size, HS
+// code, quantity, value) unless the line says otherwise (`sh.lines[rowId]`, only the
+// fields typed). Port of lading follows the route (`_shipPort`, Talia's table) unless
+// typed. Parties and the signer are kept on THIS COMPUTER (`SHIP_BOOK_KEY`,
+// `SHIP_SIGNER_KEY`), never in the code: the site is public, and tax ids are private.
+const SHIP_BOOK_KEY = 'frame_ship_book';
+const SHIP_SIGNER_KEY = 'frame_ship_signer';
+const SHIP_PARTY_FIELDS = ['name', 'addr', 'country', 'phone', 'tax'];
+const SHIP_FIELDS = ['no', 'date', 'mode', 'terms', 'awb', 'kg', 'freight', 'insurance', 'currency', 'value', 'signer', 'port', 'ship', 'cons', 'rows', 'lines'];
+// HS codes, six digits (the shared international part; a broker adds the country's own
+// digits). Reproductions, framed or on canvas, are printed pictures (4911.91); originals are
+// paintings and drawings (9701.21, not over 100 years old). Blank = fill in by hand.
+const SHIP_HS = {
+    original: '9701.21',
+    'Framed Art': '4911.91', 'Framed Art (Shadow Box)': '4911.91', 'Framed Canvas (Floater)': '4911.91', 'Frameless Canvas (Wrapped)': '4911.91',
+    'Wallcovering (EGD)': '4814.90', 'Window Film (WF)': '3919.90'
+};
+const SHIP_DESC = {
+    'Framed Art': 'Framed art print', 'Framed Art (Shadow Box)': 'Framed art in shadow box', 'Framed Canvas (Floater)': 'Framed print on canvas',
+    'Frameless Canvas (Wrapped)': 'Print on canvas, wrapped on stretcher', 'Wallcovering (EGD)': 'Printed wallcovering', 'Window Film (WF)': 'Printed window film, self-adhesive',
+    'Didactic Panel': 'Printed interpretive panel', 'Sourced Object': 'Decorative object'
+};
+function _shipList() { return (editorialContent && editorialContent.shipments) || []; }
+function _shipById(id) { return _shipList().find(s => s && s.id === id) || null; }
+function _shipIsOriginal(r) { return r && r.product !== 'Sourced Object' && (/^(FAO|FCM)[._-]/i.test(String(r.imageCode || '').trim()) || /original|commission/i.test(String(r.artType || ''))); }
+function _shipHs(r) { return _shipIsOriginal(r) ? SHIP_HS.original : (SHIP_HS[r.product] || ''); }
+function _shipDesc(r) {
+    let d = _shipIsOriginal(r) ? 'Original artwork' : (SHIP_DESC[r.product] || 'Framed art print');
+    const at = String(r.artType || '').trim();
+    if (_shipIsOriginal(r) && at && !/^original( artwork)?$/i.test(at)) d += ', ' + at;
+    const w = _inNum(r.extW), h = _inNum(r.extH);
+    if (w > 0 && h > 0) d += ', ' + w + '"W x ' + h + '"H';
+    const code = _rfqImageCode(r);
+    return d + ' (' + r.id + (code ? ' / ' + code : '') + ')';
+}
+// Country and province/state from a party's own fields: the country field, else the
+// address. Only what the port table needs: CA or US, and QC / ON on the Canadian side.
+function _shipWhere(p) {
+    const c = String((p && p.country) || '').trim(), a = String((p && p.addr) || '');
+    let country = /^(ca|can|canada)$/i.test(c) ? 'CA' : /^(us|usa|u\.s\.a\.|united states( of america)?)$/i.test(c) ? 'US' : '';
+    if (!country) country = /canada/i.test(a) ? 'CA' : /\b(usa|united states)\b/i.test(a) ? 'US' : '';
+    let prov = '';
+    if (/\b(QC|Qu[eé]bec)\b|montr[eé]al/i.test(a)) prov = 'QC';
+    else if (/\b(ON|Ontario)\b|toronto/i.test(a)) prov = 'ON';
+    if (!country && prov) country = 'CA';
+    return { country: country, prov: prov };
+}
+// Talia's route table. A typed port wins; an unknown route is blank, never a guess.
+function _shipPortAuto(sh) {
+    if (!sh) return '';
+    if (sh.mode === 'air') return 'Montreal-Trudeau (YUL)';
+    const f = _shipWhere(sh.ship), t = _shipWhere(sh.cons);
+    if (f.country === 'CA' && t.country === 'US') return f.prov === 'QC' ? 'Lacolle, QC' : f.prov === 'ON' ? 'Windsor, ON' : '';
+    if (f.country === 'US' && t.country === 'CA') return t.prov === 'QC' ? 'Champlain, NY' : t.prov === 'ON' ? 'Port Huron, MI' : '';
+    return '';
+}
+function _shipPort(sh) { return String((sh && sh.port) || '').trim() || _shipPortAuto(sh); }
+function _shipCountryName(p) { const w = _shipWhere(p); return w.country === 'CA' ? 'Canada' : w.country === 'US' ? 'USA' : String((p && p.country) || '').trim(); }
+// One line per piece: derived, then the line's own typed fields on top.
+function _shipLines(sh) {
+    const rows = (sh.rows || []).map(id => (dashProjectData || []).find(r => r && r.id === id)).filter(Boolean);
+    return rows.map(r => {
+        const o = (sh.lines && sh.lines[r.id]) || {};
+        const p = _priceRow(r);
+        const val = sh.value === 'sell' ? p.sell : p.cost;
+        const qty = _priceNum(o.qty) != null ? _priceNum(o.qty) : (_priceQty(r) || 1);
+        const unit = _priceNum(o.unit) != null ? _priceNum(o.unit) : (val != null ? Math.round(val * 100) / 100 : null);
+        return { id: r.id, desc: o.desc != null ? o.desc : _shipDesc(r), hs: o.hs != null ? o.hs : _shipHs(r), origin: o.origin != null ? o.origin : _shipCountryName(sh.ship),
+            qty: qty, uom: o.uom || 'PCS', unit: unit, total: unit != null ? Math.round(unit * qty * 100) / 100 : null };
+    });
+}
+function _shipTotals(sh) {
+    const lines = _shipLines(sh);
+    const goods = lines.reduce((a, l) => a + (l.total || 0), 0);
+    const fr = _priceNum(sh.freight), ins = _priceNum(sh.insurance);
+    return { lines: lines, goods: Math.round(goods * 100) / 100, freight: fr, insurance: ins, total: Math.round((goods + (fr || 0) + (ins || 0)) * 100) / 100, missing: lines.filter(l => l.unit == null || !l.hs).map(l => l.id) };
+}
+// cur '' = a bare number (the invoice's lines: the currency is stated once, in its box)
+function _shipMoney(n, cur) { return n == null || !isFinite(n) ? '' : (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (cur === '' ? '' : ' ' + (cur || 'USD')); }
+function _shipLoadBook() { try { const v = JSON.parse(localStorage.getItem(SHIP_BOOK_KEY) || '[]'); return Array.isArray(v) ? v.filter(p => p && p.name) : []; } catch (e) { return []; } }
+function _shipSaveParty(p) {
+    if (!p || !String(p.name || '').trim()) return false;
+    const book = _shipLoadBook().filter(x => String(x.name).trim().toLowerCase() !== String(p.name).trim().toLowerCase());
+    const o = {}; SHIP_PARTY_FIELDS.forEach(k => { if (String(p[k] || '').trim()) o[k] = String(p[k]).trim(); });
+    book.push(o); book.sort((a, b) => a.name.localeCompare(b.name));
+    try { localStorage.setItem(SHIP_BOOK_KEY, JSON.stringify(book)); return true; } catch (e) { return false; }
+}
+function _shipSigner() { try { return localStorage.getItem(SHIP_SIGNER_KEY) || ''; } catch (e) { return ''; } }
+// A new invoice: numbered, dated today, DAP by ground, in the project's currency, valued at
+// cost, signed by whoever signed last on this computer.
+function newShipment(rows) {
+    const list = _shipList().slice();
+    const id = 'sh' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    const sh = { id: id, no: '', date: _todayIso(), mode: 'ground', terms: 'DAP', currency: _pricing().currency || 'USD', value: 'cost', signer: _shipSigner(), ship: {}, cons: {}, rows: (rows || []).slice(), lines: {} };
+    list.push(sh);
+    editorialContent.shipments = list;
+    pushHistory();
+    return id;
+}
+// ONE writer. A party or a line patch merges; `lines[id] = null` (or a field set to '' on
+// a line) goes back to the derived value. Empty parties and lines are pruned.
+function setShipment(id, patch, quiet) {
+    const sh = _shipById(id); if (!sh) return false;
+    Object.keys(patch || {}).forEach(k => {
+        if (SHIP_FIELDS.indexOf(k) < 0) return;
+        const v = patch[k];
+        if (k === 'ship' || k === 'cons') {
+            const p = Object.assign({}, sh[k] || {});
+            Object.keys(v || {}).forEach(f => { if (SHIP_PARTY_FIELDS.indexOf(f) < 0) return; const s = String(v[f] == null ? '' : v[f]); if (s.trim()) p[f] = s; else delete p[f]; });
+            sh[k] = p;
+        } else if (k === 'lines') {
+            const L = Object.assign({}, sh.lines || {});
+            Object.keys(v || {}).forEach(rid => {
+                if (v[rid] == null) { delete L[rid]; return; }
+                const o = Object.assign({}, L[rid] || {});
+                Object.keys(v[rid]).forEach(f => { const s = v[rid][f]; if (s == null || String(s).trim() === '') delete o[f]; else o[f] = String(s); });
+                if (Object.keys(o).length) L[rid] = o; else delete L[rid];
+            });
+            sh.lines = L;
+        } else if (k === 'rows') {
+            sh.rows = (v || []).filter((x, i, a) => x && a.indexOf(x) === i);
+            Object.keys(sh.lines || {}).forEach(rid => { if (sh.rows.indexOf(rid) < 0) delete sh.lines[rid]; });
+        } else if (v == null || String(v).trim() === '') delete sh[k];
+        else sh[k] = String(v);
+    });
+    if (patch && patch.signer != null) { try { localStorage.setItem(SHIP_SIGNER_KEY, String(patch.signer)); } catch (e) {} }
+    if (!quiet) pushHistory();
+    return true;
+}
+function deleteShipment(id) {
+    const list = _shipList().filter(s => s && s.id !== id);
+    if (list.length) editorialContent.shipments = list; else delete editorialContent.shipments;
+    pushHistory();
+}
+function _shipFileName(sh) { return 'commercial_invoice_' + (String(sh.no || '').trim() ? _prodSafe(sh.no) : _prodStamp()) + '.pdf'; }
+// The invoice as a PDF: shipper and consignee, the shipment facts, a line per piece with its
+// HS code and origin, totals, and the declaration signed and dated.
+function _commercialInvoicePdf(sh) {
+    const JP = (window.jspdf && window.jspdf.jsPDF) || (typeof jsPDF !== 'undefined' ? jsPDF : null);
+    if (!JP) throw new Error('PDF library not loaded');
+    const doc = new JP({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+    const PW = doc.internal.pageSize.getWidth(), PH = doc.internal.pageSize.getHeight(), M = 40, W = PW - M * 2;
+    const cur = sh.currency || 'USD', T = _shipTotals(sh);
+    const ink = () => doc.setTextColor(20, 20, 20), mute = () => doc.setTextColor(110, 110, 110);
+    const font = (b, s) => { doc.setFont('helvetica', b ? 'bold' : 'normal'); doc.setFontSize(s); };
+    font(true, 18); ink(); doc.text('COMMERCIAL INVOICE', M, M + 14);
+    font(false, 9); mute(); doc.text('Invoice ' + (sh.no || '') + '   ' + (sh.date || ''), PW - M, M + 14, { align: 'right' });
+    let y = M + 34;
+    const party = (label, p, x, w) => {
+        font(true, 7.5); mute(); doc.text(label, x, y);
+        font(true, 9.5); ink();
+        let yy = y + 13;
+        doc.text(doc.splitTextToSize(String(p.name || ''), w), x, yy); yy += 12;
+        font(false, 8.5);
+        const lines = doc.splitTextToSize(String(p.addr || '').replace(/\r/g, ''), w);
+        doc.text(lines, x, yy); yy += lines.length * 10.5;
+        const extra = [_shipCountryName(p), p.phone ? 'Tel ' + p.phone : '', p.tax ? 'Tax ID / EIN ' + p.tax : ''].filter(Boolean);
+        extra.forEach(t => { doc.text(t, x, yy); yy += 10.5; });
+        return yy;
+    };
+    const half = (W - 20) / 2;
+    const yEnd = Math.max(party('SHIPPER / EXPORTER', sh.ship || {}, M, half), party('CONSIGNEE', sh.cons || {}, M + half + 20, half));
+    y = yEnd + 8;
+    doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.5); doc.line(M, y, PW - M, y); y += 16;
+    const facts = [['Invoice number', sh.no], ['Invoice date', sh.date], ['AWB / tracking', sh.awb], ['Incoterms', sh.terms || 'DAP'],
+        ['Mode', sh.mode === 'air' ? 'Air' : 'Ground'], ['Port of lading', _shipPort(sh)], ['Country of export', _shipCountryName(sh.ship)], ['Country of destination', _shipCountryName(sh.cons)],
+        ['Gross weight', sh.kg ? sh.kg + ' kg' : ''], ['Currency', cur]];
+    const fw = W / 4;
+    facts.forEach((f, i) => {
+        const x = M + (i % 4) * fw, yy = y + Math.floor(i / 4) * 26;
+        font(true, 7); mute(); doc.text(f[0].toUpperCase(), x, yy);
+        font(false, 9); ink(); doc.text(String(f[1] || ''), x, yy + 11);
+    });
+    y += Math.ceil(facts.length / 4) * 26 + 6;
+    // the lines
+    const cols = [['Description of goods', 0, 'left'], ['HS code', 250, 'left'], ['Origin', 300, 'left'], ['Qty', 358, 'right'], ['UOM', 366, 'left'], ['Unit value', 450, 'right'], ['Total', W, 'right']];
+    const head = () => {
+        doc.setFillColor(242, 242, 242); doc.rect(M, y - 9, W, 14, 'F');
+        font(true, 7.5); ink(); cols.forEach(c => doc.text(c[0], M + c[1], y, c[2] === 'right' ? { align: 'right' } : undefined));
+        y += 14;
+    };
+    head();
+    T.lines.forEach(l => {
+        font(false, 8.5);
+        const dl = doc.splitTextToSize(String(l.desc || ''), 240);
+        const h = Math.max(1, dl.length) * 10.5 + 4;
+        if (y + h > PH - 170) { doc.addPage(); y = M + 10; head(); font(false, 8.5); }
+        ink(); doc.text(dl, M, y);
+        doc.text(String(l.hs || ''), M + 250, y); doc.text(String(l.origin || ''), M + 300, y);
+        doc.text(String(l.qty), M + 358, y, { align: 'right' }); doc.text(String(l.uom || ''), M + 366, y);
+        doc.text(l.unit != null ? _shipMoney(l.unit, '') : '', M + 450, y, { align: 'right' });
+        doc.text(l.total != null ? _shipMoney(l.total, '') : '', PW - M, y, { align: 'right' });
+        y += h;
+        doc.setDrawColor(230, 230, 230); doc.line(M, y - 7, PW - M, y - 7);
+    });
+    y += 6;
+    const tot = (label, v, bold) => { font(bold, bold ? 10 : 8.5); ink(); doc.text(label, M + 360, y); doc.text(v == null ? '' : _shipMoney(v, cur), PW - M, y, { align: 'right' }); y += bold ? 16 : 13; };
+    tot('Total value of goods', T.goods);
+    tot('Freight', T.freight);
+    tot('Insurance', T.insurance);
+    tot('Invoice total', T.total, true);
+    font(false, 8.5); mute();
+    doc.text('Total pieces: ' + T.lines.reduce((a, l) => a + (Number(l.qty) || 0), 0), M, y - 16);
+    y = Math.max(y + 18, PH - 130);
+    font(false, 8.5); ink();
+    doc.text('I declare that all the information contained in this invoice is true and correct.', M, y);
+    y += 34;
+    doc.setDrawColor(120, 120, 120); doc.line(M, y, M + 220, y); doc.line(M + 260, y, M + 400, y);
+    font(true, 9); doc.text(String(sh.signer || ''), M, y - 6);
+    font(false, 9); doc.text(_todayIso(), M + 260, y - 6);
+    font(false, 7); mute(); doc.text('Name and signature', M, y + 10); doc.text('Date', M + 260, y + 10);
+    return doc;
+}
+function downloadCommercialInvoice(id) {
+    const sh = _shipById(id); if (!sh) return;
+    let doc;
+    try { doc = _commercialInvoicePdf(sh); } catch (e) { showInfoModal('Commercial invoice', 'The PDF could not be made: ' + e.message); return; }
+    doc.save(_shipFileName(sh));
+}
+let _prodShipPick = null;
+function _prodShippingInto(body) {
+    const list = _shipList();
+    const intro = document.createElement('div'); intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:10px;';
+    intro.textContent = 'Commercial invoices for shipments between Canada and the USA. Pick the pieces in the box and the lines write themselves: description, size, HS code, quantity and value. Port of lading follows the route. Shippers and consignees you save are kept on this computer.';
+    body.appendChild(intro);
+    const top = document.createElement('div'); top.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:12px; font-size:var(--fs-70);';
+    if (list.length) {
+        const sel = document.createElement('select'); sel.id = 'shipPick'; sel.style.cssText = 'height:26px; width:auto; flex:none;';
+        list.forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = (s.no || 'No number') + ' · ' + (s.date || '') + ' · ' + (s.cons && s.cons.name ? s.cons.name : 'no consignee') + ' · ' + (s.rows || []).length + ' pieces'; sel.appendChild(o); });
+        if (!_shipById(_prodShipPick)) _prodShipPick = list[list.length - 1].id;
+        sel.value = _prodShipPick;
+        sel.onchange = () => { _prodShipPick = sel.value; _prodShow(); };
+        top.appendChild(sel);
+    }
+    top.appendChild(_prodBtn('New commercial invoice', () => { _prodShipPick = newShipment([]); _prodShow(); }, !!list.length, 'Start an invoice; pick its pieces below'));
+    body.appendChild(top);
+    const sh = _shipById(_prodShipPick);
+    if (!sh) return;
+    const set = (patch) => { setShipment(sh.id, patch); _prodShow(); };
+    const sty = 'height:24px; font-size:var(--fs-70);';
+    const field = (host, label, val, onSet, opts) => {
+        const l = document.createElement('label'); l.style.cssText = 'display:flex; flex-direction:column; gap:2px; font-size:var(--fs-60); color:var(--text-muted); min-width:0;' + ((opts && opts.grow) ? ' flex:1 1 ' + opts.grow + 'px;' : ' flex:0 0 auto;');
+        l.appendChild(document.createTextNode(label));
+        let i;
+        if (opts && opts.options) {
+            i = document.createElement('select'); i.style.cssText = sty + ' width:auto;';
+            opts.options.forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; i.appendChild(o); });
+        } else if (opts && opts.area) { i = document.createElement('textarea'); i.rows = 3; i.style.cssText = 'font-size:var(--fs-70); resize:vertical; width:100%;'; }
+        else { i = document.createElement('input'); i.type = (opts && opts.type) || 'text'; i.style.cssText = sty + ' width:' + ((opts && opts.w) || 110) + 'px;' + ((opts && opts.grow) ? ' width:100%;' : ''); }
+        i.value = val == null ? '' : val;
+        if (opts && opts.ph) i.placeholder = opts.ph;
+        if (opts && opts.id) i.id = opts.id;
+        i.onchange = () => onSet(i.value);
+        l.appendChild(i); host.appendChild(l); return i;
+    };
+    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end; margin-bottom:8px;'; body.appendChild(d); return d; };
+    // the shipment
+    let r1 = row();
+    field(r1, 'Invoice number', sh.no, v => set({ no: v }), { ph: 'e.g. PO-02133', id: 'shipNo' });
+    field(r1, 'Date', sh.date, v => set({ date: v }), { type: 'date', w: 130 });
+    field(r1, 'Mode', sh.mode || 'ground', v => set({ mode: v }), { options: [['ground', 'Ground'], ['air', 'Air']], id: 'shipMode' });
+    field(r1, 'Incoterms', sh.terms || 'DAP', v => set({ terms: v }), { w: 60 });
+    field(r1, 'AWB / tracking', sh.awb, v => set({ awb: v }), { w: 130 });
+    field(r1, 'Port of lading', sh.port, v => set({ port: v }), { w: 170, ph: _shipPortAuto(sh) || 'say the route', id: 'shipPort' });
+    let r2 = row();
+    field(r2, 'Gross weight (kg)', sh.kg, v => set({ kg: _priceNum(v) }), { w: 80 });
+    field(r2, 'Freight', sh.freight, v => set({ freight: _priceNum(v) }), { w: 80 });
+    field(r2, 'Insurance', sh.insurance, v => set({ insurance: _priceNum(v) }), { w: 80 });
+    field(r2, 'Currency', sh.currency || 'USD', v => set({ currency: String(v || '').trim().toUpperCase() }), { w: 50 });
+    field(r2, 'Value at', sh.value || 'cost', v => set({ value: v }), { options: [['cost', 'Cost (what we pay)'], ['sell', 'Sell (what the client pays)']], id: 'shipValue' });
+    field(r2, 'Signed by', sh.signer, v => set({ signer: v }), { w: 150, id: 'shipSigner' });
+    // the parties, each with the address book
+    const book = _shipLoadBook();
+    const pr = row(); pr.style.alignItems = 'stretch';
+    [['ship', 'Shipper / exporter'], ['cons', 'Consignee']].forEach(([k, label]) => {
+        const p = sh[k] || {};
+        const box = document.createElement('div'); box.setAttribute('data-ship-party', k);
+        box.style.cssText = 'flex:1 1 300px; min-width:0; border:1px solid var(--border-color); border-radius:var(--r-6); padding:8px; display:flex; flex-direction:column; gap:6px;';
+        const hd = document.createElement('div'); hd.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap;';
+        const t = document.createElement('b'); t.textContent = label; t.style.cssText = 'font-size:var(--fs-70); flex:1 1 auto;'; hd.appendChild(t);
+        if (book.length) {
+            const pick = document.createElement('select'); pick.style.cssText = 'height:24px; width:auto; flex:none; font-size:var(--fs-65);';
+            pick.innerHTML = '<option value="">Address book…</option>' + book.map((b, i) => '<option value="' + i + '">' + _esc(b.name) + '</option>').join('');
+            pick.onchange = () => { const b = book[parseInt(pick.value, 10)]; if (!b) return; const o = {}; SHIP_PARTY_FIELDS.forEach(f => { o[f] = b[f] || ''; }); set({ [k]: o }); };
+            hd.appendChild(pick);
+        }
+        hd.appendChild(_prodBtn('Save', () => { if (_shipSaveParty(p)) { _toast('Saved to the address book', p.name + ', on this computer.'); _prodShow(); } else _toast('Give it a name first', ''); }, true, 'Keep this party on this computer for the next invoice'));
+        box.appendChild(hd);
+        const a = document.createElement('div'); a.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap;';
+        field(a, 'Name', p.name, v => set({ [k]: { name: v } }), { grow: 200 });
+        field(a, 'Country', p.country, v => set({ [k]: { country: v } }), { w: 80, ph: 'Canada / USA' });
+        box.appendChild(a);
+        field(box, 'Address', p.addr, v => set({ [k]: { addr: v } }), { area: true });
+        const c = document.createElement('div'); c.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap;';
+        field(c, 'Phone', p.phone, v => set({ [k]: { phone: v } }), { w: 120 });
+        field(c, 'Tax ID / EIN', p.tax, v => set({ [k]: { tax: v } }), { w: 140 });
+        box.appendChild(c);
+        pr.appendChild(box);
+    });
+    // the pieces: tick what is in the box; a vendor picks all of theirs
+    const rows = _deckSpecRows().filter(r => r && r.id);
+    const pk = row();
+    const lab = document.createElement('b'); lab.textContent = 'Pieces in the box'; lab.style.cssText = 'font-size:var(--fs-70);'; pk.appendChild(lab);
+    const vendors = _vendorNames().filter(v => rows.some(r => _rowVendor(r) === v));
+    if (vendors.length) {
+        const vs = document.createElement('select'); vs.style.cssText = 'height:24px; width:auto; flex:none; font-size:var(--fs-65);';
+        vs.innerHTML = '<option value="">Add a vendor’s pieces…</option>' + vendors.map(v => '<option>' + _esc(v) + '</option>').join('');
+        vs.onchange = () => { if (!vs.value) return; set({ rows: (sh.rows || []).concat(rows.filter(r => _rowVendor(r) === vs.value).map(r => r.id)) }); };
+        pk.appendChild(vs);
+    }
+    pk.appendChild(_prodBtn('All', () => set({ rows: rows.map(r => r.id) }), true));
+    pk.appendChild(_prodBtn('None', () => set({ rows: [] }), true));
+    const ticks = document.createElement('div'); ticks.id = 'shipPieces'; ticks.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px 12px; font-size:var(--fs-65); margin-bottom:10px; max-height:110px; overflow:auto;';
+    rows.forEach(r => {
+        const l = document.createElement('label'); l.style.cssText = 'display:inline-flex; gap:3px; align-items:center;'; l.title = (r.product || '') + (_rowVendor(r) ? ' · ' + _rowVendor(r) : '');
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.setAttribute('data-ship-row', r.id); cb.checked = (sh.rows || []).indexOf(r.id) >= 0;
+        cb.onchange = () => set({ rows: cb.checked ? (sh.rows || []).concat([r.id]) : (sh.rows || []).filter(x => x !== r.id) });
+        l.appendChild(cb); l.appendChild(document.createTextNode(r.id)); ticks.appendChild(l);
+    });
+    body.appendChild(ticks);
+    // the lines, editable; a typed field sticks, blank goes back to the piece's own
+    const T = _shipTotals(sh);
+    if (T.lines.length) {
+        const tbl = document.createElement('table'); tbl.id = 'shipLines'; tbl.style.cssText = 'width:100%; border-collapse:collapse; font-size:var(--fs-65); margin-bottom:8px;';
+        tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:3px;">Description</th><th style="padding:3px;" title="Six digits, the international part: a broker adds the country’s own. Originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90.">HS code</th><th style="padding:3px;">Origin</th><th style="padding:3px;">Qty</th><th style="padding:3px;">Unit value</th><th style="padding:3px; text-align:right;">Total</th></tr></thead>';
+        const tb = document.createElement('tbody'); tbl.appendChild(tb);
+        T.lines.forEach(l => {
+            const tr = document.createElement('tr'); tr.setAttribute('data-ship-line', l.id); tr.style.borderTop = '1px solid var(--border-color)';
+            const cell = (val, k, w, warn) => {
+                const td = document.createElement('td'); td.style.padding = '3px';
+                const i = document.createElement('input'); i.type = 'text'; i.value = val == null ? '' : val; i.setAttribute('data-k', k);
+                i.style.cssText = 'height:22px; font-size:var(--fs-65); width:' + w + ';' + (warn ? ' border-color:var(--warn);' : '');
+                i.onchange = () => set({ lines: { [l.id]: { [k]: i.value } } });
+                td.appendChild(i); tr.appendChild(td);
+            };
+            cell(l.desc, 'desc', '100%'); cell(l.hs, 'hs', '70px', !l.hs); cell(l.origin, 'origin', '70px'); cell(l.qty, 'qty', '40px'); cell(l.unit, 'unit', '80px', l.unit == null);
+            const tt = document.createElement('td'); tt.style.cssText = 'padding:3px; text-align:right; white-space:nowrap;'; tt.textContent = l.total != null ? _shipMoney(l.total, sh.currency) : ''; tr.appendChild(tt);
+            tb.appendChild(tr);
+        });
+        body.appendChild(tbl);
+    }
+    const foot = row(); foot.style.alignItems = 'center';
+    const sum = document.createElement('div'); sum.id = 'shipTotal'; sum.style.cssText = 'flex:1 1 auto; font-size:var(--fs-70);';
+    sum.textContent = T.lines.length ? T.lines.length + ' line' + (T.lines.length === 1 ? '' : 's') + ' · goods ' + _shipMoney(T.goods, sh.currency) + ' · total ' + _shipMoney(T.total, sh.currency) + (T.missing.length ? ' · ' + T.missing.length + ' without a value or HS code (' + T.missing.join(', ') + ')' : '') : 'Tick the pieces in the box.';
+    if (T.missing.length) sum.style.color = 'var(--warn)';
+    foot.appendChild(sum);
+    foot.appendChild(_prodBtn('Delete invoice', () => _confirmDestroy({ title: 'Delete this commercial invoice?', body: 'Only the invoice goes; the pieces are not touched.', confirm: 'Delete', undoable: true, onConfirm: () => { deleteShipment(sh.id); _prodShipPick = null; _prodShow(); } }), true));
+    foot.appendChild(_prodBtn('Download PDF', () => downloadCommercialInvoice(sh.id), false, 'commercial_invoice_<number>.pdf'));
+}
+
 const PROD_TABS = [
     ['samples', 'Samples', 'Frame and mat samples: what to order, and what the client approved'],
     ['vendors', 'Vendors', 'Who makes each piece, and the production pack: RFIs, contact sheets, purchases'],
     ['pricing', 'Pricing', 'Costs, sell prices, allowances and the budget; Excel and Salesforce'],
-    ['issues', 'Issues', 'What went out at each issue, and what has changed since']
+    ['issues', 'Issues', 'What went out at each issue, and what has changed since'],
+    ['shipping', 'Shipping', 'Commercial invoices for shipments between Canada and the USA']
 ];
 let _prodTab = 'samples';
 function openProduction(tab) {
@@ -61105,7 +61461,7 @@ function _prodShow() {
     const body = document.getElementById('productionBody'); if (!body) return;
     document.querySelectorAll('#productionTabs [data-prod-tab]').forEach(b => b.classList.toggle('active', b.getAttribute('data-prod-tab') === _prodTab));
     body.innerHTML = '';
-    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto }[_prodTab];
+    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto, shipping: _prodShippingInto }[_prodTab];
     if (fn) fn(body);
 }
 function _prodBtn(label, onClick, secondary, tip) {
