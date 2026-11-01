@@ -86,6 +86,43 @@ filling, and put the most important piece in the biggest slot.
   (AD/PM) is a question for the user, not a guess.
 - Check the real PDF as well as the renders: render a few PDF pages back to PNG at the end.
 
+## What five real projects taught (V1 to IFS, read from the studio's records, Nov 2026)
+Full write-ups live outside the repo (the designer's `FRAME Agent Training` folder); these are the rules.
+- **The stages.** V1 concept = themes or moods, NEVER placements: no sizes, no image codes (small
+  artist or technique notes only). V2 development = one spec page per placement in floor-plan
+  order, each level opened by a breaker built from the client's rendering. IFS = approved pieces
+  only, no OPTION headings, real sizes, frame codes that match the approved samples. Ask which
+  stage the brief is before building; never put V2 material in a V1.
+- **V1 structure that worked:** a themes page (one image and one line per theme), then 5 to 8
+  pages per theme with the theme name as the heading and its paragraph small top right on every
+  page of that theme. Open SOFT: no dark, sepia or black-and-white pages first.
+- **Show framing and matting in concept mockups;** flat unframed images read as stock.
+- **Callouts name real specifics** from the brief (local plants, a festival, the building's own
+  history), never generic words ("tropical", "urban").
+- **The client's words are the rules.** Their codes and plan numbers, gaps included (ART-01, 02,
+  04); their room names (a space the plan does not have is a question, never a guess); their
+  colour words carried verbatim into the next version.
+- **Art only on walls the client dimensioned,** never on walls with fire panels or equipment.
+- **A rejected theme is removed everywhere at once,** cover and closing pages included.
+- **Revising a deck:** keep page numbers stable (clients answer "the piece on page 9"), leave
+  approved pages unchanged, change only the stage word on the cover.
+- **Options:** label `OPTION ONE` top right; option 1 can take the spec-page format and the rest
+  a summary page with location and image code. A set gets a grouping page before its pieces.
+- **Missing drawings get a labelled grey box** ("Floorplan Pending"), never a gap; but an issued
+  deck never says "Pending" under a real drawing, and never prints `0"W x 0"H`, "Frame Code,
+  Colour" or "N/A". A reference image that is not the art says "Concept imagery only".
+- **Every image code carries a house prefix,** a client's own photo included (never a camera
+  file name). The studio's old decks printed `.jpg` after codes: do not copy that.
+- **Thank You:** the creative director, the AD/PM AND the sales partner named in the handover
+  (missed for several versions in two projects). Proofread keywords and the copyright year.
+- **Plain words in client copy:** "graphic" or "illustrative", not studio jargon like "vector".
+- **By project type:** residential model suites are persona-led (one persona per suite, its name
+  and paragraph on every page, a page per room scheme at relative scale, objects on the plan
+  too). Corporate archive projects start as a wireframe (grey boxes at true scale, narrative and
+  keywords from the brief), stay on THAT site's own history, and show archive photos unedited.
+  Local-artist projects give each artist a bio breaker, confirm licensing first, and offer the
+  artist beside a house option.
+
 ## Rules
 - The pool is the only source of art. If a space needs something the pool lacks, leave a
   slot empty and say so; never use a context image as art.
