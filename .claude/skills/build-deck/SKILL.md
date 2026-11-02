@@ -123,6 +123,39 @@ Full write-ups live outside the repo (the designer's `FRAME Agent Training` fold
   Local-artist projects give each artist a bio breaker, confirm licensing first, and offer the
   artist beside a house option.
 
+## What five more taught, start to finish (production, install, close-out, Nov 2026)
+- **The deck the installers use is the spec deck,** so everything they need is ON the page:
+  client code, room, art size, overall size, art type, frame, mat, mount, glass, stretcher
+  depth, title, artist (spelled as the artist wants, with affiliation where the client asks),
+  year, and a production note. No field left as `TBD`, `N/A`, `0"` or a template label.
+- **One code means one place everywhere:** unique across floors (prefix by level, `L2-A01`,
+  when the client's numbers repeat), the same spelling in deck, plan, vendor sheet, crate list
+  and install guide (the client's format, e.g. `ART-01`, never a house format swapped in).
+- **The version, stage, year and project name are right on every page,** cover and footers
+  included; never another project's footer.
+- **Art type follows how the piece is bought,** and the disclaimer matches: commission wording
+  only on commissions. Show an original or object in its true colour and finish, never a
+  seller's render. Never show a commission or original before artist, licence and size are
+  confirmed.
+- **Spec values add up and use one vocabulary:** overall = art + mat + frame; one name per
+  product ("Framed Canvas"); the frame deep enough for its mat. Check the image file can print
+  at the size before proposing the size.
+- **When scope, price or vendor changes,** the next IFS lists what is not going ahead, matches
+  the quote's sizes, and carries the new frame codes.
+- **Millwork and furniture set the size:** keep a reveal inside a panel, clear lamps, draw the
+  furniture with dimension lines; with no client elevation, draw one and mark it
+  "ELEVATION REQUIRED".
+- **An install guide carries only what is being installed** (on-hold codes off the plan too):
+  one page per placement, scaled elevation, sizes, code, ONE hang rule, a centreline label over
+  furniture (CL CREDENZA), site instructions in red beside the drawing, a hardware note and a
+  general notes page.
+- **Healthcare and community art:** the client's content rules are hard rules (no cultural
+  shorthand imagery; balance people shown), calm work in public areas, labels planned from the
+  start (title, artist and affiliation, size, year).
+- **A corporate finance space wants conservative work** (mostly product, some landscape,
+  little abstract); photographs never get a deckled edge.
+- **Multi-package projects:** version numbers run across the whole project, not per package.
+
 ## Rules
 - The pool is the only source of art. If a space needs something the pool lacks, leave a
   slot empty and say so; never use a context image as art.
