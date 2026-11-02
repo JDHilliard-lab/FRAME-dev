@@ -2392,6 +2392,8 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **A PIECE LETTER FOLLOWS A NUMBER OR A SEPARATOR (20.13, `_artGroupKey`).** One letter is stripped only after a digit
   (`ART.1A`, `ART-1AA` = arrangement A piece A) or a separator (`ART.1.A`, `1B.L3.ART-EF-A`); `1B.L3.ART-EA` is its own
   placement (Ford Hub's existing-inventory codes). Still ONE letter: two-letter runs would break catalogue keys.
+- **A CODE FRAME CANNOT PARSE STILL SORTS (20.14, `_codeRowKey` `nat`, `_codeNatCmp`).** After every parsed code, in natural
+  order (`1B.L3.ART-02` < `-10` < `-EA`); walls too (`_codesSortWalls` no longer skips them; `empty` walls last).
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
