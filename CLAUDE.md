@@ -2353,6 +2353,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   note, at}`, one writer `setSampleStatus` (prunes empties). `sampleReplace` swaps through `_salonFrameDress` (library)
   or the typed code, pushes to wall copies, ONE undo. Preflight (`_samplePreflight`): rejected and still used = err;
   IFS (`_deckIsIFS`, read off the footer version, no stage setting) and not approved = warn. Issues carry `prod`.
+- **THE ART TYPE IS HOW THE PIECE IS BOUGHT (20.07, `_artTypePreflight`).** FAO/original with a `sourceUrl` host in
+  `SHOP_HOST_RE` warns; `COMMISSION_NOTE_RE` text on a spec page must sit with an `_rowIsCommission` piece and a
+  commission needs it. The two presets (`Commission note`, `Original artwork note`) are in `_DS_NOTE_PRESETS`; the
+  original note must NOT match `COMMISSION_NOTE_RE` (tested).
 - **WALL LABELS ARE A PRODUCTION TAB (20.06, `_prodLabelsInto`, `setRowLabel`, `_labelLines`, `_labelSheetPdf`, `_labelCsv`).**
   Row fields `artworkTitle`/`artist` (hidden in the form) plus `artistAffil`, `artMedium`, `artYear`; `labelOff` '1'/'0'
   only when it differs from `_labelDefaultOn` (objects and flat graphics off). Sheet = Avery 5163 (4"x2", 2x5 Letter).
