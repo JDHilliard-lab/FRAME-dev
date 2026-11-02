@@ -2389,6 +2389,9 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **EVERY PICTURE HAS A HOUSE CODE (20.12, `HOUSE_IMG_CODE_RE`, `_imgCodeShapePreflight`).** Letters 2-5 then TWO dotted
   number groups (JZY.010.00219; IMG_4021 must fail). Blank / TBD skipped (other checks). Warn, err in an IFS. Test fixtures with real pictures
   need a house image code or they gain this warning.
+- **A PIECE LETTER FOLLOWS A NUMBER OR A SEPARATOR (20.13, `_artGroupKey`).** One letter is stripped only after a digit
+  (`ART.1A`, `ART-1AA` = arrangement A piece A) or a separator (`ART.1.A`, `1B.L3.ART-EF-A`); `1B.L3.ART-EA` is its own
+  placement (Ford Hub's existing-inventory codes). Still ONE letter: two-letter runs would break catalogue keys.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
