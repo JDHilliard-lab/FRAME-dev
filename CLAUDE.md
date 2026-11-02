@@ -2380,6 +2380,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_rowIsPurchase` (Sourced Object, FAO/FCM/FSO/FSL code, original/commission/sourced art type) NEVER goes on an RFI.
   A per-vendor RFI is `buildDashCSVString({only})`, never a second CSV writer. `Vendor,Source URL` trail `Category`.
   Contact sheet caption `_contactSheetCaption` = image code + `_WxH` at PRINT size, project unit, no extension.
+- **WILL IT PRINT SHARP (20.10, `_artIncomingPx`, `_linkPx`, `artLink.pw/ph`, `_artPrintPpi`, `_printResPreflight`).** The
+  import keeps a 1200 px copy, so the ORIGINAL's pixels ride on the link (set beside `_artIncomingFile`, SVG none;
+  `_linkReadFile` passes them to `_linkApply`). ppi = min(pw/printW, ph/printH) / artZoom, print size from
+  `_rowOpeningAndPrint` in inches. Under `PRINT_PPI_MIN` 150 (`FLAT_PPI_MIN` 75): warn, err in an IFS. No pixels = not judged.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
