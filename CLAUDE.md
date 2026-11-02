@@ -2384,6 +2384,8 @@ run but passes alone is usually load timing: rerun before chasing it.
   import keeps a 1200 px copy, so the ORIGINAL's pixels ride on the link (set beside `_artIncomingFile`, SVG none;
   `_linkReadFile` passes them to `_linkApply`). ppi = min(pw/printW, ph/printH) / artZoom, print size from
   `_rowOpeningAndPrint` in inches. Under `PRINT_PPI_MIN` 150 (`FLAT_PPI_MIN` 75): warn, err in an IFS. No pixels = not judged.
+- **THE SIZES ADD UP (20.11, `_rowOpeningAndPrint(...).short`, `_sizeMathPreflight`).** `short` = a sized piece whose
+  opening was <= 0 BEFORE the clamp; warn, err in an IFS.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
