@@ -94,7 +94,13 @@ check('the rail button counts with the same predicate as reset', () => {
   const r = APP.indexOf("'↺ Reset page order ('");
   if (r < 0) throw new Error('rail reset label not found');
   const near = APP.slice(APP.lastIndexOf('const handPlaced', r), r);
-  if (near.indexOf('_dsPageHandPlaced') < 0) throw new Error('the rail counts hand-placed pages its own way');
+  // 20.03: both go through _dsHandPlacedCount (inserted pages + moved standard pages),
+  // which itself counts inserted pages with _dsPageHandPlaced.
+  if (near.indexOf('_dsHandPlacedCount()') < 0) throw new Error('the rail counts hand-placed pages its own way');
+  const rs = APP.slice(APP.indexOf('function _dsResetLayoutOrder'), APP.indexOf('function _dsDeleteInserted'));
+  if (rs.indexOf('_dsHandPlacedCount()') < 0) throw new Error('reset counts hand-placed pages its own way');
+  const hc = APP.slice(APP.indexOf('function _dsHandPlacedCount'), APP.indexOf('function _dsResetLayoutOrder'));
+  if (hc.indexOf('_dsPageHandPlaced') < 0) throw new Error('the shared count no longer uses _dsPageHandPlaced');
 });
 
 const failed = results.filter(r => !r.ok);

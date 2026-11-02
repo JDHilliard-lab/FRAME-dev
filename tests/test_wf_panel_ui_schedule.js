@@ -952,7 +952,8 @@ const path = require('path');
       const i = S.indexOf('function _deckPageList');
       const body = S.slice(i, i + 22000);
       const mg = body.indexOf('_mergeFlatPages(');
-      const pin = body.indexOf("if (p.afterKey === '__start__')");
+      // 20.03: one pin pass for inserted pages AND moved standard pages (x.after).
+      const pin = body.indexOf("if (x.after === '__start__')");
       if (mg < 0 || pin < 0) throw new Error('could not find the merge and the pin pass');
       if (mg > pin) throw new Error('the merge still runs after the pins, so an anchor on a merged sheet is unfindable');
       // The pin pass must see the merged titles, so the hidden-fixed filter has to move

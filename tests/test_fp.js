@@ -1226,13 +1226,16 @@ const fs = require('fs');
       // and that generator is mirrored by the PDF exporter. A per-page override would
       // fight it - the pairing that has drifted more than any other here.
       if (!_dsPageMovable({ kind: 'layout', page: { id: 'p1' } })) throw new Error('an inserted page cannot be moved');
-      ['fixed', 'card', 'floorplan', 'planDetail', 'spec'].forEach(k => {
+      ['floorplan', 'planDetail', 'spec'].forEach(k => {
         if (_dsPageMovable({ kind: k, page: { id: 'x' } })) throw new Error(k + ' pages became draggable');
       });
+      // 20.03: the standard pages move (test_move_standard_pages); the cover never does.
+      if (_dsPageMovable({ kind: 'fixed', fixed: 'cover' })) throw new Error('the cover became draggable');
+      if (!_dsPageMovable({ kind: 'card', type: 'timeline' })) throw new Error('Process / Timeline cannot be moved');
       // Every locked kind explains ITSELF and points at the control that decides it.
       // "You cannot move this" without saying where the order lives is the state this
       // replaced, where two thirds of a deck ignored the buttons beside it.
-      [['fixed', 'Include pages'], ['card', 'Include pages'],
+      [['fixed', 'Include pages'],
        ['floorplan', 'Floorplan order'], ['planDetail', 'Floorplan order'],
        ['spec', 'Floorplan order']].forEach(pair => {
         const note = _dsPageLockNote({ kind: pair[0] });

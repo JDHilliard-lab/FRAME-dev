@@ -328,9 +328,15 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **A floorplan page has no Templates tab** (`_dsPageTakesTemplates`); hidden, not
   disabled, Layers stays. Re-apply the hide via `_dsSyncToolsTabBar` after `_dsToolsTab`
   runs, and fall back to Page if Templates was open when a plan is selected.
-- **ONLY INSERTED LAYOUT PAGES CAN BE MOVED** (`_dsPageMovable`). Fixed pages, floorplans,
-  plan details, spec pages and breakers are placed by `_deckPageList` / `_deckPlanSlots`
-  from the data; don't add per-page overrides for them (manual plan order covers it).
+- **INSERTED PAGES AND THE STANDARD PAGES MOVE; GENERATED PAGES DO NOT** (`_dsPageMovable`).
+  20.03: `DECK_FLOAT_KEYS` (timeline, understanding, narrative, strategy, frameRec, slogan,
+  contacts; never the cover) move by `editorialContent.pagePlace[key]` = the key they follow,
+  stored only once moved, resolved in the SAME multi-pass pin loop as layout `afterKey` (either
+  can anchor to the other). Moving one re-anchors pages pinned to it onto its old neighbour (they
+  stay put), and a pinned neighbour sharing the new anchor onto it. Reset clears `pagePlace`;
+  `_dsHandPlacedCount` is the one count. Floorplans, plan details, spec pages and breakers are
+  placed by `_deckPageList` / `_deckPlanSlots` from the data; don't add per-page overrides for
+  them (manual plan order covers it).
   `_dsPageLockNote` says why a page can't move and where its order is decided.
   **`_dsMovePageTo` is the ONE move** (rail drag, "move to page N", page-actions menu). It
   reads the anchor off the RESULTING order, drops `place` (it fights the hand-set

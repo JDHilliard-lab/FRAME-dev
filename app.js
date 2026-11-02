@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.02';
+const APP_VERSION = '20.03';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -21173,17 +21173,40 @@ function _deckPageList() {
         pages.length = 0;
         merged.forEach(p => pages.push(p));
     }
+    // A STANDARD PAGE MOVED BY HAND (20.03) leaves its home slot and is pinned like an
+    // inserted page: `ec.pagePlace[key]` is the key it follows. Both kinds go through one
+    // resolver, because either can be anchored to the other (Timeline after a moodboard, a
+    // divider after Frame Recommendations). An anchor not placed yet waits for a later pass.
+    const pins = [];
     (ec.layoutPages || []).forEach(p => {
         if (!p.afterKey) return;
-        const d = { kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Page', page: p };
-        if (p.afterKey === '__start__') { pages.unshift(d); return; }
-        let idx = -1;
-        for (let i = pages.length - 1; i >= 0; i--) { if (_deckPageKey(pages[i]) === p.afterKey) { idx = i; break; } }
-        if (idx < 0) { pages.push(d); return; }
-        let j = idx + 1;
-        while (j < pages.length && pages[j].kind === 'layout' && pages[j].page && pages[j].page.afterKey === p.afterKey) j++;
-        pages.splice(j, 0, d);
+        pins.push({ d: { kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Page', page: p }, after: p.afterKey });
     });
+    const place = ec.pagePlace || {};
+    const moved = [];
+    for (let i = pages.length - 1; i >= 0; i--) {
+        const k = _deckPageKey(pages[i]);
+        if (k && place[k] && _deckPageFloats(k)) moved.unshift({ d: pages.splice(i, 1)[0], after: place[k] });
+    }
+    moved.forEach(x => pins.push(x));
+    pins.forEach(x => { x.d._pinAfter = x.after; });
+    let pending = pins;
+    while (pending.length) {
+        const later = [];
+        pending.forEach(x => {
+            if (x.after === '__start__') { let j = 0; while (j < pages.length && pages[j]._pinAfter === '__start__') j++; pages.splice(j, 0, x.d); return; }
+            let idx = -1;
+            for (let i = pages.length - 1; i >= 0; i--) { if (_deckPageKey(pages[i]) === x.after) { idx = i; break; } }
+            if (idx < 0) { later.push(x); return; }
+            let j = idx + 1;
+            while (j < pages.length && pages[j]._pinAfter === x.after) j++;
+            pages.splice(j, 0, x.d);
+        });
+        // Nothing found its anchor this pass: the first one goes to the end (what an
+        // unresolved anchor always did) and the rest try again, since some may follow it.
+        if (later.length === pending.length) pages.push(later.shift().d);
+        pending = later;
+    }
     // Already merged and hidden-filtered above, before the pins were placed.
     // The contents page is written from this list, so it is synced here, last.
     const _toc = _tocSyncAll(pages);
@@ -25585,12 +25608,22 @@ function _dsWireRailDrag(cell, desc, i) {
         _dsDragFromKey = null;
     });
 }
-function _dsPageMovable(desc) { return !!(desc && desc.kind === 'layout' && desc.page && !desc.page._tocPartOf); }
+// THE STANDARD PAGES A DESIGNER MAY PLACE (20.03). Studio decks put Process + Timeline at
+// the end as often as near the front, and Frame Recommendations wherever the conversation
+// reaches frames. The cover stays page 1. Placement is `editorialContent.pagePlace[key]`,
+// the key the page follows (as an inserted page's afterKey), stored only once moved.
+const DECK_FLOAT_KEYS = ['card:timeline', 'fixed:understanding', 'fixed:narrative', 'fixed:strategy', 'card:frameRec', 'fixed:slogan', 'card:contacts'];
+function _deckPageFloats(key) { return DECK_FLOAT_KEYS.indexOf(key) >= 0; }
+function _dsPageMovable(desc) {
+    if (!desc) return false;
+    if (desc.kind === 'layout') return !!(desc.page && !desc.page._tocPartOf);
+    return (desc.kind === 'fixed' || desc.kind === 'card') && _deckPageFloats(_deckPageKey(desc));
+}
 function _dsPageLockNote(desc) {
     if (!desc || _dsPageMovable(desc)) return '';
     if (desc.kind === 'layout' && desc.page && desc.page._tocPartOf) return 'The contents continued \u2014 it follows the first Contents page and goes away when the contents fits on one.';
     if (desc.kind === 'fixed' || desc.kind === 'card') {
-        return 'Fixed page — its place in the deck is set. Switch it on or off under Project, Include pages.';
+        return 'The cover is always the first page. Switch pages on or off under Project, Include pages.';
     }
     if (desc.kind === 'floorplan' || desc.kind === 'planDetail') {
         return 'Ordered with the plans — change Floorplan order under Project (or pick Manual to sequence them yourself).';
@@ -25626,14 +25659,34 @@ function _dsMovePageTo(desc, newIdx) {
     // Build the order this move is asking for, then read the anchor off it. Working from
     // the RESULT rather than from offsets is what keeps "before page 3" meaning the same
     // thing whether the page is currently above or below it.
+    const oldBefore = (from > 0) ? (_deckPageKey(list[from - 1]) || '__start__') : '__start__';
     const moved = list.splice(from, 1)[0];
     list.splice(to, 0, moved);
     const before = (to > 0) ? list[to - 1] : null;
-    desc.page.afterKey = before ? (_deckPageKey(before) || '__start__') : '__start__';
-    // `place` is the template's own anchor (afterCover, afterStrategy…). Once a page has
-    // been positioned by hand that anchor is no longer the truth, and leaving it would let
-    // it fight the afterKey on the next rebuild.
-    delete desc.page.place;
+    const after = before ? (_deckPageKey(before) || '__start__') : '__start__';
+    if (desc.kind === 'layout') {
+        desc.page.afterKey = after;
+        // `place` is the template's own anchor (afterCover, afterStrategy…). Once a page has
+        // been positioned by hand that anchor is no longer the truth, and leaving it would let
+        // it fight the afterKey on the next rebuild.
+        delete desc.page.place;
+    } else {
+        // A standard page (20.03). Pages pinned to it stay where they were rather than
+        // travelling with it: moving Process + Timeline to the end must not drag the page
+        // that happened to follow it.
+        (editorialContent.layoutPages || []).forEach(p => { if (p.afterKey === myKey) p.afterKey = oldBefore; });
+        const pl = editorialContent.pagePlace || (editorialContent.pagePlace = {});
+        Object.keys(pl).forEach(k => { if (pl[k] === myKey) pl[k] = oldBefore; });
+        pl[myKey] = after;
+    }
+    // A pinned neighbour sharing the anchor would be sorted against the moved page by the
+    // resolver's own order; anchoring it to the moved page says which comes first.
+    const next = list[to + 1];
+    const nk = next && _deckPageKey(next);
+    if (nk && nk !== myKey) {
+        if (next.kind === 'layout' && next.page && next.page.afterKey === after) next.page.afterKey = myKey;
+        else if (editorialContent.pagePlace && editorialContent.pagePlace[nk] === after) editorialContent.pagePlace[nk] = myKey;
+    }
     _dsSyncLayoutPageOrder(list);
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
@@ -25736,20 +25789,28 @@ function _dsPageHandPlaced(p) {
     const home = _starterLayoutHome()[p.id];
     return !(home && home === p.afterKey);
 }
+// Inserted pages off their template's anchor plus standard pages moved by hand (20.03).
+function _dsHandPlacedCount() {
+    const pl = editorialContent.pagePlace || {};
+    return (editorialContent.layoutPages || []).filter(_dsPageHandPlaced).length
+        + Object.keys(pl).filter(k => pl[k] && _deckPageFloats(k)).length;
+}
 // Put every inserted page back where its template meant it to go. Once a few have been
 // hand-anchored there is otherwise no way back short of deleting and re-adding them.
 function _dsResetLayoutOrder() {
     const arr = (editorialContent.layoutPages || []);
     const hand = arr.filter(_dsPageHandPlaced);
-    if (!hand.length) { _toast('Nothing to reset', 'No pages have been moved by hand — they are all still where their template puts them.'); return; }
+    const n = _dsHandPlacedCount();
+    if (!n) { _toast('Nothing to reset', 'No pages have been moved by hand — they are all still where their template puts them.'); return; }
     _confirmDestroy({
-        title: 'Put ' + hand.length + ' hand-placed page' + (hand.length === 1 ? '' : 's') + ' back in the default order?',
-        body: 'Pages you moved by hand go back to where their template puts them.',
+        title: 'Put ' + n + ' hand-placed page' + (n === 1 ? '' : 's') + ' back in the default order?',
+        body: 'Pages you moved by hand go back to where their template puts them, and standard pages (Process + Timeline, Frame Recommendations…) to their usual place.',
         confirm: 'Reset order',
         undoable: true,
         onConfirm: () => {
             // A starter page goes back to its starter anchor; anything else to its template's.
             hand.forEach(p => { const home = _starterLayoutHome()[p.id]; if (home) { p.afterKey = home; return; } delete p.afterKey; if (!p.place) p.place = 'afterStrategy'; });
+            delete editorialContent.pagePlace;
             if (typeof pushHistory === 'function') pushHistory();
             if (typeof scheduleAutosave === 'function') scheduleAutosave();
             _dsRefresh();
@@ -25918,11 +25979,11 @@ function _dsRenderRail() {
     // put them short of deleting and re-adding each one. Hidden when there is nothing to
     // undo, so it is not a permanently-armed button for a rare job.
     {
-        const handPlaced = (editorialContent.layoutPages || []).filter(_dsPageHandPlaced).length;
+        const handPlaced = _dsHandPlacedCount();
         if (handPlaced) {
             const rst = document.createElement('button');
             rst.textContent = '↺ Reset page order (' + handPlaced + ')';
-            rst.title = 'Put every hand-placed page back where its template puts it. Fixed and generated pages are unaffected — they were never moved.';
+            rst.title = 'Put every hand-placed page back where its template puts it, and moved standard pages back in their usual place. Generated pages are unaffected — they were never moved.';
             rst.style.cssText = 'width:100%; height:22px; margin-top:5px; font-size:var(--fs-60); background:var(--bg-input);'
                 + ' color:var(--text-muted); border:1px solid var(--border-color); border-radius:var(--r-4); cursor:pointer;';
             rst.onclick = () => _dsResetLayoutOrder();
@@ -49543,7 +49604,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+                body: `<strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
