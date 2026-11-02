@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.05';
+const APP_VERSION = '20.06';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -49621,7 +49621,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+                body: `<strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
@@ -60237,7 +60237,7 @@ function _ifsAuditPreflight(pages) {
             if (bad(r.artist)) warns.push('artist');
         }
         if (errs.length) out.push({ sev: 'err', text: r.id + ' — no ' + errs.join(' or ') + ' in an IFS', idx: null, go: go(r) });
-        if (warns.length) out.push({ sev: 'warn', text: r.id + ' — no ' + warns.join(', ') + ' in an IFS', idx: null, go: go(r) });
+        if (warns.length) out.push(Object.assign({ sev: 'warn', text: r.id + ' — no ' + warns.join(', ') + ' in an IFS', idx: null, go: go(r) }, (warns.indexOf('title') >= 0 || warns.indexOf('artist') >= 0) ? { prod: { tab: 'labels' } } : {}));
     });
     return out;
 }
@@ -60413,6 +60413,142 @@ async function _contactSheetPdf(rows, title) {
         }
     }
     return doc;
+}
+// ── WALL LABELS (20.06) ──────────────────────────────────────────────────────────────
+// Choctaw's labels read Title, Artist (tribal affiliation), Size, Year; 17 titles were
+// added during the install because the deck had "N/A". Title and artist were hidden form
+// fields (captions were typed in InDesign), so there was nowhere in FRAME to fill them in.
+// The Labels tab is that place; the label sheet prints on 4" x 2" stock (Avery 5163, ten to
+// a Letter page) and the CSV goes to whoever prints them. `r.labelOff` = this piece gets no
+// label (client-owned work, objects); objects and flat graphics default to none.
+const LABEL_FIELDS = [['artworkTitle', 'Title'], ['artist', 'Artist'], ['artistAffil', 'Affiliation'], ['artMedium', 'Medium'], ['artYear', 'Year']];
+function _labelDefaultOn(r) { return !(r.product === 'Sourced Object' || _isFlatGraphic(r.product)); }
+function _labelOn(r) { return r.labelOff === '1' ? false : (r.labelOff === '0' ? true : _labelDefaultOn(r)); }
+function _labelRows() { return _deckSpecRows().filter(r => r && r.id); }
+function _labelSize(r) {
+    const s = _rowOpeningAndPrint(r);
+    if (!(s.openW > 0 && s.openH > 0)) return '';
+    const u = (typeof dashUnit !== 'undefined' && dashUnit) || 'in';
+    return _fmtUnitNum(s.openW, u) + ' × ' + _fmtUnitNum(s.openH, u) + ' ' + u;
+}
+// The label's lines, in print order; empty parts are left out, never printed as blanks.
+function _labelLines(r) {
+    const t = String(r.artworkTitle || '').trim(), a = String(r.artist || '').trim(), af = String(r.artistAffil || '').trim();
+    const med = String(r.artMedium || '').trim(), yr = String(r.artYear || '').trim();
+    return {
+        title: t,
+        artist: a + (af ? ' (' + af + ')' : ''),
+        detail: [med, yr].filter(Boolean).join(', '),
+        size: _labelSize(r),
+    };
+}
+function setRowLabel(id, patch) {
+    if ('labelOn' in patch) {
+        const r = dashProjectData.find(x => x && x.id === id);
+        const on = !!patch.labelOn; delete patch.labelOn;
+        patch.labelOff = (r && on === _labelDefaultOn(r)) ? '' : (on ? '0' : '1');
+    }
+    return setRowsProduction([id], patch);
+}
+function _labelCsv(rows) {
+    const q = (v) => { const s = String(v == null ? '' : v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const head = ['Code', 'Title', 'Artist', 'Affiliation', 'Medium', 'Year', 'Size', 'Image Code', 'Location'];
+    const lines = [head.join(',')];
+    rows.forEach(r => lines.push([r.id, r.artworkTitle, r.artist, r.artistAffil, r.artMedium, r.artYear, _labelSize(r), _imgCodeNoExt(r.imageCode), r.location].map(q).join(',')));
+    return lines.join('\n');
+}
+function _imgCodeNoExt(c) { return String(c || '').trim().replace(/\.(jpe?g|png|tiff?|psd|pdf|webp)$/i, ''); }
+function _labelSheetPdf(rows) {
+    const JP = (window.jspdf && window.jspdf.jsPDF) || (typeof jsPDF !== 'undefined' ? jsPDF : null);
+    if (!JP) throw new Error('PDF library not loaded');
+    const doc = new JP({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+    // Avery 5163: 4" x 2", two across and five down, 0.5" top, 0.15625" side, 0.1875" gap.
+    const W = 288, H = 144, TOP = 36, SIDE = 11.25, GAPX = 13.5, PAD = 16, per = 10;
+    const pages = Math.max(1, Math.ceil(rows.length / per));
+    for (let p = 0; p < pages; p++) {
+        if (p) doc.addPage();
+        for (let i = 0; i < per; i++) {
+            const r = rows[p * per + i]; if (!r) break;
+            const x = SIDE + (i % 2) * (W + GAPX), y = TOP + Math.floor(i / 2) * H;
+            doc.setDrawColor(225, 225, 225); doc.setLineWidth(0.4); doc.rect(x, y, W, H);
+            const L = _labelLines(r);
+            let cy = y + PAD + 10;
+            const line = (txt, font, size, rgb, gap) => {
+                if (!txt) return;
+                doc.setFont('helvetica', font); doc.setFontSize(size); doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+                doc.splitTextToSize(txt, W - PAD * 2).slice(0, 2).forEach(t => { doc.text(t, x + PAD, cy); cy += size * 1.25; });
+                cy += gap;
+            };
+            line(L.title || 'Untitled', 'bolditalic', 13, [20, 20, 20], 3);
+            line(L.artist, 'normal', 10, [40, 40, 40], 1);
+            line(L.detail, 'normal', 9, [90, 90, 90], 1);
+            line(L.size, 'normal', 9, [90, 90, 90], 0);
+            // Which wall it goes on, small, for whoever hangs it.
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); doc.setTextColor(150, 150, 150);
+            doc.text(String(r.id || ''), x + W - PAD, y + H - 10, { align: 'right' });
+        }
+    }
+    return doc;
+}
+function downloadLabels(kind) {
+    const rows = _labelRows().filter(_labelOn);
+    if (!rows.length) { _toast('No labels to make', 'Tick the pieces that get a label on the Labels tab.'); return; }
+    const name = _prodStamp() + '.' + _prodProjectTag() + '.Labels';
+    let blob;
+    if (kind === 'csv') blob = new Blob([_labelCsv(rows)], { type: 'text/csv' });
+    else {
+        try { blob = _labelSheetPdf(rows).output('blob'); }
+        catch (e) { showInfoModal('Label sheet', 'The label sheet could not be made: ' + _esc(e && e.message || e)); return; }
+    }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = name + (kind === 'csv' ? '.csv' : '.pdf'); a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
+    const untitled = rows.filter(r => !String(r.artworkTitle || '').trim()).length;
+    if (untitled) _toast('Some labels have no title', untitled + ' label' + (untitled === 1 ? ' prints' : 's print') + ' as Untitled.');
+}
+function _prodLabelsInto(body) {
+    const rows = _labelRows();
+    const intro = document.createElement('div'); intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:10px;';
+    intro.textContent = rows.length
+        ? 'What each wall label says. Spell the artist the way they want it printed. Untick pieces that get no label (work the client already owns, objects). Changes save as you leave each field.'
+        : 'No pieces in the deck yet.';
+    body.appendChild(intro);
+    if (!rows.length) return;
+    const bar = document.createElement('div'); bar.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:10px;';
+    const on = rows.filter(_labelOn), missing = on.filter(r => !String(r.artworkTitle || '').trim() || !String(r.artist || '').trim()).length;
+    const cnt = document.createElement('span'); cnt.id = 'labelCount'; cnt.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); flex:1 1 auto;';
+    cnt.textContent = on.length + ' label' + (on.length === 1 ? '' : 's') + (missing ? ' · ' + missing + ' missing a title or artist' : '');
+    bar.appendChild(cnt);
+    bar.appendChild(_prodBtn('Label sheet (PDF)', () => downloadLabels('pdf'), false, '4" x 2" labels, ten to a Letter page (Avery 5163)'));
+    bar.appendChild(_prodBtn('Labels CSV', () => downloadLabels('csv'), true, 'One row per label, for whoever prints them'));
+    body.appendChild(bar);
+    const tbl = document.createElement('table'); tbl.id = 'labelTable';
+    tbl.style.cssText = 'width:100%; border-collapse:collapse; font-size:var(--fs-70);';
+    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;" title="Gets a label">Label</th><th style="padding:4px;">Code</th>'
+        + LABEL_FIELDS.map(f => '<th style="padding:4px;">' + f[1] + '</th>').join('') + '<th style="padding:4px;">Size</th></tr></thead>';
+    const tb = document.createElement('tbody'); tbl.appendChild(tb);
+    rows.forEach(r => {
+        const tr = document.createElement('tr'); tr.setAttribute('data-label-row', r.id);
+        tr.style.cssText = 'border-top:1px solid var(--border-color);';
+        const td = () => { const c = document.createElement('td'); c.style.cssText = 'padding:4px; vertical-align:middle;'; tr.appendChild(c); return c; };
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = _labelOn(r);
+        cb.onchange = () => { setRowLabel(r.id, { labelOn: cb.checked }); _prodShow(); };
+        td().appendChild(cb);
+        const code = td(); code.textContent = r.id; code.style.fontWeight = '700';
+        LABEL_FIELDS.forEach(([k, lab]) => {
+            const inp = document.createElement('input'); inp.type = 'text'; inp.value = String(r[k] || '');
+            inp.setAttribute('data-label-field', k);
+            inp.placeholder = lab;
+            inp.style.cssText = 'width:100%; min-width:0; height:24px; font-size:var(--fs-70); padding:2px 5px;' + (k === 'artYear' ? ' max-width:56px;' : '');
+            // Commit on change, never per keystroke: each commit is one undo step.
+            inp.onchange = () => { const p = {}; p[k] = inp.value; setRowLabel(r.id, p); };
+            inp.onkeydown = (e) => e.stopPropagation();
+            td().appendChild(inp);
+        });
+        const sz = td(); sz.textContent = _labelSize(r); sz.style.cssText += 'white-space:nowrap; color:var(--text-muted);';
+        tb.appendChild(tr);
+    });
+    body.appendChild(tbl);
 }
 // Every file of the pack, as [{name, kind, data}] (string data for CSV/text, a jsPDF doc
 // for PDFs), so the plan can be checked without a canvas and the ZIP is one loop.
@@ -62128,7 +62264,8 @@ const PROD_TABS = [
     ['pricing', 'Pricing', 'Costs, sell prices, allowances and the budget; Excel and Salesforce'],
     ['issues', 'Issues', 'What went out at each issue, and what has changed since'],
     ['shipping', 'Shipping', 'Commercial invoices for shipments between Canada and the USA'],
-    ['brand', 'Brand standards', 'Fixed-price RI / SHS and Ford items, and the client emails that go with them']
+    ['brand', 'Brand standards', 'Fixed-price RI / SHS and Ford items, and the client emails that go with them'],
+    ['labels', 'Labels', 'What each wall label says (title, artist, year), the label sheet and its CSV']
 ];
 let _prodTab = 'samples';
 function openProduction(tab) {
@@ -62163,7 +62300,7 @@ function _prodShow() {
     const body = document.getElementById('productionBody'); if (!body) return;
     document.querySelectorAll('#productionTabs [data-prod-tab]').forEach(b => b.classList.toggle('active', b.getAttribute('data-prod-tab') === _prodTab));
     body.innerHTML = '';
-    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto, shipping: _prodShippingInto, brand: _prodBrandInto }[_prodTab];
+    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto, shipping: _prodShippingInto, brand: _prodBrandInto, labels: _prodLabelsInto }[_prodTab];
     if (fn) fn(body);
 }
 function _prodBtn(label, onClick, secondary, tip) {

@@ -2353,6 +2353,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   note, at}`, one writer `setSampleStatus` (prunes empties). `sampleReplace` swaps through `_salonFrameDress` (library)
   or the typed code, pushes to wall copies, ONE undo. Preflight (`_samplePreflight`): rejected and still used = err;
   IFS (`_deckIsIFS`, read off the footer version, no stage setting) and not approved = warn. Issues carry `prod`.
+- **WALL LABELS ARE A PRODUCTION TAB (20.06, `_prodLabelsInto`, `setRowLabel`, `_labelLines`, `_labelSheetPdf`, `_labelCsv`).**
+  Row fields `artworkTitle`/`artist` (hidden in the form) plus `artistAffil`, `artMedium`, `artYear`; `labelOff` '1'/'0'
+  only when it differs from `_labelDefaultOn` (objects and flat graphics off). Sheet = Avery 5163 (4"x2", 2x5 Letter).
+  Empty parts are left out, never printed blank.
 - **THE STAGE IS THE PRESENTATION TYPE (20.04, `_deckStage`, `PRES_STAGE`).** `_deckIsIFS` is true for Final Spec
   and Install Guide (the footer box `#specPdfVersion` is maxlength 4, so "V6" never says IFS). `_ifsAuditPreflight`
   (always: duplicate placement codes, punctuation-blind; `PAGE_PLACEHOLDER_RE` on typed page text via `_pfPageTexts`,
