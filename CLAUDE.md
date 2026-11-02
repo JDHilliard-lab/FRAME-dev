@@ -2394,6 +2394,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   placement (Ford Hub's existing-inventory codes). Still ONE letter: two-letter runs would break catalogue keys.
 - **A CODE FRAME CANNOT PARSE STILL SORTS (20.14, `_codeRowKey` `nat`, `_codeNatCmp`).** After every parsed code, in natural
   order (`1B.L3.ART-02` < `-10` < `-EA`); walls too (`_codesSortWalls` no longer skips them; `empty` walls last).
+- **INSTALL PAGES FOLLOW THEIR PLAN (20.15).** In Install-guide mode with `_deckPlanOrder() === 'byLevel'`, each plan is
+  followed by the walls whose first active frame's row is pinned on that level (`_deckLvlOf(r.level)`); unpinned walls
+  and the other orders keep "all plans, then all walls".
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
