@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.03';
+const APP_VERSION = '20.04';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -24221,6 +24221,9 @@ function _dsRunPreflight() {
     try { issues.push.apply(issues, _samplePreflight()); } catch (e) {}
     // Duplicate image codes; TBDs, leftover options and a wrong version in an IFS (19.88).
     try { issues.push.apply(issues, _readinessPreflight()); } catch (e) {}
+    // What ten studio projects kept catching after issue; stale stage and version (20.04).
+    try { issues.push.apply(issues, _ifsAuditPreflight(pages)); } catch (e) {}
+    try { issues.push.apply(issues, _stagePreflight(pages)); } catch (e) {}
     // Spelling \u2014 a separate pass, see _dsRunSpellCheck for what it does and doesn't do.
     try { issues.push.apply(issues, _dsRunSpellCheck()); } catch (e) {}
     return issues;
@@ -49604,7 +49607,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+                body: `<strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
@@ -60074,9 +60077,21 @@ function _sampleRequestText(opts) {
 }
 // IFS is the stage where nothing may be pending. Read off the footer version the deck
 // already prints (Project tab), so there is no second "stage" setting to forget.
+// 20.04: the footer box holds four characters ("V5"), so it rarely says IFS. The
+// presentation type IS the stage (Final Spec, Install Guide), and the designer picks it.
 function _deckIsIFS() {
+    const st = _deckStage();
+    if (st === 'specification' || st === 'installation') return true;
     let v = ''; try { v = _deckFooterMeta().version || ''; } catch (e) {}
     return /\bIFS\b|issued for spec/i.test(v);
+}
+// THE DECK'S STAGE (20.04): the presentation type, else a stage word in the footer.
+const PRES_STAGE = { concept: 'concept', wireframe: 'concept', artdev: 'development', final: 'specification', install: 'installation' };
+function _deckStage() {
+    const t = editorialContent && editorialContent.presentationType;
+    if (t && PRES_STAGE[t]) return PRES_STAGE[t];
+    let v = ''; try { v = _deckFooterMeta().version || ''; } catch (e) {}
+    return _deckStageOf(v);
 }
 function _samplePreflight() {
     const out = [];
@@ -60141,6 +60156,118 @@ function _readinessPreflight() {
         const nv = /(?:^|[ ._-])V(\d+)(?=[ ._-]|$)/i.exec(fn.replace(/\.[a-z0-9]+$/i, ''));
         if (fv && nv && fv[1] !== nv[1]) out.push({ sev: 'warn', text: 'The footer says V' + fv[1] + ' but the project file is V' + nv[1] + ' (' + fn + '). Update the version on the Project tab.', idx: null });
     } catch (e) {}
+    return out;
+}
+
+// ── WHAT TEN STUDIO PROJECTS KEPT CATCHING AFTER ISSUE (20.04) ─────────────────────────
+// Vendors and PMs found these by reading issued decks line by line, again and again:
+// pieces with no size or frame code, framed paper with no glass, canvas with no stretcher
+// depth, originals with no title or artist (Choctaw added 17 titles during the install),
+// template words left on a page, OPTION headings in a final IFS, two placements with one
+// code. The data checks run in an IFS only; text and codes are checked always.
+const IFS_GLAZED = ['Framed Art', 'Framed Art (Shadow Box)'];
+const IFS_FRAMED = ['Framed Art', 'Framed Art (Shadow Box)', 'Framed Canvas (Floater)'];
+const IFS_CANVAS = ['Framed Canvas (Floater)', 'Frameless Canvas (Wrapped)'];
+// The starter deck's and templates' own filler is the commonest leftover ("paravian" is
+// the starter's stand-in paragraph; a filler bio once went to a client).
+const PAGE_PLACEHOLDER_RE = /\blorem\b|\bplaceholder\b|\bartist name\b|\bartwork title\b|\bclient name\b|\b(?:cover page |alt section |section )?(?:sub)?heading\b|\boptional image code\b|\bparavian\b|\btext here\b|\btitle here\b|\bTBD\b/i;
+// Every text a designer typed on a page, with its page index: page elements, fixed-page
+// elements and annotations. Generated pages (spec, plans) print data, checked above.
+function _pfPageTexts(pages) {
+    const out = [];
+    const strip = (t) => String(t || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+    (pages || []).forEach((d, i) => {
+        let els = null;
+        if (d.kind === 'layout' && d.page) els = d.page.elements || [];
+        else if (d.kind === 'fixed') { try { const rr = _fixedPageFor(d.fixed); if (rr && rr.page) els = rr.page.elements || []; } catch (e) {} }
+        (els || []).forEach(e => { if (e && !e.hidden && e.type === 'text' && e.text && !e._toc) out.push({ i: i, d: d, t: strip(e.text) }); });
+        const k = _deckPageKey(d);
+        ((k && (editorialContent.annotations || {})[k]) || []).forEach(a => { if (a && !a.hidden && (a.type === 'text' || a.type === 'note') && a.text) out.push({ i: i, d: d, t: strip(a.text) }); });
+    });
+    return out.filter(x => x.t);
+}
+function _ifsAuditPreflight(pages) {
+    const out = [];
+    const rows = _deckSpecRows();
+    const go = (r) => ({ kind: 'piece', label: 'Piece', rowId: r.id });
+    // Two placements with one code (always): the plan, vendor sheet and install guide would
+    // point at one wall for both. Punctuation-blind, so ART-1 and ART.1 collide too.
+    const seen = {};
+    rows.forEach(r => {
+        const c = String((r && r.id) || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+        if (!c) return;
+        (seen[c] = seen[c] || []).push(r.id);
+    });
+    Object.keys(seen).forEach(c => { if (seen[c].length > 1) out.push({ sev: 'err', text: seen[c].join(' and ') + ' — two placements with the same code. Each code must mean one place.', idx: null, go: go({ id: seen[c][0] }) }); });
+    // Words left from a template, and OPTION headings once the deck is final.
+    const ifs = _deckIsIFS();
+    const flagged = {};
+    _pfPageTexts(pages).forEach(x => {
+        const m = PAGE_PLACEHOLDER_RE.exec(x.t);
+        if (m && !flagged['p' + x.i]) { flagged['p' + x.i] = 1; out.push({ sev: ifs ? 'err' : 'warn', text: _dsPageLabel(x.d) + ' — still says “' + m[0] + '” (template text)', idx: x.i }); }
+        if (ifs && /\bOPTION\b/.test(x.t) && !flagged['o' + x.i]) { flagged['o' + x.i] = 1; out.push({ sev: 'warn', text: _dsPageLabel(x.d) + ' — an OPTION heading in an IFS. Show only what the client chose.', idx: x.i }); }
+    });
+    if (!ifs) return out;
+    rows.forEach(r => {
+        if (!r || !r.id) return;
+        const prod = String(r.product || '');
+        const errs = [], warns = [];
+        if (!(+r.extW > 0 && +r.extH > 0)) errs.push('overall size');
+        if (IFS_FRAMED.indexOf(prod) >= 0 && !String(r.fCode || '').trim()) errs.push('frame code');
+        if (IFS_GLAZED.indexOf(prod) >= 0 && !String(r.glass || '').trim()) warns.push('glass');
+        if (IFS_CANVAS.indexOf(prod) >= 0 && !(+r.canvasDepth > 0)) warns.push('stretcher depth');
+        // An original, commission or artist's work carries a label and an invoice.
+        if (_rowIsPurchase(r) && prod !== 'Sourced Object') {
+            const bad = (v) => { const s = String(v || '').trim(); return !s || /^(n\/?a|tbd|untitled\?|artist name|artwork title)$/i.test(s); };
+            if (bad(r.artworkTitle)) warns.push('title');
+            if (bad(r.artist)) warns.push('artist');
+        }
+        if (errs.length) out.push({ sev: 'err', text: r.id + ' — no ' + errs.join(' or ') + ' in an IFS', idx: null, go: go(r) });
+        if (warns.length) out.push({ sev: 'warn', text: r.id + ' — no ' + warns.join(', ') + ' in an IFS', idx: null, go: go(r) });
+    });
+    return out;
+}
+// ── ONE VERSION AND STAGE ON EVERY PAGE (20.04) ───────────────────────────────────────
+// Stale covers and headings went out in most of the ten projects (a V2 cover on a V6,
+// ART DEVELOPMENT on an IFS); Ford Salt Lake City spent a whole round fixing them. The
+// footer's version (Project tab) is the truth: a formal stage name typed on a page must be
+// the footer's stage, and a version number beside it (or anywhere on the cover) its number.
+const DECK_STAGES = [
+    ['concept', /\b(?:art(?:work)? concept|issued? for concept(?: approval)?)\b/i],
+    ['development', /\bart(?:work)? development\b/i],
+    ['specification', /\b(?:issued? for spec(?:ification)?|IFS)\b/i],
+    ['installation', /\b(?:issued? for install(?:ation)?|IFI|installation guide)\b/i],
+];
+function _deckStageOf(text) {
+    const s = String(text || '');
+    const hit = DECK_STAGES.filter(st => st[1].test(s));
+    return hit.length ? hit[hit.length - 1][0] : null;
+}
+function _stagePreflight(pages) {
+    const out = [];
+    const fv = String(_deckFooterMeta().version || '').trim();
+    const fStage = _deckStage();
+    const fNum = (/\bV\s?(\d+)\b/i.exec(fv) || [])[1] || null;
+    if (!fStage && !fNum) return out;
+    const STAGE_LABEL = { concept: 'Concept', development: 'Art Development', specification: 'Final Spec', installation: 'Install Guide' };
+    const truth = [fNum ? 'V' + fNum : null, fStage ? STAGE_LABEL[fStage] : null].filter(Boolean).join(' ');
+    const seen = {};
+    _pfPageTexts(pages).forEach(x => {
+        const hits = DECK_STAGES.map(st => { const m = st[1].exec(x.t); return m ? { s: st[0], w: m[0].toUpperCase() } : null; }).filter(Boolean);
+        const stages = hits.map(h => h.s);
+        const isCover = x.d.kind === 'fixed' && x.d.fixed === 'cover';
+        const wrongStage = fStage ? hits.filter(h => h.s !== fStage).map(h => '“' + h.w + '”') : [];
+        let wrongV = null;
+        if (fNum && (stages.length || isCover)) {
+            const re = /\bV\s?(\d+)\b/gi; let m;
+            while ((m = re.exec(x.t))) { if (m[1] !== fNum) { wrongV = 'V' + m[1]; break; } }
+        }
+        if (!wrongStage.length && !wrongV) return;
+        const what = [wrongV, wrongStage.length ? wrongStage[0] : null].filter(Boolean).join(', ');
+        const key = x.i + '|' + what;
+        if (seen[key]) return; seen[key] = 1;
+        out.push({ sev: 'warn', text: _dsPageLabel(x.d) + ' — says ' + what + ', but this deck is ' + truth + ' (Project tab). Update the page or the Project tab.', idx: x.i });
+    });
     return out;
 }
 

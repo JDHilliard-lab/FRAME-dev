@@ -2350,6 +2350,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   note, at}`, one writer `setSampleStatus` (prunes empties). `sampleReplace` swaps through `_salonFrameDress` (library)
   or the typed code, pushes to wall copies, ONE undo. Preflight (`_samplePreflight`): rejected and still used = err;
   IFS (`_deckIsIFS`, read off the footer version, no stage setting) and not approved = warn. Issues carry `prod`.
+- **THE STAGE IS THE PRESENTATION TYPE (20.04, `_deckStage`, `PRES_STAGE`).** `_deckIsIFS` is true for Final Spec
+  and Install Guide (the footer box `#specPdfVersion` is maxlength 4, so "V6" never says IFS). `_ifsAuditPreflight`
+  (always: duplicate placement codes, punctuation-blind; `PAGE_PLACEHOLDER_RE` on typed page text via `_pfPageTexts`,
+  warn, err in an IFS; IFS only: OPTION headings, no size / frame code (err), no glass on `IFS_GLAZED`, no stretcher
+  depth on `IFS_CANVAS`, no title/artist on `_rowIsPurchase` non-objects) and `_stagePreflight` (a formal stage name in
+  `DECK_STAGES` that is not the deck's stage; a `V<n>` ≠ the footer's on the cover or beside a stage name, never in
+  body copy). The starter deck's own filler is flagged on purpose.
 - **IFS READINESS (19.88, `_readinessPreflight`).** Always: one `_imgCodeKey` on two `_artSig`s (reuse those two,
   never a new signature). IFS only: TBD in image code / `buildSpecStrings` values / notes, a catalogue placement with
   more than one option, footer `V<n>` vs the project file name's `V<n>`.
