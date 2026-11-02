@@ -2386,6 +2386,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_rowOpeningAndPrint` in inches. Under `PRINT_PPI_MIN` 150 (`FLAT_PPI_MIN` 75): warn, err in an IFS. No pixels = not judged.
 - **THE SIZES ADD UP (20.11, `_rowOpeningAndPrint(...).short`, `_sizeMathPreflight`).** `short` = a sized piece whose
   opening was <= 0 BEFORE the clamp; warn, err in an IFS.
+- **EVERY PICTURE HAS A HOUSE CODE (20.12, `HOUSE_IMG_CODE_RE`, `_imgCodeShapePreflight`).** Letters 2-5 then TWO dotted
+  number groups (JZY.010.00219; IMG_4021 must fail). Blank / TBD skipped (other checks). Warn, err in an IFS. Test fixtures with real pictures
+  need a house image code or they gain this warning.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
