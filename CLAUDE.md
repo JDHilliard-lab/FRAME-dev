@@ -244,6 +244,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_codesMoveBeside` for the Items drag; `_codesRenameRow` for a typed code (number is a
   position, new prefix recodes via `_recodeForCategory`, letter change renames one piece,
   number change on one piece moves the set). None push history; the caller does.
+  **A NEW CODE COPIES THE PROJECT'S STYLE (20.05, `_codeNumsFor` returns `sep` + `width`)**: the separator and zero
+  padding most codes of that prefix use (ties to '.'), the number counted across every style. ART-01 projects mint
+  ART-05, never ART.3.
   **A structured or catalogue code is never renumbered and RESERVES its number**
   (`_renumberPrefix`). **`applyIdRename(…, quiet)`** skips its re-renders;
   `_codesRefreshViews()` redraws once. `_fpRenameGroup` also renames a wall named after the
