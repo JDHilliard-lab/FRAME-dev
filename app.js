@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.07';
+const APP_VERSION = '20.08';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -27917,22 +27917,24 @@ async function _dsSaveSelectedTextPreset() {
 }
 // Stamps: the status marks a deck goes out under. Bold red caps, top right,
 // in the same red the text-ink strip offers, so a stamp and a red note match.
-const _DS_STAMPS = ['DRAFT', 'FOR APPROVAL', 'CONCEPT ONLY', 'NOT TO SCALE', 'PRELIMINARY'];
+const _DS_STAMPS = ['DRAFT', 'FOR APPROVAL', 'CONCEPT ONLY', 'NOT TO SCALE', 'PRELIMINARY', 'COLOR SAMPLE APPROVAL REQUIRED'];   // 20.08: colour settled by physical strikes, not on screen
 const _DS_STAMP_INK = '#e00000';
 function _dsAddStatusStamp(word) {
+    // A long stamp gets a wider box ending on the same right edge, so it stays one line.
+    const sw = String(word || '').length > 16 ? 0.46 : 0.26, sx = 0.94 - sw;
     if (_dsCurrentEditablePage()) {
         try {
             addMoodboardText();
             const els = _mbEls(); const el = els[els.length - 1];
-            if (el && el.type === 'text') { el.text = word; el.w = 0.26; el.x = 0.68; el.y = 0.05; el.size = 0.034; el.bold = true; el.color = _DS_STAMP_INK; el.font = 'display'; el.align = 'right'; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+            if (el && el.type === 'text') { el.text = word; el.w = sw; el.x = sx; el.y = 0.05; el.size = 0.034; el.bold = true; el.color = _DS_STAMP_INK; el.font = 'display'; el.align = 'right'; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
         } catch (e) {}
         return;
     }
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
     if (!key) { _toast('Not available here', 'This page type doesn’t support overlay text.'); return; }
     const list = _dsAnnList(key);
-    const _fs = _dsFreeSpot(list, 0.68, 0.05);
-    list.push({ type: 'note', text: word, x: _fs.x, y: _fs.y, w: 0.26, size: 0.034, color: _DS_STAMP_INK, font: 'display', bold: true, italic: false, align: 'right' });
+    const _fs = _dsFreeSpot(list, sx, 0.05);
+    list.push({ type: 'note', text: word, x: _fs.x, y: _fs.y, w: sw, size: 0.034, color: _DS_STAMP_INK, font: 'display', bold: true, italic: false, align: 'right' });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
@@ -30517,12 +30519,28 @@ function _dsAddFooter(page, w, hh, desc) {
     } catch (e) {}
 }
 function _dsAddStamp(page, w, hh, desc) {
-    if (!desc || desc.kind !== 'spec') return;
-    const st = _approvalOf(desc._ovKey || (desc.row && desc.row.id) || '');
-    if (!st) return;
+    // One stamp, or a row of them for a set approved piece by piece (20.08): the screen
+    // shows what _drawApprovalStamps prints, right to left.
+    const stamps = _approvalStamps(desc);
+    if (stamps.length > 1) {
+        const row = document.createElement('div');
+        row.className = 'ds-approval-stamps';
+        row.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.012) + 'px; right:' + Math.round(w * 0.043) + 'px; display:flex; flex-direction:row-reverse; gap:' + Math.max(3, Math.round(w * 0.006)) + 'px; z-index:20; pointer-events:none;';
+        stamps.forEach(t => {
+            const s = document.createElement('div');
+            const col = t.st === 'approved' ? '#1a7f37' : '#c0392b';
+            s.textContent = t.txt;
+            s.style.cssText = "font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.02)) + 'px; letter-spacing:0.04em; color:' + col + '; border:1.5px solid ' + col + '; background:#fff; border-radius:var(--r-4); padding:' + Math.max(1, Math.round(hh * 0.006)) + 'px ' + Math.max(3, Math.round(w * 0.008)) + 'px;';
+            row.appendChild(s);
+        });
+        page.appendChild(row);
+        return;
+    }
+    if (!stamps.length) return;
+    const st = stamps[0].st;
     const s = document.createElement('div');
     const approved = st === 'approved';
-    s.textContent = approved ? 'APPROVED' : 'PENDING APPROVAL';
+    s.textContent = stamps[0].txt;
     const col = approved ? '#1a7f37' : '#c0392b';
     s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.012) + 'px; right:' + Math.round(w * 0.043) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.024)) + 'px; letter-spacing:0.04em; color:' + col + '; border:1.5px solid ' + col + '; background:#fff; padding:2px 7px; border-radius:var(--r-4); z-index:6;';
     page.appendChild(s);
@@ -45305,23 +45323,49 @@ function _drawOneAnnotation(doc, a, PW, PH) {
 }
 // "APPROVED" stamp, top-right corner. Used to mark a deck as client-approved
 // while other placements are still in revision.
+// THE STAMPS A SPEC PAGE WEARS (20.08), one answer for the PDF and the screen. A page's own
+// status as before; a SET page marked pending whose pieces are partly Approved on the
+// dashboard says which (Pentagon City approved pieces of a set one by one and kept those
+// pages unchanged while the rest were reselected): green APPROVED A, C beside red PENDING B.
+function _approvalStamps(desc) {
+    if (!desc || desc.kind !== 'spec') return [];
+    const st = _approvalOf(desc._ovKey || (desc.row && desc.row.id) || '');
+    if (!st) return [];
+    if (st === 'approved') return [{ txt: 'APPROVED', st: 'approved' }];
+    const mem = desc.members || [];
+    if (mem.length > 1) {
+        const from = desc._letterFrom || 0, L = _setLetters(from + mem.length);
+        const ok = [], rest = [];
+        mem.forEach((m, i) => { (['approved', 'production'].indexOf(_pieceStatus(m)) >= 0 ? ok : rest).push(L[from + i]); });
+        if (ok.length && rest.length) return [{ txt: 'APPROVED ' + ok.join(', '), st: 'approved' }, { txt: 'PENDING ' + rest.join(', '), st: 'pending' }];
+        if (ok.length) return [{ txt: 'APPROVED', st: 'approved' }];
+    }
+    return [{ txt: 'PENDING APPROVAL', st: 'pending' }];
+}
 function _drawApprovalStamp(doc, PW, PH, M, status) {
-    const approved = status === 'approved';
-    const txt = approved ? 'APPROVED' : 'PENDING APPROVAL';
-    const rgb = approved ? [26, 127, 55] : [192, 57, 43];
-    doc.setFont(_font('display'), 'bold');
-    doc.setFontSize(approved ? 13 : 11);
-    const tw = doc.getTextWidth(txt);
-    const padX = 9, padY = 6, bh = 22;
-    const bw = tw + padX * 2;
-    const x = PW - M - bw;          // right-aligned, same edge as the back-link
-    const y = 6;                    // in the top margin band, above ALL page
+    _drawApprovalStamps(doc, PW, PH, M, [{ txt: status === 'approved' ? 'APPROVED' : 'PENDING APPROVAL', st: status }]);
+}
+// Right to left from the margin, the first stamp outermost.
+function _drawApprovalStamps(doc, PW, PH, M, stamps) {
+    let right = PW - M;             // right-aligned, same edge as the back-link
+    (stamps || []).forEach(s => {
+        const approved = s.st === 'approved';
+        const rgb = approved ? [26, 127, 55] : [192, 57, 43];
+        doc.setFont(_font('display'), 'bold');
+        doc.setFontSize(approved && s.txt === 'APPROVED' ? 13 : 11);
+        const tw = doc.getTextWidth(s.txt);
+        const padX = 9, padY = 6, bh = 22;
+        const bw = tw + padX * 2;
+        const x = right - bw;
+        const y = 6;                // in the top margin band, above ALL page
                                     // content — framed mockups can't reach here
-    doc.setDrawColor(rgb[0], rgb[1], rgb[2]); doc.setLineWidth(1.6);
-    doc.setFillColor(255, 255, 255);
-    doc.roundedRect(x, y, bw, bh, 3, 3, 'FD');
-    doc.setTextColor(rgb[0], rgb[1], rgb[2]);
-    doc.text(txt, x + padX, y + bh - padY);
+        doc.setDrawColor(rgb[0], rgb[1], rgb[2]); doc.setLineWidth(1.6);
+        doc.setFillColor(255, 255, 255);
+        doc.roundedRect(x, y, bw, bh, 3, 3, 'FD');
+        doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+        doc.text(s.txt, x + padX, y + bh - padY);
+        right = x - 6;
+    });
 }
 async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // The whole deck, always: the page list is the studio's (see below), so there is no
@@ -45545,9 +45589,13 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // — Approval status: spec pages the client has approved (green) or that are
     //   pending approval (red), shown under the floorplan back-link —
     const _stat = editorialContent.approvalStatus || {};
+    let _descAt = {};
+    try { _deckPageList().forEach(d => { const k = _deckPageKey(d); if (k) _descAt[k] = d; }); } catch (e) { _descAt = {}; }
     for (let p = 1; p <= pageNum; p++) {
         const k = _pageKeys[p] || '';
-        if (k.indexOf('spec:') === 0) { const s = _stat[k.slice(5)]; if (s) { try { doc.setPage(p); _drawApprovalStamp(doc, PW, PH, M, s); } catch (e) {} } }
+        if (k.indexOf('spec:') !== 0) continue;
+        const stamps = _descAt[k] ? _approvalStamps(_descAt[k]) : (_stat[k.slice(5)] ? [{ txt: _stat[k.slice(5)] === 'approved' ? 'APPROVED' : 'PENDING APPROVAL', st: _stat[k.slice(5)] }] : []);
+        if (stamps.length) { try { doc.setPage(p); _drawApprovalStamps(doc, PW, PH, M, stamps); } catch (e) {} }
     }
     try {
         const sc = window._exportScope || { mode: 'all' };
@@ -49625,7 +49673,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+                body: `<strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>

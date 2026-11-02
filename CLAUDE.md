@@ -2353,6 +2353,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   note, at}`, one writer `setSampleStatus` (prunes empties). `sampleReplace` swaps through `_salonFrameDress` (library)
   or the typed code, pushes to wall copies, ONE undo. Preflight (`_samplePreflight`): rejected and still used = err;
   IFS (`_deckIsIFS`, read off the footer version, no stage setting) and not approved = warn. Issues carry `prod`.
+- **A SPEC PAGE'S STAMPS ARE `_approvalStamps(desc)` (20.08)**, for the PDF post-pass (`_drawApprovalStamps`, right to
+  left from the margin; `_drawApprovalStamp` is a wrapper) and the screen (`_dsAddStamp`). A set page marked pending
+  with some members' `_pieceStatus` approved/production prints APPROVED <letters> + PENDING <letters> (letters from
+  `_letterFrom`); no page status = no stamp, whatever the dashboard says.
 - **THE ART TYPE IS HOW THE PIECE IS BOUGHT (20.07, `_artTypePreflight`).** FAO/original with a `sourceUrl` host in
   `SHOP_HOST_RE` warns; `COMMISSION_NOTE_RE` text on a spec page must sit with an `_rowIsCommission` piece and a
   commission needs it. The two presets (`Commission note`, `Original artwork note`) are in `_DS_NOTE_PRESETS`; the
