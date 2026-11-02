@@ -2380,6 +2380,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_rowIsPurchase` (Sourced Object, FAO/FCM/FSO/FSL code, original/commission/sourced art type) NEVER goes on an RFI.
   A per-vendor RFI is `buildDashCSVString({only})`, never a second CSV writer. `Vendor,Source URL` trail `Category`.
   Contact sheet caption `_contactSheetCaption` = image code + `_WxH` at PRINT size, project unit, no extension.
+- **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
+  `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
+  piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
+  issue with no `logSeq` (or a log trimmed past it, `CODE_LOG_KEEP`) falls back to same `Artwork` sig + image code.
 - **ISSUES (19.90, `markIssued`, `_issueSnapshot`, `_issueDiff`, `editorialContent.issues`, max `ISSUE_KEEP`).** A
   record is TEXT ONLY: `buildSpecStrings` lines + image code, product, location, qty, vendor and `_artSig` (never a
   data URL; tested). Keyed by row id, so a renumber reads as removed + added. The pack adds the latest diff.

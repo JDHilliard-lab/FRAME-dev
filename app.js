@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.08';
+const APP_VERSION = '20.09';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -47127,6 +47127,8 @@ function applyIdRename(oldId, newId, quiet) {
     });
     // "Keep apart" answers name rows by id (19.44).
     try { (editorialContent.codeSetsApart || []).forEach(a => { if (Array.isArray(a)) a.forEach((x, i) => { if (x === oldId) a[i] = newId; }); }); } catch (e) {}
+    // The rename log the Issues diff reads (20.09), only for a piece the dashboard has.
+    if (dashRow) _codeLogAdd(oldId, newId);
     // QUIET for a batch: a renumber renames every piece twice, and re-rendering the
     // elevation, the dashboard and the push list per row made sixty codes crawl. The
     // batch redraws once at the end (_codesRefreshViews).
@@ -49673,7 +49675,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+                body: `<strong>20.09</strong> <b>Renumbered pieces are said.</b> Production, Issues now lists pieces whose code changed since an issue as <b>RENUMBERED</b> (ART.2 → ART.1), not as one piece removed and another added, in the copied text and the changes CSV, so vendors and the client hear about it. Spec changes on a renumbered piece show under its new code.<br><br><strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
@@ -60763,11 +60765,46 @@ function _issueSnapshot() {
     _deckSpecRows().forEach(r => { if (r && r.id) out[r.id] = _issueRowRecord(r); });
     return out;
 }
+// ── RENAMES BETWEEN ISSUES (20.09) ────────────────────────────────────────────────────
+// Ford Admin renumbered every placement between V1 and V2, One Park Tower every ground
+// floor code at V7, and nobody said so; the diff read each as one piece removed and another
+// added. applyIdRename logs every rename (`editorialContent.codeLog`, entries {s, f, t},
+// `codeLogSeq` the running number), an issue remembers the number it was marked at
+// (`logSeq`), and the diff follows each old code through the renames after it (temporary
+// renumber stems included). Issues older than the log fall back to the same picture and
+// image code.
+const CODE_LOG_KEEP = 2000;
+function _codeLogAdd(from, to) {
+    const ec = editorialContent;
+    const seq = (ec.codeLogSeq || 0) + 1;
+    ec.codeLogSeq = seq;
+    const log = ec.codeLog || (ec.codeLog = []);
+    log.push({ s: seq, f: from, t: to });
+    if (log.length > CODE_LOG_KEEP) log.splice(0, log.length - CODE_LOG_KEEP);
+}
+// {oldCode: newCode} for every code renamed since `seq`, or null when the log no longer
+// reaches back that far (then the caller falls back to matching pictures).
+function _codeRenamesSince(seq) {
+    const log = editorialContent.codeLog || [];
+    if (seq == null) return null;
+    if (log.length && log[0].s > seq + 1) return null;
+    const cur = {};   // original -> current
+    const back = {};  // current -> original
+    log.forEach(e => {
+        if (e.s <= seq) return;
+        const orig = (back[e.f] != null) ? back[e.f] : e.f;
+        delete back[e.f];
+        cur[orig] = e.t; back[e.t] = orig;
+    });
+    const out = {};
+    Object.keys(cur).forEach(o => { if (cur[o] !== o) out[o] = cur[o]; });
+    return out;
+}
 function markIssued(label) {
     const ec = editorialContent;
     let v = ''; try { v = _deckFooterMeta().version || ''; } catch (e) {}
     const list = (ec.issues || []).slice();
-    const rec = { label: String(label || v || ('Issue ' + (list.length + 1))).trim(), at: _todayIso(), rows: _issueSnapshot() };
+    const rec = { label: String(label || v || ('Issue ' + (list.length + 1))).trim(), at: _todayIso(), rows: _issueSnapshot(), logSeq: ec.codeLogSeq || 0 };
     list.push(rec);
     while (list.length > ISSUE_KEEP) list.shift();
     ec.issues = list;
@@ -60784,11 +60821,30 @@ function deleteIssue(i) {
 // {added, removed, changed: [{id, fields: [{label, was, now}]}]} between an issue and now.
 function _issueDiff(issue) {
     const was = (issue && issue.rows) || {}, now = _issueSnapshot();
-    const added = Object.keys(now).filter(id => !was[id]);
-    const removed = Object.keys(was).filter(id => !now[id]);
+    // Where each issued code lives now (20.09): renamed through the log, else itself.
+    const to = {};
+    const ren = _codeRenamesSince(issue && issue.logSeq);
+    // Renamed pieces first: a code another piece was renamed INTO is no longer this one's.
+    const into = {};
+    if (ren) Object.keys(was).forEach(o => { const n = ren[o]; if (n && now[n]) { to[o] = n; into[n] = 1; } });
+    Object.keys(was).forEach(o => { if (to[o] || (ren && ren[o])) return; if (now[o] && !into[o]) to[o] = o; });
+    if (!ren) {
+        // An issue older than the log: the same picture under the same image code.
+        const taken = {}; Object.keys(to).forEach(o => { taken[to[o]] = 1; });
+        Object.keys(was).forEach(o => {
+            const a = was[o]; if (to[o] || !a.Artwork) return;
+            const hits = Object.keys(now).filter(n => !taken[n] && !was[n] && now[n].Artwork === a.Artwork && now[n]['Image code'] === a['Image code']);
+            if (hits.length === 1) { to[o] = hits[0]; taken[hits[0]] = 1; }
+        });
+    }
+    const fromOf = {}; Object.keys(to).forEach(o => { fromOf[to[o]] = o; });
+    const added = Object.keys(now).filter(id => fromOf[id] == null);
+    const removed = Object.keys(was).filter(id => to[id] == null);
+    const renamed = Object.keys(to).filter(o => to[o] !== o).map(o => ({ from: o, to: to[o] }));
     const changed = [];
     Object.keys(now).forEach(id => {
-        const a = was[id], b = now[id]; if (!a) return;
+        const o = fromOf[id]; if (o == null) return;
+        const a = was[o], b = now[id];
         const fields = [];
         const keys = Object.keys(a); Object.keys(b).forEach(k => { if (keys.indexOf(k) < 0) keys.push(k); });
         keys.forEach(k => {
@@ -60799,14 +60855,15 @@ function _issueDiff(issue) {
         });
         if (fields.length) changed.push({ id: id, fields: fields });
     });
-    const byCode = (p, q) => String(p.id || p).localeCompare(String(q.id || q), undefined, { numeric: true });
-    return { added: added.sort(byCode), removed: removed.sort(byCode), changed: changed.sort(byCode) };
+    const byCode = (p, q) => String(p.id || p.to || p).localeCompare(String(q.id || q.to || q), undefined, { numeric: true });
+    return { added: added.sort(byCode), removed: removed.sort(byCode), changed: changed.sort(byCode), renamed: renamed.sort(byCode) };
 }
 function _issueDiffText(issue) {
     const d = _issueDiff(issue);
     const NL = '\n';
-    if (!d.added.length && !d.removed.length && !d.changed.length) return 'No changes since ' + issue.label + ' (' + issue.at + ').';
+    if (!d.added.length && !d.removed.length && !d.changed.length && !d.renamed.length) return 'No changes since ' + issue.label + ' (' + issue.at + ').';
     let t = 'Changes since ' + issue.label + ' (' + issue.at + ')' + NL;
+    if (d.renamed.length) t += NL + 'RENUMBERED (same piece, new code)' + NL + d.renamed.map(r => '    ' + r.from + '  \u2192  ' + r.to).join(NL) + NL;
     if (d.added.length) t += NL + 'ADDED' + NL + d.added.map(id => '    ' + id).join(NL) + NL;
     if (d.removed.length) t += NL + 'REMOVED' + NL + d.removed.map(id => '    ' + id).join(NL) + NL;
     if (d.changed.length) t += NL + 'CHANGED' + NL + d.changed.map(c => '    ' + c.id + NL + c.fields.map(f => '        ' + f.label + ': ' + (f.was || '(blank)') + '  →  ' + (f.now || '(blank)')).join(NL)).join(NL) + NL;
@@ -60817,6 +60874,7 @@ function _issueDiffCSV(issue) {
     const q = (s) => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
     const vend = {}; _deckSpecRows().forEach(r => { if (r && r.id) vend[r.id] = _rowVendor(r); });
     let csv = ['Item Code', 'Change', 'Field', 'Was', 'Now', 'Vendor'].map(q).join(',') + '\n';
+    d.renamed.forEach(r => { csv += [r.to, 'Renumbered', 'Item Code', r.from, r.to, vend[r.to] || ''].map(q).join(',') + '\n'; });
     d.added.forEach(id => { csv += [id, 'Added', '', '', '', vend[id] || ''].map(q).join(',') + '\n'; });
     d.removed.forEach(id => { csv += [id, 'Removed', '', '', '', ((issue.rows || {})[id] || {}).Vendor || ''].map(q).join(',') + '\n'; });
     d.changed.forEach(c => c.fields.forEach(f => { csv += [c.id, 'Changed', f.label, f.was, f.now, vend[c.id] || ''].map(q).join(',') + '\n'; }));
