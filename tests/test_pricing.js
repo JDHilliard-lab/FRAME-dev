@@ -57,7 +57,7 @@ const body = [
   '',
   '  await check("Update estimates fills from the dated rate card and NEVER touches a quote; sizes are inches in a cm project", async function () {',
   '    fresh();',
-  '    setRateCard([{ product: "Framed Art", base: 100, perSqFt: 10, doubleMat: 25 }], "2026-09-01");',
+  '    setRateCard([{ product: "Framed Art", base: 100, perSqFt: 10, doubleMat: 25 }], "2026-09-01", { buffer: 0 });',
   '    setRowPrice("ART.1", { unitCost: 999 }, true);',
   '    row("ART.2").m2A = true; row("ART.2").m2 = 0.25;',
   '    const n = updateEstimates();',

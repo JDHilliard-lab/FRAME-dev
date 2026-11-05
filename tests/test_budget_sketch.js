@@ -34,7 +34,7 @@ const path = require('path');
       _fpSketchOn = false; _fpAddSize = ''; _fpSketchArea = ''; _fpAddType = artCat();
       __pushes = 0;
     };
-    const card = () => setRateCard([{ product: 'Framed Art', base: 100, perSqFt: 10 }], '2026-10-01', { oversize: 150 });
+    const card = () => setRateCard([{ product: 'Framed Art', base: 100, perSqFt: 10 }], '2026-10-01', { oversize: 150, buffer: 0 });
 
     __check('EXACT ASK: with Sketch on, each click on the plan is a new piece of the type and size, pinned where it landed, one undo per click', () => {
       setup(); _fpAddSize = '36x24'; _fpSketchToggle(true);

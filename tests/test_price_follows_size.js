@@ -38,7 +38,7 @@ const body = [
   '  const row = function (id) { return dashProjectData.find(function (r) { return r.id === id; }); };',
   '',
   '  const chip = function () { return document.getElementById("dashProdBtn"); };',
-  '  const card = function () { setRateCard([{ product: "Framed Art", base: 100, perSqFt: 20 }], "2026-10-01"); _pricingSet({ markup: 2, budget: 3000 }, true); };',
+  '  const card = function () { setRateCard([{ product: "Framed Art", base: 100, perSqFt: 20 }], "2026-10-01", { buffer: 0 }); _pricingSet({ markup: 2, budget: 3000 }, true); };',
   '  await check("an estimate is worked out from the size every read: no Update estimates needed", async function () {',
   '    fresh(); card();',
   '    row("ART.1").extW = 36; row("ART.1").extH = 48;',

@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.16">
+    <link rel="stylesheet" href="style.css?v=20.17">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -351,6 +351,17 @@
                             <div><label>Cnv. Depth</label><input type="number" step="0.125" id="canvasDepth" oninput="handleCanvasDepthChange()"></div>
                             <div><label>Cnv. Wrap</label><input type="number" step="0.125" id="canvasWrap" oninput="syncDashAndCalculate()"></div>
                             <div><label title="Distance from frame inner edge to canvas image: covers canvas face + shadow gap">Inset</label><input type="number" step="0.125" id="floaterInset" oninput="syncDashAndCalculate()" title="Inset from frame inner edge to canvas image opening (covers visible canvas face + shadow gap, typically 0.75&quot;)"></div>
+                        </div>
+                        <!-- 20.17: how the canvas sides are made, decided before the picture is placed -->
+                        <div id="canvasSidesRow" style="display:none; margin-top:6px;">
+                            <label title="How the picture covers the sides of the stretcher">Sides</label>
+                            <select id="m_canvasSides" onchange="syncDashAndCalculate()" title="Picture wraps: crop into the picture so its edges go round the sides. Mirror: the printer reflects the edge. Extend: production builds the extra picture before print.">
+                                <option value="">Not decided</option>
+                                <option value="image">Picture wraps (crop into it)</option>
+                                <option value="mirror">Mirror the edge</option>
+                                <option value="extend">Extend in production</option>
+                            </select>
+                            <div id="canvasSidesNote" style="font-size:var(--fs-65); color:var(--text-muted); margin-top:4px; line-height:1.4;"></div>
                         </div>
                         <!-- Flat graphics (wallcovering / window film): the substrate is the
                              only construction detail there is, so it gets one free-text field.
@@ -2252,9 +2263,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.16';</script>
-<script src="templates.js?v=20.16"></script>
-<script src="app.js?v=20.16"></script>
+<script>window.FRAME_HTML_VERSION = '20.17';</script>
+<script src="templates.js?v=20.17"></script>
+<script src="app.js?v=20.17"></script>
 
 </body>
 </html>

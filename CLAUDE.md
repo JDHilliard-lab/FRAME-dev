@@ -2403,6 +2403,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_rfqMount` tests the panel BEFORE `_isFlatGraphic` (it is one, so it read as EGD). Max sizes in INCHES, short x long,
   shown in the project unit; mat/glass judged at overall - 2 x fW + 0.5 (rabbet lip). Floater: stretcher deeper than
   `rabbetDepth` = proud canvas; offer the deepest standard depth, never a custom one (costs more). Warn, err in an IFS.
+- **A CANVAS'S SIDES (20.17, `_canvasWrapOf`, `canvasSides`, `CANVAS_SIDES`, `_canvasSidesInfo`, `_canvasRoomCrop`,
+  `canvasSidesMakeRoom`, `_canvasSidesNote`, `_canvasSidesPreflight`, `_stdStretcherFor`).** Floater print = art + 2 x
+  `_canvasWrapOf` (typed wrap, else depth + 0.5"); the RFQ O cell keeps `N+0.5` only when it agrees. The crop is STILL the
+  face everywhere (`computeArtDrawRect` untouched): 'image' means the picture outside the crop is the wrap, judged by
+  `_canvasSidesInfo.short`; the dashboard band `.canvas-sides-ghost` is screen only. `_artPrintPpi` spreads a floater over
+  its FACE. Rabbet/depth auto-fill uses `STD_STRETCHER_DEPTHS` (never depth = rabbet). `HOUSE_BUFFER_PCT` 3 applies when
+  the card's buffer is blank (0 = none); pricing fixtures not about the buffer pass `{ buffer: 0 }`.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An

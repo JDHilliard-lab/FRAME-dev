@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.16';
+const APP_VERSION = '20.17';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -1630,7 +1630,7 @@ const dashDefaultData = {
     printOutput: "full",
     fColorName: "", fHeight: 0, rabbetDepth: 0,
     paperType: "Fine Art Paper",
-    bleed: 0.25, canvasDepth: "", canvasWrap: "", floaterInset: 0.75,
+    bleed: 0.25, canvasDepth: "", canvasWrap: "", canvasSides: "", floaterInset: 0.75,
     // Float Mount fields. useFloatMount controls whether the row uses Mat Controls
     // or Float Mount as its inner-area treatment. Defaults to false (mats).
     // The Shadow Box product auto-flips this to true on selection. The fields
@@ -12724,7 +12724,7 @@ function deleteDashRow() {
 function loadDashDataIntoControls(data) {
     const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; };
     setVal('m_itemCode', data.id); setVal('m_imageCode', data.imageCode); _fillLevelSelect(data); setVal('m_qty', data.qty);
-    setVal('m_product', data.product); setVal('m_location', data.location); setVal('m_bleed', dashFmt(data.bleed)); setVal('canvasDepth', dashFmt(data.canvasDepth)); setVal('canvasWrap', dashFmt(data.canvasWrap)); setVal('floaterInset', dashFmt(data.floaterInset !== undefined ? data.floaterInset : 0.75));
+    setVal('m_product', data.product); setVal('m_location', data.location); setVal('m_bleed', dashFmt(data.bleed)); setVal('canvasDepth', dashFmt(data.canvasDepth)); setVal('canvasWrap', dashFmt(data.canvasWrap)); setVal('m_canvasSides', data.canvasSides || ''); setVal('floaterInset', dashFmt(data.floaterInset !== undefined ? data.floaterInset : 0.75));
     // Phase A: artwork attribution + frame profile depth + paper type.
     // All optional — defaulted to '' / 0 for older saved rows that don't have them yet.
     setVal('m_artist', data.artist !== undefined ? data.artist : '');
@@ -12870,6 +12870,92 @@ function dashHtIn(idx, field, val, fromTable) {
 // Takes a plain object, so the DOM-driven caller can pass its assembled values
 // instead of a stored row. Lengths come out in whatever unit went in; nothing
 // here converts.
+// ── HOW A CANVAS'S SIDES ARE MADE (20.17) ───────────────────────────────────────────
+// The picture is cropped to the canvas FACE everywhere (computeArtDrawRect, unchanged). The
+// wrap round the stretcher is one of three things, chosen up front so nobody builds a wrap
+// in Photoshop that a crop would have given for free:
+//   image   the picture runs round the sides: the part just outside the face crop is used
+//   mirror  the printer mirrors the edge (no extra picture needed)
+//   extend  production extends the picture (content-aware fill) before print
+// '' = not decided yet. Stored as `canvasSides` on the row.
+const CANVAS_SIDES = { image: 'Picture wraps', mirror: 'Mirror the edge', extend: 'Extend in production' };
+// The wrap, in the row's unit. Floater: typed, else stretcher depth + 0.5" (the quote
+// template's "Image Wrap = Stretcher Depth + .5"). Frameless: typed (studio convention).
+function _canvasWrapOf(r) {
+    r = r || {};
+    const w = parseFloat(r.canvasWrap) || 0;
+    if (r.product === 'Frameless Canvas (Wrapped)') return w;
+    if (r.product !== 'Framed Canvas (Floater)') return 0;
+    if (w > 0) return w;
+    const d = parseFloat(r.canvasDepth) || 0;
+    return d > 0 ? d + 0.5 * unitFactor('in', dashUnit) : 0;
+}
+// For 'image': how much picture the crop leaves outside the face on each side, and which
+// sides have less than the wrap. Row units.
+function _canvasSidesInfo(r) {
+    if (!r || (r.product !== 'Framed Canvas (Floater)' && r.product !== 'Frameless Canvas (Wrapped)')) return null;
+    const out = { mode: r.canvasSides || '', wrap: _canvasWrapOf(r), spare: null, short: [] };
+    if (out.mode !== 'image' || !(out.wrap > 0) || !r.artworkUrl) return out;
+    const ar = (r.artworkW > 0 && r.artworkH > 0) ? r.artworkW / r.artworkH : 0;
+    const sz = _rowOpeningAndPrint(r);
+    if (!ar || !(sz.openW > 0) || !(sz.openH > 0)) return out;
+    const g = computeArtDrawRect(sz.openW, sz.openH, ar, r.artZoom, r.artPanX, r.artPanY);
+    out.spare = { left: -g.dx, right: g.dw + g.dx - sz.openW, top: -g.dy, bottom: g.dh + g.dy - sz.openH };
+    ['left', 'right', 'top', 'bottom'].forEach(k => { if (out.spare[k] < out.wrap - 1e-3) out.short.push(k); });
+    return out;
+}
+// The crop nearest the current one that leaves a full wrap of picture on every side: zoom
+// in only as far as needed, then slide the picture so each side has its wrap.
+function _canvasRoomCrop(r) {
+    const info = _canvasSidesInfo(r);
+    if (!info || !info.spare) return null;
+    const sz = _rowOpeningAndPrint(r), W = sz.openW, H = sz.openH, w = info.wrap, ar = r.artworkW / r.artworkH;
+    const g1 = computeArtDrawRect(W, H, ar, 1, 0, 0);
+    const zoom = Math.max(parseFloat(r.artZoom) || 1, (W + 2 * w) / g1.dw, (H + 2 * w) / g1.dh);
+    const dw = g1.dw * zoom, dh = g1.dh * zoom;
+    let dx = (W - dw) / 2 + (parseFloat(r.artPanX) || 0) * W, dy = (H - dh) / 2 + (parseFloat(r.artPanY) || 0) * H;
+    dx = Math.min(-w, Math.max(W + w - dw, dx)); dy = Math.min(-w, Math.max(H + w - dh, dy));
+    const r4 = (v) => Math.round(v * 10000) / 10000;
+    return { zoom: Math.ceil(zoom * 10000) / 10000, panX: r4((dx - (W - dw) / 2) / W), panY: r4((dy - (H - dh) / 2) / H) };
+}
+function canvasSidesMakeRoom() {
+    const row = _artCropRow(); if (!row) return;
+    const c = _canvasRoomCrop(row); if (!c) return;
+    row.artZoom = c.zoom; row.artPanX = c.panX; row.artPanY = c.panY;
+    _syncArtCropControls();
+    syncDashAndCalculate();
+}
+// One line for the vendor (RFQ / RFI Notes), in inches like the rest of the sheet.
+function _canvasSidesNote(r) {
+    const info = _canvasSidesInfo(r);
+    if (!info || !info.mode || !(info.wrap > 0)) return '';
+    const w = _fmtUnitNum(info.wrap * unitFactor(dashUnit, 'in'), 'in') + '"';
+    return info.mode === 'image' ? 'Image wrap ' + w + ': the picture runs round the sides (in the file)'
+        : info.mode === 'mirror' ? 'Mirror wrap ' + w + ': mirror the edge round the sides'
+        : 'Image wrap ' + w + ': the picture is extended round the sides before print';
+}
+function _canvasSidesRowShow(on) { const el = document.getElementById('canvasSidesRow'); if (el) el.style.display = on ? 'block' : 'none'; }
+function _canvasSidesNotePaint(r) {
+    const el = document.getElementById('canvasSidesNote'); if (!el) return;
+    const info = _canvasSidesInfo(r);
+    // A floater's wrap follows its stretcher until one is typed: show that as the hint, not a 0.
+    const wrapEl = document.getElementById('canvasWrap');
+    if (wrapEl && r && r.product === 'Framed Canvas (Floater)') {
+        if (!(parseFloat(r.canvasWrap) > 0) && document.activeElement !== wrapEl) wrapEl.value = '';
+        wrapEl.placeholder = info && info.wrap > 0 ? dashFmt(info.wrap) : '';
+    } else if (wrapEl) wrapEl.placeholder = '';
+    if (!info) { el.innerHTML = ''; return; }
+    const f = (v) => _fmtUnitNum(v, dashUnit) + ' ' + dashUnit, w = f(info.wrap);
+    let t;
+    if (!info.mode) t = 'How are the sides made? Decide before you place the picture: crop into it, mirror the edge, or extend it in production.';
+    else if (info.mode === 'mirror') t = 'The printer mirrors ' + w + ' of the edge round the sides. Nothing extra to prepare.';
+    else if (info.mode === 'extend') t = 'Production extends the picture ' + w + ' all round before print (content-aware fill). Picking “Picture wraps” and cropping in saves that work.';
+    else if (!r.artworkUrl) t = 'Leave ' + w + ' of picture outside the face on every side. The dashboard shows that band once the picture is in.';
+    else if (!info.spare) t = 'The sides take ' + w + ' of the picture round the face.';
+    else if (info.short.length) t = 'Not enough picture on the ' + info.short.join(', ') + ' for the ' + w + ' sides (red stripes). <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px;" onclick="canvasSidesMakeRoom()" title="Zoom in just enough, keeping your crop as close as it can">Make room</button>';
+    else t = 'The picture covers the ' + w + ' sides.';
+    el.innerHTML = t;
+}
 function _rowOpeningAndPrint(r) {
     r = r || {};
     const n = (v) => parseFloat(v) || 0;
@@ -12902,8 +12988,10 @@ function _rowOpeningAndPrint(r) {
     openW = Math.max(0, openW); openH = Math.max(0, openH);
 
     let printW, printH;
-    // A floater's swatch already carries its wrap, so no extra margin.
-    if (isC) { printW = openW; printH = openH; }
+    // A floater's canvas wraps round its stretcher like any canvas: art + 2 x wrap, the wrap
+    // being stretcher depth + 0.5" unless one is typed (20.17; it was the art size alone, so
+    // the RFI's image size had no wrap: Ford China's 28.5" art is a 32.5" image).
+    if (isC) { const wrap = _canvasWrapOf(r); printW = openW + wrap * 2; printH = openH + wrap * 2; }
     // A wrapped canvas needs enough image to fold around the stretcher bars.
     else if (isFL) { const wrap = n(r.canvasWrap); printW = openW + wrap * 2; printH = openH + wrap * 2; }
     // Everything printed on paper or vinyl — including flat graphics — needs
@@ -13013,7 +13101,7 @@ function syncDashAndCalculate(opts) {
         rabbetDepth: getVal('rabbetDepth') || 0,
         fColorName: getStr('m_fColorName') || '',
         paperType: getStr('m_paperType') || '',
-        bleed: getVal('m_bleed'), canvasDepth: getRaw('canvasDepth'), canvasWrap: getRaw('canvasWrap'), floaterInset: getVal('floaterInset') || 0.75,
+        bleed: getVal('m_bleed'), canvasDepth: getRaw('canvasDepth'), canvasWrap: getRaw('canvasWrap'), canvasSides: getStr('m_canvasSides') || '', floaterInset: getVal('floaterInset') || 0.75,
         // Preserved from prior row state — set when a floater swatch was picked.
         // Used by buildSpecStrings to derive Float Reveal = floaterInset - faceWidth.
         // Not surfaced in the form (it's swatch metadata, not user-edited).
@@ -13364,6 +13452,21 @@ function updateDashVisualsFromDOM() {
             });
         }
         artVis.appendChild(aimg);
+        // 20.17: THE SIDES, WHILE YOU CROP. A canvas whose picture wraps shows the band of the
+        // picture that will go round the stretcher, faint, outside the face; red stripes where
+        // the crop leaves no picture. Screen only.
+        if ((isCanvas || isFrameless) && data.canvasSides === 'image') {
+            const wpx = _canvasWrapOf(data) * ratio;
+            if (wpx > 0) {
+                const gh = document.createElement('div'); gh.className = 'canvas-sides-ghost';
+                gh.setAttribute('data-export-skip', '1');
+                gh.title = 'The sides: this band of the picture wraps round the stretcher. Red stripes mean the crop leaves no picture there.';
+                gh.style.cssText = 'position:absolute; left:' + (artL - wpx) + 'px; top:' + (artT - wpx) + 'px; width:' + (ow + 2 * wpx) + 'px; height:' + (oh + 2 * wpx) + 'px; overflow:hidden; pointer-events:none; outline:1px dashed rgba(200,40,40,0.8); background:repeating-linear-gradient(45deg, rgba(220,50,50,0.35) 0 4px, transparent 4px 8px);';
+                const gi = document.createElement('img'); gi.src = data.artworkUrl; gi.draggable = false;
+                gi.style.cssText = 'position:absolute; left:' + (rect.dx + wpx) + 'px; top:' + (rect.dy + wpx) + 'px; width:' + rect.dw + 'px; height:' + rect.dh + 'px; opacity:0.45; display:block;';
+                gh.appendChild(gi); fVis.appendChild(gh);
+            }
+        }
         // 19.12: WHAT YOU CAN DO TO A PICTURE, ON THE PICTURE. Once an opening had artwork
         // nothing said a new image can be dropped on it, and Remove sat up in the zoom row.
         // Shown on hover: Replace and Remove top-right, and a strip saying the two gestures.
@@ -13407,6 +13510,7 @@ function updateDashVisualsFromDOM() {
         artVis.innerHTML = _artAddIconHTML(artW * ratio, artH * ratio, "document.getElementById('m_artworkFile').click()");
     }
     fVis.appendChild(artVis);
+    try { _canvasSidesNotePaint(data); } catch (e) {}
 }
 
 // CSV IMPORT PARSER
@@ -13788,7 +13892,7 @@ function handleDashProductChange(shouldSync = true) {
     // plumbing that has no meaning here.
     if (isFlat) {
         matWrapper.style.display = 'none';
-        canvasSettings.style.display = 'none';
+        canvasSettings.style.display = 'none'; _canvasSidesRowShow(false);
         bleedSettings.style.display = 'grid';
         if (egdSettings) egdSettings.style.display = 'grid';
         // The frame block is HIDDEN, not dimmed. Dimming is right for a wrapped
@@ -13854,7 +13958,7 @@ function handleDashProductChange(shouldSync = true) {
     // gap); Frameless ignores it (no frame to inset from).
     if (isFloater || isFrameless) {
         matWrapper.style.display = 'none';
-        canvasSettings.style.display = 'grid';
+        canvasSettings.style.display = 'grid'; _canvasSidesRowShow(true);
         bleedSettings.style.display = 'grid';
         // For frameless canvas, dim out the Inset field (it's irrelevant — there's no frame).
         const insetCell = document.getElementById('floaterInset');
@@ -13873,9 +13977,18 @@ function handleDashProductChange(shouldSync = true) {
         const wrapEl = document.getElementById('canvasWrap');
         const currentDepth = parseFloat(depthEl ? depthEl.value : '') || 0;
         if (depthEl && currentDepth === 0) {
-            depthEl.value = '2';
-            if (wrapEl && (parseFloat(wrapEl.value) || 0) === 0) {
-                wrapEl.value = '2';
+            if (isFloater) {
+                // 20.17: a floater gets the deepest standard stretcher its rabbet takes
+                // (1.5" when the rabbet is unknown) and a wrap of that + 0.5".
+                const k = unitFactor(dashUnit, 'in'), rb = (parseFloat((document.getElementById('rabbetDepth') || {}).value) || 0) * k;
+                const d = (rb > 0 ? _stdStretcherFor(rb) : null) || 1.5;
+                depthEl.value = dashFmt(d / k);
+                if (wrapEl && (parseFloat(wrapEl.value) || 0) === 0) wrapEl.value = dashFmt((d + 0.5) / k);
+            } else {
+                depthEl.value = '2';
+                if (wrapEl && (parseFloat(wrapEl.value) || 0) === 0) {
+                    wrapEl.value = '2';
+                }
             }
         }
         if(shouldSync) syncDashAndCalculate();
@@ -13891,7 +14004,7 @@ function handleDashProductChange(shouldSync = true) {
 
     // Non-floater, non-frameless: show wrapper, hide canvas settings, show bleed.
     matWrapper.style.display = 'block';
-    canvasSettings.style.display = 'none';
+    canvasSettings.style.display = 'none'; _canvasSidesRowShow(false);
     bleedSettings.style.display = 'grid';
 
     // SHADOW BOX product: auto-flip the toggle to Float Mount (and persist) on
@@ -14005,24 +14118,20 @@ function handleRabbetChange() {
         if (rabbet > 0) {
             const prevRabbet = parseFloat(row.rabbetDepth) || 0;
 
-            // Auto-fill canvasDepth = rabbet (stretcher bar fits the rabbet pocket).
-            if (depthEl) {
-                const currentDepth = parseFloat(depthEl.value) || 0;
-                const isUnsetOrAutoFilled = (currentDepth === 0) ||
-                    (prevRabbet > 0 && Math.abs(currentDepth - prevRabbet) < 0.001);
-                if (isUnsetOrAutoFilled) {
-                    depthEl.value = dashFmt(rabbet);
-                }
-            }
-
-            // Auto-fill canvasWrap = rabbet + 0.5" (printer safety margin).
-            if (wrapEl) {
-                const prevWrapSuggestion = prevRabbet > 0 ? prevRabbet + 0.5 : null;
-                const currentWrap = parseFloat(wrapEl.value) || 0;
-                const isUnsetOrAutoFilled = (currentWrap === 0) ||
-                    (prevWrapSuggestion !== null && Math.abs(currentWrap - prevWrapSuggestion) < 0.001);
-                if (isUnsetOrAutoFilled) {
-                    wrapEl.value = dashFmt(rabbet + 0.5);
+            // 20.17: the stretcher is the deepest STANDARD depth the rabbet takes (a 1.625"
+            // rabbet takes 1.5"), never the rabbet itself: that was a made-to-order stretcher.
+            // The wrap is stretcher + 0.5" (the quote template). Earlier fills (depth = rabbet,
+            // wrap = rabbet + 0.5) still count as auto-filled, so they are replaced too.
+            const k = unitFactor(dashUnit, 'in'), half = 0.5 / k;
+            const stdOf = (rb) => { const s = _stdStretcherFor(rb * k); return s ? s / k : null; };
+            const prevStd = prevRabbet > 0 ? stdOf(prevRabbet) : null, std = stdOf(rabbet);
+            const near = (a, b) => b != null && Math.abs(a - b) < 0.001;
+            let depthNow = depthEl ? (parseFloat(depthEl.value) || 0) : 0;
+            if (depthEl && std != null && (depthNow === 0 || near(depthNow, prevRabbet) || near(depthNow, prevStd))) {
+                const prevDepth = depthNow; depthNow = std; depthEl.value = dashFmt(std);
+                if (wrapEl) {
+                    const w = parseFloat(wrapEl.value) || 0;
+                    if (w === 0 || near(w, prevRabbet + half) || near(w, prevDepth + half) || near(w, (prevStd || 0) + half)) wrapEl.value = dashFmt(std + half);
                 }
             }
         }
@@ -14037,6 +14146,13 @@ function handleRabbetChange() {
 // rabbet, not stretcher (since stretcher = rabbet anyway).
 function handleCanvasDepthChange() {
     const row = dashProjectData[dashSelectedRowIndex];
+    // 20.17: a floater's wrap follows its stretcher: depth + 0.5", unless typed.
+    if (row && row.product === "Framed Canvas (Floater)") {
+        const depthEl = document.getElementById('canvasDepth'), wrapEl = document.getElementById('canvasWrap');
+        const half = 0.5 / unitFactor(dashUnit, 'in'), d = parseFloat(depthEl && depthEl.value) || 0, prev = parseFloat(row.canvasDepth) || 0;
+        const w = parseFloat(wrapEl && wrapEl.value) || 0;
+        if (wrapEl && d > 0 && (w === 0 || (prev > 0 && Math.abs(w - (prev + half)) < 0.001))) wrapEl.value = dashFmt(d + half);
+    }
     if (row && row.product === "Frameless Canvas (Wrapped)") {
         const depthEl = document.getElementById('canvasDepth');
         const wrapEl = document.getElementById('canvasWrap');
@@ -24284,6 +24400,8 @@ function _dsRunPreflight() {
     try { issues.push.apply(issues, _sizeMathPreflight()); } catch (e) {}
     // Bigger than a sheet of paper, mat, glass or a stretcher can make in one piece (20.16).
     try { issues.push.apply(issues, _maxMakePreflight()); } catch (e) {}
+    // How a canvas's sides are made, and whether the crop leaves picture for them (20.17).
+    try { issues.push.apply(issues, _canvasSidesPreflight()); } catch (e) {}
     // An image code with no house prefix, e.g. a client photo still named IMG_4021 (20.12).
     try { issues.push.apply(issues, _imgCodeShapePreflight()); } catch (e) {}
     // Spelling \u2014 a separate pass, see _dsRunSpellCheck for what it does and doesn't do.
@@ -45791,7 +45909,9 @@ function suggestedCanvasWrapFromRabbet(r) {
     if (r.product !== "Framed Canvas (Floater)") return null;
     const rabbet = parseFloat(r.rabbetDepth) || 0;
     if (rabbet <= 0) return null;
-    return rabbet + 0.5;
+    // 20.17: the standard stretcher the rabbet takes, + 0.5" (was rabbet + 0.5)
+    const k = unitFactor(dashUnit, 'in'), d = _stdStretcherFor(rabbet * k);
+    return d ? (d + 0.5) / k : null;
 }
 
 // buildSpecStrings — single source of truth for spec block content.
@@ -49727,7 +49847,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.16</strong> <b>The quote template's own rules.</b> From the company's 2026 quote template: twelve artists take a 10% royalty (AJG, ISM, JMS, LSA, PEN, LDC, NHS, SAL, STN, THK, TJB, ZPK), not just PEN, so their pieces price higher than before. A didactic panel (printed acrylic, dibond) gets 0.125\" bleed instead of none, and the RFQ lists it as a Printed Panel Product, not EGD. Preflight now says when a piece is bigger than can be made in one piece: paper wider than 59\" on the short side, glass past 40 x 60 (use acrylic), mat board past 40 x 60 that is not white or cream, or past 48 x 72, acrylic past 59 x 96, MDF past 60 x 96, canvas too wide for its stretcher depth (53.4\" at 0.75\", 52\" at 1.5\", 51\" at 2\"), or a stretcher bar longer than 9.5 ft. It also flags a floater whose canvas stretcher is deeper than the frame's rabbet, which leaves the canvas standing proud of the frame, and names the standard stretcher depth that fits. A warning in a concept deck, an error in Final Spec.<br><br><strong>20.15</strong> <b>Install pages follow their plan.</b> In the Install guide layout, with plans ordered by level (the default), each floor plan is now followed by the walls whose pieces are pinned on it, as spec pages always were. Before, every plan printed first and every wall after them.<br><br><strong>20.14</strong> <b>Client codes in number order.</b> Codes in the client's own format (1B.L3.ART-01) now sort in number order on the dashboard, the walls and the pages, like ART codes always have: ART-02 before ART-10, numbers before letters. Before, they stayed in the order they were added.<br><br><strong>20.13</strong> <b>Client codes ending in letters.</b> A code like 1B.L3.ART-EA is its own placement now, not piece A of a set called 1B.L3.ART-E. A piece letter follows the placement's number (ART.1A) or a separator (1B.L3.ART-EF-A), so a client's lettered placements each get their own pin, wall and page.<br><br><strong>20.12</strong> <b>Every picture has a house code.</b> Preflight flags an image code that is not a house code, such as a client photo still named IMG_4021 or a render's file name, so the vendor can find the file. A house code is a prefix of letters then numbers (FAO.010.00031). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.11</strong> <b>The sizes add up.</b> Preflight flags a piece whose frame and mats are wider than its overall size, which leaves no opening for the picture (a 2\" frame and 4\" mats on a 10\" piece). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.10</strong> <b>Will it print sharp?</b> FRAME now remembers how big a picture's original file was (it keeps a smaller copy to work with), and Preflight says when that file is too small for the size it prints: under about 150 pixels per inch for framed work, 75 for a wallcovering, counting any zoomed crop. A warning in a concept deck, an error in Final Spec. Pictures added before 20.10 are not judged until they are added again.<br><br><strong>20.09</strong> <b>Renumbered pieces are said.</b> Production, Issues now lists pieces whose code changed since an issue as <b>RENUMBERED</b> (ART.2 → ART.1), not as one piece removed and another added, in the copied text and the changes CSV, so vendors and the client hear about it. Spec changes on a renumbered piece show under its new code.<br><br><strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+                body: `<strong>20.17</strong> <b>Canvas sides, decided up front.</b> A framed canvas (floater) now prints at its art size plus the wrap round the stretcher, as the quote template says (stretcher depth + 0.5\" a side): a 28.5 x 38.5 canvas is a 32.5 x 42.5 print, on the RFQ, the RFI and the contact sheet. Before, the floater's print size had no wrap. Each canvas has a <b>Sides</b> choice on the dashboard: <b>Picture wraps</b> (crop into the picture so its edges go round the sides; the dashboard shows that band faintly round the face, with red stripes where the crop leaves no picture, and <b>Make room</b> zooms in just enough), <b>Mirror the edge</b> (the printer does it), or <b>Extend in production</b>. The choice goes in the RFQ and RFI Notes, and Preflight asks for it on any canvas with a picture. Typing a floater's rabbet now fills the deepest standard stretcher it takes (1.5\" for a 1.625\" rabbet) and a wrap 0.5\" deeper, instead of a made-to-order stretcher the depth of the rabbet; Preflight flags a stretcher that is not a standard depth. Every estimate now carries a 3% buffer (currency against USD, fuel, shipping) unless the rate card's Buffer % says otherwise; type 0 for none.<br><br><strong>20.16</strong> <b>The quote template's own rules.</b> From the company's 2026 quote template: twelve artists take a 10% royalty (AJG, ISM, JMS, LSA, PEN, LDC, NHS, SAL, STN, THK, TJB, ZPK), not just PEN, so their pieces price higher than before. A didactic panel (printed acrylic, dibond) gets 0.125\" bleed instead of none, and the RFQ lists it as a Printed Panel Product, not EGD. Preflight now says when a piece is bigger than can be made in one piece: paper wider than 59\" on the short side, glass past 40 x 60 (use acrylic), mat board past 40 x 60 that is not white or cream, or past 48 x 72, acrylic past 59 x 96, MDF past 60 x 96, canvas too wide for its stretcher depth (53.4\" at 0.75\", 52\" at 1.5\", 51\" at 2\"), or a stretcher bar longer than 9.5 ft. It also flags a floater whose canvas stretcher is deeper than the frame's rabbet, which leaves the canvas standing proud of the frame, and names the standard stretcher depth that fits. A warning in a concept deck, an error in Final Spec.<br><br><strong>20.15</strong> <b>Install pages follow their plan.</b> In the Install guide layout, with plans ordered by level (the default), each floor plan is now followed by the walls whose pieces are pinned on it, as spec pages always were. Before, every plan printed first and every wall after them.<br><br><strong>20.14</strong> <b>Client codes in number order.</b> Codes in the client's own format (1B.L3.ART-01) now sort in number order on the dashboard, the walls and the pages, like ART codes always have: ART-02 before ART-10, numbers before letters. Before, they stayed in the order they were added.<br><br><strong>20.13</strong> <b>Client codes ending in letters.</b> A code like 1B.L3.ART-EA is its own placement now, not piece A of a set called 1B.L3.ART-E. A piece letter follows the placement's number (ART.1A) or a separator (1B.L3.ART-EF-A), so a client's lettered placements each get their own pin, wall and page.<br><br><strong>20.12</strong> <b>Every picture has a house code.</b> Preflight flags an image code that is not a house code, such as a client photo still named IMG_4021 or a render's file name, so the vendor can find the file. A house code is a prefix of letters then numbers (FAO.010.00031). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.11</strong> <b>The sizes add up.</b> Preflight flags a piece whose frame and mats are wider than its overall size, which leaves no opening for the picture (a 2\" frame and 4\" mats on a 10\" piece). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.10</strong> <b>Will it print sharp?</b> FRAME now remembers how big a picture's original file was (it keeps a smaller copy to work with), and Preflight says when that file is too small for the size it prints: under about 150 pixels per inch for framed work, 75 for a wallcovering, counting any zoomed crop. A warning in a concept deck, an error in Final Spec. Pictures added before 20.10 are not judged until they are added again.<br><br><strong>20.09</strong> <b>Renumbered pieces are said.</b> Production, Issues now lists pieces whose code changed since an issue as <b>RENUMBERED</b> (ART.2 → ART.1), not as one piece removed and another added, in the copied text and the changes CSV, so vendors and the client hear about it. Spec changes on a renumbered piece show under its new code.<br><br><strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
@@ -60393,7 +60513,10 @@ function _artPrintPpi(r) {
     const l = r && r.artLink;
     if (!l || !(l.pw > 0) || !(l.ph > 0) || !r.artworkUrl) return null;
     const sz = _rowOpeningAndPrint(r), k = unitFactor(dashUnit, 'in');
-    const pw = sz.printW * k, ph = sz.printH * k;
+    // A floater's picture is cropped to the face; its wrap is picture outside that crop, or
+    // mirrored, or built later, so the face is what the pixels are spread over (20.17).
+    const fl = r.product === 'Framed Canvas (Floater)';
+    const pw = (fl ? sz.openW : sz.printW) * k, ph = (fl ? sz.openH : sz.printH) * k;
     if (!(pw > 0) || !(ph > 0)) return null;
     return Math.min(l.pw / pw, l.ph / ph) / Math.max(1, parseFloat(r.artZoom) || 1);
 }
@@ -60497,14 +60620,39 @@ function _maxMakeIssues(r) {
 // real installs). Stretchers come in the standard depths below; a custom depth costs more, so
 // the fix offered is the deepest STANDARD stretcher that fits, or a deeper floater. INCHES.
 const STD_STRETCHER_DEPTHS = [0.75, 1.5, 2];
+function _stdStretcherFor(rabbetIn) { return STD_STRETCHER_DEPTHS.filter(x => x <= rabbetIn + 1e-6).pop() || null; }
 function _canvasDepthIssue(r) {
     if (!r || r.product !== 'Framed Canvas (Floater)') return null;
     const k = unitFactor(dashUnit, 'in'), d = (parseFloat(r.canvasDepth) || 0) * k, rb = (parseFloat(r.rabbetDepth) || 0) * k;
-    if (!(d > 0) || !(rb > 0) || d <= rb + 1e-6) return null;
+    if (!(d > 0)) return null;
     const u = dashUnit, show = (v) => _fmtUnitNum(v / k, u) + ' ' + u;
+    // 20.17: a depth off the standard list is a custom stretcher (FRAME used to fill depth =
+    // rabbet, e.g. 1.625"): say so and name the standard one that fits.
+    if (!(rb > 0) || d <= rb + 1e-6) {
+        if (STD_STRETCHER_DEPTHS.some(x => Math.abs(x - d) < 1e-3)) return null;
+        const std = STD_STRETCHER_DEPTHS.filter(x => x <= (rb > 0 ? rb : d) + 1e-6).pop();
+        return 'a ' + show(d) + ' stretcher is not a standard depth (' + STD_STRETCHER_DEPTHS.map(show).join(', ') + '), so it is made to order and costs more. ' + (std ? 'Use ' + show(std) + '.' : 'Use a standard depth and a floater that takes it.');
+    }
     const fit = STD_STRETCHER_DEPTHS.filter(x => x <= rb + 1e-6).pop();
     return 'the ' + show(d) + ' stretcher is deeper than the floater’s ' + show(rb) + ' rabbet, so the canvas stands ' + show(d - rb) + ' proud of the frame. '
         + (fit ? 'Use a ' + show(fit) + ' stretcher (a standard depth) or a deeper floater.' : 'Use a deeper floater; no standard stretcher fits this one.');
+}
+// A canvas with a picture and no decision on its sides, or a picture that cannot cover them.
+function _canvasSidesPreflight() {
+    const out = [], ifs = _deckIsIFS();
+    _deckSpecRows().forEach(r => {
+        if (!r || !r.id || !r.artworkUrl) return;
+        const info = _canvasSidesInfo(r);
+        if (!info) return;
+        const go = { kind: 'piece', label: 'Piece', rowId: r.id };
+        if (!info.mode) { out.push({ sev: 'warn', text: r.id + ' — say how the canvas sides are made: the picture wraps (crop into it), mirror the edge, or extend it in production (Sides, on the dashboard).', idx: null, go: go }); return; }
+        if (info.short.length) {
+            const f = (v) => _fmtUnitNum(Math.max(0, v), dashUnit) + ' ' + dashUnit;
+            const least = Math.min.apply(null, info.short.map(k => info.spare[k]));
+            out.push({ sev: ifs ? 'err' : 'warn', text: r.id + ' — the picture wraps round the sides, but the crop leaves only ' + f(least) + ' of the ' + f(info.wrap) + ' it needs on the ' + info.short.join(', ') + '. Use Make room on the dashboard, or pick Mirror or Extend.', idx: null, go: go });
+        }
+    });
+    return out;
 }
 function _maxMakePreflight() {
     const out = [], ifs = _deckIsIFS();
@@ -60689,8 +60837,20 @@ async function _contactSheetPdf(rows, title) {
                         const px = Math.max(1, Math.round(dw * 2.5)), py = Math.max(1, Math.round(dh * 2.5));
                         const cnv = document.createElement('canvas'); cnv.width = px; cnv.height = py;
                         const g = cnv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, px, py);
-                        const cr = computeArtDrawRect(px, py, iw / ih, r.artZoom, r.artPanX, r.artPanY);
-                        g.drawImage(img, cr.dx, cr.dy, cr.dw, cr.dh);
+                        const cwr = IFS_CANVAS.indexOf(r.product) >= 0 ? _canvasWrapOf(r) : 0;
+                        if (cwr > 0 && sz.printW > 0) {
+                            // 20.17: a canvas is cropped to its FACE; the wrap is the band round it.
+                            // Picture wraps: the picture outside the crop shows there. Mirror or
+                            // extend: the band is grey, the vendor or production makes it.
+                            const wx = cwr / sz.printW * px, wy = cwr / sz.printH * py, fw = px - 2 * wx, fh = py - 2 * wy;
+                            const cr = computeArtDrawRect(fw, fh, iw / ih, r.artZoom, r.artPanX, r.artPanY);
+                            if (r.canvasSides !== 'image') { g.fillStyle = '#e6e6e6'; g.fillRect(0, 0, px, py); g.save(); g.beginPath(); g.rect(wx, wy, fw, fh); g.clip(); }
+                            g.drawImage(img, wx + cr.dx, wy + cr.dy, cr.dw, cr.dh);
+                            if (r.canvasSides !== 'image') g.restore();
+                        } else {
+                            const cr = computeArtDrawRect(px, py, iw / ih, r.artZoom, r.artPanX, r.artPanY);
+                            g.drawImage(img, cr.dx, cr.dy, cr.dw, cr.dh);
+                        }
                         doc.addImage(cnv.toDataURL('image/jpeg', 0.85), 'JPEG', x + (bw - dw) / 2, y + (bh - dh) / 2, dw, dh);
                     }
                 } catch (e) {}
@@ -61280,6 +61440,8 @@ function _rateFor(r) {
 // "on a 30x40", so it scales with the piece's area. `buffer` is a percent on the whole
 // estimate ("always add a buffer"). No amounts in the code: the site is public.
 const ADDON_KEYS = ['premiumFrame', 'nonGlare', 'sealant', 'oversize', 'buffer'];
+// 20.17: the studio's standard buffer on every estimate, a percent (a policy, not a price).
+const HOUSE_BUFFER_PCT = 3;
 const PREMIUM_FRAME_RE = /^(LJ|UA)-/i;
 const NON_GLARE_RE = /non[\s-]*glare|anti[\s-]*(glare|reflect)|museum|optium|\bAR\b/i;
 const HUMID_LOC_RE = /bath|rest\s*room|wash\s*room|powder|shower|\bspa\b|pool|locker|sauna|steam|humid/i;
@@ -61314,8 +61476,10 @@ function _estimateCost(r) {
         const n = _priceNum(ad[a]); if (n == null) return;
         c += a === 'nonGlare' ? n * sqft / NON_GLARE_REF_SQFT : n;
     });
-    const buf = _priceNum(ad.buffer);
-    if (buf != null && buf > 0 && c > 0) c *= 1 + buf / 100;
+    // 20.17: every estimate carries the house buffer (currency against USD, fuel, shipping)
+    // unless the card says otherwise; a typed 0 means none.
+    const typed = _priceNum(ad.buffer), buf = typed != null ? typed : HOUSE_BUFFER_PCT;
+    if (buf > 0 && c > 0) c *= 1 + buf / 100;
     return c > 0 ? Math.round(c * 100) / 100 : null;
 }
 // Refresh every ESTIMATE (and fill pieces with no price) from the rate card. Quotes stay.
@@ -61610,7 +61774,7 @@ function _rfqSheet(docType, only) {
         const mB = matsOn ? I(r.m1B) : floatM ? I(r.sbPaperMargin) : 0, mL = matsOn ? I(r.m1L) : floatM ? I(r.sbPaperMargin) : 0;
         const wb = mt === 'float_white' ? I(r.sbPaperBorder) : 0;
         const cd = canvas ? I(r.canvasDepth) : 0;
-        const wrap = r.product === 'Frameless Canvas (Wrapped)' ? I(r.canvasWrap) : (canvas ? cd + 0.5 : 0);
+        const wrap = canvas ? I(_canvasWrapOf(r)) : 0;
         // the template's formula where it agrees with FRAME, else FRAME's number
         const F = (f, tv, fv) => B(near(tv, fv) ? { f: f, v: fv } : { v: fv });
         let J, K, L, M;
@@ -61631,12 +61795,12 @@ function _rfqSheet(docType, only) {
         if (multi) { const lv = levels[_deckLvlOf(r.level)]; lvName = (lv && lv.name) || ''; }
         const vName = _rowVendor(r);
         a.push(B(lvName), B(RFQ_MOUNT_LABEL[mt]), B(p.qty), B(r.id), B(r.product || ''), B(r.location || ''), B(_rfqImageCode(r)), B(H), B(V), J, K, L, M,
-            B(cd), canvas && r.product !== 'Frameless Canvas (Wrapped)' ? B({ f: 'N' + n + '+0.5', v: cd + 0.5 }) : B(wrap),
+            B(cd), canvas && r.product !== 'Frameless Canvas (Wrapped)' && near(wrap, cd + 0.5) ? B({ f: 'N' + n + '+0.5', v: wrap }) : B(wrap),
             B(matsOn ? (r.m1ColorName || '') : (floatM ? (r.sbBackerColorName || '') : (flat ? 0 : ''))), B(mT), B(mR), B(mB), B(mL),
             B(canvas || flat || !framed ? 'N/A' : (r.glass || '')), B(flat ? '' : (r.paperType || '')), B(), B(), B(wb || ''),
             B(framed ? (String(r.fCode || '').trim() || 'TBD') : 'N/A'), B(fw), B(framed ? I(r.fHeight) : 0),
             B(mt === 'egd' ? 'N/A' : (r.hardware || '')), B(flat ? (r.material || '') : canvas ? 'Canvas' : (r.paperType || '')),
-            B(mt === 'egd' ? '' : (r.mount || RFQ_MOUNT_LABEL[mt])), B(String(r.prodNotes || '').trim()), B(vName));
+            B(mt === 'egd' ? '' : (r.mount || RFQ_MOUNT_LABEL[mt])), B([_canvasSidesNote(r), String(r.prodNotes || '').trim()].filter(Boolean).join('. ')), B(vName));
         if (!rfi) {
             const mk = p.markup - 1; // the revenue markup over cost, royalty included
             a.push(B(p.cost != null ? { v: p.cost, money: true } : { money: true }),
@@ -61926,10 +62090,10 @@ function openRateCard() {
      ['nonGlare', 'Non-glare glass, at 30x40', 'Added when the Glass field says non-glare, anti-reflective or museum; scaled by the piece’s area against a 30 x 40'],
      ['sealant', 'Moisture sealant', 'Added when the location reads as humid (bath, restroom, spa, pool, shower, locker); a piece can be switched on the Pricing tab'],
      ['oversize', 'Oversize, past 40x50', 'Added when the overall size is bigger than 40 x 50 either way round'],
-     ['buffer', 'Buffer %', 'A percentage on top of every estimate']].forEach(([k, label, tip]) => {
+     ['buffer', 'Buffer %', 'A percentage on top of every estimate, for currency against USD, fuel and shipping. 3% when blank; type 0 for none']].forEach(([k, label, tip]) => {
         const l = document.createElement('label'); l.style.cssText = 'display:flex; gap:6px; align-items:center;'; l.title = tip;
         const t = document.createElement('span'); t.textContent = label; t.style.cssText = 'width:170px;';
-        const i = document.createElement('input'); i.type = 'text'; i.setAttribute('data-addon', k); i.value = ad[k] != null ? ad[k] : ''; i.style.cssText = 'width:70px; height:24px;';
+        const i = document.createElement('input'); i.type = 'text'; i.setAttribute('data-addon', k); i.value = ad[k] != null ? ad[k] : ''; if (k === 'buffer') i.placeholder = String(HOUSE_BUFFER_PCT); i.style.cssText = 'width:70px; height:24px;';
         l.appendChild(t); l.appendChild(i); adBox.appendChild(l);
     });
     card.appendChild(adBox);
