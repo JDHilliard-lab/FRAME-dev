@@ -141,11 +141,11 @@ const path = require('path');
         if (!_elevPickable(elevFrames[0]) || !_elevPickable(elevFrames[1])) throw new Error('a panel or frame was locked');
         if (!_elevPickable({ product: 'Window Film (WF)' })) throw new Error('window film locked');
       });
-      await __check('Didactic Panel is a flat product: listed, no bleed, its own application, not pinned by EGD wall mode', async () => {
+      await __check('Didactic Panel is a flat product: listed, 0.125in printed-panel bleed (20.16), its own application, not pinned by EGD wall mode', async () => {
         if (FRAME_PRODUCTS.indexOf('Didactic Panel') < 0 || !_isFlatGraphic('Didactic Panel')) throw new Error('not a flat product');
         const opts = Array.from(document.querySelectorAll('#m_product option')).map(o => o.value);
         if (opts.indexOf('Didactic Panel') < 0) throw new Error('not in the dropdown');
-        if (_flatBleedIn('Didactic Panel') !== 0) throw new Error('panel bleed ' + _flatBleedIn('Didactic Panel'));
+        if (_flatBleedIn('Didactic Panel') !== 0.125) throw new Error('panel bleed ' + _flatBleedIn('Didactic Panel'));
         if (_flatBleedIn('Wallcovering (EGD)') !== 2) throw new Error('wallcovering bleed changed');
         if (FLAT_GRAPHIC_APPLICATION['Didactic Panel'] !== 'Printed Acrylic Panel') throw new Error('application');
         seed();

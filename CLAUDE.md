@@ -2397,6 +2397,12 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **INSTALL PAGES FOLLOW THEIR PLAN (20.15).** In Install-guide mode with `_deckPlanOrder() === 'byLevel'`, each plan is
   followed by the walls whose first active frame's row is pinned on that level (`_deckLvlOf(r.level)`); unpinned walls
   and the other orders keep "all plans, then all walls".
+- **THE QUOTE TEMPLATE'S RULES (20.16, `ROYALTY_10_CODES`, `PRINTED_PANEL_BLEED_IN`, `MAX_MAKE`, `_maxMakeIssues`,
+  `_canvasDepthIssue`, `STD_STRETCHER_DEPTHS`, `_maxMakePreflight`).** From the real `2026 QUOTE TEMPLATE - Terms and
+  Conditions.xltx`: royalty 10% is a list of twelve prefixes, not PEN alone. Didactic Panel bleed 0.125 (printed panel);
+  `_rfqMount` tests the panel BEFORE `_isFlatGraphic` (it is one, so it read as EGD). Max sizes in INCHES, short x long,
+  shown in the project unit; mat/glass judged at overall - 2 x fW + 0.5 (rabbet lip). Floater: stretcher deeper than
+  `rabbetDepth` = proud canvas; offer the deepest standard depth, never a custom one (costs more). Warn, err in an IFS.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
@@ -2428,7 +2434,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   Import compares against `_priceRow(r).cost`, or a round-tripped estimate becomes a quote. No Update estimates button.
 - **THE COMPANY'S OWN SHEETS (19.96, `_rfqSheet(docType, only)`, `_salesforceLinesCSV`, `_rowRoyalty`, `HOUSE_MARKUP`,
   `VENDOR_CODES` / `_vendorCode`).** From the team's Claude projects (RFQ/RFI Generator, RFQ -> Import Template). Sell =
-  cost x (markup + royalty): markup is typed or `HOUSE_MARKUP` 1.8731 (template AK = 87.31% + AJ), royalty F 0 / PEN 0.10 /
+  cost x (markup + royalty): markup is typed or `HOUSE_MARKUP` 1.8731 (template AK = 87.31% + AJ), royalty F 0 / `ROYALTY_10_CODES` 0.10 /
   else 0.05 or `r.royalty` (stored only when it differs). Margin is AFTER royalties. RFQ = template front sheet, rows 1-8
   header, row 9 titles (`RFQ_COLS`, A to AN), data from row 10, `freeze: 9`; J to M are the template's mount formula ONLY
   where it equals `_rowOpeningAndPrint` (else FRAME's number). RFI = A to AG, no purchases, Total Pieces only. SF CSV is the
