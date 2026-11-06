@@ -1782,51 +1782,64 @@ const path = require('path');
     });
 
     // ── The traced bed drawings (16.82) ─────────────────────────────────────
-    __check('EXACT REPORT: the traced beds are joined-up line work, not a field of stubs', () => {
-      // "The drawings of beds looked a little janky, you made it sound like you could
-      // connect the lines better." They came out of an exploded CAD export as ~109k
-      // one-segment paths; the first stitcher stopped dead at every junction and joined
-      // only on an exact quantised match, so the drawings arrived as short fragments with
-      // trace dust around them and hairpin spikes where a chain doubled back on itself.
-      // NB: this whole block is a template literal, so every backslash has to be doubled
-      // — \\s written singly collapses to a plain 's' and the split silently stops
-      // separating coordinates, which turns every run into nonsense and reads as dust.
-      const parse = (d) => d.split('M').filter(Boolean).map(s => {
-        const n = s.trim().split(/[L\\s]+/).filter(Boolean).map(Number);
-        const p = []; for (let k = 0; k + 1 < n.length; k += 2) p.push([n[k], n[k + 1]]);
-        return p;
-      });
-      const plen = (r) => { let L = 0; for (let i = 1; i < r.length; i++) L += Math.hypot(r[i][0] - r[i-1][0], r[i][1] - r[i-1][1]); return L; };
+    __check('EXACT REPORT: the bed styles are drawn smooth, not traced (20.19)', () => {
+      // "The drawings should be smooth not jagged or lines ending suddenly, almost like
+      // ikea install guides." CHANGED in 20.19: the five styles were traced from an
+      // exploded CAD sheet (hundreds of stitched L-segments, and Platform was really two
+      // singles and a nightstand). They are now hand-drawn: a few outlines each, with
+      // real curves. The old stub/dust/hairpin checks measured the tracer and no longer
+      // apply; what must still hold is below.
       if (BED_STYLE_VARIANTS.length !== 5) throw new Error('the bed style set changed size');
+      // Keys and proportions are what a saved bed stores and sizes by, so a redraw must
+      // not move them or every styled bed in an old project changes height.
+      const want = { b67: 26.9, b71: 48.9, b72: 62, b74: 50.7, b75: 41.9 };
       BED_STYLE_VARIANTS.forEach(v => {
-        const runs = [];
-        (v.svg.match(/ d="([^"]*)"/g) || []).forEach(m => parse(m.slice(4, -1)).forEach(r => runs.push(r)));
-        if (runs.length < 10) throw new Error(v.key + ' has almost no geometry left');
-        // DUST: a run under 0.9 units on a drawing normalised to 100 wide is a leftover
-        // stub, and at hairline weight it reads as fuzz around the drawing. Wingback and
-        // Low profile were two thirds dust before this.
-        const dust = runs.filter(r => plen(r) < 0.9).length;
-        if (dust > 2) throw new Error(v.key + ' still carries ' + dust + ' dust runs');
-        // HAIRPINS: a near-reversal over a SHORT spur is a stitching fault, never drawing.
-        // Long reversals are left alone — the V between two pillows is a real one.
-        let spikes = 0;
-        runs.forEach(r => {
-          for (let i = 1; i < r.length - 1; i++) {
-            const v1 = [r[i][0]-r[i-1][0], r[i][1]-r[i-1][1]], v2 = [r[i+1][0]-r[i][0], r[i+1][1]-r[i][1]];
-            const l1 = Math.hypot(v1[0], v1[1]), l2 = Math.hypot(v2[0], v2[1]);
-            if (l1 < 1e-9 || l2 < 1e-9) continue;
-            if ((v1[0]*v2[0] + v1[1]*v2[1]) / (l1 * l2) < Math.cos(150 * Math.PI / 180) && Math.min(l1, l2) < 6) spikes++;
-          }
-        });
-        if (spikes) throw new Error(v.key + ' still has ' + spikes + ' short hairpin spikes');
-        // The weight hierarchy is what stops traced art reading flatter than the
-        // hand-drawn assets beside it — object line, detail, fine, as three nested
-        // <g stroke-width> groups. "Simplify the drawing" is exactly the change that
-        // would quietly collapse these onto one weight.
-        const ws = (v.svg.match(/stroke-width="([\\d.]+)"/g) || []).map(m => parseFloat(m.split('"')[1]));
+        if (!(v.key in want)) throw new Error('unknown bed style key ' + v.key);
+        if (v.w !== 100 || v.h !== want[v.key]) throw new Error(v.key + ' changed proportion: ' + v.w + 'x' + v.h);
+        const ds = (v.svg.match(/ d="[^"]*"/g) || []).join(' ');
+        // Smooth: pillows and upholstery are curves, never chains of short lines.
+        if (ds.indexOf('C') < 0 && ds.indexOf('Q') < 0) throw new Error(v.key + ' has no curves');
+        // Few strokes: a traced drawing ran to hundreds of L commands.
+        const cmds = ds.split('').filter(c => 'MLHVCQAZ'.indexOf(c) >= 0).length;
+        if (cmds > 120) throw new Error(v.key + ' is ' + cmds + ' path commands; it reads as traced');
+        if (ds.split('L').length - 1 > 12) throw new Error(v.key + ' is built from short line segments again');
+        const ws = (v.svg.match(/stroke-width="([0-9.]+)"/g) || []).map(m => parseFloat(m.split('"')[1]));
         if (new Set(ws).size < 3) throw new Error(v.key + ' lost its line-weight hierarchy: ' + ws.join('/'));
         if (!(ws[0] > ws[1] && ws[1] > ws[2])) throw new Error(v.key + ' weights are not heaviest-first: ' + ws.join('/'));
       });
+    });
+
+    __check('the library covers guestrooms, offices, bathrooms and life safety (20.19)', () => {
+      // "We would need guestroom content, office content, fixtures, bathroom, toilets."
+      const cat = (c) => (CONTEXT_LIBRARY.find(g => g.cat === c) || { items: [] }).items.map(p => p.key);
+      const need = {
+        Office: ['off-desk', 'workstation', 'task-chair', 'monitor', 'conf-table', 'file-lateral',
+                 'cab-storage', 'bookcase', 'whiteboard', 'kitchenette', 'fridge'],
+        Bath: ['toilet-wall', 'flush-plate', 'urinal', 'lav-pedestal', 'stall', 'towel-disp',
+               'hand-dryer', 'soap', 'tp-holder', 'robe-hook', 'towel-ring', 'mirror-lit'],
+        Furniture: ['armchair', 'desk-chair', 'bench', 'mirror-floor', 'planter', 'coat-stand'],
+        Millwork: ['wardrobe', 'minibar'],
+        Fixtures: ['tv-65', 'tv-75', 'picture-light', 'pendant', 'fountain', 'clock'],
+        'Keep clear': ['kc-pull', 'kc-extinguisher', 'kc-exit', 'kc-grille', 'kc-access'],
+      };
+      Object.keys(need).forEach(c => need[c].forEach(k => {
+        if (cat(c).indexOf(k) < 0) throw new Error(k + ' is not in ' + c);
+      }));
+      // Everything in Keep clear is a keep-clear block, or the hatch and Preflight miss it.
+      CONTEXT_LIBRARY.find(g => g.cat === 'Keep clear').items.forEach(p => {
+        if (p.avoid !== true) throw new Error(p.key + ' sits in Keep clear but is not marked avoid');
+      });
+      // Every device now DRAWS (the zone is the one deliberate box): a bare rectangle
+      // labelled Switch told an installer less than a switch plate does.
+      CONTEXT_PRESETS.filter(p => /^kc-/.test(p.key) && p.key !== 'kc-zone').forEach(p => {
+        if (!p.svg) throw new Error(p.key + ' has no drawing');
+      });
+      ['thermostat', 'outlet'].forEach(k => { if (!CONTEXT_PRESETS.find(p => p.key === k).svg) throw new Error(k + ' has no drawing'); });
+      // Life-safety heights the install guide is planned against.
+      const g = (k) => CONTEXT_PRESETS.find(p => p.key === k);
+      if (g('kc-extinguisher').aff + g('kc-extinguisher').h !== 48) throw new Error('the extinguisher cabinet top is not at 48in');
+      if (g('kc-pull').aff !== 48 || g('kc-pull').affMode !== 'center') throw new Error('the pull station is not at 48in');
+      if (g('kitchenette').h !== 90) throw new Error('the kitchenette uppers do not reach 90in');
     });
 
     __check('the tracer keeps corners and refuses only reversals', () => {
