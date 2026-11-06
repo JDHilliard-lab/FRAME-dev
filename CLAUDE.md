@@ -2410,6 +2410,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_canvasSidesInfo.short`; the dashboard band `.canvas-sides-ghost` is screen only. `_artPrintPpi` spreads a floater over
   its FACE. Rabbet/depth auto-fill uses `STD_STRETCHER_DEPTHS` (never depth = rabbet). `HOUSE_BUFFER_PCT` 3 applies when
   the card's buffer is blank (0 = none); pricing fixtures not about the buffer pass `{ buffer: 0 }`.
+- **A PIN HOLDS TWO DIGITS (20.18, `_fpShortPinNums`, `g.fullNum`).** `_fpGroups` passes every group through it: an
+  all-digit `num` longer than 2 shows its last two while unique and not 00, else the long ones get 01.. in `_codeNatCmp`
+  order around the short codes' numbers. Never changes a code; dotted nums untouched.
 - **RENAMES ARE LOGGED (20.09, `_codeLogAdd` in `applyIdRename`, `codeLog`/`codeLogSeq`, issue `logSeq`,
   `_codeRenamesSince`).** `_issueDiff` maps every issued code to its current one (renamed pieces first, so a code another
   piece was renamed INTO is no longer the old piece's), returns `renamed`; temp renumber stems collapse in the chain. An
