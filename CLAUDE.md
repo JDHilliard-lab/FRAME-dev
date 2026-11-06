@@ -2499,8 +2499,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   API image fills set `radius` 0 unless asked (straight-edged house moodboards). The driver waits for the start screen
   before closing it (it opens after the API is ready and swallows clicks).
 - **THE CONTEXT LIBRARY IS HAND-DRAWN, AND SMOOTH (20.19).** New art is authored as a few outlines with real
-  curves (C/Q/A), every line ending on another line (a stroke stopping in mid-air reads as traced), at the
-  `_O/_D/_F/_H` weights; still mitre joins and butt caps (`test_elev_context_blocks` pins both). The five
+  curves (C/Q/A), every line ending on another line (a stroke stopping in mid-air reads as traced). ONE line
+  weight since 20.21 (`CTX_LW_*` all equal, on request: "no tapering"); mitre joins and butt caps stay.
+  `data-o="1"` on a shape makes it OPAQUE in drawing order (`_ctxArtSvg` turns it into a white fill), which
+  is how a front pillow hides the sham behind it; author overlapping parts back to front. The beds come
+  from one generator, `tools/ctx-bed-gen.js` (sham/pillow/lumbar/duvet/base): restyle them there, together. The five
   `BED_STYLE_VARIANTS` were redrawn under the SAME keys and 100-wide aspect (a saved bed sizes by them). Small
   wall devices share `_CTX_ART_SWITCH/THERMO/OUTLET` between Fixtures and Keep clear. The Office category sits
   before Keep clear. Reference sites (First In Architecture etc.) forbid redistributing their DWGs: use them

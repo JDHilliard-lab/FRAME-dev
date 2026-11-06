@@ -828,8 +828,10 @@ const path = require('path');
       // Institutional Furniture CAD Drawings." One uniform stroke reads as hand-drawn
       // however accurate the geometry underneath is — the weight hierarchy is the single
       // thing that separates a spec drawing from a sketch.
-      if (!(CTX_LW_OBJ > CTX_LW_DET && CTX_LW_DET > CTX_LW_FINE)) {
-        throw new Error('the three weights are not a hierarchy: ' + [CTX_LW_OBJ, CTX_LW_DET, CTX_LW_FINE].join('/'));
+      // CHANGED (20.21): ONE weight. "Keep the lineweight all the same, no tapering",
+      // with an IKEA-style reference. The hierarchy below is retired on that request.
+      if (!(CTX_LW_OBJ === CTX_LW_DET && CTX_LW_DET === CTX_LW_FINE)) {
+        throw new Error('the context weights differ again: ' + [CTX_LW_OBJ, CTX_LW_DET, CTX_LW_FINE].join('/'));
       }
       // Mitre joins and butt caps. Rounded joins on a heavy outline is most of what made
       // these look hand-drawn.
@@ -847,8 +849,6 @@ const path = require('path');
       // Every drawn asset actually USES the hierarchy — at least two weights. A single
       // weight throughout is the thing being fixed here, so one is a regression.
       CONTEXT_PRESETS.filter(p => p.svg).forEach(p => {
-        const weights = new Set((p.svg.match(/stroke-width="([\\d.]+)"/g) || []));
-        if (weights.size < 2) throw new Error(p.key + ' is drawn at a single line weight');
         // …and the heaviest weight present is the object line, i.e. the outer profile is
         // never lighter than the detail inside it.
         if (p.svg.indexOf('stroke-width="' + CTX_LW_OBJ + '"') < 0) {
@@ -1576,7 +1576,9 @@ const path = require('path');
       if (!bed.hatch) throw new Error('the bed declares no wood region');
       // The region is the PLINTH ONLY — it must not reach up into the mattress, whose
       // slab occupies y 0..10.
-      if (/M4 19/.test(bed.hatch) === false) throw new Error('the bed wood region is not its plinth: ' + bed.hatch);
+      // CHANGED (20.21): the wood is the upholstered BASE (starting at 14in down, under
+      // the duvet, which is opaque and hides the grain above its hem).
+      if (bed.hatch.indexOf('M0.9 14 ') < 0) throw new Error('the bed wood region is not its base: ' + bed.hatch);
       if (bed.hatch.indexOf('height="24"') >= 0 || /h60/.test(bed.hatch)) {
         throw new Error('the bed wood region covers the whole block again');
       }
@@ -1853,9 +1855,17 @@ const path = require('path');
         const cmds = ds.split('').filter(c => 'MLHVCQAZ'.indexOf(c) >= 0).length;
         if (cmds > 120) throw new Error(v.key + ' is ' + cmds + ' path commands; it reads as traced');
         if (ds.split('L').length - 1 > 12) throw new Error(v.key + ' is built from short line segments again');
+        // One weight (20.21), and the pillows OVERLAP: the front ones are opaque so the
+        // sham behind is hidden, not drawn through (the "turtle shell" look had none).
         const ws = (v.svg.match(/stroke-width="([0-9.]+)"/g) || []).map(m => parseFloat(m.split('"')[1]));
-        if (new Set(ws).size < 3) throw new Error(v.key + ' lost its line-weight hierarchy: ' + ws.join('/'));
-        if (!(ws[0] > ws[1] && ws[1] > ws[2])) throw new Error(v.key + ' weights are not heaviest-first: ' + ws.join('/'));
+        if (new Set(ws).size !== 1) throw new Error(v.key + ' mixes line weights: ' + ws.join('/'));
+        if ((v.svg.split('data-o="1"').length - 1) < 6) throw new Error(v.key + ' has no opaque pillows and duvet');
+        // The marker becomes a real white fill only in the RENDERED art (the source keeps
+        // no literal fills); without it every pillow line shows through the one in front.
+        const drawn = _ctxArtSvg(v, null, 1);
+        if (drawn.indexOf('data-o=') >= 0 || drawn.indexOf('fill="' + CONTEXT_FILL + '"') < 0) {
+          throw new Error(v.key + ' draws its opaque shapes see-through');
+        }
       });
     });
 
