@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.19';
+const APP_VERSION = '20.20';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -9727,7 +9727,7 @@ const CONTEXT_LIBRARY = [
           side: { w: 28, h: 18,
             svg: _O + '<path d="M0 0 h11 v1.6 h-11 z"/>'
                     + '<path d="M0 1.6 v14 a3 3 0 0 0 3 2.4 h6 a3 3 0 0 0 3 -2.4 v-14"/>' + _G
-               + _D + '<path d="M11 1.6 C16 2.5 22 4 24.5 7 C26.5 9.5 26.5 13 24 15.5"/>'
+               + _D + '<path fill="none" d="M11 1.6 C16 2.5 22 4 24.5 7 C26.5 9.5 26.5 13 24 15.5"/>'
                     + '<path d="M12 18 h13"/>' + _G
                + _F + '<path d="M0 1 h11"/>' + _G } },
         { key: 'toilet-tank', name: 'Toilet + tank', w: 20, h: 30, aff: 0, affMode: 'bottom',
@@ -9782,7 +9782,7 @@ const CONTEXT_LIBRARY = [
         { key: 'lav-pedestal', name: 'Pedestal sink', w: 22, h: 38, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Sink',
           svg: _O + '<path d="M0.8 4 H21.2 Q22 4 22 4.8 V6 C22 10.6 18 13 11 13 C4 13 0 10.6 0 6 V4.8 Q0 4 0.8 4 Z"/>'
                   + '<path d="M8 13 C8.6 20 8.2 30 6.6 38 H15.4 C13.8 30 13.4 20 14 13"/>' + _G
-             + _D + '<path d="M0 6 H22"/><path d="M10 4 V1.8 Q10 0.4 11.6 0.4 H13.6 V1.4"/>' + _G
+             + _D + '<path d="M0 6 H22"/><path fill="none" d="M10 4 V1.8 Q10 0.4 11.6 0.4 H13.6 V1.4"/>' + _G
              + _F + '<path d="M9 4 H12"/><path d="M7.4 36.6 H14.6"/>' + _G },
         { key: 'stall', name: 'Toilet stall', w: 36, h: 70, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Stall',
           svg: _O + '<path d="M0 0 H36 V1.5 H0 Z"/><path d="M0 1.5 H4 V70 H0 Z M32 1.5 H36 V70 H32 Z"/>'
@@ -9980,7 +9980,7 @@ const CONTEXT_LIBRARY = [
                     + '<path d="M20.6 2.4 L19.6 16"/>'
                     + '<path d="M2 16 h20 v2.2 h-20 z"/>'
                     + '<path d="M3.2 18.2 L2 34"/><path d="M20.2 18.2 L21.4 34"/>' + _G
-               + _D + '<path d="M19.6 4 C17.5 5.4 17.5 12.6 19.3 14"/>' + _G
+               + _D + '<path fill="none" d="M19.6 4 C17.5 5.4 17.5 12.6 19.3 14"/>' + _G
                + _F + '<path d="M2 18.2 h20"/><path d="M2.8 27 h18"/>' + _G } },
         { key: 'lounge', name: 'Lounge chair', w: 32, h: 30, aff: 0, affMode: 'bottom',
           shape: 'rect', fill: 'plain', label: 'Lounge Chair',
@@ -10162,7 +10162,7 @@ const CONTEXT_LIBRARY = [
                   + '<path d="M24.5 56.5 H35.75 V85 H24.5 Z M36.25 56.5 H47.5 V85 H36.25 Z"/>'
                   + '<path d="M48.5 56.5 H71.5 V85 H48.5 Z"/>'
                   + '<path d="M72.5 56.5 H83.25 V85 H72.5 Z M83.75 56.5 H94.5 V85 H83.75 Z"/>'
-                  + '<path d="M35.4 54 V48 Q35.4 45 38.4 45 Q41 45 41 48 V49.2"/>' + _G
+                  + '<path fill="none" d="M35.4 54 V48 Q35.4 45 38.4 45 Q41 45 41 48 V49.2"/>' + _G
              + _F + '<path d="M34.4 54 H37.4"/>'
                   + '<path d="M10 59.6 H15 M10 69.4 H15 M10 79.6 H15"/>'
                   + '<path d="M34.2 60 V65 M37.8 60 V65 M81.7 60 V65 M85.3 60 V65 M52 58.4 H68"/>'
@@ -10276,6 +10276,52 @@ function _ctxArtSvg(p, inkAttr, pxScale) {
         + '<g fill="none" stroke="' + (inkAttr || 'currentColor') + '" stroke-width="' + conv(CTX_LW_DET) + '"'
         + ' stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4">'
         + body + '</g></svg>';
+}
+// THE BODY FOLLOWS THE DRAWING (20.20). A block used to be an opaque white BOX, so a
+// task chair hid the wall between its casters and a kitchenette hid its backsplash. The
+// white now comes from the drawing itself: every closed shape in the art is filled,
+// stroke off, UNDER the lines. Open strokes (chair legs, a modesty-panel edge drawn as
+// a line) have no area and cover nothing, which is the point: you see the wall there.
+// A Keep clear block keeps its full box, because there the box IS the zone.
+// An OPEN CURVE would be filled across its chord (a faucet's gooseneck became a white
+// fin), so a stroke that must stay line-only carries fill="none" in the art.
+// ONE builder for screen, export and canvas; the dash pattern is stripped (a body has
+// no stroke, and a dashed hidden line must not punch a dashed hole in it).
+function _ctxBodyOn(b, art) { return !!(art && art.svg) && !_ctxAvoid(b); }
+function _ctxBodyGroup(p, fill) {
+    if (!p || !p.svg) return '';
+    return '<g fill="' + (fill || CONTEXT_FILL) + '" stroke="none">'
+        + p.svg.replace(/ stroke-dasharray="[^"]*"/g, '') + '</g>';
+}
+function _ctxBodySvg(p, fill) {
+    if (!p || !p.svg) return '';
+    return '<svg viewBox="0 0 ' + p.w + ' ' + p.h + '" preserveAspectRatio="none"'
+        + ' xmlns="http://www.w3.org/2000/svg">' + _ctxBodyGroup(p, fill) + '</svg>';
+}
+// Where the body crosses a horizontal line, as [from, to] fractions of the block width,
+// read off a rasterised body (the art is curves; solving them per item is not worth it).
+// null = cannot tell (no canvas, e.g. a test harness): the caller falls back to the box.
+async function _ctxBodySpansAt(p, yFrac) {
+    try {
+        if (typeof document === 'undefined' || !p || !p.svg) return null;
+        const W = 400, H = Math.max(8, Math.min(1600, Math.round(W * p.h / (p.w || 1))));
+        const c = document.createElement('canvas'); c.width = W; c.height = H;
+        const x = c.getContext && c.getContext('2d');
+        if (!x || !x.getImageData) return null;
+        const svg = _ctxBodySvg(p, '#000').replace('<svg ', '<svg width="' + W + '" height="' + H + '" ');
+        const img = await _loadImgRaw('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg));
+        if (!img) return null;
+        x.drawImage(img, 0, 0, W, H);
+        const row = Math.max(0, Math.min(H - 1, Math.round(yFrac * H)));
+        const d = x.getImageData(0, row, W, 1).data;
+        const out = []; let s0 = -1;
+        for (let i = 0; i <= W; i++) {
+            const on = i < W && d[i * 4 + 3] > 64;
+            if (on && s0 < 0) s0 = i;
+            if (!on && s0 >= 0) { out.push([s0 / W, i / W]); s0 = -1; }
+        }
+        return out;
+    } catch (e) { return null; }
 }
 // The elevation box a preset places at, converted into the project unit. ONE definition,
 // because click-to-place, double-click-to-add and the palette tooltip all have to agree
@@ -17548,7 +17594,8 @@ async function _ctxDrawToCanvas(x, elev, g) {
         if (!art && shape === 'ellipse') {
             x.beginPath(); x.ellipse(bx + bw / 2, by + bh / 2, bw / 2, bh / 2, 0, 0, Math.PI * 2); x.fill(); x.stroke();
         } else {
-            x.fillRect(bx, by, bw, bh);
+            // With a body (20.20) the white comes in with the art, below.
+            if (!_ctxBodyOn(b, art)) x.fillRect(bx, by, bw, bh);
             if (!art) {
                 x.strokeRect(bx, by, bw, bh);
                 if (shape === 'shelf') { x.lineWidth = linePx * 2; x.beginPath(); x.moveTo(bx, by); x.lineTo(bx + bw, by); x.stroke(); }
@@ -17567,7 +17614,8 @@ async function _ctxDrawToCanvas(x, elev, g) {
             const W = Math.max(1, Math.round(bw)), H = Math.max(1, Math.round(bh));
             // _ctxArtSvg divides authored weights by its scale; this scale makes the
             // OBJECT line come out at linePx and the rest of the hierarchy in proportion.
-            const svg = _ctxArtSvg(art, _ctxInkHex(), (bw / (art.w || 1)) * (CTX_LW_OBJ / linePx)).replace('<svg ', '<svg width="' + W + '" height="' + H + '" ');
+            let svg = _ctxArtSvg(art, _ctxInkHex(), (bw / (art.w || 1)) * (CTX_LW_OBJ / linePx)).replace('<svg ', '<svg width="' + W + '" height="' + H + '" ');
+            if (_ctxBodyOn(b, art)) svg = svg.replace('xmlns="http://www.w3.org/2000/svg">', 'xmlns="http://www.w3.org/2000/svg">' + _ctxBodyGroup(art));
             try {
                 // NOT _loadImg: its cache keys on length + the last 32 characters, and every
                 // one of these ends in the same closing tags, so two drawings could swap.
@@ -50141,7 +50189,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.19</strong> <b>More things to put on a wall, drawn clean.</b> The wall's Context library has a new Office group (desks, a workstation with its screen, task chair, monitor, conference table, files, cabinet, bookcase, whiteboard, kitchenette, fridge) and more for guestrooms (club chair, desk chair, bench, wardrobe, minibar, floor mirror, planter, coat stand), restrooms (wall-hung toilet and flush plate, urinal, pedestal sink, stall, towel dispenser, hand dryer, soap, paper holder, robe hook, towel ring, lighted mirror) and fixtures (65 and 75 inch TVs, picture light, pendant, drinking fountain, clock). Keep clear adds a fire alarm pull, extinguisher cabinet, exit sign, return grille and access panel, and every switch, outlet and device now draws as itself instead of a labelled box. The five bed styles are redrawn smooth: they were traced and looked jagged. A bed already set to a style keeps its size.
+                body: `<strong>20.20</strong> <b>Context drawings fill their own shape, not a box.</b> A chair dropped on a wall used to come in as a white rectangle that hid the wall around it. Now only the solid parts of a drawing are white: you see the wall between chair legs and casters, under a desk, between upper and base cabinets and inside a toilet stall, on screen, in the SVG and in the PDF, and the baseboard runs through wherever nothing stands in front of it. Keep clear blocks and plain boxes still fill their whole box.
+<strong>20.19</strong> <b>More things to put on a wall, drawn clean.</b> The wall's Context library has a new Office group (desks, a workstation with its screen, task chair, monitor, conference table, files, cabinet, bookcase, whiteboard, kitchenette, fridge) and more for guestrooms (club chair, desk chair, bench, wardrobe, minibar, floor mirror, planter, coat stand), restrooms (wall-hung toilet and flush plate, urinal, pedestal sink, stall, towel dispenser, hand dryer, soap, paper holder, robe hook, towel ring, lighted mirror) and fixtures (65 and 75 inch TVs, picture light, pendant, drinking fountain, clock). Keep clear adds a fire alarm pull, extinguisher cabinet, exit sign, return grille and access panel, and every switch, outlet and device now draws as itself instead of a labelled box. The five bed styles are redrawn smooth: they were traced and looked jagged. A bed already set to a style keeps its size.
 <strong>20.18</strong> <b>Plan pins hold two digits.</b> A long client code (ART-1001) used to print its whole number in the pin and spill out of the circle. The pin now shows the last two digits (01), or numbers the long codes 01, 02, 03 in code order when the last two digits would repeat. The item code itself is unchanged, and the plan key beside the pins still reads 01 | ART-1001.<br><br><strong>20.17</strong> <b>Canvas sides, decided up front.</b> A framed canvas (floater) now prints at its art size plus the wrap round the stretcher, as the quote template says (stretcher depth + 0.5\" a side): a 28.5 x 38.5 canvas is a 32.5 x 42.5 print, on the RFQ, the RFI and the contact sheet. Before, the floater's print size had no wrap. Each canvas has a <b>Sides</b> choice on the dashboard: <b>Picture wraps</b> (crop into the picture so its edges go round the sides; the dashboard shows that band faintly round the face, with red stripes where the crop leaves no picture, and <b>Make room</b> zooms in just enough), <b>Mirror the edge</b> (the printer does it), or <b>Extend in production</b>. The choice goes in the RFQ and RFI Notes, and Preflight asks for it on any canvas with a picture. Typing a floater's rabbet now fills the deepest standard stretcher it takes (1.5\" for a 1.625\" rabbet) and a wrap 0.5\" deeper, instead of a made-to-order stretcher the depth of the rabbet; Preflight flags a stretcher that is not a standard depth. Every estimate now carries a 3% buffer (currency against USD, fuel, shipping) unless the rate card's Buffer % says otherwise; type 0 for none.<br><br><strong>20.16</strong> <b>The quote template's own rules.</b> From the company's 2026 quote template: twelve artists take a 10% royalty (AJG, ISM, JMS, LSA, PEN, LDC, NHS, SAL, STN, THK, TJB, ZPK), not just PEN, so their pieces price higher than before. A didactic panel (printed acrylic, dibond) gets 0.125\" bleed instead of none, and the RFQ lists it as a Printed Panel Product, not EGD. Preflight now says when a piece is bigger than can be made in one piece: paper wider than 59\" on the short side, glass past 40 x 60 (use acrylic), mat board past 40 x 60 that is not white or cream, or past 48 x 72, acrylic past 59 x 96, MDF past 60 x 96, canvas too wide for its stretcher depth (53.4\" at 0.75\", 52\" at 1.5\", 51\" at 2\"), or a stretcher bar longer than 9.5 ft. It also flags a floater whose canvas stretcher is deeper than the frame's rabbet, which leaves the canvas standing proud of the frame, and names the standard stretcher depth that fits. A warning in a concept deck, an error in Final Spec.<br><br><strong>20.15</strong> <b>Install pages follow their plan.</b> In the Install guide layout, with plans ordered by level (the default), each floor plan is now followed by the walls whose pieces are pinned on it, as spec pages always were. Before, every plan printed first and every wall after them.<br><br><strong>20.14</strong> <b>Client codes in number order.</b> Codes in the client's own format (1B.L3.ART-01) now sort in number order on the dashboard, the walls and the pages, like ART codes always have: ART-02 before ART-10, numbers before letters. Before, they stayed in the order they were added.<br><br><strong>20.13</strong> <b>Client codes ending in letters.</b> A code like 1B.L3.ART-EA is its own placement now, not piece A of a set called 1B.L3.ART-E. A piece letter follows the placement's number (ART.1A) or a separator (1B.L3.ART-EF-A), so a client's lettered placements each get their own pin, wall and page.<br><br><strong>20.12</strong> <b>Every picture has a house code.</b> Preflight flags an image code that is not a house code, such as a client photo still named IMG_4021 or a render's file name, so the vendor can find the file. A house code is a prefix of letters then numbers (FAO.010.00031). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.11</strong> <b>The sizes add up.</b> Preflight flags a piece whose frame and mats are wider than its overall size, which leaves no opening for the picture (a 2\" frame and 4\" mats on a 10\" piece). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.10</strong> <b>Will it print sharp?</b> FRAME now remembers how big a picture's original file was (it keeps a smaller copy to work with), and Preflight says when that file is too small for the size it prints: under about 150 pixels per inch for framed work, 75 for a wallcovering, counting any zoomed crop. A warning in a concept deck, an error in Final Spec. Pictures added before 20.10 are not judged until they are added again.<br><br><strong>20.09</strong> <b>Renumbered pieces are said.</b> Production, Issues now lists pieces whose code changed since an issue as <b>RENUMBERED</b> (ART.2 → ART.1), not as one piece removed and another added, in the copied text and the changes CSV, so vendors and the client hear about it. Spec changes on a renumbered piece show under its new code.<br><br><strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
 <strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
@@ -54123,7 +54172,8 @@ function renderContextBlocks(wallW, wallH) {
         const hasArt = !!art;
         if (hasArt) el.classList.add('ctx-has-art');
         let extra = '';
-        if (hasArt) extra = ' border:none;';
+        // The art carries its own outline; with a body (20.20) the box goes clear too.
+        if (hasArt) extra = ' border:none;' + (_ctxBodyOn(b, art) ? ' background:transparent;' : '');
         else if (shape === 'ellipse') extra = ' border-radius:50%;';
         else if (shape === 'shelf') extra = ' border-top-width:2px; border-top-color:' + CONTEXT_INK + ';';
         // A screen reads as a solid object rather than an opening, so it is the one
@@ -54166,6 +54216,14 @@ function renderContextBlocks(wallW, wallH) {
         const hatchRegion = hasArt ? _ctxHatchRegion(b, art) : null;
         const avoid = _ctxAvoid(b);
         if (avoid) el.classList.add('ctx-avoid');
+        // The drawing's own white, FIRST, so the surface hatch and the lines sit over it.
+        if (_ctxBodyOn(b, art)) {
+            const bw0 = document.createElement('div');
+            bw0.className = 'ctx-body';
+            bw0.style.cssText = 'position:absolute; inset:0; pointer-events:none;';
+            bw0.innerHTML = _ctxBodySvg(art);
+            el.appendChild(bw0);
+        }
         // A keep-clear block is hatched over its whole box, art or not (19.47).
         if (!hasArt || hatchRegion || avoid) {
             const fillSvg = _ctxFillSvg(avoid ? 'avoid' : fillKind, pw, ph, avoid ? null : hatchRegion, art, b.id);
@@ -59535,17 +59593,27 @@ async function exportElevSVG(opts) {
                 const by = br.y.toFixed(1);
                 const x0 = wp.x, x1 = wp.x + wp.w;
                 const spans = [];
-                document.querySelectorAll('#context-layer .ctx-block').forEach(ctxEl => {
+                for (const ctxEl of document.querySelectorAll('#context-layer .ctx-block')) {
                     const cs2 = getComputedStyle(ctxEl);
-                    if (cs2.display === 'none' || cs2.visibility === 'hidden') return;
+                    if (cs2.display === 'none' || cs2.visibility === 'hidden') continue;
+                    const cp = rectToSvg(ctxEl);
+                    if (!(cp.w > 0) || !(cp.h > 0)) continue;
+                    if (br.y < cp.y || br.y > cp.y + cp.h) continue;   // doesn't cross the line
+                    // A body that follows its drawing (20.20) hides the baseboard only where
+                    // the drawing is solid at that height: it shows between chair casters.
+                    if (ctxEl.querySelector('.ctx-body')) {
+                        const artEl0 = ctxEl.querySelector('.ctx-art');
+                        const ap = artEl0 ? _ctxArtFor(artEl0.dataset.ctxArt, artEl0.dataset.ctxArtView, artEl0.dataset.ctxArtVariant) : null;
+                        const fr = ap ? await _ctxBodySpansAt(ap, (br.y - cp.y) / cp.h) : null;
+                        if (fr) { fr.forEach(([a, b]) => spans.push([cp.x + a * cp.w, cp.x + b * cp.w])); continue; }
+                        spans.push([cp.x, cp.x + cp.w]);
+                        continue;
+                    }
                     // A transparent block hides nothing. Read the COMPUTED background so
                     // this follows CONTEXT_FILL rather than assuming what it is.
-                    if (!cs2.backgroundColor || cs2.backgroundColor === 'rgba(0, 0, 0, 0)') return;
-                    const cp = rectToSvg(ctxEl);
-                    if (!(cp.w > 0) || !(cp.h > 0)) return;
-                    if (br.y < cp.y || br.y > cp.y + cp.h) return;   // doesn't cross the line
+                    if (!cs2.backgroundColor || cs2.backgroundColor === 'rgba(0, 0, 0, 0)') continue;
                     spans.push([cp.x, cp.x + cp.w]);
-                });
+                }
                 spans.sort((a, b) => a[0] - b[0]);
                 let cx = x0;
                 const seg = (a, b) => {
@@ -59614,7 +59682,11 @@ async function exportElevSVG(opts) {
             const bd = _parseBorder(ccs.borderTop);
             const stroke = bd ? bd.color : CONTEXT_EDGE;
             const sw = _svgStrokePx(null, bd ? bd.width : 1);
-            if (artOk) {
+            if (artOk && ctxEl.querySelector('.ctx-body')) {
+                // The body follows the drawing (20.20): its closed shapes, not the box.
+                ctxLayer.push(_ctxBodySvg(artP).replace(/^<svg /,
+                    `<svg x="${p.x.toFixed(1)}" y="${p.y.toFixed(1)}" width="${p.w.toFixed(1)}" height="${p.h.toFixed(1)}" `));
+            } else if (artOk) {
                 // The tint, with NO stroke — the art supplies the outline, and two
                 // outlines a hairline apart reads as a rendering fault. Drawn first so
                 // the surface hint and the drawing both sit over it, matching the screen

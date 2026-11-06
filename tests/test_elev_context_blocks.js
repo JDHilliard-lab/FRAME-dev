@@ -1104,6 +1104,56 @@ const path = require('path');
       }
     });
 
+    __check('EXACT REPORT: a drawing fills its own shape, not a box (20.20)', () => {
+      // "is it possible to only fill in the shapes of the drawings, right now when I drop
+      // in the drawings they come in with a box fill, like the chair." The white now
+      // comes from the drawing's closed shapes; the wall shows between the casters.
+      seed();
+      addContextBlock('task-chair');
+      drawElevAll();
+      const el = document.getElementById('context-layer').querySelector('.ctx-block');
+      // jsdom drops a shorthand it cannot fully parse from the serialised style, so the
+      // parsed colour is read; a white box would read as rgb(255, 255, 255).
+      const bg = el.style.backgroundColor || '';
+      if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+        throw new Error('the chair block still paints a white box: ' + bg);
+      }
+      const body = el.querySelector('.ctx-body');
+      if (!body) throw new Error('the chair has no body of its own');
+      const kids = Array.from(el.children);
+      if (!(kids.indexOf(body) < kids.indexOf(el.querySelector('.ctx-art')))) throw new Error('the body is drawn over the lines');
+      const bsvg = body.innerHTML;
+      if (bsvg.indexOf('fill="' + CONTEXT_FILL + '"') < 0 || bsvg.indexOf('stroke="none"') < 0) {
+        throw new Error('the body is not a stroke-less white fill');
+      }
+      // A Keep clear block IS its box (the zone), and a plain Box has no drawing.
+      seed();
+      addContextBlock('kc-thermostat'); addContextBlock('rect');
+      drawElevAll();
+      document.getElementById('context-layer').querySelectorAll('.ctx-block').forEach(b2 => {
+        if (b2.querySelector('.ctx-body')) throw new Error('a ' + b2.dataset.ctxShape + ' / keep-clear block lost its box');
+        if (b2.style.backgroundColor === 'transparent') throw new Error('a keep-clear or plain block went clear');
+      });
+      // A hidden (dashed) line must not punch a dashed hole in the body, and an open
+      // curve stays a line: the faucet's gooseneck became a white fin when filled.
+      const kit = CONTEXT_PRESETS.find(p => p.key === 'kitchenette');
+      const kb = _ctxBodyGroup(kit);
+      if (kb.indexOf('stroke-dasharray') >= 0) throw new Error('the body kept a dash pattern');
+      if (kb.indexOf('fill="none" d="M35.4 54') < 0) throw new Error('the kitchenette faucet is filled');
+      const ped = CONTEXT_PRESETS.find(p => p.key === 'lav-pedestal');
+      if (ped.svg.indexOf('fill="none" d="M10 4') < 0) throw new Error('the sink faucet is filled');
+      // Every renderer follows: the export emits the body (not a box) for these blocks,
+      // the canvas thumbnail skips its box fill, and the export's baseboard breaks where
+      // the drawing is solid, not across the whole box.
+      const xi = S.indexOf("if (artOk && ctxEl.querySelector('.ctx-body'))");
+      if (xi < 0 || S.slice(xi, xi + 300).indexOf('_ctxBodySvg(artP)') < 0) throw new Error('the export still paints a box behind the art');
+      if (S.indexOf('if (!_ctxBodyOn(b, art)) x.fillRect(') < 0) throw new Error('the canvas thumbnail still paints a box');
+      const bi = S.indexOf("const bbEl = wall.querySelector('#baseboard-line');");
+      if (bi < 0 || S.slice(bi, S.indexOf('Image-code captions beneath frames', bi)).indexOf('_ctxBodySpansAt(') < 0) {
+        throw new Error('the baseboard gap ignores the drawing');
+      }
+    });
+
     __check('EXACT REPORT: Delete removes the selected blocks, no scrolling to find an x', () => {
       // "need to be able to use the delete button to get rid of all context block, I do
       // not want to have to scroll through and click the x to delete it."

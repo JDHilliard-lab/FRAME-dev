@@ -2505,6 +2505,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   wall devices share `_CTX_ART_SWITCH/THERMO/OUTLET` between Fixtures and Keep clear. The Office category sits
   before Keep clear. Reference sites (First In Architecture etc.) forbid redistributing their DWGs: use them
   for proportions only, never trace them into the public app.
+- **A CONTEXT BLOCK'S WHITE IS ITS DRAWING, NOT ITS BOX (20.20, `_ctxBodyOn`, `_ctxBodyGroup`, `_ctxBodySvg`,
+  `_ctxBodySpansAt`).** Every closed shape in the art is filled white (stroke off, dashes stripped) UNDER the
+  lines: `.ctx-body` first in the block on screen (box `background:transparent`), `_ctxBodySvg` in the export in
+  place of the box rect, and the canvas thumbnail inlines `_ctxBodyGroup` instead of `fillRect`. Keep clear
+  (`_ctxAvoid`) and art-less blocks keep the box. The export's baseboard gap is read off a rasterised body at the
+  baseboard height (null without a canvas, then the box). An OPEN CURVE fills across its chord, so a stroke that
+  must stay a line carries `fill="none"` in the art (faucets, the toilet side lid, the chair side back).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
