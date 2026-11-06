@@ -28,7 +28,10 @@ const path = require('path');
 // ── primitives ─────────────────────────────────────────────────────────────
 const n = (v) => { const r = Math.round((+v) * 100) / 100; return Object.is(r, -0) ? 0 : r; };
 const at = (o) => (o ? ' data-o="1"' : '');
-const R = (x, y, w, h, r, o) => `<rect${at(o)} x="${n(x)}" y="${n(y)}" width="${n(w)}" height="${n(h)}"${r ? ` rx="${n(r)}"` : ''}/>`;
+// 20.23: corners are only just softened (the product-elevation reference is near square),
+// so every authored radius is scaled by RK in one place.
+const RK = 0.55;
+const R = (x, y, w, h, r, o) => `<rect${at(o)} x="${n(x)}" y="${n(y)}" width="${n(w)}" height="${n(h)}"${r ? ` rx="${n(r * RK)}"` : ''}/>`;
 const P = (d, o) => `<path${at(o)} d="${d}"/>`;
 const open = (d) => `<path fill="none" d="${d}"/>`;
 const C = (cx, cy, r, o) => `<circle${at(o)} cx="${n(cx)}" cy="${n(cy)}" r="${n(r)}"/>`;
@@ -121,42 +124,97 @@ function taskChairSide(x, F, dir) {
     return o;
 }
 
-// ── beds ───────────────────────────────────────────────────────────────────
-// Pillow: soft rectangle with a gentle seam, so it reads as a cushion and never a shell.
-function pillow(x, y, w, h, o) {
-    const r = Math.min(h * 0.42, w * 0.2);
-    return R(x, y, w, h, r, o) + open(`M${n(x + r * 0.9)} ${n(y + h * 0.3)} Q${n(x + w / 2)} ${n(y + h * 0.18)} ${n(x + w - r * 0.9)} ${n(y + h * 0.3)}`);
+// Door (20.23): casing as a double line, the leaf, two hinges on the hinge side, a lever
+// on the other at cy. Hinges right by default, as in the reference.
+function door(w, h, cy, o) {
+    o = o || {};
+    let s = R(0, 0, w, h, 0, true) + open(`M1 ${n(h)} V1 H${n(w - 1)} V${n(h)}`) + R(2, 2, w - 4, h - 2, 0);
+    const hx = o.hingeLeft ? 2 : w - 2.6;
+    s += R(hx, 12, 0.6, 3.6, 0) + R(hx, h - 22, 0.6, 3.6, 0);
+    if (cy) s += lever(o.hingeLeft ? w - 6 : 6, cy, o.hingeLeft ? -1 : 1);
+    return s;
 }
-// The bedding of a bed of width W at x0, floor F, duvet top mT: optional euro shams,
-// two sleeping pillows, the duvet with its turn-down band, a soft base on small feet.
+// Classic close-coupled toilet, 18in wide x 30in, centred on cx, floor at F.
+function toilet(cx, F) {
+    return R(cx - 9, F - 30, 18, 11.4, 0.8, true) + HL(F - 28.6, cx - 9, cx + 9) + C(cx - 6.6, F - 26.4, 0.5) + open(`M${n(cx - 6.1)} ${n(F - 26.4)} H${n(cx - 3.8)}`)
+        + R(cx - 8.6, F - 18.4, 17.2, 1.9, 0.9, true)
+        + P(`M${n(cx - 8)} ${n(F - 16.5)} H${n(cx + 8)} C${n(cx + 8.4)} ${n(F - 13)} ${n(cx + 6.8)} ${n(F - 10.6)} ${n(cx + 4.8)} ${n(F - 9.8)}`
+            + ` L${n(cx + 5.4)} ${n(F)} H${n(cx - 5.4)} L${n(cx - 4.8)} ${n(F - 9.8)} C${n(cx - 6.8)} ${n(F - 10.6)} ${n(cx - 8.4)} ${n(F - 13)} ${n(cx - 8)} ${n(F - 16.5)} Z`, true)
+        + open(`M${n(cx - 4.8)} ${n(F - 9.8)} Q${n(cx)} ${n(F - 9.2)} ${n(cx + 4.8)} ${n(F - 9.8)}`);
+}
+// Widespread faucet standing on a counter at y = top, centred on cx.
+function faucet(cx, top) {
+    return R(cx - 0.7, top - 7.4, 1.4, 7.4, 0.3, true) + open(`M${n(cx - 0.7)} ${n(top - 6.8)} Q${n(cx - 0.7)} ${n(top - 8.2)} ${n(cx + 0.6)} ${n(top - 8.2)} H${n(cx + 1.6)} V${n(top - 7)}`)
+        + R(cx - 6, top - 2.6, 1.2, 2.6, 0, true) + R(cx - 7, top - 3.4, 3.2, 0.9, 0.3, true)
+        + R(cx + 4.8, top - 2.6, 1.2, 2.6, 0, true) + R(cx + 3.8, top - 3.4, 3.2, 0.9, 0.3, true);
+}
+// Vanity on a slim metal frame (20.23): counter, a drawer box framed in double lines with
+// recessed tab pulls, legs to the floor, a low stretcher. `n` drawer fronts; `bowls` =
+// x centres of concealed basins (dashed: the cabinet is closed).
+function vanity(x, w, F, h, nf, bowls) {
+    const top = F - h, bt = top + 1.4, bh = Math.min(h * 0.6, 20);
+    let s = R(x + 0.6, bt, 1.2, h - 1.4, 0, true) + R(x + w - 1.8, bt, 1.2, h - 1.4, 0, true);
+    s += R(x + 1.8, F - 4.6, w - 3.6, 1, 0, true);
+    s += R(x + 1.8, bt, w - 3.6, bh, 0, true) + R(x + 2.8, bt + 1, w - 5.6, bh - 2, 0);
+    for (let i = 1; i < nf; i++) s += VL(x + 2.8 + (w - 5.6) * i / nf, bt + 1, bt + bh - 1);
+    for (let i = 0; i < nf; i++) s += R(x + 2.8 + (w - 5.6) * (i + 0.5) / nf - 1.6, bt + 1, 3.2, 1.2, 0);
+    s += R(x, top, w, 1.4, 0, true);
+    if (bowls && bowls.length) s += HID(bowls.map(c => open(`M${n(c - 8)} ${n(bt)} V${n(bt + 3)} Q${n(c - 8)} ${n(bt + 6)} ${n(c - 5)} ${n(bt + 6)} H${n(c + 5)} Q${n(c + 8)} ${n(bt + 6)} ${n(c + 8)} ${n(bt + 3)} V${n(bt)}`)).join(''));
+    return s;
+}
+
+// ── beds ───────────────────────────────────────────────────────────────────
+// Pillow (20.23, the designer's product-elevation reference): a near-square cushion whose
+// top dips gently between two slightly raised corners. The bottom is hidden by the duvet.
+function pillow(x, y, w, h, o) {
+    const d = Math.min(h * 0.09, 1), k = Math.min(w * 0.03, 0.6);
+    return P(`M${n(x)} ${n(y)} Q${n(x + w / 2)} ${n(y + d * 2)} ${n(x + w)} ${n(y)} Q${n(x + w - k)} ${n(y + h / 2)} ${n(x + w)} ${n(y + h)}`
+        + ` H${n(x)} Q${n(x + k)} ${n(y + h / 2)} ${n(x)} ${n(y)} Z`, o);
+}
+// The bedding of a bed of width W at x0, floor F, duvet top mT. Back to front: legs and
+// platform base, pillows (four on a wide bed: two behind at the outsides, two in front),
+// then the duvet, which covers the mattress, drapes down both sides and FLARES at the hem
+// over the base. The mattress shows as two lines inside the drape.
 function bedding(x0, W, F, mT, o) {
     o = o || {};
     let s = '';
+    const legH = o.plinth ? 0 : Math.min(3.4, (F - mT) * 0.16), baseH = Math.min(5.4, (F - mT) * 0.26);
+    const yBase = F - legH - baseH, yDrape = yBase + baseH * 0.62;
     if (o.plinth) {
-        s += R(x0 + 4, F - 2.2, W - 8, 2.2, 0.3, true);
-        s += R(x0 + 0.2, F - 5, W - 0.4, 2.8, 0.6, true);
+        s += R(x0 + 4, F - 2.4, W - 8, 2.4, 0, true);
+        s += R(x0 + 0.6, F - 2.4 - baseH * 0.7, W - 1.2, baseH * 0.7, 0.2, true);
     } else {
-        s += foot(x0 + 3.6, F, 2.4, 1.2) + foot(x0 + W - 6, F, 2.4, 1.2);
-        s += R(x0 + 1.4, F - 5.4, W - 2.8, 4.2, 1, true);
+        const lw = Math.min(4.2, W * 0.07);
+        s += R(x0 + 1.6, F - legH, lw, legH, 0, true) + R(x0 + W - 1.6 - lw, F - legH, lw, legH, 0, true);
+        s += R(x0 + 0.6, yBase, W - 1.2, baseH, 0.2, true);
     }
-    const ph = Math.min(9, (F - mT) * 0.5 + 3), pg = 2, pw = (W - 8 - pg) / 2;
-    if (o.shams) {
-        const sh = ph + 3.6;
-        s += pillow(x0 + 3, mT + 2.6 - sh, pw + 1, sh, true) + pillow(x0 + W / 2 + pg / 2 - 1, mT + 2.6 - sh, pw + 1, sh, true);
+    const top = mT + 0.4;
+    if (W >= 50) {
+        const ow = W * 0.17, iw = W * 0.29, oh = Math.min(10.5, (yBase - mT) * 0.9 + 3), ih = oh - 0.6;
+        s += pillow(x0 + W * 0.075, top - oh, ow, oh + 1, true) + pillow(x0 + W * 0.925 - ow, top - oh, ow, oh + 1, true);
+        s += pillow(x0 + W / 2 - iw - 0.4, top - ih, iw, ih + 1, true) + pillow(x0 + W / 2 + 0.4, top - ih, iw, ih + 1, true);
+    } else {
+        const iw = W * 0.38, ih = Math.min(9, (yBase - mT) * 0.9 + 2);
+        s += pillow(x0 + W / 2 - iw - 0.4, top - ih, iw, ih + 1, true) + pillow(x0 + W / 2 + 0.4, top - ih, iw, ih + 1, true);
     }
-    s += pillow(x0 + 4, mT + 2.6 - ph, pw, ph, true) + pillow(x0 + 4 + pw + pg, mT + 2.6 - ph, pw, ph, true);
-    const hem = F - (o.plinth ? 4.4 : 3.6), rT = 1.6, rB = 2.8;
-    s += P(`M${n(x0)} ${n(mT + rT)} Q${n(x0)} ${n(mT)} ${n(x0 + rT)} ${n(mT)} H${n(x0 + W - rT)} Q${n(x0 + W)} ${n(mT)} ${n(x0 + W)} ${n(mT + rT)}`
-        + ` V${n(hem - rB)} Q${n(x0 + W)} ${n(hem)} ${n(x0 + W - rB)} ${n(hem)} H${n(x0 + rB)} Q${n(x0)} ${n(hem)} ${n(x0)} ${n(hem - rB)} Z`, true);
-    const band = mT + Math.min(4.2, (hem - mT) * 0.33);
-    s += HL(band, x0, x0 + W);
-    s += open(`M${n(x0 + 2.4)} ${n(band + 1.2)} Q${n(x0 + 1.4)} ${n((band + hem) / 2)} ${n(x0 + 2.6)} ${n(hem - 0.8)}`);
-    s += open(`M${n(x0 + W - 2.4)} ${n(band + 1.2)} Q${n(x0 + W - 1.4)} ${n((band + hem) / 2)} ${n(x0 + W - 2.6)} ${n(hem - 0.8)}`);
+    // Duvet: soft top corners, sides falling and flaring out by ~1in, a rounded hem, the
+    // centre lifting to the top of the base between the drapes.
+    const L = x0, Rr = x0 + W, fl = Math.min(1.2, W * 0.02);
+    s += P(`M${n(L + 1)} ${n(mT + 2)} Q${n(L + 1.2)} ${n(mT)} ${n(L + 3)} ${n(mT)} H${n(Rr - 3)} Q${n(Rr - 1.2)} ${n(mT)} ${n(Rr - 1)} ${n(mT + 2)}`
+        + ` C${n(Rr - 0.6)} ${n(yBase - 3)} ${n(Rr + fl * 0.4)} ${n(yDrape - 2)} ${n(Rr + fl)} ${n(yDrape)}`
+        + ` Q${n(Rr + fl)} ${n(yDrape + 0.9)} ${n(Rr - 0.4)} ${n(yDrape + 0.4)} C${n(Rr - 1.4)} ${n(yDrape)} ${n(Rr - 1.6)} ${n(yBase + 0.8)} ${n(Rr - 2)} ${n(yBase)}`
+        + ` H${n(L + 2)} C${n(L + 1.6)} ${n(yBase + 0.8)} ${n(L + 1.4)} ${n(yDrape)} ${n(L + 0.4)} ${n(yDrape + 0.4)}`
+        + ` Q${n(L - fl)} ${n(yDrape + 0.9)} ${n(L - fl)} ${n(yDrape)} C${n(L - fl * 0.4)} ${n(yDrape - 2)} ${n(L + 0.6)} ${n(yBase - 3)} ${n(L + 1)} ${n(mT + 2)} Z`, true);
+    const fold = mT + Math.min(1.6, (yBase - mT) * 0.18);
+    s += open(`M${n(L + 1.6)} ${n(fold)} Q${n(x0 + W / 2)} ${n(fold + 0.5)} ${n(Rr - 1.6)} ${n(fold)}`);
+    const mat = mT + Math.min(3.2, (yBase - mT) * 0.34);
+    s += HL(mat, L + 2.4, Rr - 2.4) + VL(L + 2.4, mat, yBase) + VL(Rr - 2.4, mat, yBase);
     return s;
 }
 // Headboards, drawn FIRST (opaque) so the bedding covers their lower edge.
 const HEADS = {
-    inset: (x, w, top, bot) => R(x, top, w, bot - top, 0.8, true) + R(x + 2.4, top + 2.4, w - 4.8, bot - top - 2.4, 0.5),
+    // A framed panel: thin posts and top rail drawn as double lines (20.23).
+    inset: (x, w, top, bot) => R(x, top, w, bot - top, 0.2, true) + open(`M${n(x + 1.2)} ${n(bot)} V${n(top + 1.2)} H${n(x + w - 1.2)} V${n(bot)}`),
     panel: (x, w, top, bot) => R(x, top, w / 2 - 0.3, bot - top, 1.4, true) + R(x + w / 2 + 0.3, top, w / 2 - 0.3, bot - top, 1.4, true),
     channel: (x, w, top, bot) => {
         let s = P(`M${n(x)} ${n(bot)} V${n(top + 6)} Q${n(x)} ${n(top)} ${n(x + 6)} ${n(top)} H${n(x + w - 6)} Q${n(x + w)} ${n(top)} ${n(x + w)} ${n(top + 6)} V${n(bot)} Z`, true);
@@ -180,6 +238,11 @@ function bedFront(x0, W, F, top, head, o) {
     const mT = o.mT != null ? o.mT : F - 21.5;
     let s = '';
     if (head) s += HEADS[head](x0 + (o.hx || 0), W - 2 * (o.hx || 0), top, F - 6);
+    // Reading lights on the headboard, as in the reference: a small bracket and shade.
+    if (head && o.sconces) {
+        const sy = top + Math.min(5, (mT - top) * 0.2), hx = o.hx || 0;
+        [x0 + hx + 2.2, x0 + W - hx - 2.2 - 2.4].forEach(sx => { s += R(sx, sy, 2.4, 1.4, 0, true) + R(sx, sy + 1.4, 2.4, 4.2, 0.2, true) + HL(sy + 3.2, sx, sx + 2.4); });
+    }
     s += bedding(x0, W, F, mT, { shams: !!head && head !== 'low', plinth: o.plinth });
     return s;
 }
@@ -213,7 +276,7 @@ function scaleSvg(svg, k) {
 // each is drawn on a 60in queen in inches and scaled into that space.
 const BED_STYLES = [
     { key: 'b67', name: 'Platform', h: 26.9, head: null, o: { plinth: true } },
-    { key: 'b71', name: 'Panel', h: 48.9, head: 'inset' },
+    { key: 'b71', name: 'Panel', h: 48.9, head: 'inset', o: { sconces: true } },
     { key: 'b72', name: 'Tall upholstered', h: 62, head: 'channel' },
     { key: 'b74', name: 'Wingback', h: 50.7, head: 'wing' },
     { key: 'b75', name: 'Low profile', h: 41.9, head: 'low' },
@@ -235,19 +298,19 @@ const FL = (h) => h;   // readability: "floor at h"
 
 cat('Guestroom', [
     I({ key: 'bed-king', name: 'King bed', w: 76, h: 24, lengthIn: 80, aff: 0, affMode: 'bottom', label: 'King Bed', variants: true,
-        art: () => bedPreset(76), hatch: R(1.4, 18.6, 73.2, 4.2),
+        art: () => bedPreset(76), hatch: R(0.6, 17.86, 74.8, 3.8),
         side: { w: 80, h: 36, art: () => bedSide(80, 36), hatch: R(0, 0, 4, 36) + R(4, 30.6, 75.4, 4.2) } }),
     I({ key: 'bed-queen', name: 'Queen bed', w: 60, h: 24, lengthIn: 80, aff: 0, affMode: 'bottom', label: 'Queen Bed', variants: true,
-        art: () => bedPreset(60), hatch: R(1.4, 18.6, 57.2, 4.2),
+        art: () => bedPreset(60), hatch: R(0.6, 17.86, 58.8, 3.8),
         side: { w: 80, h: 36, art: () => bedSide(80, 36), hatch: R(0, 0, 4, 36) + R(4, 30.6, 75.4, 4.2) } }),
     I({ key: 'bed-full', name: 'Double / full', w: 54, h: 24, lengthIn: 75, aff: 0, affMode: 'bottom', label: 'Full Bed', variants: true,
-        art: () => bedPreset(54), hatch: R(1.4, 18.6, 51.2, 4.2),
+        art: () => bedPreset(54), hatch: R(0.6, 17.86, 52.8, 3.8),
         side: { w: 75, h: 36, art: () => bedSide(75, 36), hatch: R(0, 0, 4, 36) + R(4, 30.6, 70.4, 4.2) } }),
     I({ key: 'bed-twin', name: 'Twin bed', w: 39, h: 24, lengthIn: 75, aff: 0, affMode: 'bottom', label: 'Twin Bed', variants: true,
         art: () => bedPreset(39),
         side: { w: 75, h: 36, art: () => bedSide(75, 36) } }),
     I({ key: 'gr-king-set', name: 'King bed + nightstands', w: 126, h: 54, aff: 0, affMode: 'bottom', label: 'King Bed',
-        art: () => nightstand(0, 54, 22, 24, 'frames') + bedFront(24, 78, 54, 0, 'inset', { mT: 29.5, hx: 1 }) + nightstand(104, 54, 22, 24, 'vase'),
+        art: () => nightstand(0, 54, 22, 24, 'frames') + bedFront(24, 78, 54, 0, 'inset', { mT: 29.5, hx: 1, sconces: true }) + nightstand(104, 54, 22, 24, 'vase'),
         side: { w: 84, h: 54, art: () => bedSide(84, 54, { hbTop: 0 }) + nightstand(4, 54, 18, 24) } }),
     I({ key: 'gr-queen-pair', name: 'Double queen beds', w: 172, h: 50, aff: 0, affMode: 'bottom', label: 'Queen Beds',
         art: () => bedFront(0, 64, 50, 8, 'inset', { mT: 25.5, hx: 1 }) + nightstand(74, 50, 24, 24, 'lamp') + bedFront(108, 64, 50, 8, 'inset', { mT: 25.5, hx: 1 }) }),
@@ -337,30 +400,17 @@ cat('Guestroom', [
 
 cat('Bathroom', [
     I({ key: 'ba-vanity-mirror', name: 'Vanity + mirror', w: 60, h: 84, aff: 0, affMode: 'bottom', label: 'Vanity',
-        art: () => {
-            let s = R(13, 2, 34, 36, 0.8, true) + R(14.6, 3.6, 30.8, 32.8, 0.3);
-            s += R(4, 12, 4, 9, 1, true) + VL(6, 21, 24) + R(52, 12, 4, 9, 1, true) + VL(54, 21, 24);
-            s += open('M28 50 V46 Q28 44.2 30 44.2 Q32 44.2 32 46 V46.6') + R(27, 49.2, 3, 0.8, 0.2);
-            s += R(0, 50, 60, 1.8, 0.4, true) + R(0, 51.8, 60, 6, 0.3, true) + pullH(30, 54.8, 10);
-            s += R(1.6, 57.8, 1.8, 26.2, 0, true) + R(56.6, 57.8, 1.8, 26.2, 0, true) + HL(72, 3.4, 56.6);
-            s += R(8, 66, 12, 6, 1, true) + R(24, 68.4, 10, 3.6, 1.4, true);
-            return s;
-        }, hatch: R(14.6, 3.6, 30.8, 32.8) }),
+        art: () => R(13, 2, 34, 34, 0.4, true) + R(14.4, 3.4, 31.2, 31.2, 0)
+            + R(4, 12, 4, 9, 1, true) + VL(6, 21, 24) + R(52, 12, 4, 9, 1, true) + VL(54, 21, 24)
+            + faucet(30, 50) + vanity(0, 60, 84, 34, 2, [30]),
+        hatch: R(14.4, 3.4, 31.2, 31.2) }),
     I({ key: 'vanity-60', name: 'Vanity 60"', w: 60, h: 34, aff: 0, affMode: 'bottom', label: 'Vanity',
-        art: () => R(0, 0, 60, 1.8, 0.4, true) + box(1, 1.8, 58, 28.2, 0.3, true) + VL(30, 1.8, 30) + pullV(27.6, 9, 5) + pullV(32.4, 9, 5) + R(3, 30, 54, 4, 0, true)
-            + HID(open('M16 1.8 V5 Q16 8 19 8 H41 Q44 8 44 5 V1.8')) }),
+        art: () => vanity(0, 60, 34, 34, 2, [30]) }),
     I({ key: 'ba-vanity-single', name: 'Single vanity', w: 36, h: 34, aff: 0, affMode: 'bottom', label: 'Vanity',
-        art: () => R(0, 0, 36, 1.8, 0.4, true) + box(1, 1.8, 34, 28.2, 0.3, true) + VL(18, 1.8, 30) + pullV(15.6, 9, 5) + pullV(20.4, 9, 5) + R(3, 30, 30, 4, 0, true)
-            + HID(open('M9 1.8 V5 Q9 7.6 11.6 7.6 H24.4 Q27 7.6 27 5 V1.8')),
-        side: { w: 22, h: 34, art: () => R(0, 0, 22, 1.8, 0.4, true) + box(1, 1.8, 20, 28.2, 0.3, true) + R(3, 30, 16, 4, 0, true) } }),
+        art: () => vanity(0, 36, 34, 34, 2, [18]),
+        side: { w: 22, h: 34, art: () => vanity(0, 22, 34, 34, 1) } }),
     I({ key: 'ba-vanity-double', name: 'Double vanity', w: 72, h: 34, aff: 0, affMode: 'bottom', label: 'Vanity',
-        art: () => {
-            let s = R(0, 0, 72, 1.8, 0.4, true) + box(1, 1.8, 70, 28.2, 0.3, true) + R(3, 30, 66, 4, 0, true);
-            for (let i = 1; i < 4; i++) s += VL(i * 18, 1.8, 30);
-            s += pullV(15.6, 9, 5) + pullV(20.4, 9, 5) + pullV(51.6, 9, 5) + pullV(56.4, 9, 5);
-            s += HID(open('M10 1.8 V5 Q10 7.6 12.6 7.6 H23.4 Q26 7.6 26 5 V1.8') + open('M46 1.8 V5 Q46 7.6 48.6 7.6 H59.4 Q62 7.6 62 5 V1.8'));
-            return s;
-        } }),
+        art: () => vanity(0, 72, 34, 34, 4, [18, 54]) }),
     I({ key: 'vanity-ada', name: 'ADA vanity', w: 48, h: 34, aff: 0, affMode: 'bottom', label: 'ADA Vanity',
         // Open knee space: the bowl is VISIBLE (so not dashed), drawn as a bowl with a drain.
         art: () => R(0, 0, 48, 2, 0.4, true) + R(0.5, 2, 1.8, 32, 0, true) + R(45.7, 2, 1.8, 32, 0, true)
@@ -421,9 +471,8 @@ cat('Bathroom', [
 
 cat('Toilets', [
     I({ key: 'toilet-tank', name: 'Floor-mounted toilet', w: 20, h: 30, aff: 0, affMode: 'bottom', label: 'Toilet',
-        art: () => R(1, 0, 18, 11.5, 1, true) + HL(2, 1, 19) + R(3.6, 2.8, 2.4, 0.8, 0.3)
-            + R(2, 12.2, 16, 2, 0.9, true) + P('M3.4 14.2 H16.6 C16.4 19 13.6 21.6 13 24 L14.4 30 H5.6 L7 24 C6.4 21.6 3.6 19 3.4 14.2 Z', true),
-        side: { w: 28, h: 30, art: () => R(0, 0, 8, 11.5, 1, true) + P('M0 12.2 H24 Q26 12.2 26 14.2 C26 19 22 22 17 23 L16 30 H6 L5.4 22 C2 21 0 18 0 14.2 Z', true) + HL(14.2, 0, 26) } }),
+        art: () => toilet(10, 30),
+        side: { w: 28, h: 30, art: () => R(0, 0, 8, 11.4, 0.8, true) + P('M0 11.6 H24 Q26 11.6 26 13.6 C26 18.4 22 21.6 17 22.6 L16 30 H6 L5.4 21.6 C2 20.6 0 17.6 0 13.6 Z', true) + HL(13.6, 0, 26) } }),
     I({ key: 'toilet-ada', name: 'ADA toilet', w: 15, h: 18, aff: 0, affMode: 'bottom', label: 'ADA Toilet',
         art: () => R(0.5, 0, 14, 2, 0.9, true) + P('M1.4 2 H13.6 C13.4 7.6 11 10.6 10.4 13 L11.6 18 H3.4 L4.6 13 C4 10.6 1.6 7.6 1.4 2 Z', true),
         side: { w: 28, h: 18, art: () => P('M0 0 H23 Q26 0 26 2 C26 7 22 10 17 11 L16 18 H6 L5.4 10 C2 9 0 6 0 2 Z', true) + HL(2, 0, 26) } }),
@@ -439,9 +488,7 @@ cat('Toilets', [
     I({ key: 'fx-ada-toilet', name: 'Accessible toilet + grab bar', w: 60, h: 36, aff: 0, affMode: 'bottom', label: 'Toilet',
         // Toilet 18in off the side wall (left edge), rear bar 36in long at 33-36in AFF.
         art: () => R(8, 1.2, 36, 1.5, 0.75, true) + R(6, 0, 3, 3.6, 0.8, true) + R(43, 0, 3, 3.6, 0.8, true)
-            + R(9, 6, 18, 11.5, 1, true) + HL(8, 9, 27) + R(11.6, 8.8, 2.4, 0.8, 0.3)
-            + R(10, 18.2, 16, 2, 0.9, true) + P('M11.4 20.2 H24.6 C24.4 25 21.6 27.6 21 30 L22.4 36 H13.6 L15 30 C14.4 27.6 11.6 25 11.4 20.2 Z', true)
-            + C(37, 14, 2.4, true) + C(37, 14, 0.7) }),
+            + toilet(18, 36) + C(37, 14, 2.4, true) + C(37, 14, 0.7) }),
     I({ key: 'lav-wall', name: 'Wall lav', w: 20, h: 22, aff: 12, affMode: 'bottom', label: 'Lavatory',
         art: () => R(0, 6, 20, 2, 0.6, true) + P('M1 8 H19 C18.6 12.6 15 15 10 15 C5 15 1.4 12.6 1 8 Z', true) + open('M8.6 6 V3 Q8.6 1 10.6 1 H12.6 V2') + open('M10 15 V19 Q10 21 12 21 H14') }),
     I({ key: 'lav-pedestal', name: 'Pedestal sink', w: 22, h: 38, aff: 0, affMode: 'bottom', label: 'Sink',
@@ -578,28 +625,30 @@ cat('Glass', [
 cat('Doors', [
     I({ key: 'door-guest', name: 'Guestroom entry', w: 36, h: 84, aff: 0, affMode: 'bottom', label: 'Guestroom Door',
         // Lever at 36in AFF (cy 48 on an 84in leaf).
-        art: () => R(0, 0, 36, 84, 0.3, true) + R(2, 2, 32, 82, 0.2) + lever(31, 48, -1) + R(26.6, 52.6, 4.4, 2.2, 0.5),
+        art: () => door(36, 84, 48) + R(4.4, 52.6, 4.4, 2.2, 0.5),
         hatch: '<rect x="2" y="2" width="32" height="82"/>' }),
     I({ key: 'door-ada-bath', name: 'ADA bathroom', w: 36, h: 80, aff: 0, affMode: 'bottom', label: 'ADA Bathroom Door',
         // Lever at 34in AFF (cy 46 on an 80in leaf).
-        art: () => R(0, 0, 36, 80, 0.3, true) + R(2, 2, 32, 78, 0.2) + lever(31, 46, -1),
+        art: () => door(36, 80, 46),
         hatch: '<rect x="2" y="2" width="32" height="78"/>' }),
     I({ key: 'dr-accessible', name: 'Accessible door', w: 36, h: 84, aff: 0, affMode: 'bottom', label: 'Door',
-        art: () => R(0, 0, 36, 84, 0.3, true) + R(2, 2, 32, 82, 0.2) + lever(31, 50, -1) + R(3.6, 74, 28.8, 8.6, 0.3) + R(14, 14, 8, 20, 0.3),
+        art: () => door(36, 84, 50) + R(3.6, 74, 28.8, 8.6, 0) + R(14, 14, 8, 20, 0),
         hatch: '<rect x="2" y="2" width="32" height="82"/>' }),
     I({ key: 'dr-double', name: 'Double doors', w: 72, h: 84, aff: 0, affMode: 'bottom', label: 'Doors',
-        art: () => R(0, 0, 72, 84, 0.3, true) + R(2, 2, 34, 82, 0.2) + R(36, 2, 34, 82, 0.2) + R(15, 47.4, 18, 1.2, 0.6) + R(39, 47.4, 18, 1.2, 0.6),
+        art: () => R(0, 0, 72, 84, 0, true) + open('M1 84 V1 H71 V84') + R(2, 2, 34, 82, 0) + R(36, 2, 34, 82, 0)
+            + R(2, 12, 0.6, 3.6, 0) + R(2, 62, 0.6, 3.6, 0) + R(69.4, 12, 0.6, 3.6, 0) + R(69.4, 62, 0.6, 3.6, 0)
+            + R(15, 47.4, 18, 1.2, 0.6) + R(39, 47.4, 18, 1.2, 0.6),
         hatch: R(2, 2, 68, 82) }),
     I({ key: 'door-closet', name: 'Closet double', w: 72, h: 80, aff: 0, affMode: 'bottom', label: 'Closet Doors',
-        art: () => R(0, 0, 72, 80, 0.3, true) + R(2, 2, 34, 78, 0.2) + R(36, 2, 34, 78, 0.2) + pullV(33.4, 44, 8) + pullV(38.6, 44, 8),
+        art: () => R(0, 0, 72, 80, 0, true) + open('M1 80 V1 H71 V80') + R(2, 2, 34, 78, 0) + R(36, 2, 34, 78, 0) + pullV(33.4, 44, 8) + pullV(38.6, 44, 8),
         hatch: R(2, 2, 68, 78) }),
     I({ key: 'dr-pocket', name: 'Pocket door', w: 36, h: 84, aff: 0, affMode: 'bottom', label: 'Pocket Door',
-        art: () => R(0, 0, 36, 84, 0.3, true) + R(2, 2, 32, 82, 0.2) + R(31, 40, 1.6, 6, 0.4) + R(4.4, 44, 2.6, 4, 0.6) + HID(HL(3.4, 0, 36)) }),
+        art: () => R(0, 0, 36, 84, 0, true) + open('M1 84 V1 H35 V84') + R(2, 2, 32, 82, 0) + R(31, 40, 1.6, 6, 0.4) + R(4.4, 44, 2.6, 4, 0.6) + HID(HL(3.4, 0, 36)) }),
     I({ key: 'dr-barn', name: 'Sliding barn door', w: 40, h: 87, aff: 0, affMode: 'bottom', label: 'Barn Door',
         art: () => R(0, 0, 40, 1.6, 0.6, true) + C(8, 3.4, 1.6, true) + C(32, 3.4, 1.6, true) + VL(8, 3.4, 6) + VL(32, 3.4, 6)
             + R(1, 6, 38, 80, 0.4, true) + R(3.6, 8.6, 32.8, 74.8, 0) + L(3.6, 83.4, 36.4, 8.6) + pullV(6.2, 46, 12) + HL(86.6, 14, 26) }),
     I({ key: 'dr-glass', name: 'Glass door', w: 36, h: 84, aff: 0, affMode: 'bottom', label: 'Glass Door',
-        art: () => R(0, 0, 36, 84, 0.3, true) + R(2, 2, 32, 82, 0.2) + R(5, 5, 26, 72, 0) + pullV(28, 46, 22),
+        art: () => door(36, 84, 0) + R(5, 5, 26, 72, 0) + pullV(8, 46, 22),
         hatch: R(5, 5, 26, 72) }),
     I({ key: 'door-slide', name: 'Sliding patio door', w: 60, h: 80, aff: 0, affMode: 'bottom', label: 'Sliding Door',
         art: () => R(0, 0, 60, 80, 0.3, true) + R(2, 2, 28, 76, 0) + R(30, 2, 28, 76, 0) + R(4, 4, 24, 72, 0) + R(32, 4, 24, 72, 0) + pullV(26.4, 42, 8) + pullV(33.6, 42, 8) }),
@@ -619,9 +668,12 @@ cat('Chairs', [
         art: () => L(3, 20, 2.4, 34) + L(17, 20, 17.6, 34) + R(0.6, 17.4, 18.8, 3.2, 1.4, true) + P('M2.6 17.4 C2.6 10 2.8 3.4 5 1.6 Q6.4 0.6 10 0.6 Q13.6 0.6 15 1.6 C17.2 3.4 17.4 10 17.4 17.4 Z', true),
         side: { w: 22, h: 34, art: () => L(3, 20, 1.8, 34) + L(19, 20, 20.2, 34) + R(0.6, 17.4, 20.8, 3.2, 1.4, true) + P('M17.6 17.4 C18.4 11 19.4 5 20.4 1.6 Q20.8 0.4 21.6 0.8 Q22.2 1.2 22 2.4 L20.8 17.4 Z', true) } }),
     I({ key: 'lounge', name: 'Lounge chair', w: 32, h: 30, aff: 0, affMode: 'bottom', label: 'Lounge Chair',
-        art: () => L(4.6, 25, 3, 30) + L(27.4, 25, 29, 30) + P('M0 25 V11 Q0 7 4 7 Q6 7 6 9 V2 Q6 0 9 0 H23 Q26 0 26 2 V9 Q26 7 28 7 Q32 7 32 11 V25 Z', true)
-            + open('M6 9 V16') + open('M26 9 V16') + R(6, 16, 20, 5.4, 1.6, true),
-        side: { w: 34, h: 30, art: () => L(4, 25, 2.4, 30) + L(30, 25, 31.6, 30) + P('M0 25 V15 Q0 12 3 12 H25 V3 Q25 0 28 0 Q34 0 34 6 V25 Z', true) + open('M3 18 H25') } }),
+        // An open frame armchair: double-line side frames with arm pads, a back cushion,
+        // a seat cushion on a rail (the reference's chair).
+        art: () => P('M3 17.5 V1.2 Q3 0 4.4 0 Q16 -0.5 27.6 0 Q29 0 29 1.2 V17.5 Z', true) + P('M2.4 22.4 V18.4 Q2.4 17 3.8 17 Q16 16.6 28.2 17 Q29.6 17 29.6 18.4 V22.4 Z', true) + R(2.4, 22.4, 27.2, 1.6, 0, true) + HL(25.6, 2.4, 29.6)
+            + R(0, 12, 2.4, 18, 0, true) + open('M0.8 30 V13.4 H1.6 V30') + R(-0.4, 11.2, 3.2, 1.6, 0.2, true)
+            + R(29.6, 12, 2.4, 18, 0, true) + open('M30.4 30 V13.4 H31.2 V30') + R(29.2, 11.2, 3.2, 1.6, 0.2, true),
+        side: { w: 34, h: 30, art: () => R(25, 0, 7, 22, 1.6, true) + R(2, 17, 26, 5.4, 1, true) + R(0, 11.2, 34, 1.6, 0.2, true) + R(1, 12.8, 2.4, 17.2, 0, true) + R(30.6, 12.8, 2.4, 17.2, 0, true) + HL(25.6, 3.4, 30.6) } }),
     I({ key: 'armchair', name: 'Club chair', w: 34, h: 32, aff: 0, affMode: 'bottom', label: 'Chair',
         art: () => foot(4, 32, 1.6, 3) + foot(28.4, 32, 1.6, 3) + P('M6 17 V3 Q6 0 9 0 H25 Q28 0 28 3 V17 Z', true)
             + R(0, 11, 7, 18, 3.4, true) + R(27, 11, 7, 18, 3.4, true) + R(6, 17, 22, 12, 1.6, true) + HL(22.4, 6, 28) }),
@@ -778,7 +830,7 @@ function write(appPath) {
 }
 function sheet(file) {
     // Rendered with the app's own conventions: one weight, opaque = white fill.
-    const LW = 1.2;
+    const LW = 0.8;
     const draw = (w, h, svg, sc) => `<svg width="${n(w * sc)}" height="${n(h * sc)}" viewBox="0 0 ${w} ${h}" style="overflow:visible"><g fill="none" stroke="#111" stroke-width="${LW / sc}">`
         + svg.replace(/[\u0001\u0002]/g, '').replace(/ data-o="1"/g, ' fill="#fff"') + '</g></svg>';
     let h = '<!doctype html><html><head><meta charset="utf-8"><style>body{font:11px Helvetica,Arial,sans-serif;margin:16px;background:#fff;color:#333}h3{margin:18px 0 6px;font-size:13px}.row{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}.c{text-align:center}</style></head><body>';

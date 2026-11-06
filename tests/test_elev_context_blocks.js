@@ -1580,7 +1580,7 @@ const path = require('path');
       // slab occupies y 0..10.
       // CHANGED (20.21): the wood is the upholstered BASE (starting at 14in down, under
       // the duvet, which is opaque and hides the grain above its hem).
-      if (bed.hatch.indexOf('y="18.6"') < 0) throw new Error('the bed wood region is not its base: ' + bed.hatch);
+      if (bed.hatch.indexOf('y="17.86"') < 0) throw new Error('the bed wood region is not its base: ' + bed.hatch);
       if (bed.hatch.indexOf('height="24"') >= 0 || /h60/.test(bed.hatch)) {
         throw new Error('the bed wood region covers the whole block again');
       }
