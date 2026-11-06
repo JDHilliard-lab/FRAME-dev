@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.21';
+const APP_VERSION = '20.22';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -9380,7 +9380,8 @@ function _ctxResize(b, driver, value) {
 // same weight, nothing tapering. The three names stay (the art is authored in _O/_D/_F
 // groups and the hidden line keeps its dash), but they are equal; the old 0.9/0.6/0.45
 // hierarchy is gone on request.
-const CTX_LW_OBJ = 0.75, CTX_LW_DET = 0.75, CTX_LW_FINE = 0.75;
+// 20.22: bolder, to the designer's reference sheet (one bold stroke throughout).
+const CTX_LW_OBJ = 1.1, CTX_LW_DET = 1.1, CTX_LW_FINE = 1.1;
 const _O = '<g stroke-width="' + CTX_LW_OBJ + '">';
 const _D = '<g stroke-width="' + CTX_LW_DET + '">';
 const _F = '<g stroke-width="' + CTX_LW_FINE + '">';
@@ -9391,783 +9392,401 @@ const _G = '</g>';
 // headboard wall you see the bed's WIDTH by its 24in mattress height; the 80in length
 // runs into the room and is plan data. Storing the length as `h` would draw a bed
 // taller than the door beside it, so it is kept in `lengthIn` and labelled.
-// ── BED STYLE VARIANTS ────────────────────────────────────────────────────
-// Redrawn by hand (20.19), restyled to the designer's reference (20.21): split or
-// channelled headboards, flanged shams with a pillow and a lumbar in front, a draped
-// duvet, a soft base on small feet. Generated from ONE pillow/duvet/base design so the
-// five styles and the plain bed agree; opaque shapes (data-o) give the overlaps.
-// The first set was traced from a cad-blocks.net sheet and read
-// jagged: thousands of short segments, strokes stopping in mid-air, and "Platform" was
-// in fact two singles and a nightstand. These are a few smooth outlines each, IKEA
-// install-guide plain: real curves for pillows and upholstery, every line ending on
-// another line. Keys, names and the 100-wide aspect are UNCHANGED, so a bed already
-// set to a style keeps its size and simply draws cleaner.
-// Front view only; turning a bed to its side falls back to the plain side drawing.
+// <ctx-library generated by tools/ctx-art.js: edit THERE, then node tools/ctx-art.js --write>
+// Bed styles: keys and 100-wide aspects are FIXED (a saved bed sizes by them).
 const BED_STYLE_VARIANTS = [
     { key: 'b67', name: 'Platform', w: 100, h: 26.9,
-      svg: _O + '<path data-o="1" d="M0.6 17.6 H99.4 Q100 17.6 100 18.2 V21.2 Q100 21.8 99.4 21.8 H0.6 Q0 21.8 0 21.2 V18.2 Q0 17.6 0.6 17.6 Z"/><path data-o="1" d="M6.4 21.8 H93.6 Q94 21.8 94 22.2 V26.5 Q94 26.9 93.6 26.9 H6.4 Q6 26.9 6 26.5 V22.2 Q6 21.8 6.4 21.8 Z"/><path data-o="1" d="M7 0.8 C19.45 3.17 36.05 3.17 48.5 0.8 C47.05 5.24 47.05 11.16 48.5 15.6 C36.05 13.23 19.45 13.23 7 15.6 C8.45 11.16 8.45 5.24 7 0.8 Z"/><path d="M9 2.47 C20.25 4.15 35.25 4.15 46.5 2.47 C45.45 6.41 45.45 11.66 46.5 15.6 C35.25 13.92 20.25 13.92 9 15.6 C10.05 11.66 10.05 6.41 9 2.47 Z"/><path data-o="1" d="M51.5 0.8 C63.95 3.17 80.55 3.17 93 0.8 C91.55 5.24 91.55 11.16 93 15.6 C80.55 13.23 63.95 13.23 51.5 15.6 C52.95 11.16 52.95 5.24 51.5 0.8 Z"/><path d="M53.5 2.47 C64.75 4.15 79.75 4.15 91 2.47 C89.95 6.41 89.95 11.66 91 15.6 C79.75 13.92 64.75 13.92 53.5 15.6 C54.55 11.66 54.55 6.41 53.5 2.47 Z"/><path data-o="1" d="M11 4.92 C22.1 6.88 36.9 6.88 48 4.92 C46.58 8.27 46.58 12.74 48 16.1 C36.9 14.13 22.1 14.13 11 16.1 C12.42 12.74 12.42 8.27 11 4.92 Z"/><path data-o="1" d="M52 4.92 C63.1 6.88 77.9 6.88 89 4.92 C87.58 8.27 87.58 12.74 89 16.1 C77.9 14.13 63.1 14.13 52 16.1 C53.42 12.74 53.42 8.27 52 4.92 Z"/><path data-o="1" d="M36 7.46 C44.4 8.71 55.6 8.71 64 7.46 C63.12 10.05 63.12 13.51 64 16.1 C55.6 14.86 44.4 14.86 36 16.1 C36.88 13.51 36.88 10.05 36 7.46 Z"/><path data-o="1" d="M0.6 13.8 C0.6 11.4 2.8 10.6 7 10.6 H93 C97.2 10.6 99.4 11.4 99.4 13.8 L99.8 19.8 C99.9 21.4 98.6 21.7 96.6 21 C88 18.2 72 17.6 50 17.6 C28 17.6 12 18.2 3.4 21 C1.4 21.7 0.1 21.4 0.2 19.8 Z"/><path d="M3.2 13.2 C30 12.2 70 12.2 96.8 13.2"/><path d="M5.2 13.8 C3.6 16.6 3.6 16.8 4.6 20.2"/><path d="M94.8 13.8 C96.4 16.6 96.4 16.8 95.4 20.2"/>' + _G },
+      svg: _O + '<rect data-o="1" x="6.67" y="23.23" width="86.67" height="3.67" rx="0.5"/><rect data-o="1" x="0.33" y="18.57" width="99.33" height="4.67" rx="1"/><rect data-o="1" x="6.67" y="-1.27" width="41.67" height="14.17" rx="5.95"/><path fill="none" d="M12.02 2.98 Q27.5 1.28 42.98 2.98"/><rect data-o="1" x="51.67" y="-1.27" width="41.67" height="14.17" rx="5.95"/><path fill="none" d="M57.02 2.98 Q72.5 1.28 87.98 2.98"/><path data-o="1" d="M0 11.23 Q0 8.57 2.67 8.57 H97.33 Q100 8.57 100 11.23 V14.9 Q100 19.57 95.33 19.57 H4.67 Q0 19.57 0 14.9 Z"/><path fill="none" d="M0 12.2 H100"/><path fill="none" d="M4 14.2 Q2.33 15.88 4.33 18.23"/><path fill="none" d="M96 14.2 Q97.67 15.88 95.67 18.23"/>' + _G },
     { key: 'b71', name: 'Panel', w: 100, h: 48.9,
-      svg: _O + '<path data-o="1" d="M4.6 0 H47.1 Q49.7 0 49.7 2.6 V33.4 Q49.7 36 47.1 36 H4.6 Q2 36 2 33.4 V2.6 Q2 0 4.6 0 Z"/><path data-o="1" d="M52.9 0 H95.4 Q98 0 98 2.6 V33.4 Q98 36 95.4 36 H52.9 Q50.3 36 50.3 33.4 V2.6 Q50.3 0 52.9 0 Z"/><path data-o="1" d="M5.5 46.8 H8.5 Q9 46.8 9 47.3 V48.4 Q9 48.9 8.5 48.9 H5.5 Q5 48.9 5 48.4 V47.3 Q5 46.8 5.5 46.8 Z"/><path data-o="1" d="M91.5 46.8 H94.5 Q95 46.8 95 47.3 V48.4 Q95 48.9 94.5 48.9 H91.5 Q91 48.9 91 48.4 V47.3 Q91 46.8 91.5 46.8 Z"/><path data-o="1" d="M3.9 34 H96.1 Q98.5 34 98.5 36.4 V44.7 Q98.5 47.1 96.1 47.1 H3.9 Q1.5 47.1 1.5 44.7 V36.4 Q1.5 34 3.9 34 Z"/><path data-o="1" d="M7 9 C19.45 11.49 36.05 11.49 48.5 9 C47.05 15 47.05 23 48.5 29 C36.05 26.51 19.45 26.51 7 29 C8.45 23 8.45 15 7 9 Z"/><path d="M10.06 11.55 C20.67 13.25 34.83 13.25 45.44 11.55 C44.45 16.79 44.45 23.77 45.44 29 C34.83 27.3 20.67 27.3 10.06 29 C11.05 23.77 11.05 16.79 10.06 11.55 Z"/><path data-o="1" d="M51.5 9 C63.95 11.49 80.55 11.49 93 9 C91.55 15 91.55 23 93 29 C80.55 26.51 63.95 26.51 51.5 29 C52.95 23 52.95 15 51.5 9 Z"/><path d="M54.56 11.55 C65.17 13.25 79.33 13.25 89.94 11.55 C88.95 16.79 88.95 23.77 89.94 29 C79.33 27.3 65.17 27.3 54.56 29 C55.55 23.77 55.55 16.79 54.56 11.55 Z"/><path data-o="1" d="M11 15.3 C22.1 17.74 36.9 17.74 48 15.3 C46.58 20.01 46.58 26.29 48 31 C36.9 28.56 22.1 28.56 11 31 C12.42 26.29 12.42 20.01 11 15.3 Z"/><path data-o="1" d="M52 15.3 C63.1 17.74 77.9 17.74 89 15.3 C87.58 20.01 87.58 26.29 89 31 C77.9 28.56 63.1 28.56 52 31 C53.42 26.29 53.42 20.01 52 15.3 Z"/><path data-o="1" d="M36 19.2 C44.4 20.71 55.6 20.71 64 19.2 C63.12 22.74 63.12 27.46 64 31 C55.6 29.49 44.4 29.49 36 31 C36.88 27.46 36.88 22.74 36 19.2 Z"/><path data-o="1" d="M0.6 27.2 C0.6 24.8 2.8 24 7 24 H93 C97.2 24 99.4 24.8 99.4 27.2 L99.8 42.4 C99.9 44 98.6 44.3 96.6 43.6 C88 38.2 72 37.6 50 37.6 C28 37.6 12 38.2 3.4 43.6 C1.4 44.3 0.1 44 0.2 42.4 Z"/><path d="M3.2 26.6 C30 25.6 70 25.6 96.8 26.6"/><path d="M5.2 27.2 C3.6 30 3.6 39.4 4.6 42.8"/><path d="M94.8 27.2 C96.4 30 96.4 39.4 95.4 42.8"/>' + _G },
+      svg: _O + '<rect data-o="1" x="1.67" y="0" width="96.67" height="38.9" rx="1.33"/><rect x="5.67" y="4" width="88.67" height="34.9" rx="0.83"/><rect data-o="1" x="6" y="46.9" width="4" height="2" rx="0.5"/><rect data-o="1" x="90" y="46.9" width="4" height="2" rx="0.5"/><rect data-o="1" x="2.33" y="39.9" width="95.33" height="7" rx="1.67"/><rect data-o="1" x="5" y="7.23" width="43.33" height="21" rx="8.67"/><path fill="none" d="M12.8 13.53 Q26.67 11.02 40.53 13.53"/><rect data-o="1" x="50" y="7.23" width="43.33" height="21" rx="8.67"/><path fill="none" d="M57.8 13.53 Q71.67 11.02 85.53 13.53"/><rect data-o="1" x="6.67" y="13.23" width="41.67" height="15" rx="6.3"/><path fill="none" d="M12.33 17.73 Q27.5 15.93 42.67 17.73"/><rect data-o="1" x="51.67" y="13.23" width="41.67" height="15" rx="6.3"/><path fill="none" d="M57.33 17.73 Q72.5 15.93 87.67 17.73"/><path data-o="1" d="M0 26.57 Q0 23.9 2.67 23.9 H97.33 Q100 23.9 100 26.57 V38.23 Q100 42.9 95.33 42.9 H4.67 Q0 42.9 0 38.23 Z"/><path fill="none" d="M0 30.17 H100"/><path fill="none" d="M4 32.17 Q2.33 36.53 4.33 41.57"/><path fill="none" d="M96 32.17 Q97.67 36.53 95.67 41.57"/>' + _G },
     { key: 'b72', name: 'Tall upholstered', w: 100, h: 62,
-      svg: _O + '<path data-o="1" d="M3 40 V7 Q3 0 10 0 H90 Q97 0 97 7 V40 Z"/><path d="M15 3 V40 M27 3 V40 M39 3 V40 M50 3 V40 M61 3 V40 M73 3 V40 M85 3 V40"/><path data-o="1" d="M5.5 59.9 H8.5 Q9 59.9 9 60.4 V61.5 Q9 62 8.5 62 H5.5 Q5 62 5 61.5 V60.4 Q5 59.9 5.5 59.9 Z"/><path data-o="1" d="M91.5 59.9 H94.5 Q95 59.9 95 60.4 V61.5 Q95 62 94.5 62 H91.5 Q91 62 91 61.5 V60.4 Q91 59.9 91.5 59.9 Z"/><path data-o="1" d="M3.9 47 H96.1 Q98.5 47 98.5 49.4 V57.8 Q98.5 60.2 96.1 60.2 H3.9 Q1.5 60.2 1.5 57.8 V49.4 Q1.5 47 3.9 47 Z"/><path data-o="1" d="M7 22 C19.45 24.49 36.05 24.49 48.5 22 C47.05 28 47.05 36 48.5 42 C36.05 39.51 19.45 39.51 7 42 C8.45 36 8.45 28 7 22 Z"/><path d="M10.06 24.55 C20.67 26.25 34.83 26.25 45.44 24.55 C44.45 29.79 44.45 36.77 45.44 42 C34.83 40.3 20.67 40.3 10.06 42 C11.05 36.77 11.05 29.79 10.06 24.55 Z"/><path data-o="1" d="M51.5 22 C63.95 24.49 80.55 24.49 93 22 C91.55 28 91.55 36 93 42 C80.55 39.51 63.95 39.51 51.5 42 C52.95 36 52.95 28 51.5 22 Z"/><path d="M54.56 24.55 C65.17 26.25 79.33 26.25 89.94 24.55 C88.95 29.79 88.95 36.77 89.94 42 C79.33 40.3 65.17 40.3 54.56 42 C55.55 36.77 55.55 29.79 54.56 24.55 Z"/><path data-o="1" d="M11 28.3 C22.1 30.74 36.9 30.74 48 28.3 C46.58 33.01 46.58 39.29 48 44 C36.9 41.56 22.1 41.56 11 44 C12.42 39.29 12.42 33.01 11 28.3 Z"/><path data-o="1" d="M52 28.3 C63.1 30.74 77.9 30.74 89 28.3 C87.58 33.01 87.58 39.29 89 44 C77.9 41.56 63.1 41.56 52 44 C53.42 39.29 53.42 33.01 52 28.3 Z"/><path data-o="1" d="M36 32.2 C44.4 33.71 55.6 33.71 64 32.2 C63.12 35.74 63.12 40.46 64 44 C55.6 42.49 44.4 42.49 36 44 C36.88 40.46 36.88 35.74 36 32.2 Z"/><path data-o="1" d="M0.6 40.2 C0.6 37.8 2.8 37 7 37 H93 C97.2 37 99.4 37.8 99.4 40.2 L99.8 55.4 C99.9 57 98.6 57.3 96.6 56.6 C88 51.2 72 50.6 50 50.6 C28 50.6 12 51.2 3.4 56.6 C1.4 57.3 0.1 57 0.2 55.4 Z"/><path d="M3.2 39.6 C30 38.6 70 38.6 96.8 39.6"/><path d="M5.2 40.2 C3.6 43 3.6 52.4 4.6 55.8"/><path d="M94.8 40.2 C96.4 43 96.4 52.4 95.4 55.8"/>' + _G },
+      svg: _O + '<path data-o="1" d="M1.67 52 V10 Q1.67 0 11.67 0 H88.33 Q98.33 0 98.33 10 V52 Z"/><path fill="none" d="M15.48 3.33 V52"/><path fill="none" d="M29.28 3.33 V52"/><path fill="none" d="M43.1 3.33 V52"/><path fill="none" d="M56.9 3.33 V52"/><path fill="none" d="M70.72 3.33 V52"/><path fill="none" d="M84.52 3.33 V52"/><rect data-o="1" x="6" y="60" width="4" height="2" rx="0.5"/><rect data-o="1" x="90" y="60" width="4" height="2" rx="0.5"/><rect data-o="1" x="2.33" y="53" width="95.33" height="7" rx="1.67"/><rect data-o="1" x="5" y="20.33" width="43.33" height="21" rx="8.67"/><path fill="none" d="M12.8 26.63 Q26.67 24.12 40.53 26.63"/><rect data-o="1" x="50" y="20.33" width="43.33" height="21" rx="8.67"/><path fill="none" d="M57.8 26.63 Q71.67 24.12 85.53 26.63"/><rect data-o="1" x="6.67" y="26.33" width="41.67" height="15" rx="6.3"/><path fill="none" d="M12.33 30.83 Q27.5 29.03 42.67 30.83"/><rect data-o="1" x="51.67" y="26.33" width="41.67" height="15" rx="6.3"/><path fill="none" d="M57.33 30.83 Q72.5 29.03 87.67 30.83"/><path data-o="1" d="M0 39.67 Q0 37 2.67 37 H97.33 Q100 37 100 39.67 V51.33 Q100 56 95.33 56 H4.67 Q0 56 0 51.33 Z"/><path fill="none" d="M0 43.27 H100"/><path fill="none" d="M4 45.27 Q2.33 49.63 4.33 54.67"/><path fill="none" d="M96 45.27 Q97.67 49.63 95.67 54.67"/>' + _G },
     { key: 'b74', name: 'Wingback', w: 100, h: 50.7,
-      svg: _O + '<path data-o="1" d="M2 36 V16 Q2 12 6 12 H12 V4 Q12 0 16 0 H84 Q88 0 88 4 V12 H94 Q98 12 98 16 V36 Z"/><path d="M12 12 V36 M88 12 V36"/><circle cx="22" cy="7" r="0.55"/><circle cx="36" cy="7" r="0.55"/><circle cx="50" cy="7" r="0.55"/><circle cx="64" cy="7" r="0.55"/><circle cx="78" cy="7" r="0.55"/><circle cx="29" cy="13" r="0.55"/><circle cx="43" cy="13" r="0.55"/><circle cx="57" cy="13" r="0.55"/><circle cx="71" cy="13" r="0.55"/><circle cx="22" cy="19" r="0.55"/><circle cx="36" cy="19" r="0.55"/><circle cx="50" cy="19" r="0.55"/><circle cx="64" cy="19" r="0.55"/><circle cx="78" cy="19" r="0.55"/><path data-o="1" d="M5.5 48.6 H8.5 Q9 48.6 9 49.1 V50.2 Q9 50.7 8.5 50.7 H5.5 Q5 50.7 5 50.2 V49.1 Q5 48.6 5.5 48.6 Z"/><path data-o="1" d="M91.5 48.6 H94.5 Q95 48.6 95 49.1 V50.2 Q95 50.7 94.5 50.7 H91.5 Q91 50.7 91 50.2 V49.1 Q91 48.6 91.5 48.6 Z"/><path data-o="1" d="M3.9 37 H96.1 Q98.5 37 98.5 39.4 V46.5 Q98.5 48.9 96.1 48.9 H3.9 Q1.5 48.9 1.5 46.5 V39.4 Q1.5 37 3.9 37 Z"/><path data-o="1" d="M7 15 C19.45 17.49 36.05 17.49 48.5 15 C47.05 20.55 47.05 27.95 48.5 33.5 C36.05 31.01 19.45 31.01 7 33.5 C8.45 27.95 8.45 20.55 7 15 Z"/><path d="M9.75 17.3 C20.55 19.02 34.95 19.02 45.75 17.3 C44.74 22.16 44.74 28.64 45.75 33.5 C34.95 31.77 20.55 31.77 9.75 33.5 C10.76 28.64 10.76 22.16 9.75 17.3 Z"/><path data-o="1" d="M51.5 15 C63.95 17.49 80.55 17.49 93 15 C91.55 20.55 91.55 27.95 93 33.5 C80.55 31.01 63.95 31.01 51.5 33.5 C52.95 27.95 52.95 20.55 51.5 15 Z"/><path d="M54.25 17.3 C65.05 19.02 79.45 19.02 90.25 17.3 C89.24 22.16 89.24 28.64 90.25 33.5 C79.45 31.77 65.05 31.77 54.25 33.5 C55.26 28.64 55.26 22.16 54.25 17.3 Z"/><path data-o="1" d="M11 20.67 C22.1 23.11 36.9 23.11 48 20.67 C46.58 25.12 46.58 31.05 48 35.5 C36.9 33.06 22.1 33.06 11 35.5 C12.42 31.05 12.42 25.12 11 20.67 Z"/><path data-o="1" d="M52 20.67 C63.1 23.11 77.9 23.11 89 20.67 C87.58 25.12 87.58 31.05 89 35.5 C77.9 33.06 63.1 33.06 52 35.5 C53.42 31.05 53.42 25.12 52 20.67 Z"/><path data-o="1" d="M36 24.18 C44.4 25.69 55.6 25.69 64 24.18 C63.12 27.58 63.12 32.1 64 35.5 C55.6 33.99 44.4 33.99 36 35.5 C36.88 32.1 36.88 27.58 36 24.18 Z"/><path data-o="1" d="M0.6 31.7 C0.6 29.3 2.8 28.5 7 28.5 H93 C97.2 28.5 99.4 29.3 99.4 31.7 L99.8 44.6 C99.9 46.2 98.6 46.5 96.6 45.8 C88 40.6 72 40 50 40 C28 40 12 40.6 3.4 45.8 C1.4 46.5 0.1 46.2 0.2 44.6 Z"/><path d="M3.2 31.1 C30 30.1 70 30.1 96.8 31.1"/><path d="M5.2 31.7 C3.6 34.5 3.6 41.6 4.6 45"/><path d="M94.8 31.7 C96.4 34.5 96.4 41.6 95.4 45"/>' + _G },
+      svg: _O + '<path data-o="1" d="M1.67 40.7 V16.35 Q1.67 13.02 5 13.02 H11.33 V3.33 Q11.33 0 14.67 0 H85.33 Q88.67 0 88.67 3.33 V13.02 H95 Q98.33 13.02 98.33 16.35 V40.7 Z"/><path fill="none" d="M11.33 13.02 V40.7"/><path fill="none" d="M88.67 13.02 V40.7"/><circle cx="21" cy="5" r="0.58"/><circle cx="40.33" cy="5" r="0.58"/><circle cx="59.67" cy="5" r="0.58"/><circle cx="79" cy="5" r="0.58"/><circle cx="26.8" cy="12.77" r="0.58"/><circle cx="42.27" cy="12.77" r="0.58"/><circle cx="57.73" cy="12.77" r="0.58"/><circle cx="73.2" cy="12.77" r="0.58"/><rect data-o="1" x="6" y="48.7" width="4" height="2" rx="0.5"/><rect data-o="1" x="90" y="48.7" width="4" height="2" rx="0.5"/><rect data-o="1" x="2.33" y="41.7" width="95.33" height="7" rx="1.67"/><rect data-o="1" x="5" y="9.03" width="43.33" height="21" rx="8.67"/><path fill="none" d="M12.8 15.33 Q26.67 12.82 40.53 15.33"/><rect data-o="1" x="50" y="9.03" width="43.33" height="21" rx="8.67"/><path fill="none" d="M57.8 15.33 Q71.67 12.82 85.53 15.33"/><rect data-o="1" x="6.67" y="15.03" width="41.67" height="15" rx="6.3"/><path fill="none" d="M12.33 19.53 Q27.5 17.73 42.67 19.53"/><rect data-o="1" x="51.67" y="15.03" width="41.67" height="15" rx="6.3"/><path fill="none" d="M57.33 19.53 Q72.5 17.73 87.67 19.53"/><path data-o="1" d="M0 28.37 Q0 25.7 2.67 25.7 H97.33 Q100 25.7 100 28.37 V40.03 Q100 44.7 95.33 44.7 H4.67 Q0 44.7 0 40.03 Z"/><path fill="none" d="M0 31.97 H100"/><path fill="none" d="M4 33.97 Q2.33 38.33 4.33 43.37"/><path fill="none" d="M96 33.97 Q97.67 38.33 95.67 43.37"/>' + _G },
     { key: 'b75', name: 'Low profile', w: 100, h: 41.9,
-      svg: _O + '<path data-o="1" d="M6.6 0 H93.4 Q95 0 95 1.6 V26.4 Q95 28 93.4 28 H6.6 Q5 28 5 26.4 V1.6 Q5 0 6.6 0 Z"/><path d="M5 7 H95 M5 13.4 H95"/><path data-o="1" d="M5.5 39.8 H8.5 Q9 39.8 9 40.3 V41.4 Q9 41.9 8.5 41.9 H5.5 Q5 41.9 5 41.4 V40.3 Q5 39.8 5.5 39.8 Z"/><path data-o="1" d="M91.5 39.8 H94.5 Q95 39.8 95 40.3 V41.4 Q95 41.9 94.5 41.9 H91.5 Q91 41.9 91 41.4 V40.3 Q91 39.8 91.5 39.8 Z"/><path data-o="1" d="M3.9 29.4 H96.1 Q98.5 29.4 98.5 31.8 V37.7 Q98.5 40.1 96.1 40.1 H3.9 Q1.5 40.1 1.5 37.7 V31.8 Q1.5 29.4 3.9 29.4 Z"/><path data-o="1" d="M7 10 C19.45 12.49 36.05 12.49 48.5 10 C47.05 15.55 47.05 22.95 48.5 28.5 C36.05 26.01 19.45 26.01 7 28.5 C8.45 22.95 8.45 15.55 7 10 Z"/><path d="M9.75 12.29 C20.55 14.02 34.95 14.02 45.75 12.29 C44.74 17.16 44.74 23.64 45.75 28.5 C34.95 26.77 20.55 26.77 9.75 28.5 C10.76 23.64 10.76 17.16 9.75 12.29 Z"/><path data-o="1" d="M51.5 10 C63.95 12.49 80.55 12.49 93 10 C91.55 15.55 91.55 22.95 93 28.5 C80.55 26.01 63.95 26.01 51.5 28.5 C52.95 22.95 52.95 15.55 51.5 10 Z"/><path d="M54.25 12.29 C65.05 14.02 79.45 14.02 90.25 12.29 C89.24 17.16 89.24 23.64 90.25 28.5 C79.45 26.77 65.05 26.77 54.25 28.5 C55.26 23.64 55.26 17.16 54.25 12.29 Z"/><path data-o="1" d="M11 15.67 C22.1 18.11 36.9 18.11 48 15.67 C46.58 20.12 46.58 26.05 48 30.5 C36.9 28.06 22.1 28.06 11 30.5 C12.42 26.05 12.42 20.12 11 15.67 Z"/><path data-o="1" d="M52 15.67 C63.1 18.11 77.9 18.11 89 15.67 C87.58 20.12 87.58 26.05 89 30.5 C77.9 28.06 63.1 28.06 52 30.5 C53.42 26.05 53.42 20.12 52 15.67 Z"/><path data-o="1" d="M36 19.18 C44.4 20.69 55.6 20.69 64 19.18 C63.12 22.58 63.12 27.1 64 30.5 C55.6 28.99 44.4 28.99 36 30.5 C36.88 27.1 36.88 22.58 36 19.18 Z"/><path data-o="1" d="M0.6 26.7 C0.6 24.3 2.8 23.5 7 23.5 H93 C97.2 23.5 99.4 24.3 99.4 26.7 L99.8 35.6 C99.9 37.2 98.6 37.5 96.6 36.8 C88 32.6 72 32 50 32 C28 32 12 32.6 3.4 36.8 C1.4 37.5 0.1 37.2 0.2 35.6 Z"/><path d="M3.2 26.1 C30 25.1 70 25.1 96.8 26.1"/><path d="M5.2 26.7 C3.6 29.5 3.6 32.6 4.6 36"/><path d="M94.8 26.7 C96.4 29.5 96.4 32.6 95.4 36"/>' + _G },
+      svg: _O + '<rect data-o="1" x="1.67" y="0" width="96.67" height="31.9" rx="1.33"/><path fill="none" d="M1.67 8.93 H98.33"/><path fill="none" d="M1.67 17.87 H98.33"/><rect data-o="1" x="6" y="39.9" width="4" height="2" rx="0.5"/><rect data-o="1" x="90" y="39.9" width="4" height="2" rx="0.5"/><rect data-o="1" x="2.33" y="32.9" width="95.33" height="7" rx="1.67"/><rect data-o="1" x="6.67" y="6.23" width="41.67" height="15" rx="6.3"/><path fill="none" d="M12.33 10.73 Q27.5 8.93 42.67 10.73"/><rect data-o="1" x="51.67" y="6.23" width="41.67" height="15" rx="6.3"/><path fill="none" d="M57.33 10.73 Q72.5 8.93 87.67 10.73"/><path data-o="1" d="M0 19.57 Q0 16.9 2.67 16.9 H97.33 Q100 16.9 100 19.57 V31.23 Q100 35.9 95.33 35.9 H4.67 Q0 35.9 0 31.23 Z"/><path fill="none" d="M0 23.17 H100"/><path fill="none" d="M4 25.17 Q2.33 29.53 4.33 34.57"/><path fill="none" d="M96 25.17 Q97.67 29.53 95.67 34.57"/>' + _G },
 ];
-// Small wall devices drawn once, shared by a Fixtures item and its Keep clear twin.
-const _CTX_ART_SWITCH = _O + '<rect x="0" y="0" width="3" height="5" rx="0.4"/>' + _G
-                 + _D + '<rect x="1.05" y="1.4" width="0.9" height="2.2" rx="0.2"/>' + _G;
-const _CTX_ART_THERMO = _O + '<rect x="0" y="0" width="5" height="5" rx="0.7"/>' + _G
-                 + _D + '<rect x="1.1" y="1.1" width="2.8" height="1.5" rx="0.2"/>' + _G
-                 + _F + '<path d="M1.6 3.7 H2.2 M2.8 3.7 H3.4"/>' + _G;
-const _CTX_ART_OUTLET = _O + '<rect x="0" y="0" width="3" height="5" rx="0.4"/>' + _G
-                 + _D + '<rect x="0.9" y="0.9" width="1.2" height="1.2" rx="0.4"/><rect x="0.9" y="2.9" width="1.2" height="1.2" rx="0.4"/>' + _G;
-
 const CONTEXT_LIBRARY = [
-    // A bed is drawn at its HEAD END, which is the face you see on a headboard wall:
-    // mattress, foundation, plinth base with a toe recess. Layered the way a bed
-    // actually builds up, with the mattress tape edge as a fine line — the pillow
-    // profile that used to be here was the single thing making these read as sketches,
-    // and a pillow does not appear on a spec elevation.
-    // FRONT is the head/foot end — the face you see on a headboard wall — at the spec'd
-    // 60/76/54in width by the 24in mattress height, with pillows indicated on the deck.
-    // SIDE is the bed running along the wall: its real 80in (75in full) length, and 36in
-    // tall because the headboard and pillow rise above the mattress. That is exactly why
-    // a view toggle carries dimensions and not just artwork.
-    { cat: 'Beds', items: [
-        { key: 'bed-queen', name: 'Queen bed', w: 60, h: 24, lengthIn: 80, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Queen Bed',
+    { cat: 'Guestroom', items: [
+        { key: 'bed-king', name: 'King bed', w: 76, h: 24, lengthIn: 80, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'King Bed',
           variants: BED_STYLE_VARIANTS,
-          svg: _O + '<path data-o="1" d="M3.5 21.9 H4.9 Q5.4 21.9 5.4 22.4 V23.5 Q5.4 24 4.9 24 H3.5 Q3 24 3 23.5 V22.4 Q3 21.9 3.5 21.9 Z"/><path data-o="1" d="M55.1 21.9 H56.5 Q57 21.9 57 22.4 V23.5 Q57 24 56.5 24 H55.1 Q54.6 24 54.6 23.5 V22.4 Q54.6 21.9 55.1 21.9 Z"/><path data-o="1" d="M3.3 14 H56.7 Q59.1 14 59.1 16.4 V19.8 Q59.1 22.2 56.7 22.2 H3.3 Q0.9 22.2 0.9 19.8 V16.4 Q0.9 14 3.3 14 Z"/><path data-o="1" d="M4.2 0.6 C11.67 2.09 21.63 2.09 29.1 0.6 C28.23 4.44 28.23 9.56 29.1 13.4 C21.63 11.91 11.67 11.91 4.2 13.4 C5.07 9.56 5.07 4.44 4.2 0.6 Z"/><path d="M5.79 1.93 C12.31 2.97 20.99 2.97 27.51 1.93 C26.9 5.37 26.9 9.96 27.51 13.4 C20.99 12.36 12.31 12.36 5.79 13.4 C6.4 9.96 6.4 5.37 5.79 1.93 Z"/><path data-o="1" d="M30.9 0.6 C38.37 2.09 48.33 2.09 55.8 0.6 C54.93 4.44 54.93 9.56 55.8 13.4 C48.33 11.91 38.37 11.91 30.9 13.4 C31.77 9.56 31.77 4.44 30.9 0.6 Z"/><path d="M32.49 1.93 C39.01 2.97 47.69 2.97 54.21 1.93 C53.6 5.37 53.6 9.96 54.21 13.4 C47.69 12.36 39.01 12.36 32.49 13.4 C33.1 9.96 33.1 5.37 32.49 1.93 Z"/><path data-o="1" d="M6.6 3.88 C13.26 5.34 22.14 5.34 28.8 3.88 C27.95 7 27.95 11.17 28.8 14.3 C22.14 12.83 13.26 12.83 6.6 14.3 C7.45 11.17 7.45 7 6.6 3.88 Z"/><path data-o="1" d="M31.2 3.88 C37.86 5.34 46.74 5.34 53.4 3.88 C52.55 7 52.55 11.17 53.4 14.3 C46.74 12.83 37.86 12.83 31.2 14.3 C32.05 11.17 32.05 7 31.2 3.88 Z"/><path data-o="1" d="M21.6 5.9 C26.64 6.81 33.36 6.81 38.4 5.9 C37.87 8.42 37.87 11.78 38.4 14.3 C33.36 13.39 26.64 13.39 21.6 14.3 C22.13 11.78 22.13 8.42 21.6 5.9 Z"/><path data-o="1" d="M0.36 11.6 C0.36 9.2 1.68 8.4 4.2 8.4 H55.8 C58.32 8.4 59.64 9.2 59.64 11.6 L59.88 18 C59.94 19.6 59.16 19.9 57.96 19.2 C52.8 16.4 43.2 15.8 30 15.8 C16.8 15.8 7.2 16.4 2.04 19.2 C0.84 19.9 0.06 19.6 0.12 18 Z"/><path d="M1.92 11 C18 10 42 10 58.08 11"/><path d="M3.12 11.6 C2.16 14.4 2.16 15 2.76 18.4"/><path d="M56.88 11.6 C57.84 14.4 57.84 15 57.24 18.4"/>' + _G,
-          hatch: '<path d="M0.9 14 h58.2 v8.2 h-58.2 Z"/>',
+          svg: _O + '<rect data-o="1" x="3.6" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="70" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="1.4" y="18.6" width="73.2" height="4.2" rx="1"/><rect data-o="1" x="4" y="3" width="33" height="9" rx="3.78"/><path fill="none" d="M7.4 5.7 Q20.5 4.62 33.6 5.7"/><rect data-o="1" x="39" y="3" width="33" height="9" rx="3.78"/><path fill="none" d="M42.4 5.7 Q55.5 4.62 68.6 5.7"/><path data-o="1" d="M0 11 Q0 9.4 1.6 9.4 H74.4 Q76 9.4 76 11 V17.6 Q76 20.4 73.2 20.4 H2.8 Q0 20.4 0 17.6 Z"/><path fill="none" d="M0 13.03 H76"/><path fill="none" d="M2.4 14.23 Q1.4 16.72 2.6 19.6"/><path fill="none" d="M73.6 14.23 Q74.6 16.72 73.4 19.6"/>' + _G,
+          hatch: '<rect x="1.4" y="18.6" width="73.2" height="4.2"/>',
           side: { w: 80, h: 36,
-            svg: _O + '<path data-o="1" d="M8.5 33.8 H11 Q11.5 33.8 11.5 34.3 V35.5 Q11.5 36 11 36 H8.5 Q8 36 8 35.5 V34.3 Q8 33.8 8.5 33.8 Z"/><path data-o="1" d="M69 33.8 H71.5 Q72 33.8 72 34.3 V35.5 Q72 36 71.5 36 H69 Q68.5 36 68.5 35.5 V34.3 Q68.5 33.8 69 33.8 Z"/><path data-o="1" d="M4.6 34 V20 Q4.6 16.8 7.8 16.8 H76.8 Q80 16.8 80 20 V30.8 Q80 34 76.8 34 Z"/><path d="M4.6 26.2 H79.8"/><path data-o="1" d="M0 36 V2.4 Q0 0 2.4 0 H3 Q5.4 0 5.4 2.4 V36 Z"/><path data-o="1" transform="rotate(-13 15.2 16.8)" d="M8.6 2.2 C10.58 2.83 13.22 2.83 15.2 2.2 C14.83 6.58 14.83 12.42 15.2 16.8 C13.22 16.17 10.58 16.17 8.6 16.8 C8.97 12.42 8.97 6.58 8.6 2.2 Z"/><path data-o="1" transform="rotate(-17 20.2 16.8)" d="M13.6 5.6 C15.58 6.23 18.22 6.23 20.2 5.6 C19.83 8.96 19.83 13.44 20.2 16.8 C18.22 16.17 15.58 16.17 13.6 16.8 C13.97 13.44 13.97 8.96 13.6 5.6 Z"/><path data-o="1" d="M44.8 16.4 C49.8 15.4 55.8 15.4 60.8 16.4 C61.6 21 61.8 26 61.4 30.4 C55.8 31.2 49.8 31.2 45.4 30.4 C45 26 44.8 21 44.8 16.4 Z"/><path d="M50.56 16.2 C51.2 21 51.52 26 50.88 30.9"/><path d="M56 16 C56.96 20 57.28 25 56.64 30.9"/><path d="M46 30.9 V32.2 M47.1 30.9 V32.2 M48.2 30.9 V32.2 M49.3 30.9 V32.2 M50.4 30.9 V32.2 M51.5 30.9 V32.2 M52.6 30.9 V32.2 M53.7 30.9 V32.2 M54.8 30.9 V32.2 M55.9 30.9 V32.2 M57 30.9 V32.2 M58.1 30.9 V32.2 M59.2 30.9 V32.2 M60.3 30.9 V32.2"/>' + _G,
-            hatch: '<path d="M0 0 h5.4 v36 h-5.4 Z"/><path d="M4.6 26.2 h75.4 v7.8 h-75.4 Z"/>' } },
-        { key: 'bed-king', name: 'King bed', w: 76, h: 24, lengthIn: 80, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'King Bed',
+            svg: _O + '<rect data-o="1" x="8" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="70" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="4" y="30.6" width="75.4" height="4.2" rx="1"/><path data-o="1" d="M4 32.4 V16.1 Q4 14.5 5.6 14.5 H76 Q80 14.5 80 18.5 V29.4 Q80 32.4 77 32.4 Z"/><path fill="none" d="M4 18.7 H79.6"/><path data-o="1" transform="rotate(-14 12 14.9)" d="M7 -0.1 H10 Q12 -0.1 12 1.9 V12.9 Q12 14.9 10 14.9 H7 Q5 14.9 5 12.9 V1.9 Q5 -0.1 7 -0.1 Z"/><path data-o="1" transform="rotate(-18 17.5 14.9)" d="M12.5 2.4 H15.5 Q17.5 2.4 17.5 4.4 V12.9 Q17.5 14.9 15.5 14.9 H12.5 Q10.5 14.9 10.5 12.9 V4.4 Q10.5 2.4 12.5 2.4 Z"/><path data-o="1" d="M48 13.9 H62.4 Q63.4 13.9 63.4 15.5 V29.6 Q63.4 30.6 62.4 30.6 H48 Q47 30.6 47 29.6 V15.5 Q47 13.9 48 13.9 Z"/><path fill="none" d="M54.48 14.3 V30.2"/><path fill="none" d="M58.08 14.3 V30.2"/><path data-o="1" d="M0 36 V2 Q0 0 2 0 Q4 0 4 2 V36 Z"/>' + _G,
+            hatch: '<rect x="0" y="0" width="4" height="36"/><rect x="4" y="30.6" width="75.4" height="4.2"/>' } },
+        { key: 'bed-queen', name: 'Queen bed', w: 60, h: 24, lengthIn: 80, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Queen Bed',
           variants: BED_STYLE_VARIANTS,
-          svg: _O + '<path data-o="1" d="M4.3 21.9 H6.34 Q6.84 21.9 6.84 22.4 V23.5 Q6.84 24 6.34 24 H4.3 Q3.8 24 3.8 23.5 V22.4 Q3.8 21.9 4.3 21.9 Z"/><path data-o="1" d="M69.66 21.9 H71.7 Q72.2 21.9 72.2 22.4 V23.5 Q72.2 24 71.7 24 H69.66 Q69.16 24 69.16 23.5 V22.4 Q69.16 21.9 69.66 21.9 Z"/><path data-o="1" d="M3.54 14 H72.46 Q74.86 14 74.86 16.4 V19.8 Q74.86 22.2 72.46 22.2 H3.54 Q1.14 22.2 1.14 19.8 V16.4 Q1.14 14 3.54 14 Z"/><path data-o="1" d="M5.32 0.6 C14.78 2.49 27.4 2.49 36.86 0.6 C35.76 4.44 35.76 9.56 36.86 13.4 C27.4 11.51 14.78 11.51 5.32 13.4 C6.42 9.56 6.42 4.44 5.32 0.6 Z"/><path d="M6.91 1.93 C15.42 3.29 26.76 3.29 35.27 1.93 C34.47 5.37 34.47 9.96 35.27 13.4 C26.76 12.04 15.42 12.04 6.91 13.4 C7.71 9.96 7.71 5.37 6.91 1.93 Z"/><path data-o="1" d="M39.14 0.6 C48.6 2.49 61.22 2.49 70.68 0.6 C69.58 4.44 69.58 9.56 70.68 13.4 C61.22 11.51 48.6 11.51 39.14 13.4 C40.24 9.56 40.24 4.44 39.14 0.6 Z"/><path d="M40.73 1.93 C49.24 3.29 60.58 3.29 69.09 1.93 C68.29 5.37 68.29 9.96 69.09 13.4 C60.58 12.04 49.24 12.04 40.73 13.4 C41.53 9.96 41.53 5.37 40.73 1.93 Z"/><path data-o="1" d="M8.36 3.88 C16.8 5.71 28.04 5.71 36.48 3.88 C35.4 7 35.4 11.17 36.48 14.3 C28.04 12.47 16.8 12.47 8.36 14.3 C9.44 11.17 9.44 7 8.36 3.88 Z"/><path data-o="1" d="M39.52 3.88 C47.96 5.71 59.2 5.71 67.64 3.88 C66.56 7 66.56 11.17 67.64 14.3 C59.2 12.47 47.96 12.47 39.52 14.3 C40.6 11.17 40.6 7 39.52 3.88 Z"/><path data-o="1" d="M27.36 5.9 C33.74 7.05 42.26 7.05 48.64 5.9 C47.97 8.42 47.97 11.78 48.64 14.3 C42.26 13.15 33.74 13.15 27.36 14.3 C28.03 11.78 28.03 8.42 27.36 5.9 Z"/><path data-o="1" d="M0.46 11.6 C0.46 9.2 2.13 8.4 5.32 8.4 H70.68 C73.87 8.4 75.54 9.2 75.54 11.6 L75.85 18 C75.92 19.6 74.94 19.9 73.42 19.2 C66.88 16.4 54.72 15.8 38 15.8 C21.28 15.8 9.12 16.4 2.58 19.2 C1.06 19.9 0.08 19.6 0.15 18 Z"/><path d="M2.43 11 C22.8 10 53.2 10 73.57 11"/><path d="M3.95 11.6 C2.74 14.4 2.74 15 3.5 18.4"/><path d="M72.05 11.6 C73.26 14.4 73.26 15 72.5 18.4"/>' + _G,
-          hatch: '<path d="M1.14 14 h73.72 v8.2 h-73.72 Z"/>',
+          svg: _O + '<rect data-o="1" x="3.6" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="54" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="1.4" y="18.6" width="57.2" height="4.2" rx="1"/><rect data-o="1" x="4" y="3" width="25" height="9" rx="3.78"/><path fill="none" d="M7.4 5.7 Q16.5 4.62 25.6 5.7"/><rect data-o="1" x="31" y="3" width="25" height="9" rx="3.78"/><path fill="none" d="M34.4 5.7 Q43.5 4.62 52.6 5.7"/><path data-o="1" d="M0 11 Q0 9.4 1.6 9.4 H58.4 Q60 9.4 60 11 V17.6 Q60 20.4 57.2 20.4 H2.8 Q0 20.4 0 17.6 Z"/><path fill="none" d="M0 13.03 H60"/><path fill="none" d="M2.4 14.23 Q1.4 16.72 2.6 19.6"/><path fill="none" d="M57.6 14.23 Q58.6 16.72 57.4 19.6"/>' + _G,
+          hatch: '<rect x="1.4" y="18.6" width="57.2" height="4.2"/>',
           side: { w: 80, h: 36,
-            svg: _O + '<path data-o="1" d="M8.5 33.8 H11 Q11.5 33.8 11.5 34.3 V35.5 Q11.5 36 11 36 H8.5 Q8 36 8 35.5 V34.3 Q8 33.8 8.5 33.8 Z"/><path data-o="1" d="M69 33.8 H71.5 Q72 33.8 72 34.3 V35.5 Q72 36 71.5 36 H69 Q68.5 36 68.5 35.5 V34.3 Q68.5 33.8 69 33.8 Z"/><path data-o="1" d="M4.6 34 V20 Q4.6 16.8 7.8 16.8 H76.8 Q80 16.8 80 20 V30.8 Q80 34 76.8 34 Z"/><path d="M4.6 26.2 H79.8"/><path data-o="1" d="M0 36 V2.4 Q0 0 2.4 0 H3 Q5.4 0 5.4 2.4 V36 Z"/><path data-o="1" transform="rotate(-13 15.2 16.8)" d="M8.6 2.2 C10.58 2.83 13.22 2.83 15.2 2.2 C14.83 6.58 14.83 12.42 15.2 16.8 C13.22 16.17 10.58 16.17 8.6 16.8 C8.97 12.42 8.97 6.58 8.6 2.2 Z"/><path data-o="1" transform="rotate(-17 20.2 16.8)" d="M13.6 5.6 C15.58 6.23 18.22 6.23 20.2 5.6 C19.83 8.96 19.83 13.44 20.2 16.8 C18.22 16.17 15.58 16.17 13.6 16.8 C13.97 13.44 13.97 8.96 13.6 5.6 Z"/><path data-o="1" d="M44.8 16.4 C49.8 15.4 55.8 15.4 60.8 16.4 C61.6 21 61.8 26 61.4 30.4 C55.8 31.2 49.8 31.2 45.4 30.4 C45 26 44.8 21 44.8 16.4 Z"/><path d="M50.56 16.2 C51.2 21 51.52 26 50.88 30.9"/><path d="M56 16 C56.96 20 57.28 25 56.64 30.9"/><path d="M46 30.9 V32.2 M47.1 30.9 V32.2 M48.2 30.9 V32.2 M49.3 30.9 V32.2 M50.4 30.9 V32.2 M51.5 30.9 V32.2 M52.6 30.9 V32.2 M53.7 30.9 V32.2 M54.8 30.9 V32.2 M55.9 30.9 V32.2 M57 30.9 V32.2 M58.1 30.9 V32.2 M59.2 30.9 V32.2 M60.3 30.9 V32.2"/>' + _G,
-            hatch: '<path d="M0 0 h5.4 v36 h-5.4 Z"/><path d="M4.6 26.2 h75.4 v7.8 h-75.4 Z"/>' } },
-        { key: 'bed-full', name: 'Double / full', w: 54, h: 24, lengthIn: 75, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Full Bed',
+            svg: _O + '<rect data-o="1" x="8" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="70" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="4" y="30.6" width="75.4" height="4.2" rx="1"/><path data-o="1" d="M4 32.4 V16.1 Q4 14.5 5.6 14.5 H76 Q80 14.5 80 18.5 V29.4 Q80 32.4 77 32.4 Z"/><path fill="none" d="M4 18.7 H79.6"/><path data-o="1" transform="rotate(-14 12 14.9)" d="M7 -0.1 H10 Q12 -0.1 12 1.9 V12.9 Q12 14.9 10 14.9 H7 Q5 14.9 5 12.9 V1.9 Q5 -0.1 7 -0.1 Z"/><path data-o="1" transform="rotate(-18 17.5 14.9)" d="M12.5 2.4 H15.5 Q17.5 2.4 17.5 4.4 V12.9 Q17.5 14.9 15.5 14.9 H12.5 Q10.5 14.9 10.5 12.9 V4.4 Q10.5 2.4 12.5 2.4 Z"/><path data-o="1" d="M48 13.9 H62.4 Q63.4 13.9 63.4 15.5 V29.6 Q63.4 30.6 62.4 30.6 H48 Q47 30.6 47 29.6 V15.5 Q47 13.9 48 13.9 Z"/><path fill="none" d="M54.48 14.3 V30.2"/><path fill="none" d="M58.08 14.3 V30.2"/><path data-o="1" d="M0 36 V2 Q0 0 2 0 Q4 0 4 2 V36 Z"/>' + _G,
+            hatch: '<rect x="0" y="0" width="4" height="36"/><rect x="4" y="30.6" width="75.4" height="4.2"/>' } },
+        { key: 'bed-full', name: 'Double / full', w: 54, h: 24, lengthIn: 75, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Full Bed',
           variants: BED_STYLE_VARIANTS,
-          svg: _O + '<path data-o="1" d="M3.2 21.9 H4.36 Q4.86 21.9 4.86 22.4 V23.5 Q4.86 24 4.36 24 H3.2 Q2.7 24 2.7 23.5 V22.4 Q2.7 21.9 3.2 21.9 Z"/><path data-o="1" d="M49.64 21.9 H50.8 Q51.3 21.9 51.3 22.4 V23.5 Q51.3 24 50.8 24 H49.64 Q49.14 24 49.14 23.5 V22.4 Q49.14 21.9 49.64 21.9 Z"/><path data-o="1" d="M3.21 14 H50.79 Q53.19 14 53.19 16.4 V19.8 Q53.19 22.2 50.79 22.2 H3.21 Q0.81 22.2 0.81 19.8 V16.4 Q0.81 14 3.21 14 Z"/><path data-o="1" d="M3.78 0.6 C10.5 1.94 19.47 1.94 26.19 0.6 C25.41 4.44 25.41 9.56 26.19 13.4 C19.47 12.06 10.5 12.06 3.78 13.4 C4.56 9.56 4.56 4.44 3.78 0.6 Z"/><path d="M5.37 1.93 C11.14 2.85 18.83 2.85 24.6 1.93 C24.06 5.37 24.06 9.96 24.6 13.4 C18.83 12.48 11.14 12.48 5.37 13.4 C5.91 9.96 5.91 5.37 5.37 1.93 Z"/><path data-o="1" d="M27.81 0.6 C34.53 1.94 43.5 1.94 50.22 0.6 C49.44 4.44 49.44 9.56 50.22 13.4 C43.5 12.06 34.53 12.06 27.81 13.4 C28.59 9.56 28.59 4.44 27.81 0.6 Z"/><path d="M29.4 1.93 C35.17 2.85 42.86 2.85 48.63 1.93 C48.09 5.37 48.09 9.96 48.63 13.4 C42.86 12.48 35.17 12.48 29.4 13.4 C29.94 9.96 29.94 5.37 29.4 1.93 Z"/><path data-o="1" d="M5.94 3.88 C11.93 5.19 19.93 5.19 25.92 3.88 C25.15 7 25.15 11.17 25.92 14.3 C19.93 12.98 11.93 12.98 5.94 14.3 C6.71 11.17 6.71 7 5.94 3.88 Z"/><path data-o="1" d="M28.08 3.88 C34.07 5.19 42.07 5.19 48.06 3.88 C47.29 7 47.29 11.17 48.06 14.3 C42.07 12.98 34.07 12.98 28.08 14.3 C28.85 11.17 28.85 7 28.08 3.88 Z"/><path data-o="1" d="M19.44 5.9 C23.98 6.72 30.02 6.72 34.56 5.9 C34.08 8.42 34.08 11.78 34.56 14.3 C30.02 13.48 23.98 13.48 19.44 14.3 C19.92 11.78 19.92 8.42 19.44 5.9 Z"/><path data-o="1" d="M0.32 11.6 C0.32 9.2 1.51 8.4 3.78 8.4 H50.22 C52.49 8.4 53.68 9.2 53.68 11.6 L53.89 18 C53.95 19.6 53.24 19.9 52.16 19.2 C47.52 16.4 38.88 15.8 27 15.8 C15.12 15.8 6.48 16.4 1.84 19.2 C0.76 19.9 0.05 19.6 0.11 18 Z"/><path d="M1.73 11 C16.2 10 37.8 10 52.27 11"/><path d="M2.81 11.6 C1.94 14.4 1.94 15 2.48 18.4"/><path d="M51.19 11.6 C52.06 14.4 52.06 15 51.52 18.4"/>' + _G,
-          hatch: '<path d="M0.81 14 h52.38 v8.2 h-52.38 Z"/>',
+          svg: _O + '<rect data-o="1" x="3.6" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="48" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="1.4" y="18.6" width="51.2" height="4.2" rx="1"/><rect data-o="1" x="4" y="3" width="22" height="9" rx="3.78"/><path fill="none" d="M7.4 5.7 Q15 4.62 22.6 5.7"/><rect data-o="1" x="28" y="3" width="22" height="9" rx="3.78"/><path fill="none" d="M31.4 5.7 Q39 4.62 46.6 5.7"/><path data-o="1" d="M0 11 Q0 9.4 1.6 9.4 H52.4 Q54 9.4 54 11 V17.6 Q54 20.4 51.2 20.4 H2.8 Q0 20.4 0 17.6 Z"/><path fill="none" d="M0 13.03 H54"/><path fill="none" d="M2.4 14.23 Q1.4 16.72 2.6 19.6"/><path fill="none" d="M51.6 14.23 Q52.6 16.72 51.4 19.6"/>' + _G,
+          hatch: '<rect x="1.4" y="18.6" width="51.2" height="4.2"/>',
           side: { w: 75, h: 36,
-            svg: _O + '<path data-o="1" d="M8.5 33.8 H11 Q11.5 33.8 11.5 34.3 V35.5 Q11.5 36 11 36 H8.5 Q8 36 8 35.5 V34.3 Q8 33.8 8.5 33.8 Z"/><path data-o="1" d="M64 33.8 H66.5 Q67 33.8 67 34.3 V35.5 Q67 36 66.5 36 H64 Q63.5 36 63.5 35.5 V34.3 Q63.5 33.8 64 33.8 Z"/><path data-o="1" d="M4.6 34 V20 Q4.6 16.8 7.8 16.8 H71.8 Q75 16.8 75 20 V30.8 Q75 34 71.8 34 Z"/><path d="M4.6 26.2 H74.8"/><path data-o="1" d="M0 36 V2.4 Q0 0 2.4 0 H3 Q5.4 0 5.4 2.4 V36 Z"/><path data-o="1" transform="rotate(-13 15.2 16.8)" d="M8.6 2.2 C10.58 2.83 13.22 2.83 15.2 2.2 C14.83 6.58 14.83 12.42 15.2 16.8 C13.22 16.17 10.58 16.17 8.6 16.8 C8.97 12.42 8.97 6.58 8.6 2.2 Z"/><path data-o="1" transform="rotate(-17 20.2 16.8)" d="M13.6 5.6 C15.58 6.23 18.22 6.23 20.2 5.6 C19.83 8.96 19.83 13.44 20.2 16.8 C18.22 16.17 15.58 16.17 13.6 16.8 C13.97 13.44 13.97 8.96 13.6 5.6 Z"/><path data-o="1" d="M42 16.4 C47 15.4 52 15.4 57 16.4 C57.8 21 58 26 57.6 30.4 C52 31.2 47 31.2 42.6 30.4 C42.2 26 42 21 42 16.4 Z"/><path d="M47.4 16.2 C48 21 48.3 26 47.7 30.9"/><path d="M52.5 16 C53.4 20 53.7 25 53.1 30.9"/><path d="M43.2 30.9 V32.2 M44.3 30.9 V32.2 M45.4 30.9 V32.2 M46.5 30.9 V32.2 M47.6 30.9 V32.2 M48.7 30.9 V32.2 M49.8 30.9 V32.2 M50.9 30.9 V32.2 M52 30.9 V32.2 M53.1 30.9 V32.2 M54.2 30.9 V32.2 M55.3 30.9 V32.2 M56.4 30.9 V32.2"/>' + _G,
-            hatch: '<path d="M0 0 h5.4 v36 h-5.4 Z"/><path d="M4.6 26.2 h70.4 v7.8 h-70.4 Z"/>' } },
-    ] },
-    // Doors carry the detail a door schedule expects: a 2in jamb, the leaf inside it,
-    // THREE butt hinges at their real AFF heights, a lever at 36in (34in on the ADA
-    // door) with a proper 2.75in backset, and a floor undercut. The hinge and lever
-    // heights are computed from the leaf height — cy is (h - AFF) — so they stay true
-    // if a size is ever corrected.
-    { cat: 'Doors', items: [
-        { key: 'door-guest', name: 'Guestroom entry', w: 36, h: 84, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Guestroom Door',
-          svg: _O + '<rect x="0" y="0" width="36" height="84"/>'
-                  + '<rect x="2" y="2" width="32" height="82"/>' + _G
-             + _D + '<circle cx="31.25" cy="48" r="1.15"/><path d="M31.25 48 h-4.4"/>' + _G
-             + _F + '<rect x="2" y="7.75" width="0.7" height="4.5"/>'
-                  + '<rect x="2" y="39.75" width="0.7" height="4.5"/>'
-                  + '<rect x="2" y="71.75" width="0.7" height="4.5"/>'
-                  + '<path d="M2 83.25 h32"/>' + _G,
-          hatch: '<rect x="2" y="2" width="32" height="82"/>' },
-        { key: 'door-ada-bath', name: 'ADA bathroom', w: 36, h: 80, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'ADA Bathroom Door',
-          // A LEVER, not a knob: ADA requires hardware operable without grasping or
-          // twisting, and that is the one visual difference from the entry door.
-          svg: _O + '<rect x="0" y="0" width="36" height="80"/>'
-                  + '<rect x="2" y="2" width="32" height="78"/>' + _G
-             + _D + '<circle cx="31.25" cy="46" r="1.15"/><path d="M31.25 46 h-5.2"/>' + _G
-             + _F + '<rect x="2" y="7.75" width="0.7" height="4.5"/>'
-                  + '<rect x="2" y="37.75" width="0.7" height="4.5"/>'
-                  + '<rect x="2" y="67.75" width="0.7" height="4.5"/>'
-                  + '<path d="M2 79.25 h32"/>' + _G,
-          hatch: '<rect x="2" y="2" width="32" height="78"/>' },
-        { key: 'door-closet', name: 'Closet double', w: 72, h: 80, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Closet Doors',
-          // Bi-parting leaves with a 2in meeting stile, hinges on the OUTER edges and
-          // pulls at the centre — the way a closet pair actually swings.
-          svg: _O + '<rect x="0" y="0" width="72" height="80"/>'
-                  + '<rect x="2" y="2" width="33" height="78"/><rect x="37" y="2" width="33" height="78"/>' + _G
-             + _D + '<path d="M33 38 v6 M39 38 v6"/>' + _G
-             + _F + '<rect x="2" y="9.75" width="0.7" height="4.5"/><rect x="2" y="65.75" width="0.7" height="4.5"/>'
-                  + '<rect x="69.3" y="9.75" width="0.7" height="4.5"/><rect x="69.3" y="65.75" width="0.7" height="4.5"/>'
-                  + '<path d="M2 79.25 h33 M37 79.25 h33"/>' + _G,
-          hatch: '<rect x="2" y="2" width="33" height="78"/><rect x="37" y="2" width="33" height="78"/>' },
-    ] },
-    { cat: 'Fixtures', items: [
-        { key: 'tv-55', name: 'TV 55"', w: 48.5, h: 28, aff: 60, affMode: 'center',
-          shape: 'tv', fill: 'plain', label: 'TV',
-          // 48.5in is the WIDTH of a 55in-diagonal panel. The diagonal is the marketing
-          // number; the width is what decides whether art fits beside it.
-          svg: _O + '<rect x="0" y="0" width="48.5" height="28" rx="0.4"/>' + _G
-             + _D + '<rect x="0.9" y="0.9" width="46.7" height="24.5"/>' + _G
-             + _F + '<path d="M0.9 25.4 h46.7"/><path d="M22.5 26.7 h3.5"/>' + _G,
-          // Edge-on: a wall-mounted panel is ~4in off the wall including its bracket.
-          // Worth having, because that projection is what a passing shoulder hits.
-          side: { w: 4, h: 28,
-            svg: _O + '<rect x="0" y="0" width="4" height="28" rx="0.3"/>' + _G
-               + _D + '<path d="M1.4 9 h1.2 v10 h-1.2 z"/>' + _G
-               + _F + '<path d="M0 1 h4 M0 27 h4"/>' + _G } },
-        { key: 'sconce', name: 'Wall sconce', w: 5, h: 10, aff: 60, affMode: 'center',
-          shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M1.55 3 L3.45 3 L4.6 10 L0.4 10 Z"/>' + _G
-             + _D + '<rect x="1.7" y="0" width="1.6" height="3"/>' + _G
-             + _F + '<path d="M0.62 8.7 h3.76"/>' + _G,
-          side: { w: 7, h: 10,
-            svg: _O + '<path d="M0 0 h1.2 v10 h-1.2 z"/>'
-                    + '<path d="M2.4 3 L4.2 3 L7 10 L1.2 10 Z"/>' + _G
-               + _D + '<path d="M1.2 4 h1.6"/>' + _G } },
-        { key: 'lamp-table', name: 'Table lamp', w: 14, h: 26, aff: 25, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: '',
-          // Sits ON the nightstand, so its default AFF is the 25in nightstand top rather
-          // than the floor — the kind of number a library is for.
-          svg: _O + '<path d="M3.2 0 L10.8 0 L14 11 L0 11 Z"/>'
-                  + '<path d="M4.6 22 h4.8 v4 h-4.8 z"/>' + _G
-             + _D + '<path d="M6.4 11 v11 M7.6 11 v11"/>' + _G
-             + _F + '<path d="M0.4 10 h13.2"/><path d="M4.6 24 h4.8"/>' + _G },
-        { key: 'lamp-floor', name: 'Floor lamp', w: 16, h: 60, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M4 0 L12 0 L16 13 L0 13 Z"/>'
-                  + '<path d="M5 57 h6 v3 h-6 z"/>' + _G
-             + _D + '<path d="M7.5 13 v44 M8.5 13 v44"/>' + _G
-             + _F + '<path d="M0.4 11.8 h15.2"/>' + _G },
-        { key: 'mirror', name: 'Mirror', w: 36, h: 48, aff: 36, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Mirror',
-          // Frame, glass reveal, and the single diagonal that means "mirror" on an
-          // interior elevation.
-          svg: _O + '<rect x="0" y="0" width="36" height="48"/>' + _G
-             + _D + '<rect x="1.5" y="1.5" width="33" height="45"/>' + _G
-             + _F + '<path d="M4 43.5 L15 12"/><path d="M10 43.5 L21 12"/>' + _G,
-          hatch: '<rect x="1.5" y="1.5" width="33" height="45"/>' },
-        { key: 'mirror-rd', name: 'Round mirror', w: 36, h: 36, aff: null, affMode: 'center',
-          shape: 'ellipse', fill: 'plain', label: 'Mirror',
-          svg: _O + '<circle cx="18" cy="18" r="17.6"/>' + _G
-             + _D + '<circle cx="18" cy="18" r="16"/>' + _G
-             + _F + '<path d="M7 27 L17 8"/><path d="M13 29 L23 10"/>' + _G },
-        { key: 'thermostat', name: 'Thermostat', w: 5, h: 5, aff: 54, affMode: 'center',
-          svg: _CTX_ART_THERMO,
-          shape: 'rect', fill: 'plain', label: '' },
-        { key: 'outlet', name: 'Outlet', w: 3, h: 5, aff: 15, affMode: 'center',
-          svg: _CTX_ART_OUTLET,
-          shape: 'rect', fill: 'plain', label: '' },
-        { key: 'tv-65', name: 'TV 65"', w: 56.7, h: 32.2, aff: 60, affMode: 'center', shape: 'tv', fill: 'plain', label: 'TV',
-          svg: _O + '<rect x="0" y="0" width="56.7" height="32.2" rx="0.4"/>' + _G
-             + _D + '<rect x="0.9" y="0.9" width="54.9" height="28.6"/>' + _G
-             + _F + '<path d="M0.9 29.5 h54.9"/><path d="M26.6 30.9 h3.5"/>' + _G,
-          side: { w: 4, h: 32.2, svg: _O + '<rect x="0" y="0" width="4" height="32.2" rx="0.3"/>' + _G
-                  + _D + '<path d="M1.4 10.6 h1.2 v11 h-1.2 z"/>' + _G + _F + '<path d="M0 1 h4 M0 31.2 h4"/>' + _G } },
-        { key: 'tv-75', name: 'TV 75"', w: 65.4, h: 37.2, aff: 60, affMode: 'center', shape: 'tv', fill: 'plain', label: 'TV',
-          svg: _O + '<rect x="0" y="0" width="65.4" height="37.2" rx="0.4"/>' + _G
-             + _D + '<rect x="0.9" y="0.9" width="63.6" height="33.6"/>' + _G
-             + _F + '<path d="M0.9 34.5 h63.6"/><path d="M30.95 35.9 h3.5"/>' + _G,
-          side: { w: 4, h: 37.2, svg: _O + '<rect x="0" y="0" width="4" height="37.2" rx="0.3"/>' + _G
-                  + _D + '<path d="M1.4 12.6 h1.2 v12 h-1.2 z"/>' + _G + _F + '<path d="M0 1 h4 M0 36.2 h4"/>' + _G } },
-        { key: 'picture-light', name: 'Picture light', w: 24, h: 7.4, aff: 82, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M1.4 4.6 H22.6 Q24 4.6 24 6 Q24 7.4 22.6 7.4 H1.4 Q0 7.4 0 6 Q0 4.6 1.4 4.6 Z"/>'
-                  + '<rect x="10" y="0" width="4" height="2.4" rx="0.5"/>' + _G
-             + _D + '<path d="M11.6 2.4 V4.6 M12.4 2.4 V4.6"/>' + _G
-             + _F + '<path d="M2 6.7 H22"/>' + _G },
-        { key: 'pendant', name: 'Pendant', w: 14, h: 30, aff: 66, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M0 30 C0 22.6 3 18 7 18 C11 18 14 22.6 14 30 Z"/>' + _G
-             + _D + '<path d="M7 0 V18"/>' + _G
-             + _F + '<path d="M6.2 18.2 V16.8 H7.8 V18.2"/><path d="M2.6 28.4 H11.4"/>' + _G },
-        { key: 'fountain', name: 'Drinking fountain', w: 19, h: 18, aff: 27, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Fountain',
-          svg: _O + '<path d="M1 0 H18 Q19 0 19 1 V7 C19 12.4 15 18 9.5 18 C4 18 0 12.4 0 7 V1 Q0 0 1 0 Z"/>' + _G
-             + _D + '<path d="M0 2.4 H19"/><path d="M6 10.4 H13"/>' + _G
-             + _F + '<path d="M8.8 2.4 V1.2 H10.2 V2.4"/>' + _G },
-        { key: 'clock', name: 'Wall clock', w: 12, h: 12, aff: 84, affMode: 'center', shape: 'ellipse', fill: 'plain', label: '',
-          svg: _O + '<circle cx="6" cy="6" r="5.8"/>' + _G
-             + _D + '<circle cx="6" cy="6" r="5"/><path d="M6 6 V2.6 M6 6 L8.4 7.4"/>' + _G
-             + _F + '<path d="M6 1.2 V1.9 M6 10.1 V10.8 M1.2 6 H1.9 M10.1 6 H10.8"/>' + _G },
-    ] },
-    // Hospitality bathrooms are drawn as often as the room itself, and the fixtures are
-    // the part a generic box says nothing useful about. Everything here is at its real
-    // ADA / code height: a 34in counter, an 18in comfort-height seat, grab bars at 34in,
-    // a towel bar at 48in.
-    { cat: 'Bath', items: [
-        { key: 'vanity-ada', name: 'ADA vanity', w: 48, h: 34, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'ADA Vanity',
-          // Open knee space is the whole point of an ADA vanity, so this is a counter and
-          // apron over a void — no cabinet. With the front open the BOWL IS VISIBLE, so
-          // it is drawn as a real object line rather than a hidden dash: an undermount
-          // basin with its rim, and the P-trap and angle stops a plumbing elevation
-          // carries. The faucet sits above the counter and is therefore outside this box.
-          svg: _O + '<rect x="0" y="0" width="48" height="2"/>'
-                  + '<rect x="0" y="2" width="48" height="3.5"/>'
-                  + '<path d="M14.5 5.5 v2.6 a9.5 5.6 0 0 0 19 0 v-2.6"/>' + _G
-             + _D + '<path d="M24 13.6 v2.2 a2.1 2.1 0 1 0 4.2 0 v-2.2"/>'
-                  + '<path d="M28.2 15.7 h6"/>' + _G
-             + _F + '<path d="M0 0.8 h48"/><path d="M16.5 5.5 v2.2 a7.5 4.2 0 0 0 15 0 v-2.2"/>'
-                  + '<circle cx="24" cy="9.2" r="0.7"/>'
-                  + '<circle cx="17" cy="20" r="0.9"/><circle cx="31" cy="20" r="0.9"/>'
-                  + '<path d="M17 19.1 v-2.4 M31 19.1 v-2.4"/>'
-                  + '<path d="M0 34 h48"/>' + _G,
-          side: { w: 22, h: 34,
-            svg: _O + '<rect x="0" y="0" width="22" height="2"/>'
-                    + '<rect x="0" y="2" width="22" height="3.5"/>'
-                    + '<path d="M3 5.5 v2.6 a8 5.6 0 0 0 16 0 v-2.6"/>' + _G
-               + _D + '<path d="M11 13.6 v2.2 a2.1 2.1 0 1 0 4.2 0 v-2.2"/>' + _G
-               + _F + '<path d="M0 0.8 h22"/><path d="M0 34 h22"/>' + _G } },
-        { key: 'vanity-60', name: 'Vanity 60"', w: 60, h: 34, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Vanity',
-          // The closed-cabinet version: counter, two doors on a consistent reveal, pulls
-          // and a recessed toe kick. The bowl is HIDDEN behind the cabinet front, which
-          // is the one place the dashed convention belongs on this item.
-          svg: _O + '<rect x="0" y="0" width="60" height="2"/>'
-                  + '<path d="M0 2 h60 v26 h-60 z"/>'
-                  + '<path d="M2.5 28 h55 v6 h-55 z"/>' + _G
-             + _D + '<rect x="1" y="3" width="28.5" height="24"/>'
-                  + '<rect x="30.5" y="3" width="28.5" height="24"/>' + _G
-             + _H + '<path d="M20 2 v2.4 a10 5 0 0 0 20 0 v-2.4"/>' + _G
-             + _F + '<path d="M0 0.8 h60"/><path d="M11 6 h8 M41 6 h8"/>' + _G },
-        { key: 'lav-wall', name: 'Wall lav', w: 20, h: 22, aff: 12, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Lavatory',
-          // A wall-hung basin: rim at 34in AFF (12 + 22), bowl, trap. Its own item
-          // because a bathroom without a vanity still has a sink.
-          svg: _O + '<path d="M0 0 h20 v3 h-20 z"/>'
-                  + '<path d="M1.5 3 v3.4 a8.5 6.5 0 0 0 17 0 v-3.4"/>' + _G
-             + _D + '<path d="M8.4 12.6 v3.4 a1.9 1.9 0 1 0 3.8 0 v-3.4"/>'
-                  + '<path d="M12.2 16 h5.6"/>' + _G
-             + _F + '<path d="M3.5 3 v2.8 a6.5 4.6 0 0 0 13 0 v-2.8"/>'
-                  + '<circle cx="10" cy="7.6" r="0.65"/><path d="M0 1 h20"/>' + _G },
-        { key: 'toilet-ada', name: 'ADA toilet', w: 15, h: 18, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'ADA Toilet',
-          // 18in is to the TOP OF SEAT, the ADA comfort height — so the box stops at the
-          // seat and any tank above it is outside this bounding box.
-          // Front elevation of a floor-mount bowl. The shape that makes it read: a seat
-          // with a visible lid overhang, a bowl that is WIDEST at the rim and pulls in
-          // to a narrow waist, then flares out again to a foot on the floor. The old
-          // version tapered straight down, which is why it looked like nothing in
-          // particular.
-          svg: _O + '<path d="M0.6 0 h13.8 a0.7 0.7 0 0 1 0 1.7 h-13.8 a0.7 0.7 0 0 1 0 -1.7 z"/>'
-                  + '<path d="M1.5 1.7 C1.5 5.2 2.6 7.6 4.3 9.5 C5.2 10.5 5.6 11.6 5.6 12.8'
-                  + ' L5.6 15.4 C5.6 16.1 5.2 16.5 4.6 16.8 L4 17.2 L4 18 L11 18 L11 17.2'
-                  + ' L10.4 16.8 C9.8 16.5 9.4 16.1 9.4 15.4 L9.4 12.8 C9.4 11.6 9.8 10.5 10.7 9.5'
-                  + ' C12.4 7.6 13.5 5.2 13.5 1.7 Z"/>' + _G
-             + _D + '<path d="M4 17.2 h7"/>' + _G
-             + _F + '<path d="M0.6 0.9 h13.8"/>'
-                  + '<path d="M3.2 5.6 C5.5 6.6 9.5 6.6 11.8 5.6"/>' + _G,
-          side: { w: 28, h: 18,
-            svg: _O + '<path d="M0 0 h11 v1.6 h-11 z"/>'
-                    + '<path d="M0 1.6 v14 a3 3 0 0 0 3 2.4 h6 a3 3 0 0 0 3 -2.4 v-14"/>' + _G
-               + _D + '<path fill="none" d="M11 1.6 C16 2.5 22 4 24.5 7 C26.5 9.5 26.5 13 24 15.5"/>'
-                    + '<path d="M12 18 h13"/>' + _G
-               + _F + '<path d="M0 1 h11"/>' + _G } },
-        { key: 'toilet-tank', name: 'Toilet + tank', w: 20, h: 30, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Toilet',
-          // Two-piece: the tank sits behind and above the seat, so the box runs to the
-          // 30in tank lid rather than to the 18in seat.
-          svg: _O + '<rect x="1" y="0" width="18" height="12" rx="0.5"/>'
-                  + '<rect x="2.5" y="12" width="15" height="1.6" rx="0.6"/>'
-                  + '<path d="M3.7 13.6 L4.1 19 C4.6 22 6.8 23.2 7.2 25.4 L6.5 28.4'
-                  + ' L5.6 30 L14.4 30 L13.5 28.4 L12.8 25.4 C13.2 23.2 15.4 22 15.9 19 L16.3 13.6"/>' + _G
-             + _D + '<path d="M1 2.2 h18"/>' + _G
-             + _F + '<circle cx="4.6" cy="4.4" r="0.8"/><path d="M6.5 28.4 h7"/>' + _G },
-        { key: 'tub', name: 'Bathtub', w: 60, h: 20, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Tub',
-          // Apron-front tub: the rolled rim, the apron face and the recessed base.
-          svg: _O + '<path d="M0 0 h60 v20 h-60 z"/>' + _G
-             + _D + '<path d="M0 2.6 h60"/><path d="M1.5 18 h57"/>' + _G
-             + _F + '<path d="M0 1.2 h60"/><path d="M52 6 v8"/>' + _G },
-        { key: 'shower', name: 'Shower', w: 36, h: 80, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Shower',
-          svg: _O + '<rect x="0" y="0" width="36" height="80"/>'
-                  + '<path d="M0 76 h36 v4 h-36 z"/>' + _G
-             + _D + '<rect x="1.5" y="1.5" width="33" height="74.5"/>'
-                  + '<path d="M19 1.5 v74.5"/>' + _G
-             + _F + '<path d="M16 36 v8"/>'
-                  + '<path d="M27 4 v3"/><path d="M23.5 7 h7"/>'
-                  + '<path d="M24.5 7 v1.6 M27 7 v1.6 M29.5 7 v1.6"/>' + _G },
-        { key: 'grab-36', name: 'Grab bar 36"', w: 36, h: 1.5, aff: 34, affMode: 'bottom',
-          shape: 'shelf', fill: 'plain', label: 'Grab Bar',
-          svg: _O + '<rect x="0" y="0" width="36" height="1.5" rx="0.75"/>' + _G
-             + _F + '<path d="M2.2 0 v1.5 M33.8 0 v1.5"/>' + _G },
-        { key: 'grab-42', name: 'Grab bar 42"', w: 42, h: 1.5, aff: 34, affMode: 'bottom',
-          shape: 'shelf', fill: 'plain', label: 'Grab Bar',
-          svg: _O + '<rect x="0" y="0" width="42" height="1.5" rx="0.75"/>' + _G
-             + _F + '<path d="M2.2 0 v1.5 M39.8 0 v1.5"/>' + _G },
-        { key: 'towel-bar', name: 'Towel bar', w: 24, h: 4, aff: 48, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M0 0 h1.6 v4 h-1.6 z"/><path d="M22.4 0 h1.6 v4 h-1.6 z"/>' + _G
-             + _D + '<path d="M1.6 1.2 h20.8"/>' + _G },
-        { key: 'toilet-wall', name: 'Wall-hung toilet', w: 15, h: 11, aff: 8, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Toilet',
-          svg: _O + '<path d="M0.5 0 H14.5 Q15 0 15 0.5 V2.2 H0 V0.5 Q0 0 0.5 0 Z"/>'
-                  + '<path d="M0.6 2.2 H14.4 C14.2 6 12 9.4 10 11 H5 C3 9.4 0.8 6 0.6 2.2 Z"/>' + _G
-             + _D + '<path d="M0 1.1 H15"/>' + _G
-             + _F + '<path d="M5.6 2.2 V3"/>' + _G },
-        { key: 'flush-plate', name: 'Flush plate', w: 9, h: 6, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<rect x="0" y="0" width="9" height="6" rx="0.6"/>' + _G
-             + _D + '<rect x="1" y="1" width="3.3" height="4" rx="0.5"/><rect x="4.7" y="1" width="3.3" height="4" rx="0.5"/>' + _G },
-        { key: 'urinal', name: 'Urinal', w: 18, h: 26, aff: 13, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Urinal',
-          svg: _O + '<path d="M3 0 H15 Q18 0 18 3 V16 C18 21.4 15.4 26 9 26 C2.6 26 0 21.4 0 16 V3 Q0 0 3 0 Z"/>' + _G
-             + _D + '<path d="M3 9 Q9 6.6 15 9 V17 C15 20.6 12.5 22.6 9 22.6 C5.5 22.6 3 20.6 3 17 Z"/>' + _G
-             + _F + '<rect x="8" y="2.4" width="2" height="1.6" rx="0.4"/><path d="M7.6 20.4 H10.4"/>' + _G },
-        { key: 'lav-pedestal', name: 'Pedestal sink', w: 22, h: 38, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Sink',
-          svg: _O + '<path d="M0.8 4 H21.2 Q22 4 22 4.8 V6 C22 10.6 18 13 11 13 C4 13 0 10.6 0 6 V4.8 Q0 4 0.8 4 Z"/>'
-                  + '<path d="M8 13 C8.6 20 8.2 30 6.6 38 H15.4 C13.8 30 13.4 20 14 13"/>' + _G
-             + _D + '<path d="M0 6 H22"/><path fill="none" d="M10 4 V1.8 Q10 0.4 11.6 0.4 H13.6 V1.4"/>' + _G
-             + _F + '<path d="M9 4 H12"/><path d="M7.4 36.6 H14.6"/>' + _G },
-        { key: 'stall', name: 'Toilet stall', w: 36, h: 70, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Stall',
-          svg: _O + '<path d="M0 0 H36 V1.5 H0 Z"/><path d="M0 1.5 H4 V70 H0 Z M32 1.5 H36 V70 H32 Z"/>'
-                  + '<path d="M4.5 1.5 H31.5 V58 H4.5 Z"/>' + _G
-             + _D + '<path d="M0 66 H4 M32 66 H36"/><rect x="28" y="28" width="2.5" height="3" rx="0.4"/>' + _G
-             + _F + '<path d="M4 6 H5.5 M4 52 H5.5"/><rect x="28.4" y="24" width="1.7" height="2" rx="0.3"/>' + _G },
-        { key: 'towel-disp', name: 'Paper towel dispenser', w: 11, h: 15, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M1 0 H10 Q11 0 11 1 V13 Q11 15 9 15 H2 Q0 15 0 13 V1 Q0 0 1 0 Z"/>' + _G
-             + _D + '<path d="M2.5 13 H8.5"/>' + _G
-             + _F + '<rect x="4" y="5" width="3" height="3" rx="0.4"/>' + _G },
-        { key: 'hand-dryer', name: 'Hand dryer', w: 10, h: 12, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M1.5 0 H8.5 Q10 0 10 1.5 V8 Q10 10 8 10 H2 Q0 10 0 8 V1.5 Q0 0 1.5 0 Z"/>'
-                  + '<path d="M3.5 10 H6.5 L6 12 H4 Z"/>' + _G
-             + _F + '<path d="M4.4 6.4 H5.6"/>' + _G },
-        { key: 'soap', name: 'Soap dispenser', w: 4, h: 7, aff: 42, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<rect x="0" y="0" width="4" height="7" rx="0.6"/>' + _G
-             + _D + '<path d="M0.8 5.2 H3.2"/>' + _G
-             + _F + '<rect x="1" y="1.6" width="2" height="2.6" rx="0.3"/>' + _G },
-        { key: 'tp-holder', name: 'Toilet paper (double)', w: 12, h: 5, aff: 22, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<circle cx="2.5" cy="2.5" r="2.4"/><circle cx="9.5" cy="2.5" r="2.4"/>' + _G
-             + _D + '<path d="M4.9 2.5 H7.1"/>' + _G
-             + _F + '<circle cx="2.5" cy="2.5" r="0.7"/><circle cx="9.5" cy="2.5" r="0.7"/>' + _G },
-        { key: 'robe-hook', name: 'Robe hook', w: 2, h: 3, aff: 66, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<circle cx="1" cy="0.7" r="0.6"/>' + _G
-             + _D + '<path d="M1 1.3 V2 Q1 2.9 1.9 2.5"/>' + _G },
-        { key: 'towel-ring', name: 'Towel ring', w: 7, h: 9, aff: 48, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<circle cx="3.5" cy="5.6" r="3.3"/>' + _G
-             + _D + '<rect x="2.4" y="0" width="2.2" height="1.6" rx="0.4"/>' + _G
-             + _F + '<path d="M3.5 1.6 V2.3"/>' + _G },
-        { key: 'mirror-lit', name: 'Lighted mirror', w: 30, h: 40, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Mirror',
-          svg: _O + '<rect x="0" y="0" width="30" height="40" rx="4"/>' + _G
-             + _D + '<rect x="2" y="2" width="26" height="36" rx="2.6"/>' + _G
-             + _F + '<path d="M6 32 L14 9 M10.5 32 L18.5 9"/>' + _G,
-          hatch: '<rect x="2" y="2" width="26" height="36"/>' },
-    ] },
-    { cat: 'Openings', items: [
-        { key: 'window', name: 'Window', w: 48, h: 48, aff: 36, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Window',
-          // Frame, sash, meeting rail and muntins — the sash inset is what stops this
-          // reading as a plain square.
-          svg: _O + '<rect x="0" y="0" width="48" height="48"/>' + _G
-             + _D + '<rect x="2" y="2" width="44" height="44"/>' + _G
-             + _F + '<path d="M24 2 v44"/><path d="M2 24 h44"/>'
-                  + '<path d="M0 45.5 h48"/>' + _G,
-          hatch: '<rect x="2" y="2" width="44" height="44"/>' },
-        { key: 'window-full', name: 'Full-height', w: 72, h: 96, aff: 4, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Window',
-          svg: _O + '<rect x="0" y="0" width="72" height="96"/>' + _G
-             + _D + '<path d="M24 0 v96 M48 0 v96"/>' + _G
-             + _F + '<rect x="1.5" y="1.5" width="21" height="93"/>'
-                  + '<rect x="25.5" y="1.5" width="21" height="93"/>'
-                  + '<rect x="49.5" y="1.5" width="21" height="93"/>' + _G,
-          hatch: '<rect x="1.5" y="1.5" width="21" height="93"/><rect x="25.5" y="1.5" width="21" height="93"/><rect x="49.5" y="1.5" width="21" height="93"/>' },
-        { key: 'door-slide', name: 'Sliding door', w: 60, h: 80, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Sliding Door',
-          svg: _O + '<rect x="0" y="0" width="60" height="80"/>'
-                  + '<rect x="1.5" y="1.5" width="28" height="77"/>'
-                  + '<rect x="30.5" y="1.5" width="28" height="77"/>' + _G
-             + _D + '<path d="M27 37 v6 M33 37 v6"/>' + _G
-             + _F + '<path d="M1.5 76 h57"/>' + _G },
-        { key: 'elevator', name: 'Elevator', w: 42, h: 84, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Elevator',
-          // Centre-opening two-leaf car doors with a sill — the pair of panel lines is
-          // what distinguishes an elevator from a plain opening in elevation.
-          svg: _O + '<rect x="0" y="0" width="42" height="84"/>'
-                  + '<rect x="2" y="2" width="38" height="82"/>' + _G
-             + _D + '<path d="M21 2 v82"/>' + _G
-             + _F + '<path d="M11 2 v82 M31 2 v82"/><path d="M2 81.5 h38"/>' + _G },
-        { key: 'niche', name: 'Niche', w: 36, h: 48, aff: 30, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Niche' },
-    ] },
-    { cat: 'Millwork', items: [
-        // A shelf keeps the `shelf` primitive rather than getting line art: at 1.5in
-        // deep there is nothing to draw but the slab, and the primitive already strikes
-        // its top edge heavy — which IS the shelf plane art gets measured from.
-        { key: 'shelf', name: 'Shelf', w: 48, h: 1.5, aff: 48, affMode: 'bottom',
-          shape: 'shelf', fill: 'plain', label: 'Shelf' },
-        { key: 'shelf-long', name: 'Long shelf', w: 96, h: 1.5, aff: 48, affMode: 'bottom',
-          shape: 'shelf', fill: 'plain', label: 'Shelf' },
-        { key: 'credenza', name: 'Credenza', w: 72, h: 30, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Credenza',
-          // Casework, drawn as casework: a top slab with an edge reveal, three door
-          // faces on consistent 1in reveals, bar pulls, and a recessed toe kick. The
-          // toe kick is the detail that most says "millwork" in elevation.
-          svg: _O + '<rect x="0" y="0" width="72" height="1.6"/>'
-                  + '<path d="M0 1.6 h72 v22.4 h-72 z"/>'
-                  + '<path d="M2.5 24 h67 v6 h-67 z"/>' + _G
-             + _D + '<rect x="1" y="2.6" width="22.6" height="20.4"/>'
-                  + '<rect x="24.7" y="2.6" width="22.6" height="20.4"/>'
-                  + '<rect x="48.4" y="2.6" width="22.6" height="20.4"/>' + _G
-             + _F + '<path d="M8.3 5.6 h8 M32 5.6 h8 M55.7 5.6 h8"/>' + _G,
-          hatch: '<rect x="0" y="0" width="72" height="24"/>',
-          side: { w: 20, h: 30,
-            svg: _O + '<rect x="0" y="0" width="20" height="1.6"/>'
-                    + '<path d="M0 1.6 h20 v22.4 h-20 z"/>'
-                    + '<path d="M1.5 24 h17 v6 h-17 z"/>' + _G
-               + _F + '<path d="M0 4.5 h20"/>' + _G } },
-        { key: 'desk', name: 'Desk', w: 48, h: 30, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Desk',
-          svg: _O + '<rect x="0" y="0" width="48" height="1.6"/>'
-                  + '<rect x="0" y="1.6" width="2.2" height="28.4"/>'
-                  + '<rect x="45.8" y="1.6" width="2.2" height="28.4"/>' + _G
-             + _D + '<rect x="6" y="4" width="36" height="9"/>' + _G
-             + _F + '<path d="M0 30 h48"/>' + _G,
-          side: { w: 24, h: 30,
-            svg: _O + '<rect x="0" y="0" width="24" height="1.6"/>'
-                    + '<rect x="1" y="1.6" width="2.2" height="28.4"/>'
-                    + '<rect x="20.8" y="1.6" width="2.2" height="28.4"/>' + _G
-               + _F + '<path d="M0 30 h24"/>' + _G } },
-        { key: 'console', name: 'Console', w: 60, h: 32, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Console',
-          svg: _O + '<rect x="0" y="0" width="60" height="1.6"/>'
-                  + '<rect x="2" y="1.6" width="2" height="30.4"/>'
-                  + '<rect x="56" y="1.6" width="2" height="30.4"/>' + _G
-             + _D + '<rect x="4" y="1.6" width="52" height="6"/>' + _G
-             + _F + '<path d="M26 5 h8"/>' + _G },
-        { key: 'headboard', name: 'Headboard', w: 78, h: 48, aff: 24, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Headboard',
-          // Upholstered panel headboard: outer frame, an inset panel, and vertical
-          // channel tufting — the standard hospitality detail.
-          svg: _O + '<rect x="0" y="0" width="78" height="48"/>' + _G
-             + _D + '<rect x="2" y="2" width="74" height="44"/>' + _G
-             + _F + '<path d="M17 2 v44 M32 2 v44 M47 2 v44 M62 2 v44"/>' + _G },
-        { key: 'wainscot', name: 'Wainscot', w: 120, h: 36, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Wainscot' },
-        { key: 'handrail', name: 'Handrail', w: 120, h: 2, aff: 34, affMode: 'bottom',
-          shape: 'shelf', fill: 'plain', label: 'Handrail' },
-        { key: 'reception', name: 'Reception', w: 120, h: 42, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Reception Desk',
-          // Transaction counter over a lower work surface: the 42in top, the 34in ADA
-          // section at one end, a reveal band and a toe kick.
-          svg: _O + '<rect x="0" y="0" width="120" height="1.8"/>'
-                  + '<path d="M0 1.8 h120 v34.2 h-120 z"/>'
-                  + '<path d="M3 36 h114 v6 h-114 z"/>' + _G
-             + _D + '<rect x="0" y="8" width="120" height="1.2"/>'
-                  + '<path d="M78 8 v28 M78 8 h42"/>' + _G
-             + _F + '<path d="M0 4.5 h120"/><path d="M26 9.2 v26.8 M52 9.2 v26.8"/>' + _G },
-        { key: 'wardrobe', name: 'Wardrobe', w: 40, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Wardrobe',
-          svg: _O + '<path d="M0 0 H40 V84 H0 Z"/>' + _G
-             + _D + '<path d="M1 1.5 H19.75 V80 H1 Z M20.25 1.5 H39 V80 H20.25 Z"/><path d="M0 81 H40"/>' + _G
-             + _F + '<path d="M18 38 V46 M22 38 V46"/>' + _G,
-          hatch: '<rect x="1" y="1.5" width="38" height="78.5"/>' },
-        { key: 'minibar', name: 'Minibar cabinet', w: 30, h: 36, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Minibar',
-          svg: _O + '<path d="M0 0 H30 V1.5 H0 Z"/><path d="M0.5 1.5 H29.5 V32 H0.5 Z"/><path d="M2 32 H28 V36 H2 Z"/>' + _G
-             + _D + '<path d="M1.5 2.5 H16 V31 H1.5 Z"/><path d="M17 2.5 H28.5 V16.25 H17 Z M17 17.25 H28.5 V31 H17 Z"/>' + _G
-             + _F + '<path d="M14.4 6 V12"/><path d="M20 9.4 H25.5 M20 24.1 H25.5"/><path d="M3 29 H14.5"/>' + _G,
-          hatch: '<rect x="0" y="0" width="30" height="1.5"/><rect x="17" y="2.5" width="11.5" height="28.5"/>' },
-    ] },
-    { cat: 'Furniture', items: [
-        { key: 'nightstand', name: 'Nightstand', w: 24, h: 25, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Nightstand',
-          svg: _O + '<rect x="0" y="0" width="24" height="1.3"/>'
-                  + '<path d="M0 1.3 h24 v19.7 h-24 z"/>'
-                  + '<path d="M1.5 21 h21 v4 h-21 z"/>' + _G
-             + _D + '<rect x="1" y="2.3" width="22" height="8.4"/>'
-                  + '<rect x="1" y="11.6" width="22" height="8.4"/>' + _G
-             + _F + '<path d="M9 6.5 h6 M9 15.8 h6"/>' + _G,
-          hatch: '<rect x="0" y="0" width="24" height="21"/>',
+            svg: _O + '<rect data-o="1" x="8" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="65" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="4" y="30.6" width="70.4" height="4.2" rx="1"/><path data-o="1" d="M4 32.4 V16.1 Q4 14.5 5.6 14.5 H71 Q75 14.5 75 18.5 V29.4 Q75 32.4 72 32.4 Z"/><path fill="none" d="M4 18.7 H74.6"/><path data-o="1" transform="rotate(-14 12 14.9)" d="M7 -0.1 H10 Q12 -0.1 12 1.9 V12.9 Q12 14.9 10 14.9 H7 Q5 14.9 5 12.9 V1.9 Q5 -0.1 7 -0.1 Z"/><path data-o="1" transform="rotate(-18 17.5 14.9)" d="M12.5 2.4 H15.5 Q17.5 2.4 17.5 4.4 V12.9 Q17.5 14.9 15.5 14.9 H12.5 Q10.5 14.9 10.5 12.9 V4.4 Q10.5 2.4 12.5 2.4 Z"/><path data-o="1" d="M45 13.9 H58.5 Q59.5 13.9 59.5 15.5 V29.6 Q59.5 30.6 58.5 30.6 H45 Q44 30.6 44 29.6 V15.5 Q44 13.9 45 13.9 Z"/><path fill="none" d="M51.08 14.3 V30.2"/><path fill="none" d="M54.45 14.3 V30.2"/><path data-o="1" d="M0 36 V2 Q0 0 2 0 Q4 0 4 2 V36 Z"/>' + _G,
+            hatch: '<rect x="0" y="0" width="4" height="36"/><rect x="4" y="30.6" width="70.4" height="4.2"/>' } },
+        { key: 'bed-twin', name: 'Twin bed', w: 39, h: 24, lengthIn: 75, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Twin Bed',
+          variants: BED_STYLE_VARIANTS,
+          svg: _O + '<rect data-o="1" x="3.6" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="33" y="22.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="1.4" y="18.6" width="36.2" height="4.2" rx="1"/><rect data-o="1" x="4" y="3" width="14.5" height="9" rx="2.9"/><path fill="none" d="M6.61 5.7 Q11.25 4.62 15.89 5.7"/><rect data-o="1" x="20.5" y="3" width="14.5" height="9" rx="2.9"/><path fill="none" d="M23.11 5.7 Q27.75 4.62 32.39 5.7"/><path data-o="1" d="M0 11 Q0 9.4 1.6 9.4 H37.4 Q39 9.4 39 11 V17.6 Q39 20.4 36.2 20.4 H2.8 Q0 20.4 0 17.6 Z"/><path fill="none" d="M0 13.03 H39"/><path fill="none" d="M2.4 14.23 Q1.4 16.72 2.6 19.6"/><path fill="none" d="M36.6 14.23 Q37.6 16.72 36.4 19.6"/>' + _G,
+          side: { w: 75, h: 36,
+            svg: _O + '<rect data-o="1" x="8" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="65" y="34.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="4" y="30.6" width="70.4" height="4.2" rx="1"/><path data-o="1" d="M4 32.4 V16.1 Q4 14.5 5.6 14.5 H71 Q75 14.5 75 18.5 V29.4 Q75 32.4 72 32.4 Z"/><path fill="none" d="M4 18.7 H74.6"/><path data-o="1" transform="rotate(-14 12 14.9)" d="M7 -0.1 H10 Q12 -0.1 12 1.9 V12.9 Q12 14.9 10 14.9 H7 Q5 14.9 5 12.9 V1.9 Q5 -0.1 7 -0.1 Z"/><path data-o="1" transform="rotate(-18 17.5 14.9)" d="M12.5 2.4 H15.5 Q17.5 2.4 17.5 4.4 V12.9 Q17.5 14.9 15.5 14.9 H12.5 Q10.5 14.9 10.5 12.9 V4.4 Q10.5 2.4 12.5 2.4 Z"/><path data-o="1" d="M45 13.9 H58.5 Q59.5 13.9 59.5 15.5 V29.6 Q59.5 30.6 58.5 30.6 H45 Q44 30.6 44 29.6 V15.5 Q44 13.9 45 13.9 Z"/><path fill="none" d="M51.08 14.3 V30.2"/><path fill="none" d="M54.45 14.3 V30.2"/><path data-o="1" d="M0 36 V2 Q0 0 2 0 Q4 0 4 2 V36 Z"/>' + _G } },
+        { key: 'gr-king-set', name: 'King bed + nightstands', w: 126, h: 54, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'King Bed',
+          svg: _O + '<rect data-o="1" x="1.4" y="52.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="19" y="52.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="0" y="30" width="22" height="22.4" rx="0.5"/><path fill="none" d="M0 31.4 H22"/><path fill="none" d="M1 41.9 H21"/><rect x="9" y="36.3" width="4" height="0.7" rx="0.35"/><rect x="9" y="46.8" width="4" height="0.7" rx="0.35"/><rect data-o="1" x="6.6" y="22.5" width="6" height="7.5" rx="0.3"/><rect x="7.6" y="23.5" width="4" height="5.5"/><rect data-o="1" x="11.1" y="24.5" width="4.5" height="5.5" rx="0.3"/><rect x="12" y="25.4" width="2.7" height="3.7"/><rect data-o="1" x="25" y="0" width="76" height="48" rx="0.8"/><rect x="27.4" y="2.4" width="71.2" height="45.6" rx="0.5"/><rect data-o="1" x="27.6" y="52.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="96" y="52.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="25.4" y="48.6" width="75.2" height="4.2" rx="1"/><rect data-o="1" x="27" y="19.5" width="35" height="12.6" rx="5.29"/><path fill="none" d="M31.76 23.28 Q44.5 21.77 57.24 23.28"/><rect data-o="1" x="63" y="19.5" width="35" height="12.6" rx="5.29"/><path fill="none" d="M67.76 23.28 Q80.5 21.77 93.24 23.28"/><rect data-o="1" x="28" y="23.1" width="34" height="9" rx="3.78"/><path fill="none" d="M31.4 25.8 Q45 24.72 58.6 25.8"/><rect data-o="1" x="64" y="23.1" width="34" height="9" rx="3.78"/><path fill="none" d="M67.4 25.8 Q81 24.72 94.6 25.8"/><path data-o="1" d="M24 31.1 Q24 29.5 25.6 29.5 H100.4 Q102 29.5 102 31.1 V47.6 Q102 50.4 99.2 50.4 H26.8 Q24 50.4 24 47.6 Z"/><path fill="none" d="M24 33.7 H102"/><path fill="none" d="M26.4 34.9 Q25.4 42.05 26.6 49.6"/><path fill="none" d="M99.6 34.9 Q100.6 42.05 99.4 49.6"/><rect data-o="1" x="105.4" y="52.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="123" y="52.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="104" y="30" width="22" height="22.4" rx="0.5"/><path fill="none" d="M104 31.4 H126"/><path fill="none" d="M105 41.9 H125"/><rect x="113" y="36.3" width="4" height="0.7" rx="0.35"/><rect x="113" y="46.8" width="4" height="0.7" rx="0.35"/><path fill="none" d="M117.64 24 C117.04 19 114.64 17 113.24 15"/><path fill="none" d="M117.64 24 C117.84 19 118.24 16 118.04 13"/><path fill="none" d="M117.64 24 C118.64 20 121.04 18 122.44 16.4"/><circle cx="113.24" cy="15" r="0.6"/><circle cx="118.04" cy="13" r="0.6"/><circle cx="122.44" cy="16.4" r="0.6"/><circle cx="115.64" cy="17.4" r="0.5"/><path data-o="1" d="M116.64 23.6 H118.64 C118.64 25 120.84 25.6 120.84 27.6 C120.84 29.4 119.24 30 117.64 30 C116.04 30 114.44 29.4 114.44 27.6 C114.44 25.6 116.64 25 116.64 23.6 Z"/>' + _G,
+          side: { w: 84, h: 54,
+            svg: _O + '<rect data-o="1" x="8" y="52.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="74" y="52.8" width="2.6" height="1.2" rx="0.3"/><rect data-o="1" x="4" y="48.6" width="79.4" height="4.2" rx="1"/><path data-o="1" d="M4 50.4 V34.1 Q4 32.5 5.6 32.5 H80 Q84 32.5 84 36.5 V47.4 Q84 50.4 81 50.4 Z"/><path fill="none" d="M4 36.7 H83.6"/><path data-o="1" transform="rotate(-14 12 32.9)" d="M7 17.9 H10 Q12 17.9 12 19.9 V30.9 Q12 32.9 10 32.9 H7 Q5 32.9 5 30.9 V19.9 Q5 17.9 7 17.9 Z"/><path data-o="1" transform="rotate(-18 17.5 32.9)" d="M12.5 20.4 H15.5 Q17.5 20.4 17.5 22.4 V30.9 Q17.5 32.9 15.5 32.9 H12.5 Q10.5 32.9 10.5 30.9 V22.4 Q10.5 20.4 12.5 20.4 Z"/><path data-o="1" d="M50.4 31.9 H65.52 Q66.52 31.9 66.52 33.5 V47.6 Q66.52 48.6 65.52 48.6 H50.4 Q49.4 48.6 49.4 47.6 V33.5 Q49.4 31.9 50.4 31.9 Z"/><path fill="none" d="M57.2 32.3 V48.2"/><path fill="none" d="M60.98 32.3 V48.2"/><path data-o="1" d="M0 54 V2 Q0 0 2 0 Q4 0 4 2 V54 Z"/><rect data-o="1" x="5.4" y="52.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="19" y="52.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="4" y="30" width="18" height="22.4" rx="0.5"/><path fill="none" d="M4 31.4 H22"/><path fill="none" d="M5 41.9 H21"/><rect x="11" y="36.3" width="4" height="0.7" rx="0.35"/><rect x="11" y="46.8" width="4" height="0.7" rx="0.35"/>' + _G } },
+        { key: 'gr-queen-pair', name: 'Double queen beds', w: 172, h: 50, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Queen Beds',
+          svg: _O + '<rect data-o="1" x="1" y="8" width="62" height="36" rx="0.8"/><rect x="3.4" y="10.4" width="57.2" height="33.6" rx="0.5"/><rect data-o="1" x="3.6" y="48.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="58" y="48.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="1.4" y="44.6" width="61.2" height="4.2" rx="1"/><rect data-o="1" x="3" y="15.5" width="28" height="12.6" rx="5.29"/><path fill="none" d="M7.76 19.28 Q17 17.77 26.24 19.28"/><rect data-o="1" x="32" y="15.5" width="28" height="12.6" rx="5.29"/><path fill="none" d="M36.76 19.28 Q46 17.77 55.24 19.28"/><rect data-o="1" x="4" y="19.1" width="27" height="9" rx="3.78"/><path fill="none" d="M7.4 21.8 Q17.5 20.72 27.6 21.8"/><rect data-o="1" x="33" y="19.1" width="27" height="9" rx="3.78"/><path fill="none" d="M36.4 21.8 Q46.5 20.72 56.6 21.8"/><path data-o="1" d="M0 27.1 Q0 25.5 1.6 25.5 H62.4 Q64 25.5 64 27.1 V43.6 Q64 46.4 61.2 46.4 H2.8 Q0 46.4 0 43.6 Z"/><path fill="none" d="M0 29.7 H64"/><path fill="none" d="M2.4 30.9 Q1.4 38.05 2.6 45.6"/><path fill="none" d="M61.6 30.9 Q62.6 38.05 61.4 45.6"/><rect data-o="1" x="75.4" y="48.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="95" y="48.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="74" y="26" width="24" height="22.4" rx="0.5"/><path fill="none" d="M74 27.4 H98"/><path fill="none" d="M75 37.9 H97"/><rect x="84" y="32.3" width="4" height="0.7" rx="0.35"/><rect x="84" y="42.8" width="4" height="0.7" rx="0.35"/><rect data-o="1" x="83.4" y="23.8" width="5.2" height="2.2" rx="0.6"/><path fill="none" d="M86 23.8 V9.5"/><path data-o="1" d="M82 0 H90 L92.6 9.5 H79.4 Z"/><rect data-o="1" x="109" y="8" width="62" height="36" rx="0.8"/><rect x="111.4" y="10.4" width="57.2" height="33.6" rx="0.5"/><rect data-o="1" x="111.6" y="48.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="166" y="48.8" width="2.4" height="1.2" rx="0.3"/><rect data-o="1" x="109.4" y="44.6" width="61.2" height="4.2" rx="1"/><rect data-o="1" x="111" y="15.5" width="28" height="12.6" rx="5.29"/><path fill="none" d="M115.76 19.28 Q125 17.77 134.24 19.28"/><rect data-o="1" x="140" y="15.5" width="28" height="12.6" rx="5.29"/><path fill="none" d="M144.76 19.28 Q154 17.77 163.24 19.28"/><rect data-o="1" x="112" y="19.1" width="27" height="9" rx="3.78"/><path fill="none" d="M115.4 21.8 Q125.5 20.72 135.6 21.8"/><rect data-o="1" x="141" y="19.1" width="27" height="9" rx="3.78"/><path fill="none" d="M144.4 21.8 Q154.5 20.72 164.6 21.8"/><path data-o="1" d="M108 27.1 Q108 25.5 109.6 25.5 H170.4 Q172 25.5 172 27.1 V43.6 Q172 46.4 169.2 46.4 H110.8 Q108 46.4 108 43.6 Z"/><path fill="none" d="M108 29.7 H172"/><path fill="none" d="M110.4 30.9 Q109.4 38.05 110.6 45.6"/><path fill="none" d="M169.6 30.9 Q170.6 38.05 169.4 45.6"/>' + _G },
+        { key: 'headboard', name: 'Headboard', w: 78, h: 48, aff: 24, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Headboard',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="78" height="48" rx="0.8"/><rect x="3" y="3" width="72" height="42" rx="0.5"/>' + _G },
+        { key: 'nightstand', name: 'Nightstand', w: 24, h: 25, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Nightstand',
+          svg: _O + '<rect data-o="1" x="1.4" y="23.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="21" y="23.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="0" y="0" width="24" height="23.4" rx="0.5"/><path fill="none" d="M0 1.4 H24"/><path fill="none" d="M1 12.4 H23"/><rect x="10" y="6.55" width="4" height="0.7" rx="0.35"/><rect x="10" y="17.55" width="4" height="0.7" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="0" width="24" height="23.4"/>',
           side: { w: 18, h: 25,
-            svg: _O + '<rect x="0" y="0" width="18" height="1.3"/>'
-                    + '<path d="M0 1.3 h18 v19.7 h-18 z"/>'
-                    + '<path d="M1.2 21 h15.6 v4 h-15.6 z"/>' + _G
-               + _F + '<path d="M0 11.2 h18"/>' + _G } },
-        { key: 'dresser', name: 'Dresser', w: 60, h: 32, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Dresser',
-          svg: _O + '<rect x="0" y="0" width="60" height="1.6"/>'
-                  + '<path d="M0 1.6 h60 v24.4 h-60 z"/>'
-                  + '<path d="M2 26 h56 v6 h-56 z"/>' + _G
-             + _D + '<rect x="1" y="2.6" width="58" height="7.4"/>'
-                  + '<rect x="1" y="10.8" width="58" height="7.4"/>'
-                  + '<rect x="1" y="19" width="58" height="6"/>' + _G
-             + _F + '<path d="M25 6.3 h10 M25 14.5 h10 M25 22 h10"/>' + _G,
-          hatch: '<rect x="0" y="0" width="60" height="26"/>',
+            svg: _O + '<rect data-o="1" x="1.4" y="23.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="15" y="23.4" width="1.6" height="1.6" rx="0.3"/><rect data-o="1" x="0" y="0" width="18" height="23.4" rx="0.5"/><path fill="none" d="M0 1.4 H18"/>' + _G } },
+        { key: 'dresser', name: 'Dresser', w: 60, h: 32, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Dresser',
+          svg: _O + '<rect data-o="1" x="2" y="30" width="2" height="2" rx="0.3"/><rect data-o="1" x="56" y="30" width="2" height="2" rx="0.3"/><rect data-o="1" x="0" y="0" width="60" height="30" rx="0.5"/><path fill="none" d="M0 1.4 H60"/><path fill="none" d="M1 10.93 H59"/><path fill="none" d="M1 20.47 H59"/><rect x="27" y="5.82" width="6" height="0.7" rx="0.35"/><rect x="27" y="15.35" width="6" height="0.7" rx="0.35"/><rect x="27" y="24.88" width="6" height="0.7" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="0" width="60" height="30"/>',
           side: { w: 20, h: 32,
-            svg: _O + '<rect x="0" y="0" width="20" height="1.6"/>'
-                    + '<path d="M0 1.6 h20 v24.4 h-20 z"/>'
-                    + '<path d="M1.5 26 h17 v6 h-17 z"/>' + _G
-               + _F + '<path d="M0 10 h20 M0 18.2 h20"/>' + _G } },
-        // Seating is where "blocky" showed most, because a chair genuinely is not a stack
-        // of rectangles. What fixes it: TAPERED legs (converging lines, not parallel
-        // bars), a curved crest rail, an arm drawn as a profile rather than a box, and
-        // cushion seams. All still orthographic — this is a spec elevation, not a
-        // perspective sketch.
-        { key: 'chair', name: 'Side chair', w: 22, h: 34, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Side Chair',
-          svg: _O + '<path d="M3.4 2.4 C3.4 0.6 5 0 7.4 0 h7.2 C17 0 18.6 0.6 18.6 2.4"/>'
-                  + '<path d="M3.4 2.4 L4.2 16"/><path d="M18.6 2.4 L17.8 16"/>'
-                  + '<path d="M1 16 h20 v2.2 h-20 z"/>'
-                  + '<path d="M2.6 18.2 L3.9 34"/><path d="M19.4 18.2 L18.1 34"/>' + _G
-             + _D + '<path d="M4.6 4.6 C7 3.4 15 3.4 17.4 4.6 L17.9 14 C15.5 12.9 6.5 12.9 4.1 14 Z"/>' + _G
-             + _F + '<path d="M1 18.2 h20"/><path d="M3.3 27 h15.4"/>'
-                  + '<path d="M4.35 9.3 C7 8.3 15 8.3 17.65 9.3"/>' + _G,
-          side: { w: 24, h: 34,
-            svg: _O + '<path d="M20.6 2.4 C20.6 0.6 22 0 23 0"/>'
-                    + '<path d="M20.6 2.4 L19.6 16"/>'
-                    + '<path d="M2 16 h20 v2.2 h-20 z"/>'
-                    + '<path d="M3.2 18.2 L2 34"/><path d="M20.2 18.2 L21.4 34"/>' + _G
-               + _D + '<path fill="none" d="M19.6 4 C17.5 5.4 17.5 12.6 19.3 14"/>' + _G
-               + _F + '<path d="M2 18.2 h20"/><path d="M2.8 27 h18"/>' + _G } },
-        { key: 'lounge', name: 'Lounge chair', w: 32, h: 30, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Lounge Chair',
-          svg: _O + '<path d="M4 0 h24 a2.4 2.4 0 0 1 2.4 2.4 v11.6 h-28.8 v-11.6 A2.4 2.4 0 0 1 4 0 z"/>'
-                  + '<path d="M0 7.6 h3.6 v13.4 h-3.6 z"/><path d="M28.4 7.6 h3.6 v13.4 h-3.6 z"/>'
-                  + '<path d="M3.6 14 h24.8 v7 h-24.8 z"/>'
-                  + '<path d="M5 21 L4 30"/><path d="M27 21 L28 30"/>' + _G
-             + _D + '<path d="M5.4 1.6 C10 0.9 22 0.9 26.6 1.6 L26.2 12.4 C21.8 11.7 10.2 11.7 5.8 12.4 Z"/>' + _G
-             + _F + '<path d="M3.6 19.4 h24.8"/><path d="M16 14 v5.4"/>'
-                  + '<path d="M0.6 8.6 h2.6 M28.8 8.6 h2.6"/>' + _G,
-          side: { w: 34, h: 30,
-            svg: _O + '<path d="M28 0 h3.6 a2.4 2.4 0 0 1 2.4 2.4 v18.6 h-6 z"/>'
-                    + '<path d="M2 7.6 h26 v13.4 h-26 z"/>'
-                    + '<path d="M3 21 L1.6 30"/><path d="M30 21 L31.4 30"/>' + _G
-               + _D + '<path d="M28 2 C25.6 6 25.6 16 28 20"/>'
-                    + '<path d="M3.4 8.8 C10 8 22 8 27 8.8 L27 19 C22 18.2 10 18.2 3.4 19 Z"/>' + _G
-               + _F + '<path d="M2 19.4 h26"/>' + _G } },
-        { key: 'sofa', name: 'Sofa', w: 84, h: 32, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Sofa',
-          // Rolled arms drawn as profiles, two back cushions, three seat cushions with
-          // welt seams, a base rail and tapered legs.
-          svg: _O + '<path d="M7 0 h70 a2.6 2.6 0 0 1 2.6 2.6 v10.4 h-75.2 v-10.4 A2.6 2.6 0 0 1 7 0 z"/>'
-                  + '<path d="M0 5.4 a4.4 4.4 0 0 1 4.4 -4.4 v20.6 h-4.4 z"/>'
-                  + '<path d="M84 5.4 a4.4 4.4 0 0 0 -4.4 -4.4 v20.6 h4.4 z"/>'
-                  + '<path d="M4.4 13 h75.2 v8.6 h-75.2 z"/>'
-                  + '<path d="M4.4 21.6 h75.2 v4.4 h-75.2 z"/>'
-                  + '<path d="M9 26 L7.6 32"/><path d="M75 26 L76.4 32"/>' + _G
-             + _D + '<path d="M6.4 1.8 C20 1 64 1 77.6 1.8 L77.2 11.6 C63.6 10.8 20.4 10.8 6.8 11.6 Z"/>'
-                  + '<path d="M42 1.2 v10.6"/>' + _G
-             + _F + '<path d="M29.5 13 v8.6 M54.5 13 v8.6"/><path d="M4.4 19.8 h75.2"/>'
-                  + '<path d="M0.8 6 a3.6 3.6 0 0 1 3.6 -3.6"/>'
-                  + '<path d="M83.2 6 a3.6 3.6 0 0 0 -3.6 -3.6"/>' + _G,
-          side: { w: 36, h: 32,
-            svg: _O + '<path d="M30 1 a4.4 4.4 0 0 1 4.4 4.4 v20.6 h-4.4 z"/>'
-                    + '<path d="M2 5.4 h28 v16.2 h-28 z"/>'
-                    + '<path d="M2 21.6 h32.4 v4.4 h-32.4 z"/>'
-                    + '<path d="M4 26 L2.6 32"/><path d="M32 26 L33.4 32"/>' + _G
-               + _D + '<path d="M30 2.4 C27 7 27 17 30 21.4"/>'
-                    + '<path d="M3.4 6.6 C12 5.8 25 5.8 29 6.6 L29 19.8 C25 19 12 19 3.4 19.8 Z"/>' + _G
-               + _F + '<path d="M2 19.8 h28"/>' + _G } },
-        { key: 'ottoman', name: 'Ottoman', w: 24, h: 18, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Ottoman',
-          svg: _O + '<path d="M0 0 h24 v12.4 h-24 z"/>'
-                  + '<path d="M3 12.4 L1.8 18"/><path d="M21 12.4 L22.2 18"/>' + _G
-             + _D + '<path d="M1.6 1.4 C7 0.7 17 0.7 22.4 1.4 L22 10.4 C16.6 9.7 7.4 9.7 2 10.4 Z"/>' + _G
-             + _F + '<path d="M0 11.2 h24"/>' + _G },
-        { key: 'table', name: 'Table', w: 48, h: 30, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Table',
-          svg: _O + '<rect x="0" y="0" width="48" height="1.6"/>'
-                  + '<rect x="3.5" y="1.6" width="2" height="28.4"/>'
-                  + '<rect x="42.5" y="1.6" width="2" height="28.4"/>' + _G
-             + _D + '<rect x="3.5" y="1.6" width="41" height="3.2"/>' + _G,
-          side: { w: 30, h: 30,
-            svg: _O + '<rect x="0" y="0" width="30" height="1.6"/>'
-                    + '<rect x="3" y="1.6" width="2" height="28.4"/>'
-                    + '<rect x="25" y="1.6" width="2" height="28.4"/>' + _G
-               + _D + '<rect x="3" y="1.6" width="24" height="3.2"/>' + _G } },
-        { key: 'side-table', name: 'Side table', w: 22, h: 24, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Side Table',
-          svg: _O + '<rect x="0" y="0" width="22" height="1.4"/>'
-                  + '<rect x="2" y="1.4" width="1.8" height="22.6"/>'
-                  + '<rect x="18.2" y="1.4" width="1.8" height="22.6"/>' + _G
-             + _D + '<rect x="2" y="1.4" width="18" height="2.6"/>' + _G
-             + _F + '<path d="M3.8 19 h14.4"/>' + _G },
-        { key: 'luggage', name: 'Luggage bench', w: 40, h: 20, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'plain', label: 'Luggage Bench',
-          svg: _O + '<rect x="0" y="0" width="40" height="3.4"/>'
-                  + '<rect x="2.5" y="3.4" width="1.8" height="16.6"/>'
-                  + '<rect x="35.7" y="3.4" width="1.8" height="16.6"/>' + _G
-             + _D + '<rect x="2.5" y="3.4" width="35" height="2.4"/>' + _G
-             + _F + '<path d="M4.3 15 h31.4"/>' + _G },
-        { key: 'armchair', name: 'Club chair', w: 34, h: 32, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
-          svg: _O + '<path d="M6 15 V3 Q6 0 9 0 H25 Q28 0 28 3 V15"/>'
-                  + '<path d="M0 26 V15 A3 3 0 0 1 6 15 V26 Z"/><path d="M28 26 V15 A3 3 0 0 1 34 15 V26 Z"/>'
-                  + '<path d="M6 18.4 Q6 17 7.4 17 H26.6 Q28 17 28 18.4 V26 H6 Z"/>'
-                  + '<path d="M0 26 H34 V28 H0 Z"/>'
-                  + '<path d="M3 28 L3.6 32 H4.8 L5.2 28 M28.8 28 L29.2 32 H30.4 L31 28"/>' + _G
-             + _D + '<path d="M8 17 C7.6 12 7.6 6 9 2.4 H25 C26.4 6 26.4 12 26 17"/><path d="M6 22.4 H28"/>' + _G
-             + _F + '<path d="M1 15.6 Q3 13.8 5 15.6 M29 15.6 Q31 13.8 33 15.6"/><path d="M7 20.4 H27"/>' + _G },
-        { key: 'desk-chair', name: 'Desk chair', w: 20, h: 33, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
-          svg: _O + '<path d="M3 15.5 V3 Q3 0 6 0 H14 Q17 0 17 3 V15.5"/>'
-                  + '<path d="M1 17 Q1 15.5 2.5 15.5 H17.5 Q19 15.5 19 17 V19 H1 Z"/>'
-                  + '<path d="M2 19 L1.6 33 H2.8 L3.4 19 M16.6 19 L17.2 33 H18.4 L18 19"/>' + _G
-             + _D + '<path d="M4.6 15.5 V3.8 Q4.6 1.6 6.8 1.6 H13.2 Q15.4 1.6 15.4 3.8 V15.5"/><path d="M3 27 H17"/>' + _G
-             + _F + '<path d="M1.6 17.3 H18.4"/>' + _G },
+            svg: _O + '<rect data-o="1" x="1.4" y="30" width="2" height="2" rx="0.3"/><rect data-o="1" x="16.6" y="30" width="2" height="2" rx="0.3"/><rect data-o="1" x="0" y="0" width="20" height="30" rx="0.5"/><path fill="none" d="M0 1.4 H20"/>' + _G } },
+        { key: 'gr-desk', name: 'Desk + chair', w: 60, h: 40, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Desk',
+          svg: _O + '<rect data-o="1" x="0" y="10" width="60" height="1.6" rx="0.4"/><rect data-o="1" x="1.2" y="11.6" width="1.6" height="28.4"/><rect data-o="1" x="40" y="11.6" width="18.8" height="28.4" rx="0.3"/><path fill="none" d="M40 21.07 H58.8"/><path fill="none" d="M40 30.53 H58.8"/><rect x="46.9" y="15.98" width="5" height="0.7" rx="0.35"/><rect x="46.9" y="25.45" width="5" height="0.7" rx="0.35"/><rect x="46.9" y="34.92" width="5" height="0.7" rx="0.35"/><circle data-o="1" cx="10.6" cy="38.7" r="1.3"/><circle data-o="1" cx="21" cy="38.8" r="1.2"/><circle data-o="1" cx="31.4" cy="38.7" r="1.3"/><path data-o="1" d="M19.6 32.6 H22.4 L32.6 36.2 V37.2 H9.4 V36.2 Z"/><rect data-o="1" x="20" y="24.5" width="2" height="8.2"/><rect data-o="1" x="9.4" y="20.4" width="23.2" height="4.2" rx="2"/><rect data-o="1" x="12.2" y="0" width="17.6" height="19.4" rx="3.2"/><path fill="none" d="M11.4 22.4 V15 H8.6"/><path fill="none" d="M30.6 22.4 V15 H33.4"/>' + _G },
+        { key: 'desk', name: 'Writing desk', w: 48, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Desk',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="48" height="1.6" rx="0.4"/><rect data-o="1" x="1" y="1.6" width="1.6" height="28.4"/><rect data-o="1" x="45.4" y="1.6" width="1.6" height="28.4"/><rect x="4" y="1.6" width="40" height="4.2" rx="0.3"/><rect x="21" y="3.35" width="6" height="0.7" rx="0.35"/>' + _G,
+          side: { w: 24, h: 30,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="24" height="1.6" rx="0.4"/><rect data-o="1" x="1" y="1.6" width="1.6" height="28.4"/><rect data-o="1" x="21.4" y="1.6" width="1.6" height="28.4"/>' + _G } },
+        { key: 'gr-media', name: 'TV + console', w: 72, h: 66, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Media Wall',
+          svg: _O + '<rect data-o="1" x="11.75" y="0" width="48.5" height="28" rx="0.6"/><rect x="12.75" y="1" width="46.5" height="25"/><path fill="none" d="M34 26.8 H38"/><rect data-o="1" x="3" y="63" width="2" height="3" rx="0.3"/><rect data-o="1" x="67" y="63" width="2" height="3" rx="0.3"/><rect data-o="1" x="0" y="36" width="72" height="27" rx="0.5"/><path fill="none" d="M0 37.6 H72"/><path fill="none" d="M18 37.6 V62.2"/><path fill="none" d="M36 37.6 V62.2"/><path fill="none" d="M54 37.6 V62.2"/><rect x="16.45" y="45" width="0.7" height="8" rx="0.35"/><rect x="18.85" y="45" width="0.7" height="8" rx="0.35"/><rect x="52.45" y="45" width="0.7" height="8" rx="0.35"/><rect x="54.85" y="45" width="0.7" height="8" rx="0.35"/>' + _G },
+        { key: 'console', name: 'Console', w: 60, h: 32, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Console',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="1.6" rx="0.4"/><rect data-o="1" x="1.5" y="1.6" width="1.6" height="30.4"/><rect data-o="1" x="56.9" y="1.6" width="1.6" height="30.4"/><rect x="3.1" y="1.6" width="53.8" height="5"/><path fill="none" d="M3.1 22 H56.9"/><rect x="27" y="3.75" width="6" height="0.7" rx="0.35"/>' + _G },
+        { key: 'tv-55', name: 'TV 55"', w: 48.5, h: 28, aff: 60, affMode: 'center', shape: 'tv', fill: 'plain', label: 'TV',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="48.5" height="28" rx="0.6"/><rect x="1" y="1" width="46.5" height="25"/><path fill="none" d="M22.5 26.6 H26"/>' + _G,
+          side: { w: 4, h: 28,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="4" height="28" rx="0.6"/><rect x="1.4" y="9" width="1.2" height="10" rx="0.3"/>' + _G } },
+        { key: 'tv-65', name: 'TV 65"', w: 56.7, h: 32.2, aff: 60, affMode: 'center', shape: 'tv', fill: 'plain', label: 'TV',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="56.7" height="32.2" rx="0.6"/><rect x="1" y="1" width="54.7" height="29.2"/><path fill="none" d="M26.6 30.8 H30.1"/>' + _G,
+          side: { w: 4, h: 32.2,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="4" height="32.2" rx="0.6"/><rect x="1.4" y="10.6" width="1.2" height="11" rx="0.3"/>' + _G } },
+        { key: 'tv-75', name: 'TV 75"', w: 65.4, h: 37.2, aff: 60, affMode: 'center', shape: 'tv', fill: 'plain', label: 'TV',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="65.4" height="37.2" rx="0.6"/><rect x="1" y="1" width="63.4" height="34.2"/><path fill="none" d="M30.95 35.8 H34.45"/>' + _G,
+          side: { w: 4, h: 37.2,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="4" height="37.2" rx="0.6"/><rect x="1.4" y="12.6" width="1.2" height="12" rx="0.3"/>' + _G } },
+        { key: 'gr-wardrobe-wall', name: 'Wardrobe wall', w: 96, h: 90, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Wardrobe',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="96" height="90" rx="0.4"/><path fill="none" d="M0 1.6 H96"/><path fill="none" d="M0 86 H96"/><path fill="none" d="M24 1.6 V86"/><path fill="none" d="M48 1.6 V86"/><path fill="none" d="M72 1.6 V86"/><rect x="21.05" y="37" width="0.7" height="14" rx="0.35"/><rect x="26.25" y="37" width="0.7" height="14" rx="0.35"/><rect x="69.05" y="37" width="0.7" height="14" rx="0.35"/><rect x="74.25" y="37" width="0.7" height="14" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="1.6" width="96" height="84.4"/>' },
+        { key: 'wardrobe', name: 'Wardrobe', w: 40, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Wardrobe',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="40" height="84" rx="0.4"/><path fill="none" d="M0 1.6 H40"/><path fill="none" d="M0 80.5 H40"/><path fill="none" d="M20 1.6 V80.5"/><rect x="17.65" y="37" width="0.7" height="10" rx="0.35"/><rect x="21.65" y="37" width="0.7" height="10" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="1.6" width="40" height="78.9"/>' },
+        { key: 'minibar', name: 'Minibar cabinet', w: 30, h: 36, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Minibar',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="30" height="33" rx="0.4"/><path fill="none" d="M0 1.6 H30"/><path fill="none" d="M16 1.6 V33"/><path fill="none" d="M16 17.3 H30"/><rect x="14.05" y="7" width="0.7" height="6" rx="0.35"/><rect x="20.5" y="9.15" width="5" height="0.7" rx="0.35"/><rect x="20.5" y="24.65" width="5" height="0.7" rx="0.35"/><rect data-o="1" x="2" y="33" width="26" height="3"/>' + _G,
+          hatch: '<rect x="16" y="1.6" width="14" height="31.4"/>' },
+        { key: 'luggage', name: 'Luggage bench', w: 40, h: 20, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Luggage Bench',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="40" height="2" rx="0.6"/><rect data-o="1" x="1.5" y="2" width="1.6" height="18"/><rect data-o="1" x="36.9" y="2" width="1.6" height="18"/><path fill="none" d="M3.1 14 H36.9"/><path fill="none" d="M10 0 V2"/><path fill="none" d="M20 0 V2"/><path fill="none" d="M30 0 V2"/>' + _G,
+          side: { w: 20, h: 20,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="20" height="2" rx="0.6"/><rect data-o="1" x="1.5" y="2" width="1.6" height="18"/><rect data-o="1" x="16.9" y="2" width="1.6" height="18"/><path fill="none" d="M3.1 14 H16.9"/>' + _G } },
         { key: 'bench', name: 'Upholstered bench', w: 48, h: 18, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Bench',
-          svg: _O + '<path d="M1.5 0 H46.5 Q48 0 48 1.5 V4.5 H0 V1.5 Q0 0 1.5 0 Z"/>'
-                  + '<path d="M0.5 4.5 H47.5 V7 H0.5 Z"/><path d="M2 7 V18 H3.6 V7 M44.4 7 V18 H46 V7"/>' + _G
-             + _D + '<path d="M3.6 14 H44.4"/>' + _G
-             + _F + '<path d="M1 2.3 H47"/><circle cx="12" cy="2.3" r="0.3"/><circle cx="24" cy="2.3" r="0.3"/><circle cx="36" cy="2.3" r="0.3"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="48" height="5" rx="1.6"/><path fill="none" d="M1 2.4 H47"/><rect data-o="1" x="2" y="5" width="1.6" height="13"/><rect data-o="1" x="44.4" y="5" width="1.6" height="13"/><path fill="none" d="M3.6 13.5 H44.4"/>' + _G },
+        { key: 'sofa', name: 'Sofa', w: 84, h: 32, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Sofa',
+          svg: _O + '<rect data-o="1" x="4" y="29" width="2" height="3" rx="0.3"/><rect data-o="1" x="78" y="29" width="2" height="3" rx="0.3"/><path data-o="1" d="M5 18 V5.6 Q5 2 8.6 2 H75.4 Q79 2 79 5.6 V18 Z"/><path data-o="1" d="M0 29 V13 Q0 9 4 9 Q8 9 8 13 V29 Z"/><path data-o="1" d="M76 29 V13 Q76 9 80 9 Q84 9 84 13 V29 Z"/><rect data-o="1" x="7" y="17" width="70" height="12" rx="1.6"/><path fill="none" d="M42 17 V24.5"/><path fill="none" d="M7 24.5 H77"/><path fill="none" d="M42 3.5 V17"/>' + _G,
+          side: { w: 36, h: 32,
+            svg: _O + '<rect data-o="1" x="3" y="29" width="2" height="3" rx="0.3"/><rect data-o="1" x="31" y="29" width="2" height="3" rx="0.3"/><path data-o="1" d="M0 29 V6 Q0 0 6 0 H9 Q12 0 12 6 V17 H33 Q36 17 36 20 V29 Z"/><path fill="none" d="M0 24.5 H36"/><path fill="none" d="M12 17 Q11 22 12 24.5"/>' + _G } },
+        { key: 'ottoman', name: 'Ottoman', w: 24, h: 18, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Ottoman',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="24" height="15" rx="2.4"/><path fill="none" d="M1 3.6 H23"/><rect data-o="1" x="2" y="15" width="2" height="3" rx="0.3"/><rect data-o="1" x="20" y="15" width="2" height="3" rx="0.3"/>' + _G },
+        { key: 'side-table', name: 'Side table', w: 22, h: 24, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Side Table',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="22" height="1.6" rx="0.4"/><rect data-o="1" x="10.2" y="1.6" width="1.6" height="21"/><rect data-o="1" x="5" y="22.6" width="12" height="1.4" rx="0.4"/>' + _G },
+        { key: 'table', name: 'Table', w: 48, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Table',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="48" height="1.8" rx="0.4"/><rect data-o="1" x="2" y="1.8" width="1.8" height="28.2"/><rect data-o="1" x="44.2" y="1.8" width="1.8" height="28.2"/><path fill="none" d="M3.8 5 H44.2"/>' + _G,
+          side: { w: 30, h: 30,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="30" height="1.8" rx="0.4"/><rect data-o="1" x="2" y="1.8" width="1.8" height="28.2"/><rect data-o="1" x="26.2" y="1.8" width="1.8" height="28.2"/><path fill="none" d="M3.8 5 H26.2"/>' + _G } },
         { key: 'mirror-floor', name: 'Floor mirror', w: 24, h: 68, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Mirror',
-          svg: _O + '<path d="M0 68 V12 A12 12 0 0 1 24 12 V68 Z"/>' + _G
-             + _D + '<path d="M1.6 68 V12 A10.4 10.4 0 0 1 22.4 12 V68"/>' + _G
-             + _F + '<path d="M5 58 L13 22 M9.6 58 L17.6 22"/>' + _G },
-        { key: 'planter', name: 'Planter', w: 24, h: 54, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Plant',
-          svg: _O + '<path d="M2 36 H22 V38 H2 Z"/><path d="M3 38 H21 L19 54 H5 Z"/>' + _G
-             + _D + '<path d="M12 36 C6 30 2 22 2 13 C7 19 11 27 12 36 Z"/>'
-                  + '<path d="M12 36 C11 26 9 14 10 2 C13 12 13.6 25 12 36 Z"/>'
-                  + '<path d="M12 36 C15 28 18 18 23 10 C21.6 20 17 29 12 36 Z"/>'
-                  + '<path d="M12 36 C9 32.4 5 31 0.4 30.4 C5 28.6 9.6 30.6 12 36 Z"/>'
-                  + '<path d="M12 36 C15 32.4 19 30.4 23.6 29.6 C20 32.4 16 33.6 12 36 Z"/>' + _G
-             + _F + '<path d="M12 36 C7.4 29.4 4.4 22 2.8 14.6"/><path d="M12 36 C11.4 26 10.6 14 10.2 4"/>'
-                  + '<path d="M12 36 C15.4 28.6 18.6 20 22.2 11.6"/><path d="M3.6 41 H20.4"/>' + _G },
+          svg: _O + '<path data-o="1" d="M0 68 V12 C0 5 5.4 0 12 0 C18.6 0 24 5 24 12 V68 Z"/><path fill="none" d="M2 68 V12.4 C2 6.6 6.6 2 12 2 C17.4 2 22 6.6 22 12.4 V68"/><path fill="none" d="M6 56 L13 24"/><path fill="none" d="M10.5 56 L17.5 24"/>' + _G },
         { key: 'coat-stand', name: 'Coat stand', w: 20, h: 68, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<path d="M9.3 3 H10.7 V62 H9.3 Z"/><path d="M9.6 62 L2 68 M10.4 62 L18 68"/>' + _G
-             + _D + '<path d="M9.3 3 Q10 0.6 10.7 3"/>'
-                  + '<path d="M9.3 8 C6 8 4 7 3.5 4.6 M10.7 8 C14 8 16 7 16.5 4.6"/>'
-                  + '<path d="M9.3 13 C7.2 13 5.6 12.4 5 10.6 M10.7 13 C12.8 13 14.4 12.4 15 10.6"/>' + _G
-             + _F + '<path d="M9.3 40 H10.7"/>' + _G },
+          svg: _O + '<path fill="none" d="M10 62 L2 68"/><path fill="none" d="M10 62 L18 68"/><rect data-o="1" x="9.3" y="3" width="1.4" height="61" rx="0.5"/><circle data-o="1" cx="10" cy="2.2" r="1.2"/><path fill="none" d="M9.3 8 C6 8 4 7 3.4 4.6"/><path fill="none" d="M10.7 8 C14 8 16 7 16.6 4.6"/><path fill="none" d="M9.3 13 C7 13 5.6 12.4 5 10.6"/><path fill="none" d="M10.7 13 C13 13 14.4 12.4 15 10.6"/>' + _G },
     ] },
-    // KEEP CLEAR (19.47): things art must not cover. `avoid: true` makes a new block a
-    // keep-clear zone (hatched; a frame over one is flagged on the wall and in Preflight).
-    // Sizes are typical North American cover plates and devices; AFF centres per ADA reach.
-    // Office (20.19): open-plan, private office, meeting room and pantry.
+    { cat: 'Bathroom', items: [
+        { key: 'ba-vanity-mirror', name: 'Vanity + mirror', w: 60, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Vanity',
+          svg: _O + '<rect data-o="1" x="13" y="2" width="34" height="36" rx="0.8"/><rect x="14.6" y="3.6" width="30.8" height="32.8" rx="0.3"/><rect data-o="1" x="4" y="12" width="4" height="9" rx="1"/><path fill="none" d="M6 21 V24"/><rect data-o="1" x="52" y="12" width="4" height="9" rx="1"/><path fill="none" d="M54 21 V24"/><path fill="none" d="M28 50 V46 Q28 44.2 30 44.2 Q32 44.2 32 46 V46.6"/><rect x="27" y="49.2" width="3" height="0.8" rx="0.2"/><rect data-o="1" x="0" y="50" width="60" height="1.8" rx="0.4"/><rect data-o="1" x="0" y="51.8" width="60" height="6" rx="0.3"/><rect x="25" y="54.45" width="10" height="0.7" rx="0.35"/><rect data-o="1" x="1.6" y="57.8" width="1.8" height="26.2"/><rect data-o="1" x="56.6" y="57.8" width="1.8" height="26.2"/><path fill="none" d="M3.4 72 H56.6"/><rect data-o="1" x="8" y="66" width="12" height="6" rx="1"/><rect data-o="1" x="24" y="68.4" width="10" height="3.6" rx="1.4"/>' + _G,
+          hatch: '<rect x="14.6" y="3.6" width="30.8" height="32.8"/>' },
+        { key: 'vanity-60', name: 'Vanity 60"', w: 60, h: 34, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Vanity',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="1.8" rx="0.4"/><rect data-o="1" x="1" y="1.8" width="58" height="28.2" rx="0.3"/><path fill="none" d="M30 1.8 V30"/><rect x="27.25" y="6.5" width="0.7" height="5" rx="0.35"/><rect x="32.05" y="6.5" width="0.7" height="5" rx="0.35"/><rect data-o="1" x="3" y="30" width="54" height="4"/>' + _G
+              + _H + '<path fill="none" d="M16 1.8 V5 Q16 8 19 8 H41 Q44 8 44 5 V1.8"/>' + _G },
+        { key: 'ba-vanity-single', name: 'Single vanity', w: 36, h: 34, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Vanity',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="1.8" rx="0.4"/><rect data-o="1" x="1" y="1.8" width="34" height="28.2" rx="0.3"/><path fill="none" d="M18 1.8 V30"/><rect x="15.25" y="6.5" width="0.7" height="5" rx="0.35"/><rect x="20.05" y="6.5" width="0.7" height="5" rx="0.35"/><rect data-o="1" x="3" y="30" width="30" height="4"/>' + _G
+              + _H + '<path fill="none" d="M9 1.8 V5 Q9 7.6 11.6 7.6 H24.4 Q27 7.6 27 5 V1.8"/>' + _G,
+          side: { w: 22, h: 34,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="22" height="1.8" rx="0.4"/><rect data-o="1" x="1" y="1.8" width="20" height="28.2" rx="0.3"/><rect data-o="1" x="3" y="30" width="16" height="4"/>' + _G } },
+        { key: 'ba-vanity-double', name: 'Double vanity', w: 72, h: 34, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Vanity',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="1.8" rx="0.4"/><rect data-o="1" x="1" y="1.8" width="70" height="28.2" rx="0.3"/><rect data-o="1" x="3" y="30" width="66" height="4"/><path fill="none" d="M18 1.8 V30"/><path fill="none" d="M36 1.8 V30"/><path fill="none" d="M54 1.8 V30"/><rect x="15.25" y="6.5" width="0.7" height="5" rx="0.35"/><rect x="20.05" y="6.5" width="0.7" height="5" rx="0.35"/><rect x="51.25" y="6.5" width="0.7" height="5" rx="0.35"/><rect x="56.05" y="6.5" width="0.7" height="5" rx="0.35"/>' + _G
+              + _H + '<path fill="none" d="M10 1.8 V5 Q10 7.6 12.6 7.6 H23.4 Q26 7.6 26 5 V1.8"/><path fill="none" d="M46 1.8 V5 Q46 7.6 48.6 7.6 H59.4 Q62 7.6 62 5 V1.8"/>' + _G },
+        { key: 'vanity-ada', name: 'ADA vanity', w: 48, h: 34, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'ADA Vanity',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="48" height="2" rx="0.4"/><rect data-o="1" x="0.5" y="2" width="1.8" height="32"/><rect data-o="1" x="45.7" y="2" width="1.8" height="32"/><path fill="none" d="M14 2 v2 a10 6 0 0 0 20 0 v-2"/><path fill="none" d="M20 9.6 a4 2.4 0 0 0 8 0"/><circle cx="24" cy="8.8" r="0.7"/><path fill="none" d="M24 10 V14 Q24 16 26 16 H30"/>' + _G,
+          side: { w: 22, h: 34,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="22" height="2" rx="0.4"/><rect data-o="1" x="0.5" y="2" width="1.8" height="32"/><path fill="none" d="M4 2 V5 Q4 9 8.6 9 H11 Q14 9 14 5 V2"/>' + _G } },
+        { key: 'shower', name: 'Shower', w: 36, h: 80, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Shower',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="80" rx="0.4"/><rect x="1.6" y="1.6" width="32.8" height="74.4"/><rect data-o="1" x="0" y="76" width="36" height="4"/><path fill="none" d="M19 1.6 V76"/><rect x="16.25" y="35" width="0.7" height="10" rx="0.35"/><path fill="none" d="M28 6 V4 H24"/><rect x="21.6" y="6" width="6.8" height="1.2" rx="0.6"/>' + _G },
+        { key: 'ba-shower-glass', name: 'Glass shower', w: 60, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Shower',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="84" rx="0.3"/><rect data-o="1" x="0" y="80" width="60" height="4" rx="0.3"/><path fill="none" d="M30 0 V80"/><path fill="none" d="M31.2 0 V80"/><path fill="none" d="M18 32 V8 Q18 5.6 15.6 5.6 H12"/><rect x="7" y="5.6" width="7" height="1.4" rx="0.7"/><path fill="none" d="M18 46 V60"/><rect x="16.6" y="60" width="2.8" height="5" rx="1.2"/><circle cx="18" cy="46" r="2"/><circle cx="18" cy="46" r="0.6"/><rect x="34.25" y="34" width="0.7" height="16" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="0" width="60" height="80"/>' },
+        { key: 'ba-shower-niche', name: 'Shower niche + fixtures', w: 36, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Shower',
+          svg: _O + '<rect x="0" y="0" width="36" height="84" rx="0.3"/><path fill="none" d="M0 80 H36"/><rect x="22" y="26" width="10" height="14" rx="0.5"/><path fill="none" d="M22 33 H32"/><rect x="24" y="29.4" width="2.2" height="3.6" rx="0.5"/><rect x="27.4" y="28.6" width="2.4" height="4.4" rx="0.5"/><path fill="none" d="M12 18 V8 Q12 5.6 9.6 5.6 H8"/><rect x="3.6" y="5.6" width="6.8" height="1.4" rx="0.7"/><circle cx="12" cy="36" r="2.2"/><circle cx="12" cy="36" r="0.6"/><path fill="none" d="M12 38.2 V50"/><rect x="10.6" y="50" width="2.8" height="5" rx="1.2"/>' + _G },
+        { key: 'ba-tub-free', name: 'Freestanding tub', w: 72, h: 28, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Tub',
+          svg: _O + '<path data-o="1" d="M0 10 H72 C71 18 66 27 60 28 H12 C6 27 1 18 0 10 Z"/><path fill="none" d="M1 12 H71"/><path fill="none" d="M36 10 V4 Q36 0.8 39.2 0.8 Q42 0.8 42 3.6 V4.4"/><rect x="33.6" y="8.8" width="4.8" height="1.2" rx="0.3"/><path fill="none" d="M33.2 7 V10"/><path fill="none" d="M38.8 7 V10"/>' + _G,
+          side: { w: 32, h: 28,
+            svg: _O + '<path data-o="1" d="M0 10 H32 C31.4 18 28.6 27 25 28 H7 C3.4 27 0.6 18 0 10 Z"/><path fill="none" d="M0.6 12 H31.4"/>' + _G } },
+        { key: 'tub', name: 'Built-in tub', w: 60, h: 20, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Tub',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="20" rx="0.4"/><path fill="none" d="M0 2.4 H60"/><rect x="1.6" y="17.6" width="56.8" height="2.4"/><rect x="51.65" y="7" width="0.7" height="6" rx="0.35"/>' + _G },
+        { key: 'mirror-lit', name: 'Lighted mirror', w: 30, h: 40, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Mirror',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="30" height="40" rx="4"/><rect x="2" y="2" width="26" height="36" rx="2.6"/><path fill="none" d="M7 31 L14 10"/><path fill="none" d="M11 31 L18 10"/>' + _G,
+          hatch: '<rect x="2" y="2" width="26" height="36"/>' },
+        { key: 'grab-36', name: 'Grab bar 36"', w: 36, h: 1.5, aff: 34, affMode: 'bottom', shape: 'shelf', fill: 'plain', label: 'Grab Bar',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="3" height="1.5" rx="0.6"/><rect data-o="1" x="33" y="0" width="3" height="1.5" rx="0.6"/><rect data-o="1" x="3" y="0.25" width="30" height="1" rx="0.5"/>' + _G },
+        { key: 'grab-42', name: 'Grab bar 42"', w: 42, h: 1.5, aff: 34, affMode: 'bottom', shape: 'shelf', fill: 'plain', label: 'Grab Bar',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="3" height="1.5" rx="0.6"/><rect data-o="1" x="39" y="0" width="3" height="1.5" rx="0.6"/><rect data-o="1" x="3" y="0.25" width="36" height="1" rx="0.5"/>' + _G },
+        { key: 'towel-bar', name: 'Towel bar', w: 24, h: 4, aff: 48, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="2.4" height="4" rx="1"/><rect data-o="1" x="21.6" y="0" width="2.4" height="4" rx="1"/><rect data-o="1" x="2.4" y="1.4" width="19.2" height="1.2" rx="0.6"/>' + _G },
+        { key: 'ba-towel-hooks', name: 'Towel bar + hooks', w: 36, h: 6, aff: 48, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="1" width="2.4" height="4" rx="1"/><rect data-o="1" x="21.6" y="1" width="2.4" height="4" rx="1"/><rect data-o="1" x="2.4" y="2.4" width="19.2" height="1.2" rx="0.6"/><circle data-o="1" cx="29" cy="1.4" r="1"/><path fill="none" d="M29 2.4 V4.4 Q29 5.6 30.2 5"/><circle data-o="1" cx="34" cy="1.4" r="1"/><path fill="none" d="M34 2.4 V4.4 Q34 5.6 35.2 5"/>' + _G },
+        { key: 'towel-ring', name: 'Towel ring', w: 7, h: 9, aff: 48, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="2.4" y="0" width="2.2" height="1.6" rx="0.5"/><path fill="none" d="M3.5 1.6 V2.3"/><circle cx="3.5" cy="5.6" r="3.2"/>' + _G },
+        { key: 'robe-hook', name: 'Robe hook', w: 2, h: 3, aff: 66, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<circle data-o="1" cx="1" cy="0.7" r="0.6"/><path fill="none" d="M1 1.3 V2 Q1 2.9 1.9 2.5"/>' + _G },
+        { key: 'ba-accessories', name: 'Shelf + toiletries', w: 24, h: 12, aff: 48, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="2" y="4" width="3" height="7" rx="0.8"/><rect data-o="1" x="2.8" y="2.4" width="1.4" height="1.6" rx="0.3"/><rect data-o="1" x="6.4" y="5.6" width="3.2" height="5.4" rx="0.8"/><rect data-o="1" x="7.4" y="3.6" width="1.2" height="2" rx="0.3"/><path data-o="1" d="M12 7 H17 L16.4 11 H12.6 Z"/><rect data-o="1" x="18.6" y="8.4" width="4" height="2.6" rx="1.2"/><rect data-o="1" x="0" y="11" width="24" height="1" rx="0.3"/>' + _G },
+        { key: 'towel-disp', name: 'Paper towel dispenser', w: 11, h: 15, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="11" height="15" rx="1.2"/><path fill="none" d="M2.4 12.6 H8.6"/><rect x="4" y="5" width="3" height="3" rx="0.5"/>' + _G },
+        { key: 'hand-dryer', name: 'Hand dryer', w: 10, h: 12, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="10" height="10" rx="1.6"/><path data-o="1" d="M3.5 10 H6.5 L6 12 H4 Z"/><path fill="none" d="M4.4 6.4 H5.6"/>' + _G },
+        { key: 'soap', name: 'Soap dispenser', w: 4, h: 7, aff: 42, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="4" height="7" rx="0.8"/><rect x="1" y="1.6" width="2" height="2.6" rx="0.3"/><path fill="none" d="M0.8 5.2 H3.2"/>' + _G },
+        { key: 'tp-holder', name: 'Toilet paper (double)', w: 12, h: 5, aff: 22, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<circle data-o="1" cx="2.5" cy="2.5" r="2.4"/><circle data-o="1" cx="9.5" cy="2.5" r="2.4"/><circle cx="2.5" cy="2.5" r="0.7"/><circle cx="9.5" cy="2.5" r="0.7"/><path fill="none" d="M4.9 2.5 H7.1"/>' + _G },
+    ] },
+    { cat: 'Toilets', items: [
+        { key: 'toilet-tank', name: 'Floor-mounted toilet', w: 20, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Toilet',
+          svg: _O + '<rect data-o="1" x="1" y="0" width="18" height="11.5" rx="1"/><path fill="none" d="M1 2 H19"/><rect x="3.6" y="2.8" width="2.4" height="0.8" rx="0.3"/><rect data-o="1" x="2" y="12.2" width="16" height="2" rx="0.9"/><path data-o="1" d="M3.4 14.2 H16.6 C16.4 19 13.6 21.6 13 24 L14.4 30 H5.6 L7 24 C6.4 21.6 3.6 19 3.4 14.2 Z"/>' + _G,
+          side: { w: 28, h: 30,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="8" height="11.5" rx="1"/><path data-o="1" d="M0 12.2 H24 Q26 12.2 26 14.2 C26 19 22 22 17 23 L16 30 H6 L5.4 22 C2 21 0 18 0 14.2 Z"/><path fill="none" d="M0 14.2 H26"/>' + _G } },
+        { key: 'toilet-ada', name: 'ADA toilet', w: 15, h: 18, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'ADA Toilet',
+          svg: _O + '<rect data-o="1" x="0.5" y="0" width="14" height="2" rx="0.9"/><path data-o="1" d="M1.4 2 H13.6 C13.4 7.6 11 10.6 10.4 13 L11.6 18 H3.4 L4.6 13 C4 10.6 1.6 7.6 1.4 2 Z"/>' + _G,
+          side: { w: 28, h: 18,
+            svg: _O + '<path data-o="1" d="M0 0 H23 Q26 0 26 2 C26 7 22 10 17 11 L16 18 H6 L5.4 10 C2 9 0 6 0 2 Z"/><path fill="none" d="M0 2 H26"/>' + _G } },
+        { key: 'toilet-wall', name: 'Wall-hung toilet', w: 15, h: 11, aff: 8, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Toilet',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="15" height="2.2" rx="0.9"/><path data-o="1" d="M0.6 2.2 H14.4 C14.2 6 12 9.4 10 11 H5 C3 9.4 0.8 6 0.6 2.2 Z"/>' + _G,
+          side: { w: 22, h: 11,
+            svg: _O + '<path data-o="1" d="M0 0 H19.6 Q22 0 22 2.2 C22 6.4 17 10.4 9 11 H0 Z"/><path fill="none" d="M0 2.2 H22"/>' + _G } },
+        { key: 'flush-plate', name: 'Flush plate', w: 9, h: 6, aff: 40, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="9" height="6" rx="0.8"/><rect x="1" y="1" width="3.3" height="4" rx="0.6"/><rect x="4.7" y="1" width="3.3" height="4" rx="0.6"/>' + _G },
+        { key: 'urinal', name: 'Urinal', w: 18, h: 26, aff: 13, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Urinal',
+          svg: _O + '<path data-o="1" d="M3 0 H15 Q18 0 18 3 V16 C18 21.4 15.4 26 9 26 C2.6 26 0 21.4 0 16 V3 Q0 0 3 0 Z"/><path d="M3.4 8 Q9 6 14.6 8 V16.6 C14.6 20.4 12.4 22.6 9 22.6 C5.6 22.6 3.4 20.4 3.4 16.6 Z"/><rect x="7.6" y="2.4" width="2.8" height="1.8" rx="0.5"/>' + _G,
+          side: { w: 14, h: 26,
+            svg: _O + '<path data-o="1" d="M0 0 H6 Q14 2 14 14 C14 22 10 26 4 26 H0 Z"/><path fill="none" d="M0 8 Q7 9 9 16 Q8.4 21 4 22.6 H0"/>' + _G } },
+        { key: 'fx-ada-toilet', name: 'Accessible toilet + grab bar', w: 60, h: 36, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Toilet',
+          svg: _O + '<rect data-o="1" x="8" y="1.2" width="36" height="1.5" rx="0.75"/><rect data-o="1" x="6" y="0" width="3" height="3.6" rx="0.8"/><rect data-o="1" x="43" y="0" width="3" height="3.6" rx="0.8"/><rect data-o="1" x="9" y="6" width="18" height="11.5" rx="1"/><path fill="none" d="M9 8 H27"/><rect x="11.6" y="8.8" width="2.4" height="0.8" rx="0.3"/><rect data-o="1" x="10" y="18.2" width="16" height="2" rx="0.9"/><path data-o="1" d="M11.4 20.2 H24.6 C24.4 25 21.6 27.6 21 30 L22.4 36 H13.6 L15 30 C14.4 27.6 11.6 25 11.4 20.2 Z"/><circle data-o="1" cx="37" cy="14" r="2.4"/><circle cx="37" cy="14" r="0.7"/>' + _G },
+        { key: 'lav-wall', name: 'Wall lav', w: 20, h: 22, aff: 12, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Lavatory',
+          svg: _O + '<rect data-o="1" x="0" y="6" width="20" height="2" rx="0.6"/><path data-o="1" d="M1 8 H19 C18.6 12.6 15 15 10 15 C5 15 1.4 12.6 1 8 Z"/><path fill="none" d="M8.6 6 V3 Q8.6 1 10.6 1 H12.6 V2"/><path fill="none" d="M10 15 V19 Q10 21 12 21 H14"/>' + _G },
+        { key: 'lav-pedestal', name: 'Pedestal sink', w: 22, h: 38, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Sink',
+          svg: _O + '<path fill="none" d="M10 4 V1.8 Q10 0.4 11.6 0.4 H13.6 V1.4"/><rect x="9" y="3.4" width="3" height="0.6" rx="0.2"/><path data-o="1" d="M0.8 4 H21.2 Q22 4 22 4.8 V6 C22 10.6 18 13 11 13 C4 13 0 10.6 0 6 V4.8 Q0 4 0.8 4 Z"/><path data-o="1" d="M8 13 C8.6 20 8.2 30 6.6 38 H15.4 C13.8 30 13.4 20 14 13"/><path fill="none" d="M0 6 H22"/>' + _G },
+        { key: 'fx-lav-basin', name: 'Vessel basin', w: 24, h: 10, aff: 34, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Basin',
+          svg: _O + '<path data-o="1" d="M2 4 H22 C21.4 7.6 18 10 12 10 C6 10 2.6 7.6 2 4 Z"/><path fill="none" d="M5 2.8 V1.4 Q5 0 6.4 0 H9 V0.8"/><rect x="4" y="2.8" width="2" height="1.2" rx="0.3"/>' + _G },
+        { key: 'stall', name: 'Toilet stall', w: 36, h: 70, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Stall',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="1.5" rx="0.3"/><rect data-o="1" x="0" y="1.5" width="4" height="68.5" rx="0.3"/><rect data-o="1" x="32" y="1.5" width="4" height="68.5" rx="0.3"/><rect data-o="1" x="4.5" y="1.5" width="27" height="56.5" rx="0.5"/><path fill="none" d="M0 66 H4"/><path fill="none" d="M32 66 H36"/><rect x="28" y="28" width="2.5" height="3" rx="0.4"/><rect x="28.4" y="24" width="1.7" height="2" rx="0.3"/>' + _G },
+        { key: 'fountain', name: 'Drinking fountain', w: 19, h: 18, aff: 27, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Fountain',
+          svg: _O + '<path data-o="1" d="M1 0 H18 Q19 0 19 1 V7 C19 12.4 15 18 9.5 18 C4 18 0 12.4 0 7 V1 Q0 0 1 0 Z"/><path fill="none" d="M0 2.4 H19"/><path fill="none" d="M6 10.4 H13"/><path fill="none" d="M8.8 2.4 V1.2 H10.2 V2.4"/>' + _G },
+    ] },
     { cat: 'Office', items: [
-        { key: 'off-desk', name: 'Office desk', w: 60, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Desk',
-          svg: _O + '<path d="M0 0 H60 V1.5 H0 Z"/><path d="M1 1.5 H3 V30 H1 Z"/><path d="M41 1.5 H58 V30 H41 Z"/>' + _G
-             + _D + '<path d="M3 2.5 H41 M3 15 H41"/>'
-                  + '<path d="M42 2.5 H57 V8 H42 Z M42 9 H57 V14.5 H42 Z M42 15.5 H57 V29 H42 Z"/>' + _G
-             + _F + '<path d="M47.5 5.2 H51.5 M47.5 11.8 H51.5 M47.5 18.4 H51.5"/><path d="M0 0.7 H60"/>' + _G,
-          side: { w: 30, h: 30, svg: _O + '<path d="M0 0 H30 V1.5 H0 Z"/><path d="M1 1.5 H29 V30 H1 Z"/>' + _G
-                  + _F + '<path d="M0 0.7 H30"/>' + _G } },
+        { key: 'of-workstation', name: 'Workstation + task chair', w: 72, h: 42, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Workstation',
+          svg: _O + '<rect data-o="1" x="25" y="0" width="22" height="13" rx="0.6"/><rect x="26" y="1" width="20" height="10.4"/><rect data-o="1" x="35" y="13" width="2" height="2.4"/><rect data-o="1" x="31.4" y="15.4" width="9.2" height="0.8" rx="0.3"/><path data-o="1" d="M62 11.64 C61.11 8.78 58.88 6.95 57.54 6.43 C57.98 8.52 60.21 10.6 62 11.64 Z"/><path data-o="1" d="M62 11.64 C62.92 8.94 65.23 7.22 66.61 6.73 C66.15 8.69 63.85 10.66 62 11.64 Z"/><path data-o="1" d="M62 11.64 C61.85 7.55 61.48 4.94 61.26 4.2 C61.33 7.18 61.7 10.15 62 11.64 Z"/><path data-o="1" d="M62 11.64 C62.45 7.96 63.56 5.61 64.23 4.94 C64.01 7.62 62.89 10.3 62 11.64 Z"/><path data-o="1" d="M62 11.64 C61.38 7.75 59.81 5.28 58.88 4.57 C59.19 7.4 60.75 10.23 62 11.64 Z"/><path data-o="1" d="M59.95 11.64 H64.05 L63.64 16.2 H60.36 Z"/><rect data-o="1" x="4" y="13.2" width="6" height="3" rx="0.6"/><rect data-o="1" x="0" y="16.2" width="72" height="1.6" rx="0.4"/><rect data-o="1" x="1.2" y="17.8" width="1.6" height="24.2"/><rect data-o="1" x="52" y="17.8" width="18.8" height="24.2" rx="0.3"/><path fill="none" d="M52 25.87 H70.8"/><path fill="none" d="M52 33.93 H70.8"/><rect x="58.9" y="21.48" width="5" height="0.7" rx="0.35"/><rect x="58.9" y="29.55" width="5" height="0.7" rx="0.35"/><rect x="58.9" y="37.62" width="5" height="0.7" rx="0.35"/><circle data-o="1" cx="26.43" cy="40.8" r="1.2"/><circle data-o="1" cx="36" cy="40.9" r="1.1"/><circle data-o="1" cx="45.57" cy="40.8" r="1.2"/><path data-o="1" d="M34.71 35.19 H37.29 L46.67 38.5 V39.42 H25.33 V38.5 Z"/><rect data-o="1" x="35.08" y="27.74" width="1.84" height="7.54"/><rect data-o="1" x="25.33" y="23.97" width="21.34" height="3.86" rx="1.84"/><rect data-o="1" x="27.9" y="5.2" width="16.19" height="17.85" rx="2.94"/><path fill="none" d="M27.17 25.81 V19 H24.59"/><path fill="none" d="M44.83 25.81 V19 H47.41"/>' + _G },
         { key: 'workstation', name: 'Workstation + screen', w: 60, h: 48, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Workstation',
-          svg: _O + '<path d="M0 18 V1 Q0 0 1 0 H59 Q60 0 60 1 V18"/><path d="M0 18 H60 V19.5 H0 Z"/>'
-                  + '<path d="M1 19.5 H3 V48 H1 Z M57 19.5 H59 V48 H57 Z"/>' + _G
-             + _D + '<path d="M1.5 18 V1.5 H58.5 V18"/><path d="M3 20.5 H57 V32 H3 Z"/>'
-                  + '<rect x="20" y="4" width="20" height="11.6" rx="0.5"/>' + _G
-             + _F + '<path d="M29 15.6 V17.4 M31 15.6 V17.4"/><path d="M26.6 17.6 H33.4"/>' + _G },
-        { key: 'task-chair', name: 'Task chair', w: 26, h: 40, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
-          svg: _O + '<path d="M6.5 0 H19.5 Q22 0 22 2.5 V15 Q22 17.5 19.5 17.5 H6.5 Q4 17.5 4 15 V2.5 Q4 0 6.5 0 Z"/>'
-                  + '<path d="M2.6 19.5 H23.4 Q25.5 19.5 25.5 21.6 Q25.5 24 23 24 H3 Q0.5 24 0.5 21.6 Q0.5 19.5 2.6 19.5 Z"/>'
-                  + '<path d="M12 25.5 V33 H14 V25.5"/><path d="M11 33 H15 L24.6 36 V37 H1.4 V36 Z"/>'
-                  + '<circle cx="2.6" cy="38.5" r="1.4"/><circle cx="13" cy="38.5" r="1.4"/><circle cx="23.4" cy="38.5" r="1.4"/>' + _G
-             + _D + '<path d="M1.4 12.6 Q1.4 12 2 12 H5 Q5.6 12 5.6 12.6 V14 H1.4 Z M20.4 12.6 Q20.4 12 21 12 H24 Q24.6 12 24.6 12.6 V14 H20.4 Z"/>'
-                  + '<path d="M3.5 14 V19.5 M22.5 14 V19.5"/><path d="M12.2 17.5 V19.5 M13.8 17.5 V19.5"/>'
-                  + '<path d="M9 24 H17 V25.5 H9 Z"/>' + _G
-             + _F + '<path d="M6 11 Q13 12.6 20 11"/><path d="M12 29 H14"/>' + _G },
-        { key: 'monitor', name: 'Monitor', w: 24, h: 17, aff: 29.5, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<rect x="0" y="0" width="24" height="14.2" rx="0.6"/><path d="M11 14.2 H13 V16.3 H11 Z"/><path d="M7 16.3 H17 V17 H7 Z"/>' + _G
-             + _D + '<rect x="0.9" y="0.9" width="22.2" height="11.8"/>' + _G
-             + _F + '<path d="M11.4 13.5 H12.6"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="18" rx="0.8"/><rect x="1.6" y="1.6" width="56.8" height="16.4" rx="0.3"/><rect data-o="1" x="20" y="4" width="20" height="11.6" rx="0.5"/><rect data-o="1" x="29" y="15.6" width="2" height="2.4"/><rect data-o="1" x="0" y="18" width="60" height="1.6" rx="0.4"/><rect data-o="1" x="1" y="19.6" width="1.8" height="28.4"/><rect data-o="1" x="57.2" y="19.6" width="1.8" height="28.4"/><rect x="2.8" y="19.6" width="54.4" height="11"/>' + _G },
+        { key: 'off-desk', name: 'Office desk', w: 60, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Desk',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="1.6" rx="0.4"/><rect data-o="1" x="1" y="1.6" width="1.8" height="28.4"/><rect data-o="1" x="41" y="1.6" width="18" height="28.4" rx="0.3"/><rect x="2.8" y="1.6" width="38.2" height="12"/><path fill="none" d="M41 11.07 H59"/><path fill="none" d="M41 20.53 H59"/><rect x="47.5" y="5.98" width="5" height="0.7" rx="0.35"/><rect x="47.5" y="15.45" width="5" height="0.7" rx="0.35"/><rect x="47.5" y="24.92" width="5" height="0.7" rx="0.35"/>' + _G,
+          side: { w: 30, h: 30,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="30" height="1.6" rx="0.4"/><rect data-o="1" x="1" y="1.6" width="28" height="28.4" rx="0.3"/>' + _G } },
+        { key: 'of-desk-storage', name: 'Desk + storage', w: 72, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Desk',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="1.6" rx="0.4"/><rect data-o="1" x="1" y="1.6" width="17" height="28.4" rx="0.3"/><rect data-o="1" x="54" y="1.6" width="17" height="28.4" rx="0.3"/><rect x="18" y="1.6" width="36" height="10"/><path fill="none" d="M1 11.07 H18"/><path fill="none" d="M1 20.53 H18"/><rect x="7" y="5.98" width="5" height="0.7" rx="0.35"/><rect x="7" y="15.45" width="5" height="0.7" rx="0.35"/><rect x="7" y="24.92" width="5" height="0.7" rx="0.35"/><path fill="none" d="M54 15.8 H71"/><rect x="57" y="4.4" width="2.4" height="9" rx="0.3"/><rect x="60" y="5.4" width="2.4" height="8" rx="0.3"/><rect x="63" y="4" width="2.4" height="9.4" rx="0.3"/><rect x="60" y="22.55" width="5" height="0.7" rx="0.35"/>' + _G },
+        { key: 'credenza', name: 'Credenza', w: 72, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Credenza',
+          svg: _O + '<rect data-o="1" x="3" y="26" width="2" height="4" rx="0.3"/><rect data-o="1" x="67" y="26" width="2" height="4" rx="0.3"/><rect data-o="1" x="0" y="0" width="72" height="26" rx="0.5"/><path fill="none" d="M0 1.6 H72"/><path fill="none" d="M18 1.6 V26"/><path fill="none" d="M36 1.6 V26"/><path fill="none" d="M54 1.6 V26"/><rect x="6.5" y="4.65" width="5" height="0.7" rx="0.35"/><rect x="24.5" y="4.65" width="5" height="0.7" rx="0.35"/><rect x="42.5" y="4.65" width="5" height="0.7" rx="0.35"/><rect x="60.5" y="4.65" width="5" height="0.7" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="1.6" width="72" height="24.4"/>',
+          side: { w: 20, h: 30,
+            svg: _O + '<rect data-o="1" x="2" y="26" width="2" height="4" rx="0.3"/><rect data-o="1" x="16" y="26" width="2" height="4" rx="0.3"/><rect data-o="1" x="0" y="0" width="20" height="26" rx="0.5"/><path fill="none" d="M0 1.6 H20"/>' + _G } },
+        { key: 'of-meeting', name: 'Meeting table + chairs', w: 120, h: 36, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Meeting Table',
+          svg: _O + '<rect data-o="1" x="36" y="0" width="18" height="10" rx="2.4"/><rect data-o="1" x="66" y="0" width="18" height="10" rx="2.4"/><rect data-o="1" x="18" y="7" width="84" height="1.8" rx="0.6"/><rect data-o="1" x="33" y="8.8" width="2" height="27.2"/><rect data-o="1" x="85" y="8.8" width="2" height="27.2"/><rect data-o="1" x="27" y="34.6" width="14" height="1.4" rx="0.4"/><rect data-o="1" x="79" y="34.6" width="14" height="1.4" rx="0.4"/><circle data-o="1" cx="2" cy="34.8" r="1.2"/><circle data-o="1" cx="17" cy="34.8" r="1.2"/><path fill="none" d="M2 33 L9.5 30 L17 33"/><rect data-o="1" x="8.6" y="21" width="1.8" height="9"/><path data-o="1" d="M3 17.4 H17 Q18 17.4 18 18.6 V20 H3 Z"/><path data-o="1" d="M2.4 19 L0.6 1 Q0.6 0 1.8 0 H3 Q4 0 4 1 L4.8 17.4"/><path fill="none" d="M6 17.4 V12 H13"/><circle data-o="1" cx="118" cy="34.8" r="1.2"/><circle data-o="1" cx="103" cy="34.8" r="1.2"/><path fill="none" d="M118 33 L110.5 30 L103 33"/><rect data-o="1" x="109.6" y="21" width="1.8" height="9"/><path data-o="1" d="M117 17.4 H103 Q102 17.4 102 18.6 V20 H117 Z"/><path data-o="1" d="M117.6 19 L119.4 1 Q119.4 0 118.2 0 H117 Q116 0 116 1 L115.2 17.4"/><path fill="none" d="M114 17.4 V12 H107"/>' + _G },
         { key: 'conf-table', name: 'Conference table', w: 96, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Table',
-          svg: _O + '<path d="M0 0 H96 V2 H0 Z"/><path d="M18 2 H30 L32 30 H16 Z M66 2 H78 L80 30 H64 Z"/>' + _G
-             + _D + '<path d="M15 29 H33 M63 29 H81"/>' + _G
-             + _H + '<path d="M36 2.4 H60 V6 H36 Z"/>' + _G
-             + _F + '<path d="M0 0.8 H96"/>' + _G },
-        { key: 'file-lateral', name: 'Lateral file', w: 36, h: 28, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'File',
-          svg: _O + '<path d="M0 0 H36 V28 H0 Z"/>' + _G
-             + _D + '<path d="M1 1 H35 V13.5 H1 Z M1 14.5 H35 V27 H1 Z"/>' + _G
-             + _F + '<rect x="13" y="4" width="10" height="1.4" rx="0.5"/><rect x="13" y="17.5" width="10" height="1.4" rx="0.5"/>'
-                  + '<rect x="16.5" y="7" width="3" height="1.6"/><rect x="16.5" y="20.5" width="3" height="1.6"/>' + _G },
-        { key: 'cab-storage', name: 'Storage cabinet', w: 36, h: 72, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Cabinet',
-          svg: _O + '<path d="M0 0 H36 V72 H0 Z"/>' + _G
-             + _D + '<path d="M1 1 H17.75 V70 H1 Z M18.25 1 H35 V70 H18.25 Z"/>' + _G
-             + _F + '<path d="M15.6 32 V38 M20.4 32 V38"/>' + _G
-             + _H + '<path d="M1.6 17.5 H34.4 M1.6 52.5 H34.4"/>' + _G,
-          hatch: '<rect x="1" y="1" width="34" height="69"/>' },
-        { key: 'bookcase', name: 'Bookcase', w: 36, h: 72, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Bookcase',
-          svg: _O + '<path d="M0 0 H36 V72 H0 Z"/>' + _G
-             + _D + '<path d="M1 1 H35 V68 H1 Z"/><path d="M1 18 H35 M1 35.5 H35 M1 53 H35"/>' + _G
-             + _F + '<path d="M3 9 H4.6 V18 H3 Z M4.6 8 H6.2 V18 H4.6 Z M6.2 9.5 H7.8 V18 H6.2 Z M8.6 18 L11 9.6 L12.5 10 L10.1 18"/>'
-                  + '<path d="M24 15.6 H33 V18 H24 Z M25 13.2 H32 V15.6 H25 Z"/>'
-                  + '<path d="M3 26 H4.8 V35.5 H3 Z M4.8 25 H6.4 V35.5 H4.8 Z M6.4 26.5 H8.2 V35.5 H6.4 Z M8.2 25.5 H9.8 V35.5 H8.2 Z"/>'
-                  + '<path d="M27 35.5 C25 31 26 28.4 27.6 27 H29.4 C31 28.4 32 31 30 35.5 Z"/>'
-                  + '<path d="M3 46 H13 V53 H3 Z"/>'
-                  + '<path d="M22 43.5 H23.6 V53 H22 Z M23.6 44.5 H25.4 V53 H23.6 Z M25.4 43 H27 V53 H25.4 Z M27 44 H28.8 V53 H27 Z"/>'
-                  + '<rect x="3" y="59.5" width="13" height="8.5" rx="0.8"/><rect x="20" y="59.5" width="13" height="8.5" rx="0.8"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="96" height="2" rx="0.6"/><path data-o="1" d="M18 2 H30 L32 30 H16 Z M66 2 H78 L80 30 H64 Z"/>' + _G
+              + _H + '<rect x="36" y="2.4" width="24" height="3.6"/>' + _G },
+        { key: 'monitor', name: 'Monitor', w: 24, h: 17, aff: 29.5, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="24" height="14.2" rx="0.6"/><rect x="0.9" y="0.9" width="22.2" height="11.8"/><rect data-o="1" x="11" y="14.2" width="2" height="2.1"/><rect data-o="1" x="7" y="16.3" width="10" height="0.7" rx="0.3"/>' + _G },
         { key: 'whiteboard', name: 'Whiteboard', w: 72, h: 48, aff: 36, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Whiteboard',
-          svg: _O + '<rect x="0" y="0" width="72" height="45" rx="0.4"/>'
-                  + '<path d="M4 45 H68 V46.5 Q68 48 66.5 48 H5.5 Q4 48 4 46.5 Z"/>' + _G
-             + _D + '<rect x="1" y="1" width="70" height="43"/>' + _G
-             + _F + '<path d="M10 45.9 H15 M17 45.9 H22"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="45" rx="0.6"/><rect x="1" y="1" width="70" height="43"/><path data-o="1" d="M4 45 H68 V46.5 Q68 48 66.5 48 H5.5 Q4 48 4 46.5 Z"/><path fill="none" d="M10 45.9 H15"/><path fill="none" d="M17 45.9 H22"/>' + _G },
+        { key: 'file-lateral', name: 'Lateral file', w: 36, h: 28, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'File',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="28" rx="0.5"/><path fill="none" d="M1 14 H35"/><rect x="13.5" y="4.65" width="9" height="0.7" rx="0.35"/><rect x="13.5" y="18.65" width="9" height="0.7" rx="0.35"/>' + _G },
+        { key: 'of-file-3', name: 'Lateral file, 3 drawer', w: 36, h: 40, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'File',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="40" rx="0.5"/><path fill="none" d="M1 13.3 H35"/><path fill="none" d="M1 26.6 H35"/><rect x="13.5" y="4.25" width="9" height="0.7" rx="0.35"/><rect x="13.5" y="17.55" width="9" height="0.7" rx="0.35"/><rect x="13.5" y="30.85" width="9" height="0.7" rx="0.35"/>' + _G },
+        { key: 'cab-storage', name: 'Storage cabinet', w: 36, h: 72, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Cabinet',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="72" rx="0.5"/><path fill="none" d="M0 1.6 H36"/><path fill="none" d="M0 69 H36"/><path fill="none" d="M18 1.6 V69"/><rect x="15.25" y="32" width="0.7" height="6" rx="0.35"/><rect x="20.05" y="32" width="0.7" height="6" rx="0.35"/>' + _G,
+          hatch: '<rect x="0" y="1.6" width="36" height="67.4"/>' },
+        { key: 'bookcase', name: 'Bookcase', w: 36, h: 72, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Bookcase',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="72" rx="0.5"/><rect x="1.6" y="1.6" width="32.8" height="66.4"/><path fill="none" d="M1.6 18 H34.4"/><path fill="none" d="M1.6 35.5 H34.4"/><path fill="none" d="M1.6 53 H34.4"/><rect x="3.6" y="9" width="1.8" height="9" rx="0.2"/><rect x="5.4" y="8" width="1.8" height="10" rx="0.2"/><rect x="7.2" y="9.6" width="1.8" height="8.4" rx="0.2"/><rect x="24" y="15.4" width="9" height="2.6" rx="0.3"/><rect x="25" y="13" width="7" height="2.4" rx="0.3"/><rect x="3.6" y="26" width="1.8" height="9.5" rx="0.2"/><rect x="5.4" y="25" width="1.8" height="10.5" rx="0.2"/><rect x="7.2" y="26.6" width="1.8" height="8.9" rx="0.2"/><path data-o="1" d="M27.6 29.1 H29.6 C29.6 30.5 31.8 31.1 31.8 33.1 C31.8 34.9 30.2 35.5 28.6 35.5 C27 35.5 25.4 34.9 25.4 33.1 C25.4 31.1 27.6 30.5 27.6 29.1 Z"/><rect x="3.6" y="46" width="10" height="7" rx="0.4"/><rect x="22" y="43.6" width="1.8" height="9.4" rx="0.2"/><rect x="23.8" y="44.6" width="1.8" height="8.4" rx="0.2"/><rect x="25.6" y="43" width="1.8" height="10" rx="0.2"/><rect x="3.6" y="59.6" width="12.4" height="8.4" rx="1"/><rect x="20" y="59.6" width="12.4" height="8.4" rx="1"/>' + _G },
+        { key: 'reception', name: 'Reception desk', w: 120, h: 42, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Reception Desk',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="120" height="2" rx="0.6"/><rect data-o="1" x="1" y="2" width="118" height="38" rx="0.5"/><path fill="none" d="M1 10 H119"/><rect data-o="1" x="2" y="40" width="116" height="2"/>' + _G },
         { key: 'kitchenette', name: 'Kitchenette', w: 96, h: 90, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Kitchenette',
-          // Uppers 54 to 90in AFF, counter at 36in, sink cabinet with the bowl as a hidden line.
-          svg: _O + '<path d="M0 0 H96 V36 H0 Z"/><path d="M0 54 H96 V55.5 H0 Z"/>'
-                  + '<path d="M0.5 55.5 H95.5 V86 H0.5 Z"/><path d="M2 86 H94 V90 H2 Z"/>' + _G
-             + _D + '<path d="M0.5 0.5 H23.75 V35.5 H0.5 Z M24.25 0.5 H47.75 V35.5 H24.25 Z M48.25 0.5 H71.75 V35.5 H48.25 Z M72.25 0.5 H95.5 V35.5 H72.25 Z"/>'
-                  + '<path d="M1.5 56.5 H23.5 V64 H1.5 Z M1.5 65 H23.5 V75 H1.5 Z M1.5 76 H23.5 V85 H1.5 Z"/>'
-                  + '<path d="M24.5 56.5 H35.75 V85 H24.5 Z M36.25 56.5 H47.5 V85 H36.25 Z"/>'
-                  + '<path d="M48.5 56.5 H71.5 V85 H48.5 Z"/>'
-                  + '<path d="M72.5 56.5 H83.25 V85 H72.5 Z M83.75 56.5 H94.5 V85 H83.75 Z"/>'
-                  + '<path fill="none" d="M35.4 54 V48 Q35.4 45 38.4 45 Q41 45 41 48 V49.2"/>' + _G
-             + _F + '<path d="M34.4 54 H37.4"/>'
-                  + '<path d="M10 59.6 H15 M10 69.4 H15 M10 79.6 H15"/>'
-                  + '<path d="M34.2 60 V65 M37.8 60 V65 M81.7 60 V65 M85.3 60 V65 M52 58.4 H68"/>'
-                  + '<path d="M21.7 30 V34 M26.3 30 V34 M69.7 30 V34 M74.3 30 V34"/>' + _G
-             + _H + '<path d="M27 55.5 V61 Q27 63 29 63 H43 Q45 63 45 61 V55.5"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="96" height="36" rx="0.4"/><path fill="none" d="M24 0 V36"/><path fill="none" d="M48 0 V36"/><path fill="none" d="M72 0 V36"/><rect x="21.25" y="29" width="0.7" height="4" rx="0.35"/><rect x="26.05" y="29" width="0.7" height="4" rx="0.35"/><rect x="69.25" y="29" width="0.7" height="4" rx="0.35"/><rect x="74.05" y="29" width="0.7" height="4" rx="0.35"/><path fill="none" d="M35.4 54 V48 Q35.4 45 38.4 45 Q41 45 41 48 V49.2"/><rect x="34" y="53.2" width="3.4" height="0.8" rx="0.2"/><rect data-o="1" x="0" y="54" width="96" height="1.6" rx="0.4"/><rect data-o="1" x="0.6" y="55.6" width="94.8" height="30.4" rx="0.3"/><rect data-o="1" x="2" y="86" width="92" height="4"/><path fill="none" d="M24 55.6 V86"/><path fill="none" d="M36 55.6 V86"/><path fill="none" d="M48 55.6 V86"/><path fill="none" d="M72 55.6 V86"/><path fill="none" d="M84 55.6 V86"/><path fill="none" d="M0.6 65.6 H24"/><path fill="none" d="M0.6 75.6 H24"/><rect x="9.5" y="60.25" width="5" height="0.7" rx="0.35"/><rect x="9.5" y="70.25" width="5" height="0.7" rx="0.35"/><rect x="9.5" y="80.25" width="5" height="0.7" rx="0.35"/><rect x="33.25" y="58.5" width="0.7" height="5" rx="0.35"/><rect x="38.05" y="58.5" width="0.7" height="5" rx="0.35"/><rect x="53" y="58.05" width="14" height="0.7" rx="0.35"/><rect x="81.25" y="58.5" width="0.7" height="5" rx="0.35"/><rect x="86.05" y="58.5" width="0.7" height="5" rx="0.35"/>' + _G
+              + _H + '<path fill="none" d="M27 55.6 V61 Q27 63 29 63 H43 Q45 63 45 61 V55.6"/>' + _G },
         { key: 'fridge', name: 'Refrigerator', w: 36, h: 70, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Fridge',
-          svg: _O + '<path d="M1 0 H35 Q36 0 36 1 V68 H0 V1 Q0 0 1 0 Z"/><path d="M1.5 68 H34.5 V70 H1.5 Z"/>' + _G
-             + _D + '<path d="M1 1 H17.75 V42 H1 Z M18.25 1 H35 V42 H18.25 Z M1 43 H35 V67 H1 Z"/>' + _G
-             + _F + '<path d="M16 8 V34 M20 8 V34 M10 45.6 H26"/><rect x="5" y="14" width="7" height="10" rx="0.6"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="68" rx="1"/><rect data-o="1" x="1.5" y="68" width="33" height="2" rx="0.3"/><path fill="none" d="M18 0 V42"/><path fill="none" d="M0 42 H36"/><rect x="15.85" y="9" width="0.7" height="24" rx="0.35"/><rect x="19.45" y="9" width="0.7" height="24" rx="0.35"/><rect x="10" y="45.25" width="16" height="0.7" rx="0.35"/><rect x="5" y="14" width="7" height="10" rx="0.6"/>' + _G },
+    ] },
+    { cat: 'Glass', items: [
+        { key: 'gl-door', name: 'Glass partition + door', w: 185, h: 108, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Glass Partition',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="185" height="108" rx="0.3"/><rect x="1.6" y="1.6" width="181.8" height="104.8"/><path fill="none" d="M36.6 1.6 V106.4"/><path fill="none" d="M71.6 1.6 V106.4"/><path fill="none" d="M106.6 1.6 V106.4"/><rect x="141.6" y="1.6" width="4" height="104.8"/><rect x="147.6" y="3.6" width="33.8" height="102.8" rx="0.2"/><rect x="149.6" y="5.6" width="29.8" height="98.8"/><circle cx="176.6" cy="72" r="0.75"/><rect x="172.4" y="71.65" width="4.2" height="0.7" rx="0.35"/>' + _G,
+          hatch: '<rect x="1.6" y="1.6" width="140" height="104.8"/><rect x="149.6" y="5.6" width="29.8" height="98.8"/>' },
+        { key: 'gl-double', name: 'Double glass doors + sidelights', w: 185, h: 108, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Glass Doors',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="185" height="108" rx="0.3"/><rect x="1.6" y="1.6" width="181.8" height="104.8"/><path fill="none" d="M54 1.6 V106.4"/><path fill="none" d="M131 1.6 V106.4"/><path fill="none" d="M1.6 22 H183.4"/><rect x="56" y="24" width="36.5" height="82.4"/><rect x="92.5" y="24" width="36.5" height="82.4"/><rect x="88.15" y="51" width="0.7" height="26" rx="0.35"/><rect x="96.15" y="51" width="0.7" height="26" rx="0.35"/>' + _G,
+          hatch: '<rect x="1.6" y="1.6" width="181.8" height="104.8"/>' },
+        { key: 'gl-fixed', name: 'Full-height fixed glass', w: 120, h: 108, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Glass',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="120" height="108" rx="0.3"/><rect x="1.6" y="1.6" width="116.8" height="104.8"/><path fill="none" d="M40 1.6 V106.4"/><path fill="none" d="M80 1.6 V106.4"/>' + _G,
+          hatch: '<rect x="1.6" y="1.6" width="116.8" height="104.8"/>' },
+        { key: 'gl-framed', name: 'Framed glass partition', w: 144, h: 108, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Glass',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="144" height="108" rx="0.3"/><rect x="1.6" y="1.6" width="140.8" height="104.8"/><rect x="1.6" y="22" width="140.8" height="2"/><rect x="47.2" y="1.6" width="2" height="104.8"/><rect x="94.8" y="1.6" width="2" height="104.8"/><rect x="1.6" y="102.4" width="140.8" height="4"/>' + _G,
+          hatch: '<rect x="1.6" y="1.6" width="140.8" height="104.8"/>' },
+        { key: 'gl-frameless', name: 'Frameless glass partition', w: 144, h: 108, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Glass',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="144" height="2" rx="0.3"/><rect data-o="1" x="0" y="106" width="144" height="2" rx="0.3"/><path fill="none" d="M0.3 2 V106"/><path fill="none" d="M143.7 2 V106"/><path fill="none" d="M47.6 2 V106"/><path fill="none" d="M48.4 2 V106"/><path fill="none" d="M95.6 2 V106"/><path fill="none" d="M96.4 2 V106"/>' + _G,
+          hatch: '<rect x="0" y="2" width="144" height="104"/>' },
+        { key: 'gl-slide', name: 'Glass sliding door', w: 96, h: 108, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Sliding Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="96" height="3" rx="0.4"/><circle cx="10" cy="4.6" r="1.2"/><circle cx="38" cy="4.6" r="1.2"/><circle cx="56" cy="4.6" r="1.2"/><circle cx="84" cy="4.6" r="1.2"/><rect data-o="1" x="2" y="5.8" width="46" height="101" rx="0.3"/><rect x="4" y="7.8" width="42" height="97"/><rect data-o="1" x="46" y="5.8" width="48" height="101" rx="0.3"/><rect x="48" y="7.8" width="44" height="97"/><rect x="50.65" y="53" width="0.7" height="22" rx="0.35"/><path fill="none" d="M0 107.2 H96"/>' + _G,
+          hatch: '<rect x="2" y="5.8" width="92" height="101"/>' },
+        { key: 'window', name: 'Window', w: 48, h: 48, aff: 36, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Window',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="48" height="48" rx="0.3"/><rect x="2" y="2" width="44" height="44"/><path fill="none" d="M24 2 V46"/><rect data-o="1" x="-1" y="46" width="50" height="2" rx="0.3"/>' + _G,
+          hatch: '<rect x="2" y="2" width="44" height="44"/>' },
+        { key: 'window-full', name: 'Full-height window', w: 72, h: 96, aff: 4, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Window',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="96" rx="0.3"/><rect x="2" y="2" width="68" height="92"/><path fill="none" d="M36 2 V94"/><path fill="none" d="M2 72 H70"/>' + _G,
+          hatch: '<rect x="2" y="2" width="68" height="92"/>' },
+    ] },
+    { cat: 'Doors', items: [
+        { key: 'door-guest', name: 'Guestroom entry', w: 36, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Guestroom Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="84" rx="0.3"/><rect x="2" y="2" width="32" height="82" rx="0.2"/><circle cx="31" cy="48" r="0.75"/><rect x="26.8" y="47.65" width="4.2" height="0.7" rx="0.35"/><rect x="26.6" y="52.6" width="4.4" height="2.2" rx="0.5"/>' + _G,
+          hatch: '<rect x="2" y="2" width="32" height="82"/>' },
+        { key: 'door-ada-bath', name: 'ADA bathroom', w: 36, h: 80, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'ADA Bathroom Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="80" rx="0.3"/><rect x="2" y="2" width="32" height="78" rx="0.2"/><circle cx="31" cy="46" r="0.75"/><rect x="26.8" y="45.65" width="4.2" height="0.7" rx="0.35"/>' + _G,
+          hatch: '<rect x="2" y="2" width="32" height="78"/>' },
+        { key: 'dr-accessible', name: 'Accessible door', w: 36, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="84" rx="0.3"/><rect x="2" y="2" width="32" height="82" rx="0.2"/><circle cx="31" cy="50" r="0.75"/><rect x="26.8" y="49.65" width="4.2" height="0.7" rx="0.35"/><rect x="3.6" y="74" width="28.8" height="8.6" rx="0.3"/><rect x="14" y="14" width="8" height="20" rx="0.3"/>' + _G,
+          hatch: '<rect x="2" y="2" width="32" height="82"/>' },
+        { key: 'dr-double', name: 'Double doors', w: 72, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Doors',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="84" rx="0.3"/><rect x="2" y="2" width="34" height="82" rx="0.2"/><rect x="36" y="2" width="34" height="82" rx="0.2"/><rect x="15" y="47.4" width="18" height="1.2" rx="0.6"/><rect x="39" y="47.4" width="18" height="1.2" rx="0.6"/>' + _G,
+          hatch: '<rect x="2" y="2" width="68" height="82"/>' },
+        { key: 'door-closet', name: 'Closet double', w: 72, h: 80, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Closet Doors',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="80" rx="0.3"/><rect x="2" y="2" width="34" height="78" rx="0.2"/><rect x="36" y="2" width="34" height="78" rx="0.2"/><rect x="33.05" y="40" width="0.7" height="8" rx="0.35"/><rect x="38.25" y="40" width="0.7" height="8" rx="0.35"/>' + _G,
+          hatch: '<rect x="2" y="2" width="68" height="78"/>' },
+        { key: 'dr-pocket', name: 'Pocket door', w: 36, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Pocket Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="84" rx="0.3"/><rect x="2" y="2" width="32" height="82" rx="0.2"/><rect x="31" y="40" width="1.6" height="6" rx="0.4"/><rect x="4.4" y="44" width="2.6" height="4" rx="0.6"/>' + _G
+              + _H + '<path fill="none" d="M0 3.4 H36"/>' + _G },
+        { key: 'dr-barn', name: 'Sliding barn door', w: 40, h: 87, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Barn Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="40" height="1.6" rx="0.6"/><circle data-o="1" cx="8" cy="3.4" r="1.6"/><circle data-o="1" cx="32" cy="3.4" r="1.6"/><path fill="none" d="M8 3.4 V6"/><path fill="none" d="M32 3.4 V6"/><rect data-o="1" x="1" y="6" width="38" height="80" rx="0.4"/><rect x="3.6" y="8.6" width="32.8" height="74.8"/><path fill="none" d="M3.6 83.4 L36.4 8.6"/><rect x="5.85" y="40" width="0.7" height="12" rx="0.35"/><path fill="none" d="M14 86.6 H26"/>' + _G },
+        { key: 'dr-glass', name: 'Glass door', w: 36, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Glass Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="84" rx="0.3"/><rect x="2" y="2" width="32" height="82" rx="0.2"/><rect x="5" y="5" width="26" height="72"/><rect x="27.65" y="35" width="0.7" height="22" rx="0.35"/>' + _G,
+          hatch: '<rect x="5" y="5" width="26" height="72"/>' },
+        { key: 'door-slide', name: 'Sliding patio door', w: 60, h: 80, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Sliding Door',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="60" height="80" rx="0.3"/><rect x="2" y="2" width="28" height="76"/><rect x="30" y="2" width="28" height="76"/><rect x="4" y="4" width="24" height="72"/><rect x="32" y="4" width="24" height="72"/><rect x="26.05" y="38" width="0.7" height="8" rx="0.35"/><rect x="33.25" y="38" width="0.7" height="8" rx="0.35"/>' + _G },
+        { key: 'elevator', name: 'Elevator', w: 42, h: 84, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Elevator',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="42" height="84" rx="0.3"/><rect x="2" y="2" width="38" height="82" rx="0.2"/><path fill="none" d="M21 2 V84"/>' + _G },
+        { key: 'niche', name: 'Niche', w: 36, h: 48, aff: 30, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Niche',
+          svg: _O + '<rect x="0" y="0" width="36" height="48" rx="0.3"/><rect x="2" y="2" width="32" height="44" rx="0.2"/><path fill="none" d="M0 46 H36"/>' + _G },
+    ] },
+    { cat: 'Chairs', items: [
+        { key: 'task-chair', name: 'Task chair', w: 26, h: 40, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
+          svg: _O + '<circle data-o="1" cx="2.6" cy="38.7" r="1.3"/><circle data-o="1" cx="13" cy="38.8" r="1.2"/><circle data-o="1" cx="23.4" cy="38.7" r="1.3"/><path data-o="1" d="M11.6 32.6 H14.4 L24.6 36.2 V37.2 H1.4 V36.2 Z"/><rect data-o="1" x="12" y="24.5" width="2" height="8.2"/><rect data-o="1" x="1.4" y="20.4" width="23.2" height="4.2" rx="2"/><rect data-o="1" x="4.2" y="0" width="17.6" height="19.4" rx="3.2"/><path fill="none" d="M3.4 22.4 V15 H0.6"/><path fill="none" d="M22.6 22.4 V15 H25.4"/>' + _G },
+        { key: 'chair', name: 'Side chair', w: 22, h: 34, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Side Chair',
+          svg: _O + '<path fill="none" d="M3 20 L2 34"/><path fill="none" d="M19 20 L20 34"/><rect data-o="1" x="1" y="17" width="20" height="3.6" rx="1.6"/><path data-o="1" d="M3.4 17 V4 Q3.4 0.6 7 0.6 H15 Q18.6 0.6 18.6 4 V17 Z"/>' + _G,
+          side: { w: 24, h: 34,
+            svg: _O + '<path fill="none" d="M3 20 L1.6 34"/><path fill="none" d="M20 20 L21.4 34"/><rect data-o="1" x="1" y="17" width="21" height="3.6" rx="1.6"/><path data-o="1" d="M19 17 L21 1.6 Q21.2 0.4 22.4 0.6 Q23.4 1 23.2 2.2 L21.8 17 Z"/>' + _G } },
+        { key: 'ch-dining', name: 'Dining chair', w: 20, h: 34, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
+          svg: _O + '<path fill="none" d="M3 20 L2.4 34"/><path fill="none" d="M17 20 L17.6 34"/><rect data-o="1" x="0.6" y="17.4" width="18.8" height="3.2" rx="1.4"/><path data-o="1" d="M2.6 17.4 C2.6 10 2.8 3.4 5 1.6 Q6.4 0.6 10 0.6 Q13.6 0.6 15 1.6 C17.2 3.4 17.4 10 17.4 17.4 Z"/>' + _G,
+          side: { w: 22, h: 34,
+            svg: _O + '<path fill="none" d="M3 20 L1.8 34"/><path fill="none" d="M19 20 L20.2 34"/><rect data-o="1" x="0.6" y="17.4" width="20.8" height="3.2" rx="1.4"/><path data-o="1" d="M17.6 17.4 C18.4 11 19.4 5 20.4 1.6 Q20.8 0.4 21.6 0.8 Q22.2 1.2 22 2.4 L20.8 17.4 Z"/>' + _G } },
+        { key: 'lounge', name: 'Lounge chair', w: 32, h: 30, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Lounge Chair',
+          svg: _O + '<path fill="none" d="M4.6 25 L3 30"/><path fill="none" d="M27.4 25 L29 30"/><path data-o="1" d="M0 25 V11 Q0 7 4 7 Q6 7 6 9 V2 Q6 0 9 0 H23 Q26 0 26 2 V9 Q26 7 28 7 Q32 7 32 11 V25 Z"/><path fill="none" d="M6 9 V16"/><path fill="none" d="M26 9 V16"/><rect data-o="1" x="6" y="16" width="20" height="5.4" rx="1.6"/>' + _G,
+          side: { w: 34, h: 30,
+            svg: _O + '<path fill="none" d="M4 25 L2.4 30"/><path fill="none" d="M30 25 L31.6 30"/><path data-o="1" d="M0 25 V15 Q0 12 3 12 H25 V3 Q25 0 28 0 Q34 0 34 6 V25 Z"/><path fill="none" d="M3 18 H25"/>' + _G } },
+        { key: 'armchair', name: 'Club chair', w: 34, h: 32, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
+          svg: _O + '<rect data-o="1" x="4" y="29" width="1.6" height="3" rx="0.3"/><rect data-o="1" x="28.4" y="29" width="1.6" height="3" rx="0.3"/><path data-o="1" d="M6 17 V3 Q6 0 9 0 H25 Q28 0 28 3 V17 Z"/><rect data-o="1" x="0" y="11" width="7" height="18" rx="3.4"/><rect data-o="1" x="27" y="11" width="7" height="18" rx="3.4"/><rect data-o="1" x="6" y="17" width="22" height="12" rx="1.6"/><path fill="none" d="M6 22.4 H28"/>' + _G },
+        { key: 'desk-chair', name: 'Desk chair', w: 20, h: 33, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Chair',
+          svg: _O + '<path fill="none" d="M2.6 19 L2 33"/><path fill="none" d="M17.4 19 L18 33"/><path fill="none" d="M2.4 27 H17.6"/><rect data-o="1" x="0.6" y="15.5" width="18.8" height="3.5" rx="1.4"/><path data-o="1" d="M3 15.5 V3 Q3 0 6 0 H14 Q17 0 17 3 V15.5 Z"/><rect x="5" y="2" width="10" height="11" rx="1.4"/>' + _G },
+        { key: 'ch-bar', name: 'Bar stool', w: 18, h: 43, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Stool',
+          svg: _O + '<path fill="none" d="M3 17 L2 43"/><path fill="none" d="M15 17 L16 43"/><path fill="none" d="M2.4 31 H15.6"/><rect data-o="1" x="0" y="13" width="18" height="4" rx="1.6"/><path data-o="1" d="M2 13 V3 Q2 0 5 0 H13 Q16 0 16 3 V13 Z"/><rect x="4" y="2.4" width="10" height="8" rx="1.2"/>' + _G,
+          side: { w: 18, h: 43,
+            svg: _O + '<path fill="none" d="M3 17 L2 43"/><path fill="none" d="M15 17 L16 43"/><path fill="none" d="M2.4 31 H15.6"/><rect data-o="1" x="0" y="13" width="18" height="4" rx="1.6"/><path data-o="1" d="M14 13 L15 1.6 Q15.2 0.4 16.4 0.6 Q17.4 1 17.2 2.2 L16.6 13 Z"/>' + _G } },
+        { key: 'ch-banquette', name: 'Banquette', w: 72, h: 36, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Banquette',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="72" height="18.6" rx="1.6"/><path fill="none" d="M12 1.6 V18.6"/><path fill="none" d="M24 1.6 V18.6"/><path fill="none" d="M36 1.6 V18.6"/><path fill="none" d="M48 1.6 V18.6"/><path fill="none" d="M60 1.6 V18.6"/><rect data-o="1" x="0" y="18" width="72" height="4.6" rx="1.6"/><rect data-o="1" x="0.6" y="22.6" width="70.8" height="13.4" rx="0.3"/><path fill="none" d="M0.6 32 H71.4"/>' + _G,
+          side: { w: 24, h: 36,
+            svg: _O + '<path data-o="1" d="M0 36 V2 Q0 0 2 0 H4 Q6 0 6 2 V18 H22 Q24 18 24 20 V22.6 H0 Z"/><rect data-o="1" x="0.6" y="22.6" width="22.8" height="13.4" rx="0.3"/>' + _G } },
+    ] },
+    { cat: 'Decor', items: [
+        { key: 'sconce', name: 'Wall sconce', w: 5, h: 10, aff: 60, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="1.7" y="0" width="1.6" height="3" rx="0.4"/><path data-o="1" d="M1.55 3 H3.45 L4.6 10 H0.4 Z"/>' + _G,
+          side: { w: 7, h: 10,
+            svg: _O + '<rect data-o="1" x="0" y="0" width="1.2" height="10" rx="0.3"/><path fill="none" d="M1.2 4 H2.8"/><path data-o="1" d="M2.4 3 H4.2 L7 10 H1.2 Z"/>' + _G } },
+        { key: 'lamp-table', name: 'Table lamp', w: 14, h: 26, aff: 25, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="4.4" y="23.8" width="5.2" height="2.2" rx="0.6"/><path fill="none" d="M7 23.8 V9.5"/><path data-o="1" d="M3 0 H11 L13.6 9.5 H0.4 Z"/>' + _G },
+        { key: 'lamp-floor', name: 'Floor lamp', w: 16, h: 60, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="3.5" y="58.4" width="9" height="1.6" rx="0.6"/><path fill="none" d="M8 12 V58.4"/><path data-o="1" d="M3 0 H13 L16 12 H0 Z"/>' + _G },
+        { key: 'pendant', name: 'Pendant', w: 14, h: 30, aff: 66, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<path fill="none" d="M7 0 V17"/><rect data-o="1" x="6.2" y="16.6" width="1.6" height="1.6" rx="0.3"/><path data-o="1" d="M0 30 C0 22.6 3 18 7 18 C11 18 14 22.6 14 30 Z"/>' + _G },
+        { key: 'picture-light', name: 'Picture light', w: 24, h: 7.4, aff: 82, affMode: 'bottom', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="10" y="0" width="4" height="2.4" rx="0.5"/><path fill="none" d="M12 2.4 V4.6"/><rect data-o="1" x="0" y="4.6" width="24" height="2.8" rx="1.4"/>' + _G },
+        { key: 'mirror', name: 'Mirror', w: 36, h: 48, aff: 36, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Mirror',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="36" height="48" rx="0.6"/><rect x="1.6" y="1.6" width="32.8" height="44.8" rx="0.2"/><path fill="none" d="M5 42 L14 14"/><path fill="none" d="M10 42 L19 14"/>' + _G,
+          hatch: '<rect x="1.6" y="1.6" width="32.8" height="44.8"/>' },
+        { key: 'mirror-rd', name: 'Round mirror', w: 36, h: 36, aff: null, affMode: 'center', shape: 'ellipse', fill: 'plain', label: 'Mirror',
+          svg: _O + '<circle data-o="1" cx="18" cy="18" r="17.6"/><circle cx="18" cy="18" r="16"/><path fill="none" d="M9 26 L17 9"/><path fill="none" d="M14 28 L22 11"/>' + _G },
+        { key: 'clock', name: 'Wall clock', w: 12, h: 12, aff: 84, affMode: 'center', shape: 'ellipse', fill: 'plain', label: '',
+          svg: _O + '<circle data-o="1" cx="6" cy="6" r="5.8"/><circle cx="6" cy="6" r="5"/><path fill="none" d="M6 6 V2.6 M6 6 L8.4 7.4"/>' + _G },
+        { key: 'planter', name: 'Planter', w: 24, h: 54, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Plant',
+          svg: _O + '<path data-o="1" d="M12 33.48 C7.98 20.59 -2.06 12.39 -8.09 10.04 C-6.08 19.42 3.96 28.79 12 33.48 Z"/><path data-o="1" d="M12 33.48 C16.15 21.33 26.53 13.59 32.76 11.38 C30.68 20.22 20.3 29.06 12 33.48 Z"/><path data-o="1" d="M12 33.48 C11.33 15.07 9.66 3.35 8.65 0 C8.99 13.39 10.66 26.78 12 33.48 Z"/><path data-o="1" d="M12 33.48 C14.01 16.91 19.03 6.36 22.04 3.35 C21.04 15.4 16.02 27.45 12 33.48 Z"/><path data-o="1" d="M12 33.48 C9.19 15.99 2.16 4.85 -2.06 1.67 C-0.66 14.4 6.38 27.12 12 33.48 Z"/><path data-o="1" d="M2.77 33.48 H21.23 L19.39 54 H4.61 Z"/>' + _G },
+        { key: 'thermostat', name: 'Thermostat', w: 5, h: 5, aff: 54, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="5" height="5" rx="0.8"/><rect x="1.1" y="1.1" width="2.8" height="1.5" rx="0.2"/><path fill="none" d="M1.6 3.7 H2.2"/><path fill="none" d="M2.8 3.7 H3.4"/>' + _G },
+        { key: 'outlet', name: 'Outlet', w: 3, h: 5, aff: 15, affMode: 'center', shape: 'rect', fill: 'plain', label: '',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="3" height="5" rx="0.4"/><rect x="0.9" y="0.9" width="1.2" height="1.2" rx="0.4"/><rect x="0.9" y="2.9" width="1.2" height="1.2" rx="0.4"/>' + _G },
     ] },
     { cat: 'Keep clear', items: [
-        { key: 'kc-switch', name: 'Light switch', w: 3, h: 5, aff: 48, affMode: 'center', avoid: true,
-          svg: _CTX_ART_SWITCH,
-          shape: 'rect', fill: 'plain', label: 'Switch' },
-        { key: 'kc-thermostat', name: 'Thermostat', w: 5, h: 5, aff: 48, affMode: 'center', avoid: true,
-          svg: _CTX_ART_THERMO,
-          shape: 'rect', fill: 'plain', label: 'Thermostat' },
-        { key: 'kc-outlet', name: 'Outlet', w: 3, h: 5, aff: 18, affMode: 'center', avoid: true,
-          svg: _CTX_ART_OUTLET,
-          shape: 'rect', fill: 'plain', label: 'Outlet' },
-        { key: 'kc-alarm', name: 'Fire alarm strobe', w: 6, h: 6, aff: 80, affMode: 'bottom', avoid: true,
-          svg: _O + '<rect x="0" y="0" width="6" height="6" rx="0.6"/>' + _G
-              + _D + '<rect x="1.5" y="3.4" width="3" height="1.7" rx="0.4"/>' + _G
-              + _F + '<path d="M1.5 1.3 H4.5 M1.5 2.2 H4.5"/>' + _G,
-          shape: 'rect', fill: 'plain', label: 'Strobe' },
-        { key: 'kc-reader', name: 'Card reader', w: 4, h: 6, aff: 42, affMode: 'center', avoid: true,
-          svg: _O + '<rect x="0" y="0" width="4" height="6" rx="0.5"/>' + _G
-              + _D + '<rect x="1" y="2.4" width="2" height="2.6" rx="0.3"/>' + _G
-              + _F + '<circle cx="2" cy="1.2" r="0.35"/>' + _G,
-          shape: 'rect', fill: 'plain', label: 'Reader' },
-        { key: 'kc-sign', name: 'Room sign', w: 8, h: 8, aff: 60, affMode: 'center', avoid: true,
-          svg: _O + '<rect x="0" y="0" width="8" height="8" rx="0.4"/>' + _G
-              + _D + '<path d="M2 3 H6 M2.6 4.6 H5.4"/>' + _G
-              + _F + '<circle cx="3" cy="6.2" r="0.2"/><circle cx="4" cy="6.2" r="0.2"/><circle cx="5" cy="6.2" r="0.2"/>' + _G,
-          shape: 'rect', fill: 'plain', label: 'Sign' },
-        { key: 'kc-zone', name: 'Keep-clear zone', w: 24, h: 24, aff: null, affMode: 'center', freeform: true, avoid: true,
-          shape: 'rect', fill: 'plain', label: 'Keep clear' },
+        { key: 'kc-switch', name: 'Light switch', w: 3, h: 5, aff: 48, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: 'Switch',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="3" height="5" rx="0.4"/><rect x="1.05" y="1.4" width="0.9" height="2.2" rx="0.2"/>' + _G },
+        { key: 'kc-thermostat', name: 'Thermostat', w: 5, h: 5, aff: 48, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: 'Thermostat',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="5" height="5" rx="0.8"/><rect x="1.1" y="1.1" width="2.8" height="1.5" rx="0.2"/><path fill="none" d="M1.6 3.7 H2.2"/><path fill="none" d="M2.8 3.7 H3.4"/>' + _G },
+        { key: 'kc-outlet', name: 'Outlet', w: 3, h: 5, aff: 18, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: 'Outlet',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="3" height="5" rx="0.4"/><rect x="0.9" y="0.9" width="1.2" height="1.2" rx="0.4"/><rect x="0.9" y="2.9" width="1.2" height="1.2" rx="0.4"/>' + _G },
+        { key: 'kc-alarm', name: 'Fire alarm strobe', w: 6, h: 6, aff: 80, affMode: 'bottom', avoid: true, shape: 'rect', fill: 'plain', label: 'Strobe',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="6" height="6" rx="0.6"/><rect x="1.5" y="3.4" width="3" height="1.7" rx="0.4"/><path fill="none" d="M1.5 1.3 H4.5"/><path fill="none" d="M1.5 2.2 H4.5"/>' + _G },
+        { key: 'kc-reader', name: 'Card reader', w: 4, h: 6, aff: 42, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: 'Reader',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="4" height="6" rx="0.5"/><rect x="1" y="2.4" width="2" height="2.6" rx="0.3"/><circle cx="2" cy="1.2" r="0.35"/>' + _G },
+        { key: 'kc-sign', name: 'Room sign', w: 8, h: 8, aff: 60, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: 'Sign',
+          svg: _O + '<rect data-o="1" x="0" y="0" width="8" height="8" rx="0.4"/><path fill="none" d="M2 3 H6"/><path fill="none" d="M2.6 4.6 H5.4"/><circle cx="3" cy="6.2" r="0.2"/><circle cx="4" cy="6.2" r="0.2"/><circle cx="5" cy="6.2" r="0.2"/>' + _G },
+        { key: 'kc-zone', name: 'Keep-clear zone', w: 24, h: 24, aff: null, affMode: 'center', freeform: true, avoid: true, shape: 'rect', fill: 'plain', label: 'Keep clear' },
         { key: 'kc-pull', name: 'Fire alarm pull', w: 4, h: 5.5, aff: 48, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: 'Pull',
-          svg: _O + '<rect x="0" y="0" width="4" height="5.5" rx="0.4"/>' + _G
-             + _D + '<rect x="1" y="2.6" width="2" height="1.1" rx="0.3"/>' + _G
-             + _F + '<path d="M1.2 1.1 H2.8"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="4" height="5.5" rx="0.4"/><rect x="1" y="2.6" width="2" height="1.1" rx="0.3"/><path fill="none" d="M1.2 1.1 H2.8"/>' + _G },
         { key: 'kc-extinguisher', name: 'Extinguisher cabinet', w: 12, h: 27, aff: 21, affMode: 'bottom', avoid: true, shape: 'rect', fill: 'plain', label: 'FEC',
-          svg: _O + '<rect x="0" y="0" width="12" height="27" rx="0.4"/>' + _G
-             + _D + '<rect x="1" y="1" width="10" height="25"/>' + _G
-             + _F + '<path d="M3.6 23 V9 Q3.6 6 6 6 Q8.4 6 8.4 9 V23 Q8.4 24 7.4 24 H4.6 Q3.6 24 3.6 23 Z"/>'
-                  + '<path d="M5.4 6 V4.6 H6.6 V6 M4.8 4.6 H8.2"/><path d="M8.4 9 C10.2 10.6 10.2 18 8.4 20"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="12" height="27" rx="0.4"/><rect x="1" y="1" width="10" height="25"/><path d="M3.6 23 V9 Q3.6 6 6 6 Q8.4 6 8.4 9 V23 Q8.4 24 7.4 24 H4.6 Q3.6 24 3.6 23 Z"/><path fill="none" d="M5.4 6 V4.6 H6.6 V6 M4.8 4.6 H8.2"/><path fill="none" d="M8.4 9 C10.2 10.6 10.2 18 8.4 20"/>' + _G },
         { key: 'kc-exit', name: 'Exit sign', w: 13, h: 8.5, aff: 86, affMode: 'bottom', avoid: true, shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<rect x="0" y="0" width="13" height="8.5" rx="0.5"/>' + _G
-             + _D + '<path d="M4.6 2.6 V5.9 M4.6 2.6 H6 M4.6 4.25 H5.7 M4.6 5.9 H6"/>'
-                  + '<path d="M6.6 2.6 L8.2 5.9 M8.2 2.6 L6.6 5.9 M8.9 2.6 V5.9 M9.6 2.6 H11.2 M10.4 2.6 V5.9"/>' + _G
-             + _F + '<path d="M3.4 3 L2 4.25 L3.4 5.5"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="13" height="8.5" rx="0.5"/><path fill="none" d="M4.6 2.6 V5.9 M4.6 2.6 H6 M4.6 4.25 H5.7 M4.6 5.9 H6"/><path fill="none" d="M6.6 2.6 L8.2 5.9 M8.2 2.6 L6.6 5.9 M8.9 2.6 V5.9 M9.6 2.6 H11.2 M10.4 2.6 V5.9"/><path fill="none" d="M3.4 3 L2 4.25 L3.4 5.5"/>' + _G },
         { key: 'kc-grille', name: 'Return grille', w: 24, h: 12, aff: 84, affMode: 'bottom', avoid: true, shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<rect x="0" y="0" width="24" height="12" rx="0.3"/>' + _G
-             + _D + '<rect x="1.2" y="1.2" width="21.6" height="9.6"/>' + _G
-             + _F + '<path d="M1.2 2.4 H22.8 M1.2 3.6 H22.8 M1.2 4.8 H22.8 M1.2 6 H22.8 M1.2 7.2 H22.8 M1.2 8.4 H22.8 M1.2 9.6 H22.8"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="24" height="12" rx="0.3"/><rect x="1.2" y="1.2" width="21.6" height="9.6"/><path fill="none" d="M1.2 2.4 H22.8"/><path fill="none" d="M1.2 3.6 H22.8"/><path fill="none" d="M1.2 4.8 H22.8"/><path fill="none" d="M1.2 6 H22.8"/><path fill="none" d="M1.2 7.2 H22.8"/><path fill="none" d="M1.2 8.4 H22.8"/><path fill="none" d="M1.2 9.6 H22.8"/>' + _G },
         { key: 'kc-access', name: 'Access panel', w: 12, h: 12, aff: null, affMode: 'center', avoid: true, shape: 'rect', fill: 'plain', label: '',
-          svg: _O + '<rect x="0" y="0" width="12" height="12"/>' + _G
-             + _D + '<rect x="0.8" y="0.8" width="10.4" height="10.4"/>' + _G
-             + _F + '<circle cx="9.6" cy="6" r="0.45"/>' + _G },
+          svg: _O + '<rect data-o="1" x="0" y="0" width="12" height="12" rx="0.2"/><rect x="0.8" y="0.8" width="10.4" height="10.4"/><circle cx="9.6" cy="6" r="0.45"/>' + _G },
     ] },
     { cat: 'Basic', items: [
-        // FREEFORM: these have no catalogue size worth placing, so a click does nothing
-        // and a drag is the only way to make one. That keeps the tool forgiving about a
-        // stray click exactly where a stray click is likely — you reach for Box when you
-        // are tracing something the library does not have.
-        { key: 'rect', name: 'Box', w: 36, h: 36, aff: null, affMode: 'center', freeform: true,
-          shape: 'rect', fill: 'plain', label: '' },
-        { key: 'circle', name: 'Circle', w: 24, h: 24, aff: null, affMode: 'center', freeform: true,
-          shape: 'ellipse', fill: 'plain', label: '' },
-        { key: 'wood', name: 'Wood panel', w: 48, h: 96, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'wood', label: '' },
-        { key: 'glass', name: 'Glass panel', w: 48, h: 96, aff: 0, affMode: 'bottom',
-          shape: 'rect', fill: 'glass', label: '' },
+        { key: 'rect', name: 'Box', w: 36, h: 36, aff: null, affMode: 'center', freeform: true, shape: 'rect', fill: 'plain', label: '' },
+        { key: 'circle', name: 'Circle', w: 24, h: 24, aff: null, affMode: 'center', freeform: true, shape: 'ellipse', fill: 'plain', label: '' },
+        { key: 'shelf', name: 'Shelf', w: 48, h: 1.5, aff: 48, affMode: 'bottom', shape: 'shelf', fill: 'plain', label: 'Shelf' },
+        { key: 'shelf-long', name: 'Long shelf', w: 96, h: 1.5, aff: 48, affMode: 'bottom', shape: 'shelf', fill: 'plain', label: 'Shelf' },
+        { key: 'wainscot', name: 'Wainscot', w: 120, h: 36, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'plain', label: 'Wainscot' },
+        { key: 'handrail', name: 'Handrail', w: 120, h: 2, aff: 34, affMode: 'bottom', shape: 'shelf', fill: 'plain', label: 'Handrail' },
+        { key: 'wood', name: 'Wood panel', w: 48, h: 96, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'wood', label: '' },
+        { key: 'glass', name: 'Glass panel', w: 48, h: 96, aff: 0, affMode: 'bottom', shape: 'rect', fill: 'glass', label: '' },
     ] },
 ];
+// </ctx-library>
 // The wrapper that applies the drawing convention ONCE. preserveAspectRatio="none" so
 // the art fills whatever box the block has been resized to — paired with
 // vector-effect="non-scaling-stroke", which is what stops a stretched block from also
@@ -50122,7 +49741,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.21</strong> <b>Beds that look like beds, and one line weight.</b> Every bed (the plain queen, king and full, and the Platform, Panel, Tall upholstered, Wingback and Low profile styles) is redrawn: flanged shams with a pillow and a lumbar in front of them, a draped duvet, a soft base on small feet, and the side view has pillows leaning on the headboard and a throw over the foot. Pillows in front now hide the ones behind. All context drawings are drawn at one line weight, with no thick and thin lines. A bed already set to a style keeps its size.
+                body: `<strong>20.22</strong> <b>The context library, redrawn to the hospitality reference sheet.</b> Every drawing is now one bold, even line with soft corners and simple shapes, and the palette follows the catalogue: Guestroom, Bathroom, Toilets, Office, Glass, Doors, Chairs, Decor, Keep clear and Basic. New blocks: king bed with nightstands, double queen beds, twin bed, desk with chair, TV with console, wardrobe wall, vanity with mirror and sconces, single and double vanities, glass shower, shower niche, freestanding tub, towel bar with hooks, a shelf of toiletries, accessible toilet with grab bar, vessel basin, workstation with task chair, desk with storage, meeting table with chairs, a 3-drawer file, five glass partitions and a glass sliding door, double, pocket, barn, glass and accessible doors, dining chair, bar stool and banquette. Everything already on a wall keeps its size.
+<strong>20.21</strong> <b>Beds that look like beds, and one line weight.</b> Every bed (the plain queen, king and full, and the Platform, Panel, Tall upholstered, Wingback and Low profile styles) is redrawn: flanged shams with a pillow and a lumbar in front of them, a draped duvet, a soft base on small feet, and the side view has pillows leaning on the headboard and a throw over the foot. Pillows in front now hide the ones behind. All context drawings are drawn at one line weight, with no thick and thin lines. A bed already set to a style keeps its size.
 <strong>20.20</strong> <b>Context drawings fill their own shape, not a box.</b> A chair dropped on a wall used to come in as a white rectangle that hid the wall around it. Now only the solid parts of a drawing are white: you see the wall between chair legs and casters, under a desk, between upper and base cabinets and inside a toilet stall, on screen, in the SVG and in the PDF, and the baseboard runs through wherever nothing stands in front of it. Keep clear blocks and plain boxes still fill their whole box.
 <strong>20.19</strong> <b>More things to put on a wall, drawn clean.</b> The wall's Context library has a new Office group (desks, a workstation with its screen, task chair, monitor, conference table, files, cabinet, bookcase, whiteboard, kitchenette, fridge) and more for guestrooms (club chair, desk chair, bench, wardrobe, minibar, floor mirror, planter, coat stand), restrooms (wall-hung toilet and flush plate, urinal, pedestal sink, stall, towel dispenser, hand dryer, soap, paper holder, robe hook, towel ring, lighted mirror) and fixtures (65 and 75 inch TVs, picture light, pendant, drinking fountain, clock). Keep clear adds a fire alarm pull, extinguisher cabinet, exit sign, return grille and access panel, and every switch, outlet and device now draws as itself instead of a labelled box. The five bed styles are redrawn smooth: they were traced and looked jagged. A bed already set to a style keeps its size.
 <strong>20.18</strong> <b>Plan pins hold two digits.</b> A long client code (ART-1001) used to print its whole number in the pin and spill out of the circle. The pin now shows the last two digits (01), or numbers the long codes 01, 02, 03 in code order when the last two digits would repeat. The item code itself is unchanged, and the plan key beside the pins still reads 01 | ART-1001.<br><br><strong>20.17</strong> <b>Canvas sides, decided up front.</b> A framed canvas (floater) now prints at its art size plus the wrap round the stretcher, as the quote template says (stretcher depth + 0.5\" a side): a 28.5 x 38.5 canvas is a 32.5 x 42.5 print, on the RFQ, the RFI and the contact sheet. Before, the floater's print size had no wrap. Each canvas has a <b>Sides</b> choice on the dashboard: <b>Picture wraps</b> (crop into the picture so its edges go round the sides; the dashboard shows that band faintly round the face, with red stripes where the crop leaves no picture, and <b>Make room</b> zooms in just enough), <b>Mirror the edge</b> (the printer does it), or <b>Extend in production</b>. The choice goes in the RFQ and RFI Notes, and Preflight asks for it on any canvas with a picture. Typing a floater's rabbet now fills the deepest standard stretcher it takes (1.5\" for a 1.625\" rabbet) and a wrap 0.5\" deeper, instead of a made-to-order stretcher the depth of the rabbet; Preflight flags a stretcher that is not a standard depth. Every estimate now carries a 3% buffer (currency against USD, fuel, shipping) unless the rate card's Buffer % says otherwise; type 0 for none.<br><br><strong>20.16</strong> <b>The quote template's own rules.</b> From the company's 2026 quote template: twelve artists take a 10% royalty (AJG, ISM, JMS, LSA, PEN, LDC, NHS, SAL, STN, THK, TJB, ZPK), not just PEN, so their pieces price higher than before. A didactic panel (printed acrylic, dibond) gets 0.125\" bleed instead of none, and the RFQ lists it as a Printed Panel Product, not EGD. Preflight now says when a piece is bigger than can be made in one piece: paper wider than 59\" on the short side, glass past 40 x 60 (use acrylic), mat board past 40 x 60 that is not white or cream, or past 48 x 72, acrylic past 59 x 96, MDF past 60 x 96, canvas too wide for its stretcher depth (53.4\" at 0.75\", 52\" at 1.5\", 51\" at 2\"), or a stretcher bar longer than 9.5 ft. It also flags a floater whose canvas stretcher is deeper than the frame's rabbet, which leaves the canvas standing proud of the frame, and names the standard stretcher depth that fits. A warning in a concept deck, an error in Final Spec.<br><br><strong>20.15</strong> <b>Install pages follow their plan.</b> In the Install guide layout, with plans ordered by level (the default), each floor plan is now followed by the walls whose pieces are pinned on it, as spec pages always were. Before, every plan printed first and every wall after them.<br><br><strong>20.14</strong> <b>Client codes in number order.</b> Codes in the client's own format (1B.L3.ART-01) now sort in number order on the dashboard, the walls and the pages, like ART codes always have: ART-02 before ART-10, numbers before letters. Before, they stayed in the order they were added.<br><br><strong>20.13</strong> <b>Client codes ending in letters.</b> A code like 1B.L3.ART-EA is its own placement now, not piece A of a set called 1B.L3.ART-E. A piece letter follows the placement's number (ART.1A) or a separator (1B.L3.ART-EF-A), so a client's lettered placements each get their own pin, wall and page.<br><br><strong>20.12</strong> <b>Every picture has a house code.</b> Preflight flags an image code that is not a house code, such as a client photo still named IMG_4021 or a render's file name, so the vendor can find the file. A house code is a prefix of letters then numbers (FAO.010.00031). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.11</strong> <b>The sizes add up.</b> Preflight flags a piece whose frame and mats are wider than its overall size, which leaves no opening for the picture (a 2\" frame and 4\" mats on a 10\" piece). A warning in a concept deck, an error in Final Spec.<br><br><strong>20.10</strong> <b>Will it print sharp?</b> FRAME now remembers how big a picture's original file was (it keeps a smaller copy to work with), and Preflight says when that file is too small for the size it prints: under about 150 pixels per inch for framed work, 75 for a wallcovering, counting any zoomed crop. A warning in a concept deck, an error in Final Spec. Pictures added before 20.10 are not judged until they are added again.<br><br><strong>20.09</strong> <b>Renumbered pieces are said.</b> Production, Issues now lists pieces whose code changed since an issue as <b>RENUMBERED</b> (ART.2 → ART.1), not as one piece removed and another added, in the copied text and the changes CSV, so vendors and the client hear about it. Spec changes on a renumbered piece show under its new code.<br><br><strong>20.08</strong> <b>Approve a set piece by piece.</b> Mark a set's page as pending (the Approval button) and set each approved piece to Approved on the dashboard: the page prints a green <b>APPROVED A, C</b> beside a red <b>PENDING B</b>, in the PDF and on screen. The Text menu's stamps add <b>COLOR SAMPLE APPROVAL REQUIRED</b>, for colour that will be settled with physical samples.<br><br><strong>20.07</strong> <b>The art type is how the piece is bought.</b> Preflight flags a piece coded as an original (FAO) whose source link is a shop (Etsy, Amazon, Wayfair and the like): a shop piece is sourced (FSO), shown in its real colour and finish. It also flags a commission note on a page with no commission on it, and a commission with no note. The Text menu has two new notes: <b>Commission note</b> and <b>Original artwork note</b>.<br><br><strong>20.06</strong> <b>Wall labels.</b> Production has a <b>Labels</b> tab: title, artist, affiliation, medium and year for each piece, with a tick for the pieces that get a label (objects start unticked). <b>Label sheet (PDF)</b> prints 4" x 2" labels, ten to a Letter page (Avery 5163); <b>Labels CSV</b> is for whoever prints them. Preflight's missing title or artist warning opens this tab.<br><br><strong>20.05</strong> <b>New pieces follow the client's codes.</b> In a project numbered the client's way (ART-01, ART-02), a new piece is ART-03 or the next free number, not ART.3. The separator and zero padding come from the codes already there, so the plan, vendor sheet, crate list and install guide all read the same.<br><br><strong>20.04</strong> <b>Preflight checks what vendors kept finding after a deck went out.</b> In every deck: words left from a template (CLIENT NAME, SECTION HEADING, the filler paragraph, Artist Name), two placements with the same code, and a cover or heading whose version or stage disagrees with the Project tab (a V2 ART DEVELOPMENT cover on a V6). In a Final Spec or Install Guide deck: a piece with no size or frame code, framed paper with no glass, canvas with no stretcher depth, an original or commission with no title or artist, and OPTION headings. Picking Final Spec or Install Guide now counts as an IFS for every Preflight check.<br><br><strong>20.03</strong> <b>Move the standard pages.</b> Process / Timeline, Project Understanding, Art Narrative, Art Collection Strategy, Frame Recommendations, Good Art Good People and Thank You can now be dragged in the page rail, given a page number, or placed before or after a page, like an inserted page. Pages next to a moved page stay where they were. Reset page order puts them back in their usual place. The cover stays page 1.<br><br><strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>

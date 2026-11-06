@@ -845,7 +845,9 @@ const path = require('path');
         throw new Error('the wrapper weight is not the detail line');
       }
       // THIN. This line work sits behind the artwork and must never compete with it.
-      if (CTX_LW_OBJ > 1) throw new Error('the object line is back to a heavy weight: ' + CTX_LW_OBJ);
+      // CHANGED (20.22): one BOLD stroke, to the designer's reference sheet. The old 6px
+      // complaint was a scaling bug (fixed below), not the weight; still capped.
+      if (CTX_LW_OBJ > 1.5) throw new Error('the object line is back to a heavy weight: ' + CTX_LW_OBJ);
       // Every drawn asset actually USES the hierarchy — at least two weights. A single
       // weight throughout is the thing being fixed here, so one is a regression.
       CONTEXT_PRESETS.filter(p => p.svg).forEach(p => {
@@ -863,19 +865,20 @@ const path = require('path');
       if (van.svg.indexOf('stroke-dasharray') < 0) throw new Error('the concealed bowl is not drawn as a hidden line');
       const adaVan = CONTEXT_PRESETS.find(p => p.key === 'vanity-ada');
       if (adaVan.svg.indexOf('stroke-dasharray') >= 0) throw new Error('the ADA bowl is dashed, but open knee space makes it visible');
-      // Construction detail: a door is a jamb + leaf + three hinges + a lever, not a
-      // rectangle with a dot on it. Counted rather than eyeballed so the detail cannot
-      // quietly be simplified away again.
+      // CHANGED (20.22): the designer's reference doors are frame + leaf + lever, no
+      // hinges, so the three-hinge count is retired. The frame and leaf stay.
       const door = CONTEXT_PRESETS.find(p => p.key === 'door-guest');
-      const hinges = (door.svg.match(/<rect x="2" y="[\\d.]+" width="0.7"/g) || []).length;
-      if (hinges !== 3) throw new Error('the door does not carry three butt hinges, got ' + hinges);
+      if (door.svg.indexOf('<rect data-o="1" x="0" y="0" width="36" height="84"') < 0 || door.svg.indexOf('x="2" y="2" width="32"') < 0) {
+        throw new Error('the door lost its frame or its leaf');
+      }
       // The lever sits at a real 36in AFF on an 84in leaf, so cy is 84 - 36 = 48.
       if (door.svg.indexOf('cy="48"') < 0) throw new Error('the door lever is not at 36in AFF');
       const ada = CONTEXT_PRESETS.find(p => p.key === 'door-ada-bath');
       if (ada.svg.indexOf('cy="46"') < 0) throw new Error('the ADA lever is not at 34in AFF on an 80in leaf');
       // Casework carries a toe kick — the detail that most says "millwork" in elevation.
       const cred = CONTEXT_PRESETS.find(p => p.key === 'credenza');
-      if (cred.svg.indexOf('M2.5 24 h67 v6 h-67 z') < 0) throw new Error('the credenza lost its toe kick');
+      // CHANGED (20.22): the reference credenza stands on legs, not a toe kick.
+      if ((cred.svg.match(/height="4" rx/g) || []).length < 2) throw new Error('the credenza lost its legs');
     });
 
     __check('EXACT ASK: the side view carries DIMENSIONS, not just a different drawing', () => {
@@ -1030,11 +1033,12 @@ const path = require('path');
       ['bed-queen', 'bed-king', 'bed-full'].forEach(k => {
         // Pillow domes are cubic curves on the mattress deck — a bed drawn only with
         // rects and straight lines is the version that had none.
-        if ((g(k).svg.match(/ C[\\d.]/g) || []).length < 1) throw new Error(k + ' has no pillow profile');
+        // 20.22: pillows are soft opaque cushions with a seam (a Q curve), not domes.
+        if ((g(k).svg.split(' Q').length - 1) < 2) throw new Error(k + ' has no pillows');
         if (!_ctxHasSide(g(k))) throw new Error(k + ' has no side view');
       });
       // A bathroom category with the fixtures a hospitality bath actually carries.
-      if (!CONTEXT_LIBRARY.some(c => c.cat === 'Bath')) throw new Error('there is no Bath category');
+      if (!CONTEXT_LIBRARY.some(c => c.cat === 'Bathroom')) throw new Error('there is no Bathroom category');
       ['vanity-ada', 'vanity-60', 'lav-wall', 'toilet-ada', 'toilet-tank', 'tub', 'shower',
        'grab-36', 'grab-42', 'towel-bar'].forEach(k => {
         if (!g(k)) throw new Error('missing bath item ' + k);
@@ -1056,7 +1060,7 @@ const path = require('path');
       // diagonal line segments and curves, which a box drawing has none of.
       ['chair', 'lounge', 'sofa'].forEach(k => {
         const s = g(k).svg;
-        if ((s.match(/[LC] ?-?[\\d.]/g) || []).length < 4) throw new Error(k + ' is still drawn as plain boxes');
+        if ((s.match(/[LCQ] ?-?[\\d.]/g) || []).length < 4) throw new Error(k + ' is still drawn as plain boxes');
         if (!_ctxHasSide(g(k))) throw new Error(k + ' has no side view');
       });
     });
@@ -1252,10 +1256,8 @@ const path = require('path');
       // Guestrooms, lobbies, corridors, elevator lobbies — the elevations this tool is
       // pointed at. A library is only worth having if the numbers are right.
       const cats = CONTEXT_LIBRARY.map(c => c.cat);
-      ['Openings', 'Millwork', 'Furniture', 'Fixtures', 'Basic'].forEach(c => {
-        if (cats.indexOf(c) < 0) throw new Error('missing category ' + c);
-      });
-      ['Beds', 'Doors'].forEach(c => {
+      // CHANGED (20.22): the palette follows the designer's catalogue groups.
+      ['Guestroom', 'Bathroom', 'Toilets', 'Office', 'Glass', 'Doors', 'Chairs', 'Decor', 'Keep clear', 'Basic'].forEach(c => {
         if (cats.indexOf(c) < 0) throw new Error('missing category ' + c);
       });
       ['door-guest', 'door-ada-bath', 'door-closet', 'bed-queen', 'bed-king', 'bed-full',
@@ -1309,7 +1311,7 @@ const path = require('path');
       if (g('credenza').fill !== 'plain') throw new Error('a credenza ships with a hatch again');
       // An unknown key resolves to the plain Box WITHOUT recursing forever.
       if (_ctxPreset('nope').key !== 'rect') throw new Error('an unknown key did not fall back to Box');
-      if (_ctxCatOf('credenza') !== 'Millwork') throw new Error('category lookup is wrong');
+      if (_ctxCatOf('credenza') !== 'Office') throw new Error('category lookup is wrong');
       if (_ctxCatOf('nope') !== CONTEXT_LIBRARY[0].cat) throw new Error('an unknown key has no category');
     });
 
@@ -1578,7 +1580,7 @@ const path = require('path');
       // slab occupies y 0..10.
       // CHANGED (20.21): the wood is the upholstered BASE (starting at 14in down, under
       // the duvet, which is opaque and hides the grain above its hem).
-      if (bed.hatch.indexOf('M0.9 14 ') < 0) throw new Error('the bed wood region is not its base: ' + bed.hatch);
+      if (bed.hatch.indexOf('y="18.6"') < 0) throw new Error('the bed wood region is not its base: ' + bed.hatch);
       if (bed.hatch.indexOf('height="24"') >= 0 || /h60/.test(bed.hatch)) {
         throw new Error('the bed wood region covers the whole block again');
       }
@@ -1859,7 +1861,7 @@ const path = require('path');
         // sham behind is hidden, not drawn through (the "turtle shell" look had none).
         const ws = (v.svg.match(/stroke-width="([0-9.]+)"/g) || []).map(m => parseFloat(m.split('"')[1]));
         if (new Set(ws).size !== 1) throw new Error(v.key + ' mixes line weights: ' + ws.join('/'));
-        if ((v.svg.split('data-o="1"').length - 1) < 6) throw new Error(v.key + ' has no opaque pillows and duvet');
+        if ((v.svg.split('data-o="1"').length - 1) < 5) throw new Error(v.key + ' has no opaque pillows and duvet');
         // The marker becomes a real white fill only in the RENDERED art (the source keeps
         // no literal fills); without it every pillow line shows through the one in front.
         const drawn = _ctxArtSvg(v, null, 1);
@@ -1872,14 +1874,19 @@ const path = require('path');
     __check('the library covers guestrooms, offices, bathrooms and life safety (20.19)', () => {
       // "We would need guestroom content, office content, fixtures, bathroom, toilets."
       const cat = (c) => (CONTEXT_LIBRARY.find(g => g.cat === c) || { items: [] }).items.map(p => p.key);
+      // 20.22: the catalogue's groups and its blocks (Hospitality_Elevation_Context_Block_Library).
       const need = {
-        Office: ['off-desk', 'workstation', 'task-chair', 'monitor', 'conf-table', 'file-lateral',
-                 'cab-storage', 'bookcase', 'whiteboard', 'kitchenette', 'fridge'],
-        Bath: ['toilet-wall', 'flush-plate', 'urinal', 'lav-pedestal', 'stall', 'towel-disp',
-               'hand-dryer', 'soap', 'tp-holder', 'robe-hook', 'towel-ring', 'mirror-lit'],
-        Furniture: ['armchair', 'desk-chair', 'bench', 'mirror-floor', 'planter', 'coat-stand'],
-        Millwork: ['wardrobe', 'minibar'],
-        Fixtures: ['tv-65', 'tv-75', 'picture-light', 'pendant', 'fountain', 'clock'],
+        Guestroom: ['bed-king', 'bed-queen', 'bed-full', 'bed-twin', 'gr-king-set', 'gr-queen-pair', 'nightstand',
+                    'gr-desk', 'gr-media', 'gr-wardrobe-wall', 'wardrobe', 'minibar', 'luggage', 'sofa', 'bench', 'tv-65', 'tv-75'],
+        Bathroom: ['ba-vanity-mirror', 'ba-vanity-single', 'ba-vanity-double', 'ba-shower-glass', 'ba-shower-niche',
+                   'ba-tub-free', 'tub', 'ba-towel-hooks', 'ba-accessories', 'towel-disp', 'hand-dryer', 'soap', 'tp-holder', 'robe-hook', 'towel-ring', 'mirror-lit'],
+        Toilets: ['toilet-tank', 'toilet-wall', 'urinal', 'fx-ada-toilet', 'fx-lav-basin', 'flush-plate', 'lav-pedestal', 'stall', 'fountain'],
+        Office: ['of-workstation', 'of-desk-storage', 'credenza', 'of-meeting', 'whiteboard', 'of-file-3', 'bookcase', 'reception',
+                 'off-desk', 'workstation', 'monitor', 'conf-table', 'file-lateral', 'cab-storage', 'kitchenette', 'fridge'],
+        Glass: ['gl-fixed', 'gl-door', 'gl-double', 'gl-frameless', 'gl-framed', 'gl-slide', 'window', 'window-full'],
+        Doors: ['door-guest', 'dr-double', 'dr-pocket', 'dr-barn', 'dr-glass', 'dr-accessible', 'door-ada-bath', 'door-closet', 'elevator'],
+        Chairs: ['task-chair', 'ch-dining', 'lounge', 'ch-bar', 'armchair', 'ch-banquette', 'chair', 'desk-chair'],
+        Decor: ['picture-light', 'pendant', 'clock', 'planter', 'sconce', 'lamp-table', 'mirror'],
         'Keep clear': ['kc-pull', 'kc-extinguisher', 'kc-exit', 'kc-grille', 'kc-access'],
       };
       Object.keys(need).forEach(c => need[c].forEach(k => {
