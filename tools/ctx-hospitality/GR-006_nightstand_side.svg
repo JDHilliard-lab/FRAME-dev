@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 600" width="450mm" height="600mm"><title>GR-006 Nightstand - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="450" height="30" rx="4" fill="#fff"/>
+<rect x="15" y="30" width="420" height="460" fill="#fff"/>
+<rect x="30" y="490" width="40" height="110" fill="#fff"/>
+<rect x="380" y="490" width="40" height="110" fill="#fff"/>
+<line x1="15" y1="300" x2="435" y2="300"/>
+</g>
+</svg>

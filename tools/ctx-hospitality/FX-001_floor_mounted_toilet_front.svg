@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" width="400mm" height="800mm"><title>FX-001 Floor-mounted toilet - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M50 470Q60 600 120 650L110 800L290 800L280 650Q340 600 350 470Z" fill="#fff"/>
+<rect x="40" y="420" width="320" height="50" rx="25" fill="#fff"/>
+<rect x="30" y="390" width="340" height="30" rx="15" fill="#fff"/>
+<rect x="5" y="30" width="390" height="340" rx="20" fill="#fff"/>
+<rect x="0" y="0" width="400" height="30" rx="10" fill="#fff"/>
+<circle cx="50" cy="93" r="14" fill="#fff"/>
+<rect x="50" y="85" width="70" height="15" rx="7" fill="#fff"/>
+</g>
+</svg>

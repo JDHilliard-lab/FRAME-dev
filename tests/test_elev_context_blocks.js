@@ -878,7 +878,10 @@ const path = require('path');
       // Casework carries a toe kick — the detail that most says "millwork" in elevation.
       const cred = CONTEXT_PRESETS.find(p => p.key === 'credenza');
       // CHANGED (20.22): the reference credenza stands on legs, not a toe kick.
-      if ((cred.svg.match(/height="4" rx/g) || []).length < 2) throw new Error('the credenza lost its legs');
+      // CHANGED (20.24): it is the designer's drawing now; a leg is a solid rect reaching the floor.
+      let _legs = 0;
+      cred.svg.replace(/<rect x="[-0-9.]+" y="([-0-9.]+)" width="([-0-9.]+)" height="([-0-9.]+)" data-o="1"/g, (m, y, w, h) => { if (+w < 3 && Math.abs(+y + +h - cred.h) < 0.05) _legs++; return m; });
+      if (_legs < 2) throw new Error('the credenza lost its legs');
     });
 
     __check('EXACT ASK: the side view carries DIMENSIONS, not just a different drawing', () => {

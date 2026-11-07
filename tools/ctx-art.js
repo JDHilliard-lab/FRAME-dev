@@ -757,6 +757,153 @@ cat('Basic', [
 ]);
 
 // ── emit ───────────────────────────────────────────────────────────────────
+// ── THE HOSPITALITY SET (20.24) ──────────────────────────────────────────────
+// The designer's own drawings (tools/ctx-hospitality/*.svg, millimetres, floor at the
+// bottom edge, fill="#fff" = solid, fill="none" = glass) replace ours wherever the
+// catalogue has the item. Two ways in:
+//   REPLACE an existing key: the drawing is scaled UNIFORMLY into the key's own size and
+//     sat on its floor, centred. Only where the proportions agree within a few percent,
+//     because saved walls hold that key's box and must not change shape.
+//   NEW key `hc-<id>` at the catalogue's true size, and the old item it supersedes is
+//     kept (saved walls still draw it) but `hidden` from the palette and the sheet.
+// Coordinates are rewritten numerically, never by a transform, so the one stroke weight
+// the app sets is not scaled with the drawing.
+const HC_DIR = path.join(__dirname, 'ctx-hospitality');
+const HC_CAT = { GR: 'Guestroom', BA: 'Bathroom', OF: 'Office', GL: 'Glass', DR: 'Doors', CH: 'Chairs', FX: 'Toilets' };
+// id: [replace key] or [null, name, label, aff, hides]
+const HC_MAP = {
+    'GR-001': ['gr-king-set'],
+    'GR-002': [null, 'Queen bed', 'Queen Bed', 0, ['bed-queen']],
+    'GR-003': [null, 'Twin bed', 'Twin Bed', 0, ['bed-twin']],
+    'GR-004': [null, 'Double queen beds', 'Queen Beds', 0, ['gr-queen-pair']],
+    'GR-005': [null, 'Headboard', 'Headboard', 0, ['headboard']],
+    'GR-006': ['nightstand'],
+    'GR-007': [null, 'Desk + chair', 'Desk', 0, ['gr-desk']],
+    'GR-008': ['gr-media'],
+    'GR-009': ['gr-wardrobe-wall'],
+    'GR-010': [null, 'Luggage bench', 'Luggage Bench', 0, ['luggage']],
+    'GR-011': [null, 'Lounge chair', 'Lounge Chair', 0, []],
+    'GR-012': [null, 'Sofa / sleeper sofa', 'Sofa', 0, ['sofa']],
+    'BA-001': ['ba-vanity-mirror'],
+    'BA-002': [null, 'Single basin vanity', 'Vanity', 0, ['ba-vanity-single']],
+    'BA-003': [null, 'Double basin vanity', 'Vanity', 0, ['ba-vanity-double']],
+    'BA-004': ['ba-shower-glass'],
+    'BA-005': [null, 'Shower niche + fixtures', 'Shower', 34, ['ba-shower-niche']],
+    'BA-006': ['ba-tub-free'],
+    'BA-007': ['tub'],
+    'BA-008': [null, 'Towel bar + hooks', '', 48, ['ba-towel-hooks']],
+    'BA-009': [null, 'Bathroom accessories', '', 48, ['ba-accessories']],
+    'OF-001': ['of-workstation'],
+    'OF-002': ['of-desk-storage'],
+    'OF-003': ['credenza'],
+    'OF-004': [null, 'Meeting table + chairs', 'Meeting Table', 0, ['of-meeting']],
+    'OF-005': ['whiteboard'],
+    'OF-006': [null, 'File cabinet', 'File', 0, ['of-file-3']],
+    'OF-007': ['bookcase'],
+    'OF-008': [null, 'Reception desk', 'Reception Desk', 0, ['reception']],
+    'GL-001': ['gl-fixed'], 'GL-002': ['gl-door'], 'GL-003': ['gl-double'],
+    'GL-004': ['gl-frameless'], 'GL-005': ['gl-framed'], 'GL-006': ['gl-slide'],
+    'DR-001': [null, 'Single hinged door', 'Door', 0, ['door-guest']],
+    'DR-002': ['dr-double'],
+    'DR-003': [null, 'Pocket door', 'Pocket Door', 0, ['dr-pocket']],
+    'DR-004': [null, 'Sliding barn door', 'Barn Door', 0, ['dr-barn']],
+    'DR-005': [null, 'Glass door', 'Glass Door', 0, ['dr-glass']],
+    'DR-006': [null, 'Accessible door', 'Door', 0, ['dr-accessible']],
+    'CH-001': ['task-chair'],
+    'CH-002': [null, 'Dining chair', 'Chair', 0, ['ch-dining']],
+    'CH-003': [null, 'Lounge chair', 'Lounge Chair', 0, ['lounge']],
+    'CH-004': [null, 'Bar stool', 'Stool', 0, ['ch-bar']],
+    'CH-005': [null, 'Armchair', 'Chair', 0, ['armchair']],
+    'CH-006': ['ch-banquette'],
+    'FX-001': [null, 'Floor-mounted toilet', 'Toilet', 0, ['toilet-tank']],
+    'FX-002': [null, 'Wall-hung toilet', 'Toilet', 3, ['toilet-wall']],
+    'FX-003': [null, 'Urinal', 'Urinal', 13, ['urinal']],
+    'FX-004': [null, 'Accessible toilet + grab bars', 'Toilet', 0, ['fx-ada-toilet']],
+    'FX-005': [null, 'Lavatory basin', 'Basin', 26, ['fx-lav-basin']],
+};
+const HC_TOL = 0.08;   // a replaced key's drawing may sit in a box this much off its proportions
+function hcRead() {
+    const out = {};
+    fs.readdirSync(HC_DIR).filter(f => /\.svg$/.test(f)).sort().forEach(f => {
+        const m = /^([A-Z]{2}-\d{3})_.*_(front|side)\.svg$/.exec(f);
+        if (!m) return;
+        const t = fs.readFileSync(path.join(HC_DIR, f), 'utf8');
+        const vb = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(t);
+        const body = t.slice(t.indexOf('>', t.indexOf('<g ')) + 1, t.lastIndexOf('</g>'));
+        (out[m[1]] = out[m[1]] || {})[m[2]] = { w: +vb[1], h: +vb[2], body: body, file: f };
+    });
+    return out;
+}
+// Rewrite one drawing into a box W x H (inches): uniform scale, centred, on the floor.
+function hcFit(d, W, H) {
+    const k = Math.min(W / d.w, H / d.h), dx = (W - d.w * k) / 2, dy = H - d.h * k;
+    const X = (v) => n(+v * k + dx), Y = (v) => n(+v * k + dy), S = (v) => n(+v * k);
+    const ATTR = { x: X, cx: X, x1: X, x2: X, y: Y, cy: Y, y1: Y, y2: Y, width: S, height: S, rx: S, ry: S, r: S };
+    let hatch = '';
+    const svg = d.body.replace(/<(rect|path|polygon|circle|line|ellipse|polyline)\b([^>]*?)\/?>/g, (all, tag, attrs) => {
+        let a = attrs.replace(/ stroke[\w-]*="[^"]*"/g, '');
+        a = a.replace(/ (x|y|cx|cy|x1|y1|x2|y2|width|height|rx|ry|r)="([-\d.]+)"/g, (m, nm, v) => ' ' + nm + '="' + ATTR[nm](v) + '"');
+        a = a.replace(/ d="([^"]*)"/, (m, p) => {
+            if (/[a-z]|[HVSTA]/.test(p.replace(/e-?\d/g, ''))) throw new Error(d.file + ': path uses a command the converter does not scale');
+            let i = 0;
+            return ' d="' + p.replace(/-?\d*\.?\d+/g, v => (i++ % 2 ? Y(v) : X(v))) + '"';
+        });
+        a = a.replace(/ points="([^"]*)"/, (m, p) => { let i = 0; return ' points="' + p.replace(/-?\d*\.?\d+/g, v => (i++ % 2 ? Y(v) : X(v))) + '"'; });
+        a = a.replace(/ fill="#fff(fff)?"/i, ' data-o="1"');
+        if (/ fill="(?!none)/.test(a)) throw new Error(d.file + ': unexpected fill ' + a);
+        const el = '<' + tag + a + '/>';
+        if (tag === 'rect' && / fill="none"/.test(a)) hatch += el.replace(/ fill="none"/, '');
+        return el;
+    }).replace(/\s*\n\s*/g, '');
+    return { svg: '<g stroke-linecap="round" stroke-linejoin="round">' + svg + '</g>', hatch: hatch };
+}
+const hcIn = (mm) => Math.round(mm / 25.4 * 10) / 10;
+(function hcOverlay() {
+    const src = hcRead();
+    const byKey = {};
+    CATS.forEach(c => c.items.forEach(it => { byKey[it.key] = it; }));
+    const lead = {};   // group -> catalogue items, in catalogue order, ahead of the rest
+    Object.keys(HC_MAP).forEach(id => {
+        const s = src[id];
+        if (!s || !s.front) throw new Error('no drawing for ' + id);
+        const [rk, name, label, aff, hides] = HC_MAP[id];
+        const group = HC_CAT[id.slice(0, 2)];
+        let it;
+        if (rk) {
+            it = byKey[rk];
+            if (!it) throw new Error(id + ': no key ' + rk);
+            const off = Math.abs((it.w / it.h) / (s.front.w / s.front.h) - 1);
+            if (off > HC_TOL) throw new Error(id + ' does not fit ' + rk + ' (' + Math.round(off * 100) + '% off): give it a new key');
+            const f = hcFit(s.front, it.w, it.h);
+            it.art = () => f.svg;
+            if (it.hatch || group === 'Glass') { if (f.hatch) it.hatch = f.hatch; else delete it.hatch; } else delete it.hatch;
+            if (s.side) {
+                const sw = it.side ? it.side.w : hcIn(s.side.w), sh = it.side ? it.side.h : hcIn(s.side.h);
+                const fs2 = hcFit(s.side, sw, sh);
+                it.side = { w: sw, h: sh, art: () => fs2.svg };
+            }
+            CATS.forEach(c => { const i = c.items.indexOf(it); if (i >= 0) c.items.splice(i, 1); });
+        } else {
+            const W = hcIn(s.front.w), H = hcIn(s.front.h);
+            const f = hcFit(s.front, W, H);
+            it = { key: 'hc-' + id.toLowerCase(), name: name, w: W, h: H, aff: aff, affMode: 'bottom', label: label, art: () => f.svg };
+            if (f.hatch && (group === 'Glass' || /glass/i.test(name))) it.hatch = f.hatch;
+            if (s.side) {
+                const sw = hcIn(s.side.w), sh = hcIn(s.side.h), fs2 = hcFit(s.side, sw, sh);
+                it.side = { w: sw, h: sh, art: () => fs2.svg };
+            }
+            hides.forEach(k => { if (!byKey[k]) throw new Error(id + ' hides unknown ' + k); byKey[k].hidden = true; });
+        }
+        it.ref = id;
+        (lead[group] = lead[group] || []).push(it);
+    });
+    CATS.forEach(c => {
+        // Hidden items go to the END of their group (still found by key, never shown).
+        const shown = c.items.filter(it => !it.hidden), gone = c.items.filter(it => it.hidden);
+        c.items = (lead[c.cat] || []).concat(shown, gone);
+    });
+})();
+
 const q = (s) => "'" + String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
 // Art -> the app's source form: object-line group, with HID() spans as hidden groups.
 function src(svg) {
@@ -780,6 +927,8 @@ function itemSrc(it) {
     f.push('aff: ' + (it.aff === null || it.aff === undefined ? 'null' : it.aff), 'affMode: ' + q(it.affMode || 'bottom'));
     if (it.freeform) f.push('freeform: true');
     if (it.avoid) f.push('avoid: true');
+    if (it.hidden) f.push('hidden: true');
+    if (it.ref) f.push('ref: ' + q(it.ref));
     f.push('shape: ' + q(it.shape || 'rect'), 'fill: ' + q(it.fill || 'plain'), 'label: ' + q(it.label || ''));
     let s = '        { ' + f.join(', ');
     if (it.variants) s += ',\n          variants: BED_STYLE_VARIANTS';
@@ -839,7 +988,7 @@ function sheet(file) {
     CATS.forEach(c => {
         h += '<h3>' + c.cat + '</h3><div class="row">';
         c.items.forEach(it => {
-            if (!it.art) return;
+            if (!it.art || it.hidden) return;
             h += `<div class="c">${draw(it.w, it.h, it.art(it.w, it.h), SC)}<br>${it.name}</div>`;
             if (it.side) h += `<div class="c">${draw(it.side.w, it.side.h, it.side.art(it.side.w, it.side.h), SC)}<br>${it.name} (side)</div>`;
         });

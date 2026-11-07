@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" width="400mm" height="700mm"><title>FX-003 Urinal - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M40 0L360 0Q400 0 400 60L380 500Q360 660 200 700Q40 660 20 500L0 60Q0 0 40 0Z" fill="#fff"/>
+<path d="M80 120L320 120L300 480Q280 600 200 620Q120 600 100 480Z" fill="none"/>
+<circle cx="200" cy="550" r="25" fill="none"/>
+</g>
+</svg>

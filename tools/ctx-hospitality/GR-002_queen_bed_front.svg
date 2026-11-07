@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 1370" width="2600mm" height="1370mm"><title>GR-002 Queen bed - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="2600" height="1370" rx="6" fill="#fff"/>
+<rect x="50" y="50" width="2500" height="800" rx="4" fill="#fff"/>
+<rect x="110" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="125" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<rect x="2420" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="2435" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<path d="M573.7 788.4Q788 824.4 1002.3 788.4Q1027.4 630 1004.6 471.6Q788 428.4 571.4 471.6Q548.6 630 573.7 788.4Z" fill="#fff"/>
+<path d="M1597.7 788.4Q1812 824.4 2026.3 788.4Q2051.4 630 2028.6 471.6Q1812 428.4 1595.4 471.6Q1572.6 630 1597.7 788.4Z" fill="#fff"/>
+<path d="M862.4 792Q1069.6 822 1276.8 792Q1301 660 1279 528Q1069.6 492 860.2 528Q838.2 660 862.4 792Z" fill="#fff"/>
+<path d="M1323.2 792Q1530.4 822 1737.6 792Q1761.8 660 1739.8 528Q1530.4 492 1321 528Q1299 660 1323.2 792Z" fill="#fff"/>
+<rect x="600" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="1930" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="550" y="1030" width="1500" height="230" fill="#fff"/>
+<path d="M560 720L2040 720Q2090 720 2090 770L2108 1030Q2112 1100 2040 1100L560 1100Q488 1100 492 1030L510 770Q510 720 560 720Z" fill="#fff"/>
+<line x1="520" y1="805" x2="2080" y2="805"/>
+</g>
+</svg>

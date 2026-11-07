@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3600 2743" width="3600mm" height="2743mm"><title>GL-005 Framed glass partition - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="3600" height="2743" fill="none"/>
+<rect x="50" y="1768" width="1125" height="925" fill="none"/>
+<line x1="170" y1="2082.5" x2="373.5" y2="1879"/>
+<line x1="170" y1="2230.5" x2="521.5" y2="1879"/>
+<rect x="50" y="50" width="1125" height="1668" fill="none"/>
+<line x1="170" y1="390" x2="390" y2="170"/>
+<line x1="170" y1="550" x2="550" y2="170"/>
+<rect x="1225" y="1768" width="1150" height="925" fill="none"/>
+<line x1="1345" y1="2082.5" x2="1548.5" y2="1879"/>
+<line x1="1345" y1="2230.5" x2="1696.5" y2="1879"/>
+<rect x="1225" y="50" width="1150" height="1668" fill="none"/>
+<line x1="1345" y1="390" x2="1565" y2="170"/>
+<line x1="1345" y1="550" x2="1725" y2="170"/>
+<rect x="2425" y="1768" width="1125" height="925" fill="none"/>
+<line x1="2545" y1="2082.5" x2="2748.5" y2="1879"/>
+<line x1="2545" y1="2230.5" x2="2896.5" y2="1879"/>
+<rect x="2425" y="50" width="1125" height="1668" fill="none"/>
+<line x1="2545" y1="390" x2="2765" y2="170"/>
+<line x1="2545" y1="550" x2="2925" y2="170"/>
+</g>
+</svg>

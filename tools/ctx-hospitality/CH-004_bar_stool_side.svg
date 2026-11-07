@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440.3 1100" width="440.3mm" height="1100mm"><title>CH-004 Bar stool - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="20,1100 55,1100 95,380 65,380" fill="#fff"/>
+<polygon points="390,1100 355,1100 315,380 345,380" fill="#fff"/>
+<rect x="40" y="785" width="330" height="25" rx="12" fill="#fff"/>
+<polygon points="310,320 340,320 410,0 380,0" fill="#fff"/>
+<path d="M355 220L390 220L440 10Q442 0 430 0L405 0Z" fill="#fff"/>
+<rect x="0" y="320" width="410" height="60" rx="25" fill="#fff"/>
+</g>
+</svg>

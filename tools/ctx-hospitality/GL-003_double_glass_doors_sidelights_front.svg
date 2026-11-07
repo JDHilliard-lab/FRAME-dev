@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4699 2743" width="4699mm" height="2743mm"><title>GL-003 Double glass doors + sidelights - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="4699" height="2743" fill="none"/>
+<rect x="50" y="50" width="1335" height="2643" fill="none"/>
+<line x1="170" y1="390" x2="390" y2="170"/>
+<line x1="170" y1="550" x2="550" y2="170"/>
+<rect x="1435" y="609" width="1829" height="2084" fill="none"/>
+<line x1="1555" y1="949" x2="1775" y2="729"/>
+<line x1="1555" y1="1109" x2="1935" y2="729"/>
+<rect x="1435" y="50" width="1829" height="509" fill="none"/>
+<line x1="1555" y1="223.1" x2="1667" y2="111.1"/>
+<line x1="1555" y1="304.5" x2="1748.4" y2="111.1"/>
+<rect x="3314" y="50" width="1335" height="2643" fill="none"/>
+<line x1="3434" y1="390" x2="3654" y2="170"/>
+<line x1="3434" y1="550" x2="3814" y2="170"/>
+<rect x="1435" y="609" width="914.5" height="2134" fill="none"/>
+<rect x="1535" y="709" width="714.5" height="1814" fill="none"/>
+<line x1="1620.7" y1="986.2" x2="1777.9" y2="829"/>
+<line x1="1620.7" y1="1100.5" x2="1892.2" y2="829"/>
+<rect x="2289.5" y="1343" width="26" height="600" rx="13" fill="#fff"/>
+<rect x="2269.5" y="1903" width="20" height="20" fill="#fff"/>
+<rect x="2269.5" y="1363" width="20" height="20" fill="#fff"/>
+<rect x="2349.5" y="609" width="914.5" height="2134" fill="none"/>
+<rect x="2449.5" y="709" width="714.5" height="1814" fill="none"/>
+<line x1="2535.2" y1="986.2" x2="2692.4" y2="829"/>
+<line x1="2535.2" y1="1100.5" x2="2806.8" y2="829"/>
+<rect x="2384.5" y="1343" width="26" height="600" rx="13" fill="#fff"/>
+<rect x="2364.5" y="1903" width="20" height="20" fill="#fff"/>
+<rect x="2364.5" y="1363" width="20" height="20" fill="#fff"/>
+<rect x="2410.5" y="1903" width="20" height="20" fill="#fff"/>
+<rect x="2410.5" y="1363" width="20" height="20" fill="#fff"/>
+<rect x="1428" y="2403" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="3257" y="2403" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="1428" y="1583" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="3257" y="1583" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="1428" y="783" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="3257" y="783" width="14" height="110" rx="3" fill="#fff"/>
+</g>
+</svg>

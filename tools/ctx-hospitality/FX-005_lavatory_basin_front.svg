@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 365" width="600mm" height="365mm"><title>FX-005 Lavatory basin - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M0 165L600 165L600 195Q590 325 480 365L120 365Q10 325 0 195Z" fill="#fff"/>
+<line x1="5" y1="195" x2="595" y2="195"/>
+<rect x="272" y="140" width="56" height="25" rx="6" fill="#fff"/>
+<rect x="285" y="0" width="30" height="140" rx="12" fill="#fff"/>
+<rect x="315" y="31" width="70" height="14" rx="7" fill="#fff"/>
+</g>
+</svg>

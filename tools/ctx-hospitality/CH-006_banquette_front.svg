@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900" width="1800mm" height="900mm"><title>CH-006 Banquette - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="80" y="820" width="1640" height="80" fill="#fff"/>
+<rect x="30" y="520" width="1740" height="300" fill="#fff"/>
+<rect x="0" y="0" width="1800" height="450" rx="30" fill="#fff"/>
+<line x1="225" y1="420" x2="225" y2="30"/>
+<line x1="450" y1="420" x2="450" y2="30"/>
+<line x1="675" y1="420" x2="675" y2="30"/>
+<line x1="900" y1="420" x2="900" y2="30"/>
+<line x1="1125" y1="420" x2="1125" y2="30"/>
+<line x1="1350" y1="420" x2="1350" y2="30"/>
+<line x1="1575" y1="420" x2="1575" y2="30"/>
+<rect x="0" y="430" width="1800" height="90" rx="20" fill="#fff"/>
+</g>
+</svg>

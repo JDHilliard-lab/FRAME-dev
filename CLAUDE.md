@@ -2509,6 +2509,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   group name: it rides in an inline onclick). Existing keys, sizes and side sizes never change (saved walls);
   the five `BED_STYLE_VARIANTS` keep their keys and 100-wide aspects. Reference sites (First In Architecture
   etc.) forbid redistributing their DWGs: proportions only, never traced in.
+- **THE HOSPITALITY SET IS THE DESIGNER'S DRAWINGS (20.24, `tools/ctx-hospitality/*.svg`, `HC_MAP`, `hcFit`).**
+  mm, floor at the bottom, `fill="#fff"` = solid (becomes `data-o`), `fill="none"` = glass (becomes the hatch region).
+  `HC_MAP` either REPLACES a key (drawing fitted UNIFORMLY into that key's own size, on its floor; refused past
+  `HC_TOL` 8% off its proportions) or mints `hc-<id>` at the true size and marks what it supersedes `hidden`
+  (kept for saved walls, out of the palette and the sheet). Coordinates are rewritten numerically, never a
+  transform (it would scale the one stroke weight). New drawings: drop the file in and add a `HC_MAP` line.
+  **See all blocks** (`openContextSheet`, `CTX_SHEET_PX_IN`) is the contact sheet popup: every shown item at one
+  scale, built from `CONTEXT_LIBRARY` + `_ctxArtSvg`; a tile arms that block.
 - **A CONTEXT BLOCK'S WHITE IS ITS DRAWING, NOT ITS BOX (20.20, `_ctxBodyOn`, `_ctxBodyGroup`, `_ctxBodySvg`,
   `_ctxBodySpansAt`).** Every closed shape in the art is filled white (stroke off, dashes stripped) UNDER the
   lines: `.ctx-body` first in the block on screen (box `background:transparent`), `_ctxBodySvg` in the export in

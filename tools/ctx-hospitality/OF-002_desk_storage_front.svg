@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 750" width="1800mm" height="750mm"><title>OF-002 Desk + storage - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="470" y="30" width="860" height="370" fill="#fff"/>
+<rect x="20" y="30" width="450" height="720" fill="#fff"/>
+<line x1="20" y1="680" x2="470" y2="680"/>
+<rect x="32" y="40" width="426" height="150" rx="3" fill="#fff"/>
+<rect x="185" y="86" width="120" height="14" rx="7" fill="#fff"/>
+<rect x="32" y="200" width="426" height="150" rx="3" fill="#fff"/>
+<rect x="185" y="246" width="120" height="14" rx="7" fill="#fff"/>
+<rect x="32" y="360" width="426" height="310" rx="3" fill="#fff"/>
+<rect x="185" y="406" width="120" height="14" rx="7" fill="#fff"/>
+<rect x="1330" y="30" width="450" height="720" fill="#fff"/>
+<line x1="1330" y1="680" x2="1780" y2="680"/>
+<rect x="1342" y="40" width="426" height="150" rx="3" fill="#fff"/>
+<rect x="1495" y="86" width="120" height="14" rx="7" fill="#fff"/>
+<rect x="1342" y="200" width="426" height="150" rx="3" fill="#fff"/>
+<rect x="1495" y="246" width="120" height="14" rx="7" fill="#fff"/>
+<rect x="1342" y="360" width="426" height="310" rx="3" fill="#fff"/>
+<rect x="1495" y="406" width="120" height="14" rx="7" fill="#fff"/>
+<rect x="0" y="0" width="1800" height="30" rx="4" fill="#fff"/>
+</g>
+</svg>

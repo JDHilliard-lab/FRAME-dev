@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 900" width="2100mm" height="900mm"><title>GR-012 Sofa / sleeper sofa - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="40,900 95,900 100,780 35,780" fill="#fff"/>
+<polygon points="2005,900 2060,900 2065,780 2000,780" fill="#fff"/>
+<rect x="120" y="0" width="1860" height="520" rx="50" fill="#fff"/>
+<rect x="188" y="40" width="564" height="360" rx="50" fill="#fff"/>
+<rect x="768" y="40" width="564" height="360" rx="50" fill="#fff"/>
+<rect x="1348" y="40" width="564" height="360" rx="50" fill="#fff"/>
+<rect x="0" y="280" width="180" height="500" rx="60" fill="#fff"/>
+<rect x="1920" y="280" width="180" height="500" rx="60" fill="#fff"/>
+<rect x="180" y="510" width="1740" height="270" fill="#fff"/>
+<rect x="180" y="400" width="580" height="120" rx="30" fill="#fff"/>
+<rect x="760" y="400" width="580" height="120" rx="30" fill="#fff"/>
+<rect x="1340" y="400" width="580" height="120" rx="30" fill="#fff"/>
+</g>
+</svg>

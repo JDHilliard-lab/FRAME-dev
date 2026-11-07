@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1200" width="1800mm" height="1200mm"><title>OF-005 Whiteboard - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="1800" height="1150" rx="10" fill="#fff"/>
+<rect x="25" y="25" width="1750" height="1100" rx="3" fill="#fff"/>
+<rect x="250" y="1150" width="1300" height="50" rx="8" fill="#fff"/>
+<rect x="420" y="1130" width="110" height="20" rx="10" fill="#fff"/>
+<rect x="560" y="1130" width="110" height="20" rx="10" fill="#fff"/>
+<rect x="700" y="1130" width="110" height="20" rx="10" fill="#fff"/>
+<rect x="1300" y="1110" width="150" height="40" rx="6" fill="#fff"/>
+</g>
+</svg>

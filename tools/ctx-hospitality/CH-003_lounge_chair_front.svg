@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 900" width="850mm" height="900mm"><title>CH-003 Lounge chair - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="20" y="290" width="45" height="610" fill="#fff"/>
+<rect x="785" y="290" width="45" height="610" fill="#fff"/>
+<rect x="65" y="790" width="720" height="30" fill="#fff"/>
+<rect x="65" y="570" width="720" height="50" fill="#fff"/>
+<rect x="110" y="0" width="630" height="480" rx="30" fill="#fff"/>
+<rect x="70" y="460" width="710" height="110" rx="25" fill="#fff"/>
+<rect x="0" y="270" width="100" height="30" rx="12" fill="#fff"/>
+<rect x="750" y="270" width="100" height="30" rx="12" fill="#fff"/>
+</g>
+</svg>

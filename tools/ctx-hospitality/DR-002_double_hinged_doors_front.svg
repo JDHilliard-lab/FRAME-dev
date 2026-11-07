@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1969 2204" width="1969mm" height="2204mm"><title>DR-002 Double hinged doors - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="1969" height="2204" rx="3" fill="#fff"/>
+<rect x="70" y="70" width="1829" height="2134" fill="#fff"/>
+<line x1="984.5" y1="2204" x2="984.5" y2="70"/>
+<rect x="63" y="1864" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="63" y="1044" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="63" y="244" width="14" height="110" rx="3" fill="#fff"/>
+<circle cx="909.5" cy="1204" r="30" fill="#fff"/>
+<rect x="769.5" y="1195" width="140" height="18" rx="9" fill="#fff"/>
+<circle cx="909.5" cy="1204" r="30" fill="#fff"/>
+<rect x="1892" y="1864" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="1892" y="1044" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="1892" y="244" width="14" height="110" rx="3" fill="#fff"/>
+<circle cx="1059.5" cy="1204" r="30" fill="#fff"/>
+<rect x="1059.5" y="1195" width="140" height="18" rx="9" fill="#fff"/>
+<circle cx="1059.5" cy="1204" r="30" fill="#fff"/>
+</g>
+</svg>

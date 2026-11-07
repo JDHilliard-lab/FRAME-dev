@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 782.5 895.7" width="782.5mm" height="895.7mm"><title>CH-003 Lounge chair - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="590,895.7 630,895.7 780,35.7 740,35.7" fill="#fff"/>
+<path d="M510 475.7L670 25.7Q680 -4.3 710 0.7L760 10.7Q790 17.7 780 45.7L630 485.7Z" fill="#fff"/>
+<rect x="30" y="285.7" width="45" height="610" fill="#fff"/>
+<rect x="50" y="565.7" width="600" height="50" fill="#fff"/>
+<rect x="50" y="785.7" width="560" height="30" fill="#fff"/>
+<rect x="50" y="455.7" width="570" height="110" rx="25" fill="#fff"/>
+<rect x="0" y="265.7" width="680" height="30" rx="12" fill="#fff"/>
+</g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 850" width="750mm" height="850mm"><title>CH-005 Armchair - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="30" y="750" width="45" height="100" fill="#fff"/>
+<rect x="675" y="750" width="45" height="100" fill="#fff"/>
+<rect x="90" y="0" width="570" height="450" rx="50" fill="#fff"/>
+<rect x="0" y="230" width="130" height="520" rx="30" fill="#fff"/>
+<rect x="620" y="230" width="130" height="520" rx="30" fill="#fff"/>
+<rect x="130" y="450" width="490" height="300" fill="#fff"/>
+<rect x="130" y="350" width="490" height="100" rx="25" fill="#fff"/>
+</g>
+</svg>

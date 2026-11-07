@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1054 2204" width="1054mm" height="2204mm"><title>DR-006 Accessible door - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="1054" height="2204" rx="3" fill="#fff"/>
+<rect x="70" y="70" width="914" height="2134" fill="#fff"/>
+<rect x="100" y="1954" width="854" height="250" fill="#fff"/>
+<rect x="210" y="484" width="110" height="620" fill="#fff"/>
+<rect x="225" y="499" width="80" height="590" fill="none"/>
+<line x1="234.6" y1="587.4" x2="252.2" y2="569.8"/>
+<line x1="234.6" y1="600.2" x2="265" y2="569.8"/>
+<rect x="977" y="1864" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="977" y="1044" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="977" y="244" width="14" height="110" rx="3" fill="#fff"/>
+<circle cx="145" cy="1204" r="30" fill="#fff"/>
+<rect x="145" y="1195" width="140" height="18" rx="9" fill="#fff"/>
+<circle cx="145" cy="1204" r="30" fill="#fff"/>
+</g>
+</svg>

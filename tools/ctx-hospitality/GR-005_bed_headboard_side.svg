@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 1400" width="120mm" height="1400mm"><title>GR-005 Bed headboard - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="410" width="30" height="90" fill="#fff"/>
+<rect x="30" y="0" width="90" height="1400" rx="24" fill="#fff"/>
+<line x1="60" y1="1360" x2="60" y2="40"/>
+</g>
+</svg>

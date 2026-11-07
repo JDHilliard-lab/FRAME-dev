@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3200 1370" width="3200mm" height="1370mm"><title>GR-001 King bed + nightstands - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="550" y="0" width="2100" height="1370" rx="6" fill="#fff"/>
+<rect x="600" y="50" width="2000" height="800" rx="4" fill="#fff"/>
+<rect x="660" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="675" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<rect x="2470" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="2485" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<path d="M672.4 788.4Q944.5 824.4 1216.6 788.4Q1248.5 630 1219.5 471.6Q944.5 428.4 669.5 471.6Q640.5 630 672.4 788.4Z" fill="#fff"/>
+<path d="M1983.4 788.4Q2255.5 824.4 2527.6 788.4Q2559.5 630 2530.5 471.6Q2255.5 428.4 1980.5 471.6Q1951.5 630 1983.4 788.4Z" fill="#fff"/>
+<path d="M1047.1 792Q1310.2 822 1573.2 792Q1604 660 1576 528Q1310.2 492 1044.3 528Q1016.3 660 1047.1 792Z" fill="#fff"/>
+<path d="M1626.8 792Q1889.8 822 2152.9 792Q2183.7 660 2155.7 528Q1889.8 492 1624 528Q1596 660 1626.8 792Z" fill="#fff"/>
+<rect x="695" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="2435" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="645" y="1030" width="1910" height="230" fill="#fff"/>
+<path d="M655 720L2545 720Q2595 720 2595 770L2613 1030Q2617 1100 2545 1100L655 1100Q583 1100 587 1030L605 770Q605 720 655 720Z" fill="#fff"/>
+<line x1="615" y1="805" x2="2585" y2="805"/>
+<rect x="0" y="770" width="550" height="30" rx="4" fill="#fff"/>
+<rect x="15" y="800" width="520" height="460" fill="#fff"/>
+<rect x="30" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="480" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="35" y="820" width="480" height="160" rx="3" fill="#fff"/>
+<rect x="215" y="896" width="120" height="14" rx="7" fill="#fff"/>
+<line x1="15" y1="1070" x2="535" y2="1070"/>
+<rect x="2650" y="770" width="550" height="30" rx="4" fill="#fff"/>
+<rect x="2665" y="800" width="520" height="460" fill="#fff"/>
+<rect x="2680" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="3130" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="2685" y="820" width="480" height="160" rx="3" fill="#fff"/>
+<rect x="2865" y="896" width="120" height="14" rx="7" fill="#fff"/>
+<line x1="2665" y1="1070" x2="3185" y2="1070"/>
+</g>
+</svg>

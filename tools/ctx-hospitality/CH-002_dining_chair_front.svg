@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 850" width="460mm" height="850mm"><title>CH-002 Dining chair - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="10" y="430" width="35" height="420" fill="#fff"/>
+<rect x="415" y="430" width="35" height="420" fill="#fff"/>
+<rect x="25" y="0" width="410" height="400" rx="40" fill="#fff"/>
+<line x1="60" y1="290" x2="400" y2="290"/>
+<rect x="0" y="365" width="460" height="70" rx="22" fill="#fff"/>
+</g>
+</svg>

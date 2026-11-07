@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 900" width="950mm" height="900mm"><title>GR-012 Sofa / sleeper sofa - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M690 340L760 30Q765 0 800 0L920 0Q950 0 950 30L950 340Z" fill="#fff"/>
+<polygon points="40,900 95,900 100,780 35,780" fill="#fff"/>
+<polygon points="855,900 910,900 915,780 850,780" fill="#fff"/>
+<rect x="0" y="280" width="950" height="500" rx="60" fill="#fff"/>
+<line x1="40" y1="350" x2="910" y2="350"/>
+</g>
+</svg>

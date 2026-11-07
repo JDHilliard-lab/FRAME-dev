@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1829 1130" width="1829mm" height="1130mm"><title>OF-001 Workstation + task chair - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="10" y="63" width="1809" height="327" rx="12" fill="#fff"/>
+<rect x="30" y="83" width="1769" height="287" rx="6" fill="#fff"/>
+<rect x="40" y="420" width="50" height="710" fill="#fff"/>
+<rect x="1739" y="420" width="50" height="710" fill="#fff"/>
+<rect x="90" y="420" width="1649" height="380" fill="#fff"/>
+<rect x="0" y="390" width="1829" height="30" rx="4" fill="#fff"/>
+<rect x="1092.5" y="320" width="44" height="70" fill="#fff"/>
+<rect x="994.5" y="376" width="240" height="14" rx="6" fill="#fff"/>
+<rect x="834.5" y="0" width="560" height="330" rx="8" fill="#fff"/>
+<rect x="849.5" y="15" width="530" height="300" rx="3" fill="#fff"/>
+<rect x="394.5" y="372" width="420" height="18" rx="6" fill="#fff"/>
+<circle cx="434.5" cy="1088" r="26" fill="#fff"/>
+<circle cx="754.5" cy="1088" r="26" fill="#fff"/>
+<polygon points="574.5,980 284.5,1055 289.5,1075 574.5,1010" fill="#fff"/>
+<polygon points="614.5,980 904.5,1055 899.5,1075 614.5,1010" fill="#fff"/>
+<polygon points="579.5,1010 609.5,1010 606.5,1068 582.5,1068" fill="#fff"/>
+<circle cx="289.5" cy="1098" r="30" fill="#fff"/>
+<circle cx="899.5" cy="1098" r="30" fill="#fff"/>
+<circle cx="594.5" cy="1098" r="30" fill="#fff"/>
+<rect x="549.5" y="970" width="90" height="45" rx="10" fill="#fff"/>
+<rect x="572.5" y="740" width="44" height="230" fill="#fff"/>
+<rect x="444.5" y="700" width="300" height="40" rx="8" fill="#fff"/>
+<rect x="554.5" y="490" width="80" height="140" fill="#fff"/>
+<rect x="374.5" y="30" width="440" height="480" rx="70" fill="#fff"/>
+<line x1="414.5" y1="370" x2="774.5" y2="370"/>
+<rect x="289.5" y="470" width="30" height="190" fill="#fff"/>
+<rect x="259.5" y="449" width="90" height="26" rx="13" fill="#fff"/>
+<rect x="869.5" y="470" width="30" height="190" fill="#fff"/>
+<rect x="839.5" y="449" width="90" height="26" rx="13" fill="#fff"/>
+<rect x="299.5" y="638" width="590" height="22" rx="6" fill="#fff"/>
+<rect x="344.5" y="620" width="500" height="80" rx="40" fill="#fff"/>
+</g>
+</svg>

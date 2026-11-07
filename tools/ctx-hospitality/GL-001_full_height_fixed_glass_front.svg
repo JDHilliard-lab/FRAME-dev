@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 2743" width="3000mm" height="2743mm"><title>GL-001 Full-height fixed glass - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="3000" height="50" fill="#fff"/>
+<rect x="0" y="2693" width="3000" height="50" fill="#fff"/>
+<rect x="0" y="50" width="995" height="2643" fill="none"/>
+<line x1="118.8" y1="387.8" x2="336.6" y2="170"/>
+<line x1="118.8" y1="546.2" x2="495" y2="170"/>
+<rect x="1005" y="50" width="990" height="2643" fill="none"/>
+<line x1="1123.8" y1="387.8" x2="1341.6" y2="170"/>
+<line x1="1123.8" y1="546.2" x2="1500" y2="170"/>
+<rect x="2005" y="50" width="995" height="2643" fill="none"/>
+<line x1="2123.8" y1="387.8" x2="2341.6" y2="170"/>
+<line x1="2123.8" y1="546.2" x2="2500" y2="170"/>
+</g>
+</svg>

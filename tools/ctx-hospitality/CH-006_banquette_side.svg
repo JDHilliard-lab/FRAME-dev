@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 900" width="650mm" height="900mm"><title>CH-006 Banquette - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="80" y="820" width="520" height="80" fill="#fff"/>
+<rect x="30" y="520" width="620" height="300" fill="#fff"/>
+<path d="M440 450L500 30Q505 0 535 0L650 0L650 450Z" fill="#fff"/>
+<rect x="0" y="430" width="600" height="90" rx="20" fill="#fff"/>
+</g>
+</svg>

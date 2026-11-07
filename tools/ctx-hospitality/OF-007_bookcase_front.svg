@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 2100" width="1000mm" height="2100mm"><title>OF-007 Bookcase - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="1000" height="2100" rx="3" fill="#fff"/>
+<line x1="25" y1="2020" x2="25" y2="25"/>
+<line x1="975" y1="2020" x2="975" y2="25"/>
+<line x1="25" y1="2020" x2="975" y2="2020"/>
+<line x1="25" y1="25" x2="975" y2="25"/>
+<rect x="25" y="1596" width="950" height="25" fill="#fff"/>
+<rect x="25" y="1197" width="950" height="25" fill="#fff"/>
+<rect x="25" y="798" width="950" height="25" fill="#fff"/>
+<rect x="25" y="399" width="950" height="25" fill="#fff"/>
+<rect x="60" y="1720" width="40" height="300" rx="2" fill="#fff"/>
+<rect x="104" y="1740" width="55" height="280" rx="2" fill="#fff"/>
+<rect x="163" y="1700" width="35" height="320" rx="2" fill="#fff"/>
+<rect x="202" y="1730" width="60" height="290" rx="2" fill="#fff"/>
+<rect x="266" y="1710" width="45" height="310" rx="2" fill="#fff"/>
+<rect x="315" y="1760" width="50" height="260" rx="2" fill="#fff"/>
+<polygon points="379,2020 424,2020 579,1750 534,1735" fill="#fff"/>
+<rect x="60" y="1356" width="70" height="240" rx="2" fill="#fff"/>
+<rect x="134" y="1376" width="70" height="220" rx="2" fill="#fff"/>
+<rect x="208" y="1346" width="90" height="250" rx="2" fill="#fff"/>
+<rect x="60" y="508" width="40" height="290" rx="2" fill="#fff"/>
+<rect x="104" y="528" width="40" height="270" rx="2" fill="#fff"/>
+<rect x="148" y="498" width="55" height="300" rx="2" fill="#fff"/>
+<rect x="207" y="518" width="35" height="280" rx="2" fill="#fff"/>
+<rect x="246" y="498" width="45" height="300" rx="2" fill="#fff"/>
+<rect x="295" y="538" width="40" height="260" rx="2" fill="#fff"/>
+<rect x="339" y="508" width="60" height="290" rx="2" fill="#fff"/>
+<rect x="403" y="488" width="50" height="310" rx="2" fill="#fff"/>
+<rect x="620" y="1037" width="220" height="160" rx="4" fill="#fff"/>
+<path d="M180 1197Q160 1017 250 997Q340 1017 320 1197" fill="#fff"/>
+</g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 850" width="470mm" height="850mm"><title>CH-002 Dining chair - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="10" y="430" width="35" height="420" fill="#fff"/>
+<polygon points="395,850 430,850 420,430 385,430" fill="#fff"/>
+<polygon points="380,370 420,370 470,0 430,0" fill="#fff"/>
+<rect x="0" y="365" width="460" height="70" rx="22" fill="#fff"/>
+</g>
+</svg>

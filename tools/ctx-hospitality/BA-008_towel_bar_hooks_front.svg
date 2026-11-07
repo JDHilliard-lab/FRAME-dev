@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 870 118" width="870mm" height="118mm"><title>BA-008 Towel bar + hooks - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="20" y="42" width="560" height="26" rx="13" fill="#fff"/>
+<rect x="0" y="15" width="40" height="80" rx="18" fill="#fff"/>
+<rect x="560" y="15" width="40" height="80" rx="18" fill="#fff"/>
+<circle cx="720" cy="30" r="30" fill="#fff"/>
+<rect x="709" y="25" width="22" height="75" rx="11" fill="#fff"/>
+<circle cx="720" cy="100" r="18" fill="#fff"/>
+<circle cx="840" cy="30" r="30" fill="#fff"/>
+<rect x="829" y="25" width="22" height="75" rx="11" fill="#fff"/>
+<circle cx="840" cy="100" r="18" fill="#fff"/>
+</g>
+</svg>

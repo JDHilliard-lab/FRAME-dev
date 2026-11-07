@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 850" width="780mm" height="850mm"><title>CH-005 Armchair - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M520 290L590 30Q600 0 630 0L750 0Q780 0 780 30L780 290Z" fill="#fff"/>
+<rect x="30" y="750" width="45" height="100" fill="#fff"/>
+<rect x="705" y="750" width="45" height="100" fill="#fff"/>
+<rect x="0" y="230" width="780" height="520" rx="30" fill="#fff"/>
+</g>
+</svg>

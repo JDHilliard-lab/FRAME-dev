@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688.4 800" width="688.4mm" height="800mm"><title>FX-001 Floor-mounted toilet - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="30" width="200" height="340" rx="15" fill="#fff"/>
+<rect x="0" y="0" width="215" height="30" rx="10" fill="#fff"/>
+<path d="M150 410L650 410Q700 410 685 460Q650 600 520 640L480 800L200 800L190 600L150 500Z" fill="#fff"/>
+<rect x="140" y="385" width="540" height="25" rx="12" fill="#fff"/>
+<rect x="150" y="355" width="80" height="30" rx="8" fill="#fff"/>
+</g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1055 880" width="1055mm" height="880mm"><title>FX-004 Accessible toilet + grab bars - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="15" height="80" fill="#fff"/>
+<circle cx="40" cy="40" r="19" fill="#fff"/>
+<rect x="155" y="21" width="900" height="38" rx="19" fill="#fff"/>
+<circle cx="200" cy="40" r="38" fill="#fff"/>
+<circle cx="1010" cy="40" r="38" fill="#fff"/>
+<path d="M305 550Q315 680 375 730L365 880L545 880L535 730Q595 680 605 550Z" fill="#fff"/>
+<rect x="295" y="500" width="320" height="50" rx="25" fill="#fff"/>
+<rect x="285" y="470" width="340" height="30" rx="15" fill="#fff"/>
+<rect x="260" y="110" width="390" height="340" rx="20" fill="#fff"/>
+<rect x="255" y="80" width="400" height="30" rx="10" fill="#fff"/>
+<circle cx="305" cy="173" r="14" fill="#fff"/>
+<rect x="305" y="165" width="70" height="15" rx="7" fill="#fff"/>
+</g>
+</svg>

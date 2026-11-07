@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2118 1250" width="2118mm" height="1250mm"><title>GR-003 Twin bed - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="80" height="1250" rx="6" fill="#fff"/>
+<path d="M110.6 670.2Q355 703.2 599.4 670.2Q628 525 602 379.8Q355 340.2 108 379.8Q82 525 110.6 670.2Z" fill="#fff"/>
+<rect x="140" y="1130" width="70" height="120" fill="#fff"/>
+<rect x="1950" y="1130" width="70" height="120" fill="#fff"/>
+<rect x="90" y="910" width="1970" height="230" fill="#fff"/>
+<path d="M80 600L2050 600Q2100 600 2100 650L2118 910Q2122 980 2050 980L80 980Z" fill="#fff"/>
+<line x1="730" y1="600" x2="730" y2="980"/>
+<line x1="80" y1="685" x2="730" y2="685"/>
+</g>
+</svg>

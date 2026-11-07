@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 1098" width="670mm" height="1098mm"><title>CH-001 Task chair - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="320,950 25,1025 30,1045 320,980" fill="#fff"/>
+<polygon points="350,950 645,1025 640,1045 350,980" fill="#fff"/>
+<circle cx="30" cy="1068" r="30" fill="#fff"/>
+<circle cx="640" cy="1068" r="30" fill="#fff"/>
+<rect x="290" y="940" width="90" height="45" rx="10" fill="#fff"/>
+<rect x="313" y="710" width="44" height="230" fill="#fff"/>
+<rect x="215" y="670" width="260" height="40" rx="8" fill="#fff"/>
+<polygon points="485,630 545,630 585,460 530,460" fill="#fff"/>
+<path d="M515 500Q575 280 535 40Q535 0 575 0L610 0Q635 0 635 40Q655 280 595 500Z" fill="#fff"/>
+<rect x="85" y="590" width="470" height="80" rx="40" fill="#fff"/>
+<rect x="325" y="440" width="30" height="160" fill="#fff"/>
+<rect x="185" y="419" width="270" height="26" rx="13" fill="#fff"/>
+</g>
+</svg>

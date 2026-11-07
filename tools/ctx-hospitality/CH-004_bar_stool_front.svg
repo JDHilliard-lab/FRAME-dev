@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 1100" width="410mm" height="1100mm"><title>CH-004 Bar stool - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="20,1100 55,1100 95,380 65,380" fill="#fff"/>
+<polygon points="390,1100 355,1100 315,380 345,380" fill="#fff"/>
+<rect x="40" y="785" width="330" height="25" rx="12" fill="#fff"/>
+<rect x="60" y="180" width="25" height="140" fill="#fff"/>
+<rect x="325" y="180" width="25" height="140" fill="#fff"/>
+<rect x="30" y="0" width="350" height="200" rx="40" fill="#fff"/>
+<rect x="0" y="320" width="410" height="60" rx="25" fill="#fff"/>
+</g>
+</svg>

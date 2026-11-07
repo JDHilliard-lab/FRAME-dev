@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900mm" height="1100mm"><title>OF-006 File cabinet - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="900" height="1100" rx="4" fill="#fff"/>
+<line x1="0" y1="1040" x2="900" y2="1040"/>
+<rect x="15" y="700" width="870" height="330" rx="3" fill="#fff"/>
+<rect x="380" y="760" width="140" height="20" rx="10" fill="#fff"/>
+<rect x="410" y="796" width="80" height="34" rx="3" fill="#fff"/>
+<rect x="15" y="360" width="870" height="330" rx="3" fill="#fff"/>
+<rect x="380" y="420" width="140" height="20" rx="10" fill="#fff"/>
+<rect x="410" y="456" width="80" height="34" rx="3" fill="#fff"/>
+<rect x="15" y="20" width="870" height="330" rx="3" fill="#fff"/>
+<rect x="380" y="80" width="140" height="20" rx="10" fill="#fff"/>
+<rect x="410" y="116" width="80" height="34" rx="3" fill="#fff"/>
+<circle cx="840" cy="40" r="15" fill="#fff"/>
+</g>
+</svg>

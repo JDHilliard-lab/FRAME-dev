@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4699 2743" width="4699mm" height="2743mm"><title>GL-002 Glass partition + swing door - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="4699" height="2743" fill="none"/>
+<rect x="50" y="50" width="825" height="2643" fill="none"/>
+<line x1="149" y1="351.5" x2="330.5" y2="170"/>
+<line x1="149" y1="483.5" x2="462.5" y2="170"/>
+<rect x="925" y="50" width="875" height="2643" fill="none"/>
+<line x1="1030" y1="362.5" x2="1222.5" y2="170"/>
+<line x1="1030" y1="502.5" x2="1362.5" y2="170"/>
+<rect x="1850" y="609" width="914" height="2084" fill="none"/>
+<line x1="1959.7" y1="930.1" x2="2160.8" y2="729"/>
+<line x1="1959.7" y1="1076.3" x2="2307" y2="729"/>
+<rect x="1850" y="50" width="914" height="509" fill="none"/>
+<line x1="1959.7" y1="223.1" x2="2071.7" y2="111.1"/>
+<line x1="1959.7" y1="304.5" x2="2153.1" y2="111.1"/>
+<rect x="2814" y="50" width="905" height="2643" fill="none"/>
+<line x1="2922.6" y1="369.1" x2="3121.7" y2="170"/>
+<line x1="2922.6" y1="513.9" x2="3266.5" y2="170"/>
+<rect x="3769" y="50" width="880" height="2643" fill="none"/>
+<line x1="3874.6" y1="363.6" x2="4068.2" y2="170"/>
+<line x1="3874.6" y1="504.4" x2="4209" y2="170"/>
+<rect x="1850" y="609" width="914" height="2134" fill="none"/>
+<rect x="1950" y="709" width="714" height="1814" fill="none"/>
+<line x1="2035.7" y1="986.1" x2="2192.8" y2="829"/>
+<line x1="2035.7" y1="1100.3" x2="2307" y2="829"/>
+<rect x="2704" y="1343" width="26" height="600" rx="13" fill="#fff"/>
+<rect x="2684" y="1903" width="20" height="20" fill="#fff"/>
+<rect x="2684" y="1363" width="20" height="20" fill="#fff"/>
+<rect x="1843" y="2403" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="1843" y="1583" width="14" height="110" rx="3" fill="#fff"/>
+<rect x="1843" y="783" width="14" height="110" rx="3" fill="#fff"/>
+</g>
+</svg>

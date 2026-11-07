@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 1140" width="550mm" height="1140mm"><title>BA-002 Single basin vanity - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="1020" width="480" height="120" fill="#fff"/>
+<rect x="0" y="320" width="535" height="700" fill="#fff"/>
+<line x1="20" y1="450" x2="535" y2="450"/>
+<rect x="0" y="290" width="550" height="30" rx="4" fill="#fff"/>
+<rect x="440" y="262" width="60" height="28" rx="6" fill="#fff"/>
+<path d="M455 262L455 90Q455 0 365 0L320 0L320 30L365 30Q485 30 485 90L485 262Z" fill="#fff"/>
+<rect x="485" y="154" width="60" height="16" rx="8" fill="#fff"/>
+</g>
+</svg>

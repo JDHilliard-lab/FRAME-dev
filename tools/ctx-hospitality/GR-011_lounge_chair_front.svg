@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 900" width="850mm" height="900mm"><title>GR-011 Lounge chair - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="40,900 95,900 100,780 35,780" fill="#fff"/>
+<polygon points="755,900 810,900 815,780 750,780" fill="#fff"/>
+<rect x="110" y="0" width="630" height="520" rx="60" fill="#fff"/>
+<rect x="0" y="280" width="170" height="500" rx="60" fill="#fff"/>
+<rect x="680" y="280" width="170" height="500" rx="60" fill="#fff"/>
+<rect x="170" y="510" width="510" height="270" fill="#fff"/>
+<rect x="170" y="405" width="510" height="115" rx="30" fill="#fff"/>
+</g>
+</svg>

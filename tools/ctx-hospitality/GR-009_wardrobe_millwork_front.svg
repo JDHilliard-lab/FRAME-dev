@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2458 2286" width="2458mm" height="2286mm"><title>GR-009 Wardrobe / millwork - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="20" y="0" width="2438" height="2286" rx="3" fill="#fff"/>
+<line x1="20" y1="2186" x2="2458" y2="2186"/>
+<line x1="20" y1="70" x2="2458" y2="70"/>
+<line x1="822.7" y1="2186" x2="822.7" y2="70"/>
+<line x1="842.7" y1="2186" x2="842.7" y2="70"/>
+<line x1="1635.3" y1="2186" x2="1635.3" y2="70"/>
+<line x1="1655.3" y1="2186" x2="1655.3" y2="70"/>
+<rect x="40" y="361" width="772.7" height="25" fill="#fff"/>
+<rect x="50" y="446" width="762.7" height="20" rx="10" fill="#fff"/>
+<path d="M190 456Q190 496 165 501" fill="none"/>
+<polygon points="190,526 0,646 380,646" fill="none"/>
+<circle cx="190" cy="514" r="12" fill="none"/>
+<path d="M420 456Q420 496 395 501" fill="none"/>
+<polygon points="420,526 230,646 610,646" fill="none"/>
+<circle cx="420" cy="514" r="12" fill="none"/>
+<path d="M650 456Q650 496 625 501" fill="none"/>
+<polygon points="650,526 460,646 840,646" fill="none"/>
+<circle cx="650" cy="514" r="12" fill="none"/>
+<rect x="40" y="1811" width="772.7" height="25" fill="#fff"/>
+<rect x="857.7" y="85" width="366.3" height="2086" rx="3" fill="#fff"/>
+<rect x="1174" y="886" width="20" height="400" rx="10" fill="#fff"/>
+<rect x="1254" y="85" width="366.3" height="2086" rx="3" fill="#fff"/>
+<rect x="1284" y="886" width="20" height="400" rx="10" fill="#fff"/>
+<rect x="1665.3" y="761" width="772.7" height="25" fill="#fff"/>
+<rect x="1665.3" y="411" width="772.7" height="25" fill="#fff"/>
+<rect x="1670.3" y="1806" width="762.7" height="360" rx="3" fill="#fff"/>
+<rect x="1971.7" y="1888" width="160" height="18" rx="9" fill="#fff"/>
+<rect x="1670.3" y="1426" width="762.7" height="360" rx="3" fill="#fff"/>
+<rect x="1971.7" y="1508" width="160" height="18" rx="9" fill="#fff"/>
+<rect x="1670.3" y="1046" width="762.7" height="360" rx="3" fill="#fff"/>
+<rect x="1971.7" y="1128" width="160" height="18" rx="9" fill="#fff"/>
+<rect x="1670.3" y="826" width="762.7" height="200" rx="3" fill="#fff"/>
+</g>
+</svg>

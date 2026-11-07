@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6096 1370" width="6096mm" height="1370mm"><title>GR-004 Double queen beds - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="770" width="600" height="30" rx="4" fill="#fff"/>
+<rect x="15" y="800" width="570" height="460" fill="#fff"/>
+<rect x="30" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="530" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="35" y="820" width="530" height="160" rx="3" fill="#fff"/>
+<rect x="240" y="896" width="120" height="14" rx="7" fill="#fff"/>
+<line x1="15" y1="1070" x2="585" y2="1070"/>
+<rect x="824" y="0" width="1700" height="1370" rx="6" fill="#fff"/>
+<rect x="874" y="50" width="1600" height="800" rx="4" fill="#fff"/>
+<rect x="934" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="949" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<rect x="2344" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="2359" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<path d="M947.7 788.4Q1162 824.4 1376.3 788.4Q1401.4 630 1378.6 471.6Q1162 428.4 945.4 471.6Q922.6 630 947.7 788.4Z" fill="#fff"/>
+<path d="M1971.7 788.4Q2186 824.4 2400.3 788.4Q2425.4 630 2402.6 471.6Q2186 428.4 1969.4 471.6Q1946.6 630 1971.7 788.4Z" fill="#fff"/>
+<path d="M1236.4 792Q1443.6 822 1650.8 792Q1675 660 1653 528Q1443.6 492 1234.2 528Q1212.2 660 1236.4 792Z" fill="#fff"/>
+<path d="M1697.2 792Q1904.4 822 2111.6 792Q2135.8 660 2113.8 528Q1904.4 492 1695 528Q1673 660 1697.2 792Z" fill="#fff"/>
+<rect x="974" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="2304" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="924" y="1030" width="1500" height="230" fill="#fff"/>
+<path d="M934 720L2414 720Q2464 720 2464 770L2482 1030Q2486 1100 2414 1100L934 1100Q862 1100 866 1030L884 770Q884 720 934 720Z" fill="#fff"/>
+<line x1="894" y1="805" x2="2454" y2="805"/>
+<rect x="2748" y="770" width="600" height="30" rx="4" fill="#fff"/>
+<rect x="2763" y="800" width="570" height="460" fill="#fff"/>
+<rect x="2778" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="3278" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="2783" y="820" width="530" height="160" rx="3" fill="#fff"/>
+<rect x="2988" y="896" width="120" height="14" rx="7" fill="#fff"/>
+<line x1="2763" y1="1070" x2="3333" y2="1070"/>
+<rect x="3572" y="0" width="1700" height="1370" rx="6" fill="#fff"/>
+<rect x="3622" y="50" width="1600" height="800" rx="4" fill="#fff"/>
+<rect x="3682" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="3697" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<rect x="5092" y="210" width="70" height="170" rx="8" fill="#fff"/>
+<rect x="5107" y="240" width="40" height="60" rx="4" fill="#fff"/>
+<path d="M3695.7 788.4Q3910 824.4 4124.3 788.4Q4149.4 630 4126.6 471.6Q3910 428.4 3693.4 471.6Q3670.6 630 3695.7 788.4Z" fill="#fff"/>
+<path d="M4719.7 788.4Q4934 824.4 5148.3 788.4Q5173.4 630 5150.6 471.6Q4934 428.4 4717.4 471.6Q4694.6 630 4719.7 788.4Z" fill="#fff"/>
+<path d="M3984.4 792Q4191.6 822 4398.8 792Q4423 660 4401 528Q4191.6 492 3982.2 528Q3960.2 660 3984.4 792Z" fill="#fff"/>
+<path d="M4445.2 792Q4652.4 822 4859.6 792Q4883.8 660 4861.8 528Q4652.4 492 4443 528Q4421 660 4445.2 792Z" fill="#fff"/>
+<rect x="3722" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="5052" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="3672" y="1030" width="1500" height="230" fill="#fff"/>
+<path d="M3682 720L5162 720Q5212 720 5212 770L5230 1030Q5234 1100 5162 1100L3682 1100Q3610 1100 3614 1030L3632 770Q3632 720 3682 720Z" fill="#fff"/>
+<line x1="3642" y1="805" x2="5202" y2="805"/>
+<rect x="5496" y="770" width="600" height="30" rx="4" fill="#fff"/>
+<rect x="5511" y="800" width="570" height="460" fill="#fff"/>
+<rect x="5526" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="6026" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="5531" y="820" width="530" height="160" rx="3" fill="#fff"/>
+<rect x="5736" y="896" width="120" height="14" rx="7" fill="#fff"/>
+<line x1="5511" y1="1070" x2="6081" y2="1070"/>
+</g>
+</svg>

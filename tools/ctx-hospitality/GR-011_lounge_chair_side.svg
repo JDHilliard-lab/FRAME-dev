@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800mm" height="900mm"><title>GR-011 Lounge chair - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M540 340L610 30Q615 0 650 0L770 0Q800 0 800 30L800 340Z" fill="#fff"/>
+<polygon points="40,900 95,900 100,780 35,780" fill="#fff"/>
+<polygon points="705,900 760,900 765,780 700,780" fill="#fff"/>
+<rect x="0" y="280" width="800" height="500" rx="60" fill="#fff"/>
+<line x1="40" y1="350" x2="760" y2="350"/>
+</g>
+</svg>

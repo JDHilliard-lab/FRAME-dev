@@ -3374,6 +3374,18 @@ html.phone-land .phone-deckbar { bottom: calc(10px + env(safe-area-inset-bottom,
 html.phone .fsp-card { width: 100%; height: 100%; max-height: none; border-radius: 0; border: none; padding: 12px; }
 html.phone .fsp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 html.phone .fsp-pic { height: 90px; }
+/* Context block contact sheet (20.24): one scale, paper tiles, floors aligned. */
+.ctx-sheet-btn { width: auto; display: inline-block; margin: 6px 0 0; }
+.ctx-sheet-card { width: min(1200px, 96vw); }
+.ctx-sheet-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
+.ctx-sheet-tile { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 96px; padding: 10px 10px 6px; cursor: pointer;
+    background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--r-6); color: #141414; }
+.ctx-sheet-tile:hover { border-color: var(--ui-active); box-shadow: 0 0 0 1px var(--ui-active); }
+.ctx-sheet-pic { display: flex; align-items: flex-end; justify-content: center; border-bottom: 1px solid #141414; padding: 0 6px; }
+.ctx-sheet-pic svg { display: block; overflow: visible; }
+.ctx-sheet-name { font-size: var(--fs-65); font-weight: 700; color: #141414; text-align: center; max-width: 240px; }
+.ctx-sheet-size { font-size: var(--fs-55); color: #6e6e6e; }
+html.phone .ctx-sheet-card { width: 100%; height: 100%; max-height: none; border-radius: 0; border: none; padding: 12px; }
 
 /* ═══ iPHONE: the deck's tabs above the tab bar (19.32) ═══════════════════════════════ */
 /* Project / Pages / Templates plus the deck menu, pinned over the bottom bar on Deck. The

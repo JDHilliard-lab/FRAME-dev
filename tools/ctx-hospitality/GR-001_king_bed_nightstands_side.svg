@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2218 1370" width="2218mm" height="1370mm"><title>GR-001 King bed + nightstands - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="80" height="1370" rx="6" fill="#fff"/>
+<path d="M110.6 790.2Q355 823.2 599.4 790.2Q628 645 602 499.8Q355 460.2 108 499.8Q82 645 110.6 790.2Z" fill="#fff"/>
+<rect x="140" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="2050" y="1250" width="70" height="120" fill="#fff"/>
+<rect x="90" y="1030" width="2070" height="230" fill="#fff"/>
+<path d="M80 720L2150 720Q2200 720 2200 770L2218 1030Q2222 1100 2150 1100L80 1100Z" fill="#fff"/>
+<line x1="730" y1="720" x2="730" y2="1100"/>
+<line x1="80" y1="805" x2="730" y2="805"/>
+<rect x="100" y="770" width="450" height="30" rx="4" fill="#fff"/>
+<rect x="115" y="800" width="420" height="460" fill="#fff"/>
+<rect x="130" y="1260" width="40" height="110" fill="#fff"/>
+<rect x="480" y="1260" width="40" height="110" fill="#fff"/>
+<line x1="115" y1="1070" x2="535" y2="1070"/>
+</g>
+</svg>

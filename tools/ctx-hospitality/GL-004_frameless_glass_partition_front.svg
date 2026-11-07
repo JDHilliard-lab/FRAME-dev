@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3600 2743" width="3600mm" height="2743mm"><title>GL-004 Frameless glass partition - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0" y="0" width="3600" height="30" fill="#fff"/>
+<rect x="0" y="2713" width="3600" height="30" fill="#fff"/>
+<rect x="0" y="30" width="896" height="2683" fill="none"/>
+<line x1="107.5" y1="347.1" x2="304.6" y2="150"/>
+<line x1="107.5" y1="490.5" x2="448" y2="150"/>
+<rect x="904" y="30" width="892" height="2683" fill="none"/>
+<line x1="1011" y1="346.2" x2="1207.3" y2="150"/>
+<line x1="1011" y1="489" x2="1350" y2="150"/>
+<rect x="1804" y="30" width="892" height="2683" fill="none"/>
+<line x1="1911" y1="346.2" x2="2107.3" y2="150"/>
+<line x1="1911" y1="489" x2="2250" y2="150"/>
+<rect x="2704" y="30" width="896" height="2683" fill="none"/>
+<line x1="2811.5" y1="347.1" x2="3008.6" y2="150"/>
+<line x1="2811.5" y1="490.5" x2="3152" y2="150"/>
+</g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1100" width="2400mm" height="1100mm"><title>OF-008 Reception desk - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="80" y="1020" width="2240" height="80" fill="#fff"/>
+<rect x="20" y="40" width="1480" height="980" fill="#fff"/>
+<rect x="1500" y="260" width="880" height="760" fill="#fff"/>
+<line x1="510" y1="1020" x2="510" y2="40"/>
+<line x1="1000" y1="1020" x2="1000" y2="40"/>
+<line x1="20" y1="800" x2="1500" y2="800"/>
+<line x1="1500" y1="800" x2="2380" y2="800"/>
+<rect x="1480" y="230" width="920" height="30" rx="4" fill="#fff"/>
+<rect x="0" y="0" width="1530" height="40" rx="4" fill="#fff"/>
+</g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 500" width="430mm" height="500mm"><title>GR-010 Luggage bench - side elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="20" y="60" width="50" height="440" fill="#fff"/>
+<rect x="360" y="60" width="50" height="440" fill="#fff"/>
+<rect x="70" y="350" width="290" height="30" fill="#fff"/>
+<rect x="0" y="45" width="430" height="30" fill="#fff"/>
+<rect x="0" y="0" width="78" height="45" rx="6" fill="#fff"/>
+<rect x="88" y="0" width="78" height="45" rx="6" fill="#fff"/>
+<rect x="176" y="0" width="78" height="45" rx="6" fill="#fff"/>
+<rect x="264" y="0" width="78" height="45" rx="6" fill="#fff"/>
+<rect x="352" y="0" width="78" height="45" rx="6" fill="#fff"/>
+</g>
+</svg>

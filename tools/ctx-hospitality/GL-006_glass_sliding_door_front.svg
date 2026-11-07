@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2500 2743" width="2500mm" height="2743mm"><title>GL-006 Glass sliding door - front elevation</title>
+<g stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="50" y="150" width="1200" height="2563" rx="3" fill="none"/>
+<line x1="170" y1="490" x2="390" y2="270"/>
+<line x1="170" y1="650" x2="550" y2="270"/>
+<rect x="1200" y="150" width="1250" height="2593" rx="3" fill="#fff"/>
+<line x1="1320" y1="490" x2="1540" y2="270"/>
+<line x1="1320" y1="650" x2="1700" y2="270"/>
+<rect x="1270" y="1323" width="30" height="520" rx="15" fill="#fff"/>
+<rect x="1330" y="120" width="40" height="80" rx="6" fill="#fff"/>
+<rect x="2290" y="120" width="40" height="80" rx="6" fill="#fff"/>
+<rect x="0" y="0" width="2500" height="120" rx="6" fill="#fff"/>
+</g>
+</svg>
