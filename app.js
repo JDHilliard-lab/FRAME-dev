@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.24';
+const APP_VERSION = '20.25';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6488,6 +6488,7 @@ function syncLayoutGuideButtonStates() {
                 ? 'Window film sits on the glass, so this wall does not need EGD mode. Switch only if a wallcovering should fill it.'
                 : 'Framed art hangs on the wall. Switch to EGD only if a wallcovering should fill this wall.');
     }
+    _wallFinishSync();
 }
 
 
@@ -10152,6 +10153,45 @@ function _clampFlatToWall(elev, frame) {
 // button did nothing at all, which read as "once a wall is EGD or WF it is stuck that
 // way". ART is the plain wall underneath both: clicking it turns EGD off and, if the
 // wall has glass, offers to take the glass away too.
+// ── WALL FINISH (20.25) ─────────────────────────────────────────────────────
+// What the wall is and its colour: Ford's Level 03 review (Nov 2026) asked for "wall types
+// on each elevation page... drywall, painted, wood, what wood colour" to make frame
+// decisions. NOT the wall MODE above (ART / EGD / WF says what goes ON the wall); this is
+// the wall itself. Two plain fields on the elevation, both optional, so an older file
+// opens unchanged and a blank wall prints nothing.
+const WALL_FINISHES = ['Painted drywall', 'Wood', 'Wallcovering', 'Glass', 'Concrete', 'Stone', 'Tile', 'Brick', 'Metal', 'Acoustic panel'];
+// The line the wall page prints: "WALL: WOOD · BLUE WD-11". A note with no material still
+// prints (a spec code alone is useful); neither prints nothing.
+function _wallFinishText(elev) {
+    if (!elev) return '';
+    const m = String(elev.wallFinish || '').trim(), n = String(elev.wallFinishNote || '').trim();
+    const t = [m, n].filter(Boolean).join(' \u00b7 ');
+    return t ? ('WALL: ' + t).toUpperCase() : '';
+}
+function _wallFinishSync() {
+    const sel = document.getElementById('wallFinish'), note = document.getElementById('wallFinishNote');
+    const elev = (typeof elevations !== 'undefined') ? elevations[currentElevIndex] : null;
+    if (sel) {
+        const cur = (elev && elev.wallFinish) || '';
+        // A finish typed into an older or hand-edited file still shows rather than reading as blank.
+        const opts = [''].concat(WALL_FINISHES, (cur && WALL_FINISHES.indexOf(cur) < 0) ? [cur] : []);
+        if (sel.options.length !== opts.length || Array.from(sel.options).some((o, i) => o.value !== opts[i])) {
+            sel.innerHTML = '';
+            opts.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v || 'Not set'; sel.appendChild(o); });
+        }
+        sel.value = cur;
+    }
+    if (note && document.activeElement !== note) note.value = (elev && elev.wallFinishNote) || '';
+}
+function setElevWallFinish() {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    const sel = document.getElementById('wallFinish'), note = document.getElementById('wallFinishNote');
+    const m = sel ? sel.value : '', n = note ? note.value.trim() : '';
+    if (m) elev.wallFinish = m; else delete elev.wallFinish;
+    if (n) elev.wallFinishNote = n; else delete elev.wallFinishNote;
+    scheduleAutosave();
+}
 function setElevWallMode(mode) {
     const elev = elevations[currentElevIndex];
     if (!elev) return;
@@ -10643,7 +10683,7 @@ const CAT_SPEC_FIELDS = CAT_SLOT_FIELDS.filter(k => k !== 'x' && k !== 'y');
 // asking for it is the better evidence: the group dimensions and custom lines ARE the
 // layout work, and a mockup whose measurements do not reach its own options means doing
 // that work once per option. The layer toggles still decide what prints.
-const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall'];
+const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall', 'wallFinish', 'wallFinishNote'];
 const CAT_WALL_DEEP = ['personPos', 'contextBlocks', 'glazing', 'groupDims', 'customLines', 'marks'];
 // A row-level mirror as well: the PLAN PIN belongs to the placement. A dealership hangs
 // ONE piece in that spot and picks which image goes in it, so pinning the mockup's slot
@@ -43837,6 +43877,10 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     // grey under ELEVATION DETAIL, under a heading that already starts with the same code
     // in Druk; the letter legend carries it too. A per-piece install page keeps its code.
     const _igCodeId = isElev ? '' : ((arg && arg.id) || '');
+    // WALL FINISH (20.25): an elevation page has no code line, so the wall's finish takes
+    // that slot ("WALL: WOOD · BLUE WD-11"). Same face, same place, same clearance.
+    const _igWallTxt = isElev ? _wallFinishText(elev) : '';
+    const _igLine3 = _igCodeId || _igWallTxt;
     // The title block's real right edge, measured in the faces it prints in. Anything
     // starting right of this can rise to the top margin without touching it.
     let _igTitleRight = SR.R;
@@ -43851,7 +43895,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
         const _ss = _subtitleStyleFor();
         doc.setFont(_font(_ss.font), _pdfTitleStyle(_ss.font)); doc.setFontSize(_ss.size);
         w = Math.max(w, doc.getTextWidth(_igSub));
-        if (_igCodeId) { const _cs = _specCodeStyle(); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); w = Math.max(w, doc.getTextWidth(_igCodeId + '')); }
+        if (_igLine3) { const _cs = _specCodeStyle(); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); w = Math.max(w, doc.getTextWidth(_igLine3 + '')); }
         _igTitleRight = M + w;
     } catch (e) { _igTitleRight = SR.R; }
     // Where a drawing placed at `left` may start. Beside the title it gets the whole
@@ -43873,7 +43917,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
         if (clearW > 0) { const c = _igFit(asp, clearW, yB - SR.T); if (c[1] > under[1]) return c; }
         return under;
     };
-    const _igLegTop = _igBand.sub + _subtitleClear() + (_igCodeId ? 10 : 0) + IG_LEG_TOP_GAP;
+    const _igLegTop = _igBand.sub + _subtitleClear() + (_igLine3 ? 10 : 0) + IG_LEG_TOP_GAP;
     // FULL WIDTH: the notes sit in the title band, right of the heading, right-aligned to
     // the safety edge. A note set taller than the band pushes the drawing down rather than
     // print over it. A heading too long to leave room puts them under it, on the left.
@@ -43939,7 +43983,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     // column cannot describe the placement differently.
     // An ALTERNATE arrangement says so in place of ELEVATION DETAIL (`_catBreakerSub`).
     doc.text(_igSub, M, _igBand.sub);
-    const codeId = _igCodeId;
+    const codeId = _igLine3;
     if (codeId) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text(codeId, M, _igBand.sub + _subtitleClear() + 10); }
 
     try {
@@ -49831,7 +49875,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.24</strong> <b>The context library is the hospitality block set, and you can see all of it at once.</b> Beds, nightstands, desks, media walls, wardrobes, sofas, vanities, showers, tubs, offices, glass partitions, doors, chairs, toilets and basins now use the studio's own drawings. Where a piece kept its size, walls already using it pick up the new drawing; where the size changed, it is a new item, and the old one stays on any wall that has it. <b>See all blocks</b> under the Context palette opens a contact sheet of the whole library at one scale; click a block to place it.
+                body: `<strong>20.25</strong> <b>Wall finish on every wall page.</b> Under Wall Dimensions, WALL FINISH sets what the wall is (painted drywall, wood, wallcovering, glass, concrete, stone, tile, brick, metal, acoustic panel) and its colour or spec code (White, PT-1, WD-11 Walnut). The wall's page prints it under the heading, for example WALL: WOOD · BLUE WD-11, so frames can be chosen against the wall. Blank prints nothing. Catalogue options take it from their mockup.
+<strong>20.24</strong> <b>The context library is the hospitality block set, and you can see all of it at once.</b> Beds, nightstands, desks, media walls, wardrobes, sofas, vanities, showers, tubs, offices, glass partitions, doors, chairs, toilets and basins now use the studio's own drawings. Where a piece kept its size, walls already using it pick up the new drawing; where the size changed, it is a new item, and the old one stays on any wall that has it. <b>See all blocks</b> under the Context palette opens a contact sheet of the whole library at one scale; click a block to place it.
 <strong>20.23</strong> <b>Context drawings in a thinner, product-drawing style.</b> One fine, even line and near-square corners throughout. Beds have a framed headboard (with reading lights on the Panel style and the king set), four pillows with gently dipped tops, a duvet that drapes and flares over a platform base on block legs. Doors have a cased frame, hinges and a lever; the toilet a classic tank with a flush lever; vanities sit on a slim metal frame with tab pulls and a low stretcher, with a widespread faucet on the vanity + mirror; the lounge chair is an open frame armchair. Sizes are unchanged.
 <strong>20.22</strong> <b>The context library, redrawn to the hospitality reference sheet.</b> Every drawing is now one bold, even line with soft corners and simple shapes, and the palette follows the catalogue: Guestroom, Bathroom, Toilets, Office, Glass, Doors, Chairs, Decor, Keep clear and Basic. New blocks: king bed with nightstands, double queen beds, twin bed, desk with chair, TV with console, wardrobe wall, vanity with mirror and sconces, single and double vanities, glass shower, shower niche, freestanding tub, towel bar with hooks, a shelf of toiletries, accessible toilet with grab bar, vessel basin, workstation with task chair, desk with storage, meeting table with chairs, a 3-drawer file, five glass partitions and a glass sliding door, double, pocket, barn, glass and accessible doors, dining chair, bar stool and banquette. Everything already on a wall keeps its size.
 <strong>20.21</strong> <b>Beds that look like beds, and one line weight.</b> Every bed (the plain queen, king and full, and the Platform, Panel, Tall upholstered, Wingback and Low profile styles) is redrawn: flanged shams with a pillow and a lumbar in front of them, a draped duvet, a soft base on small feet, and the side view has pillows leaning on the headboard and a throw over the foot. Pillows in front now hide the ones behind. All context drawings are drawn at one line weight, with no thick and thin lines. A bed already set to a style keeps its size.

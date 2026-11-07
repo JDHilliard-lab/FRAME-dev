@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.24">
+    <link rel="stylesheet" href="style.css?v=20.25">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -670,6 +670,15 @@
                              on ART is correct. Without this line the only way to learn that
                              is to switch mode and watch the film move. -->
                         <div id="wallModeHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
+                        <!-- WALL FINISH (20.25). What the wall IS (drywall, wood, ...) and its colour,
+                             printed under the wall page's subheading. Ford asked for it on every
+                             elevation page so frames can be chosen against the wall. Per wall,
+                             blank by default, and blank prints nothing. -->
+                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Leave it blank to print nothing.">?</span></div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
+                            <select id="wallFinish" onchange="setElevWallFinish(); pushHistory()" title="What the wall is made of" style="height:26px; min-width:0; font-size:var(--fs-60);"></select>
+                            <input type="text" id="wallFinishNote" maxlength="40" placeholder="Colour or spec code" title="Colour or the designer's spec code (White, PT-1, WD-11 Walnut)" oninput="setElevWallFinish()" onchange="pushHistory()" style="height:26px; min-width:0; font-size:var(--fs-60);">
+                        </div>
                         <!-- Codes on this wall that hang as one set (19.44, _elevSetHintSync): the
                              same suggestion Preflight lists, quiet, never a popup. -->
                         <div id="wallSetHint" class="wall-set-hint" style="display:none"></div>
@@ -2263,9 +2272,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.24';</script>
-<script src="templates.js?v=20.24"></script>
-<script src="app.js?v=20.24"></script>
+<script>window.FRAME_HTML_VERSION = '20.25';</script>
+<script src="templates.js?v=20.25"></script>
+<script src="app.js?v=20.25"></script>
 
 </body>
 </html>

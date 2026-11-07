@@ -650,9 +650,10 @@ const path = require('path');
 
     __check('the legend steps OVER the item code when a page carries one', () => {
       const b = fnBody('_drawInstallGuidePage');
-      if (b.indexOf('(_igCodeId ? 10 : 0)') < 0) throw new Error('the legend can print through the item code');
+      if (b.indexOf('(_igLine3 ? 10 : 0)') < 0) throw new Error('the legend can print through the item code');
       // ONE code id, or the clearance and the drawn code disagree about whether there is one.
-      if (b.indexOf('const codeId = _igCodeId;') < 0) throw new Error('the item code is resolved twice');
+      // 20.25: the slot is _igLine3 (item code, or on a wall page the wall finish).
+      if (b.indexOf('const codeId = _igLine3;') < 0) throw new Error('the item code is resolved twice');
     });
 
     __check('the legend metrics are declared BEFORE the first thing that reads them', () => {
@@ -700,7 +701,7 @@ const path = require('path');
       // 17.99: the name is added inside _catBreakerSub, which both the measure (checked
       // above) and the draw call, so measured and printed text cannot differ.
       if (b.indexOf('doc.text(_igSub,') < 0 || fnBody('_catBreakerSub').indexOf('_catLayoutLabel(elev)') < 0) throw new Error('the layout name is drawn but not measured');
-      if (b.indexOf('_igCodeId + ') < 0) throw new Error('the item code is not in the measurement');
+      if (b.indexOf('_igLine3 + ') < 0) throw new Error('the item code is not in the measurement');
       if (b.indexOf('IG_TITLE_CLEAR') < 0) throw new Error('there is no gap between the title and the drawing');
       // And it degrades to the safe answer if anything throws while measuring.
       const at = b.indexOf('catch (e) { _igTitleRight = SR.R; }');

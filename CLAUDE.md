@@ -2410,6 +2410,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_canvasSidesInfo.short`; the dashboard band `.canvas-sides-ghost` is screen only. `_artPrintPpi` spreads a floater over
   its FACE. Rabbet/depth auto-fill uses `STD_STRETCHER_DEPTHS` (never depth = rabbet). `HOUSE_BUFFER_PCT` 3 applies when
   the card's buffer is blank (0 = none); pricing fixtures not about the buffer pass `{ buffer: 0 }`.
+- **WALL FINISH IS NOT WALL MODE (20.25, `elev.wallFinish` / `elev.wallFinishNote`, `_wallFinishText`).** Mode (ART/EGD/WF)
+  is what goes ON the wall; finish is the wall itself. Both keys optional and deleted when blank. The install renderer
+  prints `_wallFinishText` in the code-line slot of an elevation page (`_igLine3`); both keys are in `CAT_WALL_FIELDS`.
 - **A PIN HOLDS TWO DIGITS (20.18, `_fpShortPinNums`, `g.fullNum`).** `_fpGroups` passes every group through it: an
   all-digit `num` longer than 2 shows its last two while unique and not 00, else the long ones get 01.. in `_codeNatCmp`
   order around the short codes' numbers. Never changes a code; dotted nums untouched.
