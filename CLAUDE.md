@@ -2410,6 +2410,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_canvasSidesInfo.short`; the dashboard band `.canvas-sides-ghost` is screen only. `_artPrintPpi` spreads a floater over
   its FACE. Rabbet/depth auto-fill uses `STD_STRETCHER_DEPTHS` (never depth = rabbet). `HOUSE_BUFFER_PCT` 3 applies when
   the card's buffer is blank (0 = none); pricing fixtures not about the buffer pass `{ buffer: 0 }`.
+- **GLASS IS DRAWING INK, NOT DIMENSION INK (20.26, `_elevGlassInk()`).** The run outline and mullions are black; panel
+  dims and letter tags stay `--dim-color`. A function, not a const (drawn from boot paths). A guide layer that starts
+  hidden needs a line in style.css's `#label-layer, ... { display: none; }` rule, since `toggleElevLayer` and
+  `_elevGuideVis` read an unset inline display as OFF (`#outline-layer` showed while its button said off).
 - **WALL FINISH IS NOT WALL MODE (20.25, `elev.wallFinish` / `elev.wallFinishNote`, `_wallFinishText`).** Mode (ART/EGD/WF)
   is what goes ON the wall; finish is the wall itself. Both keys optional and deleted when blank. The install renderer
   prints `_wallFinishText` in the code-line slot of an elevation page (`_igLine3`); both keys are in `CAT_WALL_FIELDS`.

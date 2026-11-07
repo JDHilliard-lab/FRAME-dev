@@ -1656,7 +1656,7 @@ body.dragging-frame #frame-layer .frame-vis:hover { z-index: calc(var(--lz, 10) 
 .od-id-tag { position: absolute; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(calc(-100% - 4px), -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 0.85); background: rgba(255,255,255,0.8); padding: 2px 3px; border-radius: var(--r-2); }
 
 /* All grid layers hidden by default */
-#label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
+#label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer, #outline-layer { display: none; }
 .dim-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
 /* CLICK-THROUGH, like every other full-wall layer above. This is an `inset: 0` div
  * covering the entire wall, so with the default `pointer-events: auto` it swallowed
