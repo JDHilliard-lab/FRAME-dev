@@ -72,7 +72,7 @@ filling, and put the most important piece in the biggest slot.
 8. **Report** to the user: the outline, every image used per page, what you could not decide
    (and why), and anything the brief asked for that the pool could not supply.
 
-## What the first brief taught (Caesars Forum Villas, Oct 2026)
+## What the first brief taught (a resort villas package, Oct 2026)
 - **Artwork pages: `Moodboard (Alt)`** (6 slots, none overlapping: two large, one tall, one
   wide for the designer's render or board, two small). `Moodboard (Float)` and `(Abstract)`
   LAYER their boxes: with whole artworks a picture covers its neighbour's code. Objects and
@@ -154,7 +154,85 @@ Full write-ups live outside the repo (the designer's `FRAME Agent Training` fold
   start (title, artist and affiliation, size, year).
 - **A corporate finance space wants conservative work** (mostly product, some landscape,
   little abstract); photographs never get a deckled edge.
-- **Multi-package projects:** version numbers run across the whole project, not per package.
+- **Multi-package projects:** packages that run at the same time each get a scope prefix on
+  the version (`GR.V4`, `CORR.V1`, `LL-L7.V5`) so no two issued files share a version, and the
+  prefix is on the cover, footer and file name alike.
+
+## What the studio's best designers do (twenty more projects, four designers' craft, Nov 2026)
+Studied from the designers' own packages; the full write-ups are outside the repo.
+
+**Structure**
+- **Skeleton first.** Build the whole deck at the first stage (plans, breakers, one page per
+  placement with grey scale walls) and change content per stage; the page the client picks
+  in development becomes the IFS page. But a skeleton must never look finished: template
+  defaults fail the review at every stage after the wireframe.
+- **Large decks need navigation:** level breaker, a key plan by sector, then a plan per sector
+  with its code list. A long corridor reads best as a plan strip over the unrolled wall with
+  leader lines to each piece; at volume, a catalogue page plus one thumbnail plan per floor.
+- **The wall before the pieces.** A set or room opens with a summary of every piece at relative
+  scale on one baseline; every piece page also shows its whole group to scale over the
+  furniture, with the furniture size and the group's overall size in a dashed box.
+- **Many similar rooms become a few rules:** a room-types page (single, triptych, diptych...)
+  with standard sizes, and a room-number matrix as the approval document when there are no
+  elevations.
+- **Frames in a legend up front** with mount photos, built from the frames actually used.
+- **Label the stage honestly.** A fully specced deck sent as "development" gets approved as the
+  IFS unchecked. An IFS that still carries OPTION labels is a development round.
+
+**Notes on the page (four kinds, each in its fixed place)**
+- **Client caveat, red, top right:** a gap ("ELEVATION REQUIRED / Artwork size to be
+  confirmed"), a size limit with both sizes ("78"W x 47"H not achievable; suggest 64"W x
+  44"H"), a resolution or availability risk. Never a silent blank field: a field still at a
+  template value carries a red reason ("FRAME SPEC PENDING CLIENT SAMPLE APPROVAL").
+- **Site condition, red, on the drawing:** "Wall finish is fabric - review on site".
+- **Trade instruction, black text in a red box with a leader line:** "End film at control
+  joint", "GC to paint door and trim to match".
+- **Installer note, red bullets on install pages:** name the obstacle and what is measured
+  from ("centred on the wall, not including counter tops", "bottom 8" above counter top").
+- **A short story caption** under each group (grey italic, 3 to 5 lines: what it is, why here,
+  how it is made). Thumbnails are captioned with what they show, never "Reference Image".
+- Draft-only status stamps ("WIP / NEED ORIGINAL FILE", "WIP / TO BE SPECCED") are useful
+  internally and must never reach a client build.
+
+**Spec maths and data the review checks**
+- Overall = art + 2 x mat + 2 x frame face (or reveal); depth from the frame; never blank.
+  Overall is the finished size: bleed is a note, never inside a size line.
+- The artist field follows the image code; an image swap clears the old artist and title, a
+  rotated piece updates the size in its code. `N @` counts equal the letters in the code.
+- One code per physical piece: split panels, layers and discs get lettered codes, each with its
+  size and file. Codes come from the client's schedule or show TBC in red; never invent one,
+  and check codes across scopes.
+- "Files built" includes a resolution check at the print size.
+- Build each version from what the client last saw (if the PDF was edited at send time, those
+  edits go back in first), and say what changed since the last issue.
+
+**Built things, not framed art**
+- **Glass film (EGD):** one line per glass leaf, doors included, laid out on the glazing shop
+  drawing (keep its notes: V.I.F., equal daylight openings, elevation letters). Per leaf: width
+  and height, measured from what, surface, ink layers with percentages, privacy level, panel
+  split and seams against the vendor's maximum width. Pane widths add up to the run; the
+  elevation height equals the spec height; each privacy name means one opacity spec; every
+  drawn leaf has a code and a print file. Show an opacity legend as rendered examples.
+- **Wallcovering:** numbered segments matching the plan, panel width, a seam diagram shown to
+  the client before quoting, bleed as a note, and an end condition for each side.
+- **Fabricated pieces** get a build page: layer legend (material, thickness), flat pattern per
+  layer, an exploded render, fixing, finish, weight. No TBD dimensions at IFS.
+
+**Install guides**
+- Install pages only (drop concept and narrative pages): general notes, care and a hardware
+  page first, then a page for EVERY placement, glass and wallcovering included.
+- Per group: letters on each piece, an install sequence ("B, C, A, D"), the typical gap, a
+  dashed box with the group's overall size, red centrelines and dimension lines, and a weight.
+- **Every height names its datum** from the client's markup (floor, chair rail, panel, counter,
+  niche). Print AFF only when the line reaches the floor; keep the client's own rule words.
+- Close with the team page, not the proposal's "Thank you for your consideration".
+
+**Fixed text and the final read**
+- Cover, subline, footer, file name, city and year come from the project record; flag any other
+  project's or city's name on a page, hidden text inside placed files, a footer version that
+  differs from the file name, and a cover stage word that differs from the request.
+- Converting a deck to the next stage means re-reading every page, not only those in the brief.
+- Every designer, the best included, ships these slips; run the review on every deck.
 
 ## Rules
 - The pool is the only source of art. If a space needs something the pool lacks, leave a
