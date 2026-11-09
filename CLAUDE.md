@@ -2361,6 +2361,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `SHOP_HOST_RE` warns; `COMMISSION_NOTE_RE` text on a spec page must sit with an `_rowIsCommission` piece and a
   commission needs it. The two presets (`Commission note`, `Original artwork note`) are in `_DS_NOTE_PRESETS`; the
   original note must NOT match `COMMISSION_NOTE_RE` (tested).
+- **NOTES AND TITLE / ARTIST ARE NEVER SPEC LINES (20.27).** `buildSpecStrings` emits no Notes row (a long note broke
+  the block; title/artist are often unknown). The spec page's right panel, TEXT BOXES (`_dsPieceTextInto`, both the
+  Per-piece and Group A/B/C branches), drops them as ordinary `note` annotations (`_dsAddPieceText`): words COPIED,
+  not linked; blank = placeholder wording `PAGE_PLACEHOLDER_RE` flags. Both spec drawers record where their rows end
+  (`_noteSpecEnd` → `_specBlockEnd[firstId]`, page fractions) so new boxes stack under the block. The `Notes` slot in
+  `SPEC_ROW_GROUPS` stays: `_SPEC_ROW_UNKNOWN_GROUP` is an index into it.
 - **WALL LABELS ARE A PRODUCTION TAB (20.06, `_prodLabelsInto`, `setRowLabel`, `_labelLines`, `_labelSheetPdf`, `_labelCsv`).**
   Row fields `artworkTitle`/`artist` (hidden in the form) plus `artistAffil`, `artMedium`, `artYear`; `labelOff` '1'/'0'
   only when it differs from `_labelDefaultOn` (objects and flat graphics off). Sheet = Avery 5163 (4"x2", 2x5 Letter).

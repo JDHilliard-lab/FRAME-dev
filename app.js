@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.26';
+const APP_VERSION = '20.27';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -28252,6 +28252,97 @@ function _dsAddPresetNote(text) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
 }
+// 20.27: A PIECE'S NOTES AND ITS TITLE / ARTIST ARE TEXT BOXES, NOT SPEC LINES. A long
+// note broke the look of the spec block, and title and artist are often unknown, so
+// neither prints in the spec any more. The right panel on a spec page drops either one
+// on the page as an ordinary note annotation the designer moves, sizes and edits. The
+// words are COPIED from the row when the box is made (not linked): the box is the
+// designer's to rewrite. A blank field comes in as placeholder wording that
+// PAGE_PLACEHOLDER_RE already flags ("Text here", "Artwork title", "Artist name").
+function _pieceTextRows(desc) {
+    if (!desc) return [];
+    return ((desc.members && desc.members.length) ? desc.members : [desc.row]).filter(r => r && r.id);
+}
+function _pieceNoteText(rows) {
+    const parts = rows.map(r => ({ id: r.id, t: String(r.notes || '').trim() })).filter(p => p.t);
+    if (!parts.length) return 'Note:\nText here';
+    if (rows.length === 1) return /^notes?\b/i.test(parts[0].t) ? parts[0].t : 'Note:\n' + parts[0].t;
+    return 'Notes:\n' + parts.map(p => p.id + '  ' + p.t).join('\n');
+}
+function _pieceCreditText(rows) {
+    if (rows.length === 1) {
+        const L = _labelLines(rows[0]);
+        return [L.title || 'Artwork title', L.artist || 'Artist name'].concat(L.detail ? [L.detail] : []).join('\n');
+    }
+    return rows.map(r => { const L = _labelLines(r); return r.id + '  ' + (L.title || 'Artwork title') + ', ' + (L.artist || 'Artist name'); }).join('\n');
+}
+// WHERE THE SPEC ROWS ENDED on the last drawn page, by the page's first piece id, as
+// fractions of the page: { x, y, w, aspect }. Written by both spec drawers (per-piece and the
+// shared set column), read by _dsAddPieceText so a new box starts UNDER the spec block
+// in its column rather than on the artwork. The page is on screen when the button is
+// pressed, so it has been drawn; no entry (never drawn) falls back to a fixed spot.
+const _specBlockEnd = {};
+function _noteSpecEnd(doc, id, x, y, w) {
+    try {
+        const ps = doc.internal.pageSize, W = ps.getWidth(), H = ps.getHeight();
+        if (id && W > 0 && H > 0 && isFinite(x) && isFinite(y) && isFinite(w)) _specBlockEnd[id] = { x: x / W, y: y / H, w: w / W, aspect: W / H };
+    } catch (e) {}
+}
+const PIECE_TEXT_SIZE = 0.016;   // about the spec rows' own type size
+// The bottom of a note box, estimated (no layout here): its lines, wrapped by width.
+function _pieceTextBottom(a, aspect) {
+    const sz = a.size || PIECE_TEXT_SIZE, per = Math.max(8, Math.floor((a.w || 0.3) * aspect / (sz * 0.5)));
+    const n = String(a.text || '').split('\n').reduce((t, l) => t + Math.max(1, Math.ceil(l.length / per)), 0);
+    return (a.y || 0) + n * sz * 1.3;
+}
+function _dsAddPieceText(desc, kind) {
+    const key = _deckPageKey(desc); const rows = _pieceTextRows(desc);
+    if (!key || !rows.length) return;
+    const list = _dsAnnList(key);
+    const isNote = kind === 'note';
+    const end = _specBlockEnd[rows[0].id];
+    let x = 0.62, y = isNote ? 0.74 : 0.62, w = 0.3;
+    if (end) {
+        // Under the spec block, in its column, below any box already stacked there.
+        x = end.x; w = Math.max(0.15, Math.min(0.32, end.w)); y = end.y + 0.035;
+        const aspect = end.aspect || 16 / 9;
+        list.forEach(a => { if (a && a.type === 'note' && Math.abs((a.x || 0) - x) < 0.02 && (a.y || 0) >= end.y - 0.01) y = Math.max(y, _pieceTextBottom(a, aspect) + 0.025); });
+    }
+    const fs = _dsFreeSpot(list, x, y);
+    list.push({ type: 'note', text: isNote ? _pieceNoteText(rows) : _pieceCreditText(rows), x: fs.x, y: fs.y, w: w,
+        size: PIECE_TEXT_SIZE, color: isNote ? '#555555' : '#222222', font: 'serif', italic: isNote, bold: false, align: 'left' });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
+}
+function _dsPieceTextInto(t, desc) {
+    const rows = _pieceTextRows(desc);
+    if (!rows.length || !_deckPageKey(desc)) return;
+    const body = _dsSection(t, 'Text boxes', 'piecetext', true,
+        'Notes and the artist and title are not printed in the spec. Add either one as a text box, then move it next to the piece or wherever it reads best on the page and edit the words there. The text is copied from the item when you add it. A blank field comes in as placeholder wording, which preflight flags until you replace or delete it.');
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:6px;';
+    [['note', '+ Item note', 'The item’s Notes as a text box on this page'],
+     ['credit', '+ Artist + title', 'Title and artist as a text box on this page (set them on the Production tab, Labels)']].forEach(([kind, label, tip]) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'action-btn btn-secondary'; b.textContent = label; b.title = tip;
+        b.dataset.pieceText = kind;
+        b.style.cssText = 'flex:1 1 0; min-width:0; height:26px; font-size:var(--fs-65);';
+        b.onclick = () => _dsAddPieceText(desc, kind);
+        row.appendChild(b);
+    });
+    body.appendChild(row);
+    const noNote = !rows.some(r => String(r.notes || '').trim());
+    const noCredit = !rows.some(r => String(r.artworkTitle || '').trim() || String(r.artist || '').trim());
+    if (noNote || noCredit) {
+        const n = document.createElement('div');
+        n.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:6px;';
+        n.textContent = (noNote && noCredit) ? 'No notes, title or artist on this item yet: both boxes start as placeholders.'
+            : noNote ? 'No notes on this item yet: the note starts as a placeholder.'
+            : 'No title or artist on this item yet: that box starts as a placeholder.';
+        body.appendChild(n);
+    }
+}
 function _dsAddTextSmart() { if (_dsCurrentEditablePage()) { try { addMoodboardText(); } catch (e) {} } else { _dsAddTextBox(); } }
 function _dsAddImageSmart() { if (_dsCurrentEditablePage()) { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); } else { _dsAddImageBox(); } }
 // Arrows/lines/multipoints ALWAYS use the annotation system — on every page
@@ -36629,6 +36720,7 @@ function _dsRenderTools() {
             // one card's options — every Group A/B/C arrangement honours it.
             _dsDualUnitInto(head);
             t.appendChild(head);
+            _dsPieceTextInto(t, desc);   // 20.27: notes and artist / title as page text boxes
 
             // THE GROUP CARDS ARE GONE, for the reason the per-piece ones went: four
             // rendered demos under a picker invite browsing arrangements rather than
@@ -36752,6 +36844,7 @@ function _dsRenderTools() {
             // reachable from whichever mode you happen to be in.
             _dsDualUnitInto(head);
             t.appendChild(head);
+            _dsPieceTextInto(t, desc);   // 20.27: notes and artist / title as page text boxes
 
             // THE PICTURE CARDS ARE GONE FROM THE PER-PIECE PANEL. They were rendered
             // page demos under “Click to switch”, and once the SHOW ON PAGE ticks
@@ -39585,6 +39678,7 @@ function _drawSharedSpecColumn(doc, o) {
         endY = Math.max(endY, y - fit.lineH + 3);
     });
     doc.setTextColor(20, 20, 20);
+    _noteSpecEnd(doc, members[0] && members[0].id, x, endY, w);   // 20.27: piece text boxes start here
     return endY;
 }
 // Frame corner + profile pairs for the set, laid out RIGHT to left so the strip
@@ -45086,6 +45180,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(160, 160, 160); doc.setLineWidth(0.5); doc.line(ds, sy - 2, de, sy - 2); doc.setLineDashPattern([], 0); }
             sy += _lead;
         });
+        _noteSpecEnd(doc, r && r.id, sx, sy - _lead + 3, sw);   // 20.27: piece text boxes start here
     }
 
     // — Elevation (wall thumbnail) —
@@ -46285,11 +46380,10 @@ function buildSpecStrings(r, opts) {
         mountLine = (r.mount || '').trim();
     }
 
-    // ── Notes line is intentionally NOT auto-composed. Per studio decision,
-    // the production note (e.g. "Print float-mounted over mat w/ 0.25\" spacers")
-    // is hand-added in InDesign when needed, since not every piece warrants it.
-    // The user's typed Notes on the dashboard still get included if they exist.
-    const notesLine = (r.notes || '').trim();
+    // ── NOTES ARE NOT IN THE SPEC BLOCK (20.27). A long note broke the look of the
+    // block, so the piece's Notes (and its title / artist) go on the page as text boxes
+    // the designer places: Deck Studio, spec page, TEXT BOXES (_dsPieceTextInto). The
+    // field still reaches the CSV export and the IFS readiness check.
 
     // ── Float Reveal (floaters only) ───────────────────────────────────────
     // Per studio convention: Float Reveal is the air gap between the canvas
@@ -46334,7 +46428,7 @@ function buildSpecStrings(r, opts) {
     //   3. Production attributes: Mount, Hardware, Glass
     //   4. Physical: Substrate
     //   5. Dimensions: Image Size + Overall Dimensions appended in InDesign script
-    //   6. Notes (when user typed them)
+    //   (Notes are not printed here since 20.27: text boxes on the page)
     const lines = [];
     lines.push({ label: 'Application', value: application });
 
@@ -46422,7 +46516,6 @@ function buildSpecStrings(r, opts) {
 
     // Notes (if user typed something — auto-fill is intentionally skipped per
     // latest decision; designers add production notes by hand in InDesign)
-    if (notesLine) lines.push({ label: 'Notes', value: notesLine });
 
     // Art / Overall dimensions are added by the InDesign script using the
     // computed Art Size W/H and Overall Width/Height columns from the CSV
@@ -49875,7 +49968,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
+                body: `<strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
+<strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
 <strong>20.25</strong> <b>Wall finish on every wall page.</b> Under Wall Dimensions, WALL FINISH sets what the wall is (painted drywall, wood, wallcovering, glass, concrete, stone, tile, brick, metal, acoustic panel) and its colour or spec code (White, PT-1, WD-11 Walnut). The wall's page prints it under the heading, for example WALL: WOOD · BLUE WD-11, so frames can be chosen against the wall. Blank prints nothing. Catalogue options take it from their mockup.
 <strong>20.24</strong> <b>The context library is the hospitality block set, and you can see all of it at once.</b> Beds, nightstands, desks, media walls, wardrobes, sofas, vanities, showers, tubs, offices, glass partitions, doors, chairs, toilets and basins now use the studio's own drawings. Where a piece kept its size, walls already using it pick up the new drawing; where the size changed, it is a new item, and the old one stays on any wall that has it. <b>See all blocks</b> under the Context palette opens a contact sheet of the whole library at one scale; click a block to place it.
 <strong>20.23</strong> <b>Context drawings in a thinner, product-drawing style.</b> One fine, even line and near-square corners throughout. Beds have a framed headboard (with reading lights on the Panel style and the king set), four pillows with gently dipped tops, a duvet that drapes and flares over a platform base on block legs. Doors have a cased frame, hinges and a lever; the toilet a classic tank with a flush lever; vanities sit on a slim metal frame with tab pulls and a low stretcher, with a widespread faucet on the vanity + mirror; the lounge chair is an open frame armchair. Sizes are unchanged.
