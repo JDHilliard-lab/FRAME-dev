@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.27">
+    <link rel="stylesheet" href="style.css?v=20.28">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -555,7 +555,7 @@
                              so the width matches Row 1's columns. -->
                         <div class="grid-row-3">
                             <div><label>Backing Board</label><input type="text" id="m_backing" oninput="syncDashAndCalculate()" placeholder="e.g. Foamcore"></div>
-                            <div></div>
+                            <div><label>Weight (lb)</label><input type="number" id="m_weight" min="0" step="0.5" oninput="syncDashAndCalculate()" placeholder="lb" title="Prints in the install guide legend, so the installer can pick fixings."></div>
                             <div></div>
                         </div>
                         <!-- Row 3: free-form notes (visible to all) + production-only notes -->
@@ -1471,7 +1471,7 @@
             </div>
             <div>
                 <label class="proj-lbl">Version</label>
-                <input type="text" id="specPdfVersion" placeholder="V1" maxlength="4" class="proj-in" style="text-align:center; padding:6px 4px;">
+                <input type="text" id="specPdfVersion" placeholder="V1" maxlength="12" class="proj-in" style="text-align:center; padding:6px 4px;">
             </div>
         </div>
         <div class="proj-settings-row">
@@ -2272,9 +2272,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.27';</script>
-<script src="templates.js?v=20.27"></script>
-<script src="app.js?v=20.27"></script>
+<script>window.FRAME_HTML_VERSION = '20.28';</script>
+<script src="templates.js?v=20.28"></script>
+<script src="app.js?v=20.28"></script>
 
 </body>
 </html>

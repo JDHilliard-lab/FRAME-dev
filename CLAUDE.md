@@ -2367,6 +2367,20 @@ run but passes alone is usually load timing: rerun before chasing it.
   not linked; blank = placeholder wording `PAGE_PLACEHOLDER_RE` flags. Both spec drawers record where their rows end
   (`_noteSpecEnd` → `_specBlockEnd[firstId]`, page fractions) so new boxes stack under the block. The `Notes` slot in
   `SPEC_ROW_GROUPS` stays: `_SPEC_ROW_UNKNOWN_GROUP` is an index into it.
+- **HEIGHTS NAME THEIR DATUM (20.28, `elev.datum = {name, hIn}`, `_elevDatum`, `_elevHangLabel`, `setElevDatum`).**
+  A client height from a chair rail labelled AFF hangs art ~3 ft low. With a datum the hang dim runs from it
+  (`bottom:datPx`), its label is `21" ABOVE CHAIR RAIL`, `.datum-guide` draws the datum with its own AFF height, and
+  `_installNoteSetOut` says it. Stored in INCHES; blank name, Floor/AFF or no height = the floor. A drawing input
+  (in the capture signature); `installSeq` / `typGapIn` (`_installWallSetOutExtras`) are notes, excluded from it.
+- **WEIGHT AND A NEW PICTURE (20.28).** Row `weightLbs` (`#m_weight`) adds a Weight legend line only on a wall where a
+  piece has one (`_igLegHasWeight`, BOTH key lists: `_igLegKeys` and `_legLines`, or the height reserved and the
+  lines drawn disagree). `_artIdentityResetOnSwap` clears title/artist/affil/medium/year when the image code changes
+  to a DIFFERENT code (same code with an extension keeps them); the form's `m_artist`/`m_artworkTitle` must be
+  cleared too or `syncDashAndCalculate` writes them straight back.
+- **ANOTHER JOB'S TEXT (20.28, `_leftoverPreflight`, `FILE_STAMP_RE`).** Typed text with a file stamp (8+ letters
+  before `.V<n>`) not containing this project's code or name is flagged; no code and no name = no check. In an IFS
+  also typed "Elevation Pending" and "Title N/A". The PDF is `_deckPdfFileName()` (date.code.version), the
+  version box takes 12 characters for a scope prefix (GR.V4).
 - **WALL LABELS ARE A PRODUCTION TAB (20.06, `_prodLabelsInto`, `setRowLabel`, `_labelLines`, `_labelSheetPdf`, `_labelCsv`).**
   Row fields `artworkTitle`/`artist` (hidden in the form) plus `artistAffil`, `artMedium`, `artYear`; `labelOff` '1'/'0'
   only when it differs from `_labelDefaultOn` (objects and flat graphics off). Sheet = Avery 5163 (4"x2", 2x5 Letter).

@@ -74,7 +74,7 @@ check('the PDF prints both stamps (real jsPDF), side by side in the top margin',
 });
 
 check('the export draws what _approvalStamps says, not the page status alone', () => {
-  const s = APP.slice(APP.indexOf('// — Approval status: spec pages'), APP.indexOf("const fname = 'FRAME_Presentation.pdf'"));
+  const s = APP.slice(APP.indexOf('// — Approval status: spec pages'), APP.indexOf("const fname = _deckPdfFileName();"));
   if (s.indexOf('_approvalStamps(_descAt[k])') < 0 || s.indexOf('_drawApprovalStamps(') < 0) throw new Error('export not wired');
 });
 

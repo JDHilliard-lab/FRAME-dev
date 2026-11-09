@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.27';
+const APP_VERSION = '20.28';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -3815,7 +3815,7 @@ function _elevCaptureSignature() {
         // they're megabytes of base64, and length is enough to spot a swap.
         // Per-wall notes (19.47) print beside the drawing, never in it: not a capture input.
         parts.push(JSON.stringify(typeof elevations !== 'undefined' ? elevations : [], (k, v) =>
-            (k === 'wallNote' || k === 'notesOff') ? undefined
+            (k === 'wallNote' || k === 'notesOff' || k === 'installSeq' || k === 'typGapIn') ? undefined
             : (typeof v === 'string' && v.length > 256) ? ('#' + v.length) : v));
         // Drawing inputs that live outside the elevations array. Hang height and
         // baseboard come from the stored INCHES, not their inputs: the input value
@@ -12390,7 +12390,7 @@ const BULK_FIELD_ELEMENTS = {
     m1ColorName: ['m1_color'], m1ColorHex: ['m1_colorHex'],
     m2: ['m2'], m2ColorName: ['m2_color'], m2ColorHex: ['m2_colorHex'],
     glass: ['m_glass'], hardware: ['m_hardware'], mount: ['m_mount'],
-    backing: ['m_backing'], notes: ['m_notes'], prodNotes: ['m_prodNotes'],
+    backing: ['m_backing'], notes: ['m_notes'], prodNotes: ['m_prodNotes'], weightLbs: ['m_weight'],
     canvasDepth: ['canvasDepth'], canvasWrap: ['canvasWrap'], floaterInset: ['floaterInset'],
     bleed: ['m_bleed'],
     // Flat graphics: substrate. Bulk-editable like any other production field —
@@ -12784,6 +12784,7 @@ function loadDashDataIntoControls(data) {
     setVal('m1_color', data.m1ColorName); setVal('m1_colorHex', data.m1ColorHex || '#ffffff');
     setVal('m2_color', data.m2ColorName); setVal('m2_colorHex', data.m2ColorHex || '#ffffff');
     setVal('m_glass', data.glass); setVal('m_hardware', data.hardware); setVal('m_mount', data.mount); setVal('m_backing', data.backing); setVal('m_notes', data.notes); setVal('m_prodNotes', data.prodNotes);
+    setVal('m_weight', (+data.weightLbs > 0) ? data.weightLbs : '');   // 20.28
 
     const m1On = data.m1A !== false;
     document.getElementById('m1Toggle').classList.toggle('active', m1On); document.getElementById('m1Toggle').innerText = m1On ? 'ON' : 'OFF';
@@ -12839,14 +12840,14 @@ function loadDashDataIntoControls(data) {
 // place. Form-side and other callers leave fromTable undefined → full re-render.
 function dashHtIn(idx, field, val, fromTable) {
     let row = dashProjectData[idx];
-    if(['qty','extW','extH','fW','fHeight','m1T','m1R','m1B','m1L','m2','m_bleed','canvasDepth','canvasWrap'].includes(field)) val = parseFloat(val) || 0;
+    if(['qty','extW','extH','fW','fHeight','m1T','m1R','m1B','m1L','m2','m_bleed','canvasDepth','canvasWrap','weightLbs'].includes(field)) val = parseFloat(val) || 0;
     if (field === 'level') val = _deckLvlOf(val);   // a 0-based plan index, never text (18.13)
     if (field === 'imageCode') val = _imgCodeClean(val);   // 19.78
     if (field === 'id') { const oldId = row.id; elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = val; }); }); }
     row[field] = val;
 
     if (idx === dashSelectedRowIndex) {
-        const map = { 'id':'m_itemCode', 'imageCode':'m_imageCode', 'level':'m_level', 'qty':'m_qty', 'location':'m_location', 'extW':'extW', 'extH':'extH', 'fCode':'m_fCode', 'fW':'fW', 'fHeight':'fHeight', 'canvasDepth':'canvasDepth', 'canvasWrap':'canvasWrap', 'm1ColorName':'m1_color', 'm1ColorHex':'m1_colorHex', 'm2ColorName':'m2_color', 'm2ColorHex':'m2_colorHex', 'm1T':'m1T', 'm1R':'m1R', 'm1B':'m1B', 'm1L':'m1L', 'm2':'m2', 'glass':'m_glass', 'hardware':'m_hardware', 'backing':'m_backing', 'mount':'m_mount', 'notes':'m_notes', 'prodNotes':'m_prodNotes' };
+        const map = { 'id':'m_itemCode', 'imageCode':'m_imageCode', 'level':'m_level', 'qty':'m_qty', 'location':'m_location', 'extW':'extW', 'extH':'extH', 'fCode':'m_fCode', 'fW':'fW', 'fHeight':'fHeight', 'canvasDepth':'canvasDepth', 'canvasWrap':'canvasWrap', 'm1ColorName':'m1_color', 'm1ColorHex':'m1_colorHex', 'm2ColorName':'m2_color', 'm2ColorHex':'m2_colorHex', 'm1T':'m1T', 'm1R':'m1R', 'm1B':'m1B', 'm1L':'m1L', 'm2':'m2', 'glass':'m_glass', 'hardware':'m_hardware', 'backing':'m_backing', 'mount':'m_mount', 'notes':'m_notes', 'prodNotes':'m_prodNotes', 'weightLbs':'m_weight' };
         if(map[field] && document.getElementById(map[field])) document.getElementById(map[field]).value = field.includes('Color') ? val : dashFmt(row[field]);
         if(field === 'product') { document.getElementById('m_product').value = row.product; handleDashProductChange(false); }
         updateDashVisualsFromDOM();
@@ -13154,7 +13155,8 @@ function syncDashAndCalculate(opts) {
         sbPaperBorder: row.useFloatMount === true ? (getVal('sbPaperBorder') || 0) : (getVal('fauxBorder') || 0),
         sbPaperEdge: getStr('sbPaperEdge') || 'clean',
         sbPaperEdgeSeed: row.sbPaperEdgeSeed || 0,
-        glass: getStr('m_glass'), hardware: getStr('m_hardware'), mount: getStr('m_mount'), backing: getStr('m_backing'), notes: getStr('m_notes'), prodNotes: getStr('m_prodNotes')
+        glass: getStr('m_glass'), hardware: getStr('m_hardware'), mount: getStr('m_mount'), backing: getStr('m_backing'), notes: getStr('m_notes'), prodNotes: getStr('m_prodNotes'),
+        weightLbs: getVal('m_weight')   // 20.28, pounds; 0 = not given
     };
     // EVERYTHING THE FORM DOES NOT OWN CARRIES THROUGH (19.73). The row is rebuilt from the
     // form on every keystroke, so a field missing from the list above was deleted by the
@@ -15252,11 +15254,32 @@ function handleDashArtworkUpload(e) {
     e.target.value = '';  // allow re-uploading the same file
 }
 
+// A NEW PICTURE IS A NEW ARTWORK (20.28). Swapping the image kept the old artist and
+// title, so a deck credited one artist's piece to another, or "Farmboy Fine Arts" to a
+// rostered artist (seen in several studio decks, the best designers' included). When the
+// image code changes to a DIFFERENT code, title, artist, affiliation, medium and year are
+// cleared. The same code again (a re-export, a recolour kept under its code) keeps them.
+const ART_IDENTITY_FIELDS = ['artworkTitle', 'artist', 'artistAffil', 'artMedium', 'artYear'];
+function _artIdentityResetOnSwap(row, newCode) {
+    if (!row) return false;
+    const was = _imgCodeKey(row), now = _imgCodeKey({ imageCode: _imgCodeClean(newCode) });
+    if (!was || was === now) return false;
+    let had = false;
+    ART_IDENTITY_FIELDS.forEach(k => { if (String(row[k] == null ? '' : row[k]).trim()) { had = true; row[k] = ''; } });
+    return had;
+}
+function _artIdentityToast(row, code) {
+    try {
+        _toast('Artist and title cleared', 'The new picture (' + _imgCodeClean(code) + ') is a different artwork, so the artist, title, medium and year on '
+            + ((row && row.id) || 'this piece') + ' were cleared. Text boxes already on its page keep their words: check them.');
+    } catch (e) {}
+}
 // Assign artwork to the currently-selected dashboard row (used by form + dash
 // preview drops). Honors bulk-edit scratch mode.
 function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
     if (_catRefuseArt(row)) return;
+    let _cleared = false;
     if (row) {
         row.artworkUrl = dataUrl; row.artworkFile = baseName;
         _linkAttach(row);   // 19.74: remember the file it came from
@@ -15270,6 +15293,8 @@ function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
         row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
         // Auto-populate the Image Code from the dropped filename (this is what
         // flows to the CSV + the bottom-right caption in InDesign).
+        _cleared = !_bulkEditing && _artIdentityResetOnSwap(row, baseName);
+        if (_cleared) ['m_artist', 'm_artworkTitle'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
         row.imageCode = baseName;
         const ic = document.getElementById('m_imageCode'); if (ic) ic.value = baseName;
     }
@@ -15277,6 +15302,7 @@ function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
     _syncArtCropControls();
     syncDashAndCalculate();
     if (!_bulkEditing && row) { pushHistory(); _warnSameImage(dashSelectedRowIndex); }
+    if (_cleared) _artIdentityToast(row, baseName);
 }
 
 // Assign artwork to a specific dashboard row by index, then live-sync to its
@@ -15289,16 +15315,19 @@ function applyArtworkToRowIndex(idx, dataUrl, baseName, w, h) {
     _linkAttach(row);   // 19.74
     row.artworkW = w || 0; row.artworkH = h || 0;    // never the previous picture's size (18.94)
     row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
+    const _cleared = _artIdentityResetOnSwap(row, baseName);   // 20.28
     row.imageCode = baseName;
     pushUpdatesToElevations(idx);
     if (idx === dashSelectedRowIndex) {
         updateDashArtworkThumb(dataUrl);
         const ic = document.getElementById('m_imageCode'); if (ic) ic.value = baseName;
+        if (_cleared) ['m_artist', 'm_artworkTitle'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
         _syncArtCropControls();
     }
     drawElevAll();
     pushHistory();
     _warnSameImage(idx);
+    if (_cleared) _artIdentityToast(row, baseName);
 }
 
 // ── Bulk artwork replacement (relink-by-code) ────────────────────────────
@@ -24416,6 +24445,8 @@ function _dsRunPreflight() {
     try { issues.push.apply(issues, _readinessPreflight()); } catch (e) {}
     // What ten studio projects kept catching after issue; stale stage and version (20.04).
     try { issues.push.apply(issues, _ifsAuditPreflight(pages)); } catch (e) {}
+    // Another job's file stamp in typed text; Pending drawings and N/A credits in an IFS (20.28).
+    try { issues.push.apply(issues, _leftoverPreflight(pages)); } catch (e) {}
     try { issues.push.apply(issues, _stagePreflight(pages)); } catch (e) {}
     try { issues.push.apply(issues, _artTypePreflight(pages)); } catch (e) {}
     // A picture too small for the size it prints (20.10).
@@ -40876,6 +40907,19 @@ function _dsPageNotesInto(body, desc, wall, save) {
     };
     ta.onchange = commit; ta.onblur = commit;
     body.appendChild(ta);
+    // 20.28: this wall's hang order and typical gap, printed as notes on its page.
+    const mkField = (lbl, attr, val, ph, onSet) => {
+        const row = document.createElement('label'); row.className = 'ds-pgnotes-row ds-pgnotes-field';
+        const t = document.createElement('span'); t.textContent = lbl; t.style.flex = 'none';
+        const inp = document.createElement('input'); inp.type = 'text'; inp.setAttribute(attr, ''); inp.value = val; inp.placeholder = ph;
+        inp.style.cssText = 'flex:1; min-width:0;';
+        inp.onchange = () => { onSet(String(inp.value || '').trim()); save(); };
+        row.appendChild(t); row.appendChild(inp); body.appendChild(row);
+    };
+    mkField('Install sequence', 'data-wall-seq', wall.installSeq || '', 'B, C, A, D', v => { if (v) wall.installSeq = v; else delete wall.installSeq; });
+    const _gIn = parseFloat(wall.typGapIn);
+    mkField('Typical gap (' + elevUnit + ')', 'data-wall-gap', (isFinite(_gIn) && _gIn > 0) ? String(_elevHeightInUnit(_gIn)) : '', elevUnit === 'in' ? '3' : (elevUnit === 'cm' ? '7.5' : '75'),
+        v => { const n = parseFloat(v); if (isFinite(n) && n > 0) wall.typGapIn = n * unitFactor(elevUnit, 'in'); else delete wall.typGapIn; });
 }
 // Width and type-size sliders for the note column. Both trade off directly against
 // how big the elevation can be, and the right compromise depends on the wall and how
@@ -41949,7 +41993,27 @@ function _installNoteLines(elev) {
         if (t) out.push(t);
     });
     _installNoteList().forEach(r => { if (r && r.on && !_installNoteOffHere(elev, 'c:' + r.id)) { const t = (r.text || '').trim(); if (t) out.push(t); } });
+    _installWallSetOutExtras(elev).forEach(t => out.push(t));
     _installWallNoteLines(elev).forEach(t => out.push(t));
+    return out;
+}
+// HANG ORDER AND TYPICAL GAP (20.28). The studio's install guides that worked best said
+// which piece goes up first ("Install sequence: B, C, A, D", centre out) and the gap that
+// holds unless a dimension says otherwise. Per wall: `elev.installSeq` (letters as typed)
+// and `elev.typGapIn` (inches). Both print as this wall's notes; neither is a drawing input.
+function _installSeqOf(elev) {
+    return String((elev && elev.installSeq) || '').toUpperCase().split(/[\s,;>\u2013\u2192]+/).map(s => s.trim()).filter(Boolean).join(', ');
+}
+function _installWallSetOutExtras(elev) {
+    const out = [];
+    if (!elev) return out;
+    const seq = _installSeqOf(elev);
+    if (seq) out.push('Install sequence: ' + seq + '.');
+    const g = parseFloat(elev.typGapIn);
+    if (isFinite(g) && g > 0) {
+        const v = g * unitFactor('in', elevUnit);
+        out.push('Typical spacing between frames is ' + elevFmt(v) + unitSuffix() + _elevDualPart(v) + ' unless dimensioned otherwise.');
+    }
     return out;
 }
 
@@ -41959,7 +42023,13 @@ function _installNoteLines(elev) {
 function _installNoteSetOut(elev) {
     const out = [];
     const aff = FRAME_INSTALL_NOTES.find(n => n.key === 'aff');
-    if (_elevHangOn(elev)) { const t = aff ? _installNoteText(aff) : ''; if (t) out.push(t); }
+    const dat = _elevDatum(elev);
+    if (_elevHangOn(elev) && dat) {
+        out.push('Heights on this wall are measured from the ' + dat.name.toLowerCase() + ' (' + _elevAffLabel(dat.hIn * unitFactor('in', elevUnit))
+            + '), not the floor. Align the centre of all artwork ' + _elevHangLabel(elev, getHangHeight()).replace(/ ABOVE .*$/, '')
+            + ' above the ' + dat.name.toLowerCase() + '. Do not align to the top or bottom of the frame.');
+    }
+    else if (_elevHangOn(elev)) { const t = aff ? _installNoteText(aff) : ''; if (t) out.push(t); }
     else out.push('Set the height from the dimensions shown on this elevation, not from a standard hang height.');
     const cls = _elevBlockCLs(elev);
     cls.forEach(b => {
@@ -43657,7 +43727,18 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
 // there threw on every breaker render while the file parsed perfectly well.
 const IG_LEG_ROW_H = 8.6, IG_LEG_GAP = 4, IG_LEG_LETTER_W = 13, IG_LEG_TOP_GAP = 10;
 const IG_LEG_FS = 7, IG_LEG_VAL_FS_MIN = 5;
-const IG_LEG_LABELS = { item: 'Item', dims: 'Overall dimensions', art: 'Art dimensions', code: 'Image code' };
+const IG_LEG_LABELS = { item: 'Item', dims: 'Overall dimensions', art: 'Art dimensions', weight: 'Weight', code: 'Image code' };
+// WEIGHT ON THE INSTALL PAGE (20.28). The installer picks fixings by weight; the studio's
+// best install guides gave it per piece. A legend line appears on a wall where any piece
+// has a weight (row `weightLbs`, pounds), so a wall with none prints as before.
+function _igLegWeightText(rr) {
+    const w = parseFloat(rr && rr.weightLbs);
+    if (!(isFinite(w) && w > 0)) return '\u2014';
+    return _num1(w) + ' lb' + (_specDualUnit() ? ' (' + _num1(w * 0.45359237) + ' kg)' : '');
+}
+function _igLegHasWeight(frames, lookupRow) {
+    return (frames || []).some(f => f && (parseFloat(((lookupRow && lookupRow(f.id)) || {}).weightLbs) > 0));
+}
 // THE LEGEND NAMES THE ITEM WHEN THE LETTER DOES NOT (19.68). Wall letters follow
 // position, so on a wall holding ART.9, ART.8B and ART.8A left to right the legend's A
 // is ART.9 while ART.8's own spec page calls another piece A. An installer checking one
@@ -43682,7 +43763,7 @@ function _igLegVals(rr) {
     // from the five other places that print it.
     const _op = (typeof _rowOpeningAndPrint === 'function') ? _rowOpeningAndPrint(rr) : null;
     const art = _op ? _igLegDimText(_op.openW, _op.openH) : '\u2014';
-    return { item: String(rr.id || '').trim() || '\u2014', dims: dims, art: art, code: (rr.imageCode || '').trim() || '\u2014' };
+    return { item: String(rr.id || '').trim() || '\u2014', dims: dims, art: art, weight: _igLegWeightText(rr), code: (rr.imageCode || '').trim() || '\u2014' };
 }
 // { stacked, valFs } for one line: stacked when label + gap + value overruns tw.
 function _igLegLineFit(doc, label, value, tw) {
@@ -44045,6 +44126,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
         _igLegItem ? 'item' : null,
         _igNoteCfg.legendDims !== false ? 'dims' : null,
         _igNoteCfg.legendArt ? 'art' : null,
+        _igLegHasWeight(activeFrames, lookupRow) ? 'weight' : null,
         _igNoteCfg.legendCode !== false ? 'code' : null
     ].filter(Boolean);
     const _igLegendOn = !_igWide && !!(_igNoteCfg.legend && activeFrames.length);   // full width: no legend column
@@ -44250,6 +44332,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     _igLegItem ? 'item' : null,
                     cfg.legendDims !== false ? 'dims' : null,
                     cfg.legendArt ? 'art' : null,
+                    _igLegHasWeight(activeFrames, lookupRow) ? 'weight' : null,
                     cfg.legendCode !== false ? 'code' : null
                 ].filter(Boolean);
                 const drawLegendBlocks = (lx, topY, blockW) => {
@@ -44512,7 +44595,10 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 const centerAFF = toIn(hangFrame.y) + toIn(hangFrame.h) / 2;
                 const affX = PXf(er.wallRightFrac) + 12;
                 doc.setLineDashPattern([3, 2], 0);
-                doc.line(affX, PYf(cyFrac), affX, PYf(floorFrac));                                  // AFF
+                const _fbDat = _elevDatum(elev);                                                    // 20.28
+                const _fbDatIn = _fbDat ? Math.min(centerAFF, _fbDat.hIn) : 0;
+                const _fbFromFrac = (padIn + wallHin - _fbDatIn) / er.hIn;
+                doc.line(affX, PYf(cyFrac), affX, PYf(_fbFromFrac));                                // AFF, or from the datum
                 if (dimFrame) {                                                                     // single frame: full CL/EQ
                     const cxFrac = er.wallLeftFrac + (toIn(dimFrame.x) + toIn(dimFrame.w) / 2) / er.wIn;
                     const fLeftFrac = er.wallLeftFrac + toIn(dimFrame.x) / er.wIn;
@@ -44529,7 +44615,8 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     doc.setLineDashPattern([], 0);
                 }
                 doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9.5);
-                doc.text(Math.round(centerAFF * 2.54) + 'cm/' + Math.round(centerAFF) + '" AFF', affX + 4, (PYf(cyFrac) + PYf(floorFrac)) / 2);
+                const _fbV = centerAFF - _fbDatIn;
+                doc.text(Math.round(_fbV * 2.54) + 'cm/' + Math.round(_fbV) + '"' + (_fbDat ? ' ABOVE ' + _fbDat.name : ' AFF'), affX + 4, (PYf(cyFrac) + PYf(_fbFromFrac)) / 2);
             }
         } else {
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
@@ -45908,7 +45995,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             if (keep.size) { for (let p = pageNum; p >= 1; p--) { if (!keep.has(p)) { try { doc.deletePage(p); } catch (e) {} } } }
         }
     } catch (e) {}
-    const fname = 'FRAME_Presentation.pdf';
+    const fname = _deckPdfFileName();
     // Last line of defence for a cancel. The page walk above is peppered with
     // `try { } catch (e) {}` blocks that deliberately swallow per-page failures
     // so one bad asset can't kill a whole deck — but that means one of them
@@ -49968,7 +50055,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
+                body: `<strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
+<strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
 <strong>20.25</strong> <b>Wall finish on every wall page.</b> Under Wall Dimensions, WALL FINISH sets what the wall is (painted drywall, wood, wallcovering, glass, concrete, stone, tile, brick, metal, acoustic panel) and its colour or spec code (White, PT-1, WD-11 Walnut). The wall's page prints it under the heading, for example WALL: WOOD · BLUE WD-11, so frames can be chosen against the wall. Blank prints nothing. Catalogue options take it from their mockup.
 <strong>20.24</strong> <b>The context library is the hospitality block set, and you can see all of it at once.</b> Beds, nightstands, desks, media walls, wardrobes, sofas, vanities, showers, tubs, offices, glass partitions, doors, chairs, toilets and basins now use the studio's own drawings. Where a piece kept its size, walls already using it pick up the new drawing; where the size changed, it is a new item, and the old one stays on any wall that has it. <b>See all blocks</b> under the Context palette opens a contact sheet of the whole library at one scale; click a block to place it.
@@ -52700,6 +52788,43 @@ function makeElevDraggable(el, idx) {
 function _elevAffLabel(hangVal) {
     return elevFmt(hangVal) + unitSuffix() + _elevDualPart(hangVal) + ' AFF';
 }
+// HEIGHTS NAME WHAT THEY ARE MEASURED FROM (20.28). A client often gives a height from
+// something other than the floor ("46 in from chair rail to top of frame"). Labelled AFF,
+// that number hangs the art about three feet low, which is what a studio corridor install
+// guide did. Per wall, `elev.datum = { name, hIn }`: what the height is measured from
+// (CHAIR RAIL, COUNTER, PANEL) and its height above the floor in INCHES. On that wall the
+// hang dimension runs up from the datum, its label names it, the datum line is drawn with
+// its own AFF height, and the install note says so. No datum, a blank name or no height
+// = the floor, exactly as before.
+function _elevDatum(elev) {
+    const d = elev && elev.datum;
+    if (!d || typeof d !== 'object') return null;
+    const name = String(d.name || '').trim().toUpperCase();
+    const hIn = parseFloat(d.hIn);
+    if (!name || /^(AFF|FLOOR|FINISHED FLOOR)$/.test(name) || !(isFinite(hIn) && hIn > 0)) return null;
+    return { name: name, hIn: hIn };
+}
+// The hang-height label for one wall. `hangVal` is in elevUnit, like _elevAffLabel's.
+function _elevHangLabel(elev, hangVal) {
+    const d = _elevDatum(elev);
+    if (!d) return _elevAffLabel(hangVal);
+    const v = Math.max(0, hangVal - d.hIn * unitFactor('in', elevUnit));
+    return elevFmt(v) + unitSuffix() + _elevDualPart(v) + ' ABOVE ' + d.name;
+}
+// The datum line's own label: CHAIR RAIL 36" AFF. '' with no datum.
+function _elevDatumLineLabel(elev) {
+    const d = _elevDatum(elev);
+    return d ? (d.name + ' ' + _elevAffLabel(d.hIn * unitFactor('in', elevUnit))) : '';
+}
+// `hVal` is in elevUnit (what the Guides tab shows); stored in inches like the hang height.
+function setElevDatum(name, hVal) {
+    const e = elevations[currentElevIndex]; if (!e) return;
+    const nm = String(name == null ? '' : name).trim();
+    const h = parseFloat(hVal);
+    if (!nm) delete e.datum;
+    else e.datum = { name: nm, hIn: (isFinite(h) && h > 0) ? h * unitFactor(elevUnit, 'in') : 0 };
+    _elevSetOutChanged();
+}
 
 // ── SCALE FIGURE HEIGHT DIMENSION ────────────────────────────────────────────
 // A real vertical dimension on the character, floor to the top of the head, built
@@ -52996,7 +53121,7 @@ function _elevWallGuidesSync() {
     const e = (typeof elevations !== 'undefined' && elevations) ? elevations[currentElevIndex] : null;
     if (!e) { box.innerHTML = ''; return; }
     const blocks = Array.isArray(e.contextBlocks) ? e.contextBlocks : [];
-    const hangTxt = (typeof getHangHeight === 'function') ? _elevAffLabel(getHangHeight()) : 'AFF';
+    const hangTxt = (typeof getHangHeight === 'function') ? _elevHangLabel(e, getHangHeight()) : 'AFF';
     let html = '<div class="section-title section-title-static">This wall</div>';
     // Baseboard (19.70): per wall, on every kind of wall. The height is in Elevation settings.
     html += '<label class="ewg-row" title="This wall has a baseboard, drawn at the height set in Elevation settings. Turn off where the wall runs to the floor (a wallcovering then sits on the floor).">'
@@ -53017,6 +53142,17 @@ function _elevWallGuidesSync() {
     }
     html += '<label class="ewg-row" title="The dashed hang line, its ' + _svgEsc(hangTxt) + ' dimension and the target. Turn off where the art is hung to a shelf, booth or furniture instead; the install note then says to work from the dimensions shown.">'
         + '<input type="checkbox" data-ewg="hang"' + (_elevHangOn(e) ? ' checked' : '') + ' onchange="setElevHangGuide(this.checked)"> Hang height (' + _svgEsc(hangTxt) + ')</label>';
+    // 20.28: what this wall's heights are measured from, when the client's markup says.
+    const _dd = (e.datum && typeof e.datum === 'object') ? e.datum : {};
+    const _ddH = parseFloat(_dd.hIn);
+    html += '<div class="ewg-row ewg-datum" title="When the client gives heights from a chair rail, counter or panel, name it and give its height above the floor. The hang dimension then runs from it and is labelled ABOVE CHAIR RAIL, never AFF. Blank = the floor.">'
+        + '<span style="flex:none;">Heights from</span>'
+        + '<input type="text" data-ewg="datum-name" list="ewgDatumList" placeholder="Floor" value="' + _svgEsc(_dd.name || '') + '" style="flex:1; min-width:0;"'
+        + ' onchange="setElevDatum(this.value, this.parentElement.querySelector(\'[data-ewg=datum-h]\').value)">'
+        + '<span style="flex:none;">at</span><input type="number" data-ewg="datum-h" min="0" step="0.25" value="' + (_ddH > 0 ? _elevHeightInUnit(_ddH) : '') + '" style="width:54px;"'
+        + ' onchange="setElevDatum(this.parentElement.querySelector(\'[data-ewg=datum-name]\').value, this.value)">'
+        + '<span style="flex:none;">' + _svgEsc(elevUnit) + ' AFF</span></div>'
+        + '<datalist id="ewgDatumList"><option value="Chair rail"><option value="Counter"><option value="Wainscot"><option value="Panel"><option value="Niche"></datalist>';
     html += '<label class="ewg-row" title="The CL line down the middle of the wall. Off by itself once a context block carries a centre line.">'
         + '<input type="checkbox" data-ewg="wallcl"' + (_elevWallClOn(e) ? ' checked' : '') + ' onchange="setElevWallCL(this.checked)"> Wall centre line</label>';
     if (blocks.length) {
@@ -53167,7 +53303,10 @@ function drawElevGuides(wallW, wallH) {
         const hangLblOffIn = (ce && typeof ce.hangDimLblOffset === 'number') ? ce.hangDimLblOffset : 0;
         const dimXIn = 8 * unitFactor('in', elevUnit) + hangDimOffIn * unitFactor('in', elevUnit);
         const dimXpx = dimXIn * elevScale;
-        const hangPx = hangVal * elevScale;
+        // A wall with a datum (20.28) is dimensioned from the datum up, not from the floor.
+        const _dat = _elevDatum(ce);
+        const datPx = _dat ? Math.min(hangVal, _dat.hIn * unitFactor('in', elevUnit)) * elevScale : 0;
+        const hangPx = hangVal * elevScale - datPx;
         const hangHalfSpan = Math.max(0, hangPx / 2 - 14); // keep number on the line
         let lblShiftPx = hangLblOffIn * unitFactor('in', elevUnit) * elevScale; // up = +
         lblShiftPx = Math.max(-hangHalfSpan, Math.min(hangHalfSpan, lblShiftPx));
@@ -53177,7 +53316,7 @@ function drawElevGuides(wallW, wallH) {
         fh.className = 'floor-hang-dim';
         fh.setAttribute('data-dim-type', 'floor-art');
         fh.style.cssText =
-            `position:absolute; left:${dimXpx}px; bottom:0; height:${hangPx}px; width:0; z-index:1;`;
+            `position:absolute; left:${dimXpx}px; bottom:${datPx}px; height:${hangPx}px; width:0; z-index:1;`;
         // Ends: perpendicular strokes under the plain style (what this dim has
         // always drawn), 45° architectural ticks under the tick style — the same
         // _dimTicksHTML every other dimension uses, so one setting governs all of
@@ -53195,8 +53334,19 @@ function drawElevGuides(wallW, wallH) {
             // ("above finished floor") is what makes this callout self-describing
             // now the HANG HEIGHT word is gone: '60" AFF' says what '60"' alone
             // did not, and it stays correct whether the studio hangs at 57 or 60.
-            `<div class="hang-dim-num" style="position:absolute; left:0; top:calc(50% - ${lblShiftPx}px); transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px; pointer-events:auto; cursor:ns-resize;">${_elevAffLabel(hangVal)}</div>`;
+            `<div class="hang-dim-num" style="position:absolute; left:0; top:calc(50% - ${lblShiftPx}px); transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px; pointer-events:auto; cursor:ns-resize;">${_svgEsc(_elevHangLabel(ce, hangVal))}</div>`;
         guideLayer.appendChild(fh);
+        // The datum itself, dashed across the wall with its own height (20.28).
+        if (_dat) {
+            const dl = document.createElement('div'); dl.className = 'hang-guide dim-dash-h datum-guide';
+            dl.setAttribute('data-svg-pen', 'line'); dl.setAttribute('data-svg-dash', '1');
+            dl.style.bottom = datPx + 'px';
+            const dlab = document.createElement('span'); dlab.className = 'datum-label';
+            dlab.textContent = _elevDatumLineLabel(ce);
+            dlab.style.cssText = 'position:absolute; right:4px; bottom:2px; color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 3px;';
+            dl.appendChild(dlab);
+            guideLayer.appendChild(dl);
+        }
         attachHangDimHandle(fh, { halfSpanPx: hangHalfSpan, numCenterTopPx: (hangPx / 2 - lblShiftPx) });
     }
     
@@ -60620,7 +60770,7 @@ const IFS_FRAMED = ['Framed Art', 'Framed Art (Shadow Box)', 'Framed Canvas (Flo
 const IFS_CANVAS = ['Framed Canvas (Floater)', 'Frameless Canvas (Wrapped)'];
 // The starter deck's and templates' own filler is the commonest leftover ("paravian" is
 // the starter's stand-in paragraph; a filler bio once went to a client).
-const PAGE_PLACEHOLDER_RE = /\blorem\b|\bplaceholder\b|\bartist name\b|\bartwork title\b|\bclient name\b|\b(?:cover page |alt section |section )?(?:sub)?heading\b|\boptional image code\b|\bparavian\b|\btext here\b|\btitle here\b|\bTBD\b/i;
+const PAGE_PLACEHOLDER_RE = /\blorem\b|\bplaceholder\b|\bartist name\b|\bartwork title\b|\bclient name\b|\b(?:cover page |alt section |section )?(?:sub)?heading\b|\boptional image code\b|\bparavian\b|\btext here\b|\btitle here\b|\bTBD\b|\bframe code, colou?r\b|\bcity, country\b|\bcode-x{3,}|\b0"\s*w\s*[x\u00d7]\s*0"\s*h/i;
 // Every text a designer typed on a page, with its page index: page elements, fixed-page
 // elements and annotations. Generated pages (spec, plans) print data, checked above.
 function _pfPageTexts(pages) {
@@ -60635,6 +60785,47 @@ function _pfPageTexts(pages) {
         ((k && (editorialContent.annotations || {})[k]) || []).forEach(a => { if (a && !a.hidden && (a.type === 'text' || a.type === 'note') && a.text) out.push({ i: i, d: d, t: strip(a.text) }); });
     });
     return out.filter(x => x.t);
+}
+// ── ANOTHER JOB'S TEXT, PENDING DRAWINGS, N/A CREDITS (20.28) ─────────────────────────
+// Twenty more studio decks: typed footers and cover strips carried another project's file
+// stamp (one hotel's footer in a model-suite deck; another site's "V6 - ISSUE FOR SPEC"
+// on every page of a didactics deck), "Elevation Pending" was typed beside drawings that
+// were there, and "Title N/A" boxes reached final decks. FRAME's own footer is built from
+// the Project tab, so only typed text can carry these.
+// A file stamp: dotted or dashed code with at least 8 letters/digits before a .V<n>.
+const FILE_STAMP_RE = /\b([A-Z0-9]{2,}(?:[.\-][A-Z0-9]+)+)\.V\d+\b/g;
+function _leftoverPreflight(pages) {
+    const out = [];
+    const ifs = _deckIsIFS();
+    let meta = {}; try { meta = _deckFooterMeta() || {}; } catch (e) {}
+    const norm = (s) => String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const code = norm(meta.code);
+    const nmEl = document.getElementById('g_projName');
+    const pname = norm(nmEl && nmEl.value);
+    const flagged = {};
+    _pfPageTexts(pages).forEach(x => {
+        if ((code || pname.length >= 4) && !flagged['s' + x.i]) {
+            const re = new RegExp(FILE_STAMP_RE.source, 'g'); let m;
+            while ((m = re.exec(x.t.toUpperCase()))) {
+                const body = norm(m[1]);
+                if (body.length < 8) continue;
+                if (code && body.indexOf(code) >= 0) continue;
+                if (pname.length >= 4 && body.indexOf(pname.slice(0, 12)) >= 0) continue;
+                flagged['s' + x.i] = 1;
+                out.push({ sev: ifs ? 'err' : 'warn', text: _dsPageLabel(x.d) + ' — says “' + m[0] + '”, which is not this project (' + (meta.code || (nmEl && nmEl.value) || 'Project tab') + '). Text copied from another job?', idx: x.i });
+                break;
+            }
+        }
+        if (ifs && !flagged['p' + x.i] && /\b(?:elevation|floor ?plan|drawing)s? pending\b/i.test(x.t)) {
+            flagged['p' + x.i] = 1;
+            out.push({ sev: 'warn', text: _dsPageLabel(x.d) + ' — says “Pending” in an IFS. If the drawing is on the page, delete the words; if it is missing, say ELEVATION REQUIRED in red and what is needed.', idx: x.i });
+        }
+        if (ifs && !flagged['n' + x.i] && /\b(?:title|artist)\s*:?\s*n\s*\/\s*a\b/i.test(x.t)) {
+            flagged['n' + x.i] = 1;
+            out.push({ sev: 'warn', text: _dsPageLabel(x.d) + ' — a title or artist reads N/A in an IFS. Give the real credit, or delete the box for a piece that has none.', idx: x.i });
+        }
+    });
+    return out;
 }
 function _ifsAuditPreflight(pages) {
     const out = [];
@@ -60990,6 +61181,18 @@ function _prodPackPlan() {
 }
 // File-name safe, keeps dots (image codes and versions carry them).
 function _prodSafe(s) { return String(s || '').trim().replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-') || 'x'; }
+// THE PDF IS NAMED LIKE THE STUDIO NAMES ITS ISSUES (20.28): date.project.version, e.g.
+// 261108.FAUL-PIN.GR.V4.pdf. Every deck used to download as FRAME_Presentation.pdf, so the
+// file sent and the file on the server could not be told apart by name. No code and no
+// project name = the old name.
+function _deckPdfFileName() {
+    let meta = {}; try { meta = _deckFooterMeta() || {}; } catch (e) {}
+    const el = document.getElementById('g_projName');
+    const proj = String(meta.code || (el && el.value) || '').trim();
+    if (!proj) return 'FRAME_Presentation.pdf';
+    const ver = String(meta.version || '').trim();
+    return _prodStamp() + '.' + _prodSafe(proj) + (ver ? '.' + _prodSafe(ver) : '') + '.pdf';
+}
 function _prodStamp() { const d = new Date(); return String(d.getFullYear()).slice(2) + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
 function _prodProjectTag() {
     let code = ''; try { code = _deckFooterMeta().code || ''; } catch (e) {}
