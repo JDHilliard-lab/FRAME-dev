@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.31';
+const APP_VERSION = '20.32';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -10216,6 +10216,11 @@ function _wallFinishSync() {
         sel.value = cur;
     }
     if (note && document.activeElement !== note) note.value = (elev && elev.wallFinishNote) || '';
+    const col = document.getElementById('wallColor'), clr = document.getElementById('wallColorClear');
+    const wc = _wallColor(elev);
+    if (col && document.activeElement !== col) col.value = wc || '#ffffff';
+    if (col) col.title = wc ? ('Wall colour ' + wc.toUpperCase() + ' (prints on this wall\'s pages)') : 'Paint this wall: pick its colour';
+    if (clr) clr.style.display = wc ? '' : 'none';
 }
 function setElevWallFinish() {
     const elev = elevations[currentElevIndex];
@@ -10225,6 +10230,33 @@ function setElevWallFinish() {
     if (m) elev.wallFinish = m; else delete elev.wallFinish;
     if (n) elev.wallFinishNote = n; else delete elev.wallFinishNote;
     scheduleAutosave();
+}
+// ── WALL COLOUR (20.32) ─────────────────────────────────────────────────────
+// The wall painted its real colour, so the deck page shows art against the wall it hangs
+// on (designers were recolouring FRAME's walls in InDesign). `elev.wallColor`, '#rrggbb',
+// optional and deleted when cleared, so an older file opens with the usual grey editor wall
+// and a white printed wall. One reader for every place that paints a wall: the editor
+// (#wall), the SVG export (a filled rect first in the back layer, under the underlay),
+// the PNG export, and the spec-page thumbnail canvas.
+function _wallColor(elev) {
+    const c = elev && elev.wallColor;
+    return (typeof c === 'string' && /^#[0-9a-f]{6}$/i.test(c)) ? c.toLowerCase() : '';
+}
+function _wallColorPaint() {
+    const wall = document.getElementById('wall');
+    if (!wall) return;
+    const elev = (typeof elevations !== 'undefined') ? elevations[currentElevIndex] : null;
+    wall.style.background = _wallColor(elev) || '';
+}
+function setElevWallColor(v) {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    const c = String(v || '').trim();
+    if (/^#[0-9a-f]{6}$/i.test(c)) elev.wallColor = c.toLowerCase(); else delete elev.wallColor;
+    _wallColorPaint();
+    _wallFinishSync();
+    scheduleAutosave();
+    try { _dsRefresh(); } catch (e) {}
 }
 function setElevWallMode(mode) {
     const elev = elevations[currentElevIndex];
@@ -10717,7 +10749,7 @@ const CAT_SPEC_FIELDS = CAT_SLOT_FIELDS.filter(k => k !== 'x' && k !== 'y');
 // asking for it is the better evidence: the group dimensions and custom lines ARE the
 // layout work, and a mockup whose measurements do not reach its own options means doing
 // that work once per option. The layer toggles still decide what prints.
-const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall', 'wallFinish', 'wallFinishNote'];
+const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall', 'wallFinish', 'wallFinishNote', 'wallColor'];
 const CAT_WALL_DEEP = ['personPos', 'contextBlocks', 'glazing', 'groupDims', 'customLines', 'marks'];
 // A row-level mirror as well: the PLAN PIN belongs to the placement. A dealership hangs
 // ONE piece in that spot and picks which image goes in it, so pinning the mockup's slot
@@ -17546,6 +17578,8 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
     const wallW_px = wallWin * ppi, wallH_px = wallHin * ppi;
     const lw = Math.max(1, Math.round(ppi * 0.06));   // wall lineweight
 
+    // — Wall colour (20.32), under everything else —
+    { const _wc = _wallColor(elev); if (_wc) { x.fillStyle = _wc; x.fillRect(wallLeftPx, wallTopPx, wallW_px, wallH_px); } }
     // — Wall outline (the wall lines) —
     x.strokeStyle = '#333333'; x.lineWidth = lw;
     x.strokeRect(wallLeftPx, wallTopPx, wallW_px, wallH_px);
@@ -50360,7 +50394,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
@@ -51412,6 +51446,7 @@ function _elevWrapPadding() {
     return { x: x || 130, y: y || 160 };
 }
 
+let _wallPngHold = false;   // 20.32: exportElevPNG owns #wall's background while it runs
 function drawElevAll() {
     if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
     // An art option owns its artwork and NOTHING else, so it re-reads size, position and
@@ -51486,6 +51521,8 @@ function drawElevAll() {
     
     const wall = document.getElementById('wall');
     wall.style.width = (wallW * elevScale) + 'px'; wall.style.height = (wallH * elevScale) + 'px';
+    // 20.32: a painted wall. Not while a PNG export holds the wall clear (it sets its own).
+    if (!_wallPngHold) wall.style.background = _wallColor(_ce) || '';
 
     // Baseboard: a horizontal line at the baseboard height from the floor,
     // spanning the wall width, drawn with the wall lineweight. 0 = none.
@@ -59057,7 +59094,8 @@ async function exportElevPNG(opts) {
     await _exportSettle();
 
     const oldOverflow = ws.style.overflow; ws.style.overflow = 'visible';
-    const oldWallBg = wall.style.background; wall.style.background = 'transparent';
+    const oldWallBg = wall.style.background; wall.style.background = _wallColor(elevations[currentElevIndex]) || 'transparent';
+    _wallPngHold = true;
 
     // Character clip-fix + flush-right + flush-bottom export padding.
     // The character is position:absolute inside #wall so it doesn't contribute
@@ -59339,6 +59377,7 @@ async function exportElevPNG(opts) {
 
         _popElevLightTheme();
         ws.style.overflow = oldOverflow;
+        _wallPngHold = false;
         wall.style.background = oldWallBg;
         // Restore the export-wrap padding (was temporarily inflated to include
         // the character when they extended past the wall edges).
@@ -59879,6 +59918,12 @@ async function exportElevSVG(opts) {
             return { x: r.left + ox, y: r.top + oy, w: r.width, h: r.height };
         };
 
+        // ── WALL COLOUR (20.32): the very first thing, so the underlay, art and blocks sit on it.
+        //    The SVG is parsed as XML: every attribute needs a value (a bare data-wall-color failed the whole capture).
+        {
+            const _wc = _wallColor(elevations[currentElevIndex]);
+            if (_wc) { const _wr = rectToSvg(wall); backLayer.push(`<rect data-wall-color="1" x="${_wr.x.toFixed(1)}" y="${_wr.y.toFixed(1)}" width="${_wr.w.toFixed(1)}" height="${_wr.h.toFixed(1)}" fill="${_wc}"/>`); }
+        }
         // ── CLIENT ELEVATION AS THE DRAWING (20.31): behind everything, clipped to the wall.
         {
             const _ue = elevations[currentElevIndex];

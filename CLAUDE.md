@@ -2450,6 +2450,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   dims and letter tags stay `--dim-color`. A function, not a const (drawn from boot paths). A guide layer that starts
   hidden needs a line in style.css's `#label-layer, ... { display: none; }` rule, since `toggleElevLayer` and
   `_elevGuideVis` read an unset inline display as OFF (`#outline-layer` showed while its button said off).
+- **WALL COLOUR IS ONE READER (20.32, `elev.wallColor` '#rrggbb', `_wallColor`, `_wallColorPaint`, `setElevWallColor`).**
+  Optional, deleted when cleared. Every wall painter goes through `_wallColor`: `drawElevAll` sets `#wall`'s inline
+  background (blank = the CSS grey), `exportElevSVG` pushes a `data-wall-color` rect FIRST in `backLayer` (under the
+  20.31 underlay), `exportElevPNG` paints it instead of transparent and sets `_wallPngHold` so a redraw mid-export
+  cannot put the editor grey back, and `renderElevationToCanvas` fills the wall before its outline. In `CAT_WALL_FIELDS`.
 - **WALL FINISH IS NOT WALL MODE (20.25, `elev.wallFinish` / `elev.wallFinishNote`, `_wallFinishText`).** Mode (ART/EGD/WF)
   is what goes ON the wall; finish is the wall itself. Both keys optional and deleted when blank. The install renderer
   prints `_wallFinishText` in the code-line slot of an elevation page (`_igLine3`); both keys are in `CAT_WALL_FIELDS`.

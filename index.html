@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.31">
+    <link rel="stylesheet" href="style.css?v=20.32">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -679,6 +679,12 @@
                         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
                             <select id="wallFinish" onchange="setElevWallFinish(); pushHistory()" title="What the wall is made of" style="height:26px; min-width:0; font-size:var(--fs-60);"></select>
                             <input type="text" id="wallFinishNote" maxlength="40" placeholder="Colour or spec code" title="Colour or the designer's spec code (White, PT-1, WD-11 Walnut)" oninput="setElevWallFinish()" onchange="pushHistory()" style="height:26px; min-width:0; font-size:var(--fs-60);">
+                        </div>
+                        <!-- WALL COLOUR (20.32): paints the wall in the editor, the deck and the exports. -->
+                        <div style="display:flex; align-items:center; gap:6px; margin-top:6px; font-size:var(--fs-60); color:var(--text-muted);">
+                            <input type="color" id="wallColor" value="#ffffff" oninput="setElevWallColor(this.value)" onchange="pushHistory()" title="Paint this wall: pick its colour" style="width:30px; height:22px; padding:0; border:1px solid var(--border-color, #ccc); background:none; cursor:pointer;">
+                            <span>Wall colour, prints on this wall's pages</span>
+                            <button type="button" id="wallColorClear" class="gz-btn" onclick="setElevWallColor(''); pushHistory()" title="Back to an unpainted wall" style="display:none; margin-left:auto;">Clear</button>
                         </div>
                         <!-- Codes on this wall that hang as one set (19.44, _elevSetHintSync): the
                              same suggestion Preflight lists, quiet, never a popup. -->
@@ -2273,9 +2279,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.31';</script>
-<script src="templates.js?v=20.31"></script>
-<script src="app.js?v=20.31"></script>
+<script>window.FRAME_HTML_VERSION = '20.32';</script>
+<script src="templates.js?v=20.32"></script>
+<script src="app.js?v=20.32"></script>
 
 </body>
 </html>
