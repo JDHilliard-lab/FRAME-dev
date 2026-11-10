@@ -51,6 +51,9 @@ const path = require('path');
       return { f: elevations[0].wallFinish, n: elevations[0].wallFinishNote, has: 'wallFinish' in elevations[0] };
     };
     window.__catFields = () => CAT_WALL_FIELDS.slice();
+    window.__ec = () => editorialContent;
+    window.__elevs = () => elevations;
+    window.__wfp = (on) => { if (on !== undefined) _setWallFinishPrints(on); return _wallFinishPrints(); };
   `;
   const quiet = console.error; console.error = () => {};
   window.eval(src + '\n' + block);
@@ -90,6 +93,33 @@ const path = require('path');
   await check('catalogue options inherit the finish from their mockup, like the wall size', async () => {
     const f = window.__catFields();
     if (f.indexOf('wallFinish') < 0 || f.indexOf('wallFinishNote') < 0) throw new Error(JSON.stringify(f));
+  });
+
+  // 20.40: one deck-wide switch. Off hides the line on every wall page and keeps the data;
+  // the Elevation tab box and the saved project both carry it; an older file prints as before.
+  await check('20.40: Print on pages OFF hides the WALL: line and keeps the wall\'s finish', async () => {
+    window.__wfp(false);
+    try {
+      const t = await window.__render({ wallFinish: 'Wood', wallFinishNote: 'WD-1' });
+      if (t.some(x => /^WALL:/.test(x.s))) throw new Error('still printed ' + t.find(x => /^WALL:/.test(x.s)).s);
+      if (window.__elevs()[0].wallFinishNote !== 'WD-1') throw new Error('turning printing off cleared the wall\'s finish');
+      if (window.__ec().wallFinishPrint !== false) throw new Error('the switch is not stored with the project (editorialContent)');
+      window.__ui({ wallFinish: 'Wood' });
+      if (document.getElementById('wallFinishPrint').checked) throw new Error('the Elevation tab box does not show the switch is off');
+    } finally { window.__wfp(true); }
+    const t2 = await window.__render({ wallFinish: 'Wood', wallFinishNote: 'WD-1' });
+    if (!t2.some(x => x.s === 'WALL: WOOD · WD-1')) throw new Error('turning it back on did not bring the line back');
+    if ('wallFinishPrint' in window.__ec()) throw new Error('ON should leave no key, like an older file');
+  });
+  await check('20.40: the Elevation tab has a Print on pages box wired to the same switch', async () => {
+    window.__ui({});
+    const cb = document.getElementById('wallFinishPrint');
+    if (!cb || !cb.checked) throw new Error('no Print on pages box, or it starts off');
+    // jsdom does not run inline handlers here, so check the wiring and drive the setter it calls.
+    if ((cb.getAttribute('onchange') || '').indexOf('_setWallFinishPrints(this.checked)') < 0) throw new Error('the box is not wired to _setWallFinishPrints');
+    window.__wfp(false); const off = cb.checked; window.__wfp(true);
+    if (off) throw new Error('the box did not follow the switch turning off');
+    if (!cb.checked) throw new Error('the box did not follow the switch turning back on');
   });
 
   const bad = results.filter(r => !r.ok);

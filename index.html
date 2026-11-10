@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.39">
+    <link rel="stylesheet" href="style.css?v=20.40">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -675,7 +675,8 @@
                              printed under the wall page's subheading. Ford asked for it on every
                              elevation page so frames can be chosen against the wall. Per wall,
                              blank by default, and blank prints nothing. -->
-                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Paint colours the wall above the baseboard on its pages and exports. Leave it blank to print nothing.">?</span></div>
+                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Paint colours the wall above the baseboard on its pages and exports. Leave it blank to print nothing. Print on pages switches the line off for every wall in the deck and keeps what each wall says.">?</span>
+                            <label style="margin-left:auto; display:inline-flex; align-items:center; gap:4px; font-weight:400; text-transform:none; letter-spacing:0; cursor:pointer;" title="Print the WALL: line on every wall page in the deck. Off hides it and keeps each wall's finish."><input type="checkbox" id="wallFinishPrint" checked onchange="_setWallFinishPrints(this.checked)" style="margin:0;"> Print on pages</label></div>
                         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
                             <select id="wallFinish" onchange="setElevWallFinish(); pushHistory()" title="What the wall is made of" style="height:26px; min-width:0; font-size:var(--fs-60);"></select>
                             <input type="text" id="wallFinishNote" maxlength="40" placeholder="Colour or spec code" title="Colour or the designer's spec code (White, PT-1, WD-11 Walnut)" oninput="setElevWallFinish()" onchange="pushHistory()" style="height:26px; min-width:0; font-size:var(--fs-60);">
@@ -2290,9 +2291,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.39';</script>
-<script src="templates.js?v=20.39"></script>
-<script src="app.js?v=20.39"></script>
+<script>window.FRAME_HTML_VERSION = '20.40';</script>
+<script src="templates.js?v=20.40"></script>
+<script src="app.js?v=20.40"></script>
 
 </body>
 </html>
