@@ -380,6 +380,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Flat graphics render behind framed art unconditionally**: `drawElevAll` sorts them to
   the front of `_drawOrder` while preserving original indices, because
   `makeElevDraggable` and every dim lookup address frames by index in `elevFrames`.
+- **IMAGES AND PACKAGE (20.37, `_projectImages`, `openImagesModal`, `packageProject`, Save menu).** The list is read
+  off `_projectPayload()` by ONE walk (`_looksLikeImage` + `classify` by path), deduped by the string like the
+  18.81 pool, so it cannot disagree with Save. A new place that stores pictures needs a `classify` branch or it
+  lands under Other (still listed, still packaged). Status from the string: data: in the file, http/library linked,
+  blob: not saved, an `artworkFile` with no `artworkUrl` missing. Images export AS STORED. The client elevation
+  keeps `underlay.name` (file name less extension, `setUnderlayName`). Test `tests/test_images_package.js`.
 - **WALL CONTEXT: the underlay never exports, the blocks always do** (unless `underlay.inDeck`, 20.31: the
   client's drawing IS the page, so `_underlayDeckSvg` puts it FIRST in `exportElevSVG`'s back layer, clipped to the
   wall rect, full strength; `exportElevPNG` keeps the layer with `overflow:hidden` and opacity 1 instead of hiding

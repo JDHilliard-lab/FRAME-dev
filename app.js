@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.36';
+const APP_VERSION = '20.37';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -7564,6 +7564,236 @@ function _syncHeaderForView() {
     try { _phoneSyncTabs(); } catch (e) {}
 }
 // The Save menu: the two ways to save that are not Ctrl+S, and the version history.
+// ── IMAGES IN THIS PROJECT, AND PACKAGE (20.37) ─────────────────────────────
+// Like InDesign's Links panel and File > Package: every picture the project carries, what
+// it is, where it is used and whether it can be exported, and one zip with the project
+// file and every picture in folders. Designers asked for it after dropping client
+// elevations in and losing track of which drawing was which.
+// The list is READ OFF THE SAVED PROJECT (_projectPayload), so it can never disagree with
+// what a Save writes: one walk, every string that is an image, named by where it sits.
+// The same picture in several places (an artwork on its row and on two walls) is ONE
+// entry with several uses, exactly as the project file pools it (18.81).
+// Status: a data: image is IN THE FILE and always exports; a web or library address is
+// LINKED and exports if it can be fetched; a blob: address lived only in one browser
+// session and is NOT SAVED; an item naming an artwork file with no picture is MISSING.
+// Images are exported AS STORED: some are reduced on the way in (page backgrounds,
+// 18.38), so the pixel size is shown and a package is not a substitute for the originals.
+const IMG_KINDS = [
+    ['clientElev', 'Client elevations'], ['artwork', 'Artwork'], ['plan', 'Floorplans'],
+    ['page', 'Deck Studio images'], ['pagebg', 'Page backgrounds'], ['deck', 'Other deck images'],
+    ['swatch', 'Frame swatches'], ['other', 'Other']
+];
+function _imgKindRank(k) { const i = IMG_KINDS.findIndex(x => x[0] === k); return i < 0 ? 99 : i; }
+function _imgExt(src) {
+    const m = /^data:image\/([a-z0-9.+-]+)/i.exec(String(src || ''));
+    let e = m ? m[1].toLowerCase() : ((/\.([a-z0-9]{2,5})(?:[?#]|$)/i.exec(String(src || '')) || [])[1] || 'png').toLowerCase();
+    if (e === 'jpeg') e = 'jpg'; if (e === 'svg+xml') e = 'svg';
+    return e;
+}
+function _imgBytes(src) {
+    const s0 = String(src || ''); if (s0.indexOf('data:') !== 0) return 0;
+    const i = s0.indexOf(','); return i < 0 ? 0 : Math.floor((s0.length - i - 1) * 3 / 4);
+}
+function _imgStatus(src) {
+    const s0 = String(src || '');
+    if (!s0) return { ok: false, key: 'missing', label: 'Missing: no picture in the file' };
+    if (s0.indexOf('data:') === 0) return { ok: true, key: 'in', label: 'In the file' };
+    if (s0.indexOf('blob:') === 0) return { ok: false, key: 'blob', label: 'Not saved: only in this browser session' };
+    return { ok: null, key: 'linked', label: 'Linked: exports if it can be downloaded' };
+}
+function _looksLikeImage(key, v) {
+    if (typeof v !== 'string' || !v) return false;
+    if (/^data:image\//i.test(v)) return true;
+    if (!/(src|url|image|img|photo|swatch|logo|background|bg|picture)/i.test(String(key || ''))) return false;
+    return /^blob:/i.test(v) || (/^(https?:|\.?\/?library\/|\/)/i.test(v) && /\.(png|jpe?g|webp|gif|svg|tiff?)(?:[?#]|$)/i.test(v));
+}
+// A page key as a person reads it: spec:elevgrp:L3.ART.S16-01 is the wall page of that set.
+function _imgPageLabel(key) {
+    const k = String(key || '');
+    let m;
+    if ((m = /^spec:elevgrp:(.+)$/.exec(k))) return 'Wall page ' + m[1];
+    if ((m = /^spec:elev:(\d+)/.exec(k))) { const e = (typeof elevations !== 'undefined' && elevations[+m[1]]) || null; return 'Wall page ' + (e ? e.name : ('#' + (+m[1] + 1))); }
+    if ((m = /^ig:(.+)$/.exec(k))) return 'Install page ' + m[1];
+    if ((m = /^spec:(.+)$/.exec(k))) return 'Spec page ' + m[1];
+    if ((m = /^fixed:(.+)$/.exec(k))) return 'Page ' + m[1].charAt(0).toUpperCase() + m[1].slice(1);
+    if ((m = /^floorplan:(\d+)/.exec(k))) return 'Floorplan page ' + (+m[1] + 1);
+    if (/^layout:/.test(k)) { try { const i = (typeof _dsPages !== 'undefined' ? _dsPages : []).findIndex(d => _deckPageKey(d) === k); if (i >= 0) return 'Page ' + (i + 1); } catch (e) {} return 'Custom page'; }
+    return 'Page ' + k;
+}
+function _projectImages() {
+    const p = _projectPayload();
+    const rows = p.dashProjectData || [], walls = p.elevations || [];
+    const rowById = {}; rows.forEach(r => { if (r && r.id != null) rowById[r.id] = r; });
+    const byKey = new Map(), out = [];
+    const nameOf = (o) => (o && (o.fileName || o.imageName || o.name || o.artworkFile)) || '';
+    const code = (r) => { const c = r && String(r.imageCode || '').trim(); return (c && !/^tbd$/i.test(c)) ? c : ''; };
+    const add = (src, info) => {
+        let e = byKey.get(src);
+        if (!e) {
+            e = { src: src, kind: info.kind, name: info.name || '', code: info.code || '', uses: [], status: _imgStatus(src), ext: _imgExt(src), bytes: _imgBytes(src) };
+            byKey.set(src, e); out.push(e);
+        } else {
+            if (_imgKindRank(info.kind) < _imgKindRank(e.kind)) e.kind = info.kind;
+            if (!e.name && info.name) e.name = info.name;
+            if (!e.code && info.code) e.code = info.code;
+        }
+        if (info.use && e.uses.indexOf(info.use) < 0) e.uses.push(info.use);
+    };
+    const classify = (path, parent, key) => {
+        const top = path[0];
+        if (top === 'dashProjectData') {
+            const r = rows[path[1]] || {};
+            if (/swatch/i.test(key)) return { kind: 'swatch', name: r.fCode || '', use: 'Frame on ' + r.id };
+            return { kind: 'artwork', code: code(r), name: r.artworkFile || '', use: 'Item ' + r.id };
+        }
+        if (top === 'elevations') {
+            const e = walls[path[1]] || {}, wn = 'Wall ' + (e.name || ('#' + (path[1] + 1)));
+            if (path[2] === 'underlay') return { kind: 'clientElev', name: (e.underlay && e.underlay.name) || '', use: wn };
+            if (path[2] === 'frames') {
+                const f = (e.frames || [])[path[3]] || {}, r = rowById[f.id];
+                if (/swatch/i.test(key)) return { kind: 'swatch', name: f.fCode || (r && r.fCode) || '', use: 'Frame on ' + f.id };
+                return { kind: 'artwork', code: code(r) || code(f), name: (r && r.artworkFile) || f.artworkFile || '', use: wn };
+            }
+            return { kind: 'other', name: nameOf(parent), use: wn };
+        }
+        if (top === 'floorplanImage') return { kind: 'plan', name: p.floorplanImageName || '', use: 'Plan ' + (((p.floorplanLevels || [])[0] || {}).name || 'Level 1') };
+        if (top === 'floorplanLevels') { const l = (p.floorplanLevels || [])[path[1]] || {}; return { kind: 'plan', name: l.imageName || '', use: 'Plan ' + (l.name || ('Level ' + (path[1] + 1))) }; }
+        if (top === 'editorial') {
+            if (path[1] === 'annotations') return { kind: 'page', name: nameOf(parent), use: _imgPageLabel(path[2]) };
+            if (path.some(x => /theme|background|pagebg/i.test(String(x)))) return { kind: 'pagebg', name: nameOf(parent), use: 'Background ' + (path[2] != null ? path[2] : '') };
+            return { kind: 'deck', name: nameOf(parent), use: path.slice(1, 3).join(' ') };
+        }
+        return { kind: 'other', name: nameOf(parent), use: path.slice(0, 2).join(' ') };
+    };
+    const walk = (v, path, parent, key) => {
+        if (typeof v === 'string') { if (_looksLikeImage(key, v)) add(v, classify(path, parent, key)); return; }
+        if (!v || typeof v !== 'object') return;
+        if (Array.isArray(v)) { for (let i = 0; i < v.length; i++) walk(v[i], path.concat(i), v, key); return; }
+        for (const k in v) walk(v[k], path.concat(k), v, k);
+    };
+    walk(p, [], null, '');
+    // An item that names an artwork file but carries no picture: listed, so it is not lost.
+    rows.forEach(r => {
+        if (!r || !String(r.artworkFile || '').trim()) return;
+        if (r.artworkUrl) return;
+        out.push({ src: '', kind: 'artwork', name: r.artworkFile, code: code(r), uses: ['Item ' + r.id], status: _imgStatus(''), ext: _imgExt(r.artworkFile), bytes: 0 });
+    });
+    out.sort((a, b) => (_imgKindRank(a.kind) - _imgKindRank(b.kind)) || String(a.code || a.name || a.uses[0] || '').localeCompare(String(b.code || b.name || b.uses[0] || ''), undefined, { numeric: true }));
+    return out;
+}
+// File names inside a package: a folder per kind, the image code or name, unique.
+function _imgSafe(s0) { return String(s0 || '').replace(/[\\/:*?"<>|\u0000-\u001f]+/g, '-').replace(/\s+/g, ' ').trim().slice(0, 90); }
+function _packagePaths(list) {
+    const used = {};
+    return list.map(e => {
+        const ki = _imgKindRank(e.kind), folder = String(ki + 1).padStart(2, '0') + ' ' + ((IMG_KINDS[ki] || [0, 'Other'])[1]);
+        const nm = _imgSafe(String(e.name || '').replace(/\.[A-Za-z0-9]{1,5}$/, ''));   // its own extension is added below
+        let base = _imgSafe(e.code) || nm || _imgSafe(e.uses[0] || 'image') || 'image';
+        if (e.code && nm && nm !== base) base = base + ' - ' + nm;
+        let n = folder + '/' + base + '.' + e.ext, k = 2;
+        while (used[n.toLowerCase()]) n = folder + '/' + base + ' (' + (k++) + ').' + e.ext;
+        used[n.toLowerCase()] = 1;
+        return n;
+    });
+}
+function _imgFmtBytes(b) { return !b ? '' : b < 1048576 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1) + ' MB'; }
+function openImagesModal() {
+    const old = document.getElementById('imagesModal'); if (old) old.remove();
+    const list = _projectImages();
+    const ov = document.createElement('div'); ov.id = 'imagesModal';
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:var(--r-10); width:820px; max-width:96vw; max-height:88vh; display:flex; flex-direction:column; overflow:hidden;';
+    const nIn = list.filter(e => e.status.ok === true).length, nBad = list.filter(e => e.status.ok === false).length, nLink = list.length - nIn - nBad;
+    const total = list.reduce((a, e) => a + (e.bytes || 0), 0);
+    card.innerHTML = '<div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-bottom:1px solid var(--border-color);">'
+        + '<div><div style="font-size:var(--fs-95); font-weight:700; color:var(--text-main);">Images in this project</div>'
+        + '<div data-img-summary style="font-size:var(--fs-65); color:var(--text-muted); margin-top:3px;">' + list.length + ' images · ' + nIn + ' in the file' + (nLink ? ' · ' + nLink + ' linked' : '') + (nBad ? ' · <span style="color:var(--warn,#e0a030);">' + nBad + ' cannot be exported</span>' : '') + (total ? ' · ' + _imgFmtBytes(total) : '') + '</div></div>'
+        + '<div style="display:flex; gap:8px; align-items:center;"><button class="action-btn" data-img-package style="width:auto; padding:0 14px; font-size:var(--fs-75);" title="Download one zip: the project file, every image in a folder per kind, and a list of what is in it">Package…</button>'
+        + '<button data-modal-close data-img-close style="border:none; background:none; color:var(--text-muted); font-size:var(--fs-120); cursor:pointer; line-height:1;">×</button></div></div>';
+    const body = document.createElement('div'); body.style.cssText = 'padding:10px 18px 16px; overflow:auto;';
+    if (!list.length) body.innerHTML = '<div style="font-size:var(--fs-75); color:var(--text-muted); padding:12px 0;">No images in this project yet.</div>';
+    const paths = _packagePaths(list);
+    IMG_KINDS.forEach(([k, label]) => {
+        const items = list.map((e, i) => [e, i]).filter(([e]) => e.kind === k);
+        if (!items.length) return;
+        const hd = document.createElement('div');
+        hd.style.cssText = 'font-size:var(--fs-65); font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--text-muted); margin:12px 0 6px;';
+        hd.textContent = label + ' (' + items.length + ')';
+        body.appendChild(hd);
+        items.forEach(([e, i]) => {
+            const row = document.createElement('div'); row.setAttribute('data-img-row', k);
+            row.style.cssText = 'display:grid; grid-template-columns:44px minmax(0,1fr) auto auto; gap:10px; align-items:center; padding:6px 0; border-top:1px solid var(--border-color);';
+            const th = document.createElement('div');
+            th.style.cssText = 'width:44px; height:34px; border-radius:var(--r-4); background:var(--bg-input,#2a2a2e) center/contain no-repeat;' + (e.src && e.status.ok !== false ? ' background-image:url("' + String(e.src).replace(/"/g, '%22') + '");' : '');
+            const t = document.createElement('div'); t.style.cssText = 'min-width:0;';
+            const title = e.code ? (e.code + (e.name && e.name !== e.code ? ' · ' + e.name : '')) : (e.name || '(no name)');
+            t.innerHTML = '<div style="font-size:var(--fs-75); font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="' + _esc(title) + '">' + _esc(title) + '</div>'
+                + '<div style="font-size:var(--fs-60); color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="' + _esc(e.uses.join(', ')) + '">' + _esc(e.uses.join(', ')) + '</div>';
+            const st = document.createElement('div'); st.setAttribute('data-img-status', e.status.key);
+            st.style.cssText = 'font-size:var(--fs-60); text-align:right; white-space:nowrap; color:' + (e.status.ok === true ? 'var(--text-muted)' : e.status.ok === false ? 'var(--warn,#e0a030)' : 'var(--text-main)') + ';';
+            st.innerHTML = _esc(e.status.label) + '<br><span style="color:var(--text-muted);">' + _esc(e.ext.toUpperCase()) + (e.bytes ? ' · ' + _imgFmtBytes(e.bytes) : '') + '<span data-img-px></span></span>';
+            if (e.src && e.status.ok !== false) { try { const im = new Image(); im.onload = () => { const sp = st.querySelector('[data-img-px]'); if (sp) sp.textContent = ' · ' + im.naturalWidth + '×' + im.naturalHeight + ' px'; }; im.src = e.src; } catch (er) {} }
+            const dl = document.createElement('button'); dl.className = 'gz-btn'; dl.textContent = 'Save';
+            dl.title = e.status.ok === false ? 'Nothing to save: ' + e.status.label : 'Download this image as ' + paths[i].split('/').pop();
+            dl.disabled = e.status.ok === false;
+            dl.onclick = () => _imgDownloadOne(e, paths[i].split('/').pop());
+            row.appendChild(th); row.appendChild(t); row.appendChild(st); row.appendChild(dl);
+            body.appendChild(row);
+        });
+    });
+    card.appendChild(body); ov.appendChild(card); document.body.appendChild(ov);
+    card.querySelector('[data-img-close]').onclick = () => ov.remove();
+    card.querySelector('[data-img-package]').onclick = () => packageProject();
+}
+async function _imgBlob(e) {
+    if (!e.src || e.status.ok === false) return null;
+    try { const r = await fetch(e.src); if (!r.ok) return null; return await r.blob(); } catch (er) { return null; }
+}
+async function _imgDownloadOne(e, fileName) {
+    const b = await _imgBlob(e);
+    if (!b) { showInfoModal('Could not save the image', 'This image could not be downloaded (' + e.status.label.toLowerCase() + ').'); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = fileName; a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (er) {} }, 4000);
+}
+// The package: <project>.json (what Save writes), every image in "NN Kind/" folders, and
+// "Package contents.txt" saying what each file is, where it is used, and what could not be
+// included and why. Returns { blob, fileName, files, skipped } (also used by the tests).
+async function packageProject(opts) {
+    opts = opts || {};
+    if (typeof JSZip === 'undefined') { showInfoModal('Package', 'The zip library did not load. Refresh the page and try again.'); return null; }
+    const list = _projectImages(), paths = _packagePaths(list);
+    const zip = new JSZip();
+    const projFile = _projectSuggestedName();
+    const base = projFile.replace(/\.json$/i, '');
+    zip.file(base + '/' + projFile, _projectFileText(_projectPayload()));
+    const lines = ['Package of ' + base, 'Made by FRAME ' + APP_VERSION + ' on ' + new Date().toLocaleString(), '', 'Project file: ' + projFile, ''];
+    const files = [], skipped = [];
+    for (let i = 0; i < list.length; i++) {
+        const e = list[i];
+        const b = await _imgBlob(e);
+        if (!b) { skipped.push({ e: e, why: e.status.ok === false ? e.status.label : 'Linked image could not be downloaded' }); continue; }
+        zip.file(base + '/' + paths[i], await b.arrayBuffer(), { binary: true, compression: 'STORE' });   // bytes, not the Blob: accepted everywhere
+        files.push(paths[i]);
+        lines.push(paths[i]);
+        lines.push('    ' + (e.code ? 'Image code ' + e.code + '. ' : '') + (e.name ? 'Name ' + e.name + '. ' : '') + 'Used on: ' + e.uses.join(', '));
+    }
+    if (skipped.length) {
+        lines.push('', 'NOT INCLUDED (' + skipped.length + ')');
+        skipped.forEach(x => lines.push('  ' + (x.e.code || x.e.name || x.e.uses[0] || 'image') + ': ' + x.why + '. Used on: ' + x.e.uses.join(', ')));
+    }
+    lines.push('', 'Images are as stored in the project. Some are reduced when added (page backgrounds), so keep the originals for print.');
+    zip.file(base + '/Package contents.txt', lines.join('\n') + '\n');
+    const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
+    const fileName = base + ' Package.zip';
+    if (!opts.noDownload) {
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName; a.click();
+        setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (er) {} }, 8000);
+        if (skipped.length) showInfoModal('Package saved, with gaps', fileName + ' is in your Downloads with ' + files.length + ' images. ' + skipped.length + ' could not be included; Package contents.txt lists them and why.');
+        else _toast('Package saved', fileName + ': the project file and ' + files.length + ' images.');
+    }
+    return { blob: blob, fileName: fileName, files: files, skipped: skipped, contents: lines.join('\n') };
+}
 function openSaveMenu() {
     _dsPopup('saveMenu', 'saveMenuBtn', (menu) => {
         menu.style.width = '280px'; menu.style.padding = '6px';
@@ -7571,6 +7801,9 @@ function openSaveMenu() {
         _dsFlyItem(menu, { label: 'Save As\u2026', kbd: 'Ctrl+Shift+S', hint: 'A copy somewhere else, and switch to it', icon: '<path d="M5 3h11l3 3v15H5z"/><path d="M12 10v7M8.5 13.5 12 17l3.5-3.5"/>', run: () => saveMasterProjectAs() });
         _dsFlySep(menu);
         _dsFlyItem(menu, { label: 'Versions\u2026', hint: 'Named snapshots to compare and restore', icon: '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>', run: () => openVersionsModal() });
+        _dsFlySep(menu);
+        _dsFlyItem(menu, { label: 'Images\u2026', hint: 'Every image in the project, and whether it exports', icon: '<rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/>', run: () => openImagesModal() });
+        _dsFlyItem(menu, { label: 'Package\u2026', hint: 'One zip: the project file and every image', icon: '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>', run: () => packageProject() });
     });
 }
 function renderNavTabs() {
@@ -10075,6 +10308,14 @@ function _underlayImage(src) {
     if (_ulImgCache.size > 24) _ulImgCache.delete(_ulImgCache.keys().next().value);
     _ulImgCache.set(src, p);
     return p;
+}
+function setUnderlayName(v) {
+    const u = _elevUnderlay(elevations[currentElevIndex]);
+    if (!u) return;
+    const n = String(v || '').trim();
+    if (n) u.name = n; else delete u.name;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
 function setUnderlayInDeck(on) {
     const u = _elevUnderlay(elevations[currentElevIndex]);
@@ -50530,7 +50771,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
@@ -55341,6 +55582,9 @@ function importElevUnderlay(file) {
             const fit = _underlayContain(natW, natH, wallW, wallH);
             elev.underlay = {
                 src: src,
+                // 20.37: the file it came from, less the extension (as image codes are), so
+                // the Context panel, the Images window and a package can say which drawing it is.
+                name: String((file && file.name) || '').replace(/\.[A-Za-z0-9]{1,5}$/, ''),
                 natW: natW || 0, natH: natH || 0,
                 // Centred on the wall, so both edges are visible to drag from. A
                 // contained image is never larger than the wall, so this can't push
@@ -55754,6 +55998,12 @@ function renderUnderlayControls() {
             <button class="gz-btn${_ulCalibrateActive ? ' gz-btn-on' : ''}" onclick="toggleUnderlayCalibrate()"
                     title="Scale the image off a dimension printed on it — click the two ends of a known size, then type it">Calibrate</button>
             <button class="gz-btn gz-btn-del" onclick="removeElevUnderlay()" title="Remove this image">&times;</button>
+          </div>
+          <div class="gz-count" style="margin-bottom:5px;">
+            <input type="text" class="gz-in" data-ul-name value="${_esc(u.name || '')}" placeholder="Name this drawing (e.g. A-501 Elevation 3)"
+                   title="Which drawing this is. Taken from the file name when you add it; shows in Save menu > Images and in a package."
+                   onchange="setUnderlayName(this.value)" style="flex:1 1 auto; min-width:0;">
+            <span class="gz-note" style="flex:0 0 auto;">${(u.natW && u.natH) ? (Math.round(u.natW) + ' \u00d7 ' + Math.round(u.natH) + ' px') : ''}</span>
           </div>
           <div class="gz-count" style="margin-bottom:5px;">
             <button class="gz-btn${u.inDeck === true ? ' gz-btn-on' : ''}" data-ul-indeck onclick="setUnderlayInDeck(${u.inDeck === true ? 'false' : 'true'})"
