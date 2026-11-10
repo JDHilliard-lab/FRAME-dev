@@ -5,7 +5,7 @@
       "type": "frame-grouping",
       "id": "team-ford-standard",
       "name": "Ford: Standard",
-      "note": "For framed prints or paper work with glass. From Ford's Frame Specifications page. BW26-409 White (Framerica) is not in the FRAME library yet.",
+      "note": "For framed prints or paper work with glass. From Ford's Frame Specifications page.",
       "codes": [
         "FA-BW26-409",
         "UA-N2610",

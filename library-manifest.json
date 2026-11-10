@@ -2079,6 +2079,21 @@
   {
     "vendor": "framerica",
     "collection": "gallery-white",
+    "code": "FA-BW26-409",
+    "width": 1.25,
+    "path": "library/framerica/gallery-white/FA-BW26-409_1.25_d0.75_r0.5.jpg",
+    "depth": 0.75,
+    "rabbet": 0.5,
+    "corner": "library/framerica/gallery-white/corners/FA-BW26-409.jpg",
+    "profileImg": "library/framerica/gallery-white/profiles/FA-BW26-409.png",
+    "color": "Gallery White BW26",
+    "family": "White",
+    "profile": "BW26",
+    "series": "BW26"
+  },
+  {
+    "vendor": "framerica",
+    "collection": "gallery-white",
     "code": "FA-BW303-409",
     "width": 1.75,
     "path": "library/framerica/gallery-white/FA-BW303-409_1.75_d1.5_r1.jpg",
