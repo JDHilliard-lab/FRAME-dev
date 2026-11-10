@@ -2454,7 +2454,8 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_elevReqStamps`).** The flag lives on the wall; the stamp is two virtual note annotations made per page key and
   drawn by `_drawAnnotations` (PDF) and `_dsRenderAnnots` (read-only, `data-elev-req`). Never push them into
   `editorialContent.annotations`, or unticking leaves stamps behind. Keys: `spec:elev:<i>`, `spec:elevgrp:<set>`, `ig:<name>`
-  are wall pages (stamp left, under the title, because the drawing runs to the top); `spec:<set>` is a spec page (top
+  are wall pages (stamp left column at y 0.545, above the plan thumbnail: the drawing runs to the top, and 20.33's spot under
+  the WALL: line sat on an install page's size legend, 20.34); `spec:<set>` is a spec page (top
   right). A page that already carries a hand-made ELEVATION REQUIRED note gets no second one. `renderDeckPageCanvas`
   (driver `render`) draws NO annotations at all; check stamps in an exported PDF.
 - **WALL COLOUR IS ONE READER (20.32, `elev.wallColor` '#rrggbb', `_wallColor`, `_wallColorPaint`, `setElevWallColor`).**

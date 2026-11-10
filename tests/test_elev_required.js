@@ -58,12 +58,15 @@ const path = require('path');
     if (!/^#e00000$/i.test(d[0].color)) throw new Error('not red: ' + d[0].color);
     if (d[0].align !== 'right' || !(d[0].x + d[0].w > 0.9) || !(d[0].y < 0.1)) throw new Error('not top right: ' + JSON.stringify(d[0]));
   });
-  await check('the wall\'s own pages (breaker, install, elevation) are stamped, in the title column', async () => {
+  await check('the wall\'s own pages (breaker, install, elevation) are stamped, left, between the legend and the plan', async () => {
     window.__setup(true);
     ['spec:elevgrp:L3.ART.S1-01', 'spec:elev:0', 'ig:S1-01 MEETING'].forEach(k => {
       const d = window.__drawn(k);
       if (d.length !== 2) throw new Error(k + ' drew ' + d.length);
-      if (d[0].align !== 'left' || !(d[0].x < 0.05)) throw new Error(k + ' not in the title column: ' + JSON.stringify(d[0]));
+      if (d[0].align !== 'left' || !(d[0].x < 0.05)) throw new Error(k + ' not in the left column: ' + JSON.stringify(d[0]));
+      // 20.34: below an install page's size legend (which starts under the WALL: line, ~0.28
+      // of the page, and runs two lines a piece), above the plan thumbnail (~0.62).
+      if (!(d[0].y >= 0.5) || !(d[1].y + 0.03 <= 0.62)) throw new Error(k + ' not between the legend and the plan: y ' + d[0].y + ' / ' + d[1].y);
     });
   });
   await check('another wall\'s pages and other pages are not stamped', async () => {
