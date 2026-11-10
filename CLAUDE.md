@@ -2450,6 +2450,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   dims and letter tags stay `--dim-color`. A function, not a const (drawn from boot paths). A guide layer that starts
   hidden needs a line in style.css's `#label-layer, ... { display: none; }` rule, since `toggleElevLayer` and
   `_elevGuideVis` read an unset inline display as OFF (`#outline-layer` showed while its button said off).
+- **ELEVATION REQUIRED IS COMPUTED, NEVER STORED (20.33, `elev.elevRequired`, `elev.elevRequiredNote`, `_elevReqWallForKey`,
+  `_elevReqStamps`).** The flag lives on the wall; the stamp is two virtual note annotations made per page key and
+  drawn by `_drawAnnotations` (PDF) and `_dsRenderAnnots` (read-only, `data-elev-req`). Never push them into
+  `editorialContent.annotations`, or unticking leaves stamps behind. Keys: `spec:elev:<i>`, `spec:elevgrp:<set>`, `ig:<name>`
+  are wall pages (stamp left, under the title, because the drawing runs to the top); `spec:<set>` is a spec page (top
+  right). A page that already carries a hand-made ELEVATION REQUIRED note gets no second one. `renderDeckPageCanvas`
+  (driver `render`) draws NO annotations at all; check stamps in an exported PDF.
 - **WALL COLOUR IS ONE READER (20.32, `elev.wallColor` '#rrggbb', `_wallColor`, `_wallColorPaint`, `setElevWallColor`).**
   Optional, deleted when cleared. Every wall painter goes through `_wallColor`: `drawElevAll` sets `#wall`'s inline
   background (blank = the CSS grey), `exportElevSVG` pushes a `data-wall-color` rect FIRST in `backLayer` (under the

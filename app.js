@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.32';
+const APP_VERSION = '20.33';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -10221,6 +10221,9 @@ function _wallFinishSync() {
     if (col && document.activeElement !== col) col.value = wc || '#ffffff';
     if (col) col.title = wc ? ('Wall colour ' + wc.toUpperCase() + ' (prints on this wall\'s pages)') : 'Paint this wall: pick its colour';
     if (clr) clr.style.display = wc ? '' : 'none';
+    const rq = document.getElementById('elevRequired'), rqn = document.getElementById('elevRequiredNote');
+    if (rq) rq.checked = !!(elev && elev.elevRequired === true);
+    if (rqn) { if (document.activeElement !== rqn) rqn.value = (elev && elev.elevRequiredNote) || ''; rqn.style.display = (rq && rq.checked) ? '' : 'none'; }
 }
 function setElevWallFinish() {
     const elev = elevations[currentElevIndex];
@@ -10254,6 +10257,63 @@ function setElevWallColor(v) {
     const c = String(v || '').trim();
     if (/^#[0-9a-f]{6}$/i.test(c)) elev.wallColor = c.toLowerCase(); else delete elev.wallColor;
     _wallColorPaint();
+    _wallFinishSync();
+    scheduleAutosave();
+    try { _dsRefresh(); } catch (e) {}
+}
+// ── ELEVATION REQUIRED (20.33) ──────────────────────────────────────────────
+// When the client has not sent an elevation for a wall, the designer builds the page from
+// the plan and says so on it: red, top right, "ELEVATION REQUIRED" over one line of what is
+// unknown ("Artwork size to be confirmed"). The studio's wording, not "No elevation
+// provided": it asks for the drawing rather than blaming the client. Designers were adding
+// it in InDesign. `elev.elevRequired` (true) and `elev.elevRequiredNote` (the second line;
+// blank = the default) live on the WALL, and the stamp is COMPUTED per page, never stored
+// in editorialContent.annotations: switch it off and every page is clean again, and a
+// recode or a renamed wall cannot strand a stamp on the wrong page.
+// Which pages: the wall's own pages (spec:elevgrp:<set>, spec:elev:<i>, ig:<name>) and the
+// spec page of every set hanging on it (spec:<set code>). One resolver, _elevReqWallForKey,
+// used by both the PDF pass (_drawAnnotations) and the Deck Studio overlay (_dsRenderAnnots).
+const ELEV_REQ_TITLE = 'ELEVATION REQUIRED';
+const ELEV_REQ_NOTE = 'Artwork size to be confirmed';
+function _elevReqWallForKey(key) {
+    const k = String(key || '');
+    const walls = (typeof elevations !== 'undefined' && Array.isArray(elevations)) ? elevations : [];
+    if (!walls.some(e => e && e.elevRequired === true)) return null;
+    const base = (v) => String(v).split('~')[0];
+    const holds = (e, code) => !!(e && Array.isArray(e.frames) && e.frames.some(f => f && f.id != null && (String(f.id) === code || _artGroupKey(f.id) === code)));
+    let m;
+    if ((m = /^spec:elev:(\d+)/.exec(k))) return walls[+m[1]] || null;
+    if (k.indexOf('spec:elevgrp:') === 0) { const g = base(k.slice(13)); return walls.find(e => holds(e, g)) || null; }
+    if (k.indexOf('ig:') === 0) { const n = k.slice(3); return walls.find(e => e && e.name === n) || null; }
+    if (k.indexOf('spec:') === 0) { const c = base(k.slice(5)); return c ? (walls.find(e => holds(e, c)) || null) : null; }
+    return null;
+}
+// The stamp as two ordinary note annotations, so it prints and previews exactly like a
+// stamp added by hand. None when the page already carries the words (a hand-made stamp wins).
+function _elevReqStamps(key) {
+    const e = _elevReqWallForKey(key);
+    if (!e || e.elevRequired !== true) return [];
+    const own = (typeof editorialContent !== 'undefined' && editorialContent && editorialContent.annotations && editorialContent.annotations[key]) || [];
+    if (own.some(a => a && !a.hidden && /elevation required/i.test(String(a.text || '')))) return [];
+    const note = String(e.elevRequiredNote || '').trim() || ELEV_REQ_NOTE;
+    const ink = (typeof _DS_STAMP_INK !== 'undefined') ? _DS_STAMP_INK : '#e00000';
+    // WHERE: top right on a spec page, as the studio places it. A WALL page's drawing runs to
+    // the top of the page (the stamp sat on the overall dimension line), so there it goes in
+    // the title column, left, under the WALL: line, which is empty on every wall page.
+    const wallPage = /^(spec:elevgrp:|spec:elev:|ig:)/.test(String(key || ''));
+    const x = wallPage ? 0.0236 : 0.48, y = wallPage ? 0.29 : 0.05, al = wallPage ? 'left' : 'right', w = wallPage ? 0.24 : 0.46;
+    return [
+        { type: 'note', text: ELEV_REQ_TITLE, x: x, y: y, w: w, size: 0.034, color: ink, font: 'display', bold: true, italic: false, align: al, _auto: 'elevReq' },
+        { type: 'note', text: note, x: x, y: y + 0.043, w: w, size: 0.019, color: ink, font: 'serif', bold: false, italic: false, align: al, _auto: 'elevReq' }
+    ];
+}
+function setElevRequired() {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    const cb = document.getElementById('elevRequired'), note = document.getElementById('elevRequiredNote');
+    if (cb && cb.checked) elev.elevRequired = true; else delete elev.elevRequired;
+    const n = note ? note.value.trim() : '';
+    if (n && n !== ELEV_REQ_NOTE) elev.elevRequiredNote = n; else delete elev.elevRequiredNote;
     _wallFinishSync();
     scheduleAutosave();
     try { _dsRefresh(); } catch (e) {}
@@ -10749,7 +10809,7 @@ const CAT_SPEC_FIELDS = CAT_SLOT_FIELDS.filter(k => k !== 'x' && k !== 'y');
 // asking for it is the better evidence: the group dimensions and custom lines ARE the
 // layout work, and a mockup whose measurements do not reach its own options means doing
 // that work once per option. The layer toggles still decide what prints.
-const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall', 'wallFinish', 'wallFinishNote', 'wallColor'];
+const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall', 'wallFinish', 'wallFinishNote', 'wallColor', 'elevRequired', 'elevRequiredNote'];
 const CAT_WALL_DEEP = ['personPos', 'contextBlocks', 'glazing', 'groupDims', 'customLines', 'marks'];
 // A row-level mirror as well: the PLAN PIN belongs to the placement. A dealership hangs
 // ONE piece in that spot and picks which image goes in it, so pinning the mockup's slot
@@ -26952,6 +27012,16 @@ function _dsRenderAnnots(page, desc, w, hh) {
     _dsLastAnnW = w; _dsLastAnnH = hh;
 
     const key = _deckPageKey(desc); if (!key) return;
+    // 20.33: the wall's ELEVATION REQUIRED stamp. Not selectable: it belongs to the wall
+    // (Elevations tab > Elevation required), so the tooltip says where to change it.
+    _elevReqStamps(key).forEach(a => {
+        const el = document.createElement('div');
+        el.textContent = a.text;
+        el.dataset.elevReq = '1';
+        el.title = 'This wall is marked Elevation required (Elevations tab, under Wall finish)';
+        el.style.cssText = 'position:absolute; left:' + (a.x * w) + 'px; top:' + (a.y * hh) + 'px; width:' + (a.w * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + Math.max(7, a.size * hh) + 'px; line-height:1.15; color:' + a.color + '; font-weight:' + (a.bold ? 700 : 400) + '; text-align:' + a.align + '; white-space:pre-wrap;font-kerning:none; pointer-events:auto; cursor:default; z-index:' + (100 + 5000) + ';';
+        page.appendChild(el);
+    });
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     list.forEach((a, i) => {
         if (a && a.hidden) return;
@@ -45927,6 +45997,8 @@ function _drawAnnCaption(doc, a, x, y, pw, ph) {
     } catch (e) {}
 }
 function _drawAnnotations(doc, key, PW, PH) {
+    // 20.33: ELEVATION REQUIRED on a wall's pages, computed from the wall, never stored.
+    try { _elevReqStamps(key).forEach(a => _drawOneAnnotation(doc, a, PW, PH)); } catch (e) {}
     if (_annInlineDrawn && _annInlineDrawn[key]) return;   // already interleaved with elements on a layout page
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
@@ -50394,7 +50466,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
