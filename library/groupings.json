@@ -1,4 +1,44 @@
 {
   "_comment": "Team frame groupings, shown in the frame browser under Team groupings. Add one by pasting the object from a designer's Share with team file into the list. Codes match library frame codes.",
-  "groupings": []
+  "groupings": [
+    {
+      "type": "frame-grouping",
+      "id": "team-ford-standard",
+      "name": "Ford: Standard",
+      "note": "For framed prints or paper work with glass. From Ford's Frame Specifications page. BW26-409 White (Framerica) is not in the FRAME library yet.",
+      "codes": [
+        "FA-BW26-409",
+        "UA-N2610",
+        "MICH-432-29",
+        "MICH-247-82",
+        "MICH-432-22",
+        "MICH-247-71",
+        "UA-N2611"
+      ]
+    },
+    {
+      "type": "frame-grouping",
+      "id": "team-ford-floater",
+      "name": "Ford: Floater",
+      "note": "For wrapped canvases and other mediums without glass. From Ford's Frame Specifications page.",
+      "codes": [
+        "MICH-307-22",
+        "MICH-307-29",
+        "MICH-348-22",
+        "MICH-348-29"
+      ]
+    },
+    {
+      "type": "frame-grouping",
+      "id": "team-ford-shadowbox",
+      "name": "Ford: Shadowbox",
+      "note": "Extra deep frames for dimensional artwork, glass or raised prints. From Ford's Frame Specifications page.",
+      "codes": [
+        "MICH-240-82",
+        "MICH-240-71",
+        "MICH-330-22",
+        "MICH-330-29"
+      ]
+    }
+  ]
 }
