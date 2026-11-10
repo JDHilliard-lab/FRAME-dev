@@ -30,7 +30,9 @@ const path = require('path');
       currentElevIndex = 0;
       _wallFinishSync();
     };
-    window.__draw = () => { try { drawElevAll(); } catch (e) { window.__drawErr = e.message; } return document.getElementById('wall').style.background; };
+    window.__paint = () => { const p = document.getElementById('wall-paint'); return p ? { bg: p.style.background, h: p.style.height, first: p.parentElement && p.parentElement.firstChild === p } : null; };
+    window.__draw = () => { try { drawElevAll(); } catch (e) { window.__drawErr = e.message; } return window.__paint(); };
+    window.__bb = (inches) => { elevBaseboardIn = inches; };
     window.__api = { _wallColor, _wallColorPaint, setElevWallColor, CAT_WALL_FIELDS, renderElevationToCanvas,
       get elev() { return elevations[0]; } };
   `;
@@ -46,17 +48,37 @@ const path = require('path');
     if (A._wallColor({ wallColor: 'navy' }) !== '') throw new Error('junk accepted');
     if (A._wallColor({}) !== '') throw new Error('blank wall coloured');
   });
-  await check('the swatch sets the wall colour and paints the editor wall; Clear deletes the key and unpaints it', async () => {
+  await check('a swatch dot sets the wall colour and paints the editor wall; No paint deletes the key and unpaints it', async () => {
     window.__setup({});
-    A.setElevWallColor('#1F3A5C');
-    if (A.elev.wallColor !== '#1f3a5c') throw new Error('not stored: ' + A.elev.wallColor);
-    const wall = document.getElementById('wall');
-    if (!/rgb\(31, 58, 92\)|#1f3a5c/i.test(wall.style.background)) throw new Error('wall shows ' + JSON.stringify(wall.style.background));
-    if (document.getElementById('wallColorClear').style.display === 'none') throw new Error('Clear hidden on a painted wall');
+    const dots = document.querySelectorAll('#wallColorSwatches button');
+    if (dots.length < 6) throw new Error('only ' + dots.length + ' swatch dots');
+    const navy = Array.from(dots).find(d => /1f2a44/i.test(d.title));
+    navy.click();
+    if (A.elev.wallColor !== '#1f2a44') throw new Error('not stored: ' + A.elev.wallColor);
+    const p = window.__paint();
+    if (!p || !/rgb\(31, 42, 68\)|#1f2a44/i.test(p.bg)) throw new Error('wall shows ' + JSON.stringify(p));
+    if (!p.first) throw new Error('paint layer is not first in the wall, so it would cover the art');
+    if (!/setElevWallColor\(''\)/.test(document.getElementById('wallColorNone').getAttribute('onclick') || '')) throw new Error('No paint does not clear');
     A.setElevWallColor('');
-    if ('wallColor' in A.elev) throw new Error('key kept after clear');
-    if (wall.style.background) throw new Error('wall still painted: ' + wall.style.background);
-    if (document.getElementById('wallColorClear').style.display !== 'none') throw new Error('Clear shown on a plain wall');
+    if ('wallColor' in A.elev) throw new Error('key kept after No paint');
+    if (window.__paint()) throw new Error('wall still painted');
+  });
+  await check('the picker is the app\'s own: round swatch dots and the colour wheel, no plain square', async () => {
+    const sw = document.getElementById('wallColor');
+    if (sw.classList.contains('color-swatch-flat') || sw.getAttribute('style')) throw new Error('the wheel is restyled: ' + sw.className + ' ' + sw.getAttribute('style'));
+    const dot = document.querySelector('#wallColorSwatches button');
+    if (!dot || !/border-radius:\s*50%/.test(dot.getAttribute('style'))) throw new Error('swatches are not the round dots');
+    if (sw.parentElement !== document.getElementById('wallColorSwatches').parentElement) throw new Error('wheel not on the swatch row');
+  });
+  await check('No paint is lit on a plain wall; a colour lights its own dot instead', async () => {
+    window.__setup({});
+    const none = document.getElementById('wallColorNone');
+    if (!/ui-active/.test(none.style.borderColor)) throw new Error('No paint not lit: ' + none.style.borderColor);
+    A.setElevWallColor('#b9b8b2');
+    if (/ui-active/.test(none.style.borderColor)) throw new Error('No paint still lit');
+    const lit = Array.from(document.querySelectorAll('#wallColorSwatches button')).filter(d => /ui-active/.test(d.style.borderColor || d.getAttribute('style')));
+    if (lit.length !== 1 || !/b9b8b2/i.test(lit[0].title)) throw new Error('lit: ' + lit.map(d => d.title));
+    A.setElevWallColor('');
   });
   await check('switching walls shows that wall\'s colour in the swatch', async () => {
     window.__setup({ wallColor: '#c8a27a' });
@@ -83,17 +105,33 @@ const path = require('path');
     const doc = new window.DOMParser().parseFromString(svg, 'image/svg+xml');
     if (doc.getElementsByTagName('parsererror').length) throw new Error('not well-formed: ' + m[1]);
   });
-  await check('the PNG export keeps a painted wall instead of making it transparent', async () => {
-    if (src.indexOf("wall.style.background = _wallColor(elevations[currentElevIndex]) || 'transparent'") < 0) throw new Error('PNG export clears the colour');
-  });
-  await check('a redraw of the elevation paints a coloured wall and leaves a plain one grey', async () => {
+  await check('EXACT ASK: the baseboard is not painted: the paint stops at its top in the editor, thumbnail and SVG', async () => {
+    window.__bb(6);
     window.__setup({ wallColor: '#c8a27a', frames: [] });
-    document.getElementById('wall').style.background = '';
-    const bg = window.__draw();
-    if (!/rgb\(200, 162, 122\)|#c8a27a/i.test(bg)) throw new Error('redraw shows ' + JSON.stringify(bg) + (window.__drawErr ? ' (' + window.__drawErr + ')' : ''));
+    const p = window.__draw();
+    if (!p) throw new Error('not painted' + (window.__drawErr ? ' (' + window.__drawErr + ')' : ''));
+    const want = (1 - 6 / 108) * 100;
+    if (Math.abs(parseFloat(p.h) - want) > 0.01) throw new Error('paint height ' + p.h + ', want ' + want.toFixed(3) + '%');
+    fills.length = 0;
+    await A.renderElevationToCanvas({ id: 'w1', name: 'A', wallW: 144, wallH: 108, frames: [{ id: 'ART.1', x: 50, y: 37, w: 40, h: 30, active: true }], wallColor: '#c8a27a' }, null, {});
+    const f = fills.find(x => x.style === '#c8a27a'), wallPx = fills.find(x => x.style === '#c8a27a') && f.h / (1 - 6 / 108);
+    if (!f || Math.abs(f.h / wallPx - (1 - 6 / 108)) > 1e-6 || !(f.h < f.w * 108 / 144)) throw new Error('thumbnail paint ' + JSON.stringify(f));
+    if (!/_wr\.h \* \(1 - _wallPaintBaseFrac\(/.test(src)) throw new Error('SVG rect not shortened to the baseboard');
+    window.__bb(0);
+    window.__setup({ wallColor: '#c8a27a', frames: [] });
+    const p0 = window.__draw();
+    if (Math.abs(parseFloat(p0.h) - 100) > 0.01) throw new Error('no baseboard: paint ' + p0.h + ', want 100%');
+  });
+  await check('the PNG export leaves the paint layer alone (only the wall\'s background goes clear)', async () => {
+    if (/wall\.style\.background = _wallColor\(/.test(src)) throw new Error('something still paints #wall\'s background');
+  });
+  await check('a redraw keeps a painted wall painted and a plain one bare', async () => {
+    window.__bb(4);
+    window.__setup({ wallColor: '#c8a27a', frames: [] });
+    const p = window.__draw();
+    if (!p || !/rgb\(200, 162, 122\)|#c8a27a/i.test(p.bg)) throw new Error('redraw shows ' + JSON.stringify(p) + (window.__drawErr ? ' (' + window.__drawErr + ')' : ''));
     window.__setup({ frames: [] });
-    const bg2 = window.__draw();
-    if (bg2) throw new Error('plain wall painted ' + bg2);
+    if (window.__draw()) throw new Error('plain wall painted');
   });
   await check('catalogue options inherit the wall colour', async () => {
     if (A.CAT_WALL_FIELDS.indexOf('wallColor') < 0) throw new Error('not in CAT_WALL_FIELDS');

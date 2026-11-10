@@ -2459,10 +2459,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   right). A page that already carries a hand-made ELEVATION REQUIRED note gets no second one. `renderDeckPageCanvas`
   (driver `render`) draws NO annotations at all; check stamps in an exported PDF.
 - **WALL COLOUR IS ONE READER (20.32, `elev.wallColor` '#rrggbb', `_wallColor`, `_wallColorPaint`, `setElevWallColor`).**
-  Optional, deleted when cleared. Every wall painter goes through `_wallColor`: `drawElevAll` sets `#wall`'s inline
-  background (blank = the CSS grey), `exportElevSVG` pushes a `data-wall-color` rect FIRST in `backLayer` (under the
-  20.31 underlay), `exportElevPNG` paints it instead of transparent and sets `_wallPngHold` so a redraw mid-export
-  cannot put the editor grey back, and `renderElevationToCanvas` fills the wall before its outline. In `CAT_WALL_FIELDS`.
+  Optional, deleted when cleared. Every wall painter goes through `_wallColor`: `drawElevAll` calls
+  `_wallColorPaint`, `exportElevSVG` pushes a `data-wall-color` rect FIRST in `backLayer` (under the 20.31 underlay),
+  and `renderElevationToCanvas` fills the wall before its outline. In `CAT_WALL_FIELDS`.
+  20.35: the control is the app's picker (`_frameSwatchesInto` dots from `WALL_PAINT_FAMILIES` + the colour-wheel
+  input, `#wallColorNone` slash dot first); a plain picker on its own row went unnoticed. Paint STOPS AT THE BASEBOARD
+  (`_wallPaintBaseFrac`): the editor paints a `#wall-paint` layer (first child of #wall) instead of #wall's background,
+  so the PNG export no longer touches it; the SVG rect and the thumbnail fill are shortened by the same fraction.
 - **WALL FINISH IS NOT WALL MODE (20.25, `elev.wallFinish` / `elev.wallFinishNote`, `_wallFinishText`).** Mode (ART/EGD/WF)
   is what goes ON the wall; finish is the wall itself. Both keys optional and deleted when blank. The install renderer
   prints `_wallFinishText` in the code-line slot of an elevation page (`_igLine3`); both keys are in `CAT_WALL_FIELDS`.

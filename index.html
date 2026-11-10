@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.34">
+    <link rel="stylesheet" href="style.css?v=20.35">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -675,16 +675,20 @@
                              printed under the wall page's subheading. Ford asked for it on every
                              elevation page so frames can be chosen against the wall. Per wall,
                              blank by default, and blank prints nothing. -->
-                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Leave it blank to print nothing.">?</span></div>
+                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Paint colours the wall above the baseboard on its pages and exports. Leave it blank to print nothing.">?</span></div>
                         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
                             <select id="wallFinish" onchange="setElevWallFinish(); pushHistory()" title="What the wall is made of" style="height:26px; min-width:0; font-size:var(--fs-60);"></select>
                             <input type="text" id="wallFinishNote" maxlength="40" placeholder="Colour or spec code" title="Colour or the designer's spec code (White, PT-1, WD-11 Walnut)" oninput="setElevWallFinish()" onchange="pushHistory()" style="height:26px; min-width:0; font-size:var(--fs-60);">
                         </div>
-                        <!-- WALL COLOUR (20.32): paints the wall in the editor, the deck and the exports. -->
-                        <div style="display:flex; align-items:center; gap:6px; margin-top:6px; font-size:var(--fs-60); color:var(--text-muted);">
-                            <input type="color" id="wallColor" value="#ffffff" oninput="setElevWallColor(this.value)" onchange="pushHistory()" title="Paint this wall: pick its colour" style="width:30px; height:22px; padding:0; border:1px solid var(--border-color, #ccc); background:none; cursor:pointer;">
-                            <span>Wall colour, prints on this wall's pages</span>
-                            <button type="button" id="wallColorClear" class="gz-btn" onclick="setElevWallColor(''); pushHistory()" title="Back to an unpainted wall" style="display:none; margin-left:auto;">Clear</button>
+                        <!-- WALL COLOUR (20.32, 20.35): the app's colour picker, as everywhere else: round swatch
+                             dots (_frameSwatchesInto) and the colour-wheel dot for any other colour. 20.32 had
+                             a plain browser picker on a row of its own and designers did not see it. The first
+                             dot is NO PAINT (the slash), lit when the wall is unpainted. -->
+                        <div id="wallColorRow" style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+                            <span style="font-size:var(--fs-60); color:var(--text-muted); flex:0 0 auto;" title="Paints the wall above the baseboard on its pages and exports">Paint</span>
+                            <button type="button" id="wallColorNone" onclick="setElevWallColor(''); pushHistory()" title="No paint: a plain wall" style="width:18px; height:18px; min-width:18px; padding:0; border-radius:50%; cursor:pointer; flex:0 0 auto; background:linear-gradient(to top right, transparent calc(50% - 1px), #d0453b calc(50% - 1px), #d0453b calc(50% + 1px), transparent calc(50% + 1px)), #ffffff; border:2px solid var(--border-color);"></button>
+                            <div id="wallColorSwatches" style="display:flex; align-items:center; flex:1 1 auto; min-width:0;"></div>
+                            <input type="color" id="wallColor" value="#ffffff" oninput="setElevWallColor(this.value)" onchange="pushHistory()" title="Any other colour">
                         </div>
                         <!-- ELEVATION REQUIRED (20.33): no client elevation for this wall yet. Stamps
                              this wall's pages and its sets' spec pages, red, top right. -->
@@ -2286,9 +2290,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.34';</script>
-<script src="templates.js?v=20.34"></script>
-<script src="app.js?v=20.34"></script>
+<script>window.FRAME_HTML_VERSION = '20.35';</script>
+<script src="templates.js?v=20.35"></script>
+<script src="app.js?v=20.35"></script>
 
 </body>
 </html>
