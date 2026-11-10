@@ -384,7 +384,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   client's drawing IS the page, so `_underlayDeckSvg` puts it FIRST in `exportElevSVG`'s back layer, clipped to the
   wall rect, full strength; `exportElevPNG` keeps the layer with `overflow:hidden` and opacity 1 instead of hiding
   it. The artboard-bounds list still never includes `#underlay-layer`. Toggle: `setUnderlayInDeck`; test
-  `tests/test_underlay_in_deck.js`).
+  `tests/test_underlay_in_deck.js`). FOURTH PLACE (20.36): `renderElevationToCanvas`, the spec-page thumbnail, draws
+  it too (over the 20.32 paint, clipped to the wall) through `_underlayImage` (decode cache, resolves null on
+  error or after 4 s so a bad image cannot hang a build). Leave any of the four out and that page shows a bare wall.
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in
   `elevUnit`, `x`/`y` bottom-left; `_ctxPxTop` is the only flip.

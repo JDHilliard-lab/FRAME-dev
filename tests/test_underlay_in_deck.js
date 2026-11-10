@@ -106,6 +106,31 @@ const path = require('path');
       if (b.indexOf("_ulLayer.style.overflow = 'hidden'") < 0 || b.indexOf("_ulImg.style.opacity = '1'") < 0) throw new Error('not clipped / not full strength');
       if (b.indexOf("else if (_ulLayer) _ulLayer.style.display = 'none'") < 0) throw new Error('a guide is no longer hidden');
     });
+    __check('20.36: the spec-page thumbnail draws it too, where the editor puts it, clipped to the wall, under the outline', async () => {
+      const IM = { __fake: 'client elevation' };
+      const keep = _underlayImage; _underlayImage = () => Promise.resolve(IM);
+      try {
+        const frames = [{ id: 'L3.ART.S24-10A', x: 100, y: 50, w: 24, h: 40, active: true }];
+        seed(Object.assign(U(), { inDeck: true })); elevations[0].frames = frames;
+        window.__calls.length = 0;
+        await renderElevationToCanvas(elevations[0], null, { dpi: 10 });
+        const calls = window.__calls;
+        const di = calls.findIndex(c => c[0] === 'drawImage' && c[1][0] === IM);
+        if (di < 0) throw new Error('the thumbnail never draws the client elevation');
+        // wall left = (20in person margin + 6in pad) x 10ppi = 260, wall top = 60, floor = 60 + 1440 = 1500
+        const a = calls[di][1].slice(1).map(v => Math.round(v * 10) / 10);
+        if (JSON.stringify(a) !== JSON.stringify([160, 70, 3200, 1450])) throw new Error('drawn at ' + JSON.stringify(a) + ', want [160,70,3200,1450]');
+        const clip = calls.slice(0, di).map(c => c[0]).lastIndexOf('clip');
+        const rect = calls.slice(0, di).filter(c => c[0] === 'rect').pop();
+        if (clip < 0 || !rect || JSON.stringify(rect[1]) !== JSON.stringify([260, 60, 2490, 1440])) throw new Error('not clipped to the wall: ' + JSON.stringify(rect && rect[1]));
+        const outline = calls.findIndex(c => c[0] === 'strokeRect');
+        if (!(outline > di)) throw new Error('drawn over the wall outline');
+        seed(U()); elevations[0].frames = frames;
+        window.__calls.length = 0;
+        await renderElevationToCanvas(elevations[0], null, { dpi: 10 });
+        if (window.__calls.some(c => c[0] === 'drawImage' && c[1][0] === IM)) throw new Error('a tracing guide reached the thumbnail');
+      } finally { _underlayImage = keep; }
+    });
   `;
 
   try {
