@@ -380,7 +380,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Flat graphics render behind framed art unconditionally**: `drawElevAll` sorts them to
   the front of `_drawOrder` while preserving original indices, because
   `makeElevDraggable` and every dim lookup address frames by index in `elevFrames`.
-- **WALL CONTEXT: the underlay never exports, the blocks always do.**
+- **WALL CONTEXT: the underlay never exports, the blocks always do** (unless `underlay.inDeck`, 20.31: the
+  client's drawing IS the page, so `_underlayDeckSvg` puts it FIRST in `exportElevSVG`'s back layer, clipped to the
+  wall rect, full strength; `exportElevPNG` keeps the layer with `overflow:hidden` and opacity 1 instead of hiding
+  it. The artboard-bounds list still never includes `#underlay-layer`. Toggle: `setUnderlayInDeck`; test
+  `tests/test_underlay_in_deck.js`).
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in
   `elevUnit`, `x`/`y` bottom-left; `_ctxPxTop` is the only flip.
