@@ -1849,7 +1849,8 @@ run but passes alone is usually load timing: rerun before chasing it.
   addressed by CODE. Project frames = frames on an item (`_fbInUse`, DERIVED from rows, never stored) +
   `editorialContent.frameShortlist` (codes; `_fbShortlist` is READ-ONLY, `_fbSetShortlist` the one
   writer, pushes history, deletes the field when empty). My groupings: localStorage `FB_MINE_KEY`.
-  Team groupings: `library/groupings.json`, committed by a person; the app is static and never writes
+  Team groupings (shown as CLIENT GROUPINGS since 20.38: a grouping's optional `client` nests it under one
+  vendor-style row, `_fbClientGrouping` = the union, `_fbOpenClients`): `library/groupings.json`, committed by a person; the app is static and never writes
   to GitHub (no tokens). Picking goes through `loadDashFromCustomLibrary` via the hidden
   `libVendor`/`libCollection` selects, which must stay in the DOM. Catalogue facts (colour, family,
   profile, series) come from `library/<v>/<c>/catalogue.json`, merged by

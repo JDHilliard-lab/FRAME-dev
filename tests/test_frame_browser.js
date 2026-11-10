@@ -259,6 +259,35 @@ function inApp() {
       if (cardsIn().join(',') !== 'MICH-41-29,MICH-NOPE-1') throw new Error('team cards: ' + cardsIn().join(','));
       if (!document.querySelector('.fb-frame[data-fb-code="MICH-NOPE-1"]').classList.contains('missing')) throw new Error('a code not in the library should show as missing, not vanish');
     });
+    // 20.38: CLIENT GROUPINGS. A shared grouping that names its client nests under one
+    // vendor-style row; the row is every frame of that client's groupings, once each.
+    {
+      const keepTeam = _fbTeam;
+      _fbTeam = keepTeam.concat([
+        { id: 'cl-std', client: 'Acme', name: 'Standard', codes: ['MICH-41-29', 'MICH-41-10'] },
+        { id: 'cl-flt', client: 'Acme', name: 'Floater', codes: ['MICH-41-10', 'MICH-41-12'] }]);
+      _fbState.src = 'project'; for (const k in _fbOpenClients) delete _fbOpenClients[k]; _fbRender();
+      ok('20.38: the sidebar says Client groupings, and a client is one closed row with its frame count', () => {
+        const heads = Array.from(document.querySelectorAll('#fbSide .fb-side-head span')).map(s => s.textContent);
+        if (heads.indexOf('Client groupings') < 0 || heads.indexOf('Team groupings') >= 0) throw new Error(JSON.stringify(heads));
+        const row = document.querySelector('[data-fb-src="client:Acme"]');
+        if (!row || !/\u25B8 Acme/.test(row.textContent) || !/3$/.test(row.textContent)) throw new Error('client row ' + (row && row.textContent));
+        if (document.querySelector('[data-fb-src="team:cl-std"]')) throw new Error('its groupings show while the client is closed');
+        if (!document.querySelector('[data-fb-src="team:gteam1"]')) throw new Error('a grouping with no client should still list on its own');
+      });
+      ok('20.38: clicking the client opens it, lists its groupings under it, and shows all its frames once', () => {
+        document.querySelector('[data-fb-src="client:Acme"]').click();
+        if (!document.querySelector('[data-fb-src="team:cl-std"].col') || !document.querySelector('[data-fb-src="team:cl-flt"].col')) throw new Error('groupings not nested under the client');
+        if (cardsIn().join(',') !== 'MICH-41-29,MICH-41-10,MICH-41-12') throw new Error('client cards: ' + cardsIn().join(','));
+      });
+      ok('20.38: a client grouping opens with its client in the title (Acme: Standard)', () => {
+        document.querySelector('[data-fb-src="team:cl-std"]').click();
+        const tt = document.querySelector('#fbHead .fb-title');
+        if (!tt || tt.textContent.indexOf('Acme: Standard') < 0) throw new Error('title ' + (tt && tt.textContent));
+        if (!document.querySelector('[data-fb-src="client:Acme"]') || !/\u25BE/.test(document.querySelector('[data-fb-src="client:Acme"]').textContent)) throw new Error('client closed while one of its groupings is open');
+      });
+      _fbTeam = keepTeam; _fbState.src = 'project'; _fbRender();
+    }
     const realAsk = _askFields;
     _askFields = () => Promise.resolve({ name: 'Lobby golds', note: 'warm' });
     const g = await _fbNewGrouping(['MICH-41-10']);

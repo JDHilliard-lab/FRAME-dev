@@ -1,10 +1,10 @@
 {
-  "_comment": "Team frame groupings, shown in the frame browser under Team groupings. Add one by pasting the object from a designer's Share with team file into the list. Codes match library frame codes.",
+  "_comment": "Client groupings, shown in the frame browser under Client groupings. Add one by pasting the object from a designer's Share with team file into the list. Codes match library frame codes. An optional \"client\" nests the grouping under that client's row (Ford > Standard, Floater, Shadowbox).",
   "groupings": [
     {
       "type": "frame-grouping",
       "id": "team-ford-standard",
-      "name": "Ford: Standard",
+      "name": "Standard",
       "note": "For framed prints or paper work with glass. From Ford's Frame Specifications page.",
       "codes": [
         "FA-BW26-409",
@@ -14,31 +14,34 @@
         "MICH-432-22",
         "MICH-247-71",
         "UA-N2611"
-      ]
+      ],
+      "client": "Ford"
     },
     {
       "type": "frame-grouping",
       "id": "team-ford-floater",
-      "name": "Ford: Floater",
+      "name": "Floater",
       "note": "For wrapped canvases and other mediums without glass. From Ford's Frame Specifications page.",
       "codes": [
         "MICH-307-22",
         "MICH-307-29",
         "MICH-348-22",
         "MICH-348-29"
-      ]
+      ],
+      "client": "Ford"
     },
     {
       "type": "frame-grouping",
       "id": "team-ford-shadowbox",
-      "name": "Ford: Shadowbox",
+      "name": "Shadowbox",
       "note": "Extra deep frames for dimensional artwork, glass or raised prints. From Ford's Frame Specifications page.",
       "codes": [
         "MICH-240-82",
         "MICH-240-71",
         "MICH-330-22",
         "MICH-330-29"
-      ]
+      ],
+      "client": "Ford"
     }
   ]
 }
