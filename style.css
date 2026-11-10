@@ -3583,3 +3583,11 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 /* 19.93/19.95: the Production button, showing the budget, turns amber past the budget or the selected piece’s allowance. */
 .dash-prod-btn { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .dash-prod-btn[data-over] { color: var(--warn); border-color: var(--warn); }
+
+/* 20.39: dragging a project .json over the window. Never takes the pointer: the drop lands on the window listener. */
+.project-drop-hint { position: fixed; inset: 0; z-index: var(--z-toast); pointer-events: none; display: flex; align-items: center; justify-content: center;
+    background: var(--modal-scrim); border: 3px dashed var(--ui-active); box-sizing: border-box; }
+.project-drop-hint .pdh-box { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 22px 30px; border-radius: var(--r-8);
+    background: var(--bg-panel); border: 1px solid var(--border-color); color: var(--text-main); }
+.project-drop-hint strong { font-family: var(--ui-display); font-size: var(--fs-105); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-strong); }
+.project-drop-hint span { font-size: var(--fs-70); color: var(--text-muted); }

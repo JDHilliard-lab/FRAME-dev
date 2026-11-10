@@ -1019,6 +1019,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   File name goes in the document title.
   `_confirmDiscardUnsaved` runs before loading, and the picker opens from inside its Yes
   handler (a picker needs a user gesture; after an awaited modal it is refused).
+  **A DROPPED .JSON IS THE THIRD OPEN PATH (20.39, `_wireProjectFileDrop`).** Window CAPTURE
+  listeners take only a drag whose item type is `application/json` (blank type is a folder,
+  the library zone's); everything else passes through to the image zones. The handle is
+  asked for synchronously in the drop (`getAsFileSystemHandle`), awaited after the confirm.
 - **ONE AUTOSAVE PER TAB (18.82).** Records are keyed by `_autosaveSession` (the old
   shared `ADB_ID = 'current'` is read and cleared, never written). `_aPrune` keeps the
   newest `AUTOSAVE_KEEP` (5), max `AUTOSAVE_MAX_DAYS`, never this tab's. `clearAutosave`
