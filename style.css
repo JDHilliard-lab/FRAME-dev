@@ -1155,6 +1155,7 @@ select.no-arrow::-ms-expand { display: none; }
  * giving it flex:1 would squash the frame list that is meant to take the height. */
 .elev-tabpane { min-height: 0; }
 .elev-tabpane[data-elevtabpane="art"] { flex: none; }
+.elev-tabpane[data-elevtabpane="wall"],
 .elev-tabpane[data-elevtabpane="guides"],
 .elev-tabpane[data-elevtabpane="context"],
 .elev-tabpane[data-elevtabpane="glass"] {
@@ -3591,3 +3592,12 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
     background: var(--bg-panel); border: 1px solid var(--border-color); color: var(--text-main); }
 .project-drop-hint strong { font-family: var(--ui-display); font-size: var(--fs-105); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-strong); }
 .project-drop-hint span { font-size: var(--fs-70); color: var(--text-muted); }
+
+/* 20.41: the Wall tab. Its two plain blocks sit on the same 20px column as the header did. */
+.elev-wall-pane { padding: 4px 20px 10px; }
+.elev-wall-pane + #sec-underlay, #sec-underlay + .elev-wall-pane { border-top: 1px solid var(--border-color); }
+/* "All walls" beside a per-wall switch: the same setting for every wall at once. */
+.wall-all-btn { margin-left: auto; flex: 0 0 auto; height: 20px; padding: 0 7px; border-radius: var(--r-4); cursor: pointer;
+    font-size: var(--fs-55); font-weight: 400; letter-spacing: 0; text-transform: none;
+    background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
+.wall-all-btn:hover, .wall-all-btn:focus-visible { color: var(--text-main); border-color: var(--ui-active); }

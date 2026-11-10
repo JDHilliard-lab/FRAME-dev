@@ -61,14 +61,14 @@ check('every guide control lives in the Guides pane', () => {
   if (pane.querySelectorAll('details.lg-group').length !== 3) throw new Error('the three guide groups did not all move');
 });
 
-check('the tab strip follows the header directly, and its order is Art, Guides, Context, Glass', () => {
+check('the tab strip follows the header directly, and its order is Art, Wall, Guides, Context, Glass (20.41 added Wall)', () => {
   const sb = doc.querySelector('.elev-sidebar');
   const kids = Array.prototype.slice.call(sb.children);
   const h = kids.indexOf(doc.querySelector('.elev-sidebar-header'));
   const t = kids.indexOf(doc.querySelector('.elev-tabs'));
   if (h < 0 || t !== h + 1) throw new Error('tab strip is not right under the header');
   const order = Array.prototype.map.call(doc.querySelectorAll('.elev-tabs [data-elevtab]'), b => b.getAttribute('data-elevtab')).join(',');
-  if (order !== 'art,guides,context,glass') throw new Error('tab order is ' + order);
+  if (order !== 'art,wall,guides,context,glass') throw new Error('tab order is ' + order);
 });
 
 check('the catalogue layout-name row stayed with the wall, not the guides', () => {
@@ -84,7 +84,7 @@ check('switching to Guides shows only the guides pane, and Art brings the frame 
   if (fx.cur !== 'guides') throw new Error('switchElevTab refused guides (fell back to ' + fx.cur + ')');
   const shown = (k) => Array.prototype.every.call(doc.querySelectorAll('[data-elevtabpane="' + k + '"]'), el => el.style.display === '');
   const hidden = (k) => Array.prototype.every.call(doc.querySelectorAll('[data-elevtabpane="' + k + '"]'), el => el.style.display === 'none');
-  if (!shown('guides') || !hidden('art') || !hidden('context') || !hidden('glass')) throw new Error('wrong panes visible on Guides');
+  if (!shown('guides') || !hidden('art') || !hidden('wall') || !hidden('context') || !hidden('glass')) throw new Error('wrong panes visible on Guides');
   if (!doc.querySelector('[data-elevtab="guides"]').classList.contains('active')) throw new Error('Guides tab not lit');
   fx.tab('art');
   if (!shown('art') || !hidden('guides')) throw new Error('Art did not bring the frame list back');

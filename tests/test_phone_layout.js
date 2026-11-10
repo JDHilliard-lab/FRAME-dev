@@ -509,11 +509,11 @@ function inApp() {
       if (calls.join(',') !== 'add,photo,dup,del,edit^,import^,export^') throw new Error('actions ran ' + calls.join(','));
     });
 
-    await ok('EXACT ASK (19.34): Walls gets Art / Guides / Context / Glass as icons that switch the panel', () => {
+    await ok('EXACT ASK (19.34): Walls gets Art / Wall / Guides / Context / Glass as icons that switch the panel', () => {
       const st = document.getElementById('phoneWallsBar');
       if (!st) throw new Error('no Walls strip');
       const keys = Array.from(st.querySelectorAll('button')).map(b => b.getAttribute('data-elevtab')).join('|');
-      if (keys !== 'art|guides|context|glass') throw new Error('tabs are ' + keys);
+      if (keys !== 'art|wall|guides|context|glass') throw new Error('tabs are ' + keys);
       document.getElementById('phoneWallTab-guides').click();
       if (_elevSidebarTab !== 'guides') throw new Error('the icon did not switch the tab');
       if (!document.getElementById('phoneWallTab-guides').classList.contains('active') || document.getElementById('phoneWallTab-art').classList.contains('active')) throw new Error('the strip does not light the open tab');

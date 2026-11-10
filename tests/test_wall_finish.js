@@ -53,7 +53,41 @@ const path = require('path');
     window.__catFields = () => CAT_WALL_FIELDS.slice();
     window.__ec = () => editorialContent;
     window.__elevs = () => elevations;
-    window.__wfp = (on) => { if (on !== undefined) _setWallFinishPrints(on); return _wallFinishPrints(); };
+    window.__wfp = (on) => { if (on !== undefined) _setWallFinishPrints(on); return _wallFinishDeckPrints(); };
+    window.__perWall = () => {
+      elevations = [{ id: 'a', name: 'A', wallW: 100, wallH: 100, frames: [] }, { id: 'b', name: 'B', wallW: 100, wallH: 100, frames: [] }];
+      currentElevIndex = 0;
+      _setWallFinishPrints(true);
+      _setWallFinishPrintsWall(false, elevations[0]);
+      const r = { aOff: _wallFinishPrints(elevations[0]), bOn: _wallFinishPrints(elevations[1]), aStored: elevations[0].wallFinishPrint, bStored: elevations[1].wallFinishPrint };
+      _setWallFinishPrints(true);
+      r.afterAllOn = _wallFinishPrints(elevations[0]); r.leftover = 'wallFinishPrint' in elevations[0];
+      _setWallFinishPrints(false);
+      _setWallFinishPrintsWall(true, elevations[1]);
+      r.deckOffWallOn = _wallFinishPrints(elevations[1]);
+      _setWallFinishPrints(true);
+      return r;
+    };
+    window.__reqAll = () => {
+      elevations = [{ id: 'a', name: 'A', wallW: 100, wallH: 100, frames: [] }, { id: 'b', name: 'B', wallW: 100, wallH: 100, frames: [], underlay: { src: 'data:image/png;base64,AAAA', x: 0, y: 0, w: 10, h: 10 } }];
+      _setElevRequiredAll(true);
+      const r = { markedBare: elevations[0].elevRequired === true, markedWithUl: elevations[1].elevRequired === true };
+      elevations[1].elevRequired = true;
+      _setElevRequiredAll(false);
+      r.afterClear = elevations.some(e => e.elevRequired);
+      return r;
+    };
+    window.__ulOffer = () => new Promise((res) => {
+      elevations = [{ id: 'a', name: 'A', wallW: 100, wallH: 100, frames: [], elevRequired: true }];
+      currentElevIndex = 0;
+      let asked = 0;
+      const prevConfirm = showConfirmModal;
+      showConfirmModal = (t, b, y, n, onYes) => { asked++; onYes && onYes(); };
+      const OrigImage = window.Image;
+      window.Image = function () { const im = {}; Object.defineProperty(im, 'src', { set() { setTimeout(() => im.onload && im.onload(), 0); } }); im.naturalWidth = 50; im.naturalHeight = 50; return im; };
+      importElevUnderlay(new window.Blob(['x'], { type: 'image/png' }));
+      setTimeout(() => { showConfirmModal = prevConfirm; window.Image = OrigImage; res({ asked, still: elevations[0].elevRequired === true }); }, 120);
+    });
   `;
   const quiet = console.error; console.error = () => {};
   window.eval(src + '\n' + block);
@@ -111,15 +145,47 @@ const path = require('path');
     if (!t2.some(x => x.s === 'WALL: WOOD · WD-1')) throw new Error('turning it back on did not bring the line back');
     if ('wallFinishPrint' in window.__ec()) throw new Error('ON should leave no key, like an older file');
   });
-  await check('20.40: the Elevation tab has a Print on pages box wired to the same switch', async () => {
+  await check('20.41: the Wall tab has a per-wall Print tick wired to this wall', async () => {
     window.__ui({});
     const cb = document.getElementById('wallFinishPrint');
-    if (!cb || !cb.checked) throw new Error('no Print on pages box, or it starts off');
+    if (!cb || !cb.checked) throw new Error('no Print box, or it starts off');
+    if (!cb.closest('[data-elevtabpane="wall"]')) throw new Error('the Print box is not on the Wall tab');
     // jsdom does not run inline handlers here, so check the wiring and drive the setter it calls.
-    if ((cb.getAttribute('onchange') || '').indexOf('_setWallFinishPrints(this.checked)') < 0) throw new Error('the box is not wired to _setWallFinishPrints');
+    if ((cb.getAttribute('onchange') || '').indexOf('_setWallFinishPrintsWall(this.checked)') < 0) throw new Error('the box is not wired to the per-wall setter');
     window.__wfp(false); const off = cb.checked; window.__wfp(true);
-    if (off) throw new Error('the box did not follow the switch turning off');
-    if (!cb.checked) throw new Error('the box did not follow the switch turning back on');
+    if (off) throw new Error('the box did not follow All walls turning off');
+    if (!cb.checked) throw new Error('the box did not follow All walls turning back on');
+  });
+  await check('20.41: one wall can hide its finish while the others print, and All walls overrides both ways', async () => {
+    window.__wfp(true);
+    const r = window.__perWall();
+    if (r.aOff !== false) throw new Error('turning wall A off did not stick: ' + r.aOff);
+    if (r.bOn !== true) throw new Error('wall B stopped printing when only A was turned off');
+    if (r.aStored !== false || r.bStored !== undefined) throw new Error('stored per-wall values wrong: ' + JSON.stringify(r));
+    if (r.afterAllOn !== true || r.leftover) throw new Error('All walls on did not clear wall A\'s own choice');
+    if (r.deckOffWallOn !== true) throw new Error('a wall ticked ON under a deck OFF did not print');
+    const t = await window.__render({ wallFinish: 'Wood', wallFinishNote: 'WD-1', wallFinishPrint: false });
+    if (t.some(x => /^WALL:/.test(x.s))) throw new Error('a wall turned off still printed its finish');
+  });
+  await check('20.41: All walls for Elevation required marks only walls with no client elevation, and clears all', async () => {
+    const r = window.__reqAll();
+    if (!r.markedBare || r.markedWithUl) throw new Error('mark-all result wrong: ' + JSON.stringify(r));
+    if (r.afterClear) throw new Error('clear-all left a wall marked');
+  });
+  await check('20.41: adding a client elevation to a wall marked Elevation required offers to untick it', async () => {
+    const r = await window.__ulOffer();
+    if (r.asked !== 1) throw new Error('asked ' + r.asked + ' times');
+    if (r.still) throw new Error('Untick did not clear Elevation required');
+  });
+  await check('20.41: wall type, client elevation, required, finish and paint are all on the Wall tab; size stays above', async () => {
+    const pane = document.querySelector('[data-elevtabpane="wall"]');
+    ['artWallBtn', 'egdWallBtn', 'wfWallBtn', 'sec-underlay', 'underlayControls', 'elevRequired', 'elevRequiredAll', 'wallFinish', 'wallFinishNote', 'wallFinishPrintAll', 'wallColorRow'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) throw new Error('#' + id + ' missing');
+      if (!pane.contains(el)) throw new Error('#' + id + ' is not on the Wall tab');
+    });
+    if (pane.contains(document.getElementById('wallW'))) throw new Error('wall size moved into the tab; it should stay above');
+    if (document.querySelector('[data-elevtabpane="context"] #sec-underlay')) throw new Error('client elevation still on Context');
   });
 
   const bad = results.filter(r => !r.ok);

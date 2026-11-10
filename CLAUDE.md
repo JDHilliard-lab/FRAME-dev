@@ -1023,10 +1023,18 @@ run but passes alone is usually load timing: rerun before chasing it.
   listeners take only a drag whose item type is `application/json` (blank type is a folder,
   the library zone's); everything else passes through to the image zones. The handle is
   asked for synchronously in the drop (`getAsFileSystemHandle`), awaited after the confirm.
-- **WALL FINISH PRINTS UNLESS `editorialContent.wallFinishPrint === false` (20.40,
-  `_wallFinishPrints`, `_setWallFinishPrints`).** Deck-wide; ON leaves no key so older files
-  print as before. Two controls, one field: `#wallFinishPrint` on the Elevation tab (synced in
-  `_wallFinishSync`) and the breaker page panel. Off never touches a wall's finish data.
+- **THE WALL TAB (20.41, `data-elevtabpane="wall"`).** Wall type, client elevation
+  (`#sec-underlay`), Elevation required, wall finish and paint live there; only W/H, zoom and
+  export stay in `#elev-sec-wall` above the tabs. Underlay paths open `'wall'`, not `'context'`.
+  Tab order art, wall, guides, context, glass (pinned by three tests).
+- **PAGE OPTIONS ARE PER WALL WITH AN "ALL WALLS" (20.41).** Wall finish: deck default
+  `editorialContent.wallFinishPrint === false` plus per-wall `elev.wallFinishPrint` (boolean,
+  absent = follow deck); `_wallFinishPrints(elev)` resolves it, `_setWallFinishPrints` (all)
+  sets the default AND deletes every wall's own value, `_setWallFinishPrintsWall` stores
+  nothing when it matches the default. `_wallAllMenu(anchor, 'finish'|'required'|'indeck')`
+  is the All walls menu; Required-all marks only walls with no client elevation. New page
+  options should follow this shape. Adding a first client elevation to a wall marked
+  Elevation required offers to untick it (`_ulOfferClearRequired`).
 - **ONE AUTOSAVE PER TAB (18.82).** Records are keyed by `_autosaveSession` (the old
   shared `ADB_ID = 'current'` is read and cleared, never written). `_aPrune` keeps the
   newest `AUTOSAVE_KEEP` (5), max `AUTOSAVE_MAX_DAYS`, never this tab's. `clearAutosave`

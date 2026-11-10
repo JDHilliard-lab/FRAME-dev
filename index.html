@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.40">
+    <link rel="stylesheet" href="style.css?v=20.41">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -633,71 +633,6 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </button>
                         </div>
-                        <!-- WALL MODE. Two buttons, not one toggle: a toggle can only show
-                             the state it is in and leaves the other one unnamed, so a
-                             designer has to already know the mode exists to go looking for
-                             it. Side by side, the wall's mode is the highlighted one and
-                             the alternative is right there with a name on it.
-                             Out of the Add & Arrange toolbar, where a labelled button was
-                             wide enough to push the item-code picker off the row. That row
-                             is icons and one long select; this is neither.
-                             ART is the default for every elevation (`elev.egdWall` absent),
-                             which is why nothing has to be written to a project for it. -->
-                        <div class="elev-mini-label" style="margin-top:10px;">WALL TYPE <span class="help-dot" data-help="Every wall starts as an ART wall. Turn EGD on when a wallcovering should fill the wall, or WF on to add window panels for film. Click a lit EGD or WF button again to turn it off.">?</span></div>
-                        <div style="display:flex; gap:6px; margin-top:4px;">
-                            <button class="action-btn btn-secondary wall-mode-btn" id="artWallBtn" onclick="setElevWallMode('art')" title="Art wall — framed art hangs on this wall. The default for every elevation." style="flex:1; height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="6" y="5" width="12" height="14"/><rect x="9" y="8" width="6" height="8"/></svg>
-                                ART WALL
-                            </button>
-                            <button class="action-btn btn-secondary wall-mode-btn" id="egdWallBtn" onclick="setElevWallMode('egd')" title="EGD wall — this wall is a graphic surface: a wallcovering or window film fills it and stays inside the wall, above the baseboard. Framed art can still be placed over it." style="flex:1; height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="3" width="18" height="15"/><path d="M3 18h18"/><path d="M3 7h18M3 11h18M7 3v15M13 3v15"/></svg>
-                                EGD WALL<span class="wm-off">&times;</span>
-                            </button>
-                            <!-- WF WALL is DERIVED, not stored: a wall with glazing on it
-                                 IS a window-film wall, so there is no third flag to keep in
-                                 step with the glass. Lit when the wall has a run; clicking
-                                 it on a bare wall builds the standard one and opens Glass,
-                                 so the next move is visible rather than something a
-                                 designer has to be told. -->
-                            <button class="action-btn btn-secondary wall-mode-btn" id="wfWallBtn" onclick="toggleWfWall()" title="WF wall — window film on glass. On a bare wall this builds the standard elevation (185&quot; x 108&quot; wall, one 100&quot; x 82&quot; run of three equal panels, 45&quot; from the left, 4&quot; sill) and opens the Glass tab." style="flex:1; height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="5" width="18" height="14"/><path d="M9 5v14M15 5v14"/></svg>
-                                WF WALL<span class="wm-off">&times;</span>
-                            </button>
-                        </div>
-                        <!-- What the mode actually governs, written by _syncEgdWallBtn. The
-                             two buttons on their own imply you must pick EGD for any EGD or
-                             WF work, which is wrong and expensive: window film is sized to
-                             the GLASS and is unaffected by the mode, so a glazed wall left
-                             on ART is correct. Without this line the only way to learn that
-                             is to switch mode and watch the film move. -->
-                        <div id="wallModeHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
-                        <!-- WALL FINISH (20.25). What the wall IS (drywall, wood, ...) and its colour,
-                             printed under the wall page's subheading. Ford asked for it on every
-                             elevation page so frames can be chosen against the wall. Per wall,
-                             blank by default, and blank prints nothing. -->
-                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Paint colours the wall above the baseboard on its pages and exports. Leave it blank to print nothing. Print on pages switches the line off for every wall in the deck and keeps what each wall says.">?</span>
-                            <label style="margin-left:auto; display:inline-flex; align-items:center; gap:4px; font-weight:400; text-transform:none; letter-spacing:0; cursor:pointer;" title="Print the WALL: line on every wall page in the deck. Off hides it and keeps each wall's finish."><input type="checkbox" id="wallFinishPrint" checked onchange="_setWallFinishPrints(this.checked)" style="margin:0;"> Print on pages</label></div>
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
-                            <select id="wallFinish" onchange="setElevWallFinish(); pushHistory()" title="What the wall is made of" style="height:26px; min-width:0; font-size:var(--fs-60);"></select>
-                            <input type="text" id="wallFinishNote" maxlength="40" placeholder="Colour or spec code" title="Colour or the designer's spec code (White, PT-1, WD-11 Walnut)" oninput="setElevWallFinish()" onchange="pushHistory()" style="height:26px; min-width:0; font-size:var(--fs-60);">
-                        </div>
-                        <!-- WALL COLOUR (20.32, 20.35): the app's colour picker, as everywhere else: round swatch
-                             dots (_frameSwatchesInto) and the colour-wheel dot for any other colour. 20.32 had
-                             a plain browser picker on a row of its own and designers did not see it. The first
-                             dot is NO PAINT (the slash), lit when the wall is unpainted. -->
-                        <div id="wallColorRow" style="display:flex; align-items:center; gap:6px; margin-top:6px;">
-                            <span style="font-size:var(--fs-60); color:var(--text-muted); flex:0 0 auto;" title="Paints the wall above the baseboard on its pages and exports">Paint</span>
-                            <button type="button" id="wallColorNone" onclick="setElevWallColor(''); pushHistory()" title="No paint: a plain wall" style="width:18px; height:18px; min-width:18px; padding:0; border-radius:50%; cursor:pointer; flex:0 0 auto; background:linear-gradient(to top right, transparent calc(50% - 1px), #d0453b calc(50% - 1px), #d0453b calc(50% + 1px), transparent calc(50% + 1px)), #ffffff; border:2px solid var(--border-color);"></button>
-                            <div id="wallColorSwatches" style="display:flex; align-items:center; flex:1 1 auto; min-width:0;"></div>
-                            <input type="color" id="wallColor" value="#ffffff" oninput="setElevWallColor(this.value)" onchange="pushHistory()" title="Any other colour">
-                        </div>
-                        <!-- ELEVATION REQUIRED (20.33): no client elevation for this wall yet. Stamps
-                             this wall's pages and its sets' spec pages, red, top right. -->
-                        <label style="display:flex; align-items:center; gap:6px; margin-top:6px; font-size:var(--fs-60); color:var(--text-muted); cursor:pointer;" title="The client has not sent an elevation for this wall. Its pages print ELEVATION REQUIRED in red, top right, with the line below.">
-                            <input type="checkbox" id="elevRequired" onchange="setElevRequired(); pushHistory()" style="margin:0;">
-                            <span>Elevation required (no client elevation yet)</span>
-                        </label>
-                        <input type="text" id="elevRequiredNote" maxlength="60" placeholder="Artwork size to be confirmed" title="The line under ELEVATION REQUIRED. Blank prints: Artwork size to be confirmed" oninput="setElevRequired()" onchange="pushHistory()" style="display:none; width:100%; box-sizing:border-box; height:24px; margin-top:4px; font-size:var(--fs-60);">
                         <!-- Codes on this wall that hang as one set (19.44, _elevSetHintSync): the
                              same suggestion Preflight lists, quiet, never a popup. -->
                         <div id="wallSetHint" class="wall-set-hint" style="display:none"></div>
@@ -745,11 +680,15 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18"/><rect x="8" y="7" width="8" height="10"/></svg>
                         <span>Art</span><span class="elev-tab-n" data-elevtab-n="art"></span>
                     </button>
+                    <button class="frame-tab" data-elevtab="wall" onclick="switchElevTab('wall')" title="Wall: its type, the client elevation, finish and paint">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v5M15 9v5M9 14v6"/></svg>
+                        <span>Wall</span>
+                    </button>
                     <button class="frame-tab" data-elevtab="guides" onclick="switchElevTab('guides')" title="Guides: which dimensions, labels and lines show on every wall">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 7h18M3 7v3M21 7v3"/><path d="M4 21V13h16v8"/><path d="M8 13v3M12 13v4M16 13v3"/></svg>
                         <span>Guides</span>
                     </button>
-                    <button class="frame-tab" data-elevtab="context" onclick="switchElevTab('context')" title="Context: the client elevation and the doors, furniture and fixtures on this wall">
+                    <button class="frame-tab" data-elevtab="context" onclick="switchElevTab('context')" title="Context: the doors, furniture and fixtures on this wall">
                         <svg class="svg-icon" viewBox="0 0 24 24"><rect x="5" y="3" width="11" height="18"/><path d="M2 21h20"/><circle cx="13" cy="12" r="0.6"/></svg>
                         <span>Context</span><span class="elev-tab-n" data-elevtab-n="context"></span>
                     </button>
@@ -773,6 +712,92 @@
                 <!-- GUIDES TAB (18.51). The layout guides used to sit in the header above the tabs,
                      open, so the header was ~550px tall and the frame list, the thing you
                      actually work in, started below the fold. A tab gives them their own height. -->
+                <!-- WALL TAB (20.41). Everything that describes the wall itself: its type, the
+                     client's elevation and whether it is still missing, the finish and the paint.
+                     These sat above the tabs (on every tab, costing the Art tab its height) and on
+                     Context, a tab away from Elevation required, which answers the same question
+                     as the client elevation. The ids are unchanged. -->
+                <div class="elev-tabpane" data-elevtabpane="wall" style="display:none;">
+                    <div class="elev-wall-pane">
+                        <!-- WALL MODE. Two buttons, not one toggle: a toggle can only show
+                             the state it is in and leaves the other one unnamed, so a
+                             designer has to already know the mode exists to go looking for
+                             it. Side by side, the wall's mode is the highlighted one and
+                             the alternative is right there with a name on it.
+                             Out of the Add & Arrange toolbar, where a labelled button was
+                             wide enough to push the item-code picker off the row. That row
+                             is icons and one long select; this is neither.
+                             ART is the default for every elevation (`elev.egdWall` absent),
+                             which is why nothing has to be written to a project for it. -->
+                        <div class="elev-mini-label" style="margin-top:10px;">WALL TYPE <span class="help-dot" data-help="Every wall starts as an ART wall. Turn EGD on when a wallcovering should fill the wall, or WF on to add window panels for film. Click a lit EGD or WF button again to turn it off.">?</span></div>
+                        <div style="display:flex; gap:6px; margin-top:4px;">
+                            <button class="action-btn btn-secondary wall-mode-btn" id="artWallBtn" onclick="setElevWallMode('art')" title="Art wall — framed art hangs on this wall. The default for every elevation." style="flex:1; height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="6" y="5" width="12" height="14"/><rect x="9" y="8" width="6" height="8"/></svg>
+                                ART WALL
+                            </button>
+                            <button class="action-btn btn-secondary wall-mode-btn" id="egdWallBtn" onclick="setElevWallMode('egd')" title="EGD wall — this wall is a graphic surface: a wallcovering or window film fills it and stays inside the wall, above the baseboard. Framed art can still be placed over it." style="flex:1; height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="3" width="18" height="15"/><path d="M3 18h18"/><path d="M3 7h18M3 11h18M7 3v15M13 3v15"/></svg>
+                                EGD WALL<span class="wm-off">&times;</span>
+                            </button>
+                            <!-- WF WALL is DERIVED, not stored: a wall with glazing on it
+                                 IS a window-film wall, so there is no third flag to keep in
+                                 step with the glass. Lit when the wall has a run; clicking
+                                 it on a bare wall builds the standard one and opens Glass,
+                                 so the next move is visible rather than something a
+                                 designer has to be told. -->
+                            <button class="action-btn btn-secondary wall-mode-btn" id="wfWallBtn" onclick="toggleWfWall()" title="WF wall — window film on glass. On a bare wall this builds the standard elevation (185&quot; x 108&quot; wall, one 100&quot; x 82&quot; run of three equal panels, 45&quot; from the left, 4&quot; sill) and opens the Glass tab." style="flex:1; height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="5" width="18" height="14"/><path d="M9 5v14M15 5v14"/></svg>
+                                WF WALL<span class="wm-off">&times;</span>
+                            </button>
+                        </div>
+                        <!-- What the mode actually governs, written by _syncEgdWallBtn. The
+                             two buttons on their own imply you must pick EGD for any EGD or
+                             WF work, which is wrong and expensive: window film is sized to
+                             the GLASS and is unaffected by the mode, so a glazed wall left
+                             on ART is correct. Without this line the only way to learn that
+                             is to switch mode and watch the film move. -->
+                        <div id="wallModeHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
+                    </div>
+                <details id="sec-underlay" class="elev-add-arrange-fixed" style="margin-top:8px;" open>
+                    <summary class="section-title" style="cursor:pointer; list-style-position:inside; user-select:none;">Client Elevation</summary>
+                    <div class="elev-section-emphasis-inner">
+                        <div id="underlayControls"></div>
+                    </div>
+                </details>
+                    <div class="elev-wall-pane">
+                        <!-- ELEVATION REQUIRED (20.33): no client elevation for this wall yet. Stamps
+                             this wall's pages and its sets' spec pages, red, top right. -->
+                        <div style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+                        <label style="display:flex; align-items:center; gap:6px; font-size:var(--fs-60); color:var(--text-muted); cursor:pointer;" title="The client has not sent an elevation for this wall. Its pages print ELEVATION REQUIRED in red, top right, with the line below.">
+                            <input type="checkbox" id="elevRequired" onchange="setElevRequired(); pushHistory()" style="margin:0;">
+                            <span>Elevation required (no client elevation yet)</span>
+                        </label>
+                        <button type="button" class="wall-all-btn" id="elevRequiredAll" onclick="_wallAllMenu(this, 'required')" title="Mark or clear Elevation required on every wall">All walls &#9662;</button>
+                        </div>
+                        <input type="text" id="elevRequiredNote" maxlength="60" placeholder="Artwork size to be confirmed" title="The line under ELEVATION REQUIRED. Blank prints: Artwork size to be confirmed" oninput="setElevRequired()" onchange="pushHistory()" style="display:none; width:100%; box-sizing:border-box; height:24px; margin-top:4px; font-size:var(--fs-60);">
+                        <!-- WALL FINISH (20.25). What the wall IS (drywall, wood, ...) and its colour,
+                             printed under the wall page's subheading. Ford asked for it on every
+                             elevation page so frames can be chosen against the wall. Per wall,
+                             blank by default, and blank prints nothing. -->
+                        <div class="elev-mini-label" style="margin-top:10px;">WALL FINISH <span class="help-dot" data-help="What the wall is made of and its colour, so frames can be chosen against it. Prints under the heading on this wall's page. Paint colours the wall above the baseboard on its pages and exports. Leave it blank to print nothing. Print turns the line on or off for this wall; All walls sets every wall at once. Each wall keeps what it says.">?</span>
+                            <label style="margin-left:auto; display:inline-flex; align-items:center; gap:4px; font-weight:400; text-transform:none; letter-spacing:0; cursor:pointer;" title="Print the WALL: line on this wall's pages. All walls sets every wall at once."><input type="checkbox" id="wallFinishPrint" checked onchange="_setWallFinishPrintsWall(this.checked)" style="margin:0;"> Print</label>
+                            <button type="button" class="wall-all-btn" id="wallFinishPrintAll" onclick="_wallAllMenu(this, 'finish')" title="Print or hide the wall finish on every wall">All walls &#9662;</button></div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
+                            <select id="wallFinish" onchange="setElevWallFinish(); pushHistory()" title="What the wall is made of" style="height:26px; min-width:0; font-size:var(--fs-60);"></select>
+                            <input type="text" id="wallFinishNote" maxlength="40" placeholder="Colour or spec code" title="Colour or the designer's spec code (White, PT-1, WD-11 Walnut)" oninput="setElevWallFinish()" onchange="pushHistory()" style="height:26px; min-width:0; font-size:var(--fs-60);">
+                        </div>
+                        <!-- WALL COLOUR (20.32, 20.35): the app's colour picker, as everywhere else: round swatch
+                             dots (_frameSwatchesInto) and the colour-wheel dot for any other colour. 20.32 had
+                             a plain browser picker on a row of its own and designers did not see it. The first
+                             dot is NO PAINT (the slash), lit when the wall is unpainted. -->
+                        <div id="wallColorRow" style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+                            <span style="font-size:var(--fs-60); color:var(--text-muted); flex:0 0 auto;" title="Paints the wall above the baseboard on its pages and exports">Paint</span>
+                            <button type="button" id="wallColorNone" onclick="setElevWallColor(''); pushHistory()" title="No paint: a plain wall" style="width:18px; height:18px; min-width:18px; padding:0; border-radius:50%; cursor:pointer; flex:0 0 auto; background:linear-gradient(to top right, transparent calc(50% - 1px), #d0453b calc(50% - 1px), #d0453b calc(50% + 1px), transparent calc(50% + 1px)), #ffffff; border:2px solid var(--border-color);"></button>
+                            <div id="wallColorSwatches" style="display:flex; align-items:center; flex:1 1 auto; min-width:0;"></div>
+                            <input type="color" id="wallColor" value="#ffffff" oninput="setElevWallColor(this.value)" onchange="pushHistory()" title="Any other colour">
+                        </div>
+                    </div>
+                </div>
                 <div class="elev-tabpane" data-elevtabpane="guides" style="display:none;">
                     <div id="elev-sec-layout" class="elev-guides-pane">
                         <div class="section-title section-title-static">Layout Guides</div>
@@ -892,12 +917,6 @@
                     </div>
                 </div>
                 <div class="elev-tabpane" data-elevtabpane="context" style="display:none;">
-                <details id="sec-underlay" class="elev-add-arrange-fixed" open>
-                    <summary class="section-title" style="cursor:pointer; list-style-position:inside; user-select:none;">Client Elevation</summary>
-                    <div class="elev-section-emphasis-inner">
-                        <div id="underlayControls"></div>
-                    </div>
-                </details>
                 <details id="sec-context" class="elev-add-arrange-fixed" style="margin-top:6px;" open>
                     <summary class="section-title" style="cursor:pointer; list-style-position:inside; user-select:none;">Context Blocks</summary>
                     <div class="elev-section-emphasis-inner">
@@ -2291,9 +2310,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.40';</script>
-<script src="templates.js?v=20.40"></script>
-<script src="app.js?v=20.40"></script>
+<script>window.FRAME_HTML_VERSION = '20.41';</script>
+<script src="templates.js?v=20.41"></script>
+<script src="app.js?v=20.41"></script>
 
 </body>
 </html>
