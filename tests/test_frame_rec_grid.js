@@ -37,6 +37,31 @@ function inApp() {
       if (tops.length !== Math.ceil(n / Math.min(cols, n))) throw new Error('rows: ' + tops.join(','));
     });
   });
+  // 20.42: the profile drawing keeps its 1-column size at 3 and 4 columns (it was capped
+  // at a quarter of the column, so it shrank as columns were added), and the Size line is no
+  // longer cut short.
+  const profile = { naturalWidth: 300, naturalHeight: 300, width: 300, height: 300 };
+  const prof = (cols, n) => {
+    editorialContent.frameRec = { groupBy: 'none', cols: cols, size: 'large' };
+    const frames = [];
+    for (let i = 0; i < n; i++) frames.push({ code: 'MICH ' + i, vendor: 'Michelangelo', sizeText: '0.875"W x 1.25"D, R 1"', count: 1, img: corner, profileImg: profile });
+    const rec = new CanvasPdfRec(936, 540); const got = []; const texts = [];
+    const real = rec.addImage.bind(rec);
+    rec.addImage = function (src, fmt, x, y, w, h) { if (src === profile) got.push(h); return real.apply(rec, arguments); };
+    const rt = rec.text.bind(rec);
+    rec.text = function (t) { texts.push(Array.isArray(t) ? t.join(' ') : String(t)); return rt.apply(rec, arguments); };
+    _drawFrameRecPage(rec, {}, 1, {}, { header: '', frames: frames.slice(0, Math.min(n, _frameRecRowsPerPage(editorialContent.frameRec))) });
+    return { h: got[0], texts };
+  };
+  const one = prof(1, 3).h;
+  [3, 4].forEach(c => {
+    ok('EXACT ASK (20.42): at ' + c + ' columns the profile is the 1-column size', () => {
+      const r = prof(c, 7);
+      if (!(one > 0) || !(r.h > 0)) throw new Error('no profile drawn: ' + one + ' / ' + r.h);
+      if (Math.abs(r.h - one) > 0.5) throw new Error('profile ' + r.h.toFixed(1) + 'pt at ' + c + ' columns vs ' + one.toFixed(1) + 'pt at 1');
+      if (!r.texts.some(t => t.indexOf('R 1"') >= 0)) throw new Error('the Size line was cut short: ' + r.texts.filter(t => /W x/.test(t)).join(' | '));
+    });
+  });
   window.__out = out;
 }
 
