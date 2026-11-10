@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.29';
+const APP_VERSION = '20.30';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -8122,7 +8122,7 @@ function addNewElevationTab() {
         if (!ans) return null;
         let wall = null;
         if (ans.kind === 'hang') wall = _placementHang(ans.key);
-        else if (ans.kind === 'new') wall = _placementMint(ans.cat, ans.set, true).wall;
+        else if (ans.kind === 'new') wall = _placementMint(ans.cat, ans.set, true, ans.ctx).wall;
         const idx = wall ? elevations.indexOf(wall) : -1;
         if (idx < 0) return null;
         renderNavTabs(); populateDashPushSelector(); switchView('elevation', idx);
@@ -11996,7 +11996,93 @@ function _codeNumsFor(prefix) {
     });
     return { max: max, padded: padded, sep: sep, width: width };
 }
-function _nextPlacementCode(prefix) {
+// ── THE PROJECT'S CODE PATTERN (20.30) ───────────────────────────────────────────
+// Some clients track art against their architectural drawings: L3.ART.S16-10A is
+// level 3, art, sector 16, placement 10, piece A. Designers built those codes by hand in
+// InDesign because FRAME only minted ART.n. A project now names its pattern once:
+//   {type}  the category's prefix (ART, EGD, WF, or the project's own, e.g. GLA)
+//   {level} the plan level's code (Level 03 -> L3; set per level)
+//   {zone}  the piece's Sector field (any word the client uses)
+//   {n} {nn} {nnn}  the placement number, padded to that many digits
+// and every new code follows it. The piece letter goes on the end as always. Blank is the
+// house ART.1. A code the pattern cannot fill (no sector given yet) falls back to the house
+// code rather than mint L3.ART.S-01.
+const CODE_PATTERN_PRESETS = [
+    { v: '', label: 'ART.1 (house)' },
+    { v: '{type}-{nn}', label: 'ART-01' },
+    { v: '{level}.{type}-{nn}', label: 'L3.ART-01 (level)' },
+    { v: '{level}.{type}.S{zone}-{nn}', label: 'L3.ART.S16-01 (level, sector)' },
+];
+function _codePattern() { return String((editorialContent && editorialContent.codePattern) || '').trim(); }
+function _codeZoneLabel() { return String((editorialContent && editorialContent.codeZoneLabel) || '').trim() || 'Sector'; }
+function _codePatternNeeds(pat) {
+    const p = pat == null ? _codePattern() : pat;
+    return { level: p.indexOf('{level}') >= 0, zone: p.indexOf('{zone}') >= 0, type: p.indexOf('{type}') >= 0 };
+}
+// A plan level's code: its own `code`, else the number in its name (Level 03 -> L3), else
+// the first letters of the name (Mezzanine -> MEZ), else L and its position.
+function _levelCode(li) {
+    const i = (typeof li === 'number' && li >= 0) ? li : 0;
+    const L = (typeof floorplanLevels !== 'undefined' && floorplanLevels) ? floorplanLevels[i] : null;
+    if (L && String(L.code || '').trim()) return String(L.code).trim();
+    const nm = String((L && L.name) || '').trim();
+    const m = /(\d+)/.exec(nm);
+    if (m) return 'L' + parseInt(m[1], 10);
+    const w = nm.replace(/^level\s*/i, '').replace(/[^A-Za-z0-9]/g, '');
+    return w ? w.slice(0, 3).toUpperCase() : 'L' + (i + 1);
+}
+function _codePatternParts(pat) {
+    const m = /\{(n+)\}/.exec(pat || '');
+    if (!m) return null;
+    return { before: pat.slice(0, m.index), width: m[1].length > 1 ? m[1].length : 0, after: pat.slice(m.index + m[0].length) };
+}
+// Fill the tokens; null when one the template uses is blank.
+function _codePatternFill(tpl, ctx) {
+    let missing = false;
+    const out = String(tpl || '').replace(/\{(type|level|zone)\}/g, (_, k) => {
+        const v = String(ctx[k] == null ? '' : ctx[k]).trim();
+        if (!v) missing = true;
+        return v;
+    });
+    return missing ? null : out;
+}
+// ctx: { level: plan index, zone: sector text }. Unset level reads the selected piece's.
+function _codeCtxResolve(prefix, ctx) {
+    const c = ctx || {};
+    let li = c.level;
+    if (typeof li !== 'number') {
+        const sel = (typeof dashSelectedRowIndex === 'number' && dashProjectData) ? dashProjectData[dashSelectedRowIndex] : null;
+        li = (sel && typeof sel.level === 'number') ? sel.level : 0;
+    }
+    return { type: prefix || 'ART', level: _levelCode(li), zone: String(c.zone == null ? '' : c.zone).trim() };
+}
+// The next code in the project's pattern, or null (no pattern, or a token it needs is blank).
+// The number counts on its own stem: L3.ART.S16-10 is followed by L3.ART.S16-11 whatever
+// Sector 24 is up to.
+function _nextPatternCode(prefix, ctx) {
+    const pp = _codePatternParts(_codePattern());
+    if (!pp) return null;
+    const c = _codeCtxResolve(prefix, ctx);
+    const stem = _codePatternFill(pp.before, c), tail = _codePatternFill(pp.after, c);
+    if (stem == null || tail == null) return null;
+    let n = 0;
+    const keys = {};
+    (dashProjectData || []).forEach(d => {
+        const k = d && d.id ? _artGroupKey(d.id) : '';
+        if (!k) return;
+        keys[k] = true;
+        if (k.indexOf(stem) !== 0 || k.length < stem.length + tail.length) return;
+        if (tail && k.slice(k.length - tail.length) !== tail) return;
+        const mid = k.slice(stem.length, k.length - tail.length);
+        if (/^\d+$/.test(mid)) n = Math.max(n, parseInt(mid, 10));
+    });
+    let code;
+    do { n++; code = stem + (pp.width ? String(n).padStart(pp.width, '0') : String(n)) + tail; } while (keys[code]);
+    return code;
+}
+function _nextPlacementCode(prefix, ctx) {
+    const pc = _nextPatternCode(prefix || 'ART', ctx);
+    if (pc) return pc;
     const p = prefix || 'ART';
     const info = _codeNumsFor(p);
     let n = info.max + 1;
@@ -12390,7 +12476,7 @@ const BULK_FIELD_ELEMENTS = {
     m1ColorName: ['m1_color'], m1ColorHex: ['m1_colorHex'],
     m2: ['m2'], m2ColorName: ['m2_color'], m2ColorHex: ['m2_colorHex'],
     glass: ['m_glass'], hardware: ['m_hardware'], mount: ['m_mount'],
-    backing: ['m_backing'], notes: ['m_notes'], prodNotes: ['m_prodNotes'], weightLbs: ['m_weight'],
+    backing: ['m_backing'], notes: ['m_notes'], prodNotes: ['m_prodNotes'], weightLbs: ['m_weight'], zone: ['m_zone'],
     canvasDepth: ['canvasDepth'], canvasWrap: ['canvasWrap'], floaterInset: ['floaterInset'],
     bleed: ['m_bleed'],
     // Flat graphics: substrate. Bulk-editable like any other production field —
@@ -12681,7 +12767,7 @@ function addDashRow() {
         if (!ans) return null;
         let id = null;
         if (ans.kind === 'grow') { const ids = _placementGrow(ans.key, ans.count); id = ids && ids[0]; }
-        else if (ans.kind === 'new') { const code = _placementMint(ans.cat, ans.set, false).code; const r = dashProjectData.find(x => x && _artGroupKey(x.id) === code); id = r && r.id; }
+        else if (ans.kind === 'new') { const code = _placementMint(ans.cat, ans.set, false, ans.ctx).code; const r = dashProjectData.find(x => x && _artGroupKey(x.id) === code); id = r && r.id; }
         const i = id ? dashProjectData.findIndex(r => r && r.id === id) : -1;
         if (i < 0) return null;
         dashSelectedRowIndex = i;
@@ -12820,6 +12906,7 @@ function loadDashDataIntoControls(data) {
     setVal('m2_color', data.m2ColorName); setVal('m2_colorHex', data.m2ColorHex || '#ffffff');
     setVal('m_glass', data.glass); setVal('m_hardware', data.hardware); setVal('m_mount', data.mount); setVal('m_backing', data.backing); setVal('m_notes', data.notes); setVal('m_prodNotes', data.prodNotes);
     setVal('m_weight', (+data.weightLbs > 0) ? data.weightLbs : '');   // 20.28
+    setVal('m_zone', data.zone || '');   // 20.30
 
     const m1On = data.m1A !== false;
     document.getElementById('m1Toggle').classList.toggle('active', m1On); document.getElementById('m1Toggle').innerText = m1On ? 'ON' : 'OFF';
@@ -13191,7 +13278,8 @@ function syncDashAndCalculate(opts) {
         sbPaperEdge: getStr('sbPaperEdge') || 'clean',
         sbPaperEdgeSeed: row.sbPaperEdgeSeed || 0,
         glass: getStr('m_glass'), hardware: getStr('m_hardware'), mount: getStr('m_mount'), backing: getStr('m_backing'), notes: getStr('m_notes'), prodNotes: getStr('m_prodNotes'),
-        weightLbs: getVal('m_weight')   // 20.28, pounds; 0 = not given
+        weightLbs: getVal('m_weight'),   // 20.28, pounds; 0 = not given
+        zone: getStr('m_zone')   // 20.30, the code pattern's {zone}
     };
     // EVERYTHING THE FORM DOES NOT OWN CARRIES THROUGH (19.73). The row is rebuilt from the
     // form on every keystroke, so a field missing from the list above was deleted by the
@@ -13620,7 +13708,7 @@ function _csvPlaceRows(rows, cats) {
         dashProjectData = rows;
         order.forEach(k => {
             const g = groups[k];
-            const code = _nextPlacementCode(_catCodeInfo(g[0].category || '').prefix);
+            const code = _nextPlacementCode(_catCodeInfo(g[0].category || '').prefix, { level: g[0].level, zone: g[0].zone });
             const letters = _setLetters(g.length);
             g.forEach((r, j) => {
                 const to = g.length === 1 ? code : code + letters[j];
@@ -34579,7 +34667,8 @@ function _fpAddCodesBar(desc) {
 // the selection, but from the floorplan there is no selection to be next to).
 function _fpAddCodes(catKey, n, opts) {
     const info = _catCodeInfo(catKey);
-    const code = _nextPlacementCode(info.prefix);
+    const ctx = (opts && opts.ctx) || null;
+    const code = _nextPlacementCode(info.prefix, ctx);
     const k = Math.max(1, Math.min(12, n || 1));
     const letters = (typeof _setLetters === 'function') ? _setLetters(k) : 'ABCDEFGHIJKL'.slice(0, k).split('');
     const _f = unitFactor('in', dashUnit);
@@ -34591,6 +34680,8 @@ function _fpAddCodes(catKey, n, opts) {
         row.category = catKey || '';
         row.qty = 0;
         row.product = info.product;
+        if (ctx && typeof ctx.level === 'number') row.level = ctx.level;   // 20.30
+        if (ctx && String(ctx.zone || '').trim()) row.zone = String(ctx.zone).trim();
         // A flat graphic gets what the product dropdown seeds for one: the 2" bleed and
         // its application wording.
         if (_isFlatGraphic(row.product)) {
@@ -35189,11 +35280,11 @@ function _placementDone(wall) {
 // A new code of a type, as a single or a set. With `hang`, it goes straight onto its own
 // wall (adopting an untouched default wall first, like the floorplan mockup does).
 // Returns { code, wall }.
-function _placementMint(catKey, setValue, hang) {
+function _placementMint(catKey, setValue, hang, ctx) {
     const choice = _placementSetChoices().find(c => c.value === setValue) || _placementSetChoices()[0];
     // Found by a marker, never by the returned code: the settle inside the add can
     // renumber it (the trap dashNewFromPhotos hit in 19.26).
-    _fpAddCodes(catKey, choice.n, { quiet: true, mark: { _mintMark: 1 } });
+    _fpAddCodes(catKey, choice.n, { quiet: true, mark: { _mintMark: 1 }, ctx: ctx || null });
     const rows = dashProjectData.filter(r => r && r._mintMark);
     rows.forEach(r => { delete r._mintMark; });
     const code = rows.length ? _artGroupKey(rows[0].id) : '';
@@ -35329,13 +35420,29 @@ function _askPlacement(mode, opts) {
         const sSel = mkSel(_placementSetChoices(), 'n1'); sSel.setAttribute('data-ask', 'set');
         s2.appendChild(field('Category', cSel));
         s2.appendChild(field('Frame set', sSel));
+        // 20.30: the pattern's level and sector, started from the selected piece.
+        const need = _codePatternNeeds();
+        const selRow = (typeof dashSelectedRowIndex === 'number' && dashProjectData) ? dashProjectData[dashSelectedRowIndex] : null;
+        let lSel = null, zIn = null;
+        if (need.level && (floorplanLevels || []).length > 1) {
+            lSel = mkSel((floorplanLevels || []).map((L, i) => ({ value: String(i), label: ((L && L.name) || ('Level ' + (i + 1))) + ' (' + _levelCode(i) + ')' })),
+                String((selRow && typeof selRow.level === 'number') ? selRow.level : 0));
+            lSel.setAttribute('data-ask', 'level');
+            s2.appendChild(field('Level', lSel));
+        }
+        if (need.zone) {
+            zIn = document.createElement('input'); zIn.type = 'text'; zIn.setAttribute('data-ask', 'zone');
+            zIn.value = (selRow && selRow.zone) || ''; zIn.placeholder = 'e.g. 16';
+            s2.appendChild(field(_codeZoneLabel(), zIn));
+        }
+        const ctxNow = () => ({ level: lSel ? (parseInt(lSel.value, 10) || 0) : ((selRow && typeof selRow.level === 'number') ? selRow.level : 0), zone: zIn ? zIn.value.trim() : '' });
         const go2 = btn(''); go2.setAttribute('data-ask', 'go-new');
         const sync2 = () => {
-            const code = _nextPlacementCode(_catCodeInfo(cSel.value).prefix);
+            const code = _nextPlacementCode(_catCodeInfo(cSel.value).prefix, ctxNow());
             go2.textContent = (wallMode ? 'Create ' + code + ' and its wall' : 'Create ' + code);
         };
-        cSel.onchange = sync2; sync2();
-        go2.onclick = () => { _fpAddType = cSel.value; finish({ kind: 'new', cat: cSel.value, set: sSel.value }); };
+        cSel.onchange = sync2; if (lSel) lSel.onchange = sync2; if (zIn) zIn.oninput = sync2; sync2();
+        go2.onclick = () => { _fpAddType = cSel.value; finish({ kind: 'new', cat: cSel.value, set: sSel.value, ctx: ctxNow() }); };
         s2.appendChild(go2);
 
         const row = document.createElement('div'); row.className = 'ask-actions';
@@ -36041,6 +36148,43 @@ function _codesCommitFormId(inputEl) {
     _codesCommitRowId(dashSelectedRowIndex, inputEl);
 }
 
+// ── RECODE A PROJECT TO ITS PATTERN (20.30) ───────────────────────────────────────
+// A project started on ART.1 codes moves to the client's pattern in one go: every house-
+// coded placement whose pieces have what the pattern needs (a Sector when it uses one)
+// takes the next pattern code, in code order, pieces keeping their letters (ART.11B ->
+// L3.ART.S24-07B). Walls named after the code, page settings and the rename log follow,
+// as for any rename. Placements still missing a sector are left and counted.
+// Returns { moved: [{from, to}], skipped: [keys] }.
+function _codePatternPlan() {
+    const out = { todo: [], skipped: [] };
+    if (!_codePatternParts(_codePattern())) return out;
+    const need = _codePatternNeeds();
+    _placementList().forEach(g => {
+        if (!_plainCodeParts(g.key)) return;   // already a client or catalogue code
+        const r0 = g.rows[0] || {};
+        const zone = String(r0.zone || '').trim();
+        if (need.zone && !zone) { out.skipped.push(g.key); return; }
+        out.todo.push({ key: g.key, prefix: _plainCodeParts(g.key).prefix, ctx: { level: typeof r0.level === 'number' ? r0.level : 0, zone: zone } });
+    });
+    return out;
+}
+function recodeToPattern(quiet) {
+    const plan = _codePatternPlan();
+    const moved = [];
+    plan.todo.forEach(t => {
+        const to = _nextPatternCode(t.prefix, t.ctx);
+        if (to && _fpRenameGroup(t.key, to, { quiet: true, force: true })) moved.push({ from: t.key, to: to });
+    });
+    if (moved.length) {
+        _codesSettle();
+        if (!quiet) {
+            _codesRefreshViews();
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        }
+    }
+    return { moved: moved, skipped: plan.skipped };
+}
 // ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
 // Every piece of the placement keeps its suffix (ART.4A -> ART.9A), so a rename is one
 // gesture for a triptych, not three. The id is the identity everything reads: the
@@ -36470,7 +36614,18 @@ function _fpPanelCats(t) {
                 },
             });
         };
-        row.appendChild(sw); row.appendChild(lbI); row.appendChild(sbI); row.appendChild(rm);
+        // 20.30: the type's code prefix, per project (GLA where a client says GLA).
+        const pxI = document.createElement('input'); pxI.type = 'text'; pxI.value = _catCodeInfo(cc.key).prefix || ''; pxI.title = 'Code prefix for this type ({type} in the code pattern)';
+        pxI.setAttribute('data-cat-prefix', cc.key);
+        pxI.style.cssText = 'flex:0 0 44px; width:44px; height:24px; font-size:var(--fs-60); padding:0 4px; text-transform:uppercase; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+        pxI.onchange = () => {
+            const v = pxI.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (!v || !/^[A-Z]/.test(v)) { pxI.value = _catCodeInfo(cc.key).prefix; return; }
+            const a = _artCatsEnsure(); if (a[ci]) { a[ci].prefix = v; if (!a[ci].product) a[ci].product = _catCodeInfo(cc.key).product; }
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools();
+        };
+        row.appendChild(sw); row.appendChild(lbI); row.appendChild(pxI); row.appendChild(sbI); row.appendChild(rm);
         t.appendChild(row);
     });
     const addCat = document.createElement('button'); addCat.textContent = '+ Add category'; addCat.className = 'action-btn btn-secondary'; addCat.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); margin-bottom:4px;';
@@ -36481,7 +36636,84 @@ function _fpPanelCats(t) {
         if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools();
     };
     t.appendChild(addCat);
-
+    _codePatternPanelInto(t);
+}
+// ITEM CODES (20.30): the pattern, the word for {zone}, each level's code, a preview of the
+// next code, and the one-shot recode of house codes.
+function _codePatternPanelInto(t) {
+    const box = document.createElement('div'); box.className = 'code-pattern-panel';
+    box.style.cssText = 'margin-top:12px; padding-top:8px; border-top:1px solid var(--border-color);';
+    const hd = document.createElement('div'); hd.textContent = 'Item codes';
+    hd.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;';
+    box.appendChild(hd);
+    const inp = 'height:24px; font-size:var(--fs-60); padding:0 5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    const save = () => { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); };
+    const pat = _codePattern();
+    const sel = document.createElement('select'); sel.setAttribute('data-code-pattern', 'preset');
+    sel.style.cssText = 'width:100%; margin-bottom:4px; ' + inp;
+    CODE_PATTERN_PRESETS.concat([{ v: '__custom', label: 'Custom\u2026' }]).forEach(p => {
+        const o = document.createElement('option'); o.value = p.v; o.textContent = p.label; sel.appendChild(o);
+    });
+    sel.value = CODE_PATTERN_PRESETS.some(p => p.v === pat) ? pat : '__custom';
+    const txt = document.createElement('input'); txt.type = 'text'; txt.value = pat; txt.placeholder = '{level}.{type}.S{zone}-{nn}';
+    txt.setAttribute('data-code-pattern', 'text');
+    txt.style.cssText = 'width:100%; margin-bottom:4px; font-family:var(--font-mono, monospace); ' + inp;
+    txt.style.display = sel.value === '__custom' ? '' : 'none';
+    const setPat = (v) => {
+        const clean = String(v || '').trim();
+        if (clean && !_codePatternParts(clean)) { _toast('A pattern needs a number', 'Add {n}, {nn} or {nnn} where the placement number goes.'); return; }
+        editorialContent.codePattern = clean;
+        save();
+    };
+    sel.onchange = () => { if (sel.value === '__custom') { txt.style.display = ''; txt.focus(); return; } setPat(sel.value); };
+    txt.onchange = () => setPat(txt.value);
+    box.appendChild(sel); box.appendChild(txt);
+    const need = _codePatternNeeds(pat);
+    if (need.zone) {
+        const zl = document.createElement('input'); zl.type = 'text'; zl.value = editorialContent.codeZoneLabel || ''; zl.placeholder = 'Sector';
+        zl.title = 'What the client calls {zone}: Sector, Zone, Area, Wing';
+        zl.setAttribute('data-code-pattern', 'zone-label');
+        zl.style.cssText = 'width:100%; margin-bottom:4px; ' + inp;
+        zl.onchange = () => { editorialContent.codeZoneLabel = zl.value.trim(); save(); };
+        box.appendChild(zl);
+    }
+    if (need.level) {
+        (floorplanLevels || []).forEach((L, i) => {
+            const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:3px;';
+            const nm = document.createElement('span'); nm.textContent = (L && L.name) || ('Level ' + (i + 1));
+            nm.style.cssText = 'flex:1; min-width:0; font-size:var(--fs-60); color:var(--text-main); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+            const ci = document.createElement('input'); ci.type = 'text'; ci.value = (L && L.code) || ''; ci.placeholder = _levelCode(i);
+            ci.setAttribute('data-level-code', String(i));
+            ci.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
+            ci.onchange = () => { if (!floorplanLevels[i]) return; const v = ci.value.trim(); if (v) floorplanLevels[i].code = v; else delete floorplanLevels[i].code; save(); };
+            row.appendChild(nm); row.appendChild(ci); box.appendChild(row);
+        });
+    }
+    if (pat) {
+        const nx = document.createElement('div'); nx.setAttribute('data-code-pattern', 'next');
+        nx.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:2px 0 6px;';
+        const sample = _nextPlacementCode('ART', need.zone ? { zone: '1' } : null);
+        nx.textContent = 'Next new code looks like ' + sample + (need.zone ? ' (' + _codeZoneLabel() + ' 1)' : '');
+        box.appendChild(nx);
+        const plan = _codePatternPlan();
+        if (plan.todo.length || plan.skipped.length) {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.setAttribute('data-code-pattern', 'recode');
+            b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60);';
+            b.textContent = plan.todo.length
+                ? 'Recode ' + plan.todo.length + ' placement' + (plan.todo.length === 1 ? '' : 's') + ' to this pattern'
+                : plan.skipped.length + (plan.skipped.length === 1 ? ' placement needs a ' : ' placements need a ') + _codeZoneLabel() + ' to recode';
+            b.disabled = !plan.todo.length;
+            b.title = plan.skipped.length ? (plan.skipped.length + ' more need a ' + _codeZoneLabel() + ' first: ' + plan.skipped.slice(0, 8).join(', ') + (plan.skipped.length > 8 ? '\u2026' : '')) : '';
+            b.onclick = () => {
+                const res = recodeToPattern();
+                _toast(res.moved.length + ' placement' + (res.moved.length === 1 ? '' : 's') + ' recoded',
+                    res.skipped.length ? (res.skipped.length + ' still need a ' + _codeZoneLabel() + ' (set it on the item, then recode again).') : 'Renames are in the code log.');
+                _dsRenderTools();
+            };
+            box.appendChild(b);
+        }
+    }
+    t.appendChild(box);
 }
 function _fpPanelPlan(t, desc) {
     _fpPlanOrderInto(t);
@@ -50094,7 +50326,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
@@ -60351,6 +60583,7 @@ const FRAME_API = {
     // ── Writing ──
     // A new code: { category: 'framed'|'canvas'|'egd'|'wf'|<project category>, set: 'n1'..'n4'
     // or a salon preset key, hang: true for its own wall, location, widthIn, heightIn }.
+    // 20.30: level (plan index) and zone (the pattern's {zone}) mint a code in the project's pattern.
     addItem(opts) {
         opts = opts || {};
         const cat = opts.category != null ? opts.category : 'framed';
@@ -60360,7 +60593,7 @@ const FRAME_API = {
         // Location and size land BEFORE the wall is drawn: the wall is named and sized from them.
         const before = {}; (dashProjectData || []).forEach(r => { if (r) before[r.id] = true; });
         const base = undoStack[undoStack.length - 1];
-        const res = _placementMint(cat, set, false);
+        const res = _placementMint(cat, set, false, (opts.level != null || opts.zone != null) ? { level: opts.level, zone: opts.zone } : null);
         const rows = (dashProjectData || []).filter(r => r && !before[r.id] && _artGroupKey(r.id) === res.code);
         const kIn = unitFactor('in', dashUnit);
         rows.forEach(r => {

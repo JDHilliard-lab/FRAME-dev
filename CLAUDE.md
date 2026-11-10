@@ -2367,6 +2367,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   not linked; blank = placeholder wording `PAGE_PLACEHOLDER_RE` flags. Both spec drawers record where their rows end
   (`_noteSpecEnd` → `_specBlockEnd[firstId]`, page fractions) so new boxes stack under the block. The `Notes` slot in
   `SPEC_ROW_GROUPS` stays: `_SPEC_ROW_UNKNOWN_GROUP` is an index into it.
+- **A PROJECT'S CODES CAN FOLLOW THE CLIENT'S PATTERN (20.30, `editorialContent.codePattern`, `_nextPatternCode`,
+  `_levelCode`, `row.zone`, `recodeToPattern`, `_codePatternPanelInto`).** Tokens {type} (the category's prefix, editable
+  per category), {level} (`floorplanLevels[i].code`, else the number in the level name: Level 03 is L3), {zone} (the
+  item's Sector field) and {n}/{nn}/{nnn}. `_nextPlacementCode(prefix, ctx)` tries the pattern first; **a token it
+  cannot fill falls back to the house code**, never `L3.ART.S-01`. The number counts on its own stem (per level and
+  sector). Pattern codes are not plain codes, so the renumber never touches them. Test: `tests/test_code_pattern.js`.
 - **A NUMBER FOLLOWED BY A WORD IS A LEVEL, NOT A PLACEMENT (20.29, `_codeSortParts`, `_nextCodeLike`,
   `_duplicateCodeFor`).** `L3.ART.S16-10A` read as prefix L, number 3, so every Level 3 piece sorted as "L.3" (all A
   pieces, then all B). The house-code number must not be followed by a separator and two letters; such a code
