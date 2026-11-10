@@ -2367,6 +2367,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   not linked; blank = placeholder wording `PAGE_PLACEHOLDER_RE` flags. Both spec drawers record where their rows end
   (`_noteSpecEnd` → `_specBlockEnd[firstId]`, page fractions) so new boxes stack under the block. The `Notes` slot in
   `SPEC_ROW_GROUPS` stays: `_SPEC_ROW_UNKNOWN_GROUP` is an index into it.
+- **A NUMBER FOLLOWED BY A WORD IS A LEVEL, NOT A PLACEMENT (20.29, `_codeSortParts`, `_nextCodeLike`,
+  `_duplicateCodeFor`).** `L3.ART.S16-10A` read as prefix L, number 3, so every Level 3 piece sorted as "L.3" (all A
+  pieces, then all B). The house-code number must not be followed by a separator and two letters; such a code
+  sorts naturally. A duplicate of a code like it is the next number on its own stem (`L3.ART.S16-11`), padding
+  kept; `_codePrefixOfRow` takes the type token inside a client code, never the level. Test:
+  `tests/test_structured_codes.js`.
 - **HEIGHTS NAME THEIR DATUM (20.28, `elev.datum = {name, hIn}`, `_elevDatum`, `_elevHangLabel`, `setElevDatum`).**
   A client height from a chair rail labelled AFF hangs art ~3 ft low. With a datum the hang dim runs from it
   (`bottom:datPx`), its label is `21" ABOVE CHAIR RAIL`, `.datum-guide` draws the datum with its own AFF height, and
