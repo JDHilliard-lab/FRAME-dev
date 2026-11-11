@@ -266,6 +266,9 @@ input[type="number"] { -moz-appearance: textfield; }
 /* ========================================= */
 .app-top-nav { display: flex; align-items: center; background: var(--bg-nav); height: 45px; flex-shrink: 0; padding-right: 15px; border-bottom: 1px solid var(--border-color); z-index: 1000; transition: background 0.3s;}
 .nav-brand { display: flex; align-items: center; height: 100%; }
+/* The header logo (20.43): one inline drawing in currentColor, so it follows the theme. */
+.nav-logo { display: flex; align-items: center; color: var(--text-strong); }
+.nav-logo-svg { height: 17px; width: auto; display: block; fill: currentColor; }
 /* THE THEME TOGGLE SHOWS THE MODE IT WILL SWITCH TO, not the one you are in.
  * It carried a moon in both themes, so the one control whose whole job is to
  * change something never changed itself - there was no feedback that the click
@@ -2555,7 +2558,14 @@ button.cat-node:hover { border-color: var(--ui-active); }
    what a designer should not be looking at before choosing a project. */
 .frame-modal.start-screen { background: var(--bg-main); backdrop-filter: none; -webkit-backdrop-filter: none; align-items: center; justify-content: center; }
 .ss-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; width: min(760px, 92vw); color: var(--text-main); }
-.ss-logo { width: min(340px, 70vw); height: auto; color: var(--text-strong); fill: currentColor; overflow: visible; }
+.ss-logo { width: min(520px, 80vw); height: auto; color: var(--text-strong); fill: currentColor; overflow: visible; }
+/* The quote over the logo (20.43): fades in as the letters settle. */
+.ss-quote { margin: 0 0 34px; text-align: center; opacity: 0; transform: translateY(-6px); animation: ssQuote 1400ms cubic-bezier(.2,.7,.2,1) 900ms forwards; }
+/* Display size, set like the logo (px, capped by the window) so the line always runs
+   wider than the logo under it (20.44). */
+.ss-quote blockquote { margin: 0; font-family: 'Messina', Georgia, serif; font-style: italic; font-size: min(46px, 6.6vw); line-height: 1.2; color: var(--text-strong); white-space: nowrap; }
+.ss-quote figcaption { margin-top: 10px; text-align: right; font-family: 'Messina', Georgia, serif; font-size: var(--fs-95); color: var(--text-muted); }
+@keyframes ssQuote { to { opacity: 1; transform: translateY(0); } }
 .ss-tag { margin-top: 14px; font-size: var(--fs-65); letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); opacity: 0; animation: ssFade 700ms ease 1050ms forwards; }
 .ss-body { width: 100%; margin-top: 44px; opacity: 0; transform: translateY(6px); animation: ssRise 600ms cubic-bezier(.2,.7,.2,1) 1250ms forwards; }
 .ss-cards { display: flex; gap: 14px; justify-content: center; }
@@ -2584,15 +2594,15 @@ button.cat-node:hover { border-color: var(--ui-active); }
 /* THE LOGO COMES TOGETHER. The mark slides in from the left while the letters close
    up from slightly spread, staggered, each fading in. Small distances and an
    ease-out, so it settles rather than arrives. In SVG user units (the viewBox is
-   346 wide), so the move scales with the logo. */
-.ss-logo .fl-mark { opacity: 0; transform: translateX(-26px); animation: flMark 950ms cubic-bezier(.2,.7,.2,1) 120ms forwards; }
-.ss-logo .fl-l { opacity: 0; transform: translateX(calc(14px + var(--i) * 6px)); animation: flLetter 900ms cubic-bezier(.2,.7,.2,1) calc(260ms + var(--i) * 70ms) forwards; }
+   982 wide since 20.43), so the move scales with the logo. */
+.ss-logo .fl-mark { opacity: 0; transform: translateX(-60px); animation: flMark 950ms cubic-bezier(.2,.7,.2,1) 120ms forwards; }
+.ss-logo .fl-l { opacity: 0; transform: translateX(calc(34px + var(--i) * 12px)); animation: flLetter 900ms cubic-bezier(.2,.7,.2,1) calc(260ms + var(--i) * 70ms) forwards; }
 @keyframes flMark { to { opacity: 1; transform: translateX(0); } }
 @keyframes flLetter { to { opacity: 1; transform: translateX(0); } }
 @keyframes ssFade { to { opacity: 1; } }
 @keyframes ssRise { to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) {
-    .ss-logo .fl-mark, .ss-logo .fl-l, .ss-tag, .ss-body, .ss-ver { animation: none; opacity: 1; transform: none; }
+    .ss-logo .fl-mark, .ss-logo .fl-l, .ss-quote, .ss-tag, .ss-body, .ss-ver { animation: none; opacity: 1; transform: none; }
 }
 
 /* NEXT STEP (18.10): one line, the one thing this project needs next. Below every dialog
@@ -2767,9 +2777,22 @@ button.cat-node:hover { border-color: var(--ui-active); }
     .frame-tour .tour-spot, .frame-tour .tour-card, .frame-tour .tour-fill { transition: none; }
     .frame-tour .tour-card.tour-nudge { animation: none; }
 }
-.ss-tour { display: block; margin: 14px auto 0; border: none; background: transparent; color: var(--text-muted);
-    font-size: var(--fs-70); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-.ss-tour:hover { color: var(--text-strong); }
+.ss-tour { display: flex; align-items: center; gap: 8px; margin: 18px auto 0; padding: 7px 16px 7px 10px; cursor: pointer;
+    border: 1px solid var(--ui-active); border-radius: var(--r-10); background: transparent; color: var(--ui-active);
+    font-size: var(--fs-75); font-weight: 600; letter-spacing: 0.02em;
+    transition: background 150ms ease, color 150ms ease, transform 150ms ease;
+    /* 20.45: three soft rings once the cards have risen (ssRise ends ~1.85s), then still. */
+    animation: ssTourPulse 1600ms ease-out 2100ms 3; }
+.ss-tour:hover, .ss-tour:focus-visible { background: var(--ui-active); color: var(--bg-main); transform: translateY(-1px); }
+.ss-tour .ss-tour-ic { width: 18px; height: 18px; flex: none; }
+.ss-tour .ss-tour-ic path { fill: currentColor; stroke: none; }
+.ss-tour:not(:hover) .ss-tour-ic { animation: ssTourNudge 1600ms ease-in-out 2100ms 3; }
+@keyframes ssTourPulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ui-active) 55%, transparent); }
+    70%, 100% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--ui-active) 0%, transparent); }
+}
+@keyframes ssTourNudge { 0%, 100% { transform: scale(1); } 35% { transform: scale(1.18); } }
+@media (prefers-reduced-motion: reduce) { .ss-tour, .ss-tour .ss-tour-ic { animation: none; } }
 .next-step .ns-tour { border-color: var(--ui-active); color: var(--ui-active); }
 
 /* 18.36: header controls that only mean something in some views (data-views). A class,

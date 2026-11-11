@@ -332,7 +332,7 @@ check('the bound file is named in the tab title and on the Save button', async (
 
 check('with nothing bound, the title falls back rather than reading blank', async () => {
     reset();
-    if (doc.title.indexOf('FRAME') < 0) throw new Error('the tab title lost its name: ' + doc.title);
+    if (doc.title.indexOf('Farmhand') < 0) throw new Error('the tab title lost its name: ' + doc.title);
     if (doc.title.indexOf('.json') >= 0) throw new Error('the title still names a file after the binding was cleared');
 });
 

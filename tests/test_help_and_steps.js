@@ -319,11 +319,11 @@ check('New project takes a name, client and units, then lands on the floorplan I
     fx.newProject({ unit: 'in' });
 });
 
-check('the logo is six parts, the mark first, and the motion respects reduced motion', async () => {
+check('the logo is nine parts (mark + FARMHAND), the mark first, and the motion respects reduced motion', async () => {
     const holder = doc.createElement('div'); holder.innerHTML = fx.logo('x');
     const parts = holder.querySelectorAll('path');
-    if (parts.length !== 6) throw new Error(parts.length + ' parts');
-    if (!parts[0].classList.contains('fl-mark') || holder.querySelectorAll('.fl-l').length !== 5) throw new Error('mark and letters are not tagged for the animation');
+    if (parts.length !== 9) throw new Error(parts.length + ' parts');
+    if (!parts[0].classList.contains('fl-mark') || holder.querySelectorAll('.fl-l').length !== 8) throw new Error('mark and letters are not tagged for the animation');
     if (CSS.indexOf('@keyframes flLetter') < 0 || CSS.indexOf('prefers-reduced-motion: reduce') < 0) throw new Error('the animation or its reduced-motion override is missing');
 });
 

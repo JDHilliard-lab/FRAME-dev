@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.42';
+const APP_VERSION = '20.45';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -69,7 +69,7 @@ function _checkBuildPairing() {
                 + String.fromCharCode(10) + String.fromCharCode(10)
                 + 'Reload with Ctrl+Shift+R (Cmd+Shift+R on a Mac) before carrying on. Save your work first if you have any.');
         }
-        try { console.warn('FRAME build mismatch: index.html ' + want + ' vs app.js ' + APP_VERSION); } catch (e) {}
+        try { console.warn('Farmhand build mismatch: index.html ' + want + ' vs app.js ' + APP_VERSION); } catch (e) {}
         return false;
     } catch (e) { return true; }
 }
@@ -233,22 +233,33 @@ function _projectIsFresh() {
     if ((floorplanLevels || []).some(l => l && l.imageData) || floorplanImageData) return false;
     return true;
 }
-// The FRAME logo as inline SVG, one shape per part, so it can come together.
-// The two logo files are the same six shapes in two fills; currentColor covers both
-// themes. Mark first, then F R A M E, each carrying its index for the stagger.
+// The FARMHAND logo as inline SVG, one shape per part, so it can come together (20.43,
+// from logo/farmhand-dark-logo.svg). There is ONE drawing: currentColor gives the dark
+// and light themes, so no second (white) file is needed. Mark first, then
+// F A R M H A N D, each carrying its index for the stagger.
 const FRAME_LOGO_PARTS = [
-    'M0 19.23 0 57.23 22.86 57.23 22.86 0 0 19.23Z',
-    'M57.15 .43 62.67 6.32 62.67 51.51 57.15 57.25 80.69 57.25 75.17 51.52 75.17 30.8 92.22 30.8 92.22 27.03 75.17 27.03 75.17 4.14 91.01 4.14 98.27 10.62 98.27 .42 57.15 .43Z',
-    'M150.88,13.84c0-9.97-8.46-13.42-22.56-13.42h-20.97l5.51,5.89v45.21l-5.51,5.72h22.2l-5.31-5.72v-20.4h4.63l15.18,26.12h12.96l-17.07-28.6c7.38-2.36,10.95-7.71,10.95-14.8M135.98,24.72c-2.39,1.83-5.75,2.63-10.04,2.63h-1.7s0-23.25,0-23.25h3.23c8.05,0,12.33,1.8,12.33,10.95,0,4.98-1.43,7.84-3.83,9.67',
-    'M193.48.42h-12l3.08,7.97-15.35,41.57-.53,1.43-4.93,5.86h13.54l-4.6-5.47.61-1.64,4.23-11.47h18.94l4.93,12.52-5.09,6.05h22.16l-4.98-5.91L193.48.42ZM178.92,34.9l7.78-21.06,8.29,21.06h-16.06Z',
-    'M297.52 57.25 292.62 51.48 285.2 6.81 289.97 .5 275.67 .49 261.7 40.85 247.21 .5 232.48 .5 236.9 6.9 230.45 51.48 225.43 57.25 239.28 57.25 234.29 51.48 239.44 16.36 255.09 57.25 259.72 57.25 274.94 14.58 280.65 51.48 276.41 57.25 297.52 57.25Z',
-    'M338.78 4.14 346.03 10.62 346.03 .42 304.92 .43 310.43 6.32 310.43 51.36 304.92 57.25 346.03 57.26 346.03 47.06 338.78 53.54 322.93 53.54 322.93 51.52 322.93 30.8 339.98 30.8 339.98 30.65 339.98 27.03 339.98 26.88 322.93 26.88 322.93 4.14 338.78 4.14Z'
+    'M0 34.06 0 98.91 39.01 98.91 39.01 1.25 0 34.06Z',
+    'M105.73,0h71.56v17.71l-12.61-11.2h-27.63v39.82h29.62v6.52h-29.62v36.14l9.64,9.92h-40.95l9.49-10.06V10.2L105.73,0Z',
+    'M280.17,88.57l8.64,10.34h-38.54l8.79-10.49-8.5-21.82h-33.02l-7.37,19.98-1.13,2.83,8.08,9.49h-23.52l8.5-10.2.99-2.55,26.64-72.27-5.38-13.89h20.97l34.86,88.57ZM247.86,59.94l-14.31-36.56-13.6,36.56h27.92Z',
+    'M361.79,49.03l29.76,49.88h-22.67l-26.36-45.49h-8.08v35.57l9.21,9.92h-38.54l9.49-9.92V10.2l-9.49-10.2h36.42c24.66,0,39.25,5.95,39.25,23.38,0,12.33-6.09,21.54-18.99,25.65ZM361.51,25.51c0-16.01-7.37-19.13-21.4-19.13h-5.67v40.53h2.98c7.51,0,13.32-1.42,17.43-4.68,4.25-3.12,6.66-8.08,6.66-16.72Z',
+    'M496.56,98.91l7.37-10.06-9.92-64.19-26.5,74.25h-8.08l-27.21-71.14-9.07,61.08,8.79,10.06h-24.09l8.64-10.06,11.34-77.66-7.79-11.05h25.65l25.22,70.14L495.28.14h24.8l-8.22,10.91,12.9,77.8,8.5,10.06h-36.7Z',
+    'M559.19,88.85V9.92l-9.5-9.92h39.54l-9.64,9.92v36.42h46.91V9.92l-9.5-9.92h39.54l-9.64,9.92v78.93l9.64,10.06h-39.54l9.5-10.06v-35.99h-46.91v35.99l9.64,10.06h-39.54l9.5-10.06Z',
+    'M759.57,88.57l8.64,10.34h-38.54l8.79-10.49-8.5-21.82h-33.02l-7.37,19.98-1.13,2.83,8.08,9.49h-23.52l8.5-10.2.99-2.55,26.64-72.27-5.38-13.89h20.97l34.86,88.57ZM727.26,59.94l-14.31-36.56-13.6,36.56h27.92Z',
+    'M794,88.85V9.92l-9.5-9.92h33.02l41.24,85.03V9.92l-9.64-9.92h25.93l-9.64,9.92v88.99h-23.38l-41.24-85.02v74.96l9.49,10.06h-25.79l9.5-10.06Z',
+    'M900.99,88.85V9.92l-9.5-9.92h50.73c25.08,0,40.39,18.71,40.39,49.46s-15.3,49.46-40.39,49.46h-50.73l9.5-10.06ZM942.23,92.39c11.76,0,18.99-16.3,18.99-42.94s-7.23-42.94-18.99-42.94h-20.83v85.88h20.83Z'
 ];
+const FRAME_LOGO_VIEWBOX = '0 0 982.62 98.91';
 function _frameLogoSvg(cls) {
-    return '<svg class="' + (cls || '') + '" viewBox="0 0 346.03 57.26" role="img" aria-label="FRAME">'
+    return '<svg class="' + (cls || '') + '" viewBox="' + FRAME_LOGO_VIEWBOX + '" role="img" aria-label="Farmhand">'
         + FRAME_LOGO_PARTS.map((d, k) => '<path class="' + (k === 0 ? 'fl-mark' : 'fl-l') + '" style="--i:' + (k - 1) + '" d="' + d + '"/>').join('')
         + '</svg>';
 }
+// The header logo is the same drawing (20.43), filled in at load: the script tags sit at
+// the end of <body>, so #navLogo already exists. Its colour is --text-strong.
+function _navLogoFill() {
+    try { const h = document.getElementById('navLogo'); if (h && !h.firstChild) h.innerHTML = _frameLogoSvg('nav-logo-svg'); } catch (e) {}
+}
+_navLogoFill();
 // The file the last project was opened from or saved to, by NAME only. The handle
 // itself is session-only on purpose (see _projectFileHandle), so this cannot reopen
 // anything; it tells you which file to pick.
@@ -273,7 +284,10 @@ async function openStartScreen() {
     ov.className = 'frame-modal fm-over start-screen';
     ov.style.display = 'flex';
     const wrap = document.createElement('div'); wrap.className = 'ss-wrap';
-    wrap.innerHTML = _frameLogoSvg('ss-logo') + '<div class="ss-tag">Presentation builder</div>';
+    // The quote fades in above the logo while it comes together (20.43).
+    wrap.innerHTML = '<figure class="ss-quote"><blockquote>\u201cMany hands make light work\u201d</blockquote>'
+        + '<figcaption>\u2013 Thomas Gordon Towers</figcaption></figure>'
+        + _frameLogoSvg('ss-logo') + '<div class="ss-tag">Presentation builder</div>';
     const body = document.createElement('div'); body.className = 'ss-body';
     const cards = document.createElement('div'); cards.className = 'ss-cards';
     const card = (title, text, icon) => {
@@ -296,7 +310,7 @@ async function openStartScreen() {
     nw.onclick = () => _startScreenNewForm(body, cards, peek);
     cards.appendChild(nw); if (!first) first = nw;
     let last = ''; try { last = localStorage.getItem(LAST_FILE_KEY) || ''; } catch (e) {}
-    const op = card('Open project', last ? ('Last file: ' + last) : 'A .json project file saved from FRAME.',
+    const op = card('Open project', last ? ('Last file: ' + last) : 'A .json project file saved from Farmhand.',
         '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></svg>');
     op.onclick = () => { if (typeof openMasterProject === 'function') openMasterProject(); };
     cards.appendChild(op);
@@ -304,7 +318,10 @@ async function openStartScreen() {
     // The tour runs over the app behind this screen and brings you back here when it
     // ends, so the choice between Continue, New and Open is still yours to make.
     const tl = document.createElement('button'); tl.type = 'button'; tl.className = 'ss-tour';
-    tl.textContent = 'New to FRAME? Take the guided tour';
+    // 20.45: a button, not a quiet link, with a play mark and a ring that pulses a few
+    // times once the screen settles, so a first-timer sees where to start.
+    tl.innerHTML = '<svg class="svg-icon ss-tour-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8.5v7l5.5-3.5z"/></svg><span></span>';
+    tl.querySelector('span').textContent = 'New to Farmhand? Take the guided tour';
     tl.onclick = () => { _startScreenClose(); startTour({ onEnd: () => { openStartScreen(); } }); };
     body.appendChild(tl);
     if (others.length) body.appendChild(_startScreenOthers(others));
@@ -511,8 +528,8 @@ function _tourDeckPage(kinds) {
 }
 function _tourParentOf(id) { const el = document.getElementById(id); return el ? el.parentElement : null; }
 const FRAME_TOUR = [
-    { ch: 0, title: 'Welcome to FRAME',
-      body: 'FRAME turns a list of artwork into a client presentation: spec pages, wall elevations, floor plans and the PDF. This tour walks the job in the order a deck is built. It only looks around, so it cannot change your project. Use the arrow keys or the buttons, and Esc to leave at any point.' },
+    { ch: 0, title: 'Welcome to Farmhand',
+      body: 'Farmhand turns a list of artwork into a client presentation: spec pages, wall elevations, floor plans and the PDF. This tour walks the job in the order a deck is built. It only looks around, so it cannot change your project. Use the arrow keys or the buttons, and Esc to leave at any point.' },
     { ch: 0, target: '#nav-tabs-fixed', prep: () => switchView('dashboard'),
       title: 'Three views, numbered in work order',
       body: '1 Deck is where a project starts (the floorplan Items list) and ends (the presentation itself), 2 Frame Dashboard is where pieces are specced, and 3 Elevation is where they hang on walls. The little counters on Elevation and Deck tell you what is still left: pieces not on a wall, and pieces not pinned on the plan.' },
@@ -600,7 +617,7 @@ const FRAME_TOUR = [
 // the wall rail and the deck rail, which a phone hides; this one walks the phone's own
 // controls. Same rules: read-only, prep only navigates, a missing target centres the card.
 const FRAME_TOUR_PHONE = [
-    { ch: 0, title: 'FRAME on your phone',
+    { ch: 0, title: 'Farmhand on your phone',
       body: 'The phone is for the moments away from the desk: snap a piece, check a wall, flip through the deck. Hold it upright to work and turn it sideways to look at a wall or a page full screen. This tour only looks around, so it cannot change your project.' },
     { ch: 0, target: '#phoneTabBar', prep: () => switchView('dashboard'),
       title: 'Three views, three colours',
@@ -3182,7 +3199,7 @@ function exportStudioDefaults() {
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'studio-defaults.json';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    if (typeof showInfoModal === 'function') showInfoModal('Studio defaults exported', 'Commit studio-defaults.json to the repo root (the folder with index.html). After that, anyone opening FRAME gets these templates and default contacts automatically.');
+    if (typeof showInfoModal === 'function') showInfoModal('Studio defaults exported', 'Commit studio-defaults.json to the repo root (the folder with index.html). After that, anyone opening Farmhand gets these templates and default contacts automatically.');
 }
 function _mbFillImage(i) {
     const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
@@ -5398,7 +5415,7 @@ function _askRestoreAutosave(timeStr, projName) {
         if (typeof showConfirmModal !== 'function') { resolve(null); return; }
         const NL = String.fromCharCode(10);
         showConfirmModal('Restore unsaved work?',
-            'FRAME found work from ' + timeStr + ' that was never saved to a file:' + NL + NL
+            'Farmhand found work from ' + timeStr + ' that was never saved to a file:' + NL + NL
             + '“' + projName + '”' + NL + NL
             + 'Restore it, or discard it for good?',
             'Restore', 'Discard',
@@ -7770,7 +7787,7 @@ async function packageProject(opts) {
     const projFile = _projectSuggestedName();
     const base = projFile.replace(/\.json$/i, '');
     zip.file(base + '/' + projFile, _projectFileText(_projectPayload()));
-    const lines = ['Package of ' + base, 'Made by FRAME ' + APP_VERSION + ' on ' + new Date().toLocaleString(), '', 'Project file: ' + projFile, ''];
+    const lines = ['Package of ' + base, 'Made by Farmhand ' + APP_VERSION + ' on ' + new Date().toLocaleString(), '', 'Project file: ' + projFile, ''];
     const files = [], skipped = [];
     for (let i = 0; i < list.length; i++) {
         const e = list[i];
@@ -8533,7 +8550,7 @@ function _fsaAvailable() {
 }
 
 const PROJECT_FILE_TYPES = [{
-    description: 'FRAME project',
+    description: 'Farmhand project',
     accept: { 'application/json': ['.json'] },
 }];
 
@@ -8566,8 +8583,8 @@ function _setProjectFile(handle, name) {
 function _syncProjectFileUI() {
     try {
         document.title = _projectFileName
-            ? ('FRAME - ' + _projectFileName)
-            : 'FRAME - Integrated Workspace';
+            ? ('Farmhand - ' + _projectFileName)
+            : 'Farmhand';
     } catch (e) {}
     try {
         const btn = _saveProjectButton();
@@ -8717,7 +8734,7 @@ async function _fsaSave(text, saveAs) {
         if (err && err.name === 'AbortError') return 'cancelled';
         try {
             showInfoModal('Could not write the file',
-                'FRAME could not save to that location: ' + ((err && err.message) || 'unknown error') + '.'
+                'Farmhand could not save to that location: ' + ((err && err.message) || 'unknown error') + '.'
                 + String.fromCharCode(10) + String.fromCharCode(10)
                 + 'A copy is being downloaded instead so the work is not stuck in this tab.');
         } catch (e) {}
@@ -8935,9 +8952,9 @@ function _readProjectText(text) {
         } else {
             // A failure, so it takes the modal rather than a toast, and says what
             // was wrong with the file rather than only that something was.
-            showInfoModal('Not a FRAME project',
-                'That file is valid JSON but it is not a FRAME project - it carries no "master-studio" type. '
-                + 'Open a .json that FRAME saved, or start a new project.');
+            showInfoModal('Not a Farmhand project',
+                'That file is valid JSON but it is not a Farmhand project - it carries no "master-studio" type. '
+                + 'Open a .json that Farmhand saved, or start a new project.');
             return false;
         }
 
@@ -8969,7 +8986,7 @@ function _readProjectText(text) {
         if (typeof markClean === 'function') markClean();
         if (typeof clearAutosave === 'function') clearAutosave();
         if (data._unitAutoFixed && typeof showInfoModal === 'function') {
-            showInfoModal('Units auto-corrected', 'This project was labeled "' + data._unitAutoFixed.from + '" but its measurements looked like "' + data._unitAutoFixed.to + '" (for example, a 108-unit-tall wall). FRAME corrected the unit to ' + data._unitAutoFixed.to + ' so the elevation, person, and hang heights scale correctly. Save the project to keep the fix.');
+            showInfoModal('Units auto-corrected', 'This project was labeled "' + data._unitAutoFixed.from + '" but its measurements looked like "' + data._unitAutoFixed.to + '" (for example, a 108-unit-tall wall). Farmhand corrected the unit to ' + data._unitAutoFixed.to + ' so the elevation, person, and hang heights scale correctly. Save the project to keep the fix.');
         }
         try { _startScreenClose(); } catch (e) {}
         return true;
@@ -9030,7 +9047,7 @@ function _projectDropHint(on) {
     if (!on) { if (h) h.remove(); return; }
     if (h) return;
     h = document.createElement('div'); h.id = 'projectDropHint'; h.className = 'project-drop-hint';
-    h.innerHTML = '<div class="pdh-box"><strong>Drop to open project</strong><span>A .json project file saved from FRAME</span></div>';
+    h.innerHTML = '<div class="pdh-box"><strong>Drop to open project</strong><span>A .json project file saved from Farmhand</span></div>';
     document.body.appendChild(h);
 }
 let _projectDropHintTimer = null;
@@ -15604,10 +15621,10 @@ function _imageFilePrecheck(file) {
         return { title: 'HEIC photos aren\u2019t supported', body: 'Browsers can\u2019t open HEIC/HEIF (the iPhone camera format). Convert it to JPG or PNG first \u2014 on iPhone, sharing via Mail or saving to Files usually converts automatically, or set Settings \u2192 Camera \u2192 Formats \u2192 Most Compatible \u2014 then upload again.' };
     }
     if (file.type && !/^image\//i.test(file.type)) {
-        return { title: 'Not an image file', body: _imgFileDesc(file) + ' isn\u2019t an image. FRAME imports JPG, PNG, WebP, GIF, BMP, or SVG files.' };
+        return { title: 'Not an image file', body: _imgFileDesc(file) + ' isn\u2019t an image. Farmhand imports JPG, PNG, WebP, GIF, BMP, or SVG files.' };
     }
     if (file.size && file.size > _IMG_IMPORT_MAX_MB * 1048576) {
-        return { title: 'Image too large', body: _imgFileDesc(file) + ' is over the ' + _IMG_IMPORT_MAX_MB + ' MB import limit. Export a smaller JPG or PNG \u2014 pages only need about 1100 px on the long edge, and FRAME downscales imports to that anyway, so a lighter export loses nothing.' };
+        return { title: 'Image too large', body: _imgFileDesc(file) + ' is over the ' + _IMG_IMPORT_MAX_MB + ' MB import limit. Export a smaller JPG or PNG \u2014 pages only need about 1100 px on the long edge, and Farmhand downscales imports to that anyway, so a lighter export loses nothing.' };
     }
     return null;
 }
@@ -15899,7 +15916,7 @@ async function openLinksPanel() {
         const note = document.createElement('div');
         note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); line-height:1.5; margin-top:10px;';
         note.textContent = (typeof window !== 'undefined' && typeof window.showOpenFilePicker === 'function')
-            ? 'A picture dragged in from your files, or picked with Relink, is watched: export over the same file and FRAME offers to update it when you come back. Pictures added any other way are Not watched until relinked.'
+            ? 'A picture dragged in from your files, or picked with Relink, is watched: export over the same file and Farmhand offers to update it when you come back. Pictures added any other way are Not watched until relinked.'
             : 'This browser cannot watch files (Chrome and Edge can). Relink still replaces a picture and keeps its size, crop and position.';
         body.appendChild(note);
         foot.innerHTML = '';
@@ -17197,7 +17214,7 @@ function _fbShareGrouping(g) {
     const blob = new Blob([_fbGroupingFileText(g)], { type: 'application/json' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'frame-grouping-' + slug + '.json'; a.click();
     setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
-    showInfoModal('Grouping ready to share', 'Saved as frame-grouping-' + slug + '.json in your Downloads. Send that file to whoever looks after the FRAME library. Once it is added to library/groupings.json it appears under Client groupings for everyone, and yours is marked as shared.');
+    showInfoModal('Grouping ready to share', 'Saved as frame-grouping-' + slug + '.json in your Downloads. Send that file to whoever looks after the Farmhand library. Once it is added to library/groupings.json it appears under Client groupings for everyone, and yours is marked as shared.');
 }
 // Pick = the existing dropdown path, so a frame chosen here is applied exactly as before.
 function _fbPick(rec) {
@@ -17248,7 +17265,7 @@ function loadFramePreset(e) {
                     ['extW','extH','fW','fHeight','rabbetDepth','bleed','canvasDepth','canvasWrap','m1T','m1B','m1L','m1R','m2'].forEach(p => { if(d.frame[p] !== undefined && !isNaN(d.frame[p])) d.frame[p] = dashFmt(d.frame[p]*factor); });
                 }
                 dashProjectData[dashSelectedRowIndex] = d.frame; loadDashDataIntoControls(d.frame); renderDashTable(); pushUpdatesToElevations(dashSelectedRowIndex);
-            } else showInfoModal('Not a preset file', 'That file does not look like a FRAME preset, so nothing was changed.');
+            } else showInfoModal('Not a preset file', 'That file does not look like a Farmhand preset, so nothing was changed.');
         } catch(err) { showInfoModal('Could not read that file', ((err && err.message) || 'The file could not be parsed') + '. Nothing was changed.'); }
     };
     r.readAsText(f); e.target.value = '';
@@ -34951,7 +34968,7 @@ function openDashMenu(btn, which) {
             { label: 'Links…', hint: 'linked pictures: update, relink', onClick: () => openLinksPanel() },
         ],
         import: [
-            { label: 'Import CSV…', hint: 'a database exported from FRAME', onClick: () => { const f = document.getElementById('csvImport'); if (f) f.click(); } },
+            { label: 'Import CSV…', hint: 'a database exported from Farmhand', onClick: () => { const f = document.getElementById('csvImport'); if (f) f.click(); } },
             { label: 'Bulk Images…', hint: 'replace artwork, matched by name', onClick: () => openBulkReplaceModal() },
             { label: 'New items from photos…', hint: 'one new item per picture', onClick: () => dashNewFromPhotos() },
         ],
@@ -49469,7 +49486,7 @@ function _frameErrIsNoise(msg, where) {
 // frames that say where it happened rather than the whole descent.
 function _frameErrDetail(rec) {
     const lines = [
-        'FRAME ' + APP_VERSION + ' (' + APP_BUILD + ')',
+        'Farmhand ' + APP_VERSION + ' (' + APP_BUILD + ')',
         rec.when,
         rec.kind + ': ' + rec.message,
     ];
@@ -49491,7 +49508,7 @@ function _frameReportError(kind, message, where, stack) {
         };
         _frameErrors.push(rec);
         if (_frameErrors.length > FRAME_ERR_MAX) _frameErrors.shift();
-        try { console.error('[FRAME ' + APP_VERSION + '] ' + rec.kind + ': ' + rec.message, rec.where, rec.stack); } catch (e) {}
+        try { console.error('[Farmhand ' + APP_VERSION + '] ' + rec.kind + ': ' + rec.message, rec.where, rec.stack); } catch (e) {}
         // Deduped on the FAULT, not the occurrence: the same line failing again
         // is the same news, and this can fire on every frame of a drag.
         const key = rec.kind + '|' + rec.message + '|' + rec.where;
@@ -49515,18 +49532,18 @@ function _frameReportError(kind, message, where, stack) {
 // _dsCopyText already carries the file:// fallback for a machine where
 // navigator.clipboard is not available.
 function _frameErrAnnounce(detail) {
-    const body = 'FRAME hit an error and part of the page may not have finished drawing. '
+    const body = 'Farmhand hit an error and part of the page may not have finished drawing. '
         + 'Your project is still in memory, so use Save Project now before anything else.'
         + String.fromCharCode(10) + String.fromCharCode(10)
         + 'Then send these details with a note about what you were doing:'
         + String.fromCharCode(10) + String.fromCharCode(10) + detail;
     try {
         if (typeof showConfirmModal === 'function') {
-            showConfirmModal('FRAME hit an error', body, 'Copy details', 'Close',
+            showConfirmModal('Farmhand hit an error', body, 'Copy details', 'Close',
                 () => { try { _dsCopyText(detail); } catch (e) {} });
             return;
         }
-        if (typeof showInfoModal === 'function') { showInfoModal('FRAME hit an error', body); return; }
+        if (typeof showInfoModal === 'function') { showInfoModal('Farmhand hit an error', body); return; }
     } catch (e) {}
     try { console.error(body); } catch (e) {}
 }
@@ -50265,7 +50282,7 @@ function _homeScreenTitle() {
     try {
         if (APP_BUILD !== 'dev') return;
         const m = document.querySelector('meta[name="apple-mobile-web-app-title"]');
-        if (m) m.setAttribute('content', 'FRAME dev');
+        if (m) m.setAttribute('content', 'Farmhand dev');
     } catch (e) {}
 }
 _homeScreenTitle();
@@ -50445,7 +50462,7 @@ function _phoneBuild() {
     const brand = document.querySelector('.nav-brand');
     if (brand && !brand.querySelector('.phone-mark')) {
         const m = document.createElement('img');
-        m.className = 'phone-mark'; m.src = 'icon-180.png'; m.alt = 'FRAME';
+        m.className = 'phone-mark'; m.src = 'icon-180.png'; m.alt = 'Farmhand';
         brand.appendChild(m);
     }
     // THE HEADER'S MIDDLE IS THE VIEW'S OWN CONTROL (19.28): the wall picker on Walls, the
@@ -50849,12 +50866,12 @@ const HELP_REFERENCE_DATA = [
     {
         id: 'getting-started',
         title: 'Start here',
-        intro: `FRAME turns a list of pieces into a client presentation. You list the item codes, spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The tabs at the top are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>, then back to the Deck to pin, build and generate.`,
+        intro: `Farmhand turns a list of pieces into a client presentation. You list the item codes, spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The tabs at the top are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>, then back to the Deck to pin, build and generate.`,
         entries: [
             { title: 'Guided tour', live: 'tour' },
             { title: 'Where this project is', live: 'steps' },
-            { title: 'On iPhone and iPad', body: `<strong>iPhone.</strong> Hold it upright to work and turn it sideways to look at a wall or a page full screen. The bar along the bottom is <strong>Deck</strong> (blue), <strong>Items</strong> (pink), <strong>Walls</strong> (yellow) and <strong>Controls</strong>; the header takes the colour of the view you are on, and the strip of icons just above the bar is that view's tools.<br><br><strong>Items</strong>: add an item, the camera (new items straight from photos), duplicate, delete, then the Edit, Import and Export menus. Tap an item to open it; the back arrow in the header returns to the list.<br><strong>Walls</strong>: Art, Guides, Context and Glass open the wall's panels. Tap the wall name in the header to switch walls or add one. Pinch to zoom the wall; swipe across an empty part of it for the next wall.<br><strong>Deck</strong>: Project, Pages and Templates, each in its own colour. <strong>All pages</strong>, <strong>Preview</strong> and <strong>Preflight</strong> light up on Pages; the menu at the end holds <strong>Generate PDF</strong> and the approval stamp. The row above the page has the page arrows and the drawing tools; tap something on the page and its settings, front, back and delete take the arrows' place. Swipe across the page for the next one.<br><strong>Controls</strong> shows the controller: a joystick that nudges whatever is selected, and Shift, Ctrl and Alt keys that stay on once tapped.<br><br><strong>iPad.</strong> The full app, by finger: drag anything, double-tap for double-click, and use the controller for nudges and Shift or Ctrl selects. The panels fold away with the tab on their edge.<br><br>On either, Safari's Share button and <strong>Add to Home Screen</strong> make FRAME its own full-screen app, and it opens with no signal once it has been opened once.` },
-            { title: 'Opening FRAME', body: `FRAME opens on the start screen. <strong>Continue</strong> brings back work that was never saved to a file (it only appears when there is some). <strong>New project</strong> asks for the project name, the client and the units, then takes you to the floorplan <strong>Items</strong> list to add the item codes. <strong>Open project</strong> opens a saved .json file.<br><br>While a project is getting started, a bar at the bottom left says the one next step and has a <strong>Go</strong> button. It goes away once the pieces are listed, on walls and pinned. Click the × to hide it until next time.` },
+            { title: 'On iPhone and iPad', body: `<strong>iPhone.</strong> Hold it upright to work and turn it sideways to look at a wall or a page full screen. The bar along the bottom is <strong>Deck</strong> (blue), <strong>Items</strong> (pink), <strong>Walls</strong> (yellow) and <strong>Controls</strong>; the header takes the colour of the view you are on, and the strip of icons just above the bar is that view's tools.<br><br><strong>Items</strong>: add an item, the camera (new items straight from photos), duplicate, delete, then the Edit, Import and Export menus. Tap an item to open it; the back arrow in the header returns to the list.<br><strong>Walls</strong>: Art, Guides, Context and Glass open the wall's panels. Tap the wall name in the header to switch walls or add one. Pinch to zoom the wall; swipe across an empty part of it for the next wall.<br><strong>Deck</strong>: Project, Pages and Templates, each in its own colour. <strong>All pages</strong>, <strong>Preview</strong> and <strong>Preflight</strong> light up on Pages; the menu at the end holds <strong>Generate PDF</strong> and the approval stamp. The row above the page has the page arrows and the drawing tools; tap something on the page and its settings, front, back and delete take the arrows' place. Swipe across the page for the next one.<br><strong>Controls</strong> shows the controller: a joystick that nudges whatever is selected, and Shift, Ctrl and Alt keys that stay on once tapped.<br><br><strong>iPad.</strong> The full app, by finger: drag anything, double-tap for double-click, and use the controller for nudges and Shift or Ctrl selects. The panels fold away with the tab on their edge.<br><br>On either, Safari's Share button and <strong>Add to Home Screen</strong> make Farmhand its own full-screen app, and it opens with no signal once it has been opened once.` },
+            { title: 'Opening Farmhand', body: `Farmhand opens on the start screen. <strong>Continue</strong> brings back work that was never saved to a file (it only appears when there is some). <strong>New project</strong> asks for the project name, the client and the units, then takes you to the floorplan <strong>Items</strong> list to add the item codes. <strong>Open project</strong> opens a saved .json file.<br><br>While a project is getting started, a bar at the bottom left says the one next step and has a <strong>Go</strong> button. It goes away once the pieces are listed, on walls and pinned. Click the × to hide it until next time.` },
             {
                 title: 'The five steps',
                 body: `<ol class="help-steps">
@@ -50867,7 +50884,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Saving your work',
-                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Open Project</strong> opens the file and FRAME remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>FRAME also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> (in the menu beside Save) keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.`
+                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Open Project</strong> opens the file and Farmhand remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>Farmhand also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> (in the menu beside Save) keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.`
             },
             {
                 title: 'Undo',
@@ -50879,7 +50896,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Getting stuck',
-                body: `If FRAME hits an error it says so in a box with <strong>Copy details</strong>. Save your project first, then send those details with a note about what you were doing. The Version section below says where.`
+                body: `If Farmhand hits an error it says so in a box with <strong>Copy details</strong>. Save your project first, then send those details with a note about what you were doing. The Version section below says where.`
             }
         ]
     },
@@ -50909,7 +50926,7 @@ const HELP_REFERENCE_DATA = [
         intro: `Each wall is its own drawing. The rail on the left lists the walls. The sidebar has four tabs: <strong>Art</strong> for the pieces, <strong>Guides</strong> for what the drawings show, <strong>Context</strong> for what is in the room, and <strong>Glass</strong> for window panels.`,
         entries: [
             { title: 'Walls and the rail', body: `Click a wall in the rail to open it and drag walls to reorder them. <strong>+ Add Wall</strong> asks which item code the wall is for: one that is not on a wall yet, or a new code of a type and frame set. Every wall belongs to a code, so none is left out of the deck. The &times; on a wall deletes it, and that can be undone.` },
-            { title: 'Linked images', body: `A picture dragged in from your files is <strong>linked</strong> to that file (Chrome and Edge). Export over the same file from Illustrator or Photoshop and, when you come back to FRAME, it says the file changed and offers <strong>Update</strong>: the new picture goes in at the same size, crop and position. <strong>Links</strong> (in the Frame Dashboard's Edit menu) lists every picture as Up to date, Modified, Missing, Needs access or Not watched, with Update and Relink. After reopening a project the browser asks once more for access: Allow access in Links.` },
+            { title: 'Linked images', body: `A picture dragged in from your files is <strong>linked</strong> to that file (Chrome and Edge). Export over the same file from Illustrator or Photoshop and, when you come back to Farmhand, it says the file changed and offers <strong>Update</strong>: the new picture goes in at the same size, crop and position. <strong>Links</strong> (in the Frame Dashboard's Edit menu) lists every picture as Up to date, Modified, Missing, Needs access or Not watched, with Update and Relink. After reopening a project the browser asks once more for access: Allow access in Links.` },
             { title: 'Measuring to the graphic', body: `With the measure tool or a free line out, a point near an edge in a wallcovering's picture (the bottom of a printed year, the side of a shape) snaps onto it and shows a <strong>magenta</strong> dot; a point near the edge of a frame or panel lands on that edge anywhere along it. So: click under the printed 1938, then on the top of the panel, for the gap between them. The reach is a few screen pixels: zoom in for finer picking. Hold <strong>Alt</strong> to place a point exactly where you click. A point on the graphic moves with it. <strong>Guide box</strong> (Lines menu) draws an empty to space things against; frames snap to its edges, level lines and centre lines. Any free line can be <strong>Guide only</strong>: on the wall, never printed.` },
             { title: 'Wall layers', body: `A wall is built up in three layers, bottom to top: <strong>Wallcovering</strong> (the printed graphic), <strong>Framed art</strong>, and <strong>On top</strong> (didactic panels, labels, signage). The wall, the PDF and the spec-page thumbnails all draw in that order. Each piece takes its product's layer; a <strong>Didactic Panel</strong> goes on top. Once a wall has more than one layer, the Art list is grouped by layer and clicking a piece's letter moves it to another layer.` },
             { title: 'Wall mode: ART, EGD, WF', body: `<strong>ART WALL</strong> is the default: framed art hangs on it. <strong>EGD WALL</strong> makes the wall a graphic surface: a wallcovering fills it and stays inside it, above the baseboard. <strong>WF WALL</strong> builds a standard window elevation for window film and opens the Glass tab. A wall with glass on it normally stays an ART wall.` },
@@ -51030,7 +51047,7 @@ const HELP_REFERENCE_DATA = [
         title: 'Tips',
         entries: [
             { title: 'A white mat with a thin black reveal', body: `Set Mat 1 to white, turn the chain off, and give Mat 2 a 0.25" black reveal.` },
-            { title: 'Float mounts need rabbet', body: `A float mount stack needs at least <strong>0.625"</strong> of rabbet. FRAME warns when the moulding is too shallow.` },
+            { title: 'Float mounts need rabbet', body: `A float mount stack needs at least <strong>0.625"</strong> of rabbet. Farmhand warns when the moulding is too shallow.` },
             { title: 'Sourced Object', body: `For sculptures, objects and pieces framed elsewhere. It currently renders and specs as Framed Art, so clear the frame and mat fields yourself if they should not print.` },
             { title: 'Your own moulding profiles', body: `Put one image per profile in a folder and choose it from the Frame Library. The file name carries the code, width, depth and rabbet: <strong>MICH-41-12_1.75_0.625.png</strong> is code MICH-41-12, 1.75" wide, 0.625" rabbet.` },
             { title: 'Light and dark', body: `The sun and moon button switches theme. The drawings and pages stay print colours either way.` }
@@ -51039,7 +51056,7 @@ const HELP_REFERENCE_DATA = [
     {
         id: 'version',
         title: 'Version',
-        intro: `About this build of FRAME.`,
+        intro: `About this build of Farmhand.`,
         entries: [
             {
                 title: 'Current version',
@@ -51047,7 +51064,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
@@ -51136,7 +51153,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Reporting issues',
-                body: `Open an issue at <a href="https://github.com/JDHilliard-lab/FRAME-dev/issues" target="_blank" rel="noopener" style="color:var(--accent);">github.com/JDHilliard-lab/FRAME-dev/issues</a> with your version and build (above), what you were trying to do, and what happened. Screenshots help.<br><br>If FRAME shows a <strong>FRAME hit an error</strong> box, press <strong>Copy details</strong> and paste that in as well: it carries the version, the build and the stack, which is most of what a fix starts from.`
+                body: `Open an issue at <a href="https://github.com/JDHilliard-lab/FRAME-dev/issues" target="_blank" rel="noopener" style="color:var(--accent);">github.com/JDHilliard-lab/FRAME-dev/issues</a> with your version and build (above), what you were trying to do, and what happened. Screenshots help.<br><br>If Farmhand shows a <strong>Farmhand hit an error</strong> box, press <strong>Copy details</strong> and paste that in as well: it carries the version, the build and the stack, which is most of what a fix starts from.`
             }
         ]
     }
@@ -60025,7 +60042,7 @@ async function exportElevPNG(opts) {
         // elevation would be hostile). Single export keeps the alert.
         if (opts && opts.returnBlob) throw err;
         showInfoModal('Image export failed', (err && err.message ? err.message : 'Unknown error') + String.fromCharCode(10, 10)
-            + 'If you opened FRAME straight from a file (file://...), the browser blocks it from reading local files. Open it from the site, or serve the folder with a local web server such as VS Code Live Server, and try again.');
+            + 'If you opened Farmhand straight from a file (file://...), the browser blocks it from reading local files. Open it from the site, or serve the folder with a local web server such as VS Code Live Server, and try again.');
     } finally {
         // Restore every frame we touched
         restoreList.forEach(({ div, hiddenChildren, overlayCanvas }) => {
@@ -62483,7 +62500,7 @@ async function _prodPackFiles(opts) {
     return files;
 }
 async function downloadProductionPack() {
-    if (typeof JSZip === 'undefined') { showInfoModal('Production pack', 'The ZIP library did not load. Reload FRAME and try again.'); return; }
+    if (typeof JSZip === 'undefined') { showInfoModal('Production pack', 'The ZIP library did not load. Reload Farmhand and try again.'); return; }
     const plan = _prodPackPlan();
     if (!plan.vendors.length && !plan.unassigned.length && !plan.purchases.length) { _toast('Nothing to send', 'There are no pieces in the deck yet.'); return; }
     let files;
@@ -62695,7 +62712,7 @@ function _issueDiffCSV(issue) {
 function _prodIssuesInto(body) {
     const list = editorialContent.issues || [];
     const intro = document.createElement('div'); intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:10px;';
-    intro.textContent = 'Mark the deck as issued each time it goes to the client or to production. FRAME keeps what every piece printed then, and lists what has changed since: for the client email, the vendors’ spec updates, and the next RFI.';
+    intro.textContent = 'Mark the deck as issued each time it goes to the client or to production. Farmhand keeps what every piece printed then, and lists what has changed since: for the client email, the vendors’ spec updates, and the next RFI.';
     body.appendChild(intro);
     const top = document.createElement('div'); top.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:12px; font-size:var(--fs-70);';
     const lab = document.createElement('input'); lab.type = 'text'; lab.id = 'issueLabel'; lab.style.cssText = 'width:200px; height:24px;';
@@ -62720,7 +62737,7 @@ function _prodIssuesInto(body) {
         const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = _prodStamp() + '.' + _prodProjectTag() + '.Changes-since-' + _prodSafe(issue.label) + '.csv'; a.click();
     }, true));
     row.appendChild(_prodBtn('Delete this record', () => _confirmDestroy({
-        title: 'Delete the record of ' + issue.label + '?', body: 'Only FRAME’s record of what was issued goes; the deck is not touched.',
+        title: 'Delete the record of ' + issue.label + '?', body: 'Only Farmhand’s record of what was issued goes; the deck is not touched.',
         confirm: 'Delete', undoable: true, onConfirm: () => { deleteIssue(pick); _prodIssuePick = null; _prodShow(); }
     }), true));
     body.appendChild(row);
@@ -63094,7 +63111,7 @@ function _quoteSheetRows() {
     return out;
 }
 async function exportQuoteXlsx() {
-    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload FRAME and try again.'); return; }
+    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload Farmhand and try again.'); return; }
     const blob = await _xlsxBlob(_quoteSheets());
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = _prodStamp() + '.' + _prodProjectTag() + '.Quote.xlsx'; a.click();
     setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
@@ -63286,7 +63303,7 @@ function _rfqFileName(docType) {
     return _prodStamp() + '_' + client + '_' + proj + '_' + (docType === 'rfi' ? 'RFI' : 'RFQ') + '.xlsx';
 }
 async function exportRfqXlsx(docType) {
-    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload FRAME and try again.'); return; }
+    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload Farmhand and try again.'); return; }
     if (!_rfqRows(docType).length) { _toast('Nothing to send', docType === 'rfi' ? 'No pieces a print vendor makes are in the deck yet.' : 'There are no pieces in the deck yet.'); return; }
     const blob = await _xlsxBlob([_rfqSheet(docType)]);
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = _rfqFileName(docType); a.click();
@@ -63349,7 +63366,7 @@ async function importPricesFile(file) {
         else rows = _csvRows(await file.text());
     } catch (e) { showInfoModal('Import prices', 'That file could not be read: ' + _esc(e && e.message || e) + '. Save it from Excel as .xlsx or .csv and try again.'); return null; }
     const res = _priceImportRows(rows);
-    if (res.error) { showInfoModal('Import prices', res.error + ' Export a quote from FRAME first: its columns are the ones FRAME reads back.'); return res; }
+    if (res.error) { showInfoModal('Import prices', res.error + ' Export a quote from Farmhand first: its columns are the ones Farmhand reads back.'); return res; }
     showInfoModal('Prices imported', res.updated.length + ' piece' + (res.updated.length === 1 ? '' : 's') + ' updated.'
         + (res.unknown.length ? '<br><br>Not in this project (left alone): ' + _esc(res.unknown.join(', ')) : '') + '<br><br>Ctrl+Z undoes the import.');
     try { _prodShow(); } catch (e) {}
@@ -64111,7 +64128,7 @@ function _prodBrandInto(body) {
         inp.onchange = () => {
             const f = inp.files && inp.files[0]; if (!f) return;
             const rd = new FileReader();
-            rd.onload = () => { const n = _bsImportText(rd.result); if (n == null) showInfoModal('Brand standards', 'That file is not a FRAME brand standards file.'); else { _toast('Brand standards imported', n + ' item' + (n === 1 ? '' : 's') + ' on this computer now.'); _prodShow(); } };
+            rd.onload = () => { const n = _bsImportText(rd.result); if (n == null) showInfoModal('Brand standards', 'That file is not a Farmhand brand standards file.'); else { _toast('Brand standards imported', n + ' item' + (n === 1 ? '' : 's') + ' on this computer now.'); _prodShow(); } };
             rd.readAsText(f);
         };
         inp.click();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
-    <title>FRAME - Integrated Workspace</title>
+    <title>Farmhand</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="FRAME">
+    <meta name="apple-mobile-web-app-title" content="Farmhand">
     <meta name="theme-color" content="#1e1e1e">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- JSZip: vendored locally (lib-jszip.min.js) so the batch ZIP export
@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.42">
+    <link rel="stylesheet" href="style.css?v=20.45">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -50,8 +50,9 @@
     
     <div class="app-top-nav">
         <div class="nav-brand" style="padding: 0 20px; border-right: 1px solid var(--border-color); margin-right: 10px; display:flex; align-items:center; height:100%;">
-            <img class="nav-logo logo-dark" src="Frame_logo_light.svg" alt="Frame Logo" style="height:28px; display:block;">
-            <img class="nav-logo logo-light" src="Frame_logo_Dark.svg" alt="Frame Logo" style="height:28px; display:none;">
+            <!-- The Farmhand logo, drawn inline by _navLogoFill in currentColor, so one
+                 drawing serves both themes. -->
+            <span id="navLogo" class="nav-logo"></span>
         </div>
         <!-- Three fixed view tabs, built by renderNavTabs. Individual walls are
              NOT here — they're in the wall rail inside #view-elevation. -->
@@ -97,7 +98,7 @@
                  It falls back to clicking the hidden input below, which is what every
                  browser without that API still uses. It also asks before discarding
                  unsaved work, which loading never used to do. -->
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMasterProject()" title="Open a FRAME project (.json)">Open Project</button>
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMasterProject()" title="Open a Farmhand project (.json)">Open Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <!-- 18.36: Versions lives in the Save menu (it is about saving), Bulk Images in the
                  Frame Dashboard's own row (it relinks artwork onto pieces). -->
@@ -2310,9 +2311,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.42';</script>
-<script src="templates.js?v=20.42"></script>
-<script src="app.js?v=20.42"></script>
+<script>window.FRAME_HTML_VERSION = '20.45';</script>
+<script src="templates.js?v=20.45"></script>
+<script src="app.js?v=20.45"></script>
 
 </body>
 </html>
