@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.45';
+const APP_VERSION = '20.46';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -12621,7 +12621,24 @@ const CODE_PATTERN_PRESETS = [
     { v: '{level}.{type}.S{zone}-{nn}', label: 'L3.ART.S16-01 (level, sector)' },
 ];
 function _codePattern() { return String((editorialContent && editorialContent.codePattern) || '').trim(); }
-function _codeZoneLabel() { return String((editorialContent && editorialContent.codeZoneLabel) || '').trim() || 'Sector'; }
+// 20.46: a bare number is a sector, not the word for one (a designer typed 22 into this box
+// expecting it to set the sector, and the panel then read "3 placements need a 22").
+function _codeZoneLabel() {
+    const v = String((editorialContent && editorialContent.codeZoneLabel) || '').trim();
+    return (v && !/^\d+$/.test(v)) ? v : 'Sector';
+}
+// 20.46: a plan level can carry a sector. Ford draws one plan per sector, so every piece on
+// that plan is in it: a piece with no Sector of its own takes its level's.
+function _levelZone(li) {
+    const i = (typeof li === 'number' && li >= 0) ? li : 0;
+    const L = (typeof floorplanLevels !== 'undefined' && floorplanLevels) ? floorplanLevels[i] : null;
+    return String((L && L.zone) || '').trim();
+}
+// A piece's sector for its code: its own, else its level's.
+function _rowZone(r) {
+    if (!r) return '';
+    return String(r.zone || '').trim() || _levelZone(typeof r.level === 'number' ? r.level : 0);
+}
 function _codePatternNeeds(pat) {
     const p = pat == null ? _codePattern() : pat;
     return { level: p.indexOf('{level}') >= 0, zone: p.indexOf('{zone}') >= 0, type: p.indexOf('{type}') >= 0 };
@@ -12661,7 +12678,7 @@ function _codeCtxResolve(prefix, ctx) {
         const sel = (typeof dashSelectedRowIndex === 'number' && dashProjectData) ? dashProjectData[dashSelectedRowIndex] : null;
         li = (sel && typeof sel.level === 'number') ? sel.level : 0;
     }
-    return { type: prefix || 'ART', level: _levelCode(li), zone: String(c.zone == null ? '' : c.zone).trim() };
+    return { type: prefix || 'ART', level: _levelCode(li), zone: String(c.zone == null ? '' : c.zone).trim() || _levelZone(li) };
 }
 // The next code in the project's pattern, or null (no pattern, or a token it needs is blank).
 // The number counts on its own stem: L3.ART.S16-10 is followed by L3.ART.S16-11 whatever
@@ -35416,6 +35433,10 @@ function _fpAddCodes(catKey, n, opts) {
         row.product = info.product;
         if (ctx && typeof ctx.level === 'number') row.level = ctx.level;   // 20.30
         if (ctx && String(ctx.zone || '').trim()) row.zone = String(ctx.zone).trim();
+        else if (_codePatternNeeds().zone && _codePatternParts(_codePattern())) {
+            const lz = _levelZone(typeof row.level === 'number' ? row.level : 0);   // 20.46
+            if (lz) row.zone = lz;
+        }
         // A flat graphic gets what the product dropdown seeds for one: the 2" bleed and
         // its application wording.
         if (_isFlatGraphic(row.product)) {
@@ -36166,8 +36187,12 @@ function _askPlacement(mode, opts) {
         }
         if (need.zone) {
             zIn = document.createElement('input'); zIn.type = 'text'; zIn.setAttribute('data-ask', 'zone');
-            zIn.value = (selRow && selRow.zone) || ''; zIn.placeholder = 'e.g. 16';
+            const lv0 = lSel ? (parseInt(lSel.value, 10) || 0) : ((selRow && typeof selRow.level === 'number') ? selRow.level : 0);
+            zIn.value = (selRow && selRow.zone) || _levelZone(lv0); zIn.placeholder = 'e.g. 16';
             s2.appendChild(field(_codeZoneLabel(), zIn));
+            // 20.46: until the designer types one, the sector follows the chosen level.
+            zIn.addEventListener('input', () => { zIn._typed = true; });
+            if (lSel) lSel.addEventListener('change', () => { if (!zIn._typed) zIn.value = _levelZone(parseInt(lSel.value, 10) || 0); });
         }
         const ctxNow = () => ({ level: lSel ? (parseInt(lSel.value, 10) || 0) : ((selRow && typeof selRow.level === 'number') ? selRow.level : 0), zone: zIn ? zIn.value.trim() : '' });
         const go2 = btn(''); go2.setAttribute('data-ask', 'go-new');
@@ -36597,7 +36622,17 @@ function _codesRenameRow(row, to) {
     const taken = (id) => (dashProjectData || []).some(o => o && o !== row && o.id === id);
     const fromKey = _artGroupKey(from), fromP = _plainCodeParts(fromKey);
     const plainRename = () => {
-        if (taken(to)) { _toast(to + ' is already taken', 'Pick a code nothing else uses.'); return { ok: false }; }
+        if (taken(to)) {
+            // 20.46: another placement has it. Offer the swap (whole placements trade codes).
+            const fk = _artGroupKey(from), tk = _artGroupKey(to);
+            if (fk !== tk && _codesCanSwap(fk, tk)) {
+                _codesAskSwap(fk, tk).then(ans => {
+                    if (ans === 'swap' && _codesSwapPlacements(fk, tk)) { _codesAnnounce(fk, tk, {}); try { _dsRefresh(); } catch (e) {} }
+                });
+                return { ok: false };
+            }
+            _toast(to + ' is already taken', 'Pick a code nothing else uses.'); return { ok: false };
+        }
         applyIdRename(from, to, true);
         _codesSettle();
         return { ok: true, from: from, to: row.id };
@@ -36896,7 +36931,7 @@ function _codePatternPlan() {
     _placementList().forEach(g => {
         if (!_plainCodeParts(g.key)) return;   // already a client or catalogue code
         const r0 = g.rows[0] || {};
-        const zone = String(r0.zone || '').trim();
+        const zone = _rowZone(r0);   // 20.46: its own, else its level's
         if (need.zone && !zone) { out.skipped.push(g.key); return; }
         out.todo.push({ key: g.key, prefix: _plainCodeParts(g.key).prefix, ctx: { level: typeof r0.level === 'number' ? r0.level : 0, zone: zone } });
     });
@@ -36907,7 +36942,11 @@ function recodeToPattern(quiet) {
     const moved = [];
     plan.todo.forEach(t => {
         const to = _nextPatternCode(t.prefix, t.ctx);
-        if (to && _fpRenameGroup(t.key, to, { quiet: true, force: true })) moved.push({ from: t.key, to: to });
+        if (to && _fpRenameGroup(t.key, to, { quiet: true, force: true })) {
+            moved.push({ from: t.key, to: to });
+            // The Sector field shows what the code says, even when it came from the level.
+            if (t.ctx.zone) (dashProjectData || []).forEach(r => { if (r && _artGroupKey(r.id) === to && !String(r.zone || '').trim()) r.zone = t.ctx.zone; });
+        }
     });
     if (moved.length) {
         _codesSettle();
@@ -36919,6 +36958,55 @@ function recodeToPattern(quiet) {
     }
     return { moved: moved, skipped: plan.skipped };
 }
+// ── SWAP TWO PLACEMENTS' CODES (20.46) ───────────────────────────────────────────
+// L3.ART.S16-02 should have been -01: the two trade codes, everything else stays with its
+// piece (artwork, frame, wall, pin). Three renames through a temporary code, so each one
+// lands on a free code; walls named after a code, per-page settings and plan-detail pages
+// follow through _fpRenameGroup. The Sector field follows the CODE, since the sector is
+// part of it. Catalogue placements (options) are refused: their codes are structure.
+// Returns true when it swapped.
+function _codesCanSwap(a, b) {
+    if (!a || !b || a === b) return false;
+    const ga = _fpFindGroup(a), gb = _fpFindGroup(b);
+    if (!ga || !gb) return false;
+    const cr = _catalogueRowIds();
+    return !ga.rows.concat(gb.rows).some(r => r && cr[r.id]);
+}
+function _codesSwapPlacements(a, b, opts) {
+    if (!_codesCanSwap(a, b)) return false;
+    const ga = _fpFindGroup(a), gb = _fpFindGroup(b);
+    const zoneA = String(ga.rows[0].zone || '').trim(), zoneB = String(gb.rows[0].zone || '').trim();
+    const rowsA = ga.rows.slice(), rowsB = gb.rows.slice();
+    const tmp = '__SW__' + Date.now().toString(36).replace(/[0-9]/g, '') + '.9';
+    if (!_fpRenameGroup(a, tmp, { quiet: true, force: true })) return false;
+    if (!_fpRenameGroup(b, a, { quiet: true, force: true })) { _fpRenameGroup(tmp, a, { quiet: true, force: true }); return false; }
+    _fpRenameGroup(tmp, b, { quiet: true, force: true });
+    if (zoneA !== zoneB) {
+        rowsA.forEach(r => { r.zone = zoneB; });
+        rowsB.forEach(r => { r.zone = zoneA; });
+    }
+    _codesSortRows(); _codesSortWalls();
+    if (!(opts && opts.quiet)) {
+        _codesRefreshViews();
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    }
+    return true;
+}
+// Typed a code another placement already has: offer the swap. A house code (ART.n) can
+// also MOVE to that number, the rule it always had, so that stays the second answer.
+// Resolves to 'swap', 'move' or null.
+function _codesAskSwap(from, to) {
+    const house = !!(_plainCodeParts(from) && _plainCodeParts(to) && _plainCodeParts(from).prefix === _plainCodeParts(to).prefix);
+    return new Promise(resolve => {
+        showConfirmModal(to + ' is already used',
+            'Swap the two? ' + from + ' becomes ' + to + ' and ' + to + ' becomes ' + from + '. Each keeps its artwork, frame, wall and plan pin.'
+            + (house ? '\n\nOr move ' + from + ' to number ' + _plainCodeParts(to).n + ' and renumber the codes between.' : ''),
+            'Swap codes', 'Cancel', () => resolve('swap'), () => resolve(null),
+            house ? { alt: { label: 'Move to ' + to, onClick: () => resolve('move') } } : {});
+    });
+}
+
 // ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
 // Every piece of the placement keeps its suffix (ART.4A -> ART.9A), so a rename is one
 // gesture for a triptych, not three. The id is the identity everything reads: the
@@ -37088,6 +37176,24 @@ function _fpItemRow(g, desc) {
         const commit = (ok) => {
             if (done) return; done = true;
             const v = inp.value.trim();
+            if (ok && v && v !== g.key && _codesCanSwap(g.key, v)) {
+                // 20.46: the code is taken by another placement, so offer to swap them.
+                _codesAskSwap(g.key, v).then(ans => {
+                    if (ans === 'swap') {
+                        if (_codesSwapPlacements(g.key, v)) { _codesAnnounce(g.key, v, {}); _dsRefresh(); _dsRenderCenter(); }
+                    } else if (ans === 'move') {
+                        const fin = _codesRenamePlacement(g.key, v);
+                        if (fin) {
+                            if (typeof pushHistory === 'function') pushHistory();
+                            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                            _codesRefreshViews(); _codesAnnounce(g.key, fin, { x: 1, y: 1 });
+                            _dsRefresh(); _dsRenderCenter();
+                        }
+                    }
+                    _dsRenderTools();
+                });
+                return;
+            }
             if (ok && v && v !== g.key) {
                 // A plain code renames by the house rule: the number is its position.
                 if (_plainCodeParts(g.key)) {
@@ -37403,31 +37509,56 @@ function _codePatternPanelInto(t) {
     txt.onchange = () => setPat(txt.value);
     box.appendChild(sel); box.appendChild(txt);
     const need = _codePatternNeeds(pat);
+    const lab = (txt0, w) => { const sp = document.createElement('span'); sp.textContent = txt0; sp.style.cssText = 'flex:' + (w ? ('0 0 ' + w + 'px; width:' + w + 'px;') : '1; min-width:0;') + ' font-size:var(--fs-55); color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;'; return sp; };
+    // 20.46: the word for {zone} says what it is, so nobody types a sector number into it.
     if (need.zone) {
-        const zl = document.createElement('input'); zl.type = 'text'; zl.value = editorialContent.codeZoneLabel || ''; zl.placeholder = 'Sector';
-        zl.title = 'What the client calls {zone}: Sector, Zone, Area, Wing';
+        const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:6px;';
+        const zl = document.createElement('input'); zl.type = 'text';
+        const lv = String(editorialContent.codeZoneLabel || '').trim();
+        zl.value = /^\d+$/.test(lv) ? '' : lv; zl.placeholder = 'Sector';
+        zl.title = 'What the client calls {zone}: Sector, Zone, Area, Wing. The sector itself is set per level below, or on each item.';
         zl.setAttribute('data-code-pattern', 'zone-label');
-        zl.style.cssText = 'width:100%; margin-bottom:4px; ' + inp;
+        zl.style.cssText = 'flex:0 0 96px; width:96px; ' + inp;
         zl.onchange = () => { editorialContent.codeZoneLabel = zl.value.trim(); save(); };
-        box.appendChild(zl);
+        row.appendChild(lab('{zone} is called')); row.appendChild(zl);
+        box.appendChild(row);
     }
-    if (need.level) {
+    if (need.level || need.zone) {
+        const hdr = document.createElement('div'); hdr.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:2px;';
+        hdr.appendChild(lab('Plan level'));
+        if (need.level) hdr.appendChild(lab('Code', 56));
+        if (need.zone) hdr.appendChild(lab(_codeZoneLabel(), 56));
+        box.appendChild(hdr);
         (floorplanLevels || []).forEach((L, i) => {
             const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:3px;';
             const nm = document.createElement('span'); nm.textContent = (L && L.name) || ('Level ' + (i + 1));
             nm.style.cssText = 'flex:1; min-width:0; font-size:var(--fs-60); color:var(--text-main); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
-            const ci = document.createElement('input'); ci.type = 'text'; ci.value = (L && L.code) || ''; ci.placeholder = _levelCode(i);
-            ci.setAttribute('data-level-code', String(i));
-            ci.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
-            ci.onchange = () => { if (!floorplanLevels[i]) return; const v = ci.value.trim(); if (v) floorplanLevels[i].code = v; else delete floorplanLevels[i].code; save(); };
-            row.appendChild(nm); row.appendChild(ci); box.appendChild(row);
+            row.appendChild(nm);
+            if (need.level) {
+                const ci = document.createElement('input'); ci.type = 'text'; ci.value = (L && L.code) || ''; ci.placeholder = _levelCode(i);
+                ci.setAttribute('data-level-code', String(i));
+                ci.title = 'The code {level} prints for this plan';
+                ci.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
+                ci.onchange = () => { if (!floorplanLevels[i]) return; const v = ci.value.trim(); if (v) floorplanLevels[i].code = v; else delete floorplanLevels[i].code; save(); };
+                row.appendChild(ci);
+            }
+            if (need.zone) {
+                const zi = document.createElement('input'); zi.type = 'text'; zi.value = (L && L.zone) || ''; zi.placeholder = 'e.g. 16';
+                zi.setAttribute('data-level-zone', String(i));
+                zi.title = 'Every piece on this plan with no ' + _codeZoneLabel() + ' of its own is in this one. A piece\'s own ' + _codeZoneLabel() + ' field still wins.';
+                zi.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
+                zi.onchange = () => { if (!floorplanLevels[i]) return; const v = zi.value.trim(); if (v) floorplanLevels[i].zone = v; else delete floorplanLevels[i].zone; save(); };
+                row.appendChild(zi);
+            }
+            box.appendChild(row);
         });
     }
     if (pat) {
         const nx = document.createElement('div'); nx.setAttribute('data-code-pattern', 'next');
         nx.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:2px 0 6px;';
-        const sample = _nextPlacementCode('ART', need.zone ? { zone: '1' } : null);
-        nx.textContent = 'Next new code looks like ' + sample + (need.zone ? ' (' + _codeZoneLabel() + ' 1)' : '');
+        const z0 = _levelZone(0);
+        const sample = _nextPlacementCode('ART', { level: 0, zone: need.zone ? (z0 || '1') : '' });
+        nx.textContent = 'Next new code looks like ' + sample + (need.zone && !z0 ? ' (if its ' + _codeZoneLabel() + ' is 1)' : '');
         box.appendChild(nx);
         const plan = _codePatternPlan();
         if (plan.todo.length || plan.skipped.length) {
@@ -37441,12 +37572,16 @@ function _codePatternPanelInto(t) {
             b.onclick = () => {
                 const res = recodeToPattern();
                 _toast(res.moved.length + ' placement' + (res.moved.length === 1 ? '' : 's') + ' recoded',
-                    res.skipped.length ? (res.skipped.length + ' still need a ' + _codeZoneLabel() + ' (set it on the item, then recode again).') : 'Renames are in the code log.');
+                    res.skipped.length ? (res.skipped.length + ' still need a ' + _codeZoneLabel() + ' (set it on the item or on its plan level, then recode again).') : 'Renames are in the code log.');
                 _dsRenderTools();
             };
             box.appendChild(b);
         }
     }
+    const sw = document.createElement('div'); sw.setAttribute('data-code-pattern', 'swap-hint');
+    sw.textContent = 'To swap two codes, double-click one on the Items tab and type the other.';
+    sw.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin-top:6px; line-height:1.4;';
+    box.appendChild(sw);
     t.appendChild(box);
 }
 function _fpPanelPlan(t, desc) {
@@ -51064,7 +51199,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
@@ -61364,6 +61499,11 @@ const FRAME_API = {
     // A new code: { category: 'framed'|'canvas'|'egd'|'wf'|<project category>, set: 'n1'..'n4'
     // or a salon preset key, hang: true for its own wall, location, widthIn, heightIn }.
     // 20.30: level (plan index) and zone (the pattern's {zone}) mint a code in the project's pattern.
+    // 20.46: two placements trade codes (each keeps its artwork, frame, wall and pin).
+    swapCodes(a, b) {
+        if (!_codesCanSwap(String(a || ''), String(b || ''))) return _apiErr('cannot swap ' + a + ' and ' + b);
+        return _codesSwapPlacements(String(a), String(b)) ? { ok: true, a: String(b), b: String(a) } : _apiErr('swap failed');
+    },
     addItem(opts) {
         opts = opts || {};
         const cat = opts.category != null ? opts.category : 'framed';
