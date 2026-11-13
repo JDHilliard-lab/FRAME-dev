@@ -3685,3 +3685,6 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .fp-scope { margin: 0 0 7px; }
 .fp-plan-head { margin: 12px 0 2px; padding-bottom: 3px; border-bottom: 1px solid var(--border-color); font-size: var(--fs-65); font-weight: 700; color: var(--text-strong); }
 .ds-fp-legend-lift { background: rgba(33, 150, 243, 0.12); outline: 1px dashed var(--selected); }
+.fp-recode-banner { display: flex; align-items: center; gap: 8px; margin: 6px 0 8px; padding: 7px 9px; border: 1px solid var(--warn); border-radius: var(--r-4); background: rgba(201, 138, 46, 0.12); font-size: var(--fs-65); line-height: 1.4; color: var(--text-main); }
+.fp-recode-banner > div { flex: 1; min-width: 0; }
+.fp-recode-banner .action-btn { width: auto; flex: 0 0 auto; height: 26px; padding: 0 10px; font-size: var(--fs-60); }

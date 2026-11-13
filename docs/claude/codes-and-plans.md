@@ -46,6 +46,9 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   a level/sector preset only when `codePattern` is UNDEFINED and every placement parses; plans take a sector from
   "Sector 23" in their name (or 3 in 4 of their placements). A code whose sector is not its plan's is a Preflight warn
   with the generic `it.fix` button (`_codesFixSector`, resolved by ROW: a fix renumbers nothing but its own code).
+- **A STUCK PLACEMENT IS FIXED WHERE IT IS SEEN (20.52, `_codesFixSectorAll`).** A plan whose placements are coded for
+  another sector shows `.fp-recode-banner` (`data-fp-recode`) atop its Items tab with Recode / Recode all (one undo entry,
+  gaps asked once). Move to level on the plan it already sits on recodes it (it did nothing: the trap designers hit).
 - **PLANS PRINT IN LEVEL, THEN SECTOR ORDER (20.51, `_planLevelsSorted`, `_planLevelOrder`).** `_deckEmitLevels` sorts
   naturally by `_levelCode`, then `_levelZone` (both plans must have one), add order breaking ties, ONLY when every plan
   has a level number; Guest A / Guest B and two unsectored plans on one level keep their add order (deliberate there;

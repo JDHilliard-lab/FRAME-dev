@@ -238,6 +238,31 @@ const path = require('path');
       if (labels.slice(0, 3).map(l => l.trim().slice(0, 3)).join() !== 'S16,S23,S24') throw new Error(labels.join('|'));
       const open = document.querySelector('.frame-menu'); if (open && open._close) open._close();
     });
+    __check('20.52: a plan holding placements coded for another sector says so, and Recode all fixes both', () => {
+      ford(); _codesInferPattern(); _codesSettle();
+      ['L3.ART.S16-01A', 'L3.ART.S16-01B', 'L3.ART.S16-03'].forEach(id => { const r = R(id); r.planPins = [{ lv: 0, x: 0.2, y: 0.2 }]; r.level = 1; });
+      const t = document.createElement('div'); document.body.appendChild(t);
+      _fpPanelItems(t, { kind: 'floorplan', level: 1 });
+      const b = t.querySelector('[data-fp-recode] button');
+      if (!b || b.textContent !== 'Recode all 2') throw new Error('banner ' + (b && b.textContent));
+      const t0 = document.createElement('div'); _fpPanelItems(t0, { kind: 'floorplan', level: 0 });
+      if (t0.querySelector('[data-fp-recode]')) throw new Error('banner on the wrong plan');
+      t.remove();
+      let pushes = 0; const was = pushHistory; pushHistory = () => { pushes++; };
+      const moved = _codesFixSectorAll(1);
+      pushHistory = was;
+      if (moved.length !== 2 || pushes !== 1) throw new Error('moved ' + moved.length + ', undo entries ' + pushes);
+      if (_codesSectorMismatches().length) throw new Error('still stuck');
+      if (keys(1) !== 'L3.ART.S23-01 L3.ART.S23-02 L3.ART.S23-03 L3.ART.S23-04') throw new Error(keys(1));
+    });
+    __check('20.52: Move to level on the plan it already sits on recodes a stuck placement', () => {
+      ford(); _codesInferPattern(); _codesSettle();
+      const r = R('L3.ART.S16-03'); r.planPins = [{ lv: 0, x: 0.2, y: 0.2 }]; r.level = 1;
+      const it = _fpMoveMenuItems(_fpFindGroup('L3.ART.S16-03'), null).find(i => i.on);
+      if (!it || it.hint !== 'recode to this plan') throw new Error('menu ' + JSON.stringify(it));
+      it.onClick();
+      if (!R('L3.ART.S23-03') || _codesSectorMismatches().length) throw new Error(ids());
+    });
     __check('the floorplan Items panel and Ctrl+K open it', () => {
       setup(['ART.1', 'ART.2'], '');
       if (!_jumpEntries().some(e => e.title === 'Page order')) throw new Error('not in Jump to');
