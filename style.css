@@ -3718,3 +3718,24 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .coding-sheet-pop .csp-tab.active { background: var(--bg-input); color: var(--text-strong); border-color: var(--text-muted); }
 .coding-sheet-pop .csp-body { flex: 1; overflow-y: auto; padding: 10px 12px 14px; }
 .coding-sheet-pop .help-entry-body { font-size: var(--fs-70); line-height: 1.5; color: var(--text-main); }
+
+/* 20.55: a picked floor plan pin and its legend line, with the line's reorder handles.
+   The grip sits just left of the line, the step arrows just right; both are children of
+   the line, so moving onto them keeps the line hovered. */
+.ds-fp-pin-picked { outline: 2px solid var(--selected) !important; outline-offset: 2px !important; z-index: 5; box-shadow: 0 0 0 5px color-mix(in srgb, var(--selected) 28%, transparent), 0 1px 4px rgba(0,0,0,0.4) !important; }
+.ds-fp-pin-hot { outline: 2px solid color-mix(in srgb, var(--selected) 70%, transparent); outline-offset: 2px; z-index: 5; }
+.ds-fp-listlink.is-picked { background: color-mix(in srgb, var(--selected) 16%, transparent); outline: 1px solid var(--selected); }
+.ds-fp-lg-grip, .ds-fp-lg-steps { position: absolute; top: 50%; transform: translateY(-50%); display: none; align-items: center; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-4); box-shadow: 0 1px 4px rgba(0,0,0,0.25); color: var(--text-main); }
+.ds-fp-listlink:hover .ds-fp-lg-grip, .ds-fp-listlink:hover .ds-fp-lg-steps,
+.ds-fp-listlink.is-picked .ds-fp-lg-grip, .ds-fp-listlink.is-picked .ds-fp-lg-steps { display: flex; }
+.ds-fp-lg-grip { right: 100%; margin-right: 3px; width: 16px; height: 16px; justify-content: center; cursor: grab; }
+.ds-fp-lg-grip:active { cursor: grabbing; }
+.ds-fp-lg-grip .svg-icon { width: 9px; height: 9px; stroke-width: 2.4; pointer-events: none; }
+.ds-fp-lg-grip:hover, .ds-fp-listlink.is-picked .ds-fp-lg-grip { color: var(--selected); border-color: var(--selected); }
+.ds-fp-lg-steps { left: 100%; margin-left: 3px; padding: 1px; gap: 1px; }
+.ds-fp-lg-step { width: 16px; height: 16px; padding: 0; display: flex; align-items: center; justify-content: center; background: none; border: 0; border-radius: var(--r-2); color: inherit; cursor: pointer; }
+.ds-fp-lg-step .svg-icon { width: 11px; height: 11px; pointer-events: none; }
+.ds-fp-lg-step:hover { background: color-mix(in srgb, var(--selected) 18%, transparent); color: var(--selected); }
+.ds-fp-lg-step.is-off { opacity: 0.3; cursor: default; }
+.ds-fp-lg-step.is-off:hover { background: none; color: inherit; }
+.ds-fp-listlink:hover, .ds-fp-listlink.is-picked { z-index: 6 !important; }

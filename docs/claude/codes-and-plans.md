@@ -33,7 +33,7 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   `tests/test_pin_move.js`.
 - **PAGE ORDER IS CODE ORDER, SET BY TRADING NUMBERS (20.51, `openPageOrder`, `_codesSetOrder`, `_codesMoveBesideAny`,
   `_codesFamKey`, `_pageOrderList`).** Three gestures, one engine: the Page order window, a drag on a floor plan page's
-  LEGEND line (`_dsFpLegendDrag`, on the `.ds-fp-listlink` overlay; a click still opens the spec page) and an Items row
+  LEGEND line (`_dsFpLegendDrag`, from the diamond grip `.ds-fp-lg-grip` only, plus one-place up / down arrows `.ds-fp-lg-step`, both added by `_dsFpLegendHandles`; a click on the line body still opens the spec page) and an Items row
   drag (now pattern codes too). `_codesSetOrder(keys)` hands out the numbers those placements ALREADY hold, per family
   (`'h:'` house prefix via `_renumberPrefix`, `'p:'` pattern stem via `_codePatternFamily`), so nothing else moves.
 - **PATTERN CODES KEEP THEIR GAPS AND THE GESTURE ASKS (20.51, `_codesPatternGaps`, `_codesGapCheck`, `_codesGapAsk`,
@@ -189,3 +189,10 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   `quiet`, found by the `_fpSketchNew` marker, never by the returned code). Stays armed until Esc, Sketch again, or
   arming a code/line; it counts as armed for crosshair, loupe and line deselect. Budget line reads `_dashBudgetInfo`.
   The bar WRAPS to two rows (the tools panel is ~250px; one row squeezed the type picker to 12px).
+- **A PIN CLICK PICKS, IT DOES NOT NAVIGATE (20.55, `_dsFpPickRow`, `_dsFpPickSet`, `_dsFpPickPaint`).** In Deck
+  Studio a click on a plan pin lights the pin (`.ds-fp-pin-picked`, by `data-fp-key`) and its legend line (`.is-picked`,
+  which shows the grip and arrows); the legend line is the only link to the spec page. A nudge under the 3px drag
+  threshold used to read as a click and jump away mid-move. The pick is held as the ROW so it follows a renumber; it is
+  painted by class toggles, never a re-render, so the same pin element still takes the double-click that removes it.
+  Cleared by a second click, a click on empty plan (`_dsFpPlace`) or Esc. The exported PDF's pins still link.
+  Test `tests/test_fp_pin_pick.js`.
