@@ -562,7 +562,8 @@ const fs = require('fs');
       // into its slot — a wrong drawing that looks completely normal.
       const A = window.__appSrc;
       const del = A.slice(A.indexOf('async function _fpDeleteLevel'), A.indexOf('floorplanLevels.splice(removed, 1)'));
-      if (del.indexOf('_fpPins(r)') < 0) throw new Error('level deletion ignores the pin array');
+      // 20.50: _fpPinsAll, so a moved placement's temporary pin is renumbered too, not dropped.
+      if (del.indexOf('_fpPinsAll(r)') < 0) throw new Error('level deletion ignores the pin array (or drops temporary pins)');
       if (del.indexOf('- 1') < 0) throw new Error('level deletion does not renumber the pins above it');
       // The arithmetic itself, as the deletion does it.
       const shift = (pins, removed) => pins.filter(p => p.lv !== removed)

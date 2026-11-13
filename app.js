@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.46';
+const APP_VERSION = '20.50';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -1938,8 +1938,11 @@ function _fillLevelSelect(data) {
     }
     sel.value = String(cur);
     const pinned = !!(data && _fpPins(data).length);
-    sel.disabled = pinned;
-    sel.title = pinned ? 'Set by where this piece is pinned on the floor plan' : 'Which floor plan this piece is listed under in the deck';
+    const waiting = !pinned && !!(data && _fpTempPin(data));   // 20.50: moved, its pin waiting on the new plan
+    sel.disabled = pinned || waiting;
+    sel.title = pinned ? 'Set by where this piece is pinned on the floor plan'
+        : waiting ? 'Moved to this level; its pin is waiting on that plan. Move it again from the floorplan Items menu'
+        : 'Which floor plan this piece is listed under in the deck';
 }
 function _fpMigrate() {
     if (!Array.isArray(floorplanLevels) || !floorplanLevels.length) {
@@ -2106,7 +2109,14 @@ function _artGroupNum(code) {
 // That is what lets the ~40 places that read a single placement (the spec page's plan
 // crop, the validator, the CSV, the level a spec page is grouped under) stay exactly as
 // they were: they get the first pin, which is the answer they always got.
-function _fpPins(r) {
+// 20.50: TWO FLAGS RIDE ON A PIN. `temp` is a placement moved to another level that has not
+// been put on its new plan yet: it LANDED there (among its sector's pins, else mid-plan) so
+// the designer can see it, but it is NOT a placement. _fpPins never returns it, so it is
+// unplaced to every counter and never printed (every page draws from _fpGroups, which reads
+// _fpPins). `check` is a real pin whose sector changed: it prints, but its spot is in doubt.
+// Both go when the pin is dragged (_fpSetPin writes a plain pin) or confirmed
+// (_fpConfirmPin), and both are flagged by Preflight (_pinMovePreflight).
+function _fpPinsAll(r) {
     if (!r) return [];
     // READ-ONLY, and it must stay that way: seeding an array here would write an empty
     // field into every row, every autosave and every undo snapshot just for asking.
@@ -2114,6 +2124,12 @@ function _fpPins(r) {
     if (r.planX != null && r.planY != null) return [{ lv: _deckLvlOf(r.level), x: r.planX, y: r.planY }];
     return [];
 }
+function _fpPins(r) { return _fpPinsAll(r).filter(p => !p.temp); }
+function _fpTempPinOn(r, lv) {
+    const n = _deckLvlOf(lv);
+    return _fpPinsAll(r).find(p => p.temp && _deckLvlOf(p.lv) === n) || null;
+}
+function _fpTempPin(r) { return _fpPinsAll(r).find(p => p.temp) || null; }
 function _fpPinOn(r, lv) {
     const n = _deckLvlOf(lv);
     return _fpPins(r).find(p => _deckLvlOf(p.lv) === n) || null;
@@ -2121,24 +2137,38 @@ function _fpPinOn(r, lv) {
 // The legacy trio follows pins[0]. Never the other way round, and never re-sorted: adding
 // a pin on a second plan must not move the primary, or the piece's spec page would jump
 // to a different level's block just because it was also shown in a guestroom.
+// A TEMPORARY first pin still names the level (the piece now lives there) but gives no
+// position: the 40 single-placement readers see an unplaced piece on its new level. Taking
+// the level from the first REAL pin instead is what snapped a moved piece back (20.50).
 function _fpSyncPrimary(r) {
-    const pins = _fpPins(r);
+    const pins = _fpPinsAll(r);
     if (!pins.length) { r.planX = null; r.planY = null; return; }
-    r.planX = pins[0].x; r.planY = pins[0].y; r.level = _deckLvlOf(pins[0].lv);
+    r.level = _deckLvlOf(pins[0].lv);
+    if (pins[0].temp) { r.planX = null; r.planY = null; return; }
+    r.planX = pins[0].x; r.planY = pins[0].y;
 }
+// Writes a PLAIN pin: placing or dragging is the designer saying "here", so a temp or check
+// flag on that plan's pin goes with it.
 function _fpSetPin(r, lv, x, y) {
     if (!r) return;
     const n = _deckLvlOf(lv);
-    const pins = _fpPins(r).slice();
+    let pins = _fpPinsAll(r).slice();
     const i = pins.findIndex(p => _deckLvlOf(p.lv) === n);
-    if (i >= 0) pins[i] = { lv: n, x: x, y: y }; else pins.push({ lv: n, x: x, y: y });
+    // A temporary pin on ANOTHER plan was only ever a stand-in: pinning the piece anywhere
+    // replaces it, in its place in the order (a leading stand-in hands the lead to this pin).
+    const t = pins.findIndex(p => p.temp && _deckLvlOf(p.lv) !== n);
+    const pin = { lv: n, x: x, y: y };
+    if (i >= 0) pins[i] = pin;
+    else if (t >= 0) pins[t] = pin;
+    else pins.push(pin);
+    if (i >= 0 && t >= 0) pins = pins.filter((p, k) => k !== t);
     r.planPins = pins;
     _fpSyncPrimary(r);
 }
 function _fpClearPin(r, lv) {
     if (!r) return;
     const n = _deckLvlOf(lv);
-    r.planPins = _fpPins(r).filter(p => _deckLvlOf(p.lv) !== n);
+    r.planPins = _fpPinsAll(r).filter(p => _deckLvlOf(p.lv) !== n);
     _fpSyncPrimary(r);
 }
 // THE WALL LINE IS PER PLAN TOO, and for exactly the same reason the pin is. Making the
@@ -2230,8 +2260,9 @@ function _fpGroups(level) {
         if (!map[k]) { map[k] = { key: k, num: _artGroupNum(r.id || ''), ids: [], rows: [], level: _deckLvlOf(r.level), category: r.category || '', location: r.location || '', planX: null, planY: null, planZoom: null }; order.push(k); }
         const g = map[k];
         g.ids.push(r.id || ''); g.rows.push(r);
-        const use = (want == null) ? (_fpPins(r)[0] || null) : _fpPinOn(r, want);
-        if (use && g.planX == null) { g.planX = use.x; g.planY = use.y; g.level = _deckLvlOf(use.lv); }
+        const _p0 = (want == null) ? (_fpPinsAll(r)[0] || null) : null;
+        const use = (want == null) ? (_p0 && !_p0.temp ? _p0 : null) : _fpPinOn(r, want);
+        if (use && g.planX == null) { g.planX = use.x; g.planY = use.y; g.level = _deckLvlOf(use.lv); if (use.check) g.check = true; }
         if (r.planZoom != null && g.planZoom == null) g.planZoom = r.planZoom;
         if (!g.category && r.category) g.category = r.category;
         // Resolved for the plan asked for, exactly as the pin above is — otherwise the
@@ -7679,6 +7710,7 @@ function _projectImages() {
         if (top === 'floorplanImage') return { kind: 'plan', name: p.floorplanImageName || '', use: 'Plan ' + (((p.floorplanLevels || [])[0] || {}).name || 'Level 1') };
         if (top === 'floorplanLevels') { const l = (p.floorplanLevels || [])[path[1]] || {}; return { kind: 'plan', name: l.imageName || '', use: 'Plan ' + (l.name || ('Level ' + (path[1] + 1))) }; }
         if (top === 'editorial') {
+            if (path[1] === 'artBin') { const e = ((p.editorial || {}).artBin || [])[path[2]] || {}, a = e.art || {}; return { kind: 'artwork', code: String(a.imageCode || '').trim(), name: a.artworkFile || '', use: 'Art on hold (was ' + (e.from || '?') + ')' }; }
             if (path[1] === 'annotations') return { kind: 'page', name: nameOf(parent), use: _imgPageLabel(path[2]) };
             if (path.some(x => /theme|background|pagebg/i.test(String(x)))) return { kind: 'pagebg', name: nameOf(parent), use: 'Background ' + (path[2] != null ? path[2] : '') };
             return { kind: 'deck', name: nameOf(parent), use: path.slice(1, 3).join(' ') };
@@ -8268,6 +8300,9 @@ function _deleteElevationNow(idx, opts) {
         const _optGone = (_isCatalogueOption(elevations[idx]) ? (elevations[idx].frames || []).filter(f => f && f.id).map(f => f.id) : []).concat(_ownGone);
         elevations.splice(idx, 1);
         if (_optGone.length) {
+            let _kept = 0;   // 20.48: their art goes to Art on hold
+            dashProjectData.forEach(r => { if (r && _optGone.indexOf(r.id) >= 0 && _artBinAdd(r, 'wall deleted')) _kept++; });
+            if (_kept) setTimeout(() => _artBinToast(_kept), 0);
             dashProjectData = dashProjectData.filter(r => !(r && _optGone.indexOf(r.id) >= 0));
             if (dashSelectedRowIndex >= dashProjectData.length) dashSelectedRowIndex = Math.max(0, dashProjectData.length - 1);
             try { _codesSettle(); } catch (e) {}
@@ -12634,6 +12669,17 @@ function _levelZone(li) {
     const L = (typeof floorplanLevels !== 'undefined' && floorplanLevels) ? floorplanLevels[i] : null;
     return String((L && L.zone) || '').trim();
 }
+// 20.49: the sector a NEW code inherits when none is given: its level's, else the last piece
+// on that level with one, else the last piece anywhere with one. A sector project then never
+// mints a house code (+ Add code on the floorplan made ART.1 beside L1.ART.S1-01).
+function _inheritZone(li) {
+    const lz = _levelZone(li);
+    if (lz) return lz;
+    const rows = dashProjectData || [];
+    for (let i = rows.length - 1; i >= 0; i--) { const r = rows[i]; if (r && (typeof r.level === 'number' ? r.level : 0) === li && String(r.zone || '').trim()) return String(r.zone).trim(); }
+    for (let i = rows.length - 1; i >= 0; i--) { const r = rows[i]; if (r && String(r.zone || '').trim()) return String(r.zone).trim(); }
+    return '';
+}
 // A piece's sector for its code: its own, else its level's.
 function _rowZone(r) {
     if (!r) return '';
@@ -12678,7 +12724,7 @@ function _codeCtxResolve(prefix, ctx) {
         const sel = (typeof dashSelectedRowIndex === 'number' && dashProjectData) ? dashProjectData[dashSelectedRowIndex] : null;
         li = (sel && typeof sel.level === 'number') ? sel.level : 0;
     }
-    return { type: prefix || 'ART', level: _levelCode(li), zone: String(c.zone == null ? '' : c.zone).trim() || _levelZone(li) };
+    return { type: prefix || 'ART', level: _levelCode(li), zone: String(c.zone == null ? '' : c.zone).trim() || _inheritZone(li) };
 }
 // The next code in the project's pattern, or null (no pattern, or a token it needs is blank).
 // The number counts on its own stem: L3.ART.S16-10 is followed by L3.ART.S16-11 whatever
@@ -13391,7 +13437,7 @@ function addDashRow() {
         if (!ans) return null;
         let id = null;
         if (ans.kind === 'grow') { const ids = _placementGrow(ans.key, ans.count); id = ids && ids[0]; }
-        else if (ans.kind === 'new') { const code = _placementMint(ans.cat, ans.set, false, ans.ctx).code; const r = dashProjectData.find(x => x && _artGroupKey(x.id) === code); id = r && r.id; }
+        else if (ans.kind === 'new') { const code = _placementMint(ans.cat, ans.set, !!ans.hang, ans.ctx).code; /* 20.47: hang */ const r = dashProjectData.find(x => x && _artGroupKey(x.id) === code); id = r && r.id; }
         const i = id ? dashProjectData.findIndex(r => r && r.id === id) : -1;
         if (i < 0) return null;
         dashSelectedRowIndex = i;
@@ -13474,6 +13520,7 @@ function detachDashRow() {
 function deleteDashRow() {
     if(dashProjectData.length <= 1) { _toast('That is the last row', 'A project keeps at least one row, so it was not deleted.'); return; }
     const idToDelete = dashProjectData[dashSelectedRowIndex].id;
+    const _kept = _artBinAdd(dashProjectData[dashSelectedRowIndex], 'deleted');   // 20.48
     dashProjectData.splice(dashSelectedRowIndex, 1);
     dashSelectedRowIndex = Math.max(0, dashSelectedRowIndex - 1);
     
@@ -13486,6 +13533,7 @@ function deleteDashRow() {
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(dashProjectData[dashSelectedRowIndex].id);
     pushHistory();
+    if (_kept) _artBinToast(1);
 }
 
 function loadDashDataIntoControls(data) {
@@ -16309,6 +16357,13 @@ function _elevAddArtworkFiles(targets, files) {
 
 function clearDashArtwork() {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+    // 20.48: the picture is kept in Art on hold, not thrown away.
+    if (row && !_bulkEditing && _rowHasArt(row)) {
+        _artBinAdd(row, 'removed');
+        _artBinToast(1);
+        // The form still shows the title and artist; reload it or the sync below writes them back.
+        loadDashDataIntoControls(row);
+    }
     if (row) {
         row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = '';
         row.artZoom = 1; row.artPanX = 0; row.artPanY = 0; row.artworkW = 0; row.artworkH = 0;
@@ -16317,6 +16372,325 @@ function clearDashArtwork() {
     updateDashArtworkThumb('');
     _syncArtCropControls();
     syncDashAndCalculate();
+}
+
+// ── UNPLACED ART (20.48) ─────────────────────────────────────────────────────────
+// Budget cuts drop placements and clients move art around, but a picture someone chose
+// is work: deleting its piece used to delete it. Now any piece that goes (Delete, Delete
+// placement, a wall deleted with its pieces, a set made smaller) or has its art removed
+// leaves the art here, in editorialContent.artBin, with where it came from. From the list
+// it goes onto another piece, onto a new placement, or is deleted for good. It is project
+// data, so it saves, undoes and packages with everything else.
+const ART_CARRY_FIELDS = ['artworkUrl', 'artworkFile', 'artworkW', 'artworkH', 'artworkTitle', 'artist', 'artistAffil', 'artMedium', 'artYear', 'imageCode', 'artZoom', 'artPanX', 'artPanY', 'artLink'];
+const ART_CARRY_BLANK = { artworkUrl: '', artworkFile: '', artworkW: 0, artworkH: 0, artworkTitle: '', artist: '', artistAffil: '', artMedium: '', artYear: '', imageCode: '', artZoom: 1, artPanX: 0, artPanY: 0 };
+// Reading never writes: the guided tour (and any read-only pass) must leave the project as
+// it found it, so the list is only created when something is put in it.
+function _artBin() {
+    return Array.isArray(editorialContent.artBin) ? editorialContent.artBin : [];
+}
+function _rowHasArt(r) { return !!(r && (String(r.artworkUrl || '').trim() || String(r.artworkFile || '').trim())); }
+// The artwork's fields off a row (the row is left blank).
+function _artTake(r) {
+    const a = {};
+    ART_CARRY_FIELDS.forEach(k => { if (r[k] !== undefined && r[k] !== null) a[k] = (k === 'artLink') ? JSON.parse(JSON.stringify(r[k])) : r[k]; });
+    ART_CARRY_FIELDS.forEach(k => { if (k === 'artLink') delete r.artLink; else r[k] = ART_CARRY_BLANK[k]; });
+    return a;
+}
+function _artPut(r, a) {
+    ART_CARRY_FIELDS.forEach(k => {
+        if (k === 'artLink') { if (a && a.artLink) r.artLink = JSON.parse(JSON.stringify(a.artLink)); else delete r.artLink; }
+        else r[k] = (a && a[k] !== undefined) ? a[k] : ART_CARRY_BLANK[k];
+    });
+}
+function _artLabel(a) {
+    a = a || {};
+    return String(a.artworkTitle || '').trim() || String(a.artworkFile || '').replace(/\.[A-Za-z0-9]{1,5}$/, '').trim() || String(a.imageCode || '').trim() || 'Untitled artwork';
+}
+// Park a row's art in the bin (no-op without art). Returns the entry.
+function _artBinAdd(r, why) {
+    if (!_rowHasArt(r)) return null;
+    const e = {
+        id: 'ab' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        art: _artTake(r),
+        from: String(r.id || ''), location: String(r.location || '').trim(),
+        level: typeof r.level === 'number' ? r.level : 0, zone: String(r.zone || '').trim(),
+        category: r.category || '', product: r.product || '',
+        extW: r.extW, extH: r.extH, unit: dashUnit,
+        why: why || 'removed', at: new Date().toISOString().slice(0, 10)
+    };
+    if (!Array.isArray(editorialContent.artBin)) editorialContent.artBin = [];
+    editorialContent.artBin.push(e);
+    return e;
+}
+function _artBinToast(n) {
+    if (!n) return;
+    _toast(n === 1 ? 'Artwork kept in Art on hold' : n + ' artworks kept in Art on hold', 'Put it on another piece or a new placement from there.',
+        { actions: [{ label: 'Open', onClick: () => openArtBin() }] });
+}
+function _rowIdxOf(r) { return dashProjectData.indexOf(r); }
+function _artRefreshRow(r) {
+    const i = _rowIdxOf(r);
+    if (i >= 0 && typeof pushUpdatesToElevations === 'function') { try { pushUpdatesToElevations(i); } catch (e) {} }
+}
+function _artAfterChange() {
+    _codesRefreshViews();
+    try { renderDashTable(); } catch (e) {}
+    try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {}
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+// Put a bin entry's art on a piece. Art already on it goes to the bin in its place.
+function artBinPlace(entryId, rowId, quiet) {
+    const bin = _artBin(), i = bin.findIndex(e => e && e.id === entryId);
+    const r = dashProjectData.find(x => x && x.id === rowId);
+    if (i < 0 || !r) return false;
+    const e = bin[i];
+    bin.splice(i, 1);
+    if (_rowHasArt(r)) _artBinAdd(r, 'replaced');
+    _artPut(r, e.art);
+    _artRefreshRow(r);
+    if (!quiet) _artAfterChange();
+    return true;
+}
+// A new placement for a bin entry: its old type, level and sector, one piece, the art on it.
+// Returns the new piece's id, or null.
+function artBinNewPlacement(entryId, ctx, quiet) {
+    const bin = _artBin(), e = bin.find(x => x && x.id === entryId);
+    if (!e) return null;
+    const c = Object.assign({ level: e.level, zone: e.zone }, ctx || {});
+    const cat = (e.category && (_artCats().some(k => k && k.key === e.category) || ART_CATEGORY_TYPES.some(k => k.key === e.category))) ? e.category : 'framed';
+    const res = _placementMint(cat, 'n1', false, c);
+    const r = dashProjectData.find(x => x && _artGroupKey(x.id) === res.code);
+    if (!r) return null;
+    bin.splice(bin.indexOf(e), 1);
+    _artPut(r, e.art);
+    if (e.location) r.location = e.location;
+    if (e.extW && e.unit === dashUnit) { r.extW = e.extW; r.extH = e.extH; }
+    _artRefreshRow(r);
+    if (!quiet) _artAfterChange();
+    return r.id;
+}
+function artBinDelete(entryId, quiet) {
+    const bin = _artBin(), i = bin.findIndex(e => e && e.id === entryId);
+    if (i < 0) return false;
+    bin.splice(i, 1);
+    if (!quiet) _artAfterChange();
+    return true;
+}
+// Move one piece's art onto another. mode 'swap' trades them; 'bump' sends the target's
+// art to the bin. A target with no art just takes it.
+function moveArtBetween(fromId, toId, mode, quiet) {
+    const a = dashProjectData.find(x => x && x.id === fromId), b = dashProjectData.find(x => x && x.id === toId);
+    if (!a || !b || a === b || !_rowHasArt(a)) return false;
+    const artA = _artTake(a);
+    if (_rowHasArt(b)) {
+        if (mode === 'swap') _artPut(a, _artTake(b));
+        else _artBinAdd(b, 'replaced');
+    }
+    _artPut(b, artA);
+    _artRefreshRow(a); _artRefreshRow(b);
+    if (!quiet) _artAfterChange();
+    return true;
+}
+// DELETE A PLACEMENT: every piece of the code, off every wall; their art goes to the bin.
+// A house project closes the gap (ART.4 becomes ART.3); a pattern project keeps its gap.
+function deletePlacementNow(key, opts) {
+    const keepArt = !(opts && opts.keepArt === false);
+    const g = _fpFindGroup(key);
+    if (!g) return 0;
+    if (g.rows.length >= dashProjectData.length) { _toast('That is every piece', 'A project keeps at least one item, so ' + key + ' was not deleted.'); return 0; }
+    let kept = 0;
+    const ids = {};
+    g.rows.forEach(r => { ids[r.id] = true; if (keepArt && _artBinAdd(r, 'placement deleted')) kept++; });
+    dashProjectData = dashProjectData.filter(r => !(r && ids[r.id]));
+    (elevations || []).forEach(e => { e.frames = (e.frames || []).filter(f => !(f && ids[f.id])); });
+    // A wall that held only this placement is left empty; it is the designer's to delete.
+    if (dashSelectedRowIndex >= dashProjectData.length) dashSelectedRowIndex = Math.max(0, dashProjectData.length - 1);
+    _codesSettle();
+    return { kept: kept, pieces: g.rows.length };
+}
+// 20.49: one question for every Remove (the row's x, its menu, the Edit menu). With art on
+// the pieces it offers to keep the art on hold for later, or to delete everything.
+function deletePlacement(key) {
+    const g = _fpFindGroup(key);
+    if (!g) return;
+    const art = g.rows.filter(_rowHasArt).length;
+    const where = g.location ? ' (' + g.location + ')' : '';
+    const pcs = g.rows.length === 1 ? 'The piece comes' : 'All ' + g.rows.length + ' pieces come';
+    const finish = (keepArt) => {
+        const res = deletePlacementNow(key, { keepArt: keepArt });
+        if (!res) return;
+        _artAfterChange();
+        try { if (dashProjectData[dashSelectedRowIndex]) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]); } catch (e) {}
+        try { renderNavTabs(); recalculateDashboardQuantities(); } catch (e) {}
+        if (res.kept) _artBinToast(res.kept); else _toast(key + ' removed', 'Ctrl+Z brings it back.');
+    };
+    if (!art) {
+        _confirmDestroy({
+            title: 'Remove ' + key + where + '?',
+            body: pcs + ' out of the project and off every wall. It has no artwork yet.',
+            confirm: 'Remove placement', undoable: true, onConfirm: () => finish(true)
+        });
+        return;
+    }
+    showConfirmModal('Remove ' + key + where + '?',
+        pcs + ' out of the project and off every wall. ' + (art === 1 ? 'It has artwork' : art + ' pieces have artwork') + ': keep it on hold to use on another placement, or delete it with the placement. Ctrl+Z undoes either.',
+        'Remove, keep the art on hold', 'Cancel', () => finish(true), null,
+        { alt: { label: 'Delete everything, art too', onClick: () => finish(false) } });
+}
+function deleteSelectedPlacement() {
+    const r = dashProjectData[dashSelectedRowIndex];
+    if (r && r.id) deletePlacement(_artGroupKey(r.id));
+}
+// Pieces as choices: code, where, and whose art is on it.
+function _artPieceChoices(exceptId) {
+    return (dashProjectData || []).filter(r => r && r.id && r.id !== exceptId && _catRowTakesArt(r)).map(r => ({
+        value: r.id,
+        label: r.id + (r.location ? ' · ' + r.location : '') + (_rowHasArt(r) ? ' · has ' + _artLabel(r) : ' · empty'),
+        has: _rowHasArt(r)
+    }));
+}
+function _artThumbEl(a, size) {
+    const box = document.createElement('div');
+    box.className = 'ab-thumb';
+    box.style.cssText = 'flex:0 0 ' + size + 'px; width:' + size + 'px; height:' + size + 'px;';
+    if (a && a.artworkUrl) { const im = document.createElement('img'); im.src = a.artworkUrl; im.alt = ''; box.appendChild(im); }
+    else box.textContent = 'No picture';
+    return box;
+}
+// The list. Each entry: put on a piece, a new placement, or delete for good.
+function openArtBin() {
+    const old = document.getElementById('artBinModal'); if (old) old.remove();
+    const ov = document.createElement('div'); ov.id = 'artBinModal';
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'ab-card';
+    const head = document.createElement('div'); head.className = 'ab-head';
+    const ttl = document.createElement('div'); ttl.className = 'ab-title'; ttl.textContent = 'Art on hold';
+    const x = document.createElement('button'); x.type = 'button'; x.className = 'fsp-close phone-x'; x.setAttribute('data-modal-close', ''); x.setAttribute('aria-label', 'Close');
+    x.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    x.onclick = () => ov.remove();
+    head.appendChild(ttl); head.appendChild(x); card.appendChild(head);
+    const sub = document.createElement('div'); sub.className = 'ab-sub';
+    sub.textContent = 'Artwork from pieces that were deleted or had their art removed. Put each one on another piece, start a new placement for it, or delete it for good.';
+    card.appendChild(sub);
+    const list = document.createElement('div'); list.className = 'ab-list'; card.appendChild(list);
+    const redraw = () => { openArtBin(); };
+    const bin = _artBin();
+    if (!bin.length) {
+        const em = document.createElement('div'); em.className = 'ab-empty'; em.setAttribute('data-ab', 'empty');
+        em.textContent = 'Nothing waiting. Art from deleted pieces will show up here.';
+        list.appendChild(em);
+    }
+    bin.slice().reverse().forEach(e => {
+        const row = document.createElement('div'); row.className = 'ab-row'; row.setAttribute('data-ab-entry', e.id);
+        row.appendChild(_artThumbEl(e.art, 72));
+        const mid = document.createElement('div'); mid.className = 'ab-mid';
+        const nm = document.createElement('div'); nm.className = 'ab-name'; nm.textContent = _artLabel(e.art);
+        const meta = document.createElement('div'); meta.className = 'ab-meta';
+        const by = String(e.art.artist || '').trim();
+        meta.textContent = (by ? by + ' · ' : '') + 'was ' + (e.from || 'a piece') + (e.location ? ' · ' + e.location : '') + ' · ' + e.why + ' ' + (e.at || '');
+        mid.appendChild(nm); mid.appendChild(meta);
+        const acts = document.createElement('div'); acts.className = 'ab-acts';
+        const sel = document.createElement('select'); sel.setAttribute('data-ab', 'target');
+        const o0 = document.createElement('option'); o0.value = ''; o0.textContent = 'Put on a piece…'; sel.appendChild(o0);
+        _artPieceChoices(null).sort((a, b) => (a.has - b.has)).forEach(c => { const o = document.createElement('option'); o.value = c.value; o.textContent = c.label; sel.appendChild(o); });
+        const put = document.createElement('button'); put.type = 'button'; put.className = 'action-btn'; put.textContent = 'Place'; put.setAttribute('data-ab', 'place');
+        put.disabled = true;
+        sel.onchange = () => {
+            const t = dashProjectData.find(r => r && r.id === sel.value);
+            put.disabled = !sel.value;
+            put.textContent = (t && _rowHasArt(t)) ? 'Place (its art comes here)' : 'Place';
+        };
+        put.onclick = () => { if (sel.value && artBinPlace(e.id, sel.value)) { _toast(_artLabel(e.art) + ' is on ' + sel.value, 'Ctrl+Z undoes it.'); redraw(); } };
+        const nw = document.createElement('button'); nw.type = 'button'; nw.className = 'action-btn btn-secondary'; nw.textContent = 'New placement'; nw.setAttribute('data-ab', 'new');
+        nw.onclick = async () => {
+            let ctx = null;
+            const need = _codePatternNeeds();
+            if (need.zone && _codePatternParts(_codePattern()) && !e.zone && !_levelZone(e.level)) {
+                const ans = await _askFields({ title: 'Which ' + _codeZoneLabel().toLowerCase() + '?', body: 'The new code needs a ' + _codeZoneLabel() + '.', confirm: 'Create', fields: [{ key: 'zone', label: _codeZoneLabel(), value: '' }] });
+                if (!ans || !String(ans.zone || '').trim()) return;
+                ctx = { zone: String(ans.zone).trim() };
+            }
+            const id = artBinNewPlacement(e.id, ctx);
+            if (id) { _toast(_artLabel(e.art) + ' has a new placement', id + '. Hang it with + Add Wall, or pin it on the plan.'); redraw(); }
+        };
+        const del = document.createElement('button'); del.type = 'button'; del.className = 'action-btn btn-secondary ab-del'; del.textContent = 'Delete'; del.title = 'Delete this artwork for good'; del.setAttribute('data-ab', 'delete');
+        del.onclick = () => _confirmDestroy({
+            title: 'Delete ' + _artLabel(e.art) + ' for good?', body: 'It comes out of the project. Ctrl+Z brings it back until you close the project.',
+            confirm: 'Delete artwork', undoable: true,
+            onConfirm: () => { artBinDelete(e.id); redraw(); }
+        });
+        acts.appendChild(sel); acts.appendChild(put); acts.appendChild(nw); acts.appendChild(del);
+        mid.appendChild(acts);
+        row.appendChild(mid);
+        list.appendChild(row);
+    });
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    return ov;
+}
+// The item form's Move button: this piece's art onto another piece.
+function openMoveArtModal(rowId) {
+    const r = rowId ? dashProjectData.find(x => x && x.id === rowId) : dashProjectData[dashSelectedRowIndex];
+    if (!r || !_rowHasArt(r)) { _toast('No artwork on this piece', 'Add a picture first, or open Art on hold.'); return null; }
+    const old = document.getElementById('moveArtModal'); if (old) old.remove();
+    const ov = document.createElement('div'); ov.id = 'moveArtModal';
+    ov.className = 'frame-modal fm-nested ask-fields'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'ask-card';
+    const h = document.createElement('h3'); h.className = 'ask-title'; h.textContent = 'Move ' + _artLabel(r) + ' to…'; card.appendChild(h);
+    const b = document.createElement('div'); b.className = 'ask-body';
+    b.textContent = 'The artwork moves; both pieces keep their frames, sizes and walls. To move a whole placement to another level, change its Level.';
+    card.appendChild(b);
+    const sel = document.createElement('select'); sel.setAttribute('data-move-art', 'target');
+    _artPieceChoices(r.id).forEach(c => { const o = document.createElement('option'); o.value = c.value; o.textContent = c.label; sel.appendChild(o); });
+    const lab = document.createElement('label'); lab.className = 'ask-field'; const sp = document.createElement('span'); sp.textContent = 'Piece'; lab.appendChild(sp); lab.appendChild(sel);
+    card.appendChild(lab);
+    const actions = document.createElement('div'); actions.className = 'ask-actions';
+    const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel'; cancel.setAttribute('data-modal-close', '');
+    cancel.onclick = () => ov.remove();
+    const bump = document.createElement('button'); bump.type = 'button'; bump.className = 'action-btn btn-secondary'; bump.setAttribute('data-move-art', 'bump');
+    bump.textContent = 'Move, theirs on hold';
+    const go = document.createElement('button'); go.type = 'button'; go.className = 'action-btn'; go.setAttribute('data-move-art', 'go');
+    const sync = () => {
+        const t = dashProjectData.find(x => x && x.id === sel.value);
+        const has = !!(t && _rowHasArt(t));
+        go.textContent = has ? 'Swap the two' : 'Move';
+        bump.style.display = has ? '' : 'none';
+    };
+    sel.onchange = sync; sync();
+    const done = (mode) => {
+        const to = sel.value;
+        if (!to) return;
+        const name = _artLabel(r);
+        if (moveArtBetween(r.id, to, mode)) {
+            ov.remove();
+            _toast(name + ' is on ' + to, mode === 'bump' ? 'Its art went to Art on hold. Ctrl+Z undoes it.' : 'Ctrl+Z undoes it.');
+        }
+    };
+    go.onclick = () => done('swap');
+    bump.onclick = () => done('bump');
+    actions.appendChild(cancel); actions.appendChild(bump); actions.appendChild(go);
+    card.appendChild(actions);
+    ov.appendChild(card); document.body.appendChild(ov);
+    return ov;
+}
+// MOVE A PIECE TO ANOTHER LEVEL (the item's Level field): its whole placement goes, the
+// sector follows when it was the old level's, and a pattern code moves to the end of its
+// new level (L3.ART.S16-04 -> L4.ART.S16-01).
+function _codesLevelEdited() {
+    const row0 = _bulkEditing ? null : dashProjectData[dashSelectedRowIndex];
+    const was = row0 ? (typeof row0.level === 'number' ? row0.level : 0) : 0;
+    syncDashAndCalculate();
+    // The sync can hand back a new row object, so read it again.
+    const row = row0 ? dashProjectData[dashSelectedRowIndex] : null;
+    if (!row) return null;
+    const now = typeof row.level === 'number' ? row.level : 0;
+    if (now === was) return null;
+    row.level = was;   // _movePlacementToLevel moves the whole placement from where it was
+    const res = _movePlacementToLevel(_artGroupKey(row.id), now);
+    if (res && res.moved.length) { _codesAnnounce(res.moved[0].from, res.moved[0].to, {}); }
+    _artAfterChange();
+    return res;
 }
 
 // The row whose crop the dashboard controls edit (bulk-aware).
@@ -25246,7 +25620,7 @@ function _dsRunPreflight() {
         const piece = { kind: 'piece', label: 'Piece', rowId: r.id };
         if (!r.artworkUrl) issues.push({ sev: 'err', text: r.id + ' \u2014 no artwork image on the dashboard', idx: gi, go: piece });
         if (hasSpecs) {
-            if (r.planX == null || r.planY == null) issues.push({ sev: 'warn', text: r.id + ' \u2014 no floorplan pin, so its spec page has no plan crop', idx: gi });
+            if ((r.planX == null || r.planY == null) && !_fpTempPin(r)) issues.push({ sev: 'warn', text: r.id + ' \u2014 no floorplan pin, so its spec page has no plan crop', idx: gi });   // a moved piece has its own line (20.50)
             const inElev = (elevations || []).some(e => e.frames && e.frames.some(f => f && f.id === r.id));
             if (!inElev) issues.push({ sev: 'warn', text: r.id + ' \u2014 not placed in any elevation, so its spec page has no elevation thumbnail', idx: gi, go: piece });
         }
@@ -25307,6 +25681,8 @@ function _dsRunPreflight() {
     try { issues.push.apply(issues, _samplePreflight()); } catch (e) {}
     // Duplicate image codes; TBDs, leftover options and a wrong version in an IFS (19.88).
     try { issues.push.apply(issues, _readinessPreflight()); } catch (e) {}
+    // A moved placement whose plan pin is temporary or flagged for a check (20.50).
+    try { issues.push.apply(issues, _pinMovePreflight(pages)); } catch (e) {}
     // What ten studio projects kept catching after issue; stale stage and version (20.04).
     try { issues.push.apply(issues, _ifsAuditPreflight(pages)); } catch (e) {}
     // Another job's file stamp in typed text; Pending drawings and N/A credits in an IFS (20.28).
@@ -33987,6 +34363,12 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
             }
         }
         _fpGroups(desc.level).forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g, S)); });
+        // 20.50: moved placements waiting on this plan. Editor only: the printed page reads
+        // _fpGroups, which never sees a temporary pin.
+        _fpGroups(desc.level).forEach(g => {
+            const tp = g.rows[0] && _fpTempPinOn(g.rows[0], desc.level);
+            if (tp && g.planX == null) wrap.appendChild(_dsMakePin(Object.assign({}, g, { planX: tp.x, planY: tp.y, temp: true }), S));
+        });
         page.appendChild(wrap);
     }).catch(() => {});
     finish(); c.appendChild(page);
@@ -34399,6 +34781,19 @@ function _dsMakePin(g, S) {
     pin.style.cssText = 'position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:' + d + 'px; height:' + d + 'px; padding:0 2px; border-radius:' + Math.ceil(d / 2 + 2) + 'px; box-sizing:border-box; background:' + categoryColor(g.category) + '; color:#fff; border:' + bw + 'px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:' + fs + 'px; font-weight:700; cursor:grab; user-select:none;';
     pin.textContent = g.num;
     pin.title = g.ids.filter(Boolean).join(', ') + ' — click to open its spec page, drag to move, double-click to remove';
+    // 20.50: a temporary pin (moved here, no spot yet) is hollow, dashed and amber with a "?";
+    // a pin whose sector changed carries a dashed amber ring until it is checked.
+    if (g.temp) {
+        pin.setAttribute('data-fp-temp', '');
+        pin.textContent = '?' + g.num;
+        pin.style.background = 'rgba(255,255,255,0.92)'; pin.style.color = 'var(--warn)';
+        pin.style.border = Math.max(2, bw + 1) + 'px dashed var(--warn)';
+        pin.title = g.key + ' moved to this plan and has no spot yet. Drag it to its place, or click it to keep it here. Not printed until then; double-click to remove.';
+    } else if (g.check) {
+        pin.setAttribute('data-fp-check', '');
+        pin.style.outline = '2px dashed var(--warn)'; pin.style.outlineOffset = '2px';
+        pin.title = g.key + ' changed sector: check this spot. Drag it to move it, or Keep spot in the Items list. Click opens its spec page.';
+    }
     pin.onmousedown = (e) => _dsFpPinDown(e, g.key);
     pin.ondblclick = (e) => { e.stopPropagation(); if (_dsFpClickTimer) { clearTimeout(_dsFpClickTimer); _dsFpClickTimer = null; } _dsFpRemove(g.key); };
     return pin;
@@ -34455,8 +34850,21 @@ function _dsFpDragUp() {
     document.removeEventListener('mousemove', _dsFpDragMove);
     document.removeEventListener('mouseup', _dsFpDragUp);
     const key = _dsFpDragKey, moved = _dsFpMoved;
+    const wasTemp = !!(_dsFpDragPin && _dsFpDragPin.hasAttribute && _dsFpDragPin.hasAttribute('data-fp-temp'));
     if (key && moved) { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
     _dsFpDragKey = null; _dsFpDragPin = null; _dsFpDownAt = null; _dsFpMoved = false;
+    // 20.50: a click on a temporary pin keeps it where it landed (it has no spec-page spot to open yet).
+    if (key && !moved && wasTemp) {
+        // Held like the click that opens a spec page, so a double-click still removes it.
+        if (_dsFpClickTimer) clearTimeout(_dsFpClickTimer);
+        const lvl = (_dsPages[_dsIndex] && _dsPages[_dsIndex].level) || 0;
+        _dsFpClickTimer = setTimeout(() => {
+            _dsFpClickTimer = null;
+            if (_fpConfirmPin(key, lvl)) _toast(key + ' is placed', 'Kept where it landed. Drag it to fine-tune.');
+            _dsRefresh(); _dsRenderTools();
+        }, 280);
+        return;
+    }
     if (key && !moved) {
         if (_dsFpClickTimer) clearTimeout(_dsFpClickTimer);
         _dsFpClickTimer = setTimeout(() => { _dsFpClickTimer = null; _dsJumpToSpecFor(key); }, 280);
@@ -34980,6 +35388,8 @@ function openDashMenu(btn, which) {
             { label: 'Move To…', hint: 'selected rows, above or below a code', onClick: () => openMoveToModal() },
             { label: 'Bulk Edit…', hint: 'one field on every selected row', onClick: () => openBulkEditModal() },
             { label: 'Duplicate as Series…', hint: 'copies with the next codes', onClick: () => openDuplicateSeriesModal() },
+            { label: 'Remove placement…', hint: 'every piece of the selected code; keep its art on hold', onClick: () => deleteSelectedPlacement() },
+            { label: 'Art on hold' + (_artBin().length ? ' (' + _artBin().length + ')' : '') + '…', hint: 'art from deleted pieces, to place again', onClick: () => openArtBin() },
             { head: '' },
             { label: 'Item codes', hint: 'add, rename and order codes', onClick: () => _jumpToCodes() },
             { label: 'Links…', hint: 'linked pictures: update, relink', onClick: () => openLinksPanel() },
@@ -35187,6 +35597,13 @@ function _fpPanelItems(t, desc) {
     _returnBarInto(_rb, 'deck');
     t.appendChild(_rb);
     t.appendChild(_fpAddCodesBar(desc));
+    if (_artBin().length) {   // 20.48
+        const ab = document.createElement('button'); ab.type = 'button'; ab.className = 'action-btn btn-secondary'; ab.setAttribute('data-fp-artbin', '');
+        ab.style.cssText = 'width:100%; height:26px; margin:6px 0; font-size:var(--fs-60);';
+        ab.textContent = _artBin().length + (_artBin().length === 1 ? ' artwork' : ' artworks') + ' waiting in Art on hold';
+        ab.onclick = () => openArtBin();
+        t.appendChild(ab);
+    }
     t.appendChild(_fpBudgetStrip());
 
     const groups = _fpGroups();
@@ -35233,7 +35650,7 @@ function _fpPanelItems(t, desc) {
 }
 // The header widths are the row's widths (FP_ITEM_COLS), so the two cannot drift.
 const FP_CAT_CHIP = 22;   // the category chip: a square as tall as the line / frames buttons (19.52)
-const FP_ITEM_COLS = { num: 24, cat: 50, line: 34, frames: 38 };   // cat wide enough for its CATEGORY heading (19.51)
+const FP_ITEM_COLS = { num: 24, move: 24, cat: 50, line: 34, frames: 38, del: 20 };   // 20.49: move menu and remove   // cat wide enough for its CATEGORY heading (19.51)
 // The line styles, in menu order. 'custom' keeps its stored value and is labelled
 // BREAKER: separate start/end runs, the line drawn along a corridor between its doors.
 const FP_LINE_STYLES = [
@@ -35272,9 +35689,11 @@ function _fpItemHeader() {
     };
     cell('#', FP_ITEM_COLS.num, 'Pin number. Hollow until the code is pinned on a plan.');
     cell('Item code', 0, 'Double-click a code to rename it', true);
+    cell('', FP_ITEM_COLS.move, 'Move or change: rename or swap the code, move it to another level or sector, move its art');
     cell('Category', FP_ITEM_COLS.cat, 'Category: sets the pin and line colour');
     cell('Line', FP_ITEM_COLS.line, 'Pick a line style (Single, Diptych, Triptych, Breaker, Wrap) and draw it on this plan');
     cell('Frames', FP_ITEM_COLS.frames, 'Single, Diptych, Triptych, Quad, or a 5 / 7 piece salon hang. Mocked up on the wall in Elevations.');
+    cell('', FP_ITEM_COLS.del, 'Remove the placement (its art can go to Art on hold)');
     return h;
 }
 
@@ -35374,9 +35793,16 @@ function _fpAddCodesBar(desc) {
     add.className = 'action-btn';
     add.style.cssText = 'flex:0 0 auto; width:auto; height:26px; padding:0 10px; font-size:var(--fs-65);';
     add.textContent = '+ Add code';
-    add.onclick = () => {
+    add.onclick = async () => {
         _fpSketchOn = false;
-        const code = _fpAddCodes(tSel.value, 1, { mark: _fpSizeFields(tSel.value) });
+        // 20.49: the plan on screen is the level, and a sector project needs a sector first.
+        const ctx = { level: (desc && typeof desc.level === 'number') ? desc.level : 0 };
+        if (_codePatternNeeds().zone && _codePatternParts(_codePattern()) && !_codeCtxResolve('', ctx).zone) {
+            const ans = await _askFields({ title: 'Which ' + _codeZoneLabel().toLowerCase() + '?', body: 'Codes here include the ' + _codeZoneLabel().toLowerCase() + '. Tip: set it once for this plan under Categories > Item codes and new codes use it.', confirm: 'Add code', fields: [{ key: 'zone', label: _codeZoneLabel(), value: '' }] });
+            if (!ans || !String(ans.zone || '').trim()) return;
+            ctx.zone = String(ans.zone).trim();
+        }
+        const code = _fpAddCodes(tSel.value, 1, { mark: _fpSizeFields(tSel.value), ctx: ctx });
         if (code) { _fpArmedId = code; _fpLineArmId = null; }
         _dsRefresh(); _dsRenderTools(); _dsRenderCenter();
         if (code) _toast('Added ' + code, (floorplanLevels.some(l => l && l.imageData) || floorplanImageData) ? 'Click the plan to pin it, or add the next one.' : 'Pin it once a plan image is in.');
@@ -35434,7 +35860,7 @@ function _fpAddCodes(catKey, n, opts) {
         if (ctx && typeof ctx.level === 'number') row.level = ctx.level;   // 20.30
         if (ctx && String(ctx.zone || '').trim()) row.zone = String(ctx.zone).trim();
         else if (_codePatternNeeds().zone && _codePatternParts(_codePattern())) {
-            const lz = _levelZone(typeof row.level === 'number' ? row.level : 0);   // 20.46
+            const lz = _codeCtxResolve('', ctx).zone;   // 20.46, 20.49: the sector the code was made with
             if (lz) row.zone = lz;
         }
         // A flat graphic gets what the product dropdown seeds for one: the 2" bleed and
@@ -35818,15 +36244,21 @@ function _frameSetThumbSVG(lay) {
 }
 function openFrameSetPicker(g) {
     if (!g) return;
+    return _openSetPicker({ title: 'Frame set for ' + g.key, cur: _fpGroupSet(g), onPick: (n, key) => _fpApplyFrameSet(g.key, n, key) });
+}
+// 20.47: the picture grid on its own, so + Add Item picks a set the same way the floorplan
+// does. o: { title, cur: { n, preset }, onPick(n, presetKey), nested }.
+function _openSetPicker(o) {
     const old = document.getElementById('frameSetPicker'); if (old) old.remove();
-    const cur = _fpGroupSet(g);
+    const cur = o.cur || { n: 1, preset: '' };
     _salonSwatchWarm();
     const ov = document.createElement('div');
     ov.id = 'frameSetPicker'; ov.className = 'frame-modal'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
     const card = document.createElement('div'); card.className = 'fsp-card';
     const head = document.createElement('div'); head.className = 'fsp-head';
     head.innerHTML = '<div><div class="fsp-title"></div><div class="fsp-sub">Pick an arrangement. Each piece can be changed after, one at a time or all together with Bulk Edit.</div></div>';
-    head.querySelector('.fsp-title').textContent = 'Frame set for ' + g.key;
+    head.querySelector('.fsp-title').textContent = o.title || 'Frame set';
+    if (o.nested) ov.classList.add('fm-nested');
     const x = document.createElement('button'); x.type = 'button'; x.className = 'fsp-close phone-x'; x.setAttribute('data-modal-close', ''); x.setAttribute('aria-label', 'Close');
     x.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
     x.onclick = () => ov.remove();
@@ -35843,7 +36275,7 @@ function openFrameSetPicker(g) {
             b.innerHTML = '<div class="fsp-pic">' + _frameSetThumbSVG(t.lay) + '</div><div class="fsp-name"></div><div class="fsp-hint"></div>';
             b.querySelector('.fsp-name').textContent = t.label;
             b.querySelector('.fsp-hint').textContent = t.n + (t.n === 1 ? ' piece' : ' pieces');
-            b.onclick = () => { ov.remove(); _fpApplyFrameSet(g.key, t.n, t.key || ''); };
+            b.onclick = () => { ov.remove(); if (typeof o.onPick === 'function') o.onPick(t.n, t.key || ''); };
             grid.appendChild(b);
         });
     };
@@ -35895,7 +36327,9 @@ function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
     const sep = (rows0.length > 1 && /^[-_.\s]/.test(tail)) ? tail.charAt(0) : '';
     const letters = _setLetters(n);
     // Rows: drop the extras, rename the survivors to their letters, add the rest.
+    let _kept = 0;
     rows0.slice(n).forEach(r => {
+        if (_artBinAdd(r, 'set made smaller')) _kept++;   // 20.48
         const i = dashProjectData.indexOf(r); if (i >= 0) dashProjectData.splice(i, 1);
         elevations.forEach(e => { e.frames = (e.frames || []).filter(f => f && f.id !== r.id); });
     });
@@ -35929,6 +36363,7 @@ function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
     if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
     if (typeof pushHistory === 'function') pushHistory();
+    if (_kept) _artBinToast(_kept);
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     if (_pend.length) _salonFrameDressLater(_pend);
     const label = presetKey ? ('salon hang, ' + _salonPreset(presetKey).label) : (FRAME_SET_SIMPLE[n] ? FRAME_SET_SIMPLE[n].label : n + ' set');
@@ -36174,7 +36609,39 @@ function _askPlacement(mode, opts) {
         const cSel = mkSel(catItems, startCat); cSel.setAttribute('data-ask', 'cat');
         const sSel = mkSel(_placementSetChoices(), 'n1'); sSel.setAttribute('data-ask', 'set');
         s2.appendChild(field('Category', cSel));
-        s2.appendChild(field('Frame set', sSel));
+        // 20.47: the set is picked from pictures, as on the floorplan. The select stays (hidden)
+        // as the value the dialog returns.
+        sSel.style.display = 'none';
+        const setBtn = document.createElement('button'); setBtn.type = 'button'; setBtn.className = 'ask-set-pick'; setBtn.setAttribute('data-ask', 'set-pick');
+        const drawSetBtn = () => {
+            const ch = _placementSetChoices().find(c => c.value === sSel.value) || _placementSetChoices()[0];
+            setBtn.innerHTML = '<span class="ask-set-pic">' + _frameSetThumbSVG(_frameSetLayout(ch.n, ch.preset)) + '</span><span class="ask-set-txt"><b></b><i>Change</i></span>';
+            setBtn.querySelector('b').textContent = ch.label;
+        };
+        const setWrap = document.createElement('div'); setWrap.appendChild(setBtn); setWrap.appendChild(sSel);
+        s2.appendChild(field('Frame set', setWrap));
+        let hangChk = null, hangTouched = false;
+        if (!wallMode) {
+            hangChk = document.createElement('input'); hangChk.type = 'checkbox'; hangChk.setAttribute('data-ask', 'hang');
+            hangChk.onchange = () => { hangTouched = true; };
+            const hl = document.createElement('label'); hl.className = 'ask-check';
+            hl.appendChild(hangChk); hl.appendChild(document.createTextNode(' Hang it on its own wall (the elevation shows the layout)'));
+            s2.appendChild(hl);
+        }
+        const syncSet = () => {
+            drawSetBtn();
+            const ch = _placementSetChoices().find(c => c.value === sSel.value);
+            if (hangChk && !hangTouched) hangChk.checked = !!(ch && ch.n > 1);
+        };
+        setBtn.onclick = () => {
+            const ch = _placementSetChoices().find(c => c.value === sSel.value) || { n: 1, preset: '' };
+            _openSetPicker({ title: 'Frame set for the new code', nested: true, cur: { n: ch.n, preset: ch.preset }, onPick: (n, key) => {
+                const v = key || ('n' + n);
+                if (_placementSetChoices().some(c => c.value === v)) { sSel.value = v; syncSet(); }
+            } });
+        };
+        sSel.addEventListener('change', syncSet);
+        syncSet();
         // 20.30: the pattern's level and sector, started from the selected piece.
         const need = _codePatternNeeds();
         const selRow = (typeof dashSelectedRowIndex === 'number' && dashProjectData) ? dashProjectData[dashSelectedRowIndex] : null;
@@ -36188,20 +36655,26 @@ function _askPlacement(mode, opts) {
         if (need.zone) {
             zIn = document.createElement('input'); zIn.type = 'text'; zIn.setAttribute('data-ask', 'zone');
             const lv0 = lSel ? (parseInt(lSel.value, 10) || 0) : ((selRow && typeof selRow.level === 'number') ? selRow.level : 0);
-            zIn.value = (selRow && selRow.zone) || _levelZone(lv0); zIn.placeholder = 'e.g. 16';
+            zIn.value = (selRow && selRow.zone) || _inheritZone(lv0); zIn.placeholder = 'e.g. 16';
             s2.appendChild(field(_codeZoneLabel(), zIn));
             // 20.46: until the designer types one, the sector follows the chosen level.
             zIn.addEventListener('input', () => { zIn._typed = true; });
-            if (lSel) lSel.addEventListener('change', () => { if (!zIn._typed) zIn.value = _levelZone(parseInt(lSel.value, 10) || 0); });
+            if (lSel) lSel.addEventListener('change', () => { if (!zIn._typed) zIn.value = _inheritZone(parseInt(lSel.value, 10) || 0); });
         }
         const ctxNow = () => ({ level: lSel ? (parseInt(lSel.value, 10) || 0) : ((selRow && typeof selRow.level === 'number') ? selRow.level : 0), zone: zIn ? zIn.value.trim() : '' });
         const go2 = btn(''); go2.setAttribute('data-ask', 'go-new');
         const sync2 = () => {
-            const code = _nextPlacementCode(_catCodeInfo(cSel.value).prefix, ctxNow());
+            // 20.47: a sector pattern never falls back to a house code (that mixed two systems).
+            const cx = ctxNow();
+            if (need.zone && _codePatternParts(_codePattern()) && !String(cx.zone || '').trim() && !_inheritZone(cx.level)) {
+                go2.disabled = true; go2.textContent = 'Give it a ' + _codeZoneLabel() + ' first'; return;
+            }
+            go2.disabled = false;
+            const code = _nextPlacementCode(_catCodeInfo(cSel.value).prefix, cx);
             go2.textContent = (wallMode ? 'Create ' + code + ' and its wall' : 'Create ' + code);
         };
         cSel.onchange = sync2; if (lSel) lSel.onchange = sync2; if (zIn) zIn.oninput = sync2; sync2();
-        go2.onclick = () => { _fpAddType = cSel.value; finish({ kind: 'new', cat: cSel.value, set: sSel.value, ctx: ctxNow() }); };
+        go2.onclick = () => { if (go2.disabled) return; _fpAddType = cSel.value; finish({ kind: 'new', cat: cSel.value, set: sSel.value, ctx: ctxNow(), hang: !!(hangChk && hangChk.checked) }); };
         s2.appendChild(go2);
 
         const row = document.createElement('div'); row.className = 'ask-actions';
@@ -36621,6 +37094,11 @@ function _codesRenameRow(row, to) {
     const from = row.id;
     const taken = (id) => (dashProjectData || []).some(o => o && o !== row && o.id === id);
     const fromKey = _artGroupKey(from), fromP = _plainCodeParts(fromKey);
+    // 20.47: one coding system per project. A pattern project takes only codes that fit it.
+    if (_codePattern() && !_catalogueRowIds()[from] && _artGroupKey(to) !== fromKey) {
+        const res = _codesRenameToPattern(fromKey, _artGroupKey(to));
+        return res ? { ok: true, from: from, to: row.id } : { ok: false };
+    }
     const plainRename = () => {
         if (taken(to)) {
             // 20.46: another placement has it. Offer the swap (whole placements trade codes).
@@ -37007,6 +37485,187 @@ function _codesAskSwap(from, to) {
     });
 }
 
+// ── ONE CODING SYSTEM PER PROJECT (20.47) ────────────────────────────────────────
+// Switching the pattern (house ART.1, level, sector, custom) recodes EVERY placement, so a
+// project never mixes L1.ART.S22-02 with L1.ART-01. Each placement's type, level and sector
+// are read off its rows, or off its current code (parsed with the pattern it was made in).
+// renumber: true numbers each new stem 1..n in the current order (a switch of system).
+// Otherwise a code that already fits keeps its number; one moving stem keeps its number
+// when keepAcross is set and it is free (a level renamed L1 -> L3), else goes to the end.
+// Catalogue placements (options) are structure and keep their codes. Placements the new
+// pattern cannot fill (no sector) are returned in `missing`; with skipMissing they keep
+// their codes, otherwise nothing changes. dry: report only.
+function _codePatternRegex(pat) {
+    if (!_codePatternParts(pat)) return null;
+    const names = [];
+    let src = '';
+    String(pat).split(/(\{type\}|\{level\}|\{zone\}|\{n+\})/).forEach(tok => {
+        if (!tok) return;
+        if (tok === '{type}') { names.push('type'); src += '([A-Za-z][A-Za-z0-9]*)'; }
+        else if (tok === '{level}') { names.push('level'); src += '([A-Za-z0-9]+)'; }
+        else if (tok === '{zone}') { names.push('zone'); src += '([A-Za-z0-9]+?)'; }
+        else if (/^\{n+\}$/.test(tok)) { names.push('n'); src += '(\\d+)'; }
+        else src += tok.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    });
+    return { re: new RegExp('^' + src + '$'), names: names };
+}
+// A placement code read with a pattern: { type, level, zone, n } or null. Blank = house.
+function _codeParse(key, pat) {
+    const k = String(key || '');
+    if (!String(pat || '').trim()) {
+        const p = _plainCodeParts(k);
+        return p ? { type: p.prefix, level: '', zone: '', n: p.n } : null;
+    }
+    const rx = _codePatternRegex(pat);
+    const m = rx && rx.re.exec(k);
+    if (!m) return null;
+    const out = { type: '', level: '', zone: '', n: 0 };
+    rx.names.forEach((nm, i) => { out[nm] = nm === 'n' ? parseInt(m[i + 1], 10) : m[i + 1]; });
+    return out;
+}
+function _codeFitsPattern(key, pat) { return !!_codeParse(key, pat == null ? _codePattern() : pat); }
+function _codesApplyPattern(newPat, opts) {
+    const o = opts || {};
+    newPat = String(newPat || '').trim();
+    const oldPat = o.from != null ? String(o.from) : _codePattern();
+    const pp = newPat ? _codePatternParts(newPat) : null;
+    if (newPat && !pp) return null;
+    const need = newPat ? _codePatternNeeds(newPat) : { zone: false, level: false, type: false };
+    const cr = _catalogueRowIds();
+    const used = {};
+    (dashProjectData || []).forEach(r => { if (r && r.id && cr[r.id]) used[_artGroupKey(r.id)] = true; });
+    const items = _placementList().map(g => {
+        const r0 = g.rows[0] || {};
+        const lvl = typeof r0.level === 'number' ? r0.level : 0;
+        const cur = _codeParse(g.key, oldPat) || _codeParse(g.key, newPat) || _codeParse(g.key, '');
+        const type = (cur && cur.type) || _codePrefixOfRow(r0);
+        const zone = String(r0.zone || '').trim() || (cur && cur.zone) || _levelZone(lvl);
+        const it = { g: g, key: g.key, type: type, zone: zone, level: lvl, n: cur ? cur.n : 0 };
+        if (newPat) {
+            const c = { type: type, level: _levelCode(lvl), zone: zone };
+            it.before = _codePatternFill(pp.before, c); it.after = _codePatternFill(pp.after, c);
+            it.width = pp.width;
+        } else { it.before = type + '.'; it.after = ''; it.width = 0; }
+        it.ok = it.before != null && it.after != null;
+        return it;
+    });
+    const missing = items.filter(it => !it.ok).map(it => it.key);
+    if (o.dry) return { missing: missing, count: items.filter(it => it.ok).length };
+    if (missing.length && !o.skipMissing) return { moved: [], missing: missing };
+    items.filter(it => !it.ok).forEach(it => { used[it.key] = true; });
+    const work = items.filter(it => it.ok);
+    const fmt = (it, n) => it.before + (it.width ? String(n).padStart(it.width, '0') : String(n)) + it.after;
+    const stemMax = (it) => {
+        let mx = 0;
+        Object.keys(used).forEach(k => {
+            if (k.indexOf(it.before) !== 0 || k.length < it.before.length + it.after.length) return;
+            if (it.after && k.slice(k.length - it.after.length) !== it.after) return;
+            const mid = k.slice(it.before.length, k.length - it.after.length);
+            if (/^\d+$/.test(mid)) mx = Math.max(mx, parseInt(mid, 10));
+        });
+        return mx;
+    };
+    const next = (it) => { let n = stemMax(it); let c; do { n++; c = fmt(it, n); } while (used[c]); return c; };
+    if (o.renumber) {
+        work.forEach(it => { it.want = next(it); used[it.want] = true; });
+    } else {
+        // Codes that already fit keep theirs; then the rest, in order.
+        work.forEach(it => {
+            const p = _codeParse(it.key, newPat);
+            if (p && fmt(it, p.n) === it.key && !used[it.key]) { it.want = it.key; used[it.key] = true; }
+        });
+        work.forEach(it => {
+            if (it.want) return;
+            const keep = o.keepAcross && it.n > 0 ? fmt(it, it.n) : '';
+            it.want = (keep && !used[keep]) ? keep : next(it);
+            used[it.want] = true;
+        });
+    }
+    const moving = work.filter(it => it.want !== it.key);
+    const stamp = Date.now().toString(36).replace(/[0-9]/g, '');
+    moving.forEach((it, i) => { it.tmp = '__AP' + i + '__' + stamp + '.9'; _fpRenameGroup(it.key, it.tmp, { quiet: true, force: true }); });
+    moving.forEach(it => _fpRenameGroup(it.tmp, it.want, { quiet: true, force: true }));
+    if (need.zone) work.forEach(it => it.g.rows.forEach(r => { r.zone = it.zone; }));
+    if (o.set !== false) editorialContent.codePattern = newPat;
+    _codesSettle();
+    if (!o.quiet) {
+        _codesRefreshViews();
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    }
+    return { moved: moving.map(it => ({ from: it.key, to: it.want })), missing: missing };
+}
+// The panel's pattern menu: switch system, asking once for a sector when pieces have none.
+// Resolves to the result, or null when cancelled (the pattern is left as it was).
+async function _codesSwitchPattern(newPat) {
+    newPat = String(newPat || '').trim();
+    if (newPat && !_codePatternParts(newPat)) { _toast('A pattern needs a number', 'Add {n}, {nn} or {nnn} where the placement number goes.'); return null; }
+    const dry = _codesApplyPattern(newPat, { dry: true });
+    if (dry && dry.missing.length) {
+        const lbl = _codeZoneLabel();
+        const ans = await _askFields({
+            title: dry.missing.length + (dry.missing.length === 1 ? ' placement has' : ' placements have') + ' no ' + lbl,
+            body: dry.missing.slice(0, 10).join(', ') + (dry.missing.length > 10 ? '…' : '') + '. This pattern puts the ' + lbl.toLowerCase() + ' in every code. Which one are they in? Change any of them after with its ' + lbl + ' field.',
+            confirm: 'Recode',
+            fields: [{ key: 'zone', label: lbl, value: _levelZone(0) || '1' }]
+        });
+        if (!ans || !String(ans.zone || '').trim()) return null;
+        const z = String(ans.zone).trim();
+        dry.missing.forEach(k => { const g = _fpFindGroup(k); if (g) g.rows.forEach(r => { r.zone = z; }); });
+    }
+    const res = _codesApplyPattern(newPat, { renumber: true });
+    if (res && res.moved.length) _toast(res.moved.length + ' placement' + (res.moved.length === 1 ? '' : 's') + ' recoded', 'Every code now follows ' + (newPat ? _codePatternSample(newPat) : 'ART.1') + '. Ctrl+Z undoes it.');
+    return res;
+}
+function _codePatternSample(pat) {
+    const pp = _codePatternParts(pat);
+    if (!pp) return 'ART.1';
+    const c = { type: 'ART', level: _levelCode(0), zone: _levelZone(0) || '16' };
+    return _codePatternFill(pp.before, c) + (pp.width ? '1'.padStart(pp.width, '0') : '1') + _codePatternFill(pp.after, c);
+}
+// An item's Sector field was changed: that placement moves to the end of its new sector.
+function _codesZoneEdited() {
+    if (!_codePatternNeeds().zone || !_codePatternParts(_codePattern())) return null;
+    const row = dashProjectData[dashSelectedRowIndex];
+    if (!row || !String(row.zone || '').trim()) return null;
+    if (!_bulkEditing) { const g = _fpFindGroup(_artGroupKey(row.id)); if (g) g.rows.forEach(r => { r.zone = row.zone; }); }
+    const res = _codesApplyPattern(_codePattern(), { skipMissing: true });
+    // 20.50: a placement that moved sector keeps its pin, flagged for a check.
+    let flagged = 0;
+    if (res && res.moved.length) res.moved.forEach(m => { const g = _fpFindGroup(m.to); if (g) flagged += _fpFlagCheck(g.rows); });
+    // One gesture, one undo entry: retake the snapshot the apply just pushed.
+    if (flagged) { try { if (undoStack.length) undoStack[undoStack.length - 1] = snapshotProjectState({ plans: true }); } catch (e) {} }
+    if (res && res.moved.length) {
+        _codesAnnounce(res.moved[0].from, res.moved[0].to, {});
+        try { _dsRefresh(); } catch (e) {}
+    }
+    return res;
+}
+
+// A placement renamed by hand in a pattern project: the code must fit the pattern; a code
+// another placement has offers the swap; the Sector follows the code. Returns true when
+// renamed now (a swap is asked for and happens after).
+function _codesRenameToPattern(fromKey, toKey) {
+    const pat = _codePattern();
+    const p = _codeParse(toKey, pat);
+    if (!p) {
+        _toast(toKey + ' does not fit this project\'s codes', 'Codes here follow ' + _codePatternSample(pat) + '. To use another system, change Item codes on the floorplan\'s Categories tab and every code follows.');
+        return false;
+    }
+    if (_fpFindGroup(toKey)) {
+        if (_codesCanSwap(fromKey, toKey)) _codesAskSwap(fromKey, toKey).then(ans => {
+            if (ans === 'swap' && _codesSwapPlacements(fromKey, toKey)) { _codesAnnounce(fromKey, toKey, {}); try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {} }
+        });
+        else _toast(toKey + ' is already taken', 'Pick a code nothing else uses.');
+        return false;
+    }
+    if (!_fpRenameGroup(fromKey, toKey, { quiet: true, force: true })) return false;
+    const g = _fpFindGroup(toKey);
+    if (g && p.zone) g.rows.forEach(r => { r.zone = p.zone; });
+    _codesSettle();
+    return true;
+}
+
 // ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
 // Every piece of the placement keeps its suffix (ART.4A -> ART.9A), so a rename is one
 // gesture for a triptych, not three. The id is the identity everything reads: the
@@ -37122,6 +37781,180 @@ function _fpFillItemList(desc) {
         rows.forEach(g => list.appendChild(_fpItemRow(g, desc)));
     });
 }
+// ── MOVE OR CHANGE A PLACEMENT (20.49) ───────────────────────────────────────────
+// The row's arrows menu. `codeEl` is the row's code label (its double-click renames).
+function _fpMoveMenuItems(g, codeEl) {
+    const items = [{ head: 'MOVE OR CHANGE ' + g.key }];
+    items.push({ label: 'Rename code…', hint: 'type a new code', onClick: () => { if (codeEl && codeEl.ondblclick) codeEl.ondblclick({ stopPropagation() {} }); } });
+    if (_placementList().length > 1) items.push({ label: 'Swap code with…', hint: 'two placements trade codes', onClick: () => openSwapCodeModal(g.key) });
+    const lv = (typeof floorplanLevels !== 'undefined' && floorplanLevels) || [];
+    const cur = typeof g.rows[0].level === 'number' ? g.rows[0].level : 0;
+    if (lv.length > 1) {
+        items.push({ head: 'MOVE TO LEVEL' });
+        lv.forEach((L, i) => items.push({ label: (L && L.name) || ('Level ' + (i + 1)), on: i === cur, onClick: () => { if (i !== cur) _movePlacementToLevelUI(g.key, i); } }));
+    }
+    if (_codePatternNeeds().zone && _codePatternParts(_codePattern())) {
+        items.push({ label: 'Change ' + _codeZoneLabel().toLowerCase() + '…', hint: 'now ' + (String(g.rows[0].zone || '').trim() || _levelZone(cur) || 'none'), onClick: () => _askPlacementZone(g.key) });
+    }
+    const withArt = g.rows.filter(_rowHasArt);
+    items.push({ head: 'ARTWORK' });
+    if (withArt.length) withArt.forEach(r => items.push({ label: 'Move ' + _artLabel(r) + ' to another piece…', hint: g.rows.length > 1 ? r.id : '', onClick: () => openMoveArtModal(r.id) }));
+    if (withArt.length) items.push({ label: 'Put ' + (withArt.length === 1 ? 'its art' : 'its ' + withArt.length + ' artworks') + ' on hold', hint: 'the piece stays, empty', onClick: () => {
+        withArt.forEach(r => _artBinAdd(r, 'removed'));
+        withArt.forEach(_artRefreshRow);
+        _artAfterChange(); _artBinToast(withArt.length);
+    } });
+    const held = _artBin().length;
+    items.push({ label: held ? 'Art on hold (' + held + ')…' : 'Art on hold…', hint: held ? 'put held art on this or another piece' : 'nothing waiting', onClick: () => openArtBin() });
+    items.push({ head: '' });
+    items.push({ label: 'Remove ' + g.key + '…', danger: true, onClick: () => deletePlacement(g.key) });
+    return items;
+}
+// A whole placement to another plan level: the sector follows when it was the old level's,
+// and a code with {level} or {zone} moves to the end of its new level (L3.ART.S16-04 ->
+// L4.ART.S24-01).
+// 20.50: ITS PIN MOVES WITH IT. The old plan's pin (and that plan's wall line) goes, and a
+// TEMPORARY pin lands on the new plan (_fpLandingSpot) for the designer to drag into place.
+// Pins on other plans (a piece shown in several guestroom types) stay. Before 20.50 the old
+// pin stayed and, as the first pin, pulled the level straight back once the piece was
+// pinned on its new plan. `res.landed` says where the temporary pin went.
+function _movePlacementToLevel(key, li) {
+    const g = _fpFindGroup(key);
+    if (!g) return null;
+    const was = typeof g.rows[0].level === 'number' ? g.rows[0].level : 0;
+    if (was === li) return { moved: [], missing: [] };
+    const oldZ = _levelZone(was), newZ = _levelZone(li);
+    const before = g.rows.map(r => _fpPinsAll(r));      // read BEFORE r.level changes (a legacy pin derives from it)
+    g.rows.forEach(r => {
+        r.level = li;
+        if (oldZ && String(r.zone || '').trim() === oldZ && newZ) r.zone = newZ;
+    });
+    const spot = _fpLandingSpot(li, _rowZone(g.rows[0]), key);
+    let landed = null;
+    g.rows.forEach((r, i) => {
+        const all = before[i];
+        const hadOld = all.some(p => _deckLvlOf(p.lv) === was);
+        let rest = all.filter(p => _deckLvlOf(p.lv) !== was);
+        const onNew = rest.find(p => _deckLvlOf(p.lv) === li);
+        if (onNew) rest = [onNew].concat(rest.filter(p => p !== onNew));   // already on that plan: it leads
+        else if (hadOld || rest.length) { rest = [{ lv: li, x: spot.x, y: spot.y, temp: true }].concat(rest); landed = spot; }
+        if (all.length || Array.isArray(r.planPins)) r.planPins = rest;
+        if (hadOld && (Array.isArray(r.planWalls) || _fpWalls(r).length)) _fpClearWall(r, was);
+        _fpSyncPrimary(r);
+    });
+    const pat = _codePattern(), need = _codePatternNeeds();
+    const res = (_codePatternParts(pat) && (need.level || need.zone)) ? _codesApplyPattern(pat, { skipMissing: true, quiet: true }) : { moved: [], missing: [] };
+    if (res) res.landed = landed;
+    return res;
+}
+// Where a moved placement's temporary pin lands on plan `li`: the middle of the pins already
+// there in its sector, else the middle of the plan; stepped out on a spiral past the other
+// temporary pins on that plan so two moved pieces never stack.
+function _fpLandingSpot(li, zone, exceptKey) {
+    const n = _deckLvlOf(li), z = String(zone || '').trim();
+    let x = 0.5, y = 0.5, from = 'centre';
+    if (z) {
+        const pts = _fpGroups(n).filter(g => g.key !== exceptKey && g.planX != null && (g.level || 0) === n && _rowZone(g.rows[0]) === z);
+        if (pts.length) {
+            x = pts.reduce((s, g) => s + g.planX, 0) / pts.length;
+            y = pts.reduce((s, g) => s + g.planY, 0) / pts.length;
+            from = 'sector';
+        }
+    }
+    const waiting = {};
+    (dashProjectData || []).forEach(r => { if (r && r.id && _fpTempPinOn(r, n) && _artGroupKey(r.id) !== exceptKey) waiting[_artGroupKey(r.id)] = 1; });
+    const k = Object.keys(waiting).length;
+    if (k) { const ang = k * 2.4, d = 0.035 * Math.sqrt(k); x += d * Math.cos(ang); y += d * Math.sin(ang); }
+    const cl = v => Math.max(0.03, Math.min(0.97, v));
+    return { x: cl(x), y: cl(y), from: from, zone: z };
+}
+// Flag a placement's pins on its own plan as "check this spot" (its sector changed).
+function _fpFlagCheck(rows) {
+    let n = 0;
+    (rows || []).forEach(r => {
+        if (!r) return;
+        const lv = _deckLvlOf(r.level);
+        const all = _fpPinsAll(r);
+        if (!all.some(p => !p.temp && _deckLvlOf(p.lv) === lv)) return;
+        r.planPins = all.map(p => (!p.temp && _deckLvlOf(p.lv) === lv) ? Object.assign({}, p, { check: true }) : p);
+        _fpSyncPrimary(r); n++;
+    });
+    return n;
+}
+// "Keep it here": a temporary pin becomes a real one where it sits, a check flag clears.
+// One undo entry. `lv` is the plan being looked at.
+function _fpConfirmPin(key, lv) {
+    const g = _fpFindGroup(key); if (!g) return false;
+    const n = _deckLvlOf(lv);
+    let did = false;
+    g.rows.forEach(r => {
+        const all = _fpPinsAll(r);
+        const i = all.findIndex(p => _deckLvlOf(p.lv) === n && (p.temp || p.check));
+        if (i < 0) return;
+        const next = all.slice(); next[i] = { lv: n, x: all[i].x, y: all[i].y };
+        r.planPins = next; _fpSyncPrimary(r); did = true;
+    });
+    if (!did) return false;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    return true;
+}
+function _movePlacementToLevelUI(key, li) {
+    const res = _movePlacementToLevel(key, li);
+    if (!res) return;
+    _artAfterChange();
+    const nm = (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1));
+    const to = res.moved.length ? res.moved[0].to : key;
+    const where = !res.landed ? 'Pin it on that plan. '
+        : (res.landed.from === 'sector' ? 'Its pin is waiting among the ' + res.landed.zone + ' pieces on that plan (amber ?): ' : 'Its pin is waiting in the middle of that plan (amber ?): ')
+          + 'drag it to its spot, or click it to keep it there. ';
+    _toast(to + ' is on ' + nm, (res.moved.length ? 'Was ' + key + '. ' : '') + where + 'Ctrl+Z undoes it.');
+}
+async function _askPlacementZone(key) {
+    const g = _fpFindGroup(key);
+    if (!g) return null;
+    const ans = await _askFields({ title: 'Move ' + key + ' to another ' + _codeZoneLabel().toLowerCase(), confirm: 'Move', fields: [{ key: 'zone', label: _codeZoneLabel(), value: String(g.rows[0].zone || '').trim() }] });
+    const z = ans && String(ans.zone || '').trim();
+    if (!z) return null;
+    const oldZ = _rowZone(g.rows[0]);
+    g.rows.forEach(r => { r.zone = z; });
+    // 20.50: a new sector is usually a new spot. The pin stays (a sector change is often just
+    // a code fix) but is flagged until confirmed or dragged.
+    if (z !== oldZ) _fpFlagCheck(g.rows);
+    const res = _codesApplyPattern(_codePattern(), { skipMissing: true, quiet: true });
+    _artAfterChange();
+    if (res && res.moved.length) _codesAnnounce(res.moved[0].from, res.moved[0].to, {});
+    return res;
+}
+// Pick the other placement for a code swap.
+function openSwapCodeModal(key) {
+    const old = document.getElementById('swapCodeModal'); if (old) old.remove();
+    const others = _placementList().filter(g => g.key !== key && _codesCanSwap(key, g.key));
+    if (!others.length) { _toast('Nothing to swap with', key + ' is the only placement that can swap.'); return null; }
+    const ov = document.createElement('div'); ov.id = 'swapCodeModal';
+    ov.className = 'frame-modal fm-nested ask-fields'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'ask-card';
+    const h = document.createElement('h3'); h.className = 'ask-title'; h.textContent = 'Swap ' + key + ' with…'; card.appendChild(h);
+    const b = document.createElement('div'); b.className = 'ask-body';
+    b.textContent = 'The two trade codes. Each keeps its artwork, frame, wall and plan pin.';
+    card.appendChild(b);
+    const sel = document.createElement('select'); sel.setAttribute('data-swap', 'target');
+    others.forEach(g => { const o = document.createElement('option'); o.value = g.key; o.textContent = g.key + (g.location ? ' · ' + g.location : ''); sel.appendChild(o); });
+    const lab = document.createElement('label'); lab.className = 'ask-field'; const sp = document.createElement('span'); sp.textContent = 'Placement'; lab.appendChild(sp); lab.appendChild(sel);
+    card.appendChild(lab);
+    const actions = document.createElement('div'); actions.className = 'ask-actions';
+    const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel'; cancel.setAttribute('data-modal-close', '');
+    cancel.onclick = () => ov.remove();
+    const go = document.createElement('button'); go.type = 'button'; go.className = 'action-btn'; go.textContent = 'Swap codes'; go.setAttribute('data-swap', 'go');
+    go.onclick = () => {
+        const to = sel.value;
+        if (_codesSwapPlacements(key, to)) { ov.remove(); _codesAnnounce(key, to, {}); try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {} }
+    };
+    actions.appendChild(cancel); actions.appendChild(go); card.appendChild(actions);
+    ov.appendChild(card); document.body.appendChild(ov);
+    return ov;
+}
+
 // One item row. The CODE is shown rather than hidden in a tooltip: on a long plan the
 // number chip alone does not tell you which piece you are pointing at, and the code is
 // what the schedule and the plan itself are labelled with.
@@ -37176,6 +38009,17 @@ function _fpItemRow(g, desc) {
         const commit = (ok) => {
             if (done) return; done = true;
             const v = inp.value.trim();
+            if (ok && v && v !== g.key && _codePattern()) {
+                // 20.47: the project's pattern decides what a code may be.
+                if (_codesRenameToPattern(g.key, v)) {
+                    if (typeof pushHistory === 'function') pushHistory();
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                    _codesRefreshViews(); _codesAnnounce(g.key, v, {});
+                    _dsRefresh(); _dsRenderCenter();
+                }
+                _dsRenderTools();
+                return;
+            }
             if (ok && v && v !== g.key && _codesCanSwap(g.key, v)) {
                 // 20.46: the code is taken by another placement, so offer to swap them.
                 _codesAskSwap(g.key, v).then(ans => {
@@ -37281,7 +38125,48 @@ function _fpItemRow(g, desc) {
     frB.title = 'Frames: ' + (_set.preset ? ('salon hang, ' + _salonPreset(_set.preset).label) : (FRAME_SET_SIMPLE[_set.n] ? FRAME_SET_SIMPLE[_set.n].label : _set.n + ' pieces')) + '. Click to change the set; it is mocked up on the wall in Elevations.';
     // The arrangements as pictures (19.31, openFrameSetPicker), not a list of names.
     frB.onclick = (e) => { e.stopPropagation(); openFrameSetPicker(g); };
-    row.appendChild(num); row.appendChild(code); row.appendChild(catWrap); row.appendChild(lnB); row.appendChild(frB);
+    // 20.49: MOVE OR CHANGE, between the code and the category, and REMOVE at the far right.
+    // Everything that moves a placement is in one menu on its row, where designers look.
+    const mvB = document.createElement('button');
+    mvB.type = 'button';
+    mvB.className = 'action-btn btn-secondary fp-move-btn';
+    mvB.setAttribute('data-fp-move', g.key);
+    mvB.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg>';
+    mvB.style.cssText = 'width:' + FP_ITEM_COLS.move + 'px; height:22px; padding:0; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;';
+    mvB.title = 'Move or change ' + g.key + ': rename or swap the code, another level or sector, move its art';
+    mvB.onclick = (e) => { e.stopPropagation(); _frameMenu(mvB, _fpMoveMenuItems(g, code)); };
+    const xB = document.createElement('button');
+    xB.type = 'button';
+    xB.className = 'action-btn btn-secondary fp-del-btn';
+    xB.setAttribute('data-fp-del', g.key);
+    xB.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    xB.style.cssText = 'width:' + FP_ITEM_COLS.del + 'px; height:22px; padding:0; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;';
+    xB.title = 'Remove ' + g.key;
+    xB.onclick = (e) => { e.stopPropagation(); deletePlacement(g.key); };
+    row.appendChild(num); row.appendChild(code);
+    // 20.50: MOVED, SPOT NOT CONFIRMED. An amber chip on the row: "?" for a temporary pin
+    // (moved to another level), "Check" for a pin whose sector changed. Clicking it keeps the
+    // pin where it is; dragging the pin on the plan does the same.
+    const _tp = _fpTempPin(g.rows[0]);
+    const _ck = !_tp && (_fpPins(g.rows[0]).find(p => p.check) || null);
+    if (_tp || _ck) {
+        const fl = _tp || _ck, flLv = _deckLvlOf(fl.lv);
+        const flName = (floorplanLevels[flLv] || {}).name || ('Level ' + (flLv + 1));
+        const chip = document.createElement('button'); chip.type = 'button';
+        chip.className = 'fp-move-flag'; chip.setAttribute('data-fp-flag', _tp ? 'temp' : 'check');
+        chip.textContent = _tp ? '?' : 'Check';
+        chip.title = _tp ? (g.key + ' moved to ' + flName + ' and has no spot yet: its amber pin is waiting there. Drag it into place, or click here to keep it where it landed.')
+                         : (g.key + ' changed sector: check its pin on ' + flName + '. Drag it, or click here to keep the spot.');
+        chip.style.cssText = 'flex:0 0 auto; height:18px; min-width:18px; padding:0 5px; border-radius:var(--r-10); border:1px dashed var(--warn); background:transparent; color:var(--warn); font-size:var(--fs-55); font-weight:700; cursor:pointer;';
+        chip.onclick = (e) => {
+            e.stopPropagation();
+            if (_fpConfirmPin(g.key, flLv)) _toast(g.key + ' is placed', _tp ? 'Kept where it landed on ' + flName + '.' : 'Spot confirmed.');
+            _dsRefresh(); _dsRenderTools(); _dsRenderCenter();
+        };
+        row.appendChild(chip);
+        row.title = (codes || g.key) + ' \u2014 ' + (_tp ? 'moved to ' + flName + ', no spot yet' : 'sector changed, check its spot');
+    }
+    row.appendChild(mvB); row.appendChild(catWrap); row.appendChild(lnB); row.appendChild(frB); row.appendChild(xB);
     row.onclick = () => _dsFpArm(g.key);
     _fpWireItemDrag(row, g);
     return row;
@@ -37499,11 +38384,15 @@ function _codePatternPanelInto(t) {
     txt.setAttribute('data-code-pattern', 'text');
     txt.style.cssText = 'width:100%; margin-bottom:4px; font-family:var(--font-mono, monospace); ' + inp;
     txt.style.display = sel.value === '__custom' ? '' : 'none';
+    // 20.47: a new pattern recodes every placement; cancelling the sector question keeps the old one.
     const setPat = (v) => {
         const clean = String(v || '').trim();
-        if (clean && !_codePatternParts(clean)) { _toast('A pattern needs a number', 'Add {n}, {nn} or {nnn} where the placement number goes.'); return; }
-        editorialContent.codePattern = clean;
-        save();
+        if (clean === _codePattern()) return;
+        if (clean && !_codePatternParts(clean)) { _toast('A pattern needs a number', 'Add {n}, {nn} or {nnn} where the placement number goes.'); _dsRenderTools(); return; }
+        return _codesSwitchPattern(clean).then(res => {
+            _dsRenderTools();
+            if (res) { try { _dsRefresh(); _dsRenderCenter(); _dsRenderRail(); } catch (e) {} }
+        });
     };
     sel.onchange = () => { if (sel.value === '__custom') { txt.style.display = ''; txt.focus(); return; } setPat(sel.value); };
     txt.onchange = () => setPat(txt.value);
@@ -37539,7 +38428,11 @@ function _codePatternPanelInto(t) {
                 ci.setAttribute('data-level-code', String(i));
                 ci.title = 'The code {level} prints for this plan';
                 ci.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
-                ci.onchange = () => { if (!floorplanLevels[i]) return; const v = ci.value.trim(); if (v) floorplanLevels[i].code = v; else delete floorplanLevels[i].code; save(); };
+                ci.onchange = () => {
+                    if (!floorplanLevels[i]) return; const v = ci.value.trim(); if (v) floorplanLevels[i].code = v; else delete floorplanLevels[i].code;
+                    _codesApplyPattern(_codePattern(), { skipMissing: true, keepAcross: true, quiet: true });   // 20.47
+                    _codesRefreshViews(); save(); try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
+                };
                 row.appendChild(ci);
             }
             if (need.zone) {
@@ -37547,7 +38440,15 @@ function _codePatternPanelInto(t) {
                 zi.setAttribute('data-level-zone', String(i));
                 zi.title = 'Every piece on this plan with no ' + _codeZoneLabel() + ' of its own is in this one. A piece\'s own ' + _codeZoneLabel() + ' field still wins.';
                 zi.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
-                zi.onchange = () => { if (!floorplanLevels[i]) return; const v = zi.value.trim(); if (v) floorplanLevels[i].zone = v; else delete floorplanLevels[i].zone; save(); };
+                zi.onchange = () => {
+                    if (!floorplanLevels[i]) return;
+                    const was = String(floorplanLevels[i].zone || '').trim(), v = zi.value.trim();
+                    if (v) floorplanLevels[i].zone = v; else delete floorplanLevels[i].zone;
+                    // 20.47: pieces that were in this level's sector move with it.
+                    if (v) (dashProjectData || []).forEach(r => { if (r && (typeof r.level === 'number' ? r.level : 0) === i && (!String(r.zone || '').trim() || String(r.zone).trim() === was)) r.zone = v; });
+                    _codesApplyPattern(_codePattern(), { skipMissing: true, keepAcross: true, quiet: true });
+                    _codesRefreshViews(); save(); try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
+                };
                 row.appendChild(zi);
             }
             box.appendChild(row);
@@ -37560,20 +38461,24 @@ function _codePatternPanelInto(t) {
         const sample = _nextPlacementCode('ART', { level: 0, zone: need.zone ? (z0 || '1') : '' });
         nx.textContent = 'Next new code looks like ' + sample + (need.zone && !z0 ? ' (if its ' + _codeZoneLabel() + ' is 1)' : '');
         box.appendChild(nx);
-        const plan = _codePatternPlan();
-        if (plan.todo.length || plan.skipped.length) {
+        // 20.47: any placement off the pattern (a house code, a code from another system).
+        const dryAll = _codesApplyPattern(pat, { dry: true });
+        const off = _placementList().filter(g => !_codeFitsPattern(g.key, pat));
+        const offMissing = off.filter(g => dryAll.missing.indexOf(g.key) >= 0);
+        const offOk = off.length - offMissing.length;
+        if (off.length) {
             const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.setAttribute('data-code-pattern', 'recode');
             b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60);';
-            b.textContent = plan.todo.length
-                ? 'Recode ' + plan.todo.length + ' placement' + (plan.todo.length === 1 ? '' : 's') + ' to this pattern'
-                : plan.skipped.length + (plan.skipped.length === 1 ? ' placement needs a ' : ' placements need a ') + _codeZoneLabel() + ' to recode';
-            b.disabled = !plan.todo.length;
-            b.title = plan.skipped.length ? (plan.skipped.length + ' more need a ' + _codeZoneLabel() + ' first: ' + plan.skipped.slice(0, 8).join(', ') + (plan.skipped.length > 8 ? '\u2026' : '')) : '';
+            b.textContent = offOk
+                ? 'Recode ' + offOk + ' placement' + (offOk === 1 ? '' : 's') + ' to this pattern'
+                : offMissing.length + (offMissing.length === 1 ? ' placement needs a ' : ' placements need a ') + _codeZoneLabel() + ' to recode';
+            b.disabled = !offOk;
+            b.title = offMissing.length ? (offMissing.length + ' need a ' + _codeZoneLabel() + ' first (on the item or its plan level): ' + offMissing.slice(0, 8).map(g => g.key).join(', ') + (offMissing.length > 8 ? '\u2026' : '')) : '';
             b.onclick = () => {
-                const res = recodeToPattern();
+                const res = _codesApplyPattern(pat, { skipMissing: true });
                 _toast(res.moved.length + ' placement' + (res.moved.length === 1 ? '' : 's') + ' recoded',
-                    res.skipped.length ? (res.skipped.length + ' still need a ' + _codeZoneLabel() + ' (set it on the item or on its plan level, then recode again).') : 'Renames are in the code log.');
-                _dsRenderTools();
+                    offMissing.length ? (offMissing.length + ' still need a ' + _codeZoneLabel() + ' (set it on the item or on its plan level, then recode again).') : 'Renames are in the code log.');
+                _dsRenderTools(); try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
             };
             box.appendChild(b);
         }
@@ -38751,8 +39656,8 @@ async function _fpDeleteLevel() {
         // Pins are keyed by level INDEX, and deleting a level shifts every index above
         // it. Drop the removed level's pin and renumber the rest, or a guestroom pin
         // silently re-homes onto whatever plan slid into its slot.
-        const kept = _fpPins(r).filter(p => _deckLvlOf(p.lv) !== removed)
-            .map(p => ({ lv: _deckLvlOf(p.lv) > removed ? _deckLvlOf(p.lv) - 1 : _deckLvlOf(p.lv), x: p.x, y: p.y }));
+        const kept = _fpPinsAll(r).filter(p => _deckLvlOf(p.lv) !== removed)
+            .map(p => Object.assign({}, p, { lv: _deckLvlOf(p.lv) > removed ? _deckLvlOf(p.lv) - 1 : _deckLvlOf(p.lv) }));
         // THE WALL LINES ARE KEYED THE SAME WAY AND WERE NOT RENUMBERED (18.11), so a
         // line drawn on Level 3 moved onto Level 2's plan when Level 1 was deleted. Read
         // BEFORE r.level changes below: a row with no planWalls derives its one line from
@@ -51199,7 +52104,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
@@ -61499,6 +62404,14 @@ const FRAME_API = {
     // A new code: { category: 'framed'|'canvas'|'egd'|'wf'|<project category>, set: 'n1'..'n4'
     // or a salon preset key, hang: true for its own wall, location, widthIn, heightIn }.
     // 20.30: level (plan index) and zone (the pattern's {zone}) mint a code in the project's pattern.
+    // 20.48: Art on hold. unplacedArt() lists it; placeArt puts an entry on a piece (its own
+    // art goes to the list); moveArt moves art piece to piece ('swap' or 'bump'); deletePlacement
+    // removes a code's pieces with no question asked, keeping their art.
+    unplacedArt() { return _artBin().map(e => ({ id: e.id, title: _artLabel(e.art), from: e.from, location: e.location, why: e.why, at: e.at })); },
+    placeArt(entryId, rowId) { return artBinPlace(String(entryId || ''), String(rowId || '')) ? { ok: true } : _apiErr('cannot place ' + entryId + ' on ' + rowId); },
+    newPlacementForArt(entryId, opts) { const id = artBinNewPlacement(String(entryId || ''), opts || null); return id ? { ok: true, id: id } : _apiErr('no entry ' + entryId); },
+    moveArt(fromId, toId, mode) { return moveArtBetween(String(fromId || ''), String(toId || ''), mode === 'bump' ? 'bump' : 'swap') ? { ok: true } : _apiErr('cannot move art from ' + fromId + ' to ' + toId); },
+    deletePlacement(key) { const r = deletePlacementNow(String(key || '')); if (!r) return _apiErr('cannot delete ' + key); _artAfterChange(); return { ok: true, artKept: r.kept, pieces: r.pieces }; },
     // 20.46: two placements trade codes (each keeps its artwork, frame, wall and pin).
     swapCodes(a, b) {
         if (!_codesCanSwap(String(a || ''), String(b || ''))) return _apiErr('cannot swap ' + a + ' and ' + b);
@@ -61910,6 +62823,29 @@ function _samplePreflight() {
 // In an IFS only (_deckIsIFS): "TBD" left in a printed spec value, the image code or the
 // notes; a catalogue placement still offering more than one option; a footer version that
 // disagrees with the project file's name (V5 footers went out on V7 pages).
+// 20.50: A MOVED PLACEMENT WHOSE SPOT IS NOT CONFIRMED. A temporary pin (moved to another
+// level, waiting on its new plan, not printed) and a pin flagged when its sector changed.
+// Warn while the deck is in progress; an error in an IFS, where a missing or doubtful pin is
+// a wrong drawing. Page goes to that level's floor plan.
+function _pinMovePreflight(pages) {
+    const out = [], seen = {};
+    const ifs = _deckIsIFS();
+    const lvName = (n) => (floorplanLevels[n] || {}).name || ('Level ' + (n + 1));
+    const planIdx = (n) => (pages || []).findIndex(d => d && d.kind === 'floorplan' && (d.level || 0) === n);
+    _deckSpecRows().forEach(r => {
+        if (!r || !r.id) return;
+        const key = _artGroupKey(r.id);
+        if (seen[key]) return;
+        const tp = _fpTempPin(r), ck = !tp && _fpPins(r).find(p => p.check);
+        if (!tp && !ck) return;
+        seen[key] = true;
+        const n = _deckLvlOf((tp || ck).lv), i = planIdx(n);
+        out.push(tp
+            ? { sev: ifs ? 'err' : 'warn', pinMove: key, text: key + ' \u2014 moved to ' + lvName(n) + ' and has no spot on its plan yet (its amber ? pin is not printed). Drag it into place, or click it to keep it there.', idx: i >= 0 ? i : null }
+            : { sev: ifs ? 'err' : 'warn', pinMove: key, text: key + ' \u2014 changed sector; its pin on ' + lvName(n) + ' may be in the old spot. Check it, then Keep spot or drag it.', idx: i >= 0 ? i : null });
+    });
+    return out;
+}
 function _readinessPreflight() {
     const out = [];
     const ifs = _deckIsIFS();

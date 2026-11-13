@@ -128,21 +128,27 @@ const path = require('path');
       const ans = await p;
       if (!ans || ans.kind !== 'new' || !ans.ctx || ans.ctx.zone !== '24') throw new Error(JSON.stringify(ans));
     });
-    __check('the Item codes panel sets the pattern and offers the recode', () => {
+    __check('the Item codes panel sets the pattern (recoding at once) and offers the recode for a mixed project', () => {
       setup([['ART.1', { zone: '16' }]], '');
       const host = document.createElement('div');
       _codePatternPanelInto(host);
       const sel = host.querySelector('[data-code-pattern="preset"]');
       sel.value = LEVEL_SECTOR; sel.onchange();
       if (editorialContent.codePattern !== LEVEL_SECTOR) throw new Error('pattern ' + editorialContent.codePattern);
+      // 20.47: choosing the pattern recodes at once, so nothing is left to recode.
+      if (ids() !== 'L3.ART.S16-01') throw new Error('not recoded on switch: ' + ids());
       const host2 = document.createElement('div');
       _codePatternPanelInto(host2);
-      const b = host2.querySelector('[data-code-pattern="recode"]');
-      if (!b || b.textContent.indexOf('Recode 1 placement') < 0) throw new Error('button ' + (b && b.textContent));
+      if (host2.querySelector('[data-code-pattern="recode"]')) throw new Error('recode button after an automatic recode');
       const lc = host2.querySelector('[data-level-code="0"]');
       if (!lc || lc.placeholder !== 'L3') throw new Error('level code ' + (lc && lc.placeholder));
-      // Nothing to recode yet: the button says why rather than "Recode 0".
-      dashProjectData[0].zone = ''; dashProjectData[0].id = 'ART.1';
+      // A project that arrives mixed (an old file) still gets the button.
+      dashProjectData.push(row('ART.1', { zone: '24' }));
+      const hostM = document.createElement('div'); _codePatternPanelInto(hostM);
+      const bM = hostM.querySelector('[data-code-pattern="recode"]');
+      if (!bM || bM.textContent.indexOf('Recode 1 placement') < 0) throw new Error('button ' + (bM && bM.textContent));
+      // Nothing it can recode yet: the button says why rather than "Recode 0".
+      dashProjectData[1].zone = '';
       const host3 = document.createElement('div'); _codePatternPanelInto(host3);
       const b3 = host3.querySelector('[data-code-pattern="recode"]');
       if (!b3 || !b3.disabled || b3.textContent !== '1 placement needs a Sector to recode') throw new Error('empty recode: ' + (b3 && b3.textContent));

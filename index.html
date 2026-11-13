@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.46">
+    <link rel="stylesheet" href="style.css?v=20.50">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -236,7 +236,7 @@
                         <div class="grid-custom-meta">
                             <div><label>Item Code</label><input type="text" id="m_itemCode" onchange="_codesCommitFormId(this)" onkeydown="if(event.key==='Enter')this.blur()" title="The number sets the order everywhere. Type a number to move it there."></div>
                             <div><label>Image Code</label><input type="text" id="m_imageCode" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Level</label><select id="m_level" onchange="syncDashAndCalculate()" title="Which floor plan this piece is listed under in the deck"></select></div>
+                            <div><label>Level</label><select id="m_level" onchange="_codesLevelEdited()" title="Which floor plan this piece is listed under in the deck"></select></div>
                             <div><label>Qty</label><input type="number" id="m_qty" oninput="syncDashAndCalculate()" disabled title="Auto-Calculated by Elevations"></div>
                         </div>
                         
@@ -256,7 +256,7 @@
                                 </select>
                             </div>
                             <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Sector</label><input type="text" id="m_zone" oninput="syncDashAndCalculate()" placeholder="e.g. 16" title="The code pattern's {zone}: the client's sector, zone or area"></div>
+                            <div><label>Sector</label><input type="text" id="m_zone" oninput="syncDashAndCalculate()" onchange="_codesZoneEdited()" placeholder="e.g. 16" title="The code pattern's {zone}: the client's sector, zone or area"></div>
                         </div>
 
                         <!-- ARTWORK (19.10). Added from the PREVIEW: its empty opening is a button
@@ -270,7 +270,8 @@
                             <input type="range" id="m_artZoom" min="1" max="3" step="0.05" value="1" style="flex:1; min-width:40px;" oninput="setArtZoomFromSlider()">
                             <button type="button" class="action-btn btn-secondary" style="flex:0 0 auto; width:auto; height:26px; padding:0 8px; font-size:var(--fs-60); white-space:nowrap;" onclick="resetArtCrop()" title="Back to the whole picture, centred">Reset</button>
                             <button type="button" id="m_fitToImageBtn" class="action-btn btn-secondary" title="Fit OD to image ratio: resize the frame so the opening matches the artwork's proportions" onclick="fitODToImage()" style="flex:0 0 auto; width:auto; height:26px; padding:0 8px; font-size:var(--fs-60); font-weight:700; white-space:nowrap;">1:1</button>
-                            <button type="button" id="m_artworkClear" class="action-btn btn-secondary" style="flex:0 0 auto; width:auto; height:26px; padding:0 8px; font-size:var(--fs-60); white-space:nowrap;" onclick="clearDashArtwork()" title="Take the artwork off this item">Remove</button>
+                            <button type="button" id="m_artworkClear" class="action-btn btn-secondary" style="flex:0 0 auto; width:auto; height:26px; padding:0 8px; font-size:var(--fs-60); white-space:nowrap;" onclick="clearDashArtwork()" title="Take the artwork off this item. It is kept in Art on hold (Edit menu).">Remove</button>
+                            <button type="button" id="m_artworkMove" class="action-btn btn-secondary" style="flex:0 0 auto; width:auto; height:26px; padding:0 8px; font-size:var(--fs-60); white-space:nowrap;" onclick="openMoveArtModal()" title="Move this artwork onto another piece, or swap it with that piece's art">Move</button>
                         </div>
 
                         <!-- Artist / Title / Art Type were visible form fields earlier in
@@ -2311,9 +2312,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.46';</script>
-<script src="templates.js?v=20.46"></script>
-<script src="app.js?v=20.46"></script>
+<script>window.FRAME_HTML_VERSION = '20.50';</script>
+<script src="templates.js?v=20.50"></script>
+<script src="app.js?v=20.50"></script>
 
 </body>
 </html>

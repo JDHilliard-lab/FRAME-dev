@@ -277,6 +277,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_fpGroups` compares numbers.
   **A new placement adopts the untouched default wall** (`_elevPristine`: default name,
   nothing on, traced on or linked to it).
+- **A MOVED PLACEMENT'S PIN IS TEMPORARY UNTIL PLACED (20.50, `_fpPinsAll`, `_fpTempPin(On)`, `_fpLandingSpot`,
+  `_fpFlagCheck`, `_fpConfirmPin`, `_pinMovePreflight`).** A pin may carry `temp` (moved to that level, no spot yet) or
+  `check` (real pin, sector changed). `_fpPins` NEVER returns a temp pin, so it is unplaced to every counter and never
+  printed (every page draws from `_fpGroups`); only the editor draws it (amber `?`, `data-fp-temp`). `_fpSyncPrimary`
+  takes the LEVEL from the first pin of `_fpPinsAll`, temp or not: taking it from the first real pin is what snapped a
+  moved piece back to its old level. `_fpSetPin` writes a plain pin (clears both flags) and replaces a temp pin on
+  another plan. `_movePlacementToLevel` reads pins BEFORE changing `r.level` (a legacy pin derives from it). Test
+  `tests/test_pin_move.js`.
 - **A ROW CAN BE PINNED ON SEVERAL PLANS** (`r.planPins = [{lv,x,y}]`).
   **Quantity is NOT affected**: qty comes from elevation frames
   (`recalculateDashboardQuantities`); a test pins that qty never reads `planPins`.
