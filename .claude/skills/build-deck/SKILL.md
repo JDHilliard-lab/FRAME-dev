@@ -113,6 +113,15 @@ Full write-ups live outside the repo (the designer's `FRAME Agent Training` fold
   Colour" or "N/A". A reference image that is not the art says "Concept imagery only".
 - **Every image code carries a house prefix,** a client's own photo included (never a camera
   file name). The studio's old decks printed `.jpg` after codes: do not copy that.
+- **Name every supporting file you cut or save by the Coding Cheat Sheet** (FRAME Help >
+  Reference > Coding cheat sheet), in the build folder and in the deck alike, never `L03-floor.png`:
+  `PLAN.YYMMDD.(GR|PA|COR).SUBJECT.DWG#` (or SHEET#), `ELEV.` same, `REND.YYMMDD.(GR|PA|COR).SUBJECT`,
+  `MOCK.` same, `FINISH.(GR|PA|COR).SUBJECT`, `FRAME.FRAME CODE.SUBJECT`, `REF.SUB.` / `REF.FRAME.`
+  / `REF.` + description. YYMMDD is the drawing set's date; DWG# is the sheet the crop came from
+  (A-501). A `REF.` image never sits beside art being proposed. Art codes follow the same sheet:
+  FAO/FCM/FSU/FST/FSO/FFI patterns, artist codes `XYZ.010.00003`, public domain sources
+  FCH/FJP/FLI/FMA/FNA/FNY/FPX/FWI/FUN (a PD image must be modified before it is proposed, and
+  never use a Creative Commons image).
 - **Thank You:** the creative director, the AD/PM AND the sales partner named in the handover
   (missed for several versions in two projects). Proofread keywords and the copyright year.
 - **Plain words in client copy:** "graphic" or "illustrative", not studio jargon like "vector".

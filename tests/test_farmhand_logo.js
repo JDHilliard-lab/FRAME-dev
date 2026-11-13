@@ -104,14 +104,15 @@ const bad = (label, why) => { failed++; console.log('  FAIL ' + label + ': ' + w
     else if (JSON.parse(MAN).name !== 'Farmhand' || JSON.parse(MAN).short_name !== 'Farmhand') bad('rename', 'the manifest still names the old app');
     else ok('the tab, the home-screen app and the manifest say Farmhand');
     // Any quoted UI string that still says FRAME as the product name. Allowed: URLs and repo
-    // names, the picture-frame terms (FRAME SET, FRAME SAMPLES), and the old What's New history.
+    // names, the picture-frame terms (FRAME SET, FRAME SAMPLES), the studio's FRAME file code in the
+    // Coding cheat sheet (FRAME.FRAME CODE.SUBJECT), and the old What's New history.
     const wn0 = APP.indexOf("title: `What's new`"), wn1 = APP.indexOf("title: 'Reporting issues'");
     const appNow = APP.slice(0, wn0) + APP.slice(wn1);
     const left = appNow.split(String.fromCharCode(10)).filter(l => {
         const s = l.trim();
         if (s.indexOf('//') === 0 || s.indexOf('*') === 0 || s.indexOf('/*') === 0) return false;
         const code = l.split(' // ')[0];
-        return /(^|[^\w\/\-.])FRAME(?![\w\-\/]| SET| SAMPLES)/.test(code);
+        return /(^|[^\w\/\-.])FRAME(?![\w\-\/]| SET| SAMPLES|<\/strong>\.FRAME CODE)/.test(code);
     });
     if (left.length) bad('rename', left.length + ' UI string(s) still say FRAME, e.g. ' + left[0].trim().slice(0, 120));
     else ok('no UI string still calls the app FRAME');

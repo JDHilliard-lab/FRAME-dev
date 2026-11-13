@@ -2304,6 +2304,12 @@ input[type=range]:focus-visible::-moz-range-thumb {
 }
 .help-ref-content .help-steps { margin: 4px 0 8px; padding-left: 20px; }
 .help-ref-content .help-steps li { margin-bottom: 6px; }
+/* 20.53: the Coding cheat sheet's tables (art types, PD sources, file codes). */
+.help-ref-content .help-table { width: 100%; border-collapse: collapse; margin: 6px 0 8px; font-size: var(--fs-65); }
+.help-ref-content .help-table th, .help-ref-content .help-table td {
+    border: 1px solid var(--border-color); padding: 4px 6px; text-align: left; vertical-align: top; overflow-wrap: anywhere; white-space: normal; height: auto; line-height: 1.35;
+}
+.help-ref-content .help-table th { background: var(--bg-input); color: var(--text-strong); font-weight: 600; }
 .help-live-steps { list-style: none; margin: 0; padding: 0; }
 .help-live-steps li {
     display: flex; align-items: flex-start; gap: 10px;
