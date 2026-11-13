@@ -3650,3 +3650,38 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
     font-size: var(--fs-55); font-weight: 400; letter-spacing: 0; text-transform: none;
     background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
 .wall-all-btn:hover, .wall-all-btn:focus-visible { color: var(--text-main); border-color: var(--ui-active); }
+
+/* PAGE ORDER (20.51): drag a plan's pages into order; the codes follow. */
+#pageOrderModal .po-card { width: 96vw; height: 92vh; max-width: 1700px; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-8); display: flex; flex-direction: column; padding: 16px 18px; box-sizing: border-box; overflow: hidden; }
+#pageOrderModal .po-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
+#pageOrderModal .po-titles { flex: 1; min-width: 0; }
+#pageOrderModal .po-title { margin: 0 0 4px; font-size: var(--fs-120); color: var(--text-strong); }
+#pageOrderModal .po-sub { font-size: var(--fs-70); color: var(--text-muted); line-height: 1.45; }
+#pageOrderModal .po-done { width: auto; flex: 0 0 auto; height: 30px; padding: 0 22px; }
+#pageOrderModal .po-tabs { margin-bottom: 12px; flex-wrap: wrap; }
+#pageOrderModal .po-tabs .po-drop { outline: 2px dashed var(--selected); outline-offset: 2px; }
+#pageOrderModal .po-grid { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 18px 14px; padding: 4px 2px 20px; }
+#pageOrderModal .po-cell { cursor: grab; user-select: none; -webkit-user-select: none; }
+#pageOrderModal .po-cell.po-locked { cursor: default; opacity: 0.75; }
+#pageOrderModal .po-cell.po-lifted { opacity: 0.3; }
+#pageOrderModal .po-thumb { position: relative; isolation: isolate; overflow: hidden; background: #fff; border: 1px solid var(--border-color); border-radius: var(--r-4); font-kerning: none; }
+#pageOrderModal .po-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#pageOrderModal .po-nopage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: var(--fs-65); }
+#pageOrderModal .po-label { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: var(--fs-70); color: var(--text-main); max-width: 236px; }
+#pageOrderModal .po-pin { flex: 0 0 auto; min-width: 20px; height: 20px; padding: 0 3px; box-sizing: border-box; border-radius: 99px; background: #e00000; color: #fff; font-weight: 700; font-size: var(--fs-60); display: inline-flex; align-items: center; justify-content: center; }
+#pageOrderModal .po-code { font-weight: 700; white-space: nowrap; }
+#pageOrderModal .po-loc { flex: 1; min-width: 0; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#pageOrderModal .po-nav { display: flex; gap: 2px; flex: 0 0 auto; }
+#pageOrderModal .po-step { width: 22px; height: 20px; padding: 0; border: 1px solid var(--border-color); border-radius: var(--r-4); background: var(--bg-input); color: var(--text-main); cursor: pointer; font-size: var(--fs-85); line-height: 1; }
+#pageOrderModal .po-step:disabled { opacity: 0.3; cursor: default; }
+#pageOrderModal .po-mark { width: 4px; align-self: stretch; min-height: 150px; border-radius: var(--r-2); background: var(--selected); }
+#pageOrderModal .po-empty { color: var(--text-muted); font-size: var(--fs-75); padding: 30px; }
+.po-ghost { position: fixed; z-index: var(--z-toast); pointer-events: none; opacity: 0.85; transform: rotate(-2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.35); background: var(--bg-panel); border-radius: var(--r-4); padding: 4px; }
+.po-ghost .po-thumb { position: relative; overflow: hidden; background: #fff; }
+.po-ghost .po-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* 20.51: the floorplan Items tab's plan buttons, This plan / All plans, plan headings, legend drag */
+.fp-plan-strip { flex-wrap: wrap; margin-bottom: 8px; }
+.fp-plan-strip .frame-tab, .fp-scope .frame-tab { font-size: var(--fs-60); }
+.fp-scope { margin: 0 0 7px; }
+.fp-plan-head { margin: 12px 0 2px; padding-bottom: 3px; border-bottom: 1px solid var(--border-color); font-size: var(--fs-65); font-weight: 700; color: var(--text-strong); }
+.ds-fp-legend-lift { background: rgba(33, 150, 243, 0.12); outline: 1px dashed var(--selected); }

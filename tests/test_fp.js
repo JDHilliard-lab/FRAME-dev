@@ -581,8 +581,10 @@ const fs = require('fs');
         const at = A.indexOf('function ' + fn);
         if (at < 0) throw new Error('missing ' + fn);
         const body = A.slice(at, at + 900);
-        if (!/_fpSetPin\\(|_fpClearPin\\(/.test(body)) throw new Error(fn + ' still writes a single placement');
+        // 20.51: the two placing handlers go through _fpPlaceGroup (it asks across sectors).
+        if (!/_fpSetPin\\(|_fpClearPin\\(|_fpPlaceGroup\\(/.test(body)) throw new Error(fn + ' still writes a single placement');
       });
+      { const at = A.indexOf('function _fpPlaceGroup'); if (at < 0 || A.slice(at, A.indexOf('function ', at + 10)).indexOf('_fpSetPin(') < 0) throw new Error('_fpPlaceGroup does not pin per plan'); }
       // And the markup tool resolves its pins for the level it is showing.
       const mk = A.indexOf('function renderFloorplanMarkup');
       if (A.slice(mk, mk + 900).indexOf('_fpGroups(_fpLevel)') < 0) throw new Error('the markup tool shows only primary pins');

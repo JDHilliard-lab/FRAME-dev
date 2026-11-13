@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.50';
+const APP_VERSION = '20.51';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -3794,6 +3794,7 @@ function snapshotProjectState(opts) {
 // Restore the given snapshot in-place. Re-binds derived references
 // (elevFrames, elevPersonPos) so existing code keeps working.
 function restoreProjectState(snap) {
+    _codesGapBase = null; setTimeout(() => { try { _codesGapReset(); } catch (e) {} }, 0);   // 20.51: gaps an undo brings back were already answered
     // CRITICAL: deep-clone the snapshot BEFORE installing into live state.
     // Without this, the live state shares object references with the snapshot
     // stored in undoStack. Any subsequent mutation to elevFrames or any
@@ -8930,7 +8931,9 @@ function _readProjectText(text) {
                 // ART.003-A silently on open meant the next re-export broke links nobody
                 // knew had moved. Compared by ROW, so catalogue renames are caught too.
                 const _before = (dashProjectData || []).filter(Boolean).map(r => [r, r.id]);
+                try { _codesInferPattern(); } catch (e) {}   // 20.51: an older file names the pattern its codes follow
                 try { _codesSettle(); } catch (e) {}
+                _codesGapReset();
                 _codesReportOpenRenames(_before);
             }
             // The drafting standard, when the file carries one. OPTIONAL by design:
@@ -13534,6 +13537,7 @@ function deleteDashRow() {
     renderDashTable(); checkGlobalEditingWarning(dashProjectData[dashSelectedRowIndex].id);
     pushHistory();
     if (_kept) _artBinToast(1);
+    _codesGapCheck();   // 20.51
 }
 
 function loadDashDataIntoControls(data) {
@@ -16437,7 +16441,7 @@ function _artAfterChange() {
     try { renderDashTable(); } catch (e) {}
     try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {}
     if (typeof pushHistory === 'function') pushHistory();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();    _codesGapCheck();   // 20.51
 }
 // Put a bin entry's art on a piece. Art already on it goes to the bin in its place.
 function artBinPlace(entryId, rowId, quiet) {
@@ -23650,7 +23654,34 @@ function _deckEmitLevels(units) {
         if (used) out.push(li);
     });
     if (!out.length) out.push(0);
-    return out;
+    return _planLevelsSorted(out);
+}
+// 20.51: PLANS PRINT IN LEVEL, THEN SECTOR ORDER, whatever order they were added in. A plan
+// added late (Sector 23 after Sector 24) used to print where it was added. Only when EVERY
+// plan has a level number (its name or its code): L2 before L10, then by sector within a
+// level. Plans with no sector on a level, and projects whose plans are not numbered levels
+// (Guest A, Guest B), keep the order they were added, which is deliberate there. Manual
+// plan order still overrides (it reorders this list).
+function _planLevelKey(li) {
+    const c = _levelCode(li);
+    return { lv: /\d/.test(c) ? c : null, z: _levelZone(li) };
+}
+function _planLevelsSorted(list) {
+    const ks = {}; (list || []).forEach(li => { ks[li] = _planLevelKey(li); });
+    if ((list || []).some(li => ks[li].lv == null)) return (list || []).slice();
+    const nat = (a, b) => String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
+    return (list || []).slice().sort((a, b) => {
+        const A = ks[a], B = ks[b];
+        const c = nat(A.lv, B.lv);
+        if (c) return c;
+        if (A.z && B.z) { const d = nat(A.z, B.z); if (d) return d; }
+        return a - b;
+    });
+}
+// Every plan in the order the deck prints them (used by every list of plans on screen).
+function _planLevelOrder() {
+    const all = (floorplanLevels || []).map((_, i) => i);
+    return _deckPlanOrder() === 'manual' ? _deckPlanSeq(_planLevelsSorted(all)) : _planLevelsSorted(all);
 }
 // 'byLevel'     — plan for a level, then that level's spec and elevation pages, then the
 //                 next level. The original behaviour and still the default, so opening an
@@ -25683,6 +25714,7 @@ function _dsRunPreflight() {
     try { issues.push.apply(issues, _readinessPreflight()); } catch (e) {}
     // A moved placement whose plan pin is temporary or flagged for a check (20.50).
     try { issues.push.apply(issues, _pinMovePreflight(pages)); } catch (e) {}
+    try { issues.push.apply(issues, _sectorMismatchPreflight(pages)); } catch (e) {}
     // What ten studio projects kept catching after issue; stale stage and version (20.04).
     try { issues.push.apply(issues, _ifsAuditPreflight(pages)); } catch (e) {}
     // Another job's file stamp in typed text; Pending drawings and N/A credits in an IFS (20.28).
@@ -25811,6 +25843,14 @@ function _dsShowPreflight() {
                     wl.style.cssText = 'width:auto; height:22px; padding:0 10px; font-size:var(--fs-60);';
                     wl.onclick = () => { const mm = document.getElementById('_dsPreflightModal'); if (mm) mm.remove(); _jumpGo(it.wall); };
                     row.appendChild(wl);
+                }
+                if (it.fix) {   // 20.51: a one-click repair the check knows how to make
+                    const fx = document.createElement('button'); fx.textContent = it.fix.label; fx.className = 'action-btn';
+                    fx.setAttribute('data-pf-act', 'fix');
+                    fx.title = it.fix.title || '';
+                    fx.style.cssText = 'width:auto; height:22px; padding:0 10px; font-size:var(--fs-60);';
+                    fx.onclick = () => { it.fix.run(); _dsShowPreflight(); };
+                    row.appendChild(fx);
                 }
                 if (it.wall && !it.set) {
                     const wl = document.createElement('button'); wl.textContent = 'Wall'; wl.className = 'action-btn btn-secondary';
@@ -34815,14 +34855,47 @@ function _dsFpPlace(e) {
     const n = _dsFpNorm(e); if (!n) return;
     const g = _fpFindGroup(_fpArmedId); if (!g) return;
     const lvl = (_dsPages[_dsIndex] && _dsPages[_dsIndex].level) || 0;
-    // Pins the group on THIS plan only. Placing a code on Guestroom B used to clear it
-    // off Guestroom A, because a row had one slot to hold a position.
-    g.rows.forEach(r => _fpSetPin(r, lvl, n.x, n.y));
     _fpArmedId = null;
     _fpLoupeHide();             // the pin is down, so the sight is finished with
-    if (typeof pushHistory === 'function') pushHistory();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    _dsRefresh();
+    // Pins the group on THIS plan only. Placing a code on Guestroom B used to clear it
+    // off Guestroom A, because a row had one slot to hold a position.
+    _fpPlaceGroup(g, lvl, n.x, n.y, () => {
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        _dsRefresh(); try { _dsRenderTools(); } catch (err) {}
+        _codesGapCheck();
+    });
+}
+// 20.51: A PIN ON ANOTHER SECTOR'S PLAN ASKS. Pinning an S16 piece on the Sector 23 plan used
+// to add a second pin (a piece shown on two plans, meant for repeated guestroom types), so
+// its code never changed and it printed on both plans. In a sector project the designer now
+// says which: Move it there (recode, old pin goes) or Show it on both plans.
+function _fpOtherSector(g, lvl) {
+    if (!g || !g.rows.length || !_codePatternNeeds().zone || !_codePatternParts(_codePattern())) return '';
+    const r0 = g.rows[0];
+    const want = _levelZone(lvl), cur = _rowZone(r0);
+    if (!want || !cur || want === cur) return '';
+    if (_fpPinsAll(r0).some(p => _deckLvlOf(p.lv) === _deckLvlOf(lvl) && !p.temp)) return '';   // already shown here: a drag
+    return want;
+}
+function _fpPlaceGroup(g, lvl, x, y, done) {
+    const pin = () => g.rows.forEach(r => _fpSetPin(r, lvl, x, y));
+    const want = _fpOtherSector(g, lvl);
+    if (!want) { pin(); done(); return; }
+    const L = floorplanLevels[lvl] || {}, word = _codeZoneLabel();
+    showConfirmModal('Move ' + g.key + ' to ' + word + ' ' + want + '?',
+        g.key + ' is coded for ' + word + ' ' + _rowZone(g.rows[0]) + '. Move it to ' + (L.name || (word + ' ' + want)) + ': it takes the next ' + word + ' ' + want + ' code and its old pin comes off. Or show it on both plans, keeping its code (for a piece that really appears on both).',
+        'Move it here', 'Cancel',
+        () => {
+            const key = g.key;
+            const res = _movePlacementToLevel(key, lvl);
+            const g2 = _fpFindGroup(res && res.moved.length ? res.moved[0].to : key) || g;
+            g2.rows.forEach(r => _fpSetPin(r, lvl, x, y));
+            done();
+            if (res && res.moved.length) _codesAnnounce(res.moved[0].from, res.moved[0].to, {});
+        },
+        () => {},
+        { alt: { label: 'Show on both plans', onClick: () => { pin(); done(); } } });
 }
 // A CLICK on a pin (no drag) opens that piece's spec page, the other half of the round
 // trip the spec page's plan thumbnail starts. Held for a moment first, because the first
@@ -34898,10 +34971,52 @@ function _dsFpListLinks(page, desc, S) {
         const a = document.createElement('div');
         a.className = 'ds-fp-listlink _dsChrome';
         a.title = 'Open the ' + q.key + ' spec page';
+        a.setAttribute('data-fp-legend', q.key);
         a.style.cssText = 'position:absolute; left:' + (q.x * S) + 'px; top:' + (q.y * S) + 'px; width:' + (q.w * S) + 'px; height:' + (q.h * S) + 'px; cursor:pointer; z-index:4;';
-        a.onclick = (ev) => { ev.stopPropagation(); _dsJumpToSpecFor(q.key); };
+        a.onclick = (ev) => { ev.stopPropagation(); if (a._dragged) { a._dragged = false; return; } _dsJumpToSpecFor(q.key); };
+        if (_codesFamKey(q.key)) { a.title += '. Drag it up or down the list to renumber'; a.onmousedown = (ev) => _dsFpLegendDrag(ev, a, q, rects, S, page); }
         page.appendChild(a);
     });
+}
+// 20.51: DRAG A LEGEND LINE TO RENUMBER. Dropped between two lines of its own family, the
+// placement takes that position: codes, pins, the legend and page order follow (one undo).
+function _dsFpLegendDrag(ev, el, q, rects, S, page) {
+    if (ev.button !== 0) return;
+    ev.preventDefault(); ev.stopPropagation();
+    const y0 = ev.clientY, pr = page.getBoundingClientRect();
+    let line = null, drop = null;
+    const fam = _codesFamKey(q.key);
+    const move = (e) => {
+        if (!line && Math.abs(e.clientY - y0) < 4) return;
+        if (!line) {
+            line = document.createElement('div'); line.className = 'ds-fp-legend-mark _dsChrome';
+            page.appendChild(line); el.classList.add('ds-fp-legend-lift');
+        }
+        const y = (e.clientY - pr.top) / S;
+        const same = rects.filter(r => r.key !== q.key && _codesFamKey(r.key) === fam);
+        if (!same.length) return;
+        let best = null;
+        same.forEach(r => {
+            const mid = r.y + r.h / 2;
+            const after = y > mid;
+            const edge = after ? r.y + r.h : r.y;
+            const d = Math.abs(y - edge);
+            if (!best || d < best.d) best = { d: d, key: r.key, after: after, edge: edge, x: r.x, w: r.w };
+        });
+        drop = best;
+        line.style.cssText = 'position:absolute; left:' + (best.x * S) + 'px; top:' + (best.edge * S - 1) + 'px; width:' + (best.w * S) + 'px; height:2px; background:var(--selected); z-index:6; pointer-events:none;';
+    };
+    const up = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+        if (!line) return;
+        line.remove(); el.classList.remove('ds-fp-legend-lift');
+        el._dragged = true;
+        setTimeout(() => { el._dragged = false; }, 0);
+        if (drop) _codesMoveBesideAny(q.key, drop.key, drop.after);
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
 }
 function _dsJumpToSpecFor(key) {
     try { _dsPages = _deckPageList(); } catch (e) {}
@@ -35548,6 +35663,7 @@ function _dsRefreshDockedStyles() {
 let _fpPanelTab = 'items';        // 'items' | 'cats' | 'plan'
 let _fpFilter = '';               // free-text match on item codes
 let _fpUnplacedOnly = false;      // "what have I not put on the plan yet"
+let _fpItemScope = 'plan';        // 20.51: 'plan' = this plan's codes, 'all' = every plan, headed
 const _fpCatCollapsed = {};       // category key -> collapsed?
 function _fpPanelTabBar(t) {
     // .frame-tabs.fit is the same strip Deck Studio and the elevation sidebar
@@ -35574,7 +35690,50 @@ function _fpRowMatches(g) {
     const hay = ((g.ids || []).filter(Boolean).join(' ') + ' ' + (g.num || '') + ' ' + (g.key || '')).toLowerCase();
     return hay.indexOf(q) >= 0;
 }
+// 20.51: one button per floor plan, in deck order: the way between sectors without
+// scrolling the rail. Shared by the Items tab and the Plans menu.
+function _dsGoToPlan(li) {
+    const i = (_dsPages || []).findIndex(d => d && d.kind === 'floorplan' && _deckLvlOf(d.level) === _deckLvlOf(li));
+    if (i < 0) { _toast('That plan has no page', 'Turn its floor plan page on under Include pages.'); return false; }
+    _dsSelectPage(i);
+    try { const cell = document.querySelectorAll('[data-railcell]')[i]; if (cell && cell.scrollIntoView) cell.scrollIntoView({ block: 'nearest' }); } catch (e) {}
+    return true;
+}
+// The Deck Studio header's floor plans button (20.51): every plan in deck order, with its
+// piece count; a pick opens the Pages tab on that plan.
+function openPlansMenu(anchor) {
+    try { _fpMigrate(); } catch (e) {}
+    const lv = floorplanLevels || [];
+    const cur = (_dsPages && _dsPages[_dsIndex] && _dsPages[_dsIndex].kind === 'floorplan') ? _deckLvlOf(_dsPages[_dsIndex].level) : -1;
+    const items = [{ head: 'FLOOR PLANS' }];
+    _planLevelOrder().forEach(i => {
+        const n = _pageOrderList(i).length;
+        items.push({ label: (lv[i] && lv[i].name) || ('Level ' + (i + 1)), hint: n + (n === 1 ? ' placement' : ' placements'), on: i === cur,
+            onClick: () => { if (_dsActiveTab !== 'pages') _dsTab('pages'); _dsGoToPlan(i); } });
+    });
+    if (_placementList().length > 1) { items.push({ head: '' }); items.push({ label: 'Page order…', hint: 'drag pages; codes follow', onClick: () => openPageOrder(cur >= 0 ? cur : undefined) }); }
+    return _frameMenu(anchor, items);
+}
+function _fpPlanStrip(desc) {
+    const lv = floorplanLevels || [];
+    if (lv.length < 2) return null;
+    const bar = document.createElement('div'); bar.className = 'frame-tabs fp-plan-strip';
+    bar.setAttribute('data-fp-plans', '');
+    const cur = _deckLvlOf(desc && desc.level);
+    _planLevelOrder().forEach(i => {
+        const b = document.createElement('button'); b.type = 'button';
+        b.className = 'frame-tab' + (i === cur ? ' active' : '');
+        b.setAttribute('data-fp-plan', String(i));
+        const z = _levelZone(i);
+        b.textContent = z ? (_codeZoneLabel() + ' ' + z) : ((lv[i] && lv[i].name) || ('Level ' + (i + 1)));
+        b.title = 'Go to the ' + ((lv[i] && lv[i].name) || ('Level ' + (i + 1))) + ' floor plan page';
+        b.onclick = () => { if (i !== cur) _dsGoToPlan(i); };
+        bar.appendChild(b);
+    });
+    return bar;
+}
 function _fpPanelItems(t, desc) {
+    { const ps = _fpPlanStrip(desc); if (ps) t.appendChild(ps); }
     // WHILE SOMETHING IS ARMED the line says what the next click does, because that is
     // the one moment it is news. The standing how-to lives on the ? dot instead of a
     // paragraph that pushed the list down every time the panel opened.
@@ -35635,7 +35794,25 @@ function _fpPanelItems(t, desc) {
         + ' border:1px solid var(--border-color); border-radius:var(--r-4); '
         + (_fpUnplacedOnly ? 'background:var(--warn); color:#fff;' : 'background:var(--bg-input); color:var(--text-main);');
     un.onclick = () => { _fpUnplacedOnly = !_fpUnplacedOnly; _dsRenderTools(); };
-    tools.appendChild(fi); tools.appendChild(un);
+    const po = document.createElement('button');   // 20.51
+    po.textContent = 'Order';
+    po.setAttribute('data-fp-order', '');
+    po.title = 'Page order: drag this plan\'s pages into the order the story runs. Codes, plan numbers and page order follow.';
+    po.style.cssText = 'flex:0 0 auto; height:26px; padding:0 8px; font-size:var(--fs-60); font-weight:700; cursor:pointer;'
+        + ' border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); color:var(--text-main);';
+    po.onclick = () => openPageOrder(desc && desc.level != null ? desc.level : _fpLevel);
+    tools.appendChild(fi); tools.appendChild(un); tools.appendChild(po);
+    if ((floorplanLevels || []).length > 1) {   // 20.51: this plan's codes, or every plan's
+        const sc = document.createElement('div'); sc.className = 'frame-tabs fp-scope';
+        [['plan', 'This plan', 'Only the codes on this floor plan'], ['all', 'All plans', 'Every code, under the plan it is on']].forEach(([k, lbl, tip]) => {
+            const b = document.createElement('button'); b.type = 'button'; b.textContent = lbl; b.title = tip;
+            b.className = 'frame-tab' + (_fpItemScope === k ? ' active' : '');
+            b.setAttribute('data-fp-scope', k);
+            b.onclick = () => { _fpItemScope = k; _dsRenderTools(); };
+            sc.appendChild(b);
+        });
+        t.appendChild(sc);
+    }
     tools.appendChild(_dsHelpDot('Click a row, then click the plan to drop its pin. Drag a pin to move it; double-click a pin to remove it. Double-click a code to rename it: the dashboard, spec pages and plan all follow. A hollow number has no pin yet; it fills once the code is placed on a plan.'));
     t.appendChild(tools);
 
@@ -36991,6 +37168,8 @@ function _codesSettle(opts) {
     try { _catSettleAll(); } catch (e) {}
     const moves = {};
     // A wall named for its codes ("ART.15A / 15B / 15C | Kitchenette") follows them (19.44).
+    // Pattern codes (L3.ART.S16-01) KEEP their gaps here: a gap may be a code the client has
+    // already seen. _codesGapAsk offers to close them after a gesture (20.51).
     _wallNamesFollowCodes(() => { _codePrefixesInUse().forEach(p => Object.assign(moves, _renumberPrefix(p))); });
     _codesSortRows();
     if (!opts || opts.walls !== false) _codesSortWalls();
@@ -37013,6 +37192,466 @@ function _codesAdoptRowOrder() {
     _codesSortRows(); _codesSortWalls();
     return moves;
 }
+// ── PATTERN CODES KEEP NO GAPS, AND A PROJECT NAMES ITS PATTERN (20.51) ─────────
+// Before 20.51 only house codes closed up: L3.ART.S16-01 moved to Sector 23 left S16 starting
+// at 02. Each pattern STEM (everything but the number: L3.ART.S16-) now numbers 1..n in its
+// current order, like a house prefix. Catalogue placements are not in _placementList and are
+// never touched. Two passes through temporary codes, so 03 -> 02 never meets an 02 still there.
+function _codePatternFamily(key, pat) {
+    const pp = _codePatternParts(pat);
+    const p = pp && _codeParse(key, pat);
+    if (!p || !(p.n > 0)) return null;
+    const c = { type: p.type, level: p.level, zone: p.zone };
+    const before = _codePatternFill(pp.before, c), after = _codePatternFill(pp.after, c);
+    if (before == null || after == null) return null;
+    return { fam: before + '\u0001' + after, n: p.n, fmt: (n) => before + (pp.width ? String(n).padStart(pp.width, '0') : String(n)) + after };
+}
+function _codesRenameMany(moves) {
+    const mv = Object.keys(moves).filter(k => moves[k] !== k);
+    if (!mv.length) return {};
+    const stamp = Date.now().toString(36).replace(/[0-9]/g, '');
+    const tmp = {};
+    mv.forEach((k, i) => { tmp[k] = '__RP' + i + '__' + stamp + '.9'; _fpRenameGroup(k, tmp[k], { quiet: true, force: true }); });
+    mv.forEach(k => _fpRenameGroup(tmp[k], moves[k], { quiet: true, force: true }));
+    const out = {}; mv.forEach(k => { out[k] = moves[k]; });
+    return out;
+}
+function _renumberPatternStems() {
+    const pat = _codePattern();
+    if (!_codePatternParts(pat)) return {};
+    const fams = {};
+    _placementList().forEach(g => {
+        const f = _codePatternFamily(g.key, pat);
+        if (!f) return;
+        (fams[f.fam] = fams[f.fam] || []).push({ key: g.key, n: f.n, fmt: f.fmt });
+    });
+    const moves = {};
+    Object.keys(fams).forEach(k => {
+        const list = fams[k].sort((a, b) => a.n - b.n);
+        list.forEach((it, i) => { const want = it.fmt(i + 1); if (want !== it.key) moves[it.key] = want; });
+    });
+    return _codesRenameMany(moves);
+}
+// THE GAP QUESTION (20.51). A pattern code that goes (deleted, moved to another sector)
+// leaves a gap: S16-01, 02, 04. Before a deck goes to the client, closing it is tidy; after,
+// it would renumber codes the client already has. Only the designer knows which, so the
+// first gesture that makes a NEW gap asks. Watched against a baseline (the gaps there were
+// at the last look); undo, redo and opening a project reset it, so they never ask.
+let _codesGapBase = null;
+function _codesPatternGaps() {
+    const pat = _codePattern();
+    if (!_codePatternParts(pat)) return {};
+    const fams = {};
+    _placementList().forEach(g => {
+        const f = _codePatternFamily(g.key, pat);
+        if (f) (fams[f.fam] = fams[f.fam] || { ns: [], fmt: f.fmt }).ns.push(f.n);
+    });
+    const out = {};
+    Object.keys(fams).forEach(k => {
+        const have = {}; let mx = 0;
+        fams[k].ns.forEach(n => { have[n] = 1; mx = Math.max(mx, n); });
+        const miss = [];
+        for (let n = 1; n < mx; n++) if (!have[n]) miss.push(fams[k].fmt(n));
+        if (miss.length) out[k] = miss;
+    });
+    return out;
+}
+function _codesGapReset() { try { _codesGapBase = _codesPatternGaps(); } catch (e) { _codesGapBase = null; } }
+// After a gesture: ask when it made a gap that was not there before. Returns the new gaps.
+function _codesGapCheck() {
+    let now;
+    try { now = _codesPatternGaps(); } catch (e) { return []; }
+    if (!_codesGapBase) { _codesGapBase = now; return []; }   // no baseline yet: nothing to compare
+    const base = _codesGapBase;
+    _codesGapBase = now;
+    const fresh = [];
+    Object.keys(now).forEach(k => now[k].forEach(c => { if (!(base[k] || []).includes(c)) fresh.push(c); }));
+    if (!fresh.length) return [];
+    setTimeout(() => _codesGapAsk(fresh), 0);
+    return fresh;
+}
+function _codesGapAsk(fresh) {
+    const iss = (editorialContent && Array.isArray(editorialContent.issues)) ? editorialContent.issues : [];
+    const last = iss.length ? iss[iss.length - 1] : null;
+    const sent = last ? ' This deck was issued' + (last.at ? ' on ' + new Date(last.at).toLocaleDateString() : '') + ': if the client has those codes, keep the gap.' : '';
+    const n = fresh.length;
+    showConfirmModal(n === 1 ? fresh[0] + ' is now free' : n + ' codes are now free',
+        (n === 1 ? 'Nothing uses ' + fresh[0] + ' any more.' : 'Nothing uses ' + fresh.join(', ') + ' any more.')
+        + ' Close the gap and renumber the codes after it (pins, pages and walls follow), or keep the gap so every code still matches what the client has seen.' + sent,
+        'Keep the gap', 'Close the gap and renumber',
+        () => {},
+        () => _codesCloseGaps(),
+        {});
+}
+// Close every gap in every pattern stem. Folds into the gesture's own undo entry.
+function _codesCloseGaps() {
+    let moves = {};
+    _wallNamesFollowCodes(() => { moves = _renumberPatternStems(); });
+    _codesSettle();
+    _codesGapReset();
+    _codesRefreshViews();
+    try { if (typeof undoStack !== 'undefined' && undoStack.length) undoStack[undoStack.length - 1] = snapshotProjectState({ plans: true }); else if (typeof pushHistory === 'function') pushHistory(); } catch (e) {}
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {}
+    const k = Object.keys(moves).length;
+    if (k) _toast(k + ' code' + (k === 1 ? '' : 's') + ' renumbered', 'The gap is closed. Ctrl+Z undoes the whole change.');
+    return moves;
+}
+// A project with no pattern stored (codePattern undefined: older than 20.30, or never set)
+// whose placements ALL read as one of the structured presets (level and/or sector in the
+// code) adopts it. A designer's own choice, house included (''), is never overridden. The
+// house-style presets are not inferred: the house renumber already handles ART-01.
+function _codesInferPattern() {
+    if (!editorialContent || editorialContent.codePattern !== undefined) { _levelZonesInfer(false); return ''; }
+    const groups = _placementList();
+    if (groups.length < 2) return '';
+    const pick = CODE_PATTERN_PRESETS.filter(p => p.v && (p.v.indexOf('{level}') >= 0 || p.v.indexOf('{zone}') >= 0))
+        .sort((a, b) => b.v.length - a.v.length)
+        .find(p => groups.every(g => _codeParse(g.key, p.v)));
+    if (!pick) return '';
+    editorialContent.codePattern = pick.v;
+    _levelZonesInfer(true);
+    return pick.v;
+}
+// Give each plan with no sector the one it plainly has: the word "Sector 23" in its name
+// (or the project's own word for it), else, when `byRows`, the sector three in four of
+// its placements carry. Writes only where blank.
+function _levelZonesInfer(byRows) {
+    if (!_codePatternNeeds().zone || !_codePatternParts(_codePattern())) return;
+    const lv = (typeof floorplanLevels !== 'undefined' && floorplanLevels) || [];
+    const word = _codeZoneLabel().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const rx = new RegExp('\\b(?:' + word + '|sector|zone)\\s*[-:#]?\\s*([A-Za-z0-9]+)', 'i');
+    lv.forEach((L, i) => {
+        if (!L || String(L.zone || '').trim()) return;
+        const m = rx.exec(String(L.name || ''));
+        if (m) { L.zone = m[1].replace(/^0+(?=\d)/, ''); return; }
+        if (!byRows) return;
+        const tally = {}; let n = 0;
+        _placementList().forEach(g => {
+            const r = g.rows[0];
+            if (_deckLvlOf(r.level) !== i) return;
+            const z = String(r.zone || '').trim(); if (!z) return;
+            tally[z] = (tally[z] || 0) + 1; n++;
+        });
+        const best = Object.keys(tally).sort((a, b) => tally[b] - tally[a])[0];
+        if (best && tally[best] * 4 >= n * 3) L.zone = best;
+    });
+}
+// A placement whose code names another sector than the plan it is on (moved in a build
+// before 20.51, or its plan's sector set later). Read-only: [{ key, li, zone, want }].
+function _codesSectorMismatches() {
+    const pat = _codePattern();
+    if (!_codePatternNeeds().zone || !_codePatternParts(pat)) return [];
+    const out = [];
+    _placementList().forEach(g => {
+        const r = g.rows[0];
+        const li = _deckLvlOf(r.level), want = _levelZone(li);
+        const p = _codeParse(g.key, pat);
+        if (!want || !p || !p.zone || p.zone === want) return;
+        out.push({ key: g.key, row: r, li: li, zone: p.zone, want: want });
+    });
+    return out;
+}
+// Fix one: the placement takes its plan's sector and the next code there; a pin left on
+// another plan comes across as a temporary pin, as a move would bring it.
+function _codesFixSector(key) {
+    // A row (from _codesSectorMismatches) is resolved NOW: fixing one renumbers its old
+    // sector, so a code read before then may already belong to another placement.
+    if (key && typeof key === 'object') key = key.id ? _artGroupKey(key.id) : '';
+    const g = _fpFindGroup(key);
+    if (!g) return null;
+    const li = _deckLvlOf(g.rows[0].level);
+    const res = _movePlacementToLevel(key, li, { realign: true });
+    _artAfterChange();
+    if (res && res.moved.length) _codesAnnounce(res.moved[0].from, res.moved[0].to, {});
+    return res;
+}
+function _sectorMismatchPreflight(pages) {
+    const ifs = _deckIsIFS();
+    const lvName = (n) => (floorplanLevels[n] || {}).name || ('Level ' + (n + 1));
+    const planIdx = (n) => (pages || []).findIndex(d => d && d.kind === 'floorplan' && (d.level || 0) === n);
+    return _codesSectorMismatches().map(m => {
+        const i = planIdx(m.li);
+        return { sev: ifs ? 'err' : 'warn', text: m.key + ' — is on ' + lvName(m.li) + ' but its code says ' + _codeZoneLabel() + ' ' + m.zone + '. Recode it to ' + _codeZoneLabel() + ' ' + m.want + '.',
+            idx: i >= 0 ? i : null, fix: { label: 'Recode', title: 'Give it the next ' + _codeZoneLabel() + ' ' + m.want + ' code; its pin comes across to this plan. Ctrl+Z undoes it.', run: () => _codesFixSector(m.row) } };
+    });
+}
+
+// ── PAGE ORDER: THE DESIGNER SETS THE SEQUENCE, THE CODES FOLLOW (20.51) ─────────
+// Code order IS page order (and pin order), so reordering pages is renumbering codes. The
+// placements given (one plan's, in the order wanted) trade the numbers they already hold:
+// within each family (a house prefix, or a pattern stem) the numbers they own, sorted, are
+// handed out in the new order. Nothing outside the list moves. One undo entry; returns
+// [{from, to}].
+function _codesSetOrder(keys, opts) {
+    const o = opts || {};
+    const pat = _codePattern();
+    const want = (keys || []).filter((k, i, a) => k && a.indexOf(k) === i && _fpFindGroup(k));
+    const fams = {};
+    want.forEach(k => {
+        const pf = _codePatternFamily(k, pat);
+        if (pf) { (fams['p:' + pf.fam] = fams['p:' + pf.fam] || { kind: 'p', list: [] }).list.push({ key: k, n: pf.n, fmt: pf.fmt }); return; }
+        const hp = _plainCodeParts(k);
+        if (hp) (fams['h:' + hp.prefix] = fams['h:' + hp.prefix] || { kind: 'h', prefix: hp.prefix, list: [] }).list.push({ key: k, n: hp.n });
+    });
+    const rowOf = {};
+    want.forEach(k => { const g = _fpFindGroup(k); if (g) rowOf[k] = g.rows[0]; });
+    _wallNamesFollowCodes(() => {
+        Object.keys(fams).forEach(fk => {
+            const F = fams[fk];
+            if (F.kind === 'h') {
+                const global = _codesPlainKeys(F.prefix);
+                const mine = F.list.map(x => x.key);
+                const slots = global.map((k, i) => mine.indexOf(k) >= 0 ? i : -1).filter(i => i >= 0);
+                const next = global.slice();
+                slots.forEach((gi, j) => { next[gi] = mine[j]; });
+                _renumberPrefix(F.prefix, next);
+            } else {
+                const nums = F.list.map(x => x.n).sort((a, b) => a - b);
+                const moves = {};
+                F.list.forEach((x, j) => { const t = x.fmt(nums[j]); if (t !== x.key) moves[x.key] = t; });
+                _codesRenameMany(moves);
+            }
+        });
+    });
+    _codesSettle();
+    const out = [];
+    want.forEach(k => { const r = rowOf[k]; const now = r && r.id ? _artGroupKey(r.id) : k; if (now !== k) out.push({ from: k, to: now }); });
+    if (!o.quiet) {
+        _codesRefreshViews();
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        try { _dsRefresh(); } catch (e) {}
+    }
+    return out;
+}
+// The numbering family a placement belongs to: 'h:ART' (house prefix) or 'p:<stem>'.
+function _codesFamKey(key) {
+    const pf = _codePatternFamily(key, _codePattern());
+    if (pf) return 'p:' + pf.fam;
+    const hp = _plainCodeParts(key);
+    return hp ? 'h:' + hp.prefix : '';
+}
+// Put one placement just before or after another of its family, the codes between them
+// shifting (L3.ART.S16-12 dropped after 04 becomes 05; 05..11 become 06..12). One undo
+// entry. Returns the placement's new key. The Items drag and the plan legend drag.
+function _codesMoveBesideAny(key, targetKey, after) {
+    const fam = _codesFamKey(key);
+    if (!fam || fam !== _codesFamKey(targetKey) || key === targetKey) return null;
+    const g0 = _fpFindGroup(key); if (!g0) return null;
+    const row = g0.rows[0];
+    const num = (k) => { const pf = _codePatternFamily(k, _codePattern()); if (pf) return pf.n; const hp = _plainCodeParts(k); return hp ? hp.n : 0; };
+    const list = _placementList().map(g => g.key).filter(k => _codesFamKey(k) === fam).sort((x, y) => num(x) - num(y)).filter(k => k !== key);
+    const ti = list.indexOf(targetKey);
+    if (ti < 0) return null;
+    list.splice(ti + (after ? 1 : 0), 0, key);
+    const res = _codesSetOrder(list);
+    const fin = row && row.id ? _artGroupKey(row.id) : key;
+    if (fin !== key) _codesAnnounce(key, fin, res.length > 1 ? { x: 1, y: 1 } : {});
+    if (_fpArmedId === key) _fpArmedId = fin;
+    try { _dsRenderTools(); _dsRenderCenter(); } catch (e) {}
+    return fin;
+}
+// Can this placement's number be traded? (A house prefix or a pattern stem.)
+function _codesOrderable(key) {
+    return !!(_codePatternFamily(key, _codePattern()) || _plainCodeParts(key));
+}
+// The placements on one plan, in code (= page) order.
+function _pageOrderList(li) {
+    const n = _deckLvlOf(li);
+    return _placementList().filter(g => _deckLvlOf(g.rows[0].level) === n);
+}
+// Each placement's first spec page, for its picture in the window.
+function _pageOrderDescs() {
+    const map = {};
+    let pages = [];
+    try { pages = _deckPageList(); } catch (e) {}
+    pages.forEach(d => {
+        if (!d || d.kind !== 'spec' || d._install) return;
+        const ids = (d.members && d.members.length) ? d.members.map(m => m && m.id) : [d.row && d.row.id];
+        ids.forEach(id => { const k = id && _artGroupKey(id); if (k && !map[k]) map[k] = d; });
+    });
+    return map;
+}
+let _pageOrderLevel = 0;
+function openPageOrder(li) {
+    try { _fpMigrate(); } catch (e) {}
+    const lv = (typeof floorplanLevels !== 'undefined' && floorplanLevels) || [];
+    _pageOrderLevel = Math.max(0, Math.min(lv.length - 1, _deckLvlOf(li == null ? _fpLevel : li)));
+    let ov = document.getElementById('pageOrderModal');
+    if (ov) ov.remove();
+    ov = document.createElement('div');
+    ov.id = 'pageOrderModal';
+    ov.className = 'frame-modal po-modal';
+    ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'po-card';
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    _pageOrderRender();
+    return ov;
+}
+function _pageOrderClose() {
+    const ov = document.getElementById('pageOrderModal');
+    if (ov) ov.remove();
+    try { _dsRenderTools(); _dsRenderCenter(); } catch (e) {}
+}
+function _pageOrderRender() {
+    const ov = document.getElementById('pageOrderModal');
+    if (!ov) return;
+    const card = ov.querySelector('.po-card');
+    card.innerHTML = '';
+    const lv = floorplanLevels || [];
+    const li = _pageOrderLevel;
+    const head = document.createElement('div'); head.className = 'po-head';
+    const h = document.createElement('h3'); h.className = 'po-title'; h.textContent = 'Page order';
+    const sub = document.createElement('div'); sub.className = 'po-sub';
+    sub.textContent = 'Drag pages into the order the story should run. Codes, plan numbers and page order follow. Drop a page on another plan\'s tab to move it there. Ctrl+Z undoes each move.';
+    const done = document.createElement('button'); done.type = 'button'; done.className = 'action-btn po-done'; done.textContent = 'Done';
+    done.setAttribute('data-modal-close', ''); done.onclick = _pageOrderClose;
+    const tl = document.createElement('div'); tl.className = 'po-titles'; tl.appendChild(h); tl.appendChild(sub);
+    head.appendChild(tl); head.appendChild(done);
+    card.appendChild(head);
+    if (lv.length > 1) {
+        const tabs = document.createElement('div'); tabs.className = 'frame-tabs po-tabs';
+        const seq = _planLevelOrder();
+        seq.forEach(i => {
+            const b = document.createElement('button'); b.type = 'button';
+            b.className = 'frame-tab' + (i === li ? ' active' : '');
+            b.setAttribute('data-po-level', String(i));
+            b.textContent = ((lv[i] && lv[i].name) || ('Level ' + (i + 1))) + ' · ' + _pageOrderList(i).length;
+            b.onclick = () => { _pageOrderLevel = i; _pageOrderRender(); };
+            tabs.appendChild(b);
+        });
+        card.appendChild(tabs);
+    }
+    const grid = document.createElement('div'); grid.className = 'po-grid';
+    card.appendChild(grid);
+    const list = _pageOrderList(li);
+    if (!list.length) {
+        const e = document.createElement('div'); e.className = 'po-empty';
+        e.textContent = 'No placements on this plan yet.';
+        grid.appendChild(e);
+        return;
+    }
+    const descs = _pageOrderDescs();
+    let pins = {};
+    try { _fpGroups(li).forEach(g => { pins[g.key] = g.num; }); } catch (e) {}
+    const TW = 236, TH = Math.round(TW * 540 / 936);
+    list.forEach((g, i) => {
+        const c = document.createElement('div'); c.className = 'po-cell';
+        c.setAttribute('data-po-key', g.key);
+        const movable = _codesOrderable(g.key);
+        if (!movable) c.classList.add('po-locked');
+        const th = document.createElement('div'); th.className = 'po-thumb';
+        th.style.width = TW + 'px'; th.style.height = TH + 'px';
+        const d = descs[g.key];
+        let url = null;
+        if (d) { try { url = _dsThumbCache[_dsThumbCacheKey(d)] || _dsThumbLast[_deckPageKey(d)] || null; } catch (e) {} }
+        if (url) { const im = document.createElement('img'); im.src = url; im.draggable = false; th.appendChild(im); }
+        else if (d) { try { th.innerHTML = _deckMockHTML(d, TW, TH); } catch (e) {} }
+        else {
+            const e = document.createElement('div'); e.className = 'po-nopage';
+            e.textContent = 'No spec page';
+            th.appendChild(e);
+        }
+        c.appendChild(th);
+        const lab = document.createElement('div'); lab.className = 'po-label';
+        const pin = document.createElement('span'); pin.className = 'po-pin';
+        pin.textContent = pins[g.key] != null ? pins[g.key] : String(i + 1);
+        const code = document.createElement('span'); code.className = 'po-code'; code.textContent = g.key;
+        const loc = document.createElement('span'); loc.className = 'po-loc'; loc.textContent = g.location || '';
+        lab.appendChild(pin); lab.appendChild(code); lab.appendChild(loc);
+        if (!movable) { lab.title = 'This code has no number Farmhand can trade, so it stays where its code puts it.'; }
+        c.appendChild(lab);
+        if (movable) {
+            const nav = document.createElement('div'); nav.className = 'po-nav';
+            const mk = (txt, d2, tip) => {
+                const b = document.createElement('button'); b.type = 'button'; b.className = 'po-step'; b.textContent = txt; b.title = tip;
+                b.setAttribute('data-po-step', String(d2));
+                b.disabled = (d2 < 0 && i === 0) || (d2 > 0 && i === list.length - 1);
+                b.onclick = (ev) => { ev.stopPropagation(); _pageOrderMove(g.key, i + d2); };
+                return b;
+            };
+            nav.appendChild(mk('‹', -1, 'Earlier')); nav.appendChild(mk('›', 1, 'Later'));
+            lab.appendChild(nav);
+            c.onmousedown = (ev) => _pageOrderDragStart(ev, c, g.key);
+        }
+        grid.appendChild(c);
+    });
+}
+// Move one placement to position `to` (0-based) on the plan being shown.
+function _pageOrderMove(key, to) {
+    const keys = _pageOrderList(_pageOrderLevel).map(g => g.key);
+    const from = keys.indexOf(key);
+    if (from < 0) return null;
+    const at = Math.max(0, Math.min(keys.length - 1, to));
+    if (at === from) return null;
+    keys.splice(at, 0, keys.splice(from, 1)[0]);
+    const res = _codesSetOrder(keys);
+    _pageOrderRender();
+    const mine = res.find(m => m.from === key);
+    if (mine) _toast(key + ' is now ' + mine.to, res.length > 1 ? (res.length - 1) + ' other code' + (res.length === 2 ? '' : 's') + ' renumbered around it. Ctrl+Z undoes it.' : 'Ctrl+Z undoes it.');
+    return res;
+}
+// Drag a page: pick up after 5px, drop between cells (or on a plan tab to move it there).
+function _pageOrderDragStart(ev, cell, key) {
+    if (ev.button !== 0 || ev.target.closest('button')) return;
+    ev.preventDefault();
+    const x0 = ev.clientX, y0 = ev.clientY;
+    let ghost = null, mark = null, drop = null;
+    const grid = cell.parentElement;
+    const cells = () => [...grid.querySelectorAll('.po-cell')];
+    const move = (e) => {
+        if (!ghost) {
+            if (Math.abs(e.clientX - x0) + Math.abs(e.clientY - y0) < 5) return;
+            ghost = cell.cloneNode(true); ghost.classList.add('po-ghost');
+            const r = cell.getBoundingClientRect();
+            ghost.style.width = r.width + 'px';
+            document.body.appendChild(ghost);
+            cell.classList.add('po-lifted');
+            mark = document.createElement('div'); mark.className = 'po-mark';
+        }
+        ghost.style.left = (e.clientX - 40) + 'px'; ghost.style.top = (e.clientY - 30) + 'px';
+        const tab = document.elementFromPoint ? document.elementFromPoint(e.clientX, e.clientY) : null;
+        const lvTab = tab && tab.closest && tab.closest('[data-po-level]');
+        document.querySelectorAll('.po-tabs .po-drop').forEach(t => t.classList.remove('po-drop'));
+        if (lvTab && +lvTab.getAttribute('data-po-level') !== _pageOrderLevel) {
+            lvTab.classList.add('po-drop'); drop = { level: +lvTab.getAttribute('data-po-level') };
+            if (mark.parentElement) mark.remove();
+            return;
+        }
+        // Nearest gap: before the first cell whose centre is past the pointer in reading order.
+        const cs = cells();
+        let at = cs.length;
+        for (let i = 0; i < cs.length; i++) {
+            const r = cs[i].getBoundingClientRect();
+            if (e.clientY < r.top) { at = i; break; }
+            if (e.clientY <= r.bottom && e.clientX < r.left + r.width / 2) { at = i; break; }
+        }
+        drop = { at: at };
+        if (at < cs.length) grid.insertBefore(mark, cs[at]); else grid.appendChild(mark);
+    };
+    const up = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+        if (ghost) ghost.remove();
+        if (mark && mark.parentElement) mark.remove();
+        cell.classList.remove('po-lifted');
+        if (!ghost || !drop) return;
+        if (drop.level != null) {
+            _movePlacementToLevelUI(key, drop.level);
+            _pageOrderRender();
+            return;
+        }
+        const keys = _pageOrderList(_pageOrderLevel).map(g => g.key);
+        const from = keys.indexOf(key);
+        const to = drop.at > from ? drop.at - 1 : drop.at;
+        _pageOrderMove(key, to);
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
+}
+
 // Plain placement keys of one prefix, in number order.
 function _codesPlainKeys(prefix) {
     const cr = _catalogueRowIds(), out = [];
@@ -37639,6 +38278,7 @@ function _codesZoneEdited() {
         _codesAnnounce(res.moved[0].from, res.moved[0].to, {});
         try { _dsRefresh(); } catch (e) {}
     }
+    _codesGapCheck();   // 20.51
     return res;
 }
 
@@ -37733,14 +38373,33 @@ function _fpFillItemList(desc) {
     if (!list) return;
     try { _codesSortRows(); } catch (e) {}
     list.innerHTML = '';
-    const groups = _fpGroups().filter(_fpRowMatches);
-    if (!groups.length) {
+    const all = _fpGroups().filter(_fpRowMatches);
+    const multi = (floorplanLevels || []).length > 1;
+    const onPlan = (g, li) => _deckLvlOf(g.rows[0].level) === li || g.rows.some(r => _fpPinsAll(r).some(p => _deckLvlOf(p.lv) === li));
+    // 20.51: This plan (default) lists only that plan's codes, so 01..10 shows once; All
+    // plans lists every plan under its own heading, in deck order.
+    const sections = !multi ? [{ li: null, groups: all }]
+        : (_fpItemScope === 'all' ? _planLevelOrder().map(li => ({ li: li, groups: all.filter(g => _deckLvlOf(g.rows[0].level) === li) })).filter(x => x.groups.length)
+                                  : [{ li: null, groups: all.filter(g => onPlan(g, _deckLvlOf(desc && desc.level))) }]);
+    if (!sections.some(x => x.groups.length)) {
         const e = document.createElement('p');
         e.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); padding:6px 2px;';
-        e.textContent = _fpUnplacedOnly ? 'Every code on this project has a pin.' : 'No codes match that filter.';
+        e.textContent = _fpUnplacedOnly ? 'Every code ' + (multi && _fpItemScope === 'plan' ? 'on this plan' : 'on this project') + ' has a pin.'
+            : ((_fpFilter || '').trim() ? 'No codes match that filter.' : 'No codes on this plan yet. All plans shows the rest.');
         list.appendChild(e);
         return;
     }
+    sections.forEach(sec => {
+        if (sec.li != null) {
+            const ph = document.createElement('div'); ph.className = 'fp-plan-head';
+            ph.setAttribute('data-fp-planhead', String(sec.li));
+            ph.textContent = ((floorplanLevels[sec.li] || {}).name || ('Level ' + (sec.li + 1))) + ' \u00b7 ' + sec.groups.length;
+            list.appendChild(ph);
+        }
+        _fpFillItemBuckets(list, sec.groups, desc);
+    });
+}
+function _fpFillItemBuckets(list, groups, desc) {
     // Category order follows _artCats so the panel reads in the same order as the legend
     // printed on the page; anything with no category falls in at the end.
     const cats = _artCats();
@@ -37791,11 +38450,14 @@ function _fpMoveMenuItems(g, codeEl) {
     const cur = typeof g.rows[0].level === 'number' ? g.rows[0].level : 0;
     if (lv.length > 1) {
         items.push({ head: 'MOVE TO LEVEL' });
-        lv.forEach((L, i) => items.push({ label: (L && L.name) || ('Level ' + (i + 1)), on: i === cur, onClick: () => { if (i !== cur) _movePlacementToLevelUI(g.key, i); } }));
+        _planLevelOrder().forEach(i => { const L = lv[i]; items.push({ label: (L && L.name) || ('Level ' + (i + 1)), on: i === cur, onClick: () => { if (i !== cur) _movePlacementToLevelUI(g.key, i); } }); });
     }
     if (_codePatternNeeds().zone && _codePatternParts(_codePattern())) {
         items.push({ label: 'Change ' + _codeZoneLabel().toLowerCase() + '…', hint: 'now ' + (String(g.rows[0].zone || '').trim() || _levelZone(cur) || 'none'), onClick: () => _askPlacementZone(g.key) });
+        const mm = _codesSectorMismatches().find(m => m.key === g.key);   // 20.51
+        if (mm) items.push({ label: 'Recode to this plan\'s ' + _codeZoneLabel().toLowerCase() + ' (' + mm.want + ')', hint: 'its code says ' + mm.zone, onClick: () => _codesFixSector(g.key) });
     }
+    items.push({ label: 'Page order…', hint: 'drag pages; codes follow', onClick: () => openPageOrder(cur) });
     const withArt = g.rows.filter(_rowHasArt);
     items.push({ head: 'ARTWORK' });
     if (withArt.length) withArt.forEach(r => items.push({ label: 'Move ' + _artLabel(r) + ' to another piece…', hint: g.rows.length > 1 ? r.id : '', onClick: () => openMoveArtModal(r.id) }));
@@ -37818,16 +38480,21 @@ function _fpMoveMenuItems(g, codeEl) {
 // Pins on other plans (a piece shown in several guestroom types) stay. Before 20.50 the old
 // pin stayed and, as the first pin, pulled the level straight back once the piece was
 // pinned on its new plan. `res.landed` says where the temporary pin went.
-function _movePlacementToLevel(key, li) {
+// 20.51 `opts.realign`: the placement is already on plan `li` but coded for another sector
+// and pinned on another plan (moved by an older build). It takes li's sector, and the plan
+// its first pin is on counts as the one it left.
+function _movePlacementToLevel(key, li, opts) {
+    const o = opts || {};
     const g = _fpFindGroup(key);
     if (!g) return null;
-    const was = typeof g.rows[0].level === 'number' ? g.rows[0].level : 0;
-    if (was === li) return { moved: [], missing: [] };
-    const oldZ = _levelZone(was), newZ = _levelZone(li);
+    let was = typeof g.rows[0].level === 'number' ? g.rows[0].level : 0;
+    if (was === li && !o.realign) return { moved: [], missing: [] };
+    const oldZ = o.realign ? String(g.rows[0].zone || '').trim() : _levelZone(was), newZ = _levelZone(li);
     const before = g.rows.map(r => _fpPinsAll(r));      // read BEFORE r.level changes (a legacy pin derives from it)
+    if (o.realign) { const p0 = before[0] && before[0][0]; was = p0 ? _deckLvlOf(p0.lv) : -1; if (was === li) was = -1; }
     g.rows.forEach(r => {
         r.level = li;
-        if (oldZ && String(r.zone || '').trim() === oldZ && newZ) r.zone = newZ;
+        if (newZ && (String(r.zone || '').trim() === oldZ || o.realign)) r.zone = newZ;
     });
     const spot = _fpLandingSpot(li, _rowZone(g.rows[0]), key);
     let landed = null;
@@ -38179,7 +38846,7 @@ function _fpItemRow(g, desc) {
 // is a recode (the category chip), not a reorder.
 let _fpDragKey = null;
 function _fpWireItemDrag(row, g) {
-    const plain = !!_plainCodeParts(g.key);
+    const plain = !!_codesFamKey(g.key);   // 20.51: pattern codes drag too, within their stem
     row.dataset.fpKey = g.key;
     if (plain) {
         row.draggable = true;
@@ -38195,8 +38862,8 @@ function _fpWireItemDrag(row, g) {
     }
     row.addEventListener('dragover', (e) => {
         if (!_fpDragKey || _fpDragKey === g.key) return;
-        const a = _plainCodeParts(_fpDragKey), b = _plainCodeParts(g.key);
-        if (!a || !b || a.prefix !== b.prefix) return;
+        const a = _codesFamKey(_fpDragKey), b = _codesFamKey(g.key);
+        if (!a || !b || a !== b) return;
         e.preventDefault();
         const r = row.getBoundingClientRect();
         const after = e.clientY > r.top + r.height / 2;
@@ -38216,6 +38883,7 @@ function _fpWireItemDrag(row, g) {
 }
 function _fpMoveCode(fromKey, targetKey, after) {
     const a = _plainCodeParts(fromKey), b = _plainCodeParts(targetKey);
+    if (!(a && b) && _codesFamKey(fromKey) && _codesFamKey(fromKey) === _codesFamKey(targetKey)) return _codesMoveBesideAny(fromKey, targetKey, after);
     if (!a || !b) return null;
     if (a.prefix !== b.prefix) { _toast(fromKey + ' is a different type', 'Change its category chip to move it to ' + b.prefix + '.'); return null; }
     const before = (dashProjectData || []).map(r => r && r.id).join('|');
@@ -39599,10 +40267,12 @@ function _fpPlaceFromEvent(e) {
     if (!n) return;
     const g = _fpFindGroup(_fpArmedId);
     if (!g) return;
-    g.rows.forEach(r => _fpSetPin(r, _fpLevel, n.x, n.y));   // whole group lands together, on THIS plan
     _fpArmedId = null;
-    if (typeof pushHistory === 'function') pushHistory();
-    renderFloorplanMarkup();
+    _fpPlaceGroup(g, _fpLevel, n.x, n.y, () => {   // whole group lands together, on THIS plan (20.51: asks across sectors)
+        if (typeof pushHistory === 'function') pushHistory();
+        renderFloorplanMarkup();
+        _codesGapCheck();
+    });
 }
 // ── Floor-plan level management ────────────────────────────────────────────
 function _fpRenderLevelBar() {
@@ -39610,7 +40280,8 @@ function _fpRenderLevelBar() {
     if (!bar) return;
     _fpMigrate();
     bar.innerHTML = '';
-    floorplanLevels.forEach((lv, i) => {
+    _planLevelOrder().forEach(i => {   // 20.51: deck order, not add order
+        const lv = floorplanLevels[i];
         const b = document.createElement('button');
         b.textContent = lv.name || ('Level ' + (i + 1));
         b.title = 'Switch to ' + (lv.name || ('Level ' + (i + 1)));
@@ -43190,6 +43861,7 @@ function _jumpEntries() {
     try {
         if (_catPlaces().length) out.push({ group: 'Views', title: 'Catalogue overview', sub: 'every placement and option', go: [{ kind: 'run', label: 'Open', run: openCatalogueOverview }], hay: 'catalogue overview options images missing' });
     } catch (e) {}
+    if (_placementList().length > 1) out.push({ group: 'Views', title: 'Page order', sub: 'drag pages into order; codes follow', go: [{ kind: 'run', label: 'Open', run: () => openPageOrder() }], hay: 'page order sequence story reorder renumber codes pins' });   // 20.51
     // 19.95: Production is a window, not a view, but it is reached from anywhere here.
     PROD_TABS.forEach(t => out.push({ group: 'Views', title: 'Production: ' + t[1], sub: t[2], go: [{ kind: 'run', label: 'Open', run: () => openProduction(t[0]) }], hay: 'production ' + t[1] + ' ' + t[2] + (t[0] === 'pricing' ? ' budget quote excel salesforce' : t[0] === 'shipping' ? ' commercial invoice customs border hs code' : t[0] === 'brand' ? ' residence inn springhill suites marriott ford retail signature email template standard items' : '') }));
     [['dashboard', '1  Frame Dashboard'], ['elevation', '2  Elevation'], ['deck', '3  Deck']].forEach(v => {
@@ -52016,6 +52688,7 @@ const HELP_REFERENCE_DATA = [
         entries: [
             { title: 'Adding a plan', body: `In Deck Studio, open the <strong>Pages</strong> tab and select the floorplan page. While it has no plan, click <strong>Upload floor plan</strong> in the middle of the page. For everything else, open the panel's <strong>Plan</strong> tab and use <strong>Open full markup tool</strong>. <strong>Change plan…</strong> loads the plan image, and <strong>+ Level</strong> adds another floor.` },
             { title: 'Pinning pieces', body: `In the floorplan panel's <strong>Items</strong> tab, click a piece and then click the plan. <strong>Unplaced</strong> shows only what is left to pin. <strong>Categories</strong> sets the pin colours.` },
+            { title: 'Page order', body: `The order of the spec pages is the order of the codes, and the plan's pin numbers come from the codes. On a floor plan page, drag a line of the legend (or a row on the <strong>Items</strong> tab) to where it belongs and the codes, pins and pages renumber to match. <strong>Order</strong> on the Items tab opens every page on that plan as a picture to drag. When a removed or moved placement leaves a gap in a sector's codes, Farmhand asks whether to keep it (the client already has those codes) or close it.` },
             { title: 'Wall lines', body: `Draw the line along the wall a piece hangs on. Hold <span class="help-kbd">Shift</span> to keep it straight. A magnifier follows the cursor while you place, for accuracy at the page edge.` },
             { title: 'One piece on several plans', body: `A piece can be pinned on the overall plan and on each guestroom plan. Pins never change quantities: quantity comes from how many walls a piece is placed on.` },
             { title: 'Plan order in the deck', body: `<strong>Floorplan order</strong> (on the Project tab and on the plan panel's Plan tab, the same setting) puts each plan before its level's pages, all plans first, or plans in an order you set by hand.` }
@@ -52104,7 +52777,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
+                body: `<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
 <strong>20.27</strong> <b>Notes, artist and title come off the spec and onto the page as text boxes.</b> An item's Notes no longer print in the spec block, where a long note broke its look. On a spec page in Deck Studio, the right panel has TEXT BOXES: <b>+ Item note</b> drops the item's Notes onto the page and <b>+ Artist + title</b> drops its title and artist (and medium and year when set), each as a text box you move next to the piece or anywhere on the page and edit there. The words are copied when you add the box. A blank field comes in as placeholder wording (Text here, Artwork title, Artist name) that preflight flags until you replace or delete it. On a set page each line starts with the piece's code. Notes still go to the CSV.
 <strong>20.26</strong> <b>Glass is drawn in black, and Outlines start off.</b> A glass run and its mullions now print in black like the rest of the wall drawing; red is kept for the dimensions (panel widths, overall size and the panel letters stay red). The red outline round each frame no longer shows on a fresh wall while the Outlines button is off: it only appears once you turn Outlines on.
