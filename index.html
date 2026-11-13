@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=20.53">
+    <link rel="stylesheet" href="style.css?v=20.54">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -1331,7 +1331,10 @@
                     <h3 style="margin: 0 0 2px; font-size:var(--fs-105); color:var(--text-strong);">Help</h3>
                     <p style="font-size:var(--fs-70); color:var(--text-muted); margin: 0;">Features, shortcuts, and the workflow at a glance.</p>
                 </div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                <button id="helpCodingSheetBtn" class="action-btn btn-secondary" style="width:auto;" onclick="_helpOpenCodingSheet()" title="Open the studio's Coding cheat sheet in a small window that stays open while you work">Coding cheat sheet</button>
                 <button data-modal-close class="icon-btn" style="border:none; background:transparent; color:var(--text-muted); cursor:pointer; padding: 4px 8px; font-size: var(--fs-120); line-height: 1;" onclick="closeHelpModal()" title="Close help">×</button>
+                </div>
             </div>
             <!-- Tab strip -->
             <div class="help-tabs">
@@ -2313,9 +2316,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '20.53';</script>
-<script src="templates.js?v=20.53"></script>
-<script src="app.js?v=20.53"></script>
+<script>window.FRAME_HTML_VERSION = '20.54';</script>
+<script src="templates.js?v=20.54"></script>
+<script src="app.js?v=20.54"></script>
 
 </body>
 </html>

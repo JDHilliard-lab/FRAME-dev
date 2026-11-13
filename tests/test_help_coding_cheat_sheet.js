@@ -23,7 +23,7 @@ window.HTMLCanvasElement.prototype.getContext = () => ({});
 window.fetch = () => Promise.reject(new Error('no network in test'));
 global.window = window; global.document = window.document; global.navigator = window.navigator;
 const quiet = console.error; console.error = () => {};
-window.eval(APP + NL + 'window.__fx = { help: HELP_REFERENCE_DATA, populate: populateHelpReference, section: renderHelpRefSection, version: APP_VERSION };');
+window.eval(APP + NL + 'window.__fx = { help: HELP_REFERENCE_DATA, populate: populateHelpReference, section: renderHelpRefSection, version: APP_VERSION, open: openHelpModal, openSheet: openCodingSheet, closeSheet: closeCodingSheet };');
 const fx = window.__fx;
 const doc = window.document;
 
@@ -75,6 +75,50 @@ check('What’s New mentions it', async () => {
     const v = fx.help.find((s) => s.id === 'version');
     const wn = v.entries.find((e) => /what.s new/i.test(e.title));
     if (wn.body.indexOf('Coding cheat sheet') < 0) throw new Error('What’s New does not mention the section');
+});
+
+check('20.54 EXACT ASK: the Help header opens the cheat sheet as a popup that stays open', async () => {
+    fx.open();
+    const btn = doc.getElementById('helpCodingSheetBtn');
+    if (!btn) throw new Error('no Coding cheat sheet button in the Help header');
+    btn.click();
+    const pop = doc.getElementById('codingSheetPop');
+    if (!pop || pop.style.display !== 'flex') throw new Error('the popup did not open');
+    if (doc.getElementById('helpModal').style.display !== 'none') throw new Error('Help stayed open over the work');
+    if (pop.hasAttribute('data-modal-backdrop') || pop.classList.contains('frame-modal')) throw new Error('the popup is a modal; it must let you keep working');
+    if (pop.querySelectorAll('.csp-tab').length !== 7) throw new Error('expected a tab per part, got ' + pop.querySelectorAll('.csp-tab').length);
+    if (pop.querySelector('.csp-body').innerHTML.indexOf('PLAN</strong>.YYMMDD') < 0) throw new Error('it does not open on file naming');
+});
+
+check('its tabs switch parts, Esc and the x close it, and it reopens on the last part', async () => {
+    const pop = doc.getElementById('codingSheetPop');
+    const tabs = pop.querySelectorAll('.csp-tab');
+    tabs[2].click();
+    if (pop.querySelector('.csp-body').innerHTML.indexOf('FCH.[REFERENCE NUMBER]') < 0) throw new Error('the public domain tab did not show its table');
+    if (!pop.querySelectorAll('.csp-tab')[2].classList.contains('active')) throw new Error('the picked tab is not marked');
+    pop.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    if (pop.style.display !== 'none') throw new Error('Esc did not close it');
+    fx.openSheet();
+    if (pop.querySelector('.csp-body').innerHTML.indexOf('FCH.[REFERENCE NUMBER]') < 0) throw new Error('it forgot the part you were on');
+    pop.querySelector('.csp-close').click();
+    if (pop.style.display !== 'none') throw new Error('the x did not close it');
+    if (doc.querySelectorAll('#codingSheetPop').length !== 1) throw new Error('reopening made a second popup');
+});
+
+check('the Reference section opens it too, and the popup sits below every modal', async () => {
+    fx.open(); fx.section('coding');
+    const b = doc.querySelector('#helpRefContent [data-coding-pop]');
+    if (!b) throw new Error('no Open as a popup button in the section');
+    b.click();
+    if (doc.getElementById('codingSheetPop').style.display !== 'flex') throw new Error('it did not open from Reference');
+    fx.closeSheet();
+    const rule = CSS.slice(CSS.indexOf('.coding-sheet-pop {'));
+    const z = /z-index: *(\d+)/.exec(rule.slice(0, rule.indexOf('}')));
+    if (!z || +z[1] >= 9999) throw new Error('the popup would cover dialogs (z-index ' + (z && z[1]) + ')');
+});
+
+check('the date is the drawing set date, and says why', async () => {
+    if (text().indexOf('date of the drawing set') < 0) throw new Error('naming does not say the date is the drawing set date');
 });
 
 (async () => {
