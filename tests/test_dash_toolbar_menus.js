@@ -69,7 +69,7 @@ const EXPECT = {
   edit: [['Move To', 'openMoveToModal'], ['Bulk Edit', 'openBulkEditModal'], ['Duplicate as Series', 'openDuplicateSeriesModal'], ['Remove placement', 'deleteSelectedPlacement'], ['Art on hold', 'openArtBin'], ['Item codes', '_jumpToCodes'], ['Links', 'openLinksPanel']],   // 19.74 added Links; samples (19.87) moved to the Production button in 19.95; 20.48 added Delete placement and Art on hold
   // 19.26: New items from photos joins Import (a new action goes in a menu, not a button).
   import: [['Import CSV', null], ['Bulk Images', 'openBulkReplaceModal'], ['New items from photos', 'dashNewFromPhotos']],
-  export: [['Export Database', 'exportDashCSV'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript'], ['Production pack', 'openProduction']],   // 19.89 production pack; prices (19.91) moved to the Production button in 19.95
+  export: [['Export Database', 'exportDashCSV'], ['Order workbook (Excel)', 'exportOrderXlsx'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript'], ['Production pack', 'openProduction']],   // 20.56 order workbook (branded sheet + SF import tab); 19.89 production pack; prices (19.91) moved to the Production button in 19.95
 };
 const BTN = { edit: 'dashEditMenuBtn', import: 'dashImportMenuBtn', export: 'dashExportMenuBtn' };
 

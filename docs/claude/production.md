@@ -112,6 +112,15 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   Import Template's 11 columns (H before W, markup a plain number, `_sfClean`). Product Code only for an art-type prefix
   (unknown mapping for prints: ask before guessing). `_xlsxBlob` cells take `border` / `head` / `title` / `pct` and a cached `v`
   beside `f`. Test fixtures that are not about royalty use F image codes.
+- **THE ORDER WORKBOOK (20.56, `exportOrderXlsx`, `_orderSheets`, `_orderSheet`, `_sfImportSheet`, `_salesforceLines`).**
+  Export menu + Pricing tab. Tabs in this order: branded Order, `SF Import Template` (the template's 11 headers at row 1,
+  values only, NEVER styled, no pane: the import reads values), `Vendor codes`. The CSV and the tab share
+  `_salesforceLines` (raw cost; the CSV writes `toFixed(2)`, so it is byte-identical to before). Rows = `_rfqRows('rfq')`;
+  spec columns are `buildSpecStrings` labels, never re-derived. Logo from `_getPdfLogos` (offline: the name in type);
+  thumbnails `_xlsxImageThumb`, four at a time, one per source. `_xlsxBlob` extras (`st`, `merges`, `heights`,
+  `images`, `freeze: 0`, `grid`, `landscape`, `footer`): custom cellXfs go AFTER the nine fixed ones; every sheet
+  writes `sheetFormatPr` (without it Quick Look lost the table); a picture is a `oneCellAnchor` with NO `editAs`
+  (schema: two-cell only; openpyxl refuses the file). Formula rows use Excel row numbers (`firstX`/`lastX`).
 - **RATE CARD ADD-ONS (19.97, `rates.addons`, `ADDON_KEYS`, `_rowAddons`, `_estimateCost`).** One set for every
   product, each DERIVED from the piece: premium frame by code (`PREMIUM_FRAME_RE`, LJ- / UA-), non-glare off the Glass
   field (`NON_GLARE_RE`; entered at 30x40, scaled by area), sealant from a humid location (`HUMID_LOC_RE`; `r.sealant`

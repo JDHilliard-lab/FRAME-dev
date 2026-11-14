@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.55';
+const APP_VERSION = '20.56';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -35594,6 +35594,7 @@ function openDashMenu(btn, which) {
         ],
         export: [
             { label: 'Export Database', hint: 'CSV of every piece', onClick: () => exportDashCSV() },
+            { label: 'Order workbook (Excel)', hint: 'branded order sheet plus the Salesforce import tab', onClick: () => exportOrderXlsx() },
             { label: 'Batch PNGs', hint: 'every piece plus the CSV, one ZIP', onClick: () => batchDownloadAllFrames() },
             { label: 'InDesign Script', hint: 'AutoFrameSpecs.jsx', onClick: () => downloadInDesignScript() },
             { head: '' },
@@ -52994,7 +52995,7 @@ The <strong>image size with bleed</strong> is worked out at RFI and never shown 
             },
             {
                 title: `What's new`,
-                body: `<strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
+                body: `<strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
 <strong>20.53</strong> <b>The studio's Coding cheat sheet is in Help.</b> Help > Reference has a <b>Coding cheat sheet</b> section: how to name supporting files (PLAN, ELEV, REND, MOCK, FINISH, FRAME and REF codes), the art types and their image codes with Medium or Application, the approved public domain sources, the public domain and Creative Commons rules, which assets can be remixed and under what code, how a new asset is coded, and what each spec page row holds.
 <strong>20.52</strong> <b>A placement left on the wrong sector's plan is easy to fix.</b> When a plan holds placements still coded for another sector (moved by an older build, or by pinning before 20.51), its Items tab says so at the top with <b>Recode</b> (or <b>Recode all</b>): each takes the next code in this plan's sector and its pin comes across, in one Ctrl+Z. Picking the plan it already sits on under <b>Move to level</b> now recodes it too, instead of doing nothing.\n<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
@@ -65012,21 +65013,60 @@ function _xmlEsc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', 
 // {s: string, bold: bool}. 19.96 grid styles for the RFQ: `border` (with money / pct),
 // `head` (bordered, bold, grey, wrapped), `title`, `pct`; a styled cell with no value is
 // written empty so the grid keeps its lines.
+// 20.56, for the branded order workbook: a cell may carry `st` instead, a style of its own
+// ({font: {b, i, sz, color}, fill: 'RRGGBB', border: 'thin' | 'bottom' | 'top', bc: border
+// colour, h: 'left' | 'center' | 'right', va: 'top' | 'center', wrap, fmt: 'money' | 'pct'}),
+// written as an extra cellXf AFTER the nine fixed ones so every older sheet is unchanged.
+// A sheet may add `merges: ['A1:C2']`, `heights: {rowIndex: points}`, `images: [{dataUrl
+// (png / jpeg), row, col, w, h, dx, dy}]` (0-based, pixels), `freeze: 0` (none), `grid:
+// false`, `landscape: true` (fits the width on the page) and `footer` (a print footer).
 async function _xlsxBlob(sheets, type) {
     const zip = new JSZip();
+    // The style registry: the nine fixed cellXfs first, then one per distinct `st`.
+    const K = {
+        fonts: ['<font><sz val="11"/><name val="Calibri"/></font>', '<font><b/><sz val="11"/><name val="Calibri"/></font>', '<font><b/><sz val="18"/><name val="Calibri"/></font>'],
+        fills: ['<fill><patternFill patternType="none"/></fill>', '<fill><patternFill patternType="gray125"/></fill>', '<fill><patternFill patternType="solid"><fgColor rgb="FFE7E6E6"/><bgColor indexed="64"/></patternFill></fill>'],
+        borders: ['<border><left/><right/><top/><bottom/><diagonal/></border>', '<border><left style="thin"><color auto="1"/></left><right style="thin"><color auto="1"/></right><top style="thin"><color auto="1"/></top><bottom style="thin"><color auto="1"/></bottom><diagonal/></border>'],
+        xfs: ['<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>', '<xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/>', '<xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>', '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment vertical="center" wrapText="1"/></xf>', '<xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment vertical="center"/></xf>', '<xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>', '<xf numFmtId="10" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment vertical="center"/></xf>', '<xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/>', '<xf numFmtId="10" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>'],
+        seen: {}
+    };
+    const pick = (list, s) => { let i = list.indexOf(s); if (i < 0) { list.push(s); i = list.length - 1; } return i; };
+    const hex = (c) => 'FF' + String(c || '000000').replace(/^#/, '').toUpperCase().slice(0, 6);
+    const styleOf = (st) => {
+        const key = JSON.stringify(st);
+        if (K.seen[key] != null) return K.seen[key];
+        const f = st.font || {};
+        const fontId = pick(K.fonts, '<font>' + (f.b ? '<b/>' : '') + (f.i ? '<i/>' : '') + '<sz val="' + (f.sz || 10) + '"/><color rgb="' + hex(f.color || '1F1D1A') + '"/><name val="Arial"/><family val="2"/></font>');
+        const fillId = st.fill ? pick(K.fills, '<fill><patternFill patternType="solid"><fgColor rgb="' + hex(st.fill) + '"/><bgColor indexed="64"/></patternFill></fill>') : 0;
+        const side = (on) => on ? ' style="thin"><color rgb="' + hex(st.bc || 'BFBAB2') + '"/>' : '/>';
+        const close = (tag, on) => '<' + tag + side(on) + (on ? '</' + tag + '>' : '');
+        const b = st.border;
+        const borderId = b ? pick(K.borders, '<border>' + close('left', b === 'thin') + close('right', b === 'thin') + close('top', b === 'thin' || b === 'top') + close('bottom', b === 'thin' || b === 'bottom') + '<diagonal/></border>') : 0;
+        const numFmtId = st.fmt === 'money' ? 164 : st.fmt === 'pct' ? 10 : 0;
+        const al = (st.h || st.va || st.wrap) ? '<alignment' + (st.h ? ' horizontal="' + st.h + '"' : '') + ' vertical="' + (st.va || 'center') + '"' + (st.wrap ? ' wrapText="1"' : '') + '/>' : '';
+        K.xfs.push('<xf numFmtId="' + numFmtId + '" fontId="' + fontId + '" fillId="' + fillId + '" borderId="' + borderId + '" xfId="0" applyFont="1"' + (fillId ? ' applyFill="1"' : '') + (borderId ? ' applyBorder="1"' : '') + (numFmtId ? ' applyNumberFormat="1"' : '') + (al ? ' applyAlignment="1">' + al + '</xf>' : '/>'));
+        return (K.seen[key] = K.xfs.length - 1);
+    };
+    let media = 0;
+    const drawings = [];
     const ws = sheets.map((sh, si) => {
-        let x = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">';
-        const fz = sh.freeze || 1;
-        x += '<sheetViews><sheetView workbookViewId="0"><pane ySplit="' + fz + '" topLeftCell="A' + (fz + 1) + '" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>';
+        const pics = (sh.images || []).map(im => { const m = /^data:image\/(png|jpe?g);base64,(.+)$/i.exec(String(im && im.dataUrl || '')); return m ? Object.assign({ ext: m[1].toLowerCase() === 'png' ? 'png' : 'jpeg', b64: m[2] }, im) : null; }).filter(Boolean);
+        let x = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">';
+        if (sh.landscape) x += '<sheetPr><pageSetUpPr fitToPage="1"/></sheetPr>';
+        const fz = sh.freeze === 0 ? 0 : (sh.freeze || 1);
+        x += '<sheetViews><sheetView workbookViewId="0"' + (sh.grid === false ? ' showGridLines="0"' : '') + '>' + (fz ? '<pane ySplit="' + fz + '" topLeftCell="A' + (fz + 1) + '" activePane="bottomLeft" state="frozen"/>' : '') + '</sheetView></sheetViews>';
+        // a default row height: without it some readers (Quick Look, Numbers) lay rows out wrong
+        x += '<sheetFormatPr defaultRowHeight="15"/>';
         if (sh.widths) x += '<cols>' + sh.widths.map((w, i) => '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + w + '" customWidth="1"/>').join('') + '</cols>';
         x += '<sheetData>';
+        const hts = sh.heights || {};
         sh.rows.forEach((row, ri) => {
-            x += '<row r="' + (ri + 1) + '">';
-            row.forEach((c, ci) => {
+            x += '<row r="' + (ri + 1) + '"' + (hts[ri] ? ' ht="' + hts[ri] + '" customHeight="1"' : '') + '>';
+            (row || []).forEach((c, ci) => {
                 if (c == null || c === '') return;
                 const ref = _xlsxCol(ci) + (ri + 1);
                 const o = (typeof c === 'object') ? c : (typeof c === 'number' ? { v: c } : { s: c });
-                const sn = o.title ? 7 : o.head ? 5 : o.border ? (o.money ? 4 : o.pct ? 6 : 3) : o.bold ? 1 : o.money ? 2 : o.pct ? 8 : 0;
+                const sn = o.st ? styleOf(o.st) : o.title ? 7 : o.head ? 5 : o.border ? (o.money ? 4 : o.pct ? 6 : 3) : o.bold ? 1 : o.money ? 2 : o.pct ? 8 : 0;
                 const st = sn ? ' s="' + sn + '"' : '';
                 if (o.f != null) x += '<c r="' + ref + '"' + st + '><f>' + _xmlEsc(o.f) + '</f>' + (o.v != null && isFinite(o.v) ? '<v>' + o.v + '</v>' : '') + '</c>';
                 else if (o.v != null && isFinite(o.v)) x += '<c r="' + ref + '"' + st + '><v>' + o.v + '</v></c>';
@@ -65035,19 +65075,50 @@ async function _xlsxBlob(sheets, type) {
             });
             x += '</row>';
         });
-        x += '</sheetData></worksheet>';
+        x += '</sheetData>';
+        if (sh.merges && sh.merges.length) x += '<mergeCells count="' + sh.merges.length + '">' + sh.merges.map(m => '<mergeCell ref="' + m + '"/>').join('') + '</mergeCells>';
+        if (sh.landscape || sh.footer) {
+            x += '<pageMargins left="0.4" right="0.4" top="0.5" bottom="0.6" header="0.3" footer="0.3"/>';
+            if (sh.landscape) x += '<pageSetup orientation="landscape" fitToWidth="1" fitToHeight="0"/>';
+            if (sh.footer) x += '<headerFooter><oddFooter>' + _xmlEsc(sh.footer) + '</oddFooter></headerFooter>';
+        }
+        if (pics.length) {
+            const dn = drawings.length + 1;
+            const E = (px) => Math.round(px * 9525);
+            let d = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">';
+            let dr = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">';
+            pics.forEach((p, pi) => {
+                media++;
+                zip.file('xl/media/image' + media + '.' + p.ext, p.b64, { base64: true });
+                dr += '<Relationship Id="rId' + (pi + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/image' + media + '.' + p.ext + '"/>';
+                d += '<xdr:oneCellAnchor><xdr:from><xdr:col>' + (p.col | 0) + '</xdr:col><xdr:colOff>' + E(p.dx || 0) + '</xdr:colOff><xdr:row>' + (p.row | 0) + '</xdr:row><xdr:rowOff>' + E(p.dy || 0) + '</xdr:rowOff></xdr:from>'
+                    + '<xdr:ext cx="' + E(p.w) + '" cy="' + E(p.h) + '"/><xdr:pic><xdr:nvPicPr><xdr:cNvPr id="' + (pi + 1) + '" name="Picture ' + (pi + 1) + '" descr="' + _xmlEsc(p.alt || '') + '"/><xdr:cNvPicPr><a:picLocks noChangeAspect="1"/></xdr:cNvPicPr></xdr:nvPicPr>'
+                    + '<xdr:blipFill><a:blip r:embed="rId' + (pi + 1) + '"/><a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="' + E(p.w) + '" cy="' + E(p.h) + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic><xdr:clientData/></xdr:oneCellAnchor>';
+            });
+            zip.file('xl/drawings/drawing' + dn + '.xml', d + '</xdr:wsDr>');
+            zip.file('xl/drawings/_rels/drawing' + dn + '.xml.rels', dr + '</Relationships>');
+            zip.file('xl/worksheets/_rels/sheet' + (si + 1) + '.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing" Target="../drawings/drawing' + dn + '.xml"/></Relationships>');
+            drawings.push(dn);
+            x += '<drawing r:id="rId1"/>';
+        }
+        x += '</worksheet>';
         zip.file('xl/worksheets/sheet' + (si + 1) + '.xml', x);
         return sh;
     });
-    zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
-        + ws.map((s, i) => '<Override PartName="/xl/worksheets/sheet' + (i + 1) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join('') + '</Types>');
+    zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>'
+        + (media ? '<Default Extension="png" ContentType="image/png"/><Default Extension="jpeg" ContentType="image/jpeg"/>' : '')
+        + '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+        + ws.map((s, i) => '<Override PartName="/xl/worksheets/sheet' + (i + 1) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join('')
+        + drawings.map(n => '<Override PartName="/xl/drawings/drawing' + n + '.xml" ContentType="application/vnd.openxmlformats-officedocument.drawing+xml"/>').join('') + '</Types>');
     zip.file('_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>');
     zip.file('xl/workbook.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'
         + ws.map((s, i) => '<sheet name="' + _xmlEsc(String(s.name).slice(0, 31)) + '" sheetId="' + (i + 1) + '" r:id="rId' + (i + 1) + '"/>').join('') + '</sheets><calcPr fullCalcOnLoad="1"/></workbook>');
     zip.file('xl/_rels/workbook.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         + ws.map((s, i) => '<Relationship Id="rId' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' + (i + 1) + '.xml"/>').join('')
         + '<Relationship Id="rId' + (ws.length + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>');
-    zip.file('xl/styles.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0.00"/></numFmts><fonts count="3"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="18"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE7E6E6"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color auto="1"/></left><right style="thin"><color auto="1"/></right><top style="thin"><color auto="1"/></top><bottom style="thin"><color auto="1"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="9"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment vertical="center" wrapText="1"/></xf><xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="10" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="10" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>');
+    zip.file('xl/styles.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0.00"/></numFmts>'
+        + '<fonts count="' + K.fonts.length + '">' + K.fonts.join('') + '</fonts><fills count="' + K.fills.length + '">' + K.fills.join('') + '</fills><borders count="' + K.borders.length + '">' + K.borders.join('') + '</borders>'
+        + '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="' + K.xfs.length + '">' + K.xfs.join('') + '</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>');
     return zip.generateAsync({ type: type || 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 }
 // The first sheet of an .xlsx as an array of rows of strings (numbers as their text).
@@ -65192,17 +65263,25 @@ function _sfProductCode(r) {
     return m && SF_ART_TYPE_CODES.indexOf(m[1]) >= 0 ? m[1] : '';
 }
 function _inNum(v) { return Math.round((parseFloat(v) || 0) * unitFactor(dashUnit, 'in') * 1000) / 1000; }
+// One line per piece in SF_IMPORT_COLS order. Quantity, Unit Cost, Revenue Markup and the
+// OAD sizes are numbers (null when unknown); the CSV and the order workbook's SF Import
+// Template tab both write these, so the two can never disagree (20.56).
+function _salesforceLines() {
+    return _deckSpecRows().filter(r => r && r.id && _priceQty(r)).map(r => {
+        const p = _priceRow(r);
+        // a percentage as a plain number (145, never %145): the import tool cannot read "%"
+        const mk = (p.cost > 0 && p.sell != null) ? Math.round((p.sell / p.cost - 1) * 10000) / 100 : null;
+        const notes = [_quoteDescription(r), String(r.prodNotes || '').trim()].filter(Boolean).join('. ');
+        const v = _rowVendor(r);
+        return [_sfProductCode(r), p.qty, p.cost != null ? p.cost : null, mk, _sfClean(r.id), _sfClean(r.location), _sfClean(_rfqImageCode(r) || r.artworkTitle),
+            _inNum(r.extH), _inNum(r.extW), _sfClean(notes), _vendorCode(v) || _sfClean(v)];
+    });
+}
 function _salesforceLinesCSV() {
     const q = (s) => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
     let csv = SF_IMPORT_COLS.map(q).join(',') + '\n';
-    _deckSpecRows().filter(r => r && r.id && _priceQty(r)).forEach(r => {
-        const p = _priceRow(r);
-        // a percentage as a plain number (145, never %145): the import tool cannot read "%"
-        const mk = (p.cost > 0 && p.sell != null) ? String(Math.round((p.sell / p.cost - 1) * 10000) / 100) : '';
-        const notes = [_quoteDescription(r), String(r.prodNotes || '').trim()].filter(Boolean).join('. ');
-        const v = _rowVendor(r);
-        csv += [_sfProductCode(r), p.qty, p.cost != null ? p.cost.toFixed(2) : '', mk, _sfClean(r.id), _sfClean(r.location), _sfClean(_rfqImageCode(r) || r.artworkTitle),
-            _inNum(r.extH), _inNum(r.extW), _sfClean(notes), _vendorCode(v) || _sfClean(v)].map(q).join(',') + '\n';
+    _salesforceLines().forEach(l => {
+        csv += l.map((c, i) => i === 2 ? (c != null ? c.toFixed(2) : '') : c).map(q).join(',') + '\n';
     });
     return csv;
 }
@@ -65326,13 +65405,165 @@ function _rfqFileName(docType) {
     const safe = (s) => String(s || '').replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
     let code = ''; try { code = _deckFooterMeta().code || ''; } catch (e) {}
     const client = safe(code || g('g_client')) || 'CLIENT', proj = safe(g('g_projName')) || 'Project';
-    return _prodStamp() + '_' + client + '_' + proj + '_' + (docType === 'rfi' ? 'RFI' : 'RFQ') + '.xlsx';
+    return _prodStamp() + '_' + client + '_' + proj + '_' + (docType === 'rfi' ? 'RFI' : docType === 'order' ? 'Order' : 'RFQ') + '.xlsx';
 }
 async function exportRfqXlsx(docType) {
     if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload Farmhand and try again.'); return; }
     if (!_rfqRows(docType).length) { _toast('Nothing to send', docType === 'rfi' ? 'No pieces a print vendor makes are in the deck yet.' : 'There are no pieces in the deck yet.'); return; }
     const blob = await _xlsxBlob([_rfqSheet(docType)]);
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = _rfqFileName(docType); a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
+}
+// ── THE ORDER WORKBOOK (20.56) ──
+// One .xlsx a PM opens and starts the purchase order from, so nothing in the designer's
+// presentation is typed twice. Three tabs:
+//   Order: Farmboy branded (logo, project header, yellow cells for the PM to fill, every
+//     piece with its picture, the spec page's own size / frame / mat / glass strings,
+//     vendor and price, totals as live formulas).
+//   SF Import Template: the Salesforce template's 11 columns at row 1 and nothing else, the
+//     same lines as the Salesforce CSV (_salesforceLines), so it imports as it stands or
+//     saves as a CSV. It is never styled: the import tool reads values only.
+//   Vendor codes: the template's second sheet.
+// Same pieces as the RFQ (_rfqRows). Prices never reach a deck renderer; this is a file.
+const ORDER_INK = '1F1D1A', ORDER_PM = 'FFF2CC', ORDER_SOFT = 'F4F2EE', ORDER_MUTED = '6B665E', ORDER_LINE = 'CFCAC2';
+const ORDER_COLS = [['#', 5], ['Image', 12], ['Item Code', 11], ['Image Code', 22], ['Title', 22], ['Location', 16], ['Product', 18], ['Art Size', 17], ['Overall', 17],
+    ['Frame', 22], ['Mat', 20], ['Glass', 14], ['Paper / Substrate', 20], ['Vendor', 14], ['Qty', 6], ['Unit Cost', 12], ['Unit Price', 12], ['Line Total', 13]];
+const ORDER_THUMB_PX = 60;    // the picture's box in the Image column, in pixels
+const ORDER_PIC_ROW_PT = 50;  // a row holding a picture, in points
+// A small JPEG of a piece's artwork (long edge 2 x px, on white), or null when there is no
+// artwork, it will not decode, or the canvas is tainted (a linked picture with no CORS).
+function _xlsxImageThumb(src, px) {
+    if (!src || typeof document === 'undefined') return Promise.resolve(null);
+    return _withTimeout(new Promise(res => {
+        let img; try { img = new Image(); } catch (e) { res(null); return; }
+        img.onload = () => {
+            try {
+                const W = img.naturalWidth || img.width, H = img.naturalHeight || img.height;
+                if (!W || !H) { res(null); return; }
+                const k = Math.min(1, (px * 2) / Math.max(W, H)), w = Math.max(1, Math.round(W * k)), h = Math.max(1, Math.round(H * k));
+                const c = document.createElement('canvas'); c.width = w; c.height = h;
+                const x = c.getContext('2d'); x.fillStyle = '#ffffff'; x.fillRect(0, 0, w, h); x.drawImage(img, 0, 0, w, h);
+                const url = c.toDataURL('image/jpeg', 0.85);
+                res(/^data:image\/jpeg;base64,/.test(url) ? { dataUrl: url, w: W, h: H } : null);
+            } catch (e) { res(null); }
+        };
+        img.onerror = () => res(null);
+        if (!/^data:/i.test(String(src))) img.crossOrigin = 'anonymous';
+        img.src = src;
+    }), 5000).then(v => v || null);
+}
+// The dark Farmboy logo as a PNG data URL with its aspect, or null (offline on file://).
+async function _orderLogo() {
+    try {
+        const L = await _withTimeout(_getPdfLogos(), 5000);
+        if (L && typeof L.farmboy === 'string' && /^data:image\/png;base64,/.test(L.farmboy)) return { dataUrl: L.farmboy, aspect: L.farmboyAR || 8.3 };
+    } catch (e) {}
+    return null;
+}
+function _orderSheet(rows, thumbs, logo) {
+    const g = (id) => { const el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; };
+    const cur = (_pricing().currency || 'USD').toUpperCase();
+    const proj = g('g_projName'), date = g('g_date') || _todayIso();
+    const last = ORDER_COLS.length - 1;
+    const out = [], heights = {}, merges = [], images = [];
+    const at = (r, c, v) => { while (out.length <= r) out.push([]); out[r][c] = v; };
+    const cell = (v, st) => (v && typeof v === 'object') ? Object.assign({ st: st }, v) : (typeof v === 'number' && isFinite(v)) ? { v: v, st: st } : { s: v == null ? '' : String(v), st: st };
+    // a run of cells sharing one style (so a merged or banded block keeps its fill and lines)
+    const band = (r, c0, c1, v, st) => { for (let c = c0; c <= c1; c++) at(r, c, c === c0 ? cell(v, st) : { st: st }); if (c1 > c0) merges.push(_xlsxCol(c0) + (r + 1) + ':' + _xlsxCol(c1) + (r + 1)); };
+    const muted = { font: { sz: 9, color: ORDER_MUTED } };
+    const qtys = rows.map(r => _priceQty(r)), sumQty = qtys.reduce((s, q) => s + q, 0);
+    // Rows 1 to 4: the logo and ORDER, the project, where the file came from, the brand rule.
+    heights[0] = 36;
+    if (logo) { const h = 26; images.push({ dataUrl: logo.dataUrl, row: 0, col: 0, w: Math.round(h * logo.aspect), h: h, dx: 4, dy: 12, alt: 'Farmboy Fine Arts' }); }
+    else at(0, 0, cell('FARMBOY FINE ARTS', { font: { b: true, sz: 16 }, va: 'bottom' }));
+    at(0, last, cell('ORDER', { font: { b: true, sz: 20 }, h: 'right', va: 'bottom' }));
+    heights[1] = 24; at(1, 0, cell(proj || 'Project', { font: { b: true, sz: 15 }, va: 'bottom' }));
+    at(2, 0, cell('Built in Farmhand from the presentation on ' + _todayIso() + '. The SF Import Template tab goes straight into Salesforce; nothing here needs typing again.', muted));
+    heights[3] = 4; for (let c = 0; c <= last; c++) at(3, c, { st: { fill: ORDER_INK } });
+    // Rows 6 to 13: the project on the left, the PM's tracking (yellow) on the right.
+    // d0 is the header row (0-based); firstX / lastX are the pieces' Excel row numbers
+    const H0 = 5, d0 = H0 + 11, firstX = d0 + 2, lastX = d0 + 1 + rows.length;
+    const left = [['Project', proj], ['Client', g('g_client')], ['Attn', g('g_attn')], ['Date', date], ['Est. delivery', g('g_delivery')],
+        ['Issued by', g('g_issued') && g('g_issued') !== 'Studio' ? g('g_issued') : 'Farmboy Fine Arts'], ['Currency', cur], ['Pieces', { f: 'SUM(O' + firstX + ':O' + (lastX) + ')', v: sumQty }]];
+    const right = [['Salesforce opportunity', ''], ['PO / reference', ''], ['Status', 'New'], ['Assigned to', ''], ['Quote sent', ''], ['Client approved', ''], ['Production start', ''], ['Ship date', '']];
+    const lab = { font: { b: true, sz: 10 } };
+    left.forEach((p, i) => {
+        const r = H0 + i; heights[r] = 18;
+        band(r, 0, 1, p[0], lab);
+        band(r, 2, 6, p[1], { font: { sz: 10 }, border: 'bottom', bc: ORDER_LINE, h: 'left' });
+        band(r, 9, 10, right[i][0], lab);
+        band(r, 11, 13, right[i][1], { font: { sz: 10, color: '1F4E9A' }, fill: ORDER_PM, border: 'bottom', bc: ORDER_LINE, h: 'left' });
+    });
+    at(H0 + left.length, 9, cell('Yellow cells are for the PM to fill in.', { font: { i: true, sz: 9, color: ORDER_MUTED } }));
+    // The pieces: a section title, the dark header row, one line per piece.
+    const hs = d0 - 1;
+    heights[hs] = 22; band(hs, 0, 1, 'PIECES', { font: { b: true, sz: 12 }, va: 'bottom' });
+    at(hs, 2, cell(sumQty + ' piece' + (sumQty === 1 ? '' : 's') + ', ' + rows.length + ' line' + (rows.length === 1 ? '' : 's') + '. Quantities follow the walls.', Object.assign({ va: 'bottom' }, muted)));
+    heights[d0] = 30;
+    ORDER_COLS.forEach((c, i) => at(d0, i, cell(c[0], { font: { b: true, sz: 9, color: 'FFFFFF' }, fill: ORDER_INK, border: 'thin', bc: ORDER_INK, h: 'center', wrap: true })));
+    const colPx = (w) => Math.round(w * 7 + 5);
+    rows.forEach((r, i) => {
+        const ri = d0 + 1 + i, n = ri + 1, p = _priceRow(r), t = thumbs && thumbs[i];
+        let spec = { application: '', lines: [] };
+        try { spec = buildSpecStrings(r, { dualUnit: '' }); } catch (e) {}
+        const line = (label) => { const l = (spec.lines || []).find(x => x.label === label); return l ? String(l.value || '') : ''; };
+        const flat = _isFlatGraphic(r.product), canvas = r.product === 'Framed Canvas (Floater)' || r.product === 'Frameless Canvas (Wrapped)';
+        const base = { font: { sz: 9 }, border: 'thin', bc: ORDER_LINE, wrap: true };
+        if (i % 2) base.fill = ORDER_SOFT;
+        const S = (o) => Object.assign({}, base, o || {});
+        const C = S({ h: 'center' }), M = S({ fmt: 'money' });
+        heights[ri] = t ? ORDER_PIC_ROW_PT : 22;
+        if (t) {
+            const k = ORDER_THUMB_PX / Math.max(t.w, t.h), w = Math.max(1, Math.round(t.w * k)), h = Math.max(1, Math.round(t.h * k));
+            images.push({ dataUrl: t.dataUrl, row: ri, col: 1, w: w, h: h, dx: Math.max(0, (colPx(ORDER_COLS[1][1]) - w) / 2), dy: Math.max(0, (ORDER_PIC_ROW_PT * 4 / 3 - h) / 2), alt: String(r.id) });
+        }
+        [i + 1, '', r.id, _rfqImageCode(r), r.artworkTitle || '', r.location || '', r.product || '', line('Art Dimensions'), line('Overall Dimensions'),
+            [line('Frame Code'), line('Frame Size')].filter(Boolean).join(', '), [line('Mat 1'), line('Mat 2')].filter(Boolean).join(' / ') || line('Float Reveal'), line('Glass'),
+            flat ? spec.application : canvas ? 'Canvas' : line('Paper Type'), _rowVendor(r)].forEach((v, c) => at(ri, c, cell(v, c === 0 ? C : S())));
+        at(ri, 14, cell(qtys[i], C));
+        at(ri, 15, cell(p.cost != null ? Math.round(p.cost * 100) / 100 : '', M));
+        at(ri, 16, cell(p.sell != null ? p.sell : '', M));
+        at(ri, 17, cell({ f: 'IF(Q' + n + '="","",O' + n + '*Q' + n + ')', v: p.sell != null ? p.lineSell : undefined }, M));
+    });
+    // Totals under the prices: the artwork from the lines, the rest is the PM's to fill.
+    const t0 = d0 + 1 + rows.length + 1, art = rows.reduce((s, r) => s + _priceRow(r).lineSell, 0);
+    const R = (k) => 'R' + (t0 + k + 1);
+    const tl = { font: { b: true, sz: 10 }, h: 'right' }, tv = { font: { sz: 10 }, fmt: 'money', border: 'bottom', bc: ORDER_LINE };
+    const pm = Object.assign({}, tv, { fill: ORDER_PM, font: { sz: 10, color: '1F4E9A' } });
+    band(t0, 12, 13, 'Total pieces', tl); at(t0, 14, cell({ f: 'SUM(O' + firstX + ':O' + lastX + ')', v: sumQty }, { font: { b: true, sz: 10 }, h: 'center' }));
+    const tot = [['Artwork subtotal', { f: 'SUM(R' + firstX + ':R' + lastX + ')', v: art }, tv], ['Shipping & crating', '', pm], ['Installation', '', pm],
+        ['Sales tax rate', '', Object.assign({}, pm, { fmt: 'pct' })], ['Sales tax', { f: '(' + R(0) + '+' + R(1) + ')*' + R(3), v: 0 }, tv],
+        ['TOTAL (' + cur + ')', { f: R(0) + '+' + R(1) + '+' + R(2) + '+' + R(4), v: art }, { font: { b: true, sz: 11 }, fmt: 'money', border: 'top', bc: ORDER_INK }]];
+    tot.forEach((x, k) => { const r = t0 + k; heights[r] = 18; band(r, 15, 16, x[0], k === tot.length - 1 ? { font: { b: true, sz: 11 }, h: 'right' } : tl); at(r, 17, cell(x[1], x[2])); });
+    at(t0 + tot.length + 1, 0, cell('Farmboy Fine Arts', { font: { b: true, sz: 9, color: ORDER_MUTED } }));
+    at(t0 + tot.length + 1, 2, cell('Sales tax is on artwork and shipping, not installation; adjust to the state. Prices are in ' + cur + '.', muted));
+    const fx = (s) => String(s || '').replace(/&/g, '&&');
+    return { name: 'Order', rows: out, widths: ORDER_COLS.map(c => c[1]), merges: merges, heights: heights, images: images, freeze: 0, grid: false, landscape: true,
+        footer: '&L&8Farmboy Fine Arts&C&8' + fx(proj) + '&R&8Page &P of &N' };
+}
+function _sfImportSheet() {
+    const rows = [SF_IMPORT_COLS.slice()].concat(_salesforceLines().map(l => l.map((c, i) => (i === 2 && c != null) ? Math.round(c * 100) / 100 : c)));
+    return { name: 'SF Import Template', rows: rows, widths: [16, 15.875, 15.625, 18.875, 13, 14.125, 20.125, 12, 12, 48, 12], freeze: 0 };
+}
+function _vendorCodesSheet() {
+    return { name: 'Vendor codes', rows: [['Vendor', 'Code']].concat(VENDOR_CODES.map(v => [v.name, v.code])), widths: [29.125, 10], freeze: 0 };
+}
+async function _orderSheets() {
+    const rows = _rfqRows('rfq');
+    // four pictures at a time, each source once: a big deck is many multi-megabyte images
+    const bySrc = new Map(), srcs = [];
+    rows.forEach(r => { const s = r.artworkUrl || ''; if (s && !bySrc.has(s)) { bySrc.set(s, null); srcs.push(s); } });
+    let next = 0;
+    const worker = async () => { while (next < srcs.length) { const s = srcs[next++]; bySrc.set(s, await _xlsxImageThumb(s, ORDER_THUMB_PX)); } };
+    const [logo] = await Promise.all([_orderLogo(), Promise.all([worker(), worker(), worker(), worker()])]);
+    const thumbs = rows.map(r => (r.artworkUrl && bySrc.get(r.artworkUrl)) || null);
+    return [_orderSheet(rows, thumbs, logo), _sfImportSheet(), _vendorCodesSheet()];
+}
+async function exportOrderXlsx() {
+    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload Farmhand and try again.'); return; }
+    if (!_rfqRows('rfq').length) { _toast('Nothing to order', 'There are no pieces in the deck yet.'); return; }
+    const blob = await _xlsxBlob(await _orderSheets());
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = _rfqFileName('order'); a.click();
     setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
 }
 // Read a sheet back: find the header row holding "Item Code", read the price columns by
@@ -65494,6 +65725,7 @@ function _prodPricingInto(body) {
         f.onchange = () => { if (f.files && f.files[0]) importPricesFile(f.files[0]); };
         f.click();
     }, true, 'Read Unit Cost, Unit Sell, Allowance and Vendor back from an .xlsx or .csv, matched by Item Code'));
+    tools.appendChild(_prodBtn('Order workbook', () => exportOrderXlsx(), true, 'One .xlsx for the PM: a Farmboy order sheet with pictures, specs, prices and yellow cells to fill, plus the SF Import Template tab ready for Salesforce'));
     tools.appendChild(_prodBtn('RFQ', () => exportRfqXlsx('rfq'), true, 'The quote in the 2026 quote template’s layout (.xlsx): every spec column, the house markup and royalty, shipping and totals'));
     tools.appendChild(_prodBtn('RFI', () => exportRfqXlsx('rfi'), true, 'The same sheet with no prices, for vendors; originals, commissions and found objects are left off'));
     tools.appendChild(_prodBtn('Salesforce CSV', () => {
