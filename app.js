@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.56';
+const APP_VERSION = '20.57';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -18747,7 +18747,8 @@ async function _loadRepoLogoVariant(fileName) {
                     cx.putImageData(id, 0, 0);
                 } catch (e) {}
             }
-            return { dataUrl: cnv.toDataURL('image/png'), aspect: w / h };
+            let vec = null; try { vec = _svgLogoToVec(svgText); } catch (e) {}
+            return { dataUrl: cnv.toDataURL('image/png'), aspect: w / h, vec: vec };
         } catch (e) {}
     }
     return null;
@@ -18761,7 +18762,7 @@ async function _getPdfLogos() {
     // repo files aren't reachable, so the footer never breaks either way.
     try {
         const dark = await _loadRepoLogoVariant('Farmboy_dark-logo.svg');
-        if (dark) { out.farmboy = dark.dataUrl; out.farmboyAR = dark.aspect; }
+        if (dark) { out.farmboy = dark.dataUrl; out.farmboyAR = dark.aspect; out.farmboyVec = dark.vec || null; if (out.farmboyVec) out.farmboyAR = out.farmboyVec.w / out.farmboyVec.h; }
     } catch (e) {}
     if (!out.farmboy) {
         try {
@@ -18775,6 +18776,78 @@ async function _getPdfLogos() {
     } catch (e) {}
     _pdfLogoCache = out;
     return out;
+}
+// THE STUDIO LOGO PRINTS AS VECTOR (20.57). It used to go in as the SVG rasterized to a
+// PNG ~1200 px wide for a box ~90 pt wide: Preview and Chrome's PDF viewer shrink an
+// image that oversampled with little filtering, so the wordmark read jagged at normal
+// zoom and fine zoomed in. Now the SVG's own paths are replayed with doc.path, so it is
+// crisp in every viewer at every zoom. The PNG stays as the fallback (a logo with a
+// command the parser does not know returns null and the old raster path runs).
+// Returns { w, h, subs: [element ops...] } in viewBox units, absolute M/L/C/Z only;
+// each entry of subs is one SVG element (all its subpaths).
+function _svgLogoToVec(svgText) {
+    const vb = /viewBox\s*=\s*"([^"]+)"/i.exec(svgText || '');
+    if (!vb) return null;
+    const v = vb[1].trim().split(/[\s,]+/).map(parseFloat);
+    if (v.length !== 4 || !v.every(isFinite) || v[2] <= 0 || v[3] <= 0) return null;
+    if (/transform\s*=|<(circle|ellipse|rect|line|polyline|use|text|image)\b/i.test(svgText)) return null;
+    const ox = v[0], oy = v[1], subs = [];
+    const P = (x, y) => [x - ox, y - oy];
+    const polyRe = /<polygon\b[^>]*\bpoints\s*=\s*"([^"]*)"/gi;
+    let m;
+    while ((m = polyRe.exec(svgText))) {
+        const n = (m[1].match(/-?(?:\d*\.\d+|\d+\.?)(?:e[-+]?\d+)?/gi) || []).map(parseFloat);
+        if (n.length < 6) continue;
+        const sub = [{ op: 'm', c: P(n[0], n[1]) }];
+        for (let i = 2; i + 1 < n.length; i += 2) sub.push({ op: 'l', c: P(n[i], n[i + 1]) });
+        sub.push({ op: 'h', c: [] }); subs.push(sub);
+    }
+    const pathRe = /<path\b[^>]*\bd\s*=\s*"([^"]*)"/gi;
+    while ((m = pathRe.exec(svgText))) {
+        const tk = m[1].match(/[a-zA-Z]|-?(?:\d*\.\d+|\d+\.?)(?:e[-+]?\d+)?/gi) || [];
+        let i = 0, cmd = '', cx = 0, cy = 0, sx = 0, sy = 0, lc = null, sub = null; const el = [];
+        const num = () => { if (i >= tk.length || /^[a-zA-Z]$/.test(tk[i])) throw new Error('svg'); return parseFloat(tk[i++]); };
+        const start = (x, y) => { sub = el; sub.push({ op: 'm', c: P(x, y) }); cx = sx = x; cy = sy = y; };
+        const line = (x, y) => { sub.push({ op: 'l', c: P(x, y) }); cx = x; cy = y; lc = null; };
+        const curve = (a, b, c, d, x, y) => { sub.push({ op: 'c', c: P(a, b).concat(P(c, d), P(x, y)) }); lc = [c, d]; cx = x; cy = y; };
+        while (i < tk.length) {
+            if (/^[a-zA-Z]$/.test(tk[i])) cmd = tk[i++];
+            else if (!cmd) return null;
+            const rel = cmd === cmd.toLowerCase(), C = cmd.toUpperCase();
+            const bx = rel ? cx : 0, by = rel ? cy : 0;
+            if (C !== 'M' && C !== 'Z' && !sub) return null;
+            if (C === 'M') { start(bx + num(), by + num()); lc = null; cmd = rel ? 'l' : 'L'; }
+            else if (C === 'L') line(bx + num(), by + num());
+            else if (C === 'H') line(bx + num(), cy);
+            else if (C === 'V') line(cx, by + num());
+            else if (C === 'C') { const a = bx + num(), b = by + num(), c = bx + num(), d = by + num(); curve(a, b, c, d, bx + num(), by + num()); }
+            else if (C === 'S') { const a = lc ? 2 * cx - lc[0] : cx, b = lc ? 2 * cy - lc[1] : cy; const c = bx + num(), d = by + num(); curve(a, b, c, d, bx + num(), by + num()); }
+            else if (C === 'Z') { sub.push({ op: 'h', c: [] }); cx = sx; cy = sy; lc = null; if (i < tk.length && !/^[a-zA-Z]$/.test(tk[i])) return null; }
+            else return null;   // Q/T/A: not in the studio marks; fall back to the raster
+        }
+        if (el.length) subs.push(el);
+    }
+    return subs.length ? { w: v[2], h: v[3], subs: subs } : null;
+}
+// Draw a parsed logo into a box, filled with one colour (even-odd, so the counters of
+// O, R, B and A stay open whichever way the source paths wind). Works on real jsPDF and
+// on CanvasPdfRec. Returns false if it drew nothing, so the caller can fall back.
+function _drawVecLogo(doc, vec, x, y, w, h, rgb) {
+    if (!vec || !vec.subs || !doc || typeof doc.path !== 'function' || typeof doc.fillEvenOdd !== 'function') return false;
+    // One fill per SVG element (`subs` holds elements, each its subpaths' ops), as SVG
+    // fills them: a single even-odd path over the whole mark would punch a hole wherever
+    // two elements overlapped.
+    const kx = w / vec.w, ky = h / vec.h;
+    const els = vec.subs.map(el => el.map(o => {
+        const c = [];
+        for (let k = 0; k < o.c.length; k += 2) c.push(x + o.c[k] * kx, y + o.c[k + 1] * ky);
+        return { op: o.op, c: c };
+    }));
+    if (!els.length || !els.every(el => el.length && el.every(o => o.c.every(isFinite)))) return false;
+    const col = rgb || [0, 0, 0];
+    doc.setFillColor(col[0], col[1], col[2]);
+    els.forEach(el => { doc.path(el); doc.fillEvenOdd(); });
+    return true;
 }
 
 // ── Brand font embedding ──────────────────────────────────────────────────
@@ -19400,11 +19473,38 @@ function _resolveFooter(desc) {
 // JPEG only, so an SVG logo handed to it failed silently: it showed on screen and never
 // printed. And a white version made on the spot (_whiteLogo) decodes the picture
 // synchronously, which can come back empty the first time. Each logo is decoded here,
-// asynchronously, into a PNG (SVG only; a PNG or JPEG is used as is) and a white version
+// asynchronously, into a PNG at print size (an SVG, or anything taller than
+// FOOTER_LOGO_PREP_H; a smaller PNG or JPEG is used as is) and a white version
 // for dark pages, and cached by its data URL. _getPdfLogos awaits this, so every PDF and
 // canvas render has both ready; _footerLogoSrc is the one place that picks.
 const _footerLogoCache = {};
-const FOOTER_LOGO_PREP_H = 240;
+// The footer logo's bitmap height, px. It prints 11 pt tall, so 96 px is ~630 dpi: sharp
+// in print, and only a few times what a screen shows at 100%, so a viewer's quick
+// downsampling doesn't stair-step it (240 was ~22x and did, 20.57).
+const FOOTER_LOGO_PREP_H = 96;
+// Shrink an image to W x H in halving steps with high-quality smoothing. One big
+// drawImage jump samples only a few source pixels per output pixel and aliases.
+function _logoResample(img, w, h, W, H) {
+    let src = img, sw = w, sh = h;
+    while (sw / 2 >= W && sh / 2 >= H) {
+        const nw = Math.max(W, Math.round(sw / 2)), nh = Math.max(H, Math.round(sh / 2));
+        const t = document.createElement('canvas'); t.width = nw; t.height = nh;
+        const tx = t.getContext('2d'); try { tx.imageSmoothingEnabled = true; tx.imageSmoothingQuality = 'high'; } catch (e) {}
+        tx.drawImage(src, 0, 0, nw, nh); src = t; sw = nw; sh = nh;
+    }
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d'); try { x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high'; } catch (e) {}
+    x.drawImage(src, 0, 0, W, H);
+    return c;
+}
+// How opaque a pixel is in the WHITE version of a dark logo: full for ink (luminance at or
+// below 120), clear for paper (200 and up), a ramp between. The old on/off cut at 160
+// dropped every anti-aliased edge pixel, which stair-stepped the outline at any zoom.
+function _logoInkAlpha(r, g, b, a) {
+    const lum = r * 0.299 + g * 0.587 + b * 0.114;
+    const k = Math.max(0, Math.min(1, (200 - lum) / 80));
+    return Math.round(a * k);
+}
 function _footerLogoPrep(dataUrl) {
     if (!dataUrl || typeof dataUrl !== 'string') return Promise.resolve(null);
     if (_footerLogoCache[dataUrl]) return Promise.resolve(_footerLogoCache[dataUrl]);
@@ -19415,16 +19515,21 @@ function _footerLogoPrep(dataUrl) {
             try {
                 let w = img.naturalWidth || 0, h = img.naturalHeight || 0;
                 if (!(w > 0 && h > 0)) { w = 600; h = 200; }   // an SVG with no size of its own
-                const H = FOOTER_LOGO_PREP_H, W = Math.max(1, Math.round(H * w / h));
-                const c = document.createElement('canvas'); c.width = W; c.height = H;
-                const x = c.getContext('2d'); x.drawImage(img, 0, 0, W, H);
-                const png = /^data:image\/svg/i.test(dataUrl) ? c.toDataURL('image/png') : dataUrl;
+                // 20.57: the bitmap is resampled HERE, smoothly, to the print size. A raw
+                // upload thousands of px wide in an 11 pt box is shrunk by the PDF viewer,
+                // and Preview / Chrome's viewer do that with little filtering: jagged at
+                // normal zoom, fine zoomed in (the studio logo had the same fault).
+                const H = Math.min(FOOTER_LOGO_PREP_H, h), W = Math.max(1, Math.round(H * w / h));
+                const c = _logoResample(img, w, h, W, H);
+                const x = c.getContext('2d');
+                const isSvg = /^data:image\/svg/i.test(dataUrl);
+                const png = (isSvg || h > FOOTER_LOGO_PREP_H) ? c.toDataURL('image/png') : dataUrl;
                 const id = x.getImageData(0, 0, W, H), d = id.data;
-                // The same rule as _whiteLogo: dark ink becomes white, everything else clear.
+                // Dark ink becomes white, everything else clear, with the alpha RAMPED by
+                // how dark the pixel is (_logoInkAlpha), so anti-aliased edges stay soft.
                 for (let i = 0; i < d.length; i += 4) {
-                    const lum = (d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114);
-                    if (d[i + 3] > 10 && lum < 160) { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; }
-                    else { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; d[i + 3] = 0; }
+                    d[i + 3] = _logoInkAlpha(d[i], d[i + 1], d[i + 2], d[i + 3]);
+                    d[i] = 255; d[i + 1] = 255; d[i + 2] = 255;
                 }
                 x.putImageData(id, 0, 0);
                 const ent = { png: png, white: c.toDataURL('image/png'), aspect: W / H };
@@ -19875,7 +19980,9 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
         let fmt = 'JPEG';
         if (typeof src === 'string') { fmt = src.indexOf('image/jpeg') >= 0 || src.indexOf('image/jpg') >= 0 ? 'JPEG' : 'PNG'; }
         else { fmt = rightLight ? 'PNG' : 'JPEG'; }
-        try { if (/png/i.test(String(fmt))) _addPngImage(doc, src, rx - logoW, PH - 27, logoW, h); else doc.addImage(src, fmt, rx - logoW, PH - 27, logoW, h); } catch (e) { try { doc.addImage(logos.farmboy, 'JPEG', rx - logoW, PH - 27, logoW, h); } catch (e2) {} }
+        let drew = false;
+        if (!_brand && logos.farmboyVec) { try { drew = _drawVecLogo(doc, logos.farmboyVec, rx - logoW, PH - 27, logoW, h, rightLight ? [255, 255, 255] : [0, 0, 0]); } catch (e) { drew = false; } }
+        if (!drew) { try { if (/png/i.test(String(fmt))) _addPngImage(doc, src, rx - logoW, PH - 27, logoW, h); else doc.addImage(src, fmt, rx - logoW, PH - 27, logoW, h); } catch (e) { try { doc.addImage(logos.farmboy, 'JPEG', rx - logoW, PH - 27, logoW, h); } catch (e2) {} } }
     }
     if (!F.hideCopyright) {
         const year = new Date().getFullYear();
@@ -21284,7 +21391,9 @@ function _drawCoverPage(doc, logos, pageNum, meta) {
     if (logos && logos.farmboy) {
         const ar = logos.farmboyAR || 8;
         const h = 20, w = h * ar;
-        try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 84, w, h); } catch (e) {}
+        let drew = false;
+        try { drew = _drawVecLogo(doc, logos.farmboyVec, rx - w, PH - 84, w, h, [0, 0, 0]); } catch (e) { drew = false; }
+        if (!drew) { try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 84, w, h); } catch (e) {} }
     }
     // Thin rule under the title.
     doc.setDrawColor(ink.line[0], ink.line[1], ink.line[2]); doc.setLineWidth(0.75);
@@ -32215,6 +32324,10 @@ CanvasPdfRec.prototype.circle = function (x, y, r, style) { this.ops.push({ t: '
 // silently dropped those chips (the call is inside a try/catch), so a dimension line
 // showed straight through the number while the real PDF masked it.
 CanvasPdfRec.prototype.lines = function (segs, x, y, sc, style, closed) { this.ops.push({ t: 'poly', a: [x, y], segs: segs || [], sc: sc, style: style, closed: !!closed, st: this._snap() }); };
+// doc.path + doc.fillEvenOdd: the studio logo as vector (_drawVecLogo, 20.57). path()
+// holds the ops, fillEvenOdd() records them as one filled shape, as jsPDF does.
+CanvasPdfRec.prototype.path = function (ops) { this._pendPath = (ops || []).slice(); return this; };
+CanvasPdfRec.prototype.fillEvenOdd = function () { if (this._pendPath) this.ops.push({ t: 'path', ops: this._pendPath, st: this._snap() }); this._pendPath = null; return this; };
 CanvasPdfRec.prototype.triangle = function (x1, y1, x2, y2, x3, y3, style) { this.ops.push({ t: 'tri', a: [x1, y1, x2, y2, x3, y3], style: style, st: this._snap() }); };
 // AN ON-SCREEN PREVIEW TAKES THE CANVAS, A PDF TAKES THE ENCODED IMAGE (19.56). Every frame
 // mockup, elevation and plan thumbnail on a spec page was JPEG-encoded and then decoded
@@ -32308,6 +32421,11 @@ CanvasPdfRec.prototype.render = async function (scale, onProgress) {
             });
             if (op.closed) x.closePath();
             fillStroke(op.style, st.fc, st.dc, st.fa, st.sa);
+        }
+        else if (op.t === 'path') {
+            x.beginPath();
+            (op.ops || []).forEach(o => { const c = o.c || []; if (o.op === 'm') x.moveTo(c[0], c[1]); else if (o.op === 'l') x.lineTo(c[0], c[1]); else if (o.op === 'c') x.bezierCurveTo(c[0], c[1], c[2], c[3], c[4], c[5]); else if (o.op === 'h') x.closePath(); });
+            x.globalAlpha = (st.fa == null ? 1 : st.fa); x.fillStyle = st.fc; x.fill('evenodd'); x.globalAlpha = 1;
         }
         else if (op.t === 'img') { const im = op._obj || loaded[op.src]; if (im) { try { x.drawImage(im, op.a[0], op.a[1], op.a[2], op.a[3]); } catch (e) {} } }
     }
@@ -52995,7 +53113,7 @@ The <strong>image size with bleed</strong> is worked out at RFI and never shown 
             },
             {
                 title: `What's new`,
-                body: `<strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
+                body: `<strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
 <strong>20.53</strong> <b>The studio's Coding cheat sheet is in Help.</b> Help > Reference has a <b>Coding cheat sheet</b> section: how to name supporting files (PLAN, ELEV, REND, MOCK, FINISH, FRAME and REF codes), the art types and their image codes with Medium or Application, the approved public domain sources, the public domain and Creative Commons rules, which assets can be remixed and under what code, how a new asset is coded, and what each spec page row holds.
 <strong>20.52</strong> <b>A placement left on the wrong sector's plan is easy to fix.</b> When a plan holds placements still coded for another sector (moved by an older build, or by pinning before 20.51), its Items tab says so at the top with <b>Recode</b> (or <b>Recode all</b>): each takes the next code in this plan's sector and its pin comes across, in one Ctrl+Z. Picking the plan it already sits on under <b>Move to level</b> now recodes it too, instead of doing nothing.\n<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
