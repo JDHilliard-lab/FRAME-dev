@@ -43,12 +43,14 @@ const path = require('path');
       const f = _fpPlanFit(936, 540, 1000, 800);
       return rects.filter(r => Math.abs(r.x - f.dx) < 0.01 && Math.abs(r.y - f.dy) < 0.01 && Math.abs(r.w - f.dw) < 0.01 && r.st === 'S');
     };
+    window.__drawAnn = (doc, a) => _drawOneAnnotation(doc, a, 936, 540);
     window.__api = { _planBorderPrints, _setPlanBorderLevel, _setPlanBorderAll, _planBorderToggle, _fpPanelPlan, get lv() { return floorplanLevels; }, get ec() { return editorialContent; } };
   `;
   const quiet = console.error; console.error = () => {};
   window.eval(src + '\n' + block);
   console.error = quiet;
   const A = window.__api;
+  const _drawOneAnnotationForTest = window.__drawAnn;
   const results = [];
   const check = async (label, fn) => { try { await fn(); results.push({ label, ok: true }); } catch (e) { results.push({ label, ok: false, err: e.message }); } };
 
@@ -88,6 +90,12 @@ const path = require('path');
     row.querySelector('button').onclick();
     if (!window.__menu || window.__menu.length !== 2) throw new Error('no All plans menu');
     if (!/_fpPanelPlan\(t, desc\) \{\s*_fpPlanOrderInto\(t\);\s*t\.appendChild\(_planBorderToggle\(desc\.level\)\)/.test(src)) throw new Error('not in the Plan tab');
+  });
+  await check('20.61: a picture box with a stroke prints its border in the PDF', async () => {
+    const rects = [];
+    const doc = new Proxy({}, { get: (o, k) => { if (k === 'rect') return (x, y, w, h, st) => rects.push(st); if (k === 'roundedRect') return (x, y, w, h, r1, r2, st) => rects.push(st); return () => doc; } });
+    _drawOneAnnotationForTest(doc, { type: 'shape', shape: 'rect', x: 0.5, y: 0.2, w: 0.4, h: 0.5, dataUrl: 'data:image/png;base64,AAAA', stroke: '#bcbec0', strokeW: 0.5, radius: 0 });
+    if (rects.indexOf('S') < 0) throw new Error('no stroke drawn: ' + JSON.stringify(rects));
   });
   await check('the PDF passes the option to the drawer', async () => {
     if (src.indexOf("{ border: _planBorderPrints(desc.level) }") < 0) throw new Error('caller does not pass it');
