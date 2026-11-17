@@ -742,3 +742,8 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   handlers run `_dsAnnShiftToggle` / `_dsAnnGroupDragStart` first, or a moodboard can never be multi-selected.
   API image fills set `radius` 0 unless asked (straight-edged house moodboards). The driver waits for the start screen
   before closing it (it opens after the API is ready and swallows clicks).
+- **PLAN BORDER IS A PAGE OPTION (20.60, `_planBorderPrints(li)`, `editorialContent.planBorder`, `floorplanLevels[li].planBorder`).**
+  `_drawFloorplanKeyPage(..., opts)` strokes the contain-fitted plan rect (0.5 pt, `PLAN_BORDER_RGB` light grey) unless
+  `opts.border === false`; the caller passes `_planBorderPrints(desc.level)`. Deck default absent = ON, `false` = off;
+  per level boolean, absent = follow the deck. `_setPlanBorderLevel` stores nothing when it matches the deck,
+  `_setPlanBorderAll` sets the deck and deletes every level's own value. UI: Plan tab, `_planBorderToggle`.
