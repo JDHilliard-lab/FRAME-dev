@@ -604,10 +604,14 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   `_elevReqStamps`).** The flag lives on the wall; the stamp is two virtual note annotations made per page key and
   drawn by `_drawAnnotations` (PDF) and `_dsRenderAnnots` (read-only, `data-elev-req`). Never push them into
   `editorialContent.annotations`, or unticking leaves stamps behind. Keys: `spec:elev:<i>`, `spec:elevgrp:<set>`, `ig:<name>`
-  are wall pages (stamp left column at y 0.545, above the plan thumbnail: the drawing runs to the top, and 20.33's spot under
+  are wall pages (stamp left column at y `ELEV_REQ_WALL_Y` 0.53 (0.545 until 20.59), above the plan thumbnail: the drawing runs to the top, and 20.33's spot under
   the WALL: line sat on an install page's size legend, 20.34); `spec:<set>` is a spec page (top
   right). A page that already carries a hand-made ELEVATION REQUIRED note gets no second one. `renderDeckPageCanvas`
   (driver `render`) draws NO annotations at all; check stamps in an exported PDF.
+  20.59: a wrapping note LIFTS the wall-page stamp (bottom stays where one line ends, `_elevReqNoteLines`, word wrap at
+  0.45 em on 936x540, max 2 extra lines) so it never covers the plan. The Deck Studio overlay is clickable, not
+  selectable: `_elevReqMenu` offers edit on the wall / remove / "Make it a movable note", the last copying the two
+  stamps WITHOUT `_auto` into this page's annotations (the only sanctioned push: the hand-made stamp then wins).
 - **WALL COLOUR IS ONE READER (20.32, `elev.wallColor` '#rrggbb', `_wallColor`, `_wallColorPaint`, `setElevWallColor`).**
   Optional, deleted when cleared. Every wall painter goes through `_wallColor`: `drawElevAll` calls
   `_wallColorPaint`, `exportElevSVG` pushes a `data-wall-color` rect FIRST in `backLayer` (under the 20.31 underlay),
