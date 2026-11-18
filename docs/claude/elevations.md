@@ -117,6 +117,14 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   plain Elevation, never read off the name). 20.63: the EDITOR crops a wall-cropped deck drawing too
   (`#underlay-layer` overflow hidden in `renderElevUnderlay`), except while Placing or Calibrating.
   Test `tests/test_underlay_whole_drawing.js`.
+  **CLIENT SHEETS AND REQUIRED CALIBRATION (20.65):** `underlay.sheet` keeps the client's whole sheet (pooled, so one
+  copy for every wall on it); `underlay.crop` (what prints) and `underlay.cal` (scale clicks a/b + real inches, floor
+  ends fl/fr, ceiling top, pxPerIn) are in SHEET PIXELS, so a re-crop never needs re-calibrating. `_ulSheetFinish`
+  still writes the cropped picture to `src` with deckView 'drawing', so the renderers need nothing new.
+  `uncal: true` (set by `importElevUnderlay`, cleared only by a calibration) = `!_underlayCalibrated`: red `_ulBanner`
+  on the wall, `setUnderlayInDeck` and All walls refuse, `_underlayCalPreflight` warns. No flag = calibrated (files
+  from before 20.65). The sheet window is `#ulSheetModal` (`_ulSheetOpen`/`_ulShDraw`, state `_ulSh`). Test
+  `tests/test_client_sheet.js`.
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in
   `elevUnit`, `x`/`y` bottom-left; `_ctxPxTop` is the only flip.

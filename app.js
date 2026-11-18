@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.64';
+const APP_VERSION = '20.65';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -10489,6 +10489,10 @@ function _ulOfferClearRequired(elev) {
 function setUnderlayInDeck(on) {
     const u = _elevUnderlay(elevations[currentElevIndex]);
     if (!u) return;
+    if (on && !_underlayCalibrated(u)) {   // 20.65
+        showInfoModal('Calibrate it first', 'This client elevation has not been calibrated, so its scale is a guess and the art on it would print the wrong size. Use Calibrate (or Re-crop or recalibrate for a sheet) on the Wall tab, then Show in deck.');
+        return;
+    }
     if (on) u.inDeck = true; else delete u.inDeck;
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
@@ -10704,7 +10708,7 @@ function _setElevFrameStyleAll(v) {
     try { renderUnderlayControls(); } catch (e) {}
 }
 function _setUnderlayInDeckAll(on) {
-    (elevations || []).forEach(e => { const u = _elevUnderlay(e); if (!u) return; if (on) u.inDeck = true; else delete u.inDeck; });
+    (elevations || []).forEach(e => { const u = _elevUnderlay(e); if (!u) return; if (on && !_underlayCalibrated(u)) return; if (on) u.inDeck = true; else delete u.inDeck; });   // never an uncalibrated one (20.65)
     _wallSettingChanged();
     try { renderUnderlayControls(); } catch (e) {}
 }
@@ -26170,6 +26174,8 @@ function _dsRunPreflight() {
     try { issues.push.apply(issues, _artTypePreflight(pages)); } catch (e) {}
     // A picture too small for the size it prints (20.10).
     try { issues.push.apply(issues, _printResPreflight()); } catch (e) {}
+    // A client elevation nobody calibrated (20.65).
+    try { issues.push.apply(issues, _underlayCalPreflight()); } catch (e) {}
     // Frame and mats that add up to more than the overall size (20.11).
     try { issues.push.apply(issues, _sizeMathPreflight()); } catch (e) {}
     // Bigger than a sheet of paper, mat, glass or a stretcher can make in one piece (20.16).
@@ -53466,7 +53472,7 @@ The <strong>image size with bleed</strong> is worked out at RFI and never shown 
             },
             {
                 title: `What's new`,
-                body: `<strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
+                body: `<strong>20.65</strong> <b>Add the client's full sheet, pick the elevation on it, and calibrate: always.</b> On the Elevation tab, Wall tab, <b>+ Add client sheet</b> takes the whole elevation sheet as it came (a PNG or JPG of the PDF page) and opens it full screen in three steps: <b>Pick the elevation</b> (drag a box round it; the box is exactly what prints on the page), <b>Scale</b> (click both ends of a dimension printed on the drawing and type it, 11'-0" or 132"), and <b>The art wall</b> (click the floor at the wall's left and right ends, then the ceiling). Finish puts the drawing on the wall to scale, its floor on the wall's floor, and can set the wall to the drawing's size. The sheet is kept whole in the project; <b>Re-crop or recalibrate</b> reopens it, and other walls can <b>Use a sheet in this project</b> without adding it again. On the Elevations tab a dashed red box shows what <b>prints on the page</b>. <b>Calibration is required:</b> a client elevation added any way is marked <b>Not calibrated</b> (a red banner on the wall, Preflight lists it) and cannot be shown in the deck until it is. <b>Calibrate</b> now says on the wall what to click, draws the line it measured, and stops after two clicks.<br><br><strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
 <strong>20.53</strong> <b>The studio's Coding cheat sheet is in Help.</b> Help > Reference has a <b>Coding cheat sheet</b> section: how to name supporting files (PLAN, ELEV, REND, MOCK, FINISH, FRAME and REF codes), the art types and their image codes with Medium or Application, the approved public domain sources, the public domain and Creative Commons rules, which assets can be remixed and under what code, how a new asset is coded, and what each spec page row holds.
 <strong>20.52</strong> <b>A placement left on the wrong sector's plan is easy to fix.</b> When a plan holds placements still coded for another sector (moved by an older build, or by pinning before 20.51), its Items tab says so at the top with <b>Recode</b> (or <b>Recode all</b>): each takes the next code in this plan's sector and its pin comes across, in one Ctrl+Z. Picking the plan it already sits on under <b>Move to level</b> now recodes it too, instead of doing nothing.\n<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
@@ -57484,12 +57490,30 @@ function _ctxPointFromEvent(e, rect) {
 // everything. It is a tracing guide, so it must never compete with the drawing on top
 // of it, and it must never leave the editor: see the three export sites listed on the
 // model above.
+// The red banner across the top of the wall (20.65): NOT CALIBRATED until it is, and the
+// next click while calibrating, so the tool says what to do where you are looking.
+function _ulBanner(u) {
+    const wall = document.getElementById('wall');
+    if (!wall) return;
+    wall.querySelectorAll('._ulBanner').forEach(el => el.remove());
+    let txt = '';
+    if (_ulCalibrateActive) txt = _ulCalSpan ? 'CALIBRATING \u00b7 type the real size on the Wall tab' : (_ulCalFirst ? 'CALIBRATING \u00b7 now click the other end' : 'CALIBRATING \u00b7 click one end of a size you know (a dimension on the drawing, a door, the ceiling height)');
+    else if (u && !_underlayCalibrated(u)) txt = 'NOT CALIBRATED \u00b7 the drawing\u2019s scale is a guess. Calibrate it on the Wall tab before placing art';
+    if (!txt) return;
+    const b = document.createElement('div');
+    b.className = '_ulBanner';
+    b.setAttribute('data-export-skip', '1');
+    b.setAttribute('data-html2canvas-ignore', 'true');
+    b.style.cssText = 'position:absolute; left:0; right:0; top:0; z-index:62; padding:4px 8px; background:rgba(224,0,0,0.92); color:#fff; font:700 11px/1.3 sans-serif; letter-spacing:.03em; pointer-events:none; text-align:center;';
+    b.textContent = txt;
+    wall.appendChild(b);
+}
 function renderElevUnderlay(wallW, wallH) {
     const layer = document.getElementById('underlay-layer');
     if (!layer) return;
     layer.innerHTML = '';
     const u = _elevUnderlay(elevations[currentElevIndex]);
-    if (!u) return;
+    if (!u) { _ulBanner(null); return; }
     const w = parseFloat(u.w) || 0, h = parseFloat(u.h) || 0;
     if (!(w > 0) || !(h > 0)) return;
     const L = (parseFloat(u.x) || 0) * elevScale;
@@ -57522,6 +57546,19 @@ function renderElevUnderlay(wallW, wallH) {
         + '; user-select:none; -webkit-user-drag:none;';
     if (_ulPlacing) img.onmousedown = _ulMoveStart;
     layer.appendChild(img);
+    // 20.65: the print area, when the drawing prints whole: a dashed red box round exactly
+    // what the page shows, so how much of the elevation is seen is never a guess.
+    if (_underlayDeckFull(elevations[currentElevIndex]) && !_ulPlacing) {
+        const pa = document.createElement('div');
+        pa.className = '_ulPrintArea';
+        pa.setAttribute('data-export-skip', '1');
+        pa.setAttribute('data-html2canvas-ignore', 'true');
+        pa.style.cssText = 'position:absolute; left:' + L + 'px; top:' + T + 'px; width:' + W + 'px; height:' + Hp
+            + 'px; border:1px dashed #e00000; box-sizing:border-box; pointer-events:none;';
+        pa.innerHTML = '<span style="position:absolute; left:0; top:-15px; font:600 9px/1 sans-serif; letter-spacing:.06em; color:#e00000; white-space:nowrap;">PRINTS ON THE PAGE</span>';
+        layer.appendChild(pa);
+    }
+    _ulBanner(u);
 
     if (!_ulPlacing) return;
     // Placement chrome: an outline so the image's true extent is readable even at a
@@ -58354,7 +58391,9 @@ function importElevUnderlay(file) {
                 // A REPLACEMENT keeps the fade and the lock you already set: swapping a
                 // blurry scan for a clean one should not reset how it reads.
                 opacity: prev ? _underlayOpacity(prev) : UNDERLAY_DEFAULT_OPACITY,
-                lockAspect: prev ? _underlayLocked(prev) : true
+                lockAspect: prev ? _underlayLocked(prev) : true,
+                // 20.65: a new picture's scale is a guess until someone calibrates it.
+                uncal: true
             };
             if (typeof _elevShowTabFor === 'function') _elevShowTabFor('wall');
             const d = document.getElementById('sec-underlay');
@@ -58657,15 +58696,32 @@ function _ulCalMark(xU, yU) {
         + ' transform:translate(-50%,50%); left:' + (xU * elevScale) + 'px; bottom:' + (yU * elevScale) + 'px;';
     wall.appendChild(d);
 }
+// The line between the two calibration clicks (20.65), so it is plain what was measured.
+function _ulCalLine(a, b) {
+    const wall = document.getElementById('wall');
+    if (!wall || !a || !b) return;
+    const x1 = a.x * elevScale, y1 = a.y * elevScale, x2 = b.x * elevScale, y2 = b.y * elevScale;
+    const d = document.createElement('div');
+    d.className = '_ulCalMark';
+    d.setAttribute('data-export-skip', '1');
+    d.setAttribute('data-html2canvas-ignore', 'true');
+    d.style.cssText = 'position:absolute; height:2px; background:var(--selected); z-index:60; pointer-events:none; transform-origin:0 50%;'
+        + ' left:' + x1 + 'px; bottom:' + y1 + 'px; width:' + Math.hypot(x2 - x1, y2 - y1) + 'px; transform:rotate(' + (-Math.atan2(y2 - y1, x2 - x1)) + 'rad);';
+    wall.appendChild(d);
+}
 function _ulCalibrateClick(e) {
     const wall = document.getElementById('wall');
     if (!wall) return;
     e.preventDefault(); e.stopPropagation();
     const p = _ctxPointFromEvent(e, wall.getBoundingClientRect());
+    // 20.65: two clicks, then it waits for the real size; more clicks measured again from
+    // the first point while the panel still showed the old number.
+    if (_ulCalSpan) return;
     if (!_ulCalFirst) {
         _ulCalFirst = p;
         _ulClearCalMarks();
         _ulCalMark(p.x, p.y);
+        _ulBanner(_elevUnderlay(elevations[currentElevIndex]));
         return;
     }
     const span = Math.hypot(p.x - _ulCalFirst.x, p.y - _ulCalFirst.y);
@@ -58673,6 +58729,7 @@ function _ulCalibrateClick(e) {
     // image to infinity. Treated as a restart rather than an error.
     if (!(span > 0.01)) { _ulCalFirst = null; _ulClearCalMarks(); return; }
     _ulCalMark(p.x, p.y);
+    _ulCalLine(_ulCalFirst, p);
     _ulCalSpan = _ctxRound(span);
     // The panel now asks what that distance really is. Deliberately an inline field
     // rather than a prompt: the measured value stays on screen beside it, and a typo
@@ -58681,6 +58738,7 @@ function _ulCalibrateClick(e) {
     const d = document.getElementById('sec-underlay');
     if (d) d.open = true;
     initElevControls();
+    _ulBanner(_elevUnderlay(elevations[currentElevIndex]));
 }
 function applyUnderlayCalibration(realValue) {
     const u = _elevUnderlay(elevations[currentElevIndex]);
@@ -58698,11 +58756,362 @@ function applyUnderlayCalibration(realValue) {
     u.y = _ctxRound(ay + ((parseFloat(u.y) || 0) - ay) * k);
     // Calibrated, so drop out of the mode and into placing — scale is settled and the
     // next thing anyone does is slide it onto the wall.
+    delete u.uncal;   // 20.65: calibrated, so it may print and carry art
     _ulCalibrateActive = false; _ulCalFirst = null; _ulCalSpan = null;
     _ulClearCalMarks();
     _ulPlacing = true;
     _ulSyncCursor();
     _ctxCommit();
+}
+
+// ── CLIENT SHEETS (20.65) ─────────────────────────────────────────────────
+// "Keep the full sheet we get from the client intact, since it has a lot of information on
+// the right, like dates and other codes. Then in FRAME we open the elevation sheet, pick the
+// elevation we want by cropping it, then calibrate it. This is a must." (Jordan, Ford Hub L1.)
+// The client's WHOLE sheet is kept on the underlay (`underlay.sheet`; the project file
+// stores an identical image once, so every wall drawn from one sheet costs one copy), and
+// the wall keeps what it took from it IN SHEET PIXELS: the crop (exactly what prints) and
+// the calibration points. Both are on the sheet, so a re-crop never needs re-calibrating.
+// The cropped picture is still written to `underlay.src`, so the four renderers listed on
+// the model need nothing new, and the crop prints whole (deckView 'drawing').
+// CALIBRATION IS NOT OPTIONAL. A client elevation added any way arrives `uncal: true`: the
+// wall carries a red NOT CALIBRATED banner, Show in deck refuses, Preflight lists it. Only
+// a calibration clears it. An underlay saved before 20.65 has no flag and reads as
+// calibrated (it was placed and printed by hand; nothing to force on an issued deck).
+function _underlayCalibrated(u) { return !!u && u.uncal !== true; }
+// Every distinct sheet in the project, newest wall last, for "use a sheet already here".
+function _ulSheets() {
+    const seen = new Map();
+    (elevations || []).forEach(e => { const s = e && e.underlay && e.underlay.sheet; if (s && s.src && !seen.has(s.src)) seen.set(s.src, s); });
+    return Array.from(seen.values());
+}
+// A length as a designer types it off a drawing: 11'-0", 11' 6 1/2", 132", 132 in, or a bare
+// number in the elevation unit. Returns INCHES, NaN when it can't be read.
+function _ulParseLen(s) {
+    s = String(s == null ? '' : s).trim().replace(/[’′]/g, "'").replace(/[”″]/g, '"').replace(/''/g, '"');
+    let m = /^(\d+(?:\.\d+)?)\s*'\s*-?\s*(?:(\d+(?:\.\d+)?)\s*)?(?:(\d+)\/(\d+))?\s*"?$/.exec(s);
+    if (m) return parseFloat(m[1]) * 12 + (m[2] ? parseFloat(m[2]) : 0) + (m[3] ? parseFloat(m[3]) / parseFloat(m[4]) : 0);
+    m = /^(\d+(?:\.\d+)?)(?:\s+(\d+)\/(\d+))?\s*(?:"|in)$/i.exec(s);
+    if (m) return parseFloat(m[1]) + (m[2] ? parseFloat(m[2]) / parseFloat(m[3]) : 0);
+    m = /^(\d+(?:\.\d+)?)$/.exec(s);
+    if (m) { const v = parseFloat(m[1]); return (typeof elevUnit !== 'undefined' && elevUnit !== 'in') ? v / unitFactor('in', elevUnit) : v; }
+    return NaN;
+}
+function _ulFmtIn(v) { return (Math.round(v * 4) / 4) + '"'; }
+function pickClientSheet() {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/png,image/jpeg,image/webp';
+    inp.onchange = () => { const f = inp.files && inp.files[0]; if (f) _ulSheetFromFile(f); };
+    inp.click();
+}
+function _ulSheetFromFile(file) {
+    const r = new FileReader();
+    r.onload = (ev) => {
+        const src = ev.target && ev.target.result;
+        if (!src) return;
+        const im = new Image();
+        im.onload = () => _ulSheetOpen({ sheet: { src: src, name: String((file && file.name) || '').replace(/\.[A-Za-z0-9]{1,5}$/, ''), natW: im.naturalWidth, natH: im.naturalHeight } });
+        im.onerror = () => showInfoModal('That sheet could not be read', 'Add the sheet as a PNG or JPG. From a PDF, export the page as an image at 150 to 200 dpi (Acrobat: Export PDF, Image).');
+        im.src = src;
+    };
+    r.readAsDataURL(file);
+}
+// "Use a sheet already in this project": the walls drawn from one sheet share it.
+function _ulSheetMenu(anchor) {
+    const items = _ulSheets().map(s => ({ label: s.name || 'Client sheet', hint: (s.natW && s.natH) ? (s.natW + ' × ' + s.natH + ' px') : '', onClick: () => _ulSheetOpen({ sheet: s }) }));
+    if (items.length && typeof _frameMenu === 'function') _frameMenu(anchor, items);
+}
+let _ulSh = null;   // the open sheet window
+function _ulShScale(st) {
+    if (!st || !st.a || !st.b || !(st.real > 0)) return 0;
+    const d = Math.hypot(st.b.x - st.a.x, st.b.y - st.a.y);
+    return d > 0 ? d / st.real : 0;   // sheet px per inch
+}
+function _ulSheetOpen(opts) {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    const u = _elevUnderlay(elev);
+    const sheet = (opts && opts.sheet) || (u && u.sheet);
+    if (!sheet || !sheet.src) return;
+    const same = !!(u && u.sheet && u.sheet.src === sheet.src);
+    const c = same && u.cal ? u.cal : {};
+    _ulSh = { elevIdx: currentElevIndex, sheet: sheet, crop: same && u.crop ? Object.assign({}, u.crop) : null,
+        a: c.a || null, b: c.b || null, real: c.real || null, fl: c.fl || null, fr: c.fr || null, top: c.top || null,
+        step: (same && u.crop) ? 3 : 1, z: 1, tx: 0, ty: 0, drag: null, pan: null, hover: null, setWall: null };
+    let m = document.getElementById('ulSheetModal'); if (m) m.remove();
+    m = document.createElement('div');
+    m.id = 'ulSheetModal';
+    m.style.cssText = 'position:fixed; inset:0; z-index:9500; display:flex; flex-direction:column; background:var(--bg-main, #1b1c1f); color:var(--text-main, #eee); font-size:13px;';
+    m.innerHTML = `
+      <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--border-color, #333);">
+        <b style="font-size:14px;">Client elevation from a sheet</b>
+        <span class="gz-note" data-uls-name></span>
+        <span style="flex:1"></span>
+        <span data-uls-steps style="display:flex; gap:6px;"></span>
+        <span style="flex:1"></span>
+        <button class="gz-btn" data-uls-fit title="Fit the whole sheet">Whole sheet</button>
+        <button class="gz-btn" data-uls-cancel>Cancel</button>
+      </div>
+      <div data-uls-prompt style="padding:8px 14px; border-bottom:1px solid var(--border-color, #333); line-height:1.45;"></div>
+      <div data-uls-view style="flex:1; position:relative; overflow:hidden; background:#7d7f84; cursor:crosshair; touch-action:none;">
+        <div data-uls-stage style="position:absolute; left:0; top:0; transform-origin:0 0;">
+          <img data-uls-img draggable="false" style="display:block; user-select:none; -webkit-user-drag:none; background:#fff;" width="${sheet.natW}" height="${sheet.natH}">
+          <svg data-uls-ov width="${sheet.natW}" height="${sheet.natH}" style="position:absolute; left:0; top:0; overflow:visible; pointer-events:none;"></svg>
+        </div>
+      </div>
+      <div data-uls-foot style="display:flex; align-items:center; gap:8px; padding:10px 14px; border-top:1px solid var(--border-color, #333); min-height:34px;"></div>`;
+    document.body.appendChild(m);
+    m.querySelector('[data-uls-img]').src = sheet.src;
+    m.querySelector('[data-uls-name]').textContent = sheet.name || '';
+    m.querySelector('[data-uls-cancel]').onclick = _ulSheetClose;
+    m.querySelector('[data-uls-fit]').onclick = () => { _ulShFit(null); _ulShDraw(); };
+    const view = m.querySelector('[data-uls-view]');
+    view.addEventListener('wheel', _ulShWheel, { passive: false });
+    view.addEventListener('mousedown', _ulShDown);
+    view.addEventListener('mousemove', _ulShMove);
+    view.addEventListener('contextmenu', (ev) => ev.preventDefault());
+    window.addEventListener('mouseup', _ulShUp);
+    document.addEventListener('keydown', _ulShKey, true);
+    requestAnimationFrame(() => { _ulShFit(_ulSh && _ulSh.step > 1 ? _ulSh.crop : null); _ulShDraw(); });
+}
+function _ulSheetClose() {
+    const m = document.getElementById('ulSheetModal'); if (m) m.remove();
+    window.removeEventListener('mouseup', _ulShUp);
+    document.removeEventListener('keydown', _ulShKey, true);
+    _ulSh = null;
+}
+// Fit a sheet rect (or the whole sheet) into the view, with a margin.
+function _ulShFit(r) {
+    const st = _ulSh, view = document.querySelector('#ulSheetModal [data-uls-view]');
+    if (!st || !view) return;
+    const vw = view.clientWidth || 1000, vh = view.clientHeight || 700;
+    const R = r ? { x: r.x - r.w * 0.08, y: r.y - r.h * 0.12, w: r.w * 1.16, h: r.h * 1.24 } : { x: 0, y: 0, w: st.sheet.natW, h: st.sheet.natH };
+    st.z = Math.min(vw / R.w, vh / R.h) * 0.96;
+    st.tx = (vw - R.w * st.z) / 2 - R.x * st.z;
+    st.ty = (vh - R.h * st.z) / 2 - R.y * st.z;
+}
+function _ulShPt(e) {
+    const st = _ulSh, view = document.querySelector('#ulSheetModal [data-uls-view]');
+    const r = view.getBoundingClientRect();
+    return { x: (e.clientX - r.left - st.tx) / st.z, y: (e.clientY - r.top - st.ty) / st.z };
+}
+// Two-finger scroll moves around the sheet; pinch (or Ctrl/Cmd + scroll) zooms at the pointer.
+function _ulShWheel(e) {
+    const st = _ulSh; if (!st) return;
+    e.preventDefault();
+    if (e.ctrlKey || e.metaKey) {
+        const view = e.currentTarget, r = view.getBoundingClientRect();
+        const px = e.clientX - r.left, py = e.clientY - r.top;
+        const k = Math.exp(-e.deltaY * 0.01), z2 = Math.max(0.02, Math.min(8, st.z * k));
+        st.tx = px - (px - st.tx) * (z2 / st.z); st.ty = py - (py - st.ty) * (z2 / st.z); st.z = z2;
+    } else { st.tx -= e.deltaX; st.ty -= e.deltaY; }
+    _ulShDraw();
+}
+// Shift keeps a measure level or plumb, the way a dimension line is drawn.
+function _ulShConstrain(p, from, shift) {
+    if (!shift || !from) return p;
+    return (Math.abs(p.x - from.x) >= Math.abs(p.y - from.y)) ? { x: p.x, y: from.y } : { x: from.x, y: p.y };
+}
+function _ulShDown(e) {
+    const st = _ulSh; if (!st) return;
+    if (e.button === 1 || e.button === 2 || e.altKey) {   // pan: Alt, middle or right drag
+        st.pan = { x: e.clientX, y: e.clientY, tx: st.tx, ty: st.ty }; e.preventDefault(); return;
+    }
+    if (e.button !== 0) return;
+    const p = _ulShPt(e);
+    e.preventDefault();
+    if (st.step === 1) { st.drag = { x0: p.x, y0: p.y }; st.crop = { x: p.x, y: p.y, w: 0, h: 0 }; _ulShDraw(); return; }
+    if (st.step === 2) {
+        if (!st.a || (st.a && st.b)) { st.a = p; st.b = null; st.real = null; }
+        else st.b = _ulShConstrain(p, st.a, e.shiftKey);
+        _ulShDraw(); return;
+    }
+    if (st.step === 3) {
+        if (!st.fl || st.top) { st.fl = p; st.fr = null; st.top = null; }
+        else if (!st.fr) st.fr = e.shiftKey ? { x: p.x, y: st.fl.y } : p;
+        else st.top = { x: st.fl.x, y: p.y };   // only its height matters
+        st.setWall = null;
+        _ulShDraw(); return;
+    }
+}
+function _ulShMove(e) {
+    const st = _ulSh; if (!st) return;
+    if (st.pan) { st.tx = st.pan.tx + (e.clientX - st.pan.x); st.ty = st.pan.ty + (e.clientY - st.pan.y); _ulShDraw(); return; }
+    const p = _ulShPt(e);
+    if (st.drag && st.step === 1) {
+        const x0 = Math.max(0, Math.min(st.drag.x0, p.x)), y0 = Math.max(0, Math.min(st.drag.y0, p.y));
+        const x1 = Math.min(st.sheet.natW, Math.max(st.drag.x0, p.x)), y1 = Math.min(st.sheet.natH, Math.max(st.drag.y0, p.y));
+        st.crop = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+        _ulShDraw(); return;
+    }
+    st.hover = { p: p, shift: e.shiftKey };
+    if (st.step > 1) _ulShDraw();
+}
+function _ulShUp() {
+    const st = _ulSh; if (!st) return;
+    st.pan = null;
+    if (st.drag) { st.drag = null; if (st.crop && (st.crop.w < 8 || st.crop.h < 8)) st.crop = null; _ulShDraw(); }
+}
+function _ulShKey(e) {
+    if (!_ulSh) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); _ulSheetClose(); }
+    else if (e.key === 'Enter' && document.activeElement && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); const b = document.querySelector('#ulSheetModal [data-uls-next]'); if (b && !b.disabled) b.click(); }
+}
+function _ulShGo(step) {
+    const st = _ulSh; if (!st) return;
+    st.step = step;
+    if (step > 1 && st.crop) _ulShFit(st.crop);
+    _ulShDraw();
+}
+// What the three clicks of step 3 say about the wall, in inches.
+function _ulShWall(st) {
+    const k = _ulShScale(st);
+    if (!(k > 0) || !st.fl || !st.fr) return null;
+    const floorY = (st.fl.y + st.fr.y) / 2;
+    return { w: Math.abs(st.fr.x - st.fl.x) / k, h: st.top ? (floorY - st.top.y) / k : null, floorY: floorY, left: Math.min(st.fl.x, st.fr.x) };
+}
+function _ulShDraw() {
+    const st = _ulSh, m = document.getElementById('ulSheetModal');
+    if (!st || !m) return;
+    m.querySelector('[data-uls-stage]').style.transform = 'translate(' + st.tx + 'px,' + st.ty + 'px) scale(' + st.z + ')';
+    const sw = 2 / st.z, r = 5 / st.z, fs = 13 / st.z;
+    const dot = (p, col) => p ? `<circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${col}" stroke="#fff" stroke-width="${sw * 0.8}"/>` : '';
+    const line = (p, q, col, dash) => (p && q) ? `<line x1="${p.x}" y1="${p.y}" x2="${q.x}" y2="${q.y}" stroke="${col}" stroke-width="${sw}"${dash ? ` stroke-dasharray="${6 / st.z} ${4 / st.z}"` : ''}/>` : '';
+    const label = (p, txt, col) => p ? `<text x="${p.x}" y="${p.y}" font-size="${fs}" font-family="sans-serif" font-weight="700" fill="${col}" stroke="#fff" stroke-width="${3 / st.z}" paint-order="stroke">${_esc(txt)}</text>` : '';
+    let ov = '';
+    const c = st.crop;
+    if (c && c.w > 0) {
+        // Everything outside the crop greyed back, so what will print reads at a glance.
+        ov += `<path d="M0 0H${st.sheet.natW}V${st.sheet.natH}H0Z M${c.x} ${c.y}V${c.y + c.h}H${c.x + c.w}V${c.y}Z" fill="rgba(20,22,28,${st.step === 1 ? 0.45 : 0.6})" fill-rule="evenodd"/>`;
+        ov += `<rect x="${c.x}" y="${c.y}" width="${c.w}" height="${c.h}" fill="none" stroke="#e00000" stroke-width="${sw}" stroke-dasharray="${8 / st.z} ${5 / st.z}"/>`;
+        ov += label({ x: c.x, y: c.y - 6 / st.z }, 'PRINTS ON THE PAGE', '#e00000');
+    }
+    const hv = st.hover ? st.hover.p : null;
+    if (st.step >= 2) {
+        ov += line(st.a, st.b || (st.step === 2 && st.a && hv ? _ulShConstrain(hv, st.a, st.hover.shift) : null), '#1e6bff', !st.b);
+        ov += dot(st.a, '#1e6bff') + dot(st.b, '#1e6bff');
+        if (st.a && st.b && st.real > 0) ov += label({ x: (st.a.x + st.b.x) / 2, y: (st.a.y + st.b.y) / 2 - 8 / st.z }, _ulFmtIn(st.real), '#1e6bff');
+    }
+    if (st.step === 3) {
+        const k = _ulShScale(st);
+        ov += line(st.fl, st.fr || (st.fl && hv ? (st.hover.shift ? { x: hv.x, y: st.fl.y } : hv) : null), '#00a86b', !st.fr);
+        if (st.fl && st.fr && !st.top && hv) ov += line({ x: st.fl.x, y: (st.fl.y + st.fr.y) / 2 }, { x: st.fl.x, y: hv.y }, '#00a86b', true);
+        if (st.fl && st.fr && st.top) ov += line({ x: st.fl.x, y: (st.fl.y + st.fr.y) / 2 }, st.top, '#00a86b', false);
+        ov += dot(st.fl, '#00a86b') + dot(st.fr, '#00a86b') + dot(st.top, '#00a86b');
+        if (k > 0 && st.fl && (st.fr || hv)) {
+            const q = st.fr || hv;
+            ov += label({ x: (st.fl.x + q.x) / 2, y: Math.max(st.fl.y, q.y) + 18 / st.z }, 'wall ' + _ulFmtIn(Math.abs(q.x - st.fl.x) / k), '#00a86b');
+        }
+    }
+    m.querySelector('[data-uls-ov]').innerHTML = ov;
+    // Steps, prompt and buttons.
+    const names = ['Pick the elevation', 'Scale', 'The art wall'];
+    m.querySelector('[data-uls-steps]').innerHTML = names.map((n, i) => {
+        const on = st.step === i + 1, done = (i === 0 && st.crop) || (i === 1 && _ulShScale(st) > 0) || (i === 2 && st.fl && st.fr);
+        return `<span style="padding:3px 9px; border-radius:var(--r-10); font-weight:600; ${on ? 'background:var(--ui-active, #1e6bff); color:#fff;' : 'background:rgba(127,127,127,.18);'}">${done && !on ? '✓ ' : ''}${i + 1} ${n}</span>`;
+    }).join('');
+    const prompt = m.querySelector('[data-uls-prompt]'), foot = m.querySelector('[data-uls-foot]');
+    const nav = '<span class="gz-note" style="margin-left:auto;">Scroll to move around · pinch or Ctrl+scroll to zoom · Alt+drag to pan</span>';
+    if (st.step === 1) {
+        prompt.innerHTML = '<b>1 · Pick the elevation.</b> Drag a box round the elevation this wall should show. The box is <b>exactly what prints</b> on the page: the room either side of the art wall, the ceiling and the floor. The full sheet stays in the project untouched.';
+        foot.innerHTML = `<span class="gz-note">${c && c.w ? ('Box ' + Math.round(c.w) + ' × ' + Math.round(c.h) + ' px of the sheet') : 'No box yet'}</span>${nav}
+            <button class="gz-btn gz-btn-on" data-uls-next ${c && c.w ? '' : 'disabled'}>Next: scale</button>`;
+        foot.querySelector('[data-uls-next]').onclick = () => _ulShGo(2);
+    } else if (st.step === 2) {
+        const k = _ulShScale(st);
+        prompt.innerHTML = '<b>2 · Scale.</b> ' + (!st.a ? 'Click one end of a dimension printed on the drawing (an 11\'-0" height string, a door width, the wall\'s own dimension).'
+            : !st.b ? 'Now click the other end. Hold <b>Shift</b> to keep it level or plumb.'
+            : 'Type what that dimension says on the drawing. Click again to measure something else.');
+        foot.innerHTML = `<button class="gz-btn" data-uls-back>Back</button>
+            <span class="gz-note">${st.a && st.b ? ('Measured ' + Math.round(Math.hypot(st.b.x - st.a.x, st.b.y - st.a.y)) + ' px. It is') : ''}</span>
+            ${st.a && st.b ? `<input type="text" class="gz-in" data-uls-real style="width:110px;" placeholder="e.g. 11'-0&quot;" value="${st.real > 0 ? _ulFmtIn(st.real).replace(/"$/, '"') : ''}">` : ''}
+            <span class="gz-note" data-uls-scale>${k > 0 ? ('Scale set: ' + (Math.round(k * 100) / 100) + ' px per inch') : ''}</span>${nav}
+            <button class="gz-btn gz-btn-on" data-uls-next ${k > 0 ? '' : 'disabled'}>Next: the art wall</button>`;
+        foot.querySelector('[data-uls-back]').onclick = () => _ulShGo(1);
+        const inp = foot.querySelector('[data-uls-real]');
+        if (inp) {
+            if (!(st.real > 0)) setTimeout(() => inp.focus(), 0);
+            const apply = () => { const v = _ulParseLen(inp.value); st.real = (v > 0) ? v : null; inp.style.borderColor = (inp.value && !(v > 0)) ? '#e00000' : ''; const n = foot.querySelector('[data-uls-next]'); if (n) n.disabled = !(_ulShScale(st) > 0); const sc = foot.querySelector('[data-uls-scale]'); if (sc) sc.textContent = _ulShScale(st) > 0 ? ('Scale set: ' + (Math.round(_ulShScale(st) * 100) / 100) + ' px per inch') : ''; };
+            inp.oninput = apply;
+            inp.onkeydown = (ev) => { if (ev.key === 'Enter') { apply(); if (_ulShScale(st) > 0) _ulShGo(3); } };
+        }
+        foot.querySelector('[data-uls-next]').onclick = () => _ulShGo(3);
+    } else {
+        const W = _ulShWall(st), elev = elevations[st.elevIdx] || {};
+        const toU = unitFactor('in', elevUnit);
+        const curW = (parseFloat(elev.wallW) || 0) / toU, curH = (parseFloat(elev.wallH) || 0) / toU;
+        prompt.innerHTML = '<b>3 · The art wall.</b> ' + (!st.fl ? 'Click the <b>floor at the left end</b> of the wall the art hangs on.'
+            : !st.fr ? 'Now the <b>floor at the right end</b>. Hold <b>Shift</b> to stay on the floor line.'
+            : !st.top ? 'Click the <b>ceiling</b> (or the top of the wall) to set its height, or Finish without it.'
+            : 'Done. Finish puts the drawing on this wall: its floor on the wall\'s floor, its ends on the wall\'s ends. Click again to redo.');
+        let sizeHtml = '';
+        if (W) {
+            const wantW = Math.round(W.w * 4) / 4, wantH = W.h ? Math.round(W.h * 4) / 4 : null;
+            const differs = Math.abs(wantW - curW) > 0.25 || (wantH && Math.abs(wantH - curH) > 0.25);
+            if (st.setWall === null) st.setWall = differs;
+            sizeHtml = `<span class="gz-note">Drawing: wall ${_ulFmtIn(wantW)}${wantH ? ' × ' + _ulFmtIn(wantH) : ''} · this wall now ${_ulFmtIn(curW)} × ${_ulFmtIn(curH)}</span>
+                <label style="display:flex; gap:5px; align-items:center;"><input type="checkbox" data-uls-setwall ${st.setWall ? 'checked' : ''}> Make this wall ${_ulFmtIn(wantW)}${wantH ? ' × ' + _ulFmtIn(wantH) : ''}</label>`;
+        }
+        foot.innerHTML = `<button class="gz-btn" data-uls-back>Back</button>${sizeHtml}${nav}
+            <button class="gz-btn gz-btn-on" data-uls-next ${W ? '' : 'disabled'}>Finish</button>`;
+        foot.querySelector('[data-uls-back]').onclick = () => _ulShGo(2);
+        const cb = foot.querySelector('[data-uls-setwall]'); if (cb) cb.onchange = () => { st.setWall = cb.checked; };
+        foot.querySelector('[data-uls-next]').onclick = () => _ulSheetFinish();
+    }
+}
+// Cut the crop out of the sheet at full resolution, place it from the three clicks, and
+// mark the wall calibrated. One undo step.
+async function _ulSheetFinish() {
+    const st = _ulSh;
+    if (!st) return;
+    const elev = elevations[st.elevIdx];
+    const k = _ulShScale(st), W = _ulShWall(st), c = st.crop;
+    if (!elev || !(k > 0) || !W || !c) return;
+    let im = null;
+    try { im = new Image(); im.src = st.sheet.src; await im.decode(); } catch (e) { im = null; }
+    if (!im) { showInfoModal('The sheet could not be read', 'Try adding it again as a PNG or JPG.'); return; }
+    const cw = Math.max(1, Math.round(c.w)), ch = Math.max(1, Math.round(c.h));
+    const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+    const g = cv.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, cw, ch);
+    g.drawImage(im, c.x, c.y, c.w, c.h, 0, 0, cw, ch);
+    const toU = unitFactor('in', elevUnit);
+    const prev = elev.underlay;
+    const r1 = (v) => Math.round(v * 10) / 10;
+    elev.underlay = {
+        src: cv.toDataURL('image/png'),
+        name: st.sheet.name || 'Client sheet',
+        natW: cw, natH: ch,
+        x: _ctxRound((c.x - W.left) / k * toU), y: _ctxRound((W.floorY - (c.y + c.h)) / k * toU),
+        w: _ctxRound(c.w / k * toU), h: _ctxRound(c.h / k * toU),
+        opacity: prev ? _underlayOpacity(prev) : UNDERLAY_DEFAULT_OPACITY,
+        lockAspect: true, inDeck: true, deckView: 'drawing',
+        sheet: st.sheet,
+        crop: { x: r1(c.x), y: r1(c.y), w: r1(c.w), h: r1(c.h) },
+        cal: { a: st.a, b: st.b, real: st.real, fl: st.fl, fr: st.fr, top: st.top || null, pxPerIn: Math.round(k * 10000) / 10000, at: new Date().toISOString().slice(0, 10) }
+    };
+    if (st.setWall) {
+        elev.wallW = Math.round(W.w * toU * 4) / 4;
+        if (W.h) elev.wallH = Math.round(W.h * toU * 4) / 4;
+        if (st.elevIdx === currentElevIndex) {
+            const iw = document.getElementById('wallW'), ih = document.getElementById('wallH');
+            if (iw) iw.value = elev.wallW; if (ih) ih.value = elev.wallH;
+        }
+    }
+    _ulSheetClose();
+    _ulPlacing = false; _ulCalibrateActive = false;
+    _ctxCommit();
+    try { renderUnderlayControls(); } catch (e) {}
+    try { if (typeof _dsClearBuiltAll === 'function') _dsClearBuiltAll(); } catch (e) {}
+    if (elev.elevRequired === true) _ulOfferClearRequired(elev);
+}
+// Preflight: a client elevation nobody calibrated (20.65).
+function _underlayCalPreflight() {
+    const out = [];
+    (elevations || []).forEach((e, i) => {
+        const u = _elevUnderlay(e);
+        if (u && !_underlayCalibrated(u)) out.push({ sev: 'warn', text: String((e && e.name) || ('Wall ' + (i + 1))) + ' — client elevation not calibrated, so its scale is a guess. Calibrate it on the Elevation tab, Wall tab, before placing art.', idx: null });
+    });
+    return out;
 }
 
 // ── The sidebar panels ────────────────────────────────────────────────────
@@ -58715,11 +59124,15 @@ function renderUnderlayControls() {
     const elev = elevations[currentElevIndex];
     const u = _elevUnderlay(elev);
     if (!u) {
-        box.innerHTML = `<div class="gz-hint">Drop the client's or architect's elevation in behind
-                 this wall and fade it back, then trace the doors, windows and millwork onto it as
-                 context blocks. It is a tracing guide unless you switch on <b>Show in deck</b>, which
-                 prints it behind the art on this wall's pages and exports.</div>
-                 <button class="gz-add" onclick="pickElevUnderlay()">+ Add client elevation</button>`;
+        // 20.65: the client's FULL sheet first. Pick the elevation on it, calibrate, done.
+        const nSheets = _ulSheets().length;
+        box.innerHTML = `<div class="gz-hint">Add the client's or architect's <b>full elevation sheet</b> as it came (PNG or JPG
+                 of the PDF page). You pick this wall's elevation on it, set the scale off a dimension, and
+                 click the wall's floor at both ends; the drawing then sits on the wall to scale and prints
+                 behind the art. The sheet itself is kept untouched.</div>
+                 <button class="gz-add" data-ul-sheet onclick="pickClientSheet()">+ Add client sheet</button>
+                 ${nSheets ? `<button class="gz-add" data-ul-sheet-reuse onclick="_ulSheetMenu(this)">Use a sheet in this project (${nSheets})</button>` : ''}
+                 <div class="gz-sub" style="margin-top:6px;">Only have a cropped picture? <a href="#" onclick="pickElevUnderlay(); return false;">Add an image instead</a> and calibrate it.</div>`;
         return;
     }
     const pct = Math.round(_underlayOpacity(u) * 100);
@@ -58751,7 +59164,16 @@ function renderUnderlayControls() {
                size you know — the baseboard, a door width, a ceiling height. ${_ulCalFirst ? 'Now click the second point.' : ''}</div>
           </div>`;
     }
-    box.innerHTML = calHtml + `
+    const _uncal = !_underlayCalibrated(u);
+    const sheetHtml = u.sheet ? `<div class="gz-count" style="margin-bottom:5px;">
+            <span class="gz-note" style="flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${_esc(u.sheet.name || '')}">Sheet: ${_esc(u.sheet.name || 'client sheet')}${u.cal && u.cal.at ? ' \u00b7 calibrated ' + _esc(u.cal.at) : ''}</span>
+            <button class="gz-btn" data-ul-recrop onclick="_ulSheetOpen()" title="Open the full sheet: move the print area, or set the scale and the wall again">Re-crop or recalibrate</button>
+          </div>` : '';
+    const uncalHtml = _uncal ? `<div class="gz-run" data-ul-uncal style="border-color:#e00000; background:rgba(224,0,0,0.08);">
+            <div class="gz-sub" style="margin:0 0 5px; color:#e00000; font-weight:700;">Not calibrated. Its scale is a guess, so art and dimensions on this wall can't be trusted, and it can't print.</div>
+            <button class="gz-btn gz-btn-on" onclick="${u.sheet ? '_ulSheetOpen()' : 'toggleUnderlayCalibrate(true)'}">Calibrate now</button>
+          </div>` : '';
+    box.innerHTML = calHtml + uncalHtml + `
         <div class="gz-run">
           <div class="gz-run-head">
             <span class="gz-run-name">Client elevation</span>
@@ -58767,8 +59189,9 @@ function renderUnderlayControls() {
                    onchange="setUnderlayName(this.value)" style="flex:1 1 auto; min-width:0;">
             <span class="gz-note" style="flex:0 0 auto;">${(u.natW && u.natH) ? (Math.round(u.natW) + ' \u00d7 ' + Math.round(u.natH) + ' px') : ''}</span>
           </div>
+          ${sheetHtml}
           <div class="gz-count" style="margin-bottom:5px;">
-            <button class="gz-btn${u.inDeck === true ? ' gz-btn-on' : ''}" data-ul-indeck onclick="setUnderlayInDeck(${u.inDeck === true ? 'false' : 'true'})"
+            <button class="gz-btn${u.inDeck === true ? ' gz-btn-on' : ''}" data-ul-indeck ${_uncal ? 'disabled title="Calibrate it first"' : ''} onclick="setUnderlayInDeck(${u.inDeck === true ? 'false' : 'true'})"
                     title="Print this client elevation behind the art on this wall's deck pages and exports, at full strength and cropped to the wall. Calibrate it first so the art is to scale.">${u.inDeck === true ? '&#10003; Shown in deck' : 'Show in deck'}</button>
             <span class="gz-note">${u.inDeck === true ? 'Prints behind the art, cropped to the wall' : 'Tracing guide only'}</span>
             <button type="button" class="wall-all-btn" data-ul-indeck-all onclick="_wallAllMenu(this, 'indeck')" title="Show in deck, or tracing guide only, on every wall that has a client elevation">All walls &#9662;</button>
