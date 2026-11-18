@@ -105,6 +105,14 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   `tests/test_underlay_in_deck.js`). FOURTH PLACE (20.36): `renderElevationToCanvas`, the spec-page thumbnail, draws
   it too (over the 20.32 paint, clipped to the wall) through `_underlayImage` (decode cache, resolves null on
   error or after 4 s so a bad image cannot hang a build). Leave any of the four out and that page shows a bare wall.
+  **THE WHOLE DRAWING (20.62):** `underlay.deckView === 'drawing'` (`_underlayDeckFull`) clips the deck underlay to
+  the IMAGE, not the wall, and is the one case the image joins the artboard bounds and `cap.boxes['underlay-layer']`
+  (in `_CAP_BASE_BOXES`, or `_capView` crops it back); its right edge becomes `wallRightX` and `floorY` is dropped
+  (a client sheet's slab and notes sit below the floor and `_igFloorPlace` dropped them into the caption band).
+  Install pages only: the spec-page thumbnail stays clipped. `elev.frameStyle === 'outline'` prints frames as a
+  black box ELEV_OUTLINE_IN wide (no raster, no shadow, flat graphics excepted). `_elevCaptionText(elev, base)`
+  is every install-page Elevation caption; `underlay.source` ('' hides) else a sheet number off `underlay.name`.
+  Test `tests/test_underlay_whole_drawing.js`.
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in
   `elevUnit`, `x`/`y` bottom-left; `_ctxPxTop` is the only flip.

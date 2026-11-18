@@ -158,7 +158,9 @@ const path = require('path');
       const body = S.slice(i, i + 40000);
       if (/capText\\('Elevation'/.test(body)) throw new Error('THE BUG: the caption still appends the elevation/item name');
       if (/\\.toUpperCase\\(\\)/.test(body.slice(0, 3000)) && /capText/.test(body)) throw new Error('the upper-casing caption builder survives');
-      if (body.indexOf("drawCaption('Elevation'") < 0) throw new Error('expected a plain \\'Elevation\\' caption');
+      // 20.62: still the word, never the item code; a wall printing its client drawing adds the
+      // source sheet after it (_elevCaptionText), which is not the item code either.
+      if (body.indexOf("drawCaption(_elevCaptionText(elev, 'Elevation')") < 0) throw new Error('expected a plain \\'Elevation\\' caption');
       // And it uses the shared helper, so it matches the spec page's size. (The
       // helper gained an optional align argument when the caption moved to the
       // wall's bottom-right corner, hence matching the call loosely.)
@@ -176,7 +178,7 @@ const path = require('path');
       // 19.41: things DO sit right of the wall (tick ends, a figure beside it), so the
       // image's right edge is not the wall's corner. The caption ends on the wall's right
       // edge as reported by the capture (_igPlaceElev's wallR), in both layouts.
-      if (body.split("drawCaption('Elevation', _wa.wallR, yBot - 2, 'right')").length - 1 !== 2) throw new Error('expected the caption right-aligned to the wall right edge in both layouts');
+      if (body.split("drawCaption(_elevCaptionText(elev, 'Elevation'), _wa.wallR, yBot - 2, 'right')").length - 1 !== 2) throw new Error('expected the caption right-aligned to the wall right edge in both layouts');
       // Both elevation layouts (elevOnly and elevPlan) must agree (counted above, 19.41).
       // The helper has to be able to do it at all.
       const j = S.indexOf('function _specThumbCaption');
