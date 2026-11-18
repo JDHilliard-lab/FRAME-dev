@@ -111,7 +111,9 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   (a client sheet's slab and notes sit below the floor and `_igFloorPlace` dropped them into the caption band).
   Install pages only: the spec-page thumbnail stays clipped. `elev.frameStyle === 'outline'` prints frames as a
   black box ELEV_OUTLINE_IN wide (no raster, no shadow, flat graphics excepted). `_elevCaptionText(elev, base)`
-  is every install-page Elevation caption; `underlay.source` ('' hides) else a sheet number off `underlay.name`.
+  is every install-page Elevation caption; it adds `underlay.source` only when typed (20.63: the studio caption is
+  plain Elevation, never read off the name). 20.63: the EDITOR crops a wall-cropped deck drawing too
+  (`#underlay-layer` overflow hidden in `renderElevUnderlay`), except while Placing or Calibrating.
   Test `tests/test_underlay_whole_drawing.js`.
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in

@@ -92,11 +92,11 @@ const path = require('path');
       _setUnderlayDeckViewAll('wall');
       if ('deckView' in elevations[0].underlay) throw new Error('wall only should store nothing');
     });
-    __check('the caption names the source sheet, read off the name, typed, or cleared', () => {
+    __check('the caption is plain Elevation unless a source sheet is typed', () => {
       seed(Object.assign(U(), { name: 'ELEV.HUB.L1.ART.S24-11_AI4101-02' }));
       if (_elevCaptionText(elevations[0], 'Elevation') !== 'Elevation') throw new Error('a tracing guide named its sheet');
       elevations[0].underlay.inDeck = true;
-      if (_elevCaptionText(elevations[0], 'Elevation') !== 'Elevation · AI4101-02') throw new Error('read off the name: ' + _elevCaptionText(elevations[0], 'Elevation'));
+      if (_elevCaptionText(elevations[0], 'Elevation') !== 'Elevation') throw new Error('20.63: the caption is plain Elevation until a source is typed, got ' + _elevCaptionText(elevations[0], 'Elevation'));
       setUnderlaySource('Ford AI4101-02 V8');
       if (_elevCaptionText(elevations[0], 'Elevation') !== 'Elevation · Ford AI4101-02 V8') throw new Error('typed source');
       setUnderlaySource('');
@@ -115,6 +115,18 @@ const path = require('path');
       const s = document.querySelector('#underlayControls [data-ul-source]');
       if (!v || !f || !s || !document.querySelector('#underlayControls [data-frame-style-all]')) throw new Error('missing control');
       if (v.value !== 'wall' || f.value !== 'frame') throw new Error('defaults ' + v.value + ' ' + f.value);
+    });
+    __check('20.63: the editor crops a wall-cropped drawing at the wall, but not while placing, a guide, or a whole drawing', () => {
+      const layer = document.getElementById('underlay-layer');
+      seed(Object.assign(U(), { inDeck: true })); elevScale = 2;
+      renderElevUnderlay(249, 144);
+      if (layer.style.overflow !== 'hidden') throw new Error('a wall-cropped drawing spills past the wall in the editor');
+      elevations[0].underlay.deckView = 'drawing'; renderElevUnderlay(249, 144);
+      if (layer.style.overflow === 'hidden') throw new Error('a whole drawing was cropped');
+      seed(U()); renderElevUnderlay(249, 144);
+      if (layer.style.overflow === 'hidden') throw new Error('a tracing guide was cropped');
+      seed(Object.assign(U(), { inDeck: true })); _ulPlacing = true; renderElevUnderlay(249, 144); _ulPlacing = false;
+      if (layer.style.overflow === 'hidden') throw new Error('cropped while placing: it cannot be lined up');
     });
     __check('export: the whole drawing joins the artboard and the crop; outline frames skip the frame raster; captions name the sheet', () => {
       const b = body('exportElevSVG');
