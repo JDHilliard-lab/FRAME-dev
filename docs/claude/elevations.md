@@ -110,7 +110,9 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   (in `_CAP_BASE_BOXES`, or `_capView` crops it back); its right edge becomes `wallRightX` and `floorY` is dropped
   (a client sheet's slab and notes sit below the floor and `_igFloorPlace` dropped them into the caption band).
   Install pages only: the spec-page thumbnail stays clipped. `elev.frameStyle === 'outline'` prints frames as a
-  black box ELEV_OUTLINE_IN wide (no raster, no shadow, flat graphics excepted). `_elevCaptionText(elev, base)`
+  black box ELEV_OUTLINE_IN wide (no raster, no shadow, flat graphics excepted). 20.64: the box is paper
+  white and its opening still goes through `_maybeAddArtworkToSvg` (wireframe block + letter, or the art),
+  outline on top; skipping it printed empty boxes (`test_outline_frames_wireframe`). `_elevCaptionText(elev, base)`
   is every install-page Elevation caption; it adds `underlay.source` only when typed (20.63: the studio caption is
   plain Elevation, never read off the name). 20.63: the EDITOR crops a wall-cropped deck drawing too
   (`#underlay-layer` overflow hidden in `renderElevUnderlay`), except while Placing or Calibrating.
