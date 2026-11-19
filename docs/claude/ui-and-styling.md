@@ -347,3 +347,11 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   Live writes the row + preview only; table, walls, warnings follow once after the colour settles, or at once on
   `change`. The pending pass tracks the ROW OBJECT, never the index; a full sync of another row flushes it first.
   A new continuous control on the form (colour, slider) takes the live form plus an `onchange` settle.
+- **HELP VIDEO GUIDES ARE RECORDED BY FRAME ITSELF (20.70, `tools/clips`, `help/clips`).** `bash tools/clips/record.sh`
+  drives the app in the frame driver's headless Chrome with real input and a drawn cursor, and encodes WebM in Chrome
+  (MediaRecorder; no ffmpeg on the machine). Captions and camera zooms are drawn by `encoder.html`, never in the page.
+  The poster is the last real frame. FICTIONAL DRAWINGS ONLY (`tools/clips/assets`, Tideline): the site is public.
+  Help embeds them as `<figure class="help-video"><video ... preload="none">`; `sw.js` returns early for range and
+  .webm/.mp4 requests. These WebM files have no seek index, so don't grab frames by seeking (peek.js is flaky past the
+  first seconds). Re-record when a clip's screens change; a missing control stops it with `not found:`. Test
+  `tests/test_help_videos.js`.

@@ -3815,3 +3815,8 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 #codeBuilderModal .cb-foot { display: flex; gap: 8px; align-items: center; }
 #codeBuilderModal .cb-foot .action-btn { width: auto; height: 32px; padding: 0 16px; }
 #codeBuilderModal .cb-flex { flex: 1; }
+
+/* 20.70: Help video guides */
+.help-video { margin: 0 0 12px; }
+.help-video video { display: block; width: 100%; max-width: 720px; aspect-ratio: 16 / 10; background: #111; border-radius: var(--r-6); border: 1px solid var(--border-color); }
+.help-video figcaption { margin-top: 5px; font-size: var(--fs-65); color: var(--text-muted); line-height: 1.4; }

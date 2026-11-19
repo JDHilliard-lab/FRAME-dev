@@ -136,6 +136,9 @@ function onFetch(event) {
     if (req.method !== 'GET') return;
     const url = new URL(req.url);
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+    // Help videos (20.70) go straight to the network: they are fetched in byte ranges, which a
+    // cached whole response cannot answer (Safari will not play them), and they are too big to keep.
+    if ((req.headers && req.headers.has && req.headers.has('range')) || /\.(webm|mp4)$/i.test(url.pathname)) return;
     if (req.mode === 'navigate') { event.respondWith(onNavigate(req)); return; }
     const sameScope = req.url.indexOf(SCOPE) === 0;
     if (sameScope && isVersioned(req.url)) { event.respondWith(onVersioned(req)); return; }

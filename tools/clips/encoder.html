@@ -1,0 +1,65 @@
+<!doctype html><html><body style="margin:0;background:#000"><canvas id="c"></canvas>
+<script>
+// Plays a list of frames [{src, t}] (t in ms from start) onto a canvas in real time and
+// records it with MediaRecorder. window.__encode(list, w, h, fps) resolves to a data URL.
+window.__encode = async function (list, w, h, fps, cam, caps, tEnd) {
+  caps = caps || [];
+  const FONT = '-apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif';
+  const capAt = (t) => { let c = null; for (const k of caps) { if (k.t <= t) c = k; else break; } return c; };
+  const drawCap = (t) => {
+    const c = capAt(t); if (!c || !c.parts) return;
+    const a = Math.min(1, (t - c.t) / 220);
+    ctx.save(); ctx.globalAlpha = a;
+    const fs = 21, padX = 24, pill = c.n ? 30 : 0, gap = c.n ? 12 : 0;
+    let tw = 0; c.parts.forEach(p => { ctx.font = (p.b ? '700 ' : '600 ') + fs + 'px ' + FONT; p.w = ctx.measureText(p.s).width; tw += p.w; });
+    const bw = tw + padX * 2 + pill + gap, bh = 54, bx = (w - bw) / 2, by = h - bh - 26;
+    ctx.fillStyle = 'rgba(17,18,22,0.93)'; ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 5;
+    ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 12); ctx.fill(); ctx.shadowColor = 'transparent';
+    let x = bx + padX; const cy = by + bh / 2;
+    if (c.n) { ctx.fillStyle = '#4f8cff'; ctx.beginPath(); ctx.arc(x + pill / 2, cy, pill / 2, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = '700 17px ' + FONT; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(c.n, x + pill / 2, cy + 1); x += pill + gap; }
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    c.parts.forEach(p => { ctx.font = (p.b ? '700 ' : '600 ') + fs + 'px ' + FONT; ctx.fillStyle = p.b ? '#9dbdff' : '#ffffff'; ctx.fillText(p.s, x, cy + 1); x += p.w; });
+    ctx.restore();
+  };
+  cam = (cam && cam.length) ? cam : [{ t: 0, dur: 0, x: 0, y: 0, w: w, h: h }];
+  const ease = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+  const camAt = (t) => {   // the box on screen at time t: each key eases from the one before
+    let cur = cam[0];
+    for (let i = 1; i < cam.length; i++) {
+      const k = cam[i]; if (t < k.t) break;
+      const p = k.dur ? Math.min(1, (t - k.t) / k.dur) : 1, e = ease(p);
+      cur = { x: cur.x + (k.x - cur.x) * e, y: cur.y + (k.y - cur.y) * e, w: cur.w + (k.w - cur.w) * e, h: cur.h + (k.h - cur.h) * e };
+    }
+    return cur;
+  };
+  const draw = (img, t) => { const s = img.naturalWidth / w, b = camAt(t); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, b.x * s, b.y * s, b.w * s, b.h * s, 0, 0, w, h); drawCap(t); };
+  const c = document.getElementById('c'); c.width = w; c.height = h;
+  const ctx = c.getContext('2d');
+  const imgs = await Promise.all(list.map(f => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('load ' + f.src)); i.src = f.src; })));
+  draw(imgs[0], 0);
+  const stream = c.captureStream(fps || 30);
+  const mime = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
+  const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 2500000 });
+  const chunks = []; rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+  const done = new Promise(r => rec.onstop = r);
+  rec.start(250);
+  const t0 = performance.now();
+  const end = Math.max(list[list.length - 1].t, tEnd || 0) + 300;
+  let k = 0;
+  await new Promise(resolve => {
+    const tick = () => {
+      const now = performance.now() - t0;
+      while (k + 1 < list.length && list[k + 1].t <= now) k++;
+      draw(imgs[k], now);
+      if (now >= end) return resolve();
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+  rec.stop(); await done;
+  const blob = new Blob(chunks, { type: 'video/webm' });
+  window.__out = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(blob); });
+  return { size: blob.size, mime: mime };
+};
+</script></body></html>
