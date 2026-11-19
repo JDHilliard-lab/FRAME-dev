@@ -210,3 +210,17 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   Renaming a plan in the markup tool sets its sector from "Sector 12" in a sector-style project, recoding its pieces,
   unless the sector was typed by hand (it only follows while it still matches the OLD name). `_codesSwitchPattern`
   fills blank plan sectors from names before asking. `_levelSetZone` is the one setter (the Item codes table uses it).
+- **THE CODE BUILDER IS THE PATTERN STRING, BOTH WAYS (20.69, `openCodeBuilder`, `_codeBuilderToPattern`,
+  `_codeBuilderFromPattern`, `_codeBuilderCheck`, `_codeBuilderApply`, `CODE_BUILDER_STARTS`).** Parts: type, level
+  (`fmt` code / n / nn = `{level}` / `{lvn}` / `{lvnn}`), field (`k` zone / f1..f3, `label`, `tag` letters before),
+  text, n (`w`). Each part's `sep` follows it. Nothing downstream knows parts exist; every preset must round-trip
+  (tested). Plan values are held per part `uid` until Use, so a moved part keeps its column. A field keeps its key;
+  a new one takes the first free (`_cbFieldKeys`). When `{zone}` now belongs to a different part than when the
+  builder opened, pieces' own `r.zone` values are cleared (they meant the old field). Two value parts with no
+  separator and no letters between are refused: the parse could not split them.
+- **PLAN FIELDS BEYOND THE SECTOR (20.69, `CODE_EXTRA_FIELDS`, `_levelField`, `_levelFieldSet`, `_codeLevelCtx`,
+  `_codePlanGaps`, `_codeFieldLabel`).** `{f1}..{f3}` live on the plan only (`floorplanLevels[i].fields[k]`), named in
+  `editorialContent.codeFields`; `{zone}` keeps its per-piece override. EVERY ctx built for a fill goes through
+  `_codeLevelCtx` (or misses the new tokens and falls back to a house code). `_codesSwitchPattern` asks only for a
+  missing SECTOR and skips pieces missing another field (`skipMissing`); + Add code on the floor plan asks for a
+  missing plan field once and stores it on the plan. Test `tests/test_code_builder.js`.

@@ -3777,3 +3777,41 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .fp-setup-tx { flex: 1; min-width: 0; font-size: var(--fs-60); line-height: 1.4; color: var(--text-main); }
 .fp-setup-step.done .fp-setup-tx { color: var(--text-muted); }
 .fp-setup-go { flex: 0 0 auto; width: auto; height: 22px; padding: 0 8px; font-size: var(--fs-55); }
+
+/* 20.69: Code builder */
+#codeBuilderModal .cb-card { background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-8); box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 900px; max-width: 95vw; max-height: 90vh; overflow: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+#codeBuilderModal h3 { margin: 0 0 4px; font-size: var(--fs-105); color: var(--text-strong); }
+#codeBuilderModal .cb-sub { font-size: var(--fs-70); color: var(--text-muted); line-height: 1.45; }
+#codeBuilderModal .cb-label { font-size: var(--fs-60); font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--text-muted); }
+#codeBuilderModal .cb-starts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#codeBuilderModal .cb-start { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 5px 9px; border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-input); color: var(--text-main); cursor: pointer; font-size: var(--fs-65); }
+#codeBuilderModal .cb-start span { font-family: var(--font-mono, monospace); color: var(--text-muted); font-size: var(--fs-60); }
+#codeBuilderModal .cb-start:hover { border-color: var(--ui-active); }
+#codeBuilderModal .cb-strip { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; padding: 10px; border: 1px dashed var(--border-color); border-radius: var(--r-6); background: var(--bg-subpanel); min-height: 60px; }
+#codeBuilderModal .cb-house { flex: 1; font-size: var(--fs-65); color: var(--text-muted); line-height: 1.45; }
+#codeBuilderModal .cb-part { width: 150px; padding: 6px 8px 8px; border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-panel); display: flex; flex-direction: column; gap: 4px; }
+#codeBuilderModal .cb-part.cb-over { border-color: var(--ui-active); box-shadow: 0 0 0 2px var(--ui-active) inset; }
+#codeBuilderModal .cb-part-top { display: flex; align-items: center; gap: 5px; font-size: var(--fs-65); color: var(--text-strong); }
+#codeBuilderModal .cb-part-top b { flex: 1; }
+#codeBuilderModal .cb-grip { cursor: grab; color: var(--text-muted); font-size: var(--fs-95); line-height: 1; user-select: none; padding: 0 2px; }
+#codeBuilderModal .cb-x { border: none; background: transparent; color: var(--text-muted); cursor: pointer; font-size: var(--fs-65); padding: 0 2px; }
+#codeBuilderModal .cb-row { display: flex; flex-direction: column; gap: 2px; font-size: var(--fs-55); color: var(--text-muted); }
+#codeBuilderModal .cb-row input, #codeBuilderModal .cb-row select, #codeBuilderModal .cb-table input { height: 24px; font-size: var(--fs-60); padding: 0 5px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-4); width: 100%; box-sizing: border-box; }
+#codeBuilderModal .cb-note { font-size: var(--fs-55); color: var(--text-muted); }
+#codeBuilderModal .cb-sep { align-self: center; width: 62px; height: 26px !important; font-size: var(--fs-65); background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-4); }
+#codeBuilderModal .cb-add { align-self: center; width: auto; height: 30px; padding: 0 12px; font-size: var(--fs-65); }
+#codeBuilderModal .cb-preview { font-family: var(--font-mono, monospace); font-size: calc(var(--fs-120) * 1.6); font-weight: 700; color: var(--text-strong); letter-spacing: 0.5px; }
+#codeBuilderModal .cb-msgs { display: flex; flex-direction: column; gap: 3px; font-size: var(--fs-65); }
+#codeBuilderModal .cb-err { color: var(--btn-danger); }
+#codeBuilderModal .cb-warn { color: var(--warn); }
+#codeBuilderModal .cb-table-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+#codeBuilderModal .cb-fill { width: auto; height: 24px; padding: 0 10px; font-size: var(--fs-60); }
+#codeBuilderModal .cb-table { width: 100%; border-collapse: collapse; font-size: var(--fs-65); }
+#codeBuilderModal .cb-table th { text-align: left; font-size: var(--fs-55); color: var(--text-muted); font-weight: 700; padding: 3px 6px; border-bottom: 1px solid var(--border-color); }
+#codeBuilderModal .cb-table td { padding: 3px 6px; color: var(--text-main); }
+#codeBuilderModal .cb-table td input { max-width: 110px; }
+#codeBuilderModal .cb-ex { font-family: var(--font-mono, monospace); color: var(--text-strong); }
+#codeBuilderModal .cb-pattern { font-family: var(--font-mono, monospace); font-size: var(--fs-55); color: var(--text-muted); }
+#codeBuilderModal .cb-foot { display: flex; gap: 8px; align-items: center; }
+#codeBuilderModal .cb-foot .action-btn { width: auto; height: 32px; padding: 0 16px; }
+#codeBuilderModal .cb-flex { flex: 1; }
