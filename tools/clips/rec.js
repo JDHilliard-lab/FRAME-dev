@@ -80,9 +80,13 @@ class Clip {
     await this.move(p.x, p.y, o.ms || 650);
     await sleep(o.pause == null ? 180 : o.pause);
     await this.s.ev(`__clipRing(${p.x},${p.y})`);
-    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: p.x, y: p.y, button: 'left', buttons: 1, clickCount: o.count || 1, modifiers: o.mod || 0 });
-    await sleep(70);
-    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: p.x, y: p.y, button: 'left', buttons: 0, clickCount: o.count || 1, modifiers: o.mod || 0 });
+    // a double-click is two real clicks (clickCount 1 then 2), as a mouse sends them
+    for (let k = 1; k <= (o.count || 1); k++) {
+      await this.s.cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: p.x, y: p.y, button: 'left', buttons: 1, clickCount: k, modifiers: o.mod || 0 });
+      await sleep(60);
+      await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: p.x, y: p.y, button: 'left', buttons: 0, clickCount: k, modifiers: o.mod || 0 });
+      if (k < (o.count || 1)) await sleep(70);
+    }
     await sleep(o.after == null ? 450 : o.after);
   }
   async drag(from, to, opts) {
@@ -96,6 +100,35 @@ class Clip {
     await sleep(150);
     await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: to.x, y: to.y, button: 'left', buttons: 0, clickCount: 1 });
     await sleep(o.after == null ? 450 : o.after);
+  }
+  // A native (HTML5) drag: DevTools intercepts the drag Chrome starts from the real mouse press,
+  // then drag events are replayed along the path, the drawn cursor moving with them.
+  async dragNative(from, to, opts) {
+    const o = opts || {};
+    const a = typeof from === 'string' ? await this.at(from) : from;
+    const b = typeof to === 'string' ? await this.at(to) : to;
+    await this.move(a.x, a.y, o.ms || 600); await sleep(150);
+    await this.s.cdp('Input.setInterceptDrags', { enabled: true });
+    let data = null;
+    this.s.on['Input.dragIntercepted'] = (p) => { data = p.data; };
+    await this.s.ev(`__clipRing(${a.x},${a.y})`);
+    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: a.x, y: a.y, button: 'left', buttons: 1, clickCount: 1 });
+    for (let i = 1; i <= 6 && !data; i++) { await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: a.x + i * 2, y: a.y + i * 3, button: 'left', buttons: 1 }); await sleep(40); }
+    if (!data) { await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: a.x, y: a.y, button: 'left', buttons: 0, clickCount: 1 }); await this.s.cdp('Input.setInterceptDrags', { enabled: false }); throw new Error('no native drag started at ' + JSON.stringify(a)); }
+    await this.s.cdp('Input.dispatchDragEvent', { type: 'dragEnter', x: a.x, y: a.y + 6, data: data });
+    const n = Math.max(8, Math.round((o.dragMs || 1000) / 30));
+    for (let i = 1; i <= n; i++) {
+      const k = i / n, e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      const x = a.x + (b.x - a.x) * e, y = a.y + (b.y - a.y) * e;
+      await this.s.cdp('Input.dispatchDragEvent', { type: 'dragOver', x: x, y: y, data: data });
+      await this.s.ev(`__clipMove(${x},${y})`);
+      await sleep(20);
+    }
+    await this.s.cdp('Input.dispatchDragEvent', { type: 'drop', x: b.x, y: b.y, data: data });
+    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: b.x, y: b.y, button: 'left', buttons: 0, clickCount: 1 });
+    await this.s.cdp('Input.setInterceptDrags', { enabled: false });
+    this.x = b.x; this.y = b.y;
+    await sleep(o.after == null ? 500 : o.after);
   }
   async type(text, delay) { for (const ch of text) { await this.s.cdp('Input.insertText', { text: ch }); await sleep(delay || 70); } }
   async key(k, code, kc) { await this.s.cdp('Input.dispatchKeyEvent', { type: 'keyDown', key: k, code: code || k, windowsVirtualKeyCode: kc || 0 }); await this.s.cdp('Input.dispatchKeyEvent', { type: 'keyUp', key: k, code: code || k, windowsVirtualKeyCode: kc || 0 }); }
