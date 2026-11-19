@@ -12,9 +12,9 @@ const check = (label, fn) => { try { fn(); results.push({ label, ok: true }); } 
 const vids = [];
 APP.replace(/<video src="([^"]+)" poster="([^"]+)"([^>]*)>/g, (m, src, poster, rest) => { vids.push({ src, poster, rest }); return m; });
 
-check('Help has the two video guides, and the floor plan guide opens with the first', () => {
+check('Help has the video guides, and the floor plan guide opens with the first', () => {
     const srcs = vids.map(v => v.src);
-    ['help/clips/01-floor-plan.webm', 'help/clips/02-client-elevation.webm'].forEach(s => { if (srcs.indexOf(s) < 0) throw new Error('missing ' + s); });
+    ['help/clips/00-new-project.webm', 'help/clips/01-floor-plan.webm', 'help/clips/02-client-elevation.webm'].forEach(s => { if (srcs.indexOf(s) < 0) throw new Error('missing ' + s); });
     const i = APP.indexOf("id: 'floorplan-guide'"), j = APP.indexOf("id: 'coding'", i);
     if (APP.slice(i, j).indexOf('help/clips/01-floor-plan.webm') < 0) throw new Error('Start here has no video');
     if (APP.indexOf("id: 'videos'") < 0) throw new Error('no Video guides section');
@@ -43,3 +43,4 @@ const bad = results.filter(r => !r.ok);
 console.log('\n--- Summary ---');
 console.log(bad.length ? bad.length + ' FAILURES' : 'ALL PASSED (' + results.length + ')');
 process.exit(bad.length ? 1 : 0);
+

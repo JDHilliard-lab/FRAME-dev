@@ -37,7 +37,7 @@ const OVERLAY = `(() => {
   window.__clipCap = (h) => { cap.innerHTML = h || ''; cap.style.opacity = h ? '1' : '0'; };
 })()`;
 class Clip {
-  constructor(s) { this.s = s; this.x = 720; this.y = 450; this.frames = []; this.t0 = 0; this.cam = []; this.caps = []; }
+  constructor(s) { this.s = s; this.x = 720; this.y = 450; this.frames = []; this.t0 = 0; this.cam = []; this.caps = []; this.callouts = []; }
   // camera: ease to show the screen box (x, y, w; h follows the video's shape) over `ms`
   zoom(x, y, w, ms) { const h = w * this.H / this.W; this.cam.push({ t: Date.now(), dur: ms || 900, x: Math.max(0, Math.min(this.W - w, x)), y: Math.max(0, Math.min(this.H - h, y)), w: w, h: h }); return sleep(ms || 900); }
   full(ms) { return this.zoom(0, 0, this.W, ms); }
@@ -45,7 +45,7 @@ class Clip {
   async start() {
     this.frames = [];
     this.s.on['Page.screencastFrame'] = (p) => { this.frames.push({ data: p.data, t: p.metadata.timestamp * 1000 }); this.s.cdp('Page.screencastFrameAck', { sessionId: p.sessionId }); };
-    this.cam = [{ t: Date.now(), dur: 0, x: 0, y: 0, w: this.W, h: this.H }]; this.caps = [];
+    this.cam = [{ t: Date.now(), dur: 0, x: 0, y: 0, w: this.W, h: this.H }]; this.caps = []; this.callouts = [];
     await this.s.cdp('Page.startScreencast', { format: 'jpeg', quality: 85, maxWidth: this.W * this.dsf, maxHeight: this.H * this.dsf, everyNthFrame: 1 });
     await sleep(400);
   }
@@ -103,6 +103,13 @@ class Clip {
     const b = (await this.at(sel)).box;
     return { x: b.x + b.w * px / nw, y: b.y + b.h * py / nh };
   }
+  // a sharp enlargement of one small area (a footer line) shown as a card over the video for `ms`;
+  // captured at `scale` by DevTools, so text is re-rendered, not blown up
+  async callout(rect, ms, label, scale) {
+    const r = await this.s.cdp('Page.captureScreenshot', { format: 'png', clip: { x: rect.x, y: rect.y, width: rect.w, height: rect.h, scale: scale || 5 } });
+    this.callouts.push({ t: Date.now(), dur: ms, label: label || '', data: r.result.data });
+    await sleep(ms);
+  }
   // captions are drawn by the encoder over the video (so a zoom never crops them)
   async cap(html, hold) {
     const m = /<span class="n">([^<]*)<\/span>/.exec(html || '');
@@ -122,7 +129,8 @@ class Clip {
     const { sock } = await connect(x => x.id === tg.result.targetId);
     const cam = this.cam.map(k => Object.assign({}, k, { t: k.t - t0 }));
     const caps = this.caps.map(k => Object.assign({}, k, { t: k.t - t0 }));
-    const info = await sock.ev(`__encode(${JSON.stringify(list)}, ${this.W}, ${this.H}, 30, ${JSON.stringify(cam)}, ${JSON.stringify(caps)}, ${this.tEnd - t0})`);
+    const callouts = this.callouts.map((k, i) => { const p = path.join(dir, 'callout' + i + '.png'); fs.writeFileSync(p, Buffer.from(k.data, 'base64')); return { t: k.t - t0, dur: k.dur, label: k.label, src: STATE.app + '/__file?p=' + encodeURIComponent(p) }; });
+    const info = await sock.ev(`__encode(${JSON.stringify(list)}, ${this.W}, ${this.H}, 30, ${JSON.stringify(cam)}, ${JSON.stringify(caps)}, ${this.tEnd - t0}, ${JSON.stringify(callouts)})`);
     const len = await sock.ev('__out.length'); let s = '';
     for (let i = 0; i < len; i += 4000000) s += await sock.ev(`__out.slice(${i}, ${i + 4000000})`);
     fs.writeFileSync(outFile, Buffer.from(s.split(',')[1], 'base64'));

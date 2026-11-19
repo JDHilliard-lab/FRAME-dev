@@ -2,7 +2,23 @@
 <script>
 // Plays a list of frames [{src, t}] (t in ms from start) onto a canvas in real time and
 // records it with MediaRecorder. window.__encode(list, w, h, fps) resolves to a data URL.
-window.__encode = async function (list, w, h, fps, cam, caps, tEnd) {
+window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts) {
+  callouts = callouts || [];
+  await Promise.all(callouts.map(k => new Promise((res, rej) => { const i = new Image(); i.onload = () => { k.img = i; res(); }; i.onerror = () => rej(new Error('callout ' + k.src)); i.src = k.src; })));
+  const drawCallouts = (t) => callouts.forEach(k => {
+    if (t < k.t || t > k.t + k.dur) return;
+    const a = Math.min(1, (t - k.t) / 200, (k.t + k.dur - t) / 200);
+    const iw = Math.min(w - 160, k.img.naturalWidth), ih = iw * k.img.naturalHeight / k.img.naturalWidth;
+    const pad = 18, lab = k.label ? 26 : 0, cw = iw + pad * 2, ch = ih + pad * 2 + lab;
+    const x = (w - cw) / 2, y = h - 54 - 26 - 22 - ch;
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.shadowColor = 'rgba(0,0,0,0.45)'; ctx.shadowBlur = 26; ctx.shadowOffsetY = 8;
+    ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.roundRect(x, y, cw, ch, 14); ctx.fill(); ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = '#4f8cff'; ctx.lineWidth = 3; ctx.stroke();
+    if (lab) { ctx.fillStyle = '#4f8cff'; ctx.font = '700 15px ' + FONT; ctx.textBaseline = 'top'; ctx.fillText(k.label.toUpperCase(), x + pad, y + pad - 2); }
+    ctx.imageSmoothingQuality = 'high'; ctx.drawImage(k.img, x + pad, y + pad + lab, iw, ih);
+    ctx.restore();
+  });
   caps = caps || [];
   const FONT = '-apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif';
   const capAt = (t) => { let c = null; for (const k of caps) { if (k.t <= t) c = k; else break; } return c; };
@@ -33,7 +49,7 @@ window.__encode = async function (list, w, h, fps, cam, caps, tEnd) {
     }
     return cur;
   };
-  const draw = (img, t) => { const s = img.naturalWidth / w, b = camAt(t); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, b.x * s, b.y * s, b.w * s, b.h * s, 0, 0, w, h); drawCap(t); };
+  const draw = (img, t) => { const s = img.naturalWidth / w, b = camAt(t); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, b.x * s, b.y * s, b.w * s, b.h * s, 0, 0, w, h); drawCallouts(t); drawCap(t); };
   const c = document.getElementById('c'); c.width = w; c.height = h;
   const ctx = c.getContext('2d');
   const imgs = await Promise.all(list.map(f => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('load ' + f.src)); i.src = f.src; })));
