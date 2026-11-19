@@ -125,6 +125,17 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   on the wall, `setUnderlayInDeck` and All walls refuse, `_underlayCalPreflight` warns. No flag = calibrated (files
   from before 20.65). The sheet window is `#ulSheetModal` (`_ulSheetOpen`/`_ulShDraw`, state `_ulSh`). Test
   `tests/test_client_sheet.js`.
+  **CROP ON THE WALL, BORDER, DROP (20.66):** `toggleUnderlayCrop` / `_ulCropRender` show the whole sheet faded with a
+  box and 8 handles (`_ulCropResize`, clamped to the sheet, min 20 px); `applyUnderlayCrop` re-cuts from the sheet and
+  places by `_ulSheetFrame` (sheet px to wall units), never touching `cal`. A plain picture becomes its own sheet on its
+  first crop (`_ulSheetOf`). Crop mode keeps an invisible `elev-underlay-img` so a capture mid-crop still has the
+  drawing, and drops itself on another wall (`_ulCropElev`). Grey border: `_igDrawingBorder` after each install-page
+  `_drawElevAnnOps`, from `view.ulBox` (capture box 'underlay-layer'), PLAN_BORDER_RGB/PT; deck default
+  `editorialContent.elevBorder === false`, per wall `elev.drawingBorder`. `_ulPanelDropWire` makes the panel a drop
+  target (stops the global project drop). Handles on #wall (z 61, export-skip), from `_elevHandlesRender` at the top of
+  `renderElevUnderlay`: `._wallHandle` right/top/top-right (`_wallDragSize`, quarter inch, min 12 in; left end and floor
+  fixed) and `._ulPaHandle` x8 round a whole-drawing print area (`_ulCropQuickStart`: crop mode for the drag, applied on
+  release via `_ulCropAuto`). None while placing, calibrating or cropping. Test `tests/test_crop_and_border.js`.
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in
   `elevUnit`, `x`/`y` bottom-left; `_ctxPxTop` is the only flip.

@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.65';
+const APP_VERSION = '20.66';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -10730,6 +10730,10 @@ function _wallAllMenu(anchor, kind) {
         { label: 'Tracing guide only on every wall', hint: n(withUl), onClick: () => _setUnderlayInDeckAll(false) },
         { label: 'Whole drawing on every wall', hint: 'the room round the art wall', onClick: () => _setUnderlayDeckViewAll('drawing') },
         { label: 'Art wall only on every wall', hint: 'cropped to the wall', onClick: () => _setUnderlayDeckViewAll('wall') },
+    ];
+    else if (kind === 'border') items = [
+        { label: 'Grey border on every wall', hint: 'round a drawing printed whole', onClick: () => _setElevBorderAll(true) },
+        { label: 'No border on any wall', hint: n(walls.length), onClick: () => _setElevBorderAll(false) },
     ];
     else if (kind === 'frames') items = [
         { label: 'Outlines on every wall', hint: n(walls.length), onClick: () => _setElevFrameStyleAll('outline') },
@@ -46324,6 +46328,7 @@ async function _capView(cap, hide) {
         vec: { w: cw, h: chh, ops: ops },
         person: (vis.person && cap.person) ? { png: cap.person.png, box: [cap.person.box[0] - x0, cap.person.box[1] - y0, cap.person.box[2] - x0, cap.person.box[3] - y0] } : null,
         wallBox: (cap.boxes && cap.boxes.wall) ? [cap.boxes.wall[0] - x0, cap.boxes.wall[1] - y0, cap.boxes.wall[2] - x0, cap.boxes.wall[3] - y0] : null,
+        ulBox: (cap.boxes && cap.boxes['underlay-layer']) ? [cap.boxes['underlay-layer'][0] - x0, cap.boxes['underlay-layer'][1] - y0, cap.boxes['underlay-layer'][2] - x0, cap.boxes['underlay-layer'][3] - y0] : null,   // 20.66 border
         floorFrac: (cap.floorY != null && chh > 0 && cap.floorY > y0 && cap.floorY <= y1 + 0.01) ? (cap.floorY - y0) / chh : null,
         wallRightFrac: (cap.wallRightX != null && cw > 0 && cap.wallRightX > x0 && cap.wallRightX <= x1 + 0.01) ? (cap.wallRightX - x0) / cw : null
     };
@@ -46494,6 +46499,7 @@ async function _captureElevRun(elevIdx) {
             // Every guide is in this capture; _capView shows the ones that are on.
             allGuides: !!(_vecOK && res.boxes), boxes: res.boxes || null, pad: res.pad || null, person: person,
             floorY: res.floorY, wallRightX: res.wallRightX,
+            ulBox: (_vecOK && res.boxes && res.boxes['underlay-layer']) ? res.boxes['underlay-layer'].slice() : null,   // 20.66 border
             // Only on the vector path, where the picture IS the artboard (no pixel crop).
             floorFrac: (_vecOK && res.floorY != null && res.artH > 0 && res.floorY > 0 && res.floorY <= res.artH) ? res.floorY / res.artH : null,
             wallRightFrac: (_vecOK && res.wallRightX != null && res.artW > 0 && res.wallRightX > 0 && res.wallRightX <= res.artW) ? res.wallRightX / res.artW : null
@@ -47713,6 +47719,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
                     _capDrawPerson(doc, cap, ex, ey, ew, eh);
                     _drawElevAnnOps(doc, cap.vec, ex, ey, ew, eh);
+                    _igDrawingBorder(doc, cap, elev, ex, ey, ew, eh);   // 20.66
                     // Under the drawing wherever it sits, ending on the wall's own right corner.
                     const _wallR = (cap.wallRightFrac > 0.5 && cap.wallRightFrac <= 1) ? ex + ew * cap.wallRightFrac : (ex + ew);
                     drawCaption(_elevCaptionText(elev, (_igParts > 1) ? ('Elevation, ' + (_igPart + 1) + ' of ' + _igParts) : 'Elevation'), _wallR, yBot - _slack / 2 - 2, 'right');
@@ -47739,6 +47746,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     _capDrawPerson(doc, cap, ex, ey, ew, eh);
                     // Lines and numbers as real vector text on top of the picture.
                     _drawElevAnnOps(doc, cap.vec, ex, ey, ew, eh);
+                    _igDrawingBorder(doc, cap, elev, ex, ey, ew, eh);   // 20.66
                     // Right-aligned to the image's right edge. The capture is cropped to its
                     // content bounding box, and nothing sits right of the wall — the
                     // top wall-width dim spans exactly the wall — so that edge IS the
@@ -47830,6 +47838,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     _capDrawPerson(doc, cap, ex, ey, ew, eh);
                     // Lines and numbers as real vector text on top of the picture.
                     _drawElevAnnOps(doc, cap.vec, ex, ey, ew, eh);
+                    _igDrawingBorder(doc, cap, elev, ex, ey, ew, eh);   // 20.66
                     // Right-aligned to the image's right edge. The capture is cropped to its
                     // content bounding box, and nothing sits right of the wall — the
                     // top wall-width dim spans exactly the wall — so that edge IS the
@@ -53472,7 +53481,7 @@ The <strong>image size with bleed</strong> is worked out at RFI and never shown 
             },
             {
                 title: `What's new`,
-                body: `<strong>20.65</strong> <b>Add the client's full sheet, pick the elevation on it, and calibrate: always.</b> On the Elevation tab, Wall tab, <b>+ Add client sheet</b> takes the whole elevation sheet as it came (a PNG or JPG of the PDF page) and opens it full screen in three steps: <b>Pick the elevation</b> (drag a box round it; the box is exactly what prints on the page), <b>Scale</b> (click both ends of a dimension printed on the drawing and type it, 11'-0" or 132"), and <b>The art wall</b> (click the floor at the wall's left and right ends, then the ceiling). Finish puts the drawing on the wall to scale, its floor on the wall's floor, and can set the wall to the drawing's size. The sheet is kept whole in the project; <b>Re-crop or recalibrate</b> reopens it, and other walls can <b>Use a sheet in this project</b> without adding it again. On the Elevations tab a dashed red box shows what <b>prints on the page</b>. <b>Calibration is required:</b> a client elevation added any way is marked <b>Not calibrated</b> (a red banner on the wall, Preflight lists it) and cannot be shown in the deck until it is. <b>Calibrate</b> now says on the wall what to click, draws the line it measured, and stops after two clicks.<br><br><strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
+                body: `<strong>20.66</strong> <b>Crop the client drawing on the wall, give it a grey border, and drop a sheet straight in.</b> On the Elevation tab, Wall tab, a drawing that prints whole has <b>Crop the print area</b>: the whole sheet appears faded on the wall with the print area as a red box; drag an edge or corner to trim it (a long elevation trimmed down prints bigger, so its dimensions read), drag inside to slide to another part, then <b>Done cropping</b>. It is cut again from the full sheet, and the scale never changes. Or skip the button: the dashed box on the wall has <b>handles</b>; grab one, drag, and let go. The wall has handles too, on its right edge, top edge and top-right corner: drag to size the wall (quarter inches; the left end and the floor stay put). <b>Grey border</b> puts a thin light grey line round the drawing on the page, like the plan border (on by default; untick per wall, or <b>All walls</b>). Drag a sheet image from Finder onto the Client elevation panel to add it.<br><br><strong>20.65</strong> <b>Add the client's full sheet, pick the elevation on it, and calibrate: always.</b> On the Elevation tab, Wall tab, <b>+ Add client sheet</b> takes the whole elevation sheet as it came (a PNG or JPG of the PDF page) and opens it full screen in three steps: <b>Pick the elevation</b> (drag a box round it; the box is exactly what prints on the page), <b>Scale</b> (click both ends of a dimension printed on the drawing and type it, 11'-0" or 132"), and <b>The art wall</b> (click the floor at the wall's left and right ends, then the ceiling). Finish puts the drawing on the wall to scale, its floor on the wall's floor, and can set the wall to the drawing's size. The sheet is kept whole in the project; <b>Re-crop or recalibrate</b> reopens it, and other walls can <b>Use a sheet in this project</b> without adding it again. On the Elevations tab a dashed red box shows what <b>prints on the page</b>. <b>Calibration is required:</b> a client elevation added any way is marked <b>Not calibrated</b> (a red banner on the wall, Preflight lists it) and cannot be shown in the deck until it is. <b>Calibrate</b> now says on the wall what to click, draws the line it measured, and stops after two clicks.<br><br><strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
 <strong>20.53</strong> <b>The studio's Coding cheat sheet is in Help.</b> Help > Reference has a <b>Coding cheat sheet</b> section: how to name supporting files (PLAN, ELEV, REND, MOCK, FINISH, FRAME and REF codes), the art types and their image codes with Medium or Application, the approved public domain sources, the public domain and Creative Commons rules, which assets can be remixed and under what code, how a new asset is coded, and what each spec page row holds.
 <strong>20.52</strong> <b>A placement left on the wrong sector's plan is easy to fix.</b> When a plan holds placements still coded for another sector (moved by an older build, or by pinning before 20.51), its Items tab says so at the top with <b>Recode</b> (or <b>Recode all</b>): each takes the next code in this plan's sector and its pin comes across, in one Ctrl+Z. Picking the plan it already sits on under <b>Move to level</b> now recodes it too, instead of doing nothing.\n<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
@@ -57512,8 +57521,11 @@ function renderElevUnderlay(wallW, wallH) {
     const layer = document.getElementById('underlay-layer');
     if (!layer) return;
     layer.innerHTML = '';
+    try { _elevHandlesRender(wallW, wallH); } catch (e) {}   // 20.66: wall and print-area handles
     const u = _elevUnderlay(elevations[currentElevIndex]);
     if (!u) { _ulBanner(null); return; }
+    if (_ulCropping && _ulCropElev !== elevations[currentElevIndex]) { _ulCropping = false; _ulCropDraft = null; _ulCropElev = null; }   // another wall: the crop is dropped
+    if (_ulCropping) { _ulCropRender(layer, u, wallH); _ulBanner(u); return; }   // 20.66
     const w = parseFloat(u.w) || 0, h = parseFloat(u.h) || 0;
     if (!(w > 0) || !(h > 0)) return;
     const L = (parseFloat(u.x) || 0) * elevScale;
@@ -59114,6 +59126,294 @@ function _underlayCalPreflight() {
     return out;
 }
 
+// ── CROP THE PRINT AREA ON THE WALL (20.66) ───────────────────────────────
+// "It would be easier if we could adjust the crop after the initial input... designers might
+// want to just focus on a specific area. When the elevation is very long the dimensions look
+// small, and we want to trim it down until we are happy with how it looks." Crop mode shows
+// the WHOLE sheet faded on the wall with the print area as a box: drag an edge or a corner to
+// trim, drag inside to slide it. Done re-cuts the picture from the full sheet. The crop is
+// in sheet pixels and the calibration is on the sheet, so the scale never moves. A plain
+// picture (no sheet) becomes its own sheet on its first crop, so nothing is ever thrown away.
+let _ulCropping = false, _ulCropDraft = null, _ulCropDrag = null, _ulCropElev = null;
+// The underlay's sheet and crop, a plain picture standing in as its own sheet.
+function _ulSheetOf(u) {
+    if (!u) return null;
+    if (u.sheet && u.sheet.src && u.crop && u.crop.w > 0) return { sheet: u.sheet, crop: u.crop };
+    if (!(u.natW > 0 && u.natH > 0)) return null;
+    return { sheet: { src: u.src, name: u.name || '', natW: u.natW, natH: u.natH }, crop: { x: 0, y: 0, w: u.natW, h: u.natH } };
+}
+// Sheet pixels to wall units for this underlay: x from the wall's left, y UP from the floor.
+function _ulSheetFrame(u) {
+    const sc = _ulSheetOf(u);
+    if (!sc || !(parseFloat(u.w) > 0)) return null;
+    const su = parseFloat(u.w) / sc.crop.w;                       // wall units per sheet px
+    return { sheet: sc.sheet, crop: sc.crop, su: su,
+        x0: parseFloat(u.x) - sc.crop.x * su,                      // the sheet's left edge
+        top: parseFloat(u.y) + parseFloat(u.h) + sc.crop.y * su };  // the sheet's top edge
+}
+function toggleUnderlayCrop(on) {
+    const u = _elevUnderlay(elevations[currentElevIndex]);
+    const want = (typeof on === 'boolean') ? on : !_ulCropping;
+    if (want && (!u || !_ulSheetFrame(u))) return;
+    _ulCropping = want;
+    _ulCropElev = want ? elevations[currentElevIndex] : null;
+    _ulCropDraft = want ? Object.assign({}, _ulSheetFrame(u).crop) : null;
+    if (want) { _ulPlacing = false; _ulCalibrateActive = false; }
+    initElevControls(); drawElevAll();
+}
+// Draw crop mode into the underlay layer: the faded sheet, the box, eight handles.
+function _ulCropRender(layer, u, wallH) {
+    const F = _ulSheetFrame(u), c = _ulCropDraft;
+    if (!F || !c) return;
+    const S = F.sheet, su = F.su;
+    const sW = S.natW * su, sH = S.natH * su;
+    layer.style.overflow = ''; layer.style.pointerEvents = 'auto'; layer.style.zIndex = '55';
+    // The printed picture stays in place (invisible), so a deck capture taken mid-crop still has its drawing.
+    const keep = document.createElement('img');
+    keep.className = 'elev-underlay-img'; keep.setAttribute('data-export-skip', '1'); keep.setAttribute('data-html2canvas-ignore', 'true');
+    keep.src = u.src; keep.alt = '';
+    keep.style.cssText = 'position:absolute; left:' + (parseFloat(u.x) * elevScale) + 'px; top:' + _ctxPxTop(u.y, parseFloat(u.h), wallH) + 'px; width:' + (parseFloat(u.w) * elevScale) + 'px; height:' + (parseFloat(u.h) * elevScale) + 'px; opacity:0; pointer-events:none;';
+    layer.appendChild(keep);
+    const sheetImg = document.createElement('img');
+    sheetImg.setAttribute('data-export-skip', '1'); sheetImg.setAttribute('data-html2canvas-ignore', 'true');
+    sheetImg.src = S.src; sheetImg.alt = '';
+    sheetImg.style.cssText = 'position:absolute; left:' + (F.x0 * elevScale) + 'px; top:' + _ctxPxTop(F.top - sH, sH, wallH) + 'px; width:' + (sW * elevScale)
+        + 'px; height:' + (sH * elevScale) + 'px; opacity:0.28; pointer-events:none; user-select:none;';
+    layer.appendChild(sheetImg);
+    const bx = F.x0 + c.x * su, bw = c.w * su, bh = c.h * su, by = F.top - (c.y + c.h) * su;
+    const L = bx * elevScale, T = _ctxPxTop(by, bh, wallH), W = bw * elevScale, H = bh * elevScale;
+    // object-position works in rendered px, so render the whole sheet at wall scale behind a clip instead.
+    const clip = document.createElement('div');
+    clip.setAttribute('data-export-skip', '1'); clip.setAttribute('data-html2canvas-ignore', 'true');
+    clip.style.cssText = 'position:absolute; left:' + L + 'px; top:' + T + 'px; width:' + W + 'px; height:' + H + 'px; overflow:hidden; pointer-events:none;';
+    const full = document.createElement('img');
+    full.src = S.src; full.alt = '';
+    full.style.cssText = 'position:absolute; left:' + (-c.x * su * elevScale) + 'px; top:' + (-c.y * su * elevScale) + 'px; width:' + (sW * elevScale) + 'px; height:' + (sH * elevScale) + 'px; opacity:0.9;';
+    clip.appendChild(full);
+    layer.appendChild(clip);
+    const box = document.createElement('div');
+    box.className = '_ulCropBox';
+    box.setAttribute('data-export-skip', '1'); box.setAttribute('data-html2canvas-ignore', 'true');
+    box.style.cssText = 'position:absolute; left:' + L + 'px; top:' + T + 'px; width:' + W + 'px; height:' + H
+        + 'px; border:1.5px dashed #e00000; box-sizing:border-box; cursor:move; pointer-events:auto;';
+    box.innerHTML = '<span style="position:absolute; left:0; top:-15px; font:600 9px/1 sans-serif; letter-spacing:.06em; color:#e00000; white-space:nowrap;">PRINTS ON THE PAGE · drag an edge to trim, inside to slide</span>';
+    box.onmousedown = (ev) => _ulCropStart(ev, 'move');
+    layer.appendChild(box);
+    [['nw', 0, 0], ['n', 0.5, 0], ['ne', 1, 0], ['e', 1, 0.5], ['se', 1, 1], ['s', 0.5, 1], ['sw', 0, 1], ['w', 0, 0.5]].forEach(([k, fx, fy]) => {
+        const g = document.createElement('div');
+        g.className = '_ulCropHandle';
+        g.setAttribute('data-crop-handle', k);
+        g.setAttribute('data-export-skip', '1'); g.setAttribute('data-html2canvas-ignore', 'true');
+        g.style.cssText = 'position:absolute; left:' + (L + W * fx) + 'px; top:' + (T + H * fy) + 'px; width:11px; height:11px; margin:-6px 0 0 -6px;'
+            + ' background:#fff; border:2px solid #e00000; border-radius:var(--r-2); pointer-events:auto; z-index:3; cursor:'
+            + ({ n: 'ns', s: 'ns', e: 'ew', w: 'ew', nw: 'nwse', se: 'nwse', ne: 'nesw', sw: 'nesw' }[k]) + '-resize;';
+        g.onmousedown = (ev) => _ulCropStart(ev, k);
+        layer.appendChild(g);
+    });
+}
+function _ulCropStart(e, kind) {
+    const u = _elevUnderlay(elevations[currentElevIndex]), F = _ulSheetFrame(u);
+    if (!F || !_ulCropDraft) return;
+    e.preventDefault(); e.stopPropagation();
+    _ulCropDrag = { kind: kind, mx: e.clientX, my: e.clientY, c0: Object.assign({}, _ulCropDraft), pxPerSheet: F.su * elevScale };
+    window.addEventListener('mousemove', _ulCropMove);
+    window.addEventListener('mouseup', _ulCropEnd);
+}
+// The new crop for a drag of (dx, dy) sheet pixels on edge/corner `kind`, clamped to the sheet.
+function _ulCropResize(c0, kind, dx, dy, natW, natH) {
+    const MIN = 20;
+    let x0 = c0.x, y0 = c0.y, x1 = c0.x + c0.w, y1 = c0.y + c0.h;
+    if (kind === 'move') {
+        const nx = Math.max(0, Math.min(natW - c0.w, c0.x + dx)), ny = Math.max(0, Math.min(natH - c0.h, c0.y + dy));
+        return { x: nx, y: ny, w: c0.w, h: c0.h };
+    }
+    if (kind.indexOf('w') >= 0) x0 = Math.max(0, Math.min(x1 - MIN, x0 + dx));
+    if (kind.indexOf('e') >= 0) x1 = Math.min(natW, Math.max(x0 + MIN, x1 + dx));
+    if (kind.indexOf('n') >= 0) y0 = Math.max(0, Math.min(y1 - MIN, y0 + dy));
+    if (kind.indexOf('s') >= 0) y1 = Math.min(natH, Math.max(y0 + MIN, y1 + dy));
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+}
+function _ulCropMove(e) {
+    const d = _ulCropDrag; if (!d) return;
+    const u = _elevUnderlay(elevations[currentElevIndex]), F = _ulSheetFrame(u);
+    if (!F) return;
+    _ulCropDraft = _ulCropResize(d.c0, d.kind, (e.clientX - d.mx) / d.pxPerSheet, (e.clientY - d.my) / d.pxPerSheet, F.sheet.natW, F.sheet.natH);
+    drawElevAll();
+}
+function _ulCropEnd() {
+    _ulCropDrag = null;
+    window.removeEventListener('mousemove', _ulCropMove);
+    window.removeEventListener('mouseup', _ulCropEnd);
+    // A drag started on the wall's print-area handles applies itself on release (20.66).
+    if (_ulCropAuto) {
+        _ulCropAuto = false;
+        const u = _elevUnderlay(elevations[currentElevIndex]), F = _ulSheetFrame(u), c = _ulCropDraft;
+        const same = F && c && ['x', 'y', 'w', 'h'].every(k => Math.abs(F.crop[k] - c[k]) < 0.5);
+        if (same) { _ulCropping = false; _ulCropDraft = null; drawElevAll(); }
+        else applyUnderlayCrop();
+    }
+}
+// Done: cut the kept part out of the full sheet and place it where it sits on the sheet.
+async function applyUnderlayCrop() {
+    const elev = elevations[currentElevIndex], u = _elevUnderlay(elev), F = _ulSheetFrame(u), c = _ulCropDraft;
+    if (!u || !F || !c) { toggleUnderlayCrop(false); return; }
+    let im = null;
+    try { im = new Image(); im.src = F.sheet.src; await im.decode(); } catch (e) { im = null; }
+    if (!im) { showInfoModal('The sheet could not be read', 'The crop was not changed.'); return; }
+    const cw = Math.max(1, Math.round(c.w)), ch = Math.max(1, Math.round(c.h));
+    const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+    const g = cv.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, cw, ch);
+    g.drawImage(im, c.x, c.y, c.w, c.h, 0, 0, cw, ch);
+    const r1 = (v) => Math.round(v * 10) / 10;
+    if (!u.sheet) u.sheet = F.sheet;          // a plain picture keeps its original as its sheet
+    u.crop = { x: r1(c.x), y: r1(c.y), w: r1(c.w), h: r1(c.h) };
+    u.src = cv.toDataURL('image/png'); u.natW = cw; u.natH = ch;
+    u.x = _ctxRound(F.x0 + c.x * F.su); u.w = _ctxRound(c.w * F.su); u.h = _ctxRound(c.h * F.su);
+    u.y = _ctxRound(F.top - (c.y + c.h) * F.su);
+    _ulCropping = false; _ulCropDraft = null;
+    _ctxCommit();
+    try { if (typeof _dsClearBuiltAll === 'function') _dsClearBuiltAll(); } catch (e) {}
+}
+
+// ── HANDLES YOU CAN GRAB ON THE WALL (20.66) ──────────────────────────────
+// "I do not see any handles I can grab for the PRINTS ON THE PAGE crop; it would be nice if
+// there were handles on the wall dim too." Two kinds, straight on the drawing, no mode:
+// the print area's eight handles (grab one: the whole sheet appears faded behind, let go and
+// the crop is cut again, one Ctrl+Z), and the wall's right edge, top edge and top-right
+// corner (drag to size the wall; the left end and the floor stay put, so nothing on the wall
+// moves). On #wall at the marks' z-index, so the frames and the grid never sit over them.
+let _ulCropAuto = false, _wallDrag = null;
+const WALL_DRAG_STEP_IN = 0.25;
+function _elevHandle(cls, left, top, cursor, title, onDown) {
+    const g = document.createElement('div');
+    g.className = cls;
+    g.setAttribute('data-export-skip', '1'); g.setAttribute('data-html2canvas-ignore', 'true');
+    g.title = title;
+    g.style.cssText = 'position:absolute; left:' + left + 'px; top:' + top + 'px; width:11px; height:11px; margin:-6px 0 0 -6px; background:#fff;'
+        + ' border:2px solid ' + (cls === '_wallHandle' ? 'var(--wall-line, #333)' : '#e00000') + '; border-radius:var(--r-2); z-index:61; cursor:' + cursor + '-resize; pointer-events:auto;';
+    g.onmousedown = onDown;
+    return g;
+}
+function _elevHandlesRender(wallW, wallH) {
+    const wall = document.getElementById('wall');
+    if (!wall) return;
+    wall.querySelectorAll('._wallHandle, ._ulPaHandle').forEach(el => el.remove());
+    if (_ulPlacing || _ulCalibrateActive || _ulCropping) return;
+    const W = wallW * elevScale, H = wallH * elevScale;
+    // Wall: the right edge, the top edge, the top-right corner.
+    [['e', W, H / 2, 'ew'], ['n', W / 2, 0, 'ns'], ['ne', W, 0, 'nesw']].forEach(([k, x, y, cur]) => {
+        wall.appendChild(_elevHandle('_wallHandle', x, y, cur, 'Drag to size the wall (the left end and the floor stay put)', (ev) => _wallDragStart(ev, k)));
+    });
+    // Print area: eight handles round a drawing that prints whole.
+    const u = _elevUnderlay(elevations[currentElevIndex]);
+    if (!u || !_underlayDeckFull(elevations[currentElevIndex]) || !_ulSheetFrame(u)) return;
+    const w = parseFloat(u.w) || 0, h = parseFloat(u.h) || 0;
+    const L = (parseFloat(u.x) || 0) * elevScale, T = _ctxPxTop(u.y, h, wallH), PW = w * elevScale, PH = h * elevScale;
+    [['nw', 0, 0], ['n', 0.5, 0], ['ne', 1, 0], ['e', 1, 0.5], ['se', 1, 1], ['s', 0.5, 1], ['sw', 0, 1], ['w', 0, 0.5]].forEach(([k, fx, fy]) => {
+        const cur = { n: 'ns', s: 'ns', e: 'ew', w: 'ew', nw: 'nwse', se: 'nwse', ne: 'nesw', sw: 'nesw' }[k];
+        wall.appendChild(_elevHandle('_ulPaHandle', L + PW * fx, T + PH * fy, cur, 'Drag to crop what prints on the page', (ev) => _ulCropQuickStart(ev, k)));
+    });
+}
+// Grab a print-area handle: crop mode for the length of the drag, applied on release.
+function _ulCropQuickStart(e, kind) {
+    const u = _elevUnderlay(elevations[currentElevIndex]), F = _ulSheetFrame(u);
+    if (!F) return;
+    _ulCropping = true; _ulCropElev = elevations[currentElevIndex];
+    _ulCropDraft = Object.assign({}, F.crop);
+    _ulCropAuto = true;
+    _ulCropStart(e, kind);
+    drawElevAll();
+}
+function _wallDragStart(e, kind) {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    e.preventDefault(); e.stopPropagation();
+    _wallDrag = { kind: kind, mx: e.clientX, my: e.clientY, w0: parseFloat(elev.wallW) || 0, h0: parseFloat(elev.wallH) || 0, moved: false };
+    window.addEventListener('mousemove', _wallDragMove);
+    window.addEventListener('mouseup', _wallDragEnd);
+}
+// The new wall size for a drag of (dx, dy) screen px, to the quarter inch, never under 12 in.
+function _wallDragSize(d, dxPx, dyPx, scale, toU) {
+    const step = WALL_DRAG_STEP_IN * toU, min = 12 * toU;
+    const snap = (v) => Math.max(min, Math.round(v / step) * step);
+    return {
+        w: (d.kind === 'e' || d.kind === 'ne') ? snap(d.w0 + dxPx / scale) : d.w0,
+        h: (d.kind === 'n' || d.kind === 'ne') ? snap(d.h0 - dyPx / scale) : d.h0
+    };
+}
+function _wallDragMove(e) {
+    const d = _wallDrag, elev = elevations[currentElevIndex];
+    if (!d || !elev) return;
+    const s = _wallDragSize(d, e.clientX - d.mx, e.clientY - d.my, elevScale, unitFactor('in', elevUnit));
+    if (s.w === elev.wallW && s.h === elev.wallH) return;
+    d.moved = true;
+    elev.wallW = s.w; elev.wallH = s.h;
+    const iw = document.getElementById('wallW'), ih = document.getElementById('wallH');
+    if (iw) iw.value = s.w; if (ih) ih.value = s.h;
+    drawElevAll();
+}
+function _wallDragEnd() {
+    const d = _wallDrag;
+    _wallDrag = null;
+    window.removeEventListener('mousemove', _wallDragMove);
+    window.removeEventListener('mouseup', _wallDragEnd);
+    if (d && d.moved) _wallSettingChanged();
+}
+
+// ── A THIN GREY BORDER ROUND THE PRINTED DRAWING (20.66) ──────────────────
+// "Adding a thin grey box to the elevation to close it off would look nice, similar to the
+// grey stroke round the floorplan pages." The same 0.5 pt light grey as PLAN_BORDER (20.60),
+// round the client drawing where it prints whole. Page option per 20.41: a deck default
+// (`editorialContent.elevBorder === false` is off; absent is ON) and a per-wall override
+// (`elev.drawingBorder`, true or false; absent follows the deck). All walls sets the
+// default and clears the overrides.
+function _elevBorderDeck() { return !(typeof editorialContent !== 'undefined' && editorialContent && editorialContent.elevBorder === false); }
+function _elevBorderPrints(elev) {
+    if (elev && typeof elev.drawingBorder === 'boolean') return elev.drawingBorder;
+    return _elevBorderDeck();
+}
+function setElevBorderWall(on, elev) {
+    const e = elev || elevations[currentElevIndex]; if (!e) return;
+    if (!!on === _elevBorderDeck()) delete e.drawingBorder; else e.drawingBorder = !!on;
+    _wallSettingChanged();
+    try { renderUnderlayControls(); } catch (err) {}
+}
+function _setElevBorderAll(on) {
+    if (typeof editorialContent === 'undefined' || !editorialContent) return;
+    if (on) delete editorialContent.elevBorder; else editorialContent.elevBorder = false;
+    (elevations || []).forEach(e => { if (e) delete e.drawingBorder; });
+    _wallSettingChanged();
+    try { renderUnderlayControls(); } catch (err) {}
+}
+// On the page, after the picture: the drawing's box from the capture, in the same rect.
+function _igDrawingBorder(doc, view, elev, ex, ey, ew, eh) {
+    try {
+        if (!view || !view.ulBox || !view.vec || !(view.vec.w > 0) || !_underlayDeckFull(elev) || !_elevBorderPrints(elev)) return;
+        const kx = ew / view.vec.w, ky = eh / view.vec.h, b = view.ulBox;
+        const x0 = ex + Math.max(0, b[0]) * kx, y0 = ey + Math.max(0, b[1]) * ky;
+        const x1 = ex + Math.min(view.vec.w, b[2]) * kx, y1 = ey + Math.min(view.vec.h, b[3]) * ky;
+        if (!(x1 - x0 > 1 && y1 - y0 > 1)) return;
+        doc.setDrawColor(PLAN_BORDER_RGB[0], PLAN_BORDER_RGB[1], PLAN_BORDER_RGB[2]); doc.setLineWidth(PLAN_BORDER_PT);
+        try { doc.setLineDashPattern([], 0); } catch (e) {}
+        doc.rect(x0, y0, x1 - x0, y1 - y0, 'S');
+    } catch (e) {}
+}
+// Drop a sheet straight onto the Client elevation panel (20.66).
+function _ulPanelDropWire(box) {
+    if (!box || box._ulDropWired) return;
+    box._ulDropWired = true;
+    const isImg = (ev) => { const dt = ev.dataTransfer; if (!dt) return false; if (dt.items && dt.items.length) return Array.from(dt.items).some(it => it.kind === 'file' && /^image\//.test(it.type || '')); return !!(dt.files && dt.files.length); };
+    box.addEventListener('dragover', (ev) => { if (!isImg(ev)) return; ev.preventDefault(); ev.stopPropagation(); box.style.outline = '2px dashed var(--ui-active, #1e6bff)'; box.style.outlineOffset = '2px'; });
+    box.addEventListener('dragleave', () => { box.style.outline = ''; });
+    box.addEventListener('drop', (ev) => {
+        box.style.outline = '';
+        const f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
+        if (!f || !/^image\//.test(f.type || '')) return;
+        ev.preventDefault(); ev.stopPropagation();
+        _ulSheetFromFile(f);
+    });
+}
+
 // ── The sidebar panels ────────────────────────────────────────────────────
 // Both reuse the .gz-* classes the window-panel editor uses. Deliberately: these are
 // the same kind of control in the same narrow sidebar, and a second set of styles is
@@ -59121,6 +59421,7 @@ function _underlayCalPreflight() {
 function renderUnderlayControls() {
     const box = document.getElementById('underlayControls');
     if (!box) return;
+    _ulPanelDropWire(box);   // 20.66: drop a sheet on the panel
     const elev = elevations[currentElevIndex];
     const u = _elevUnderlay(elev);
     if (!u) {
@@ -59207,6 +59508,13 @@ function renderUnderlayControls() {
             </select>
             <button type="button" class="wall-all-btn" data-frame-style-all onclick="_wallAllMenu(this, 'frames')" title="Outlines, or frames as drawn, on every wall">All walls &#9662;</button>
           </div>
+          ${u.deckView === 'drawing' ? `<div class="gz-count" style="margin-bottom:5px;">
+            ${_ulCropping ? `<button class="gz-btn gz-btn-on" data-ul-crop-done onclick="applyUnderlayCrop()">Done cropping</button>
+            <button class="gz-btn" onclick="toggleUnderlayCrop(false)">Cancel</button>`
+            : `<button class="gz-btn" data-ul-crop onclick="toggleUnderlayCrop(true)" ${_ulSheetFrame(u) ? '' : 'disabled'} title="Show the whole sheet on the wall and drag the print area: an edge to trim, inside to slide. The scale never changes.">Crop the print area</button>`}
+            <label style="display:flex; gap:5px; align-items:center; margin-left:auto;" title="A thin light grey line round the drawing on the page, like the plan border"><input type="checkbox" data-ul-border ${_elevBorderPrints(elev) ? 'checked' : ''} onchange="setElevBorderWall(this.checked)"> Grey border</label>
+            <button type="button" class="wall-all-btn" data-ul-border-all onclick="_wallAllMenu(this, 'border')" title="Grey border on every wall, or none">All walls &#9662;</button>
+          </div>` : ''}
           <div class="gz-count" style="margin-bottom:5px;">
             <input type="text" class="gz-in" data-ul-source value="${_esc(_underlaySource(elev))}" placeholder="Optional: source sheet after Elevation (e.g. Ford AI4101-02)"
                    title="Optional. Printed after Elevation under the drawing, so anyone can check the right sheet is behind the art. Empty prints just Elevation."
