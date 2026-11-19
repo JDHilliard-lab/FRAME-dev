@@ -63,10 +63,15 @@ function elevSheet() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fff"/>${g}</svg>`;
 }
 // A made-up abstract artwork for the spec clip: layered tide bands, sand to deep water.
-function artwork() {
+const PALETTES = {
+  'TIDE-0001': ['#e9e1d0', '#d8c7a6', '#b9c9c6', '#8fb0b4', '#5f8c98', '#3c6677', '#24485a', '#16303f'],
+  'TIDE-0002': ['#f3e3cf', '#efc9a4', '#e3a57f', '#cf8166', '#a8605a', '#7a4652', '#4f3145', '#2c2236'],
+  'TIDE-0003': ['#eef0e6', '#d9e0cc', '#b9c8ad', '#97ad8f', '#738f74', '#55725d', '#3b5548', '#253a33'],
+};
+function artwork(name, seed0) {
   const W = 1500, H = 2000; let g = '';
-  const cols = ['#e9e1d0', '#d8c7a6', '#b9c9c6', '#8fb0b4', '#5f8c98', '#3c6677', '#24485a', '#16303f'];
-  let seed = 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  const cols = PALETTES[name];
+  let seed = seed0 || 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
   cols.forEach((c, i) => {
     const y0 = 140 + i * 230; let d = `M0 ${y0}`;
     for (let x = 0; x <= W; x += 75) d += ` Q ${x + 37} ${y0 + (rnd() - 0.5) * 120} ${x + 75} ${y0 + (rnd() - 0.5) * 60}`;
@@ -80,12 +85,12 @@ function artwork() {
 const dir = path.join(__dirname, 'assets'); fs.mkdirSync(dir, { recursive: true });
 fs.writeFileSync(path.join(dir, 'PLAN.TIDE.L1_A-101.svg'), plan());
 fs.writeFileSync(path.join(dir, 'ELEV.TIDE.L1_A-401.svg'), elevSheet());
-fs.writeFileSync(path.join(dir, 'TIDE-0001.svg'), artwork());
+[['TIDE-0001', 7], ['TIDE-0002', 31], ['TIDE-0003', 97]].forEach(([n, s]) => fs.writeFileSync(path.join(dir, n + '.svg'), artwork(n, s)));
 // render to PNG with the driver's Chrome
 const { open, STATE } = require('./rec.js');
 (async () => {
   const c = await open(1280, 800);
-  for (const [n, w, h] of [['PLAN.TIDE.L1_A-101', 2000, 1300], ['ELEV.TIDE.L1_A-401', 2400, 1600], ['TIDE-0001', 1500, 2000]]) {
+  for (const [n, w, h] of [['PLAN.TIDE.L1_A-101', 2000, 1300], ['ELEV.TIDE.L1_A-401', 2400, 1600], ['TIDE-0001', 1500, 2000], ['TIDE-0002', 1500, 2000], ['TIDE-0003', 1500, 2000]]) {
     const svg = fs.readFileSync(path.join(dir, n + '.svg'), 'utf8');
     const url = await c.s.ev(`(async () => { const i = new Image(); i.src = 'data:image/svg+xml;base64,' + ${JSON.stringify(Buffer.from(svg).toString('base64'))}; await i.decode(); const cv = document.createElement('canvas'); cv.width = ${w}; cv.height = ${h}; cv.getContext('2d').drawImage(i, 0, 0); return cv.toDataURL(${JSON.stringify(n.startsWith('TIDE-') ? 'image/jpeg' : 'image/png')}, 0.88); })()`);
     fs.writeFileSync(path.join(dir, n + (n.startsWith('TIDE-') ? '.jpg' : '.png')), Buffer.from(url.split(',')[1], 'base64'));

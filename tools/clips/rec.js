@@ -73,9 +73,9 @@ class Clip {
     await this.move(p.x, p.y, o.ms || 650);
     await sleep(o.pause == null ? 180 : o.pause);
     await this.s.ev(`__clipRing(${p.x},${p.y})`);
-    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: p.x, y: p.y, button: 'left', buttons: 1, clickCount: o.count || 1 });
+    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: p.x, y: p.y, button: 'left', buttons: 1, clickCount: o.count || 1, modifiers: o.mod || 0 });
     await sleep(70);
-    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: p.x, y: p.y, button: 'left', buttons: 0, clickCount: o.count || 1 });
+    await this.s.cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: p.x, y: p.y, button: 'left', buttons: 0, clickCount: o.count || 1, modifiers: o.mod || 0 });
     await sleep(o.after == null ? 450 : o.after);
   }
   async drag(from, to, opts) {
