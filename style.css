@@ -1063,6 +1063,31 @@ select.no-arrow::-ms-expand { display: none; }
 /* The fade slider takes the whole row — the global input[type=range] rule styles the
  * track and thumb, so there is nothing to add but the width. */
 #underlayControls input[type="range"] { width: 100%; margin: 2px 0 0; }
+/* 20.67: the Client elevation panel reads at a glance. Helper text in the main text colour
+ * (muted grey on the dark panel was too faint), labels in sentence case, a status chip,
+ * one main button, section heads, and the hand tools folded under Advanced. */
+#underlayControls .gz-note, #underlayControls .gz-hint, #underlayControls .gz-sub { color: var(--text-main); opacity: 1; }
+#underlayControls .gz-sub { font-size: var(--fs-55); line-height: 1.4; }
+#underlayControls label { text-transform: none; color: var(--text-main); overflow: visible; }
+#underlayControls .ul-check { display: flex; gap: 5px; align-items: center; flex: 1 1 auto; margin: 0; font-size: var(--fs-55); font-weight: 600; white-space: nowrap; }
+#underlayControls .ul-fade > span { text-transform: none; color: var(--text-main); font-size: var(--fs-55); }
+.ul-chip { flex: none; font-size: var(--fs-50); font-weight: 700; padding: 1px 6px; border-radius: var(--r-10); white-space: nowrap; }
+.ul-chip-ok { color: #2fbf71; background: rgba(47, 191, 113, 0.15); }
+.ul-chip-bad { color: #ff5a5a; background: rgba(224, 0, 0, 0.15); }
+.ul-meta { font-size: var(--fs-55); color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 5px; }
+#underlayControls .ul-primary, .ul-primary {
+    display: block; width: 100%; padding: 5px 8px; font-size: var(--fs-60); font-weight: 700;
+    background: var(--accent, #3a86ff); border-color: var(--accent, #3a86ff); color: #fff;
+}
+.ul-primary:hover { color: #fff; filter: brightness(1.12); }
+.ul-sec {
+    font-size: var(--fs-50); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted);
+    margin: 9px 0 3px; padding-top: 6px; border-top: 1px solid var(--border-color);
+}
+.ul-adv { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border-color); }
+.ul-adv > summary { cursor: pointer; font-size: var(--fs-55); font-weight: 600; color: var(--text-main); margin-bottom: 4px; }
+.ul-adv > summary:hover { color: var(--text-strong); }
+#underlayControls .gz-add { color: var(--text-main); }
 /* An ARMED mode reads as pressed. Place and Calibrate are modes that change what a
  * click on the wall does, so a button that looks identical on and off is how you end
  * up drawing a block when you meant to measure one. */

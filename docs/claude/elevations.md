@@ -135,7 +135,21 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   target (stops the global project drop). Handles on #wall (z 61, export-skip), from `_elevHandlesRender` at the top of
   `renderElevUnderlay`: `._wallHandle` right/top/top-right (`_wallDragSize`, quarter inch, min 12 in; left end and floor
   fixed) and `._ulPaHandle` x8 round a whole-drawing print area (`_ulCropQuickStart`: crop mode for the drag, applied on
-  release via `_ulCropAuto`). None while placing, calibrating or cropping. Test `tests/test_crop_and_border.js`.
+  release via `_ulCropAuto`; REMOVED in 20.67). None while placing, calibrating or cropping. Test `tests/test_crop_and_border.js`.
+  **HANDLES IN THE SHEET WINDOW, PANEL (20.67):** every step of `#ulSheetModal` is adjustable, never a one-shot click.
+  Step 1 opens with a crop box (`_ulShDefaultCrop`: middle of the sheet, or the whole picture for `whole`), step 3 is a
+  wall box `_ulSh.wb` {x, y top, w, h} in sheet px from `_ulShWallInit` (last cal's fl/fr/top, else the wall's current
+  W x H at the scale, centred in the crop, floor 6 in above its bottom). Both use `_ulShHit` (8 handles, edges, inside =
+  move, tol 9 screen px) and `_ulCropResize`; drag on empty sheet draws a new box, a click without a drag keeps the
+  old one. Step 2's ends drag. `_ulShWall` reads `wb` first, the three clicks only for old state; `_ulSheetFinish`
+  writes `cal.fl/fr/top` from `wb` so the file format is unchanged. Typed W/H (`_ulShSetWallSize`) keep the left end
+  and the floor. `_ulShSetWall`: Make this wall auto-ticks when the box differs, until touched. Magnifier
+  `[data-uls-loupe]` (`_ulShLoupe`, 4x the view, 1x..8x) on the dragged handle, and on the pointer while measuring.
+  Arrows nudge 1 screen px, Shift 10. The footer rebuilds only when its signature changes (`footSig`) and
+  `_ulShFootSync` updates it, so a field being typed in is never replaced. Panel: status chip, one
+  `_ulEditCropWall` button (a plain picture opens as its own sheet), On the page / In the editor sections, Advanced
+  `<details>` (`_ulAdvOpen`) with the name, numbers, Place and Calibrate on the wall. On-wall print-area handles and
+  the Crop the print area button are gone; the editor crop mode code stays for now. Test `tests/test_sheet_handles.js`.
   `elev.underlay = {src, x, y, w, h, opacity}` is a tracing guide;
   `elev.contextBlocks = [{x, y, w, h, label}]` are doors, windows, millwork, TVs. Both in
   `elevUnit`, `x`/`y` bottom-left; `_ctxPxTop` is the only flip.

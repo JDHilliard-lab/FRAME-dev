@@ -128,12 +128,12 @@ const path = require('path');
       if (ig.split('_igDrawingBorder(doc, cap, elev').length - 1 !== 3) throw new Error('not on every install layout');
       if (SRC.indexOf("ulBox: (cap.boxes && cap.boxes['underlay-layer'])") < 0) throw new Error('the page view does not carry the drawing box');
     });
-    __check('handles you can grab: three on the wall, eight round a print area, none while placing or cropping', () => {
+    __check('handles you can grab: three on the wall (20.67: none round the print area), none while placing', () => {
       seed(SHEET()); elevScale = 2; _ulPlacing = false; _ulCropping = false; _ulCalibrateActive = false;
       renderElevUnderlay(126.5, 132);
       const wall = document.getElementById('wall');
       if (wall.querySelectorAll('._wallHandle').length !== 3) throw new Error('wall handles ' + wall.querySelectorAll('._wallHandle').length);
-      if (wall.querySelectorAll('._ulPaHandle').length !== 8) throw new Error('print area handles ' + wall.querySelectorAll('._ulPaHandle').length);
+      if (wall.querySelectorAll('._ulPaHandle').length) throw new Error('20.67: the print area is cropped in the sheet window, not on the wall');
       if ([...wall.querySelectorAll('._wallHandle, ._ulPaHandle')].some(h => h.getAttribute('data-export-skip') !== '1')) throw new Error('a handle could reach an export');
       seed(Object.assign(SHEET(), { deckView: undefined })); renderElevUnderlay(126.5, 132);
       if (wall.querySelectorAll('._ulPaHandle').length) throw new Error('print-area handles on a wall-cropped drawing');
@@ -146,10 +146,6 @@ const path = require('path');
       if (s1.w !== 136.75 || s1.h !== 137) throw new Error(JSON.stringify(s1));
       const s2 = _wallDragSize({ kind: 'e', w0: 126.5, h0: 132 }, -5000, 999, 2, 1);
       if (s2.w !== 12 || s2.h !== 132) throw new Error('floor or height moved, or under a foot: ' + JSON.stringify(s2));
-    });
-    __check('a print-area handle crops on release, one step, and an untouched grab changes nothing', () => {
-      const f = SRC.slice(SRC.indexOf('function _ulCropEnd('), SRC.indexOf('// Done: cut the kept part'));
-      if (f.indexOf('if (_ulCropAuto)') < 0 || f.indexOf('applyUnderlayCrop()') < 0 || f.indexOf('if (same)') < 0) throw new Error('release does not apply, or a click would recut');
     });
     __check('a sheet can be dropped on the Client elevation panel', () => {
       seed(null); renderUnderlayControls();
