@@ -14,7 +14,7 @@ APP.replace(/<video src="([^"]+)" poster="([^"]+)"([^>]*)>/g, (m, src, poster, r
 
 check('Help has the video guides, and the floor plan guide opens with the first', () => {
     const srcs = vids.map(v => v.src);
-    ['help/clips/00-new-project.webm', 'help/clips/01-floor-plan.webm', 'help/clips/02-client-elevation.webm'].forEach(s => { if (srcs.indexOf(s) < 0) throw new Error('missing ' + s); });
+    ['help/clips/00-new-project.webm', 'help/clips/01-floor-plan.webm', 'help/clips/02-client-elevation.webm', 'help/clips/03-spec-a-piece.webm'].forEach(s => { if (srcs.indexOf(s) < 0) throw new Error('missing ' + s); });
     const i = APP.indexOf("id: 'floorplan-guide'"), j = APP.indexOf("id: 'coding'", i);
     if (APP.slice(i, j).indexOf('help/clips/01-floor-plan.webm') < 0) throw new Error('Start here has no video');
     if (APP.indexOf("id: 'videos'") < 0) throw new Error('no Video guides section');
