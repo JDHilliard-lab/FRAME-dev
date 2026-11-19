@@ -31,6 +31,8 @@ const path = require('path');
       dashProjectData = [];
       _dsPages = [{ kind: 'floorplan', level: 1 }]; _dsIndex = 0; currentView = 'deck';
       _fpArmedId = null; _fpLineArmId = null; _fpLineStart = null; _fpSelLine = null;
+      // 20.68: the Size / Sketch row shows only in budget mode (Production > Pricing turns it on)
+      _fpBudgetMode = true;
       _fpSketchOn = false; _fpAddSize = ''; _fpSketchArea = ''; _fpAddType = artCat();
       __pushes = 0;
     };

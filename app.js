@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.67';
+const APP_VERSION = '20.68';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -12776,10 +12776,10 @@ function _codeNumsFor(prefix) {
 // house ART.1. A code the pattern cannot fill (no sector given yet) falls back to the house
 // code rather than mint L3.ART.S-01.
 const CODE_PATTERN_PRESETS = [
-    { v: '', label: 'ART.1 (house)' },
-    { v: '{type}-{nn}', label: 'ART-01' },
-    { v: '{level}.{type}-{nn}', label: 'L3.ART-01 (level)' },
-    { v: '{level}.{type}.S{zone}-{nn}', label: 'L3.ART.S16-01 (level, sector)' },
+    { v: '', label: 'ART.1 (house)', use: 'Most decks: one plan or a few, hotels, residential, catalogues. One count for the whole project; gaps close on their own.' },
+    { v: '{type}-{nn}', label: 'ART-01', use: 'The house count written the way a client asked for it (dash, two digits).' },
+    { v: '{level}.{type}-{nn}', label: 'L3.ART-01 (level)', use: 'Several floors and the client wants the floor in the code. Each level counts from 01; the level comes from the plan.' },
+    { v: '{level}.{type}.S{zone}-{nn}', label: 'L3.ART.S16-01 (level, sector)', use: 'Big floors the client\u2019s drawings split into sectors (Ford Hub). One plan page per sector; each sector counts from 01.' },
 ];
 function _codePattern() { return String((editorialContent && editorialContent.codePattern) || '').trim(); }
 // 20.46: a bare number is a sector, not the word for one (a designer typed 22 into this box
@@ -36283,6 +36283,7 @@ function _fpPlanStrip(desc) {
 }
 function _fpPanelItems(t, desc) {
     { const ps = _fpPlanStrip(desc); if (ps) t.appendChild(ps); }
+    _fpSetupCardInto(t, desc);   // 20.68
     // WHILE SOMETHING IS ARMED the line says what the next click does, because that is
     // the one moment it is news. The standing how-to lives on the ? dot instead of a
     // paragraph that pushed the list down every time the panel opened.
@@ -36312,7 +36313,7 @@ function _fpPanelItems(t, desc) {
         ab.onclick = () => openArtBin();
         t.appendChild(ab);
     }
-    t.appendChild(_fpBudgetStrip());
+    if (_fpBudgetMode) t.appendChild(_fpBudgetStrip());
     // 20.52: PLACEMENTS STUCK ON THIS PLAN WITH ANOTHER SECTOR'S CODE say so here, with one
     // button. They were only in Preflight and the arrows menu, and Move to level on the plan
     // they already sit on did nothing, so a designer could not see how to recode them.
@@ -36463,6 +36464,20 @@ let _fpAddType = null;     // last type picked, so a run of EGD codes needs one 
 const FP_SKETCH_SIZES = [[11, 14], [16, 20], [24, 36], [32, 36], [30, 40], [40, 50]];
 let _fpAddSize = '';          // '' = the default size, else 'WxH' in inches
 let _fpSketchOn = false;
+// 20.68: budget sketching (Size, Sketch and the budget line on the floor plan) is OFF until a
+// PM turns it on from Production > Pricing; module state, so a reload puts it away again.
+let _fpBudgetMode = false;
+function _fpBudgetModeSet(on) {
+    _fpBudgetMode = !!on;
+    if (!_fpBudgetMode) { _fpSketchOn = false; _fpAddSize = ''; try { _fpLoupeHide(); } catch (e) {} }
+}
+// From Production: close it, open the floor plan Items list with the budget tools showing.
+function startBudgetSketch() {
+    _fpBudgetModeSet(true);
+    const m = document.getElementById('productionModal'); if (m) m.remove();
+    _fpPanelTab = 'items';
+    if (_jumpToCodes()) _toast('Budget sketch is on', 'Pick a type and a size, press Sketch, then click the plan. Done budgeting puts the tools away.');
+}
 let _fpSketchArea = '';
 function _fpSketchToggle(on) {
     _fpSketchOn = on == null ? !_fpSketchOn : !!on;
@@ -36517,7 +36532,89 @@ function _fpBudgetStrip() {
     b.title = info ? 'Open Production, Pricing' : 'Base and per sq ft by product, plus add-ons';
     b.onclick = () => { if (info) openProduction('pricing'); else openRateCard(); };
     d.appendChild(b);
+    const done = document.createElement('button'); done.type = 'button'; done.className = 'action-btn btn-secondary';
+    done.setAttribute('data-fp-budget-done', '');
+    done.style.cssText = b.style.cssText;
+    done.textContent = 'Done budgeting';
+    done.title = 'Put the budget tools away. The pieces you sketched stay.';
+    done.onclick = () => { _fpBudgetModeSet(false); _dsRenderTools(); _dsRenderCenter(); };
+    d.appendChild(done);
     return d;
+}
+// ── 20.68: SET UP THIS FLOOR PLAN ──
+// The floor plan is where a presentation starts, and nothing on it said in what order. Three
+// steps, each read live from the project, each with the one button that does it: the plans
+// (one per level, or per sector), the code style, then adding and pinning codes. Folds to one
+// line once all three are done; the Guide opens the floor plan guide popup either way.
+let _fpSetupOpen = null;   // null = open until the steps are done, then folded; true/false = the user's choice
+function _fpSetupSteps(desc) {
+    const lv = floorplanLevels || [];
+    const withImg = lv.filter(L => L && L.imageData).length;
+    const pat = _codePattern();
+    const preset = CODE_PATTERN_PRESETS.find(p => p.v === pat);
+    const groups = _placementList();
+    const li = _deckLvlOf(desc && desc.level);
+    const here = groups.filter(g => _deckLvlOf(g.rows[0].level) === li || g.rows.some(r => _fpPinsAll(r).some(p => _deckLvlOf(p.lv) === li)));
+    const unpinned = here.filter(g => !g.rows.some(r => _fpPins(r).some(p => _deckLvlOf(p.lv) === li)));
+    const needZone = _codePatternNeeds(pat).zone && !!_codePatternParts(pat);
+    const noZone = needZone ? lv.filter((L, i) => L && !_levelZone(i)).length : 0;
+    return [
+        { k: 'plans', n: 1, title: 'Plans',
+          done: lv.length > 0 && withImg === lv.length,
+          text: !lv.length ? 'Add a plan image for each level.'
+              : (withImg < lv.length ? (lv.length - withImg) + ' of ' + lv.length + ' plans have no image yet.'
+                 : lv.length + (lv.length === 1 ? ' plan' : ' plans') + ', all with images.'),
+          btn: 'Plans\u2026', tip: 'Add, name and load plans: one per level, or one per sector when the client splits a level (name it Level 01 | Sector 10).',
+          go: () => { _fpLevel = li; openFloorplanMarkup(); } },
+        { k: 'codes', n: 2, title: 'Code style',
+          done: editorialContent.codePattern !== undefined && !noZone,
+          text: (noZone ? noZone + (noZone === 1 ? ' plan has' : ' plans have') + ' no ' + _codeZoneLabel().toLowerCase() + ' yet. '
+                 : '') + 'Codes look like ' + _codePatternSample(pat) + (preset ? '' : ' (custom)') + '.',
+          btn: 'Codes\u2026', tip: 'Choose how codes are made: house (ART.1), by level, or by level and sector.',
+          go: () => { _fpPanelTab = 'cats'; _dsRenderTools(); } },
+        { k: 'pins', n: 3, title: 'Add and pin',
+          done: here.length > 0 && !unpinned.length,
+          text: !here.length ? 'Pick a type, + Add code, then click the plan where it hangs.'
+              : (unpinned.length ? unpinned.length + ' of ' + here.length + ' on this plan still need a pin.' : 'All ' + here.length + ' on this plan are pinned.'),
+          btn: unpinned.length ? 'Show them' : '', tip: 'Show only the codes with no pin yet',
+          go: () => { _fpUnplacedOnly = true; _dsRenderTools(); } },
+    ];
+}
+function _fpSetupCardInto(t, desc) {
+    const steps = _fpSetupSteps(desc);
+    const allDone = steps.every(s => s.done);
+    const open = _fpSetupOpen == null ? !allDone : _fpSetupOpen;
+    const box = document.createElement('div'); box.className = 'fp-setup' + (open ? ' open' : '');
+    box.setAttribute('data-fp-setup', allDone ? 'done' : 'todo');
+    const hd = document.createElement('div'); hd.className = 'fp-setup-head';
+    const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'fp-setup-toggle';
+    tg.setAttribute('data-fp-setup-toggle', '');
+    const left = steps.filter(s => !s.done).length;
+    tg.textContent = (open ? '\u25be ' : '\u25b8 ') + 'Set up this floor plan' + (allDone ? '  \u2713' : '  (' + left + ' to do)');
+    tg.title = open ? 'Fold the steps away' : 'Show the steps';
+    tg.onclick = () => { _fpSetupOpen = !open; _dsRenderTools(); };
+    const gd = document.createElement('button'); gd.type = 'button'; gd.className = 'action-btn btn-secondary fp-setup-guide';
+    gd.setAttribute('data-fp-guide', '');
+    gd.textContent = 'Guide';
+    gd.title = 'How a floor plan is built: plans and sectors, code styles, a worked example';
+    gd.onclick = () => openFloorplanGuide(0);
+    hd.appendChild(tg); hd.appendChild(gd); box.appendChild(hd);
+    if (open) steps.forEach(s => {
+        const r = document.createElement('div'); r.className = 'fp-setup-step' + (s.done ? ' done' : '');
+        r.setAttribute('data-fp-step', s.k);
+        const n = document.createElement('span'); n.className = 'fp-setup-n'; n.textContent = s.done ? '\u2713' : String(s.n);
+        const tx = document.createElement('div'); tx.className = 'fp-setup-tx';
+        const b = document.createElement('b'); b.textContent = s.title;
+        tx.appendChild(b); tx.appendChild(document.createTextNode(' ' + s.text));
+        r.appendChild(n); r.appendChild(tx);
+        if (s.btn) {
+            const go = document.createElement('button'); go.type = 'button'; go.className = 'action-btn btn-secondary fp-setup-go';
+            go.textContent = s.btn; go.title = s.tip; go.onclick = s.go;
+            r.appendChild(go);
+        }
+        box.appendChild(r);
+    });
+    t.appendChild(box);
 }
 let _fpAddSet = 1;
 function _fpAddCodesBar(desc) {
@@ -36552,6 +36649,10 @@ function _fpAddCodesBar(desc) {
         _dsRefresh(); _dsRenderTools(); _dsRenderCenter();
         if (code) _toast('Added ' + code, (floorplanLevels.some(l => l && l.imageData) || floorplanImageData) ? 'Click the plan to pin it, or add the next one.' : 'Pin it once a plan image is in.');
     };
+    // 20.68: SIZE AND SKETCH ARE A PM'S BUDGET TOOL, not a designer's. They only show once
+    // budget sketching is switched on from Production > Pricing (`_fpBudgetMode`); a designer
+    // starting a floor plan sees the type and + Add code and nothing else.
+    if (!_fpBudgetMode) { bar.appendChild(tSel); bar.appendChild(add); return bar; }
     // 19.98: the size a new piece starts at, and Sketch (every plan click is a new piece)
     const zSel = document.createElement('select'); zSel.id = 'fpAddSize';
     zSel.title = 'Size for new pieces: the standard sizes from the budgeting guide (past 40 x 50 is oversize). Flat graphics keep their own.';
@@ -37905,6 +38006,38 @@ function _levelZonesInfer(byRows) {
         if (best && tally[best] * 4 >= n * 3) L.zone = best;
     });
 }
+// 20.68: ONE WAY TO SET A PLAN'S SECTOR. Pieces that were in its old sector (or none) move
+// with it, and the codes follow the pattern. No history: the caller owns the gesture.
+function _levelSetZone(i, v) {
+    const L = floorplanLevels && floorplanLevels[i]; if (!L) return false;
+    const was = String(L.zone || '').trim(); v = String(v || '').trim();
+    if (v === was) return false;
+    if (v) L.zone = v; else delete L.zone;
+    // 20.47: pieces that were in this level's sector move with it.
+    if (v) (dashProjectData || []).forEach(r => { if (r && (typeof r.level === 'number' ? r.level : 0) === i && (!String(r.zone || '').trim() || String(r.zone).trim() === was)) r.zone = v; });
+    if (_codePatternNeeds().zone && _codePatternParts(_codePattern())) {
+        _codesApplyPattern(_codePattern(), { skipMissing: true, keepAcross: true, quiet: true });
+        _codesRefreshViews();
+    }
+    return true;
+}
+// 20.68: the sector a plan's NAME gives it ("Level 01 | Sector 10" is 10), or ''.
+function _levelZoneFromName(name) {
+    const word = _codeZoneLabel().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const m = new RegExp('\\b(?:' + word + '|sector|zone)\\s*[-:#]?\\s*([A-Za-z0-9]+)', 'i').exec(String(name || ''));
+    return m ? m[1].replace(/^0+(?=\d)/, '') : '';
+}
+// 20.68: a plan named or renamed with a sector in it takes that sector at once (not only
+// when the project is next opened), in a project whose codes carry one. A sector typed by
+// hand is followed only while it still matches what the OLD name said.
+function _levelZoneFollowName(i, oldName) {
+    const L = floorplanLevels && floorplanLevels[i]; if (!L) return false;
+    if (!_codePatternNeeds().zone || !_codePatternParts(_codePattern())) return false;
+    const z = _levelZoneFromName(L.name), cur = String(L.zone || '').trim();
+    if (!z || z === cur) return false;
+    if (cur && cur !== _levelZoneFromName(oldName)) return false;
+    return _levelSetZone(i, z);
+}
 // A placement whose code names another sector than the plan it is on (moved in a build
 // before 20.51, or its plan's sector set later). Read-only: [{ key, li, zone, want }].
 function _codesSectorMismatches() {
@@ -38824,6 +38957,8 @@ function _codesApplyPattern(newPat, opts) {
 async function _codesSwitchPattern(newPat) {
     newPat = String(newPat || '').trim();
     if (newPat && !_codePatternParts(newPat)) { _toast('A pattern needs a number', 'Add {n}, {nn} or {nnn} where the placement number goes.'); return null; }
+    // 20.68: a plan named "Level 01 | Sector 10" already says its sector; blank ones only.
+    if (_codePatternNeeds(newPat).zone) (floorplanLevels || []).forEach(L => { if (L && !String(L.zone || '').trim()) { const z = _levelZoneFromName(L.name); if (z) L.zone = z; } });
     const dry = _codesApplyPattern(newPat, { dry: true });
     if (dry && dry.missing.length) {
         const lbl = _codeZoneLabel();
@@ -39552,11 +39687,11 @@ function _fpPanelCats(t) {
     qsL.textContent = 'Quick set';
     qsL.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px;';
     qs.appendChild(qsL);
-    [['types', 'Framed Art / Canvas / EGD / WF'], ['tiers', 'Primary / Secondary / Tertiary']].forEach(([k, l]) => {
+    [['types', 'Product types', 'Framed Art / Canvas / EGD / WF'], ['tiers', 'Tiers', 'Primary / Secondary / Tertiary']].forEach(([k, l, full]) => {
         const b = document.createElement('button');
         b.className = 'action-btn btn-secondary';
         b.style.cssText = 'flex:1 1 0; min-width:0; width:auto; height:24px; padding:0 6px; font-size:var(--fs-55); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
-        b.textContent = l; b.title = 'Replace the category list with ' + l + '. Categories still used by a piece are kept.';
+        b.textContent = l; b.title = 'Replace the category list with ' + full + '. Categories still used by a piece are kept.';
         b.setAttribute('data-cat-preset', k);
         b.onclick = () => { _artCatsApplyPreset(k); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
         qs.appendChild(b);
@@ -39622,9 +39757,23 @@ function _fpPanelCats(t) {
 function _codePatternPanelInto(t) {
     const box = document.createElement('div'); box.className = 'code-pattern-panel';
     box.style.cssText = 'margin-top:12px; padding-top:8px; border-top:1px solid var(--border-color);';
-    const hd = document.createElement('div'); hd.textContent = 'Item codes';
-    hd.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;';
+    const hd = document.createElement('div');
+    hd.style.cssText = 'display:flex; align-items:center; gap:6px; margin-bottom:4px;';
+    const hdT = document.createElement('span'); hdT.textContent = 'Item codes';
+    hdT.style.cssText = 'flex:1; font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-muted);';
+    const hdG = document.createElement('button'); hdG.type = 'button'; hdG.className = 'action-btn btn-secondary';
+    hdG.setAttribute('data-code-pattern', 'guide');
+    hdG.textContent = 'Which style?';
+    hdG.title = 'What each code style does, and when to use it';
+    hdG.style.cssText = 'flex:0 0 auto; width:auto; height:22px; padding:0 8px; font-size:var(--fs-55);';
+    hdG.onclick = () => openFloorplanGuide(2);
+    hd.appendChild(hdT); hd.appendChild(hdG);
     box.appendChild(hd);
+    // 20.68: what the box does, in one line, before the choice.
+    const why = document.createElement('div'); why.setAttribute('data-code-pattern', 'about');
+    why.textContent = 'Every new code is made for you from this style, the plan it is added on and its category\u2019s prefix. Pick it before codes go to the client.';
+    why.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); line-height:1.4; margin-bottom:6px;';
+    box.appendChild(why);
     const inp = 'height:24px; font-size:var(--fs-60); padding:0 5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
     const save = () => { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); };
     const pat = _codePattern();
@@ -39651,6 +39800,13 @@ function _codePatternPanelInto(t) {
     sel.onchange = () => { if (sel.value === '__custom') { txt.style.display = ''; txt.focus(); return; } setPat(sel.value); };
     txt.onchange = () => setPat(txt.value);
     box.appendChild(sel); box.appendChild(txt);
+    {   // 20.68: when to use the chosen style
+        const pr = CODE_PATTERN_PRESETS.find(p => p.v === pat);
+        const use = document.createElement('div'); use.setAttribute('data-code-pattern', 'use');
+        use.textContent = pr ? pr.use : 'Your own pattern: {type} is the category prefix, {level} the plan\u2019s level, {zone} its sector, {nn} the number.';
+        use.style.cssText = 'font-size:var(--fs-55); color:var(--text-main); line-height:1.4; margin:0 0 8px; padding:5px 7px; background:var(--bg-input); border-radius:var(--r-4);';
+        box.appendChild(use);
+    }
     const need = _codePatternNeeds(pat);
     const lab = (txt0, w) => { const sp = document.createElement('span'); sp.textContent = txt0; sp.style.cssText = 'flex:' + (w ? ('0 0 ' + w + 'px; width:' + w + 'px;') : '1; min-width:0;') + ' font-size:var(--fs-55); color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;'; return sp; };
     // 20.46: the word for {zone} says what it is, so nobody types a sector number into it.
@@ -39663,13 +39819,13 @@ function _codePatternPanelInto(t) {
         zl.setAttribute('data-code-pattern', 'zone-label');
         zl.style.cssText = 'flex:0 0 96px; width:96px; ' + inp;
         zl.onchange = () => { editorialContent.codeZoneLabel = zl.value.trim(); save(); };
-        row.appendChild(lab('{zone} is called')); row.appendChild(zl);
+        row.appendChild(lab('The client calls it a')); row.appendChild(zl);
         box.appendChild(row);
     }
     if (need.level || need.zone) {
         const hdr = document.createElement('div'); hdr.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:2px;';
-        hdr.appendChild(lab('Plan level'));
-        if (need.level) hdr.appendChild(lab('Code', 56));
+        hdr.appendChild(lab('Plan page'));
+        if (need.level) hdr.appendChild(lab('Level', 56));
         if (need.zone) hdr.appendChild(lab(_codeZoneLabel(), 56));
         box.appendChild(hdr);
         (floorplanLevels || []).forEach((L, i) => {
@@ -39680,7 +39836,7 @@ function _codePatternPanelInto(t) {
             if (need.level) {
                 const ci = document.createElement('input'); ci.type = 'text'; ci.value = (L && L.code) || ''; ci.placeholder = _levelCode(i);
                 ci.setAttribute('data-level-code', String(i));
-                ci.title = 'The code {level} prints for this plan';
+                ci.title = 'The level in this plan\u2019s codes. Read from the plan name (Level 01 is L1) unless you type one.';
                 ci.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
                 ci.onchange = () => {
                     if (!floorplanLevels[i]) return; const v = ci.value.trim(); if (v) floorplanLevels[i].code = v; else delete floorplanLevels[i].code;
@@ -39696,12 +39852,8 @@ function _codePatternPanelInto(t) {
                 zi.style.cssText = 'flex:0 0 56px; width:56px; ' + inp;
                 zi.onchange = () => {
                     if (!floorplanLevels[i]) return;
-                    const was = String(floorplanLevels[i].zone || '').trim(), v = zi.value.trim();
-                    if (v) floorplanLevels[i].zone = v; else delete floorplanLevels[i].zone;
-                    // 20.47: pieces that were in this level's sector move with it.
-                    if (v) (dashProjectData || []).forEach(r => { if (r && (typeof r.level === 'number' ? r.level : 0) === i && (!String(r.zone || '').trim() || String(r.zone).trim() === was)) r.zone = v; });
-                    _codesApplyPattern(_codePattern(), { skipMissing: true, keepAcross: true, quiet: true });
-                    _codesRefreshViews(); save(); try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
+                    _levelSetZone(i, zi.value);
+                    save(); try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
                 };
                 row.appendChild(zi);
             }
@@ -39738,7 +39890,8 @@ function _codePatternPanelInto(t) {
         }
     }
     const sw = document.createElement('div'); sw.setAttribute('data-code-pattern', 'swap-hint');
-    sw.textContent = 'To swap two codes, double-click one on the Items tab and type the other.';
+    sw.textContent = (need.zone ? 'Name a plan Level 01 | ' + _codeZoneLabel() + ' 10 and its level and ' + _codeZoneLabel().toLowerCase() + ' fill in here. ' : '')
+        + 'To swap two codes, double-click one on the Items tab and type the other.';
     sw.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin-top:6px; line-height:1.4;';
     box.appendChild(sw);
     t.appendChild(box);
@@ -40877,12 +41030,12 @@ function _fpRenderLevelBar() {
         bar.appendChild(b);
     });
     const add = document.createElement('button');
-    add.textContent = '+ Level'; add.title = 'Add a floor level';
+    add.textContent = '+ Level'; add.title = 'Add a plan page: a whole level, or one sector of a level';
     add.onclick = _fpAddLevel;
     add.style.cssText = 'height:26px; padding:0 10px; font-size:var(--fs-70); border:1px solid var(--border-color); border-radius:var(--r-4); cursor:pointer; background:var(--bg-input); color:var(--text-main);';
     bar.appendChild(add);
     const ren = document.createElement('button');
-    ren.textContent = 'Rename'; ren.title = 'Rename this level';
+    ren.textContent = 'Rename'; ren.title = 'Rename this plan. Level 01 | Sector 10 gives its codes level L1 and sector 10.';
     ren.onclick = _fpRenameLevel;
     ren.style.cssText = add.style.cssText;
     bar.appendChild(ren);
@@ -40899,9 +41052,12 @@ function _fpAddLevel() { _fpMigrate(); floorplanLevels.push({ name: 'Level ' + (
 async function _fpRenameLevel() {
     _fpMigrate();
     const lv = floorplanLevels[_fpLevel];
-    const nm = (await _askText('Rename level', 'Level name', lv.name || ('Level ' + (_fpLevel + 1)), 'Rename') || '').trim();
+    const nm = (await _askText('Rename plan', 'Plan name, e.g. Level 01, or Level 01 | Sector 10', lv.name || ('Level ' + (_fpLevel + 1)), 'Rename') || '').trim();
     if (!nm) return;
-    lv.name = nm; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup();
+    const was = lv.name;
+    lv.name = nm;
+    if (_levelZoneFollowName(_fpLevel, was)) _toast(_codeZoneLabel() + ' ' + lv.zone + ' set from the name', 'Codes on this plan now carry it.');
+    if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup();
 }
 async function _fpDeleteLevel() {
     _fpMigrate();
@@ -53339,6 +53495,62 @@ const HELP_REFERENCE_DATA = [
         ]
     },
     {
+        // 20.68: THE FLOOR PLAN GUIDE. The floor plan is where a designer starts a deck, and
+        // nothing said in what order, how sectors are made or which code style to pick. Opened
+        // as a floating window by openFloorplanGuide (setup card Guide, Item codes Which style?).
+        id: 'floorplan-guide',
+        title: 'Floor plan guide',
+        intro: `Where a presentation starts: the plans, how codes are made, and pinning each piece. Open it from the floor plan's <b>Guide</b> button to keep it beside your work.`,
+        entries: [
+            {
+                title: 'Start here',
+                body: `Every deck is built on its floor plans. Do these three things first, in this order; the <b>Set up this floor plan</b> card at the top of the Items tab ticks them off as you go.<br><br>
+<b>1. Plans.</b> One plan page per level. If the client's drawings split a level into sectors (one sheet per sector), make one plan page per sector instead. Press <b>Plans…</b> (or Plan tab, <b>Open full markup tool</b>): <b>+ Level</b> adds a plan page, <b>Change plan</b> loads its image, <b>Rename</b> names it. See <i>Plans and sectors</i> for how to name them.<br><br>
+<b>2. Code style.</b> Press <b>Codes…</b> (the Categories tab, Item codes). Pick how codes are made: the house style ART.1, or a client style with the level, or the level and sector, in it. Pick it before any codes go to the client: switching later recodes every piece. See <i>Code styles</i>.<br><br>
+<b>3. Add and pin.</b> On the Items tab, go to the plan the piece hangs on, pick its type (Framed Art, Canvas, EGD, WF, or your own categories) and press <b>+ Add code</b>. The code is made for you, then click the plan where it hangs to drop its pin. <b>Unplaced</b> shows what still has no pin.<br><br>
+You never type a code by hand. It comes from three things: the code style, the plan page you add it on (its level and sector) and the category's prefix (ART, EGD, WF).`
+            },
+            {
+                title: 'Plans and sectors',
+                body: `<b>One plan page per sheet the client gives you.</b> A small project is one plan. A tower is one plan per level. A big floor the client draws in sectors (Ford Hub: sheets AI1101-10, -16, -22...) is one plan page per sector.<br><br>
+<b>Name each plan the way it prints.</b> Use <b>Level 01</b> for a whole floor, and <b>Level 01 | Sector 10</b> for a sector. Farmhand reads the name:<br>
+&nbsp;&nbsp;Level 01 gives the level code <b>L1</b><br>
+&nbsp;&nbsp;Sector 10 gives the sector <b>10</b> (as soon as the code style uses sectors)<br>
+Both show in Categories, Item codes, where you can type over them (say a client calls Level 01 "L01", or the sector "S10A").<br><br>
+<b>The client's word.</b> If the drawings say Zone or Area or Wing instead of Sector, type that word in <b>The client calls it a</b>; then name plans Level 01 | Zone B.<br><br>
+<b>Order.</b> Plans print in level order, then sector order, whatever order you added them. Each plan is followed by its own wall pages.<br><br>
+<b>Moving a piece between sectors.</b> Drop its pin on another sector's plan and Farmhand asks: <b>Move it here</b> (it takes that sector's next code) or <b>Show on both plans</b> (keeps its code). A piece coded for the wrong sector shows a banner on that plan with a <b>Recode</b> button.<br><br>
+<b>Plan image names.</b> Save plan crops as PLAN.&lt;PROJECT&gt;.&lt;LEVEL&gt;_&lt;SHEET&gt;, e.g. PLAN.HUB.L1_AI1101-10 (see the Coding cheat sheet).`
+            },
+            {
+                title: 'Code styles',
+                body: `Choose under Categories, Item codes. Every new code follows it; the piece letter (A, B, C) for a set always goes on the end.<br><br>
+<b>ART.1 (house).</b> The default, and right for most decks: hotel guestrooms and public areas, residential, a single plan, catalogues and concept decks. One count runs through the project (ART.1, ART.2...). Delete ART.2 and ART.3 becomes ART.2: house codes close their gaps by themselves.<br><br>
+<b>ART-01.</b> The same house count, written with a dash and two digits, for a client spec that asks for it.<br><br>
+<b>L3.ART-01 (level).</b> Several floors and the client wants the floor in the code. Each level counts from 01. The level comes from the plan page the piece is on.<br><br>
+<b>L3.ART.S16-01 (level, sector).</b> Big floors the client's drawings split into sectors. One plan page per sector; each sector counts from 01 (L1.ART.S24-01 to -11, then L1.ART.S23-01...). Gaps are kept, not closed, because the client may already hold those codes; Farmhand asks before closing one.<br><br>
+<b>Custom.</b> The client's own scheme. Build it from {type} (the category's prefix, which you can change per category, e.g. GLA), {level}, {zone} (the sector) and {n}, {nn} or {nnn} (the number, padded to 1, 2 or 3 digits).<br><br>
+<b>When to switch.</b> At the start, when you know the client's drawing set. Switching recodes every piece in one go (the renames are logged, and Ctrl+Z undoes it). Once codes have gone to the client, leave the style alone. Moving a piece to another plan still gives it the right code.<br><br>
+<b>Prefixes.</b> The letters come from the category: Framed Art and Canvas are ART, EGD is EGD, WF is WF. Change one in the small box beside the category name on the Categories tab.`
+            },
+            {
+                title: 'Example: Ford Hub L01',
+                body: `How the Ford Hub Phase B Level 01 deck (HUB_PHASE_B_L01, Nov 2026) was set up.<br><br>
+<b>The drawings.</b> Ford's BIM set splits Level 1 into sector sheets AI1101-10, -16, -22, -23 and -24. Art hangs in five of them.<br><br>
+<b>1. Plans.</b> Five plan pages, one per sector, each named for it and given that sheet's crop:<br>
+&nbsp;&nbsp;Level 01 | Sector 10 with PLAN.HUB.L1_AI1101-10<br>
+&nbsp;&nbsp;Level 01 | Sector 16 with PLAN.HUB.L1_AI1101-16<br>
+&nbsp;&nbsp;Level 01 | Sector 22, 23 and 24 the same way<br>
+A master plan page with the sectors outlined in red goes first.<br><br>
+<b>2. Code style.</b> L3.ART.S16-01 (level, sector), the way Ford's own L3 drawings number art. Item codes then read each plan's level as L1 and its sector from the name (10, 16, 22, 23, 24).<br><br>
+<b>3. Categories.</b> Framed Artwork (ART, red pins) for the new pieces, and New Additional Art for Previous Phase (also ART, orange pins) for the two pieces from existing inventory. Both print in the plan's legend.<br><br>
+<b>4. Codes.</b> 21 placements, 51 pieces. Added on each sector's plan, they came out as L1.ART.S24-01 to -11, L1.ART.S23-01 to -07, L1.ART.S22-01, L1.ART.S16-01 and L1.ART.S10-01. The May deck's 1B.L1.ART-01 codes were recoded to this style in one go.<br><br>
+<b>5. Pins and walls.</b> Each code was pinned on its sector's plan and given a wall line, then its wall built in Elevations with Ford's elevation behind the art.<br><br>
+The deck then runs: cover, master plan, frame recommendations, and each sector's plan followed by its wall pages.`
+            },
+        ]
+    },
+    {
         // 20.53: the studio's Coding Cheat Sheet (V13, 250715), Spec Sheet example
         // and CRE-104 (public domain and Creative Commons), so a designer naming a
         // crop or coding a piece has it one click away. Text only, no PDFs.
@@ -53481,7 +53693,7 @@ The <strong>image size with bleed</strong> is worked out at RFI and never shown 
             },
             {
                 title: `What's new`,
-                body: `<strong>20.67</strong> <b>Fit the crop and the art wall with handles, and a clearer Client elevation panel.</b> The client sheet window no longer asks for one-shot clicks. <b>Crop the elevation</b> opens with a red box: drag it onto the elevation, drag its handles to trim, or drag on the sheet for a new box. In <b>Scale</b>, drag either end of the measure to fine-tune it. <b>The art wall</b> is now a green box at the wall's current size: drag it onto the wall in the drawing and drag its handles so the bottom edge sits on the floor, or type the width and height. A magnifier follows the handle you drag, and the arrow keys nudge (Shift for ten). On the Elevation tab, Wall tab, the Client elevation panel shows <b>Calibrated</b> or <b>Not calibrated</b> at the top and has one button, <b>Edit crop, scale &amp; wall</b>, which reopens the window with everything where you left it (a picture added on its own opens the same way). Page settings are grouped under <b>On the page</b>; the numbers and Place by hand are under <b>Advanced</b>. The red handles round the print area on the wall are gone (crop in the window instead); the wall-size handles stay. <b>Add a cropped image instead</b> is now a readable button.<br><br><strong>20.66</strong> <b>Crop the client drawing on the wall, give it a grey border, and drop a sheet straight in.</b> On the Elevation tab, Wall tab, a drawing that prints whole has <b>Crop the print area</b>: the whole sheet appears faded on the wall with the print area as a red box; drag an edge or corner to trim it (a long elevation trimmed down prints bigger, so its dimensions read), drag inside to slide to another part, then <b>Done cropping</b>. It is cut again from the full sheet, and the scale never changes. Or skip the button: the dashed box on the wall has <b>handles</b>; grab one, drag, and let go. The wall has handles too, on its right edge, top edge and top-right corner: drag to size the wall (quarter inches; the left end and the floor stay put). <b>Grey border</b> puts a thin light grey line round the drawing on the page, like the plan border (on by default; untick per wall, or <b>All walls</b>). Drag a sheet image from Finder onto the Client elevation panel to add it.<br><br><strong>20.65</strong> <b>Add the client's full sheet, pick the elevation on it, and calibrate: always.</b> On the Elevation tab, Wall tab, <b>+ Add client sheet</b> takes the whole elevation sheet as it came (a PNG or JPG of the PDF page) and opens it full screen in three steps: <b>Pick the elevation</b> (drag a box round it; the box is exactly what prints on the page), <b>Scale</b> (click both ends of a dimension printed on the drawing and type it, 11'-0" or 132"), and <b>The art wall</b> (click the floor at the wall's left and right ends, then the ceiling). Finish puts the drawing on the wall to scale, its floor on the wall's floor, and can set the wall to the drawing's size. The sheet is kept whole in the project; <b>Re-crop or recalibrate</b> reopens it, and other walls can <b>Use a sheet in this project</b> without adding it again. On the Elevations tab a dashed red box shows what <b>prints on the page</b>. <b>Calibration is required:</b> a client elevation added any way is marked <b>Not calibrated</b> (a red banner on the wall, Preflight lists it) and cannot be shown in the deck until it is. <b>Calibrate</b> now says on the wall what to click, draws the line it measured, and stops after two clicks.<br><br><strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
+                body: `<strong>20.68</strong> <b>The floor plan says what to do first, and how codes are made.</b> The Items tab on a floor plan page now opens with <b>Set up this floor plan</b>: three steps that tick themselves off. <b>Plans</b> (one plan page per level, or per sector; <b>Plans…</b> opens the markup tool), <b>Code style</b> (<b>Codes…</b> goes to Item codes) and <b>Add and pin</b> (how many on this plan still need a pin, and <b>Show them</b>). It folds to one line once all three are done. Its <b>Guide</b> button opens the <b>Floor plan guide</b>, a small window that stays beside your work: Start here, Plans and sectors, Code styles (which to use for which kind of deck) and the Ford Hub L01 deck as a worked example; it is in Help too. Item codes on the Categories tab says what it does, says when to use the style you picked, and has <b>Which style?</b>. A plan named <b>Level 01 | Sector 10</b> now takes sector 10 the moment you name it (it used to wait until the project was opened again). <b>Size</b>, <b>Sketch</b> and the rate card line are off the floor plan: they are a PM's budget tool, and now appear only after <b>Budget sketch on the floor plan</b> in Production, Pricing (<b>Done budgeting</b> puts them away). The Categories tab's Quick set buttons read <b>Product types</b> and <b>Tiers</b>, so they fit.<br><br><strong>20.67</strong> <b>Fit the crop and the art wall with handles, and a clearer Client elevation panel.</b> The client sheet window no longer asks for one-shot clicks. <b>Crop the elevation</b> opens with a red box: drag it onto the elevation, drag its handles to trim, or drag on the sheet for a new box. In <b>Scale</b>, drag either end of the measure to fine-tune it. <b>The art wall</b> is now a green box at the wall's current size: drag it onto the wall in the drawing and drag its handles so the bottom edge sits on the floor, or type the width and height. A magnifier follows the handle you drag, and the arrow keys nudge (Shift for ten). On the Elevation tab, Wall tab, the Client elevation panel shows <b>Calibrated</b> or <b>Not calibrated</b> at the top and has one button, <b>Edit crop, scale &amp; wall</b>, which reopens the window with everything where you left it (a picture added on its own opens the same way). Page settings are grouped under <b>On the page</b>; the numbers and Place by hand are under <b>Advanced</b>. The red handles round the print area on the wall are gone (crop in the window instead); the wall-size handles stay. <b>Add a cropped image instead</b> is now a readable button.<br><br><strong>20.66</strong> <b>Crop the client drawing on the wall, give it a grey border, and drop a sheet straight in.</b> On the Elevation tab, Wall tab, a drawing that prints whole has <b>Crop the print area</b>: the whole sheet appears faded on the wall with the print area as a red box; drag an edge or corner to trim it (a long elevation trimmed down prints bigger, so its dimensions read), drag inside to slide to another part, then <b>Done cropping</b>. It is cut again from the full sheet, and the scale never changes. Or skip the button: the dashed box on the wall has <b>handles</b>; grab one, drag, and let go. The wall has handles too, on its right edge, top edge and top-right corner: drag to size the wall (quarter inches; the left end and the floor stay put). <b>Grey border</b> puts a thin light grey line round the drawing on the page, like the plan border (on by default; untick per wall, or <b>All walls</b>). Drag a sheet image from Finder onto the Client elevation panel to add it.<br><br><strong>20.65</strong> <b>Add the client's full sheet, pick the elevation on it, and calibrate: always.</b> On the Elevation tab, Wall tab, <b>+ Add client sheet</b> takes the whole elevation sheet as it came (a PNG or JPG of the PDF page) and opens it full screen in three steps: <b>Pick the elevation</b> (drag a box round it; the box is exactly what prints on the page), <b>Scale</b> (click both ends of a dimension printed on the drawing and type it, 11'-0" or 132"), and <b>The art wall</b> (click the floor at the wall's left and right ends, then the ceiling). Finish puts the drawing on the wall to scale, its floor on the wall's floor, and can set the wall to the drawing's size. The sheet is kept whole in the project; <b>Re-crop or recalibrate</b> reopens it, and other walls can <b>Use a sheet in this project</b> without adding it again. On the Elevations tab a dashed red box shows what <b>prints on the page</b>. <b>Calibration is required:</b> a client elevation added any way is marked <b>Not calibrated</b> (a red banner on the wall, Preflight lists it) and cannot be shown in the deck until it is. <b>Calibrate</b> now says on the wall what to click, draws the line it measured, and stops after two clicks.<br><br><strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
 <strong>20.53</strong> <b>The studio's Coding cheat sheet is in Help.</b> Help > Reference has a <b>Coding cheat sheet</b> section: how to name supporting files (PLAN, ELEV, REND, MOCK, FINISH, FRAME and REF codes), the art types and their image codes with Medium or Application, the approved public domain sources, the public domain and Creative Commons rules, which assets can be remixed and under what code, how a new asset is coded, and what each spec page row holds.
 <strong>20.52</strong> <b>A placement left on the wrong sector's plan is easy to fix.</b> When a plan holds placements still coded for another sector (moved by an older build, or by pinning before 20.51), its Items tab says so at the top with <b>Recode</b> (or <b>Recode all</b>): each takes the next code in this plan's sector and its pin comes across, in one Ctrl+Z. Picking the plan it already sits on under <b>Move to level</b> now recodes it too, instead of doing nothing.\n<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.
 <strong>20.28</strong> <b>Install heights say what they are measured from, and the install page says more.</b> On the Guides tab, <b>Heights from</b> sets what a wall's heights are measured from when the client's markup says (Chair rail at 36", Counter at 34"): the hang dimension then runs from it, is labelled 46" ABOVE CHAIR RAIL instead of AFF, the datum is drawn across the wall with its own height, and the install note says so. Blank is the floor, as before. On an install page's <b>This page</b> panel, <b>Install sequence</b> (B, C, A, D) and <b>Typical gap</b> print as notes. A piece's <b>Weight (lb)</b> (Hardware & Notes) prints in the install legend on any wall where a piece has one. Changing a piece's picture to a different image code now clears its artist, title, medium and year, so one artist's piece is never credited to another. Preflight also flags another project's file stamp in typed text (a footer copied from another job), Frame Code, Colour / CITY, COUNTRY / CODE-XXXX / 0"W x 0"H left from a template, and in an IFS a typed "Elevation Pending" or a title or artist of N/A. The version box takes a scope prefix (GR.V4, CORR.V1), and the PDF downloads as date.project.version.pdf instead of FRAME_Presentation.pdf.
@@ -53643,6 +53855,55 @@ function openCodingSheet(part) {
     const body = pop.querySelector('.csp-body');
     body.innerHTML = '<div class="help-entry-body">' + sec.entries[_codingSheetPart].body + '</div>';
     body.scrollTop = 0;
+    pop.style.display = 'flex';
+}
+// 20.68: THE FLOOR PLAN GUIDE, the same floating window over Help's 'floorplan-guide'
+// section (one copy of the words). Opened from the floor plan's setup card and Item codes.
+let _fpGuidePart = 0;
+function openFloorplanGuide(part) {
+    const sec = HELP_REFERENCE_DATA.find(s => s.id === 'floorplan-guide');
+    if (!sec) return;
+    if (typeof part === 'number' && part >= 0 && part < sec.entries.length) _fpGuidePart = part;
+    let pop = document.getElementById('fpGuidePop');
+    if (!pop) {
+        pop = document.createElement('div');
+        pop.id = 'fpGuidePop';
+        pop.className = 'coding-sheet-pop help-ref-content';
+        pop.setAttribute('role', 'dialog');
+        pop.setAttribute('aria-label', 'Floor plan guide');
+        pop.innerHTML = '<div class="csp-head"><strong>Floor plan guide</strong><button class="csp-close" title="Close" aria-label="Close">\u00d7</button></div>'
+            + '<div class="csp-tabs"></div><div class="csp-body"></div>';
+        document.body.appendChild(pop);
+        const close = () => { pop.style.display = 'none'; };
+        pop.querySelector('.csp-close').onclick = close;
+        pop.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } });
+        const head = pop.querySelector('.csp-head');
+        head.addEventListener('pointerdown', (e) => {
+            if (e.target.closest('button')) return;
+            const r = pop.getBoundingClientRect(), dx = e.clientX - r.left, dy = e.clientY - r.top;
+            const move = (ev) => {
+                pop.style.left = Math.max(0, Math.min(window.innerWidth - 80, ev.clientX - dx)) + 'px';
+                pop.style.top = Math.max(0, Math.min(window.innerHeight - 40, ev.clientY - dy)) + 'px';
+                pop.style.right = 'auto';
+            };
+            const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+            window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+            e.preventDefault();
+        });
+    }
+    const tabs = pop.querySelector('.csp-tabs');
+    tabs.innerHTML = '';
+    sec.entries.forEach((e, i) => {
+        const b = document.createElement('button');
+        b.textContent = e.title;
+        b.className = 'csp-tab' + (i === _fpGuidePart ? ' active' : '');
+        b.onclick = () => openFloorplanGuide(i);
+        tabs.appendChild(b);
+    });
+    const body = pop.querySelector('.csp-body');
+    body.innerHTML = '<div class="help-entry-body">' + sec.entries[_fpGuidePart].body + '</div>';
+    body.scrollTop = 0;
+    pop.style.zIndex = '100005';
     pop.style.display = 'flex';
 }
 function closeCodingSheet() {
@@ -67173,6 +67434,7 @@ function _prodPricingInto(body) {
         const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = _prodStamp() + '_' + _prodProjectTag() + '_SF_Import.csv'; a.click();
     }, true, 'The Salesforce Quote Import Template’s 11 columns, ready for the import tool: vendor codes, markup as a plain number, no special characters'));
     tools.appendChild(_prodBtn('Rate card…', () => openRateCard(), true, 'Estimate prices before a vendor quotes'));
+    tools.appendChild(_prodBtn('Budget sketch on the floor plan', () => startBudgetSketch(), true, 'For a rough budget from a bare plan: each click on the plan drops a piece of a standard size, priced from the rate card'));
     // 19.94: no Update estimates button. Estimates are worked out from the size on every read.
     body.appendChild(tools);
     // By area.

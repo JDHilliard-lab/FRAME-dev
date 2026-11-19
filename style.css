@@ -3764,3 +3764,16 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .ds-fp-lg-step.is-off { opacity: 0.3; cursor: default; }
 .ds-fp-lg-step.is-off:hover { background: none; color: inherit; }
 .ds-fp-listlink:hover, .ds-fp-listlink.is-picked { z-index: 6 !important; }
+
+/* 20.68: Set up this floor plan (Items tab of a floor plan page) */
+.fp-setup { margin: 0 0 8px; border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-subpanel); }
+.fp-setup[data-fp-setup="todo"] { border-color: var(--ui-active); }
+.fp-setup-head { display: flex; align-items: center; gap: 6px; padding: 5px 6px 5px 8px; }
+.fp-setup-toggle { flex: 1; min-width: 0; text-align: left; border: none; background: transparent; color: var(--text-strong); font-size: var(--fs-65); font-weight: 700; cursor: pointer; padding: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-setup-guide { flex: 0 0 auto; width: auto; height: 22px; padding: 0 9px; font-size: var(--fs-60); }
+.fp-setup-step { display: flex; align-items: flex-start; gap: 7px; padding: 6px 8px; border-top: 1px solid var(--border-color); }
+.fp-setup-n { flex: 0 0 18px; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-55); font-weight: 700; background: var(--ui-active); color: #fff; }
+.fp-setup-step.done .fp-setup-n { background: var(--bg-input); color: var(--text-muted); border: 1px solid var(--border-color); }
+.fp-setup-tx { flex: 1; min-width: 0; font-size: var(--fs-60); line-height: 1.4; color: var(--text-main); }
+.fp-setup-step.done .fp-setup-tx { color: var(--text-muted); }
+.fp-setup-go { flex: 0 0 auto; width: auto; height: 22px; padding: 0 8px; font-size: var(--fs-55); }

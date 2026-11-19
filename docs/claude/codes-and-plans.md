@@ -196,3 +196,17 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   painted by class toggles, never a re-render, so the same pin element still takes the double-click that removes it.
   Cleared by a second click, a click on empty plan (`_dsFpPlace`) or Esc. The exported PDF's pins still link.
   Test `tests/test_fp_pin_pick.js`.
+- **THE FLOOR PLAN SAYS WHAT TO DO FIRST (20.68, `_fpSetupSteps`, `_fpSetupCardInto`, `_fpSetupOpen`, `openFloorplanGuide`).**
+  The Items tab opens with Set up this floor plan: Plans / Code style / Add and pin, each read live (plans with images,
+  `codePattern !== undefined` and every plan has a sector when the style needs one, this plan's codes all pinned) with
+  one button each. Folds itself when all three are done unless the user toggled it. The Floor plan guide is Help's
+  `floorplan-guide` section in the cheat sheet's floating window (`#fpGuidePop`): one copy of the words.
+  `CODE_PATTERN_PRESETS[].use` is the when-to-use line under the Item codes picker; every preset needs one (tested).
+- **SIZE, SKETCH AND THE BUDGET LINE ARE BUDGET MODE ONLY (20.68, `_fpBudgetMode`, `_fpBudgetModeSet`, `startBudgetSketch`).**
+  A designer's floor plan shows the type and + Add code only. Production > Pricing, Budget sketch on the floor plan,
+  turns it on (module state); Done budgeting turns it off and clears `_fpSketchOn` / `_fpAddSize`. The rate card is
+  never named on a designer's floor plan. Test `tests/test_fp_setup_guide.js`.
+- **A PLAN'S NAME GIVES ITS SECTOR AT ONCE (20.68, `_levelZoneFromName`, `_levelZoneFollowName`, `_levelSetZone`).**
+  Renaming a plan in the markup tool sets its sector from "Sector 12" in a sector-style project, recoding its pieces,
+  unless the sector was typed by hand (it only follows while it still matches the OLD name). `_codesSwitchPattern`
+  fills blank plan sectors from names before asking. `_levelSetZone` is the one setter (the Item codes table uses it).
