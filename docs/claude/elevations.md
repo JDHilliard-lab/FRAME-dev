@@ -694,3 +694,7 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   (`_ctxAvoid`) and art-less blocks keep the box. The export's baseboard gap is read off a rasterised body at the
   baseboard height (null without a canvas, then the box). An OPEN CURVE fills across its chord, so a stroke that
   must stay a line carries `fill="none"` in the art (faucets, the toilet side lid, the chair side back).
+- **SPACING ON SHOWS SPACING (20.74, `toggleElevLayer('dim-layer')`, `_autoSpacePairs`).** The dim layer draws only the
+  gaps named in `f.dimTo` (Art tab letter chips). Switching Spacing on when NO active frame on this wall has a `dimTo`
+  runs `_autoSpacePairs(elevFrames)` (the magnet's pairing, this wall only) and pushes one history entry; a wall with
+  any gap picked keeps exactly its chips. Off never clears pairs. Test `tests/test_spacing_toggle_pairs.js`.
