@@ -34,7 +34,7 @@ const fs = require('fs');
     __check('the 7 old generic starter templates are gone', () => {
       const removed = ['Farmboy \\u00b7 Tagline','Farmboy \\u00b7 Divider (Standard)','Farmboy \\u00b7 Narrative \\u2014 Image','Farmboy \\u00b7 Narrative (Keywords)','Farmboy \\u00b7 Moodboard (Captions)','Farmboy \\u00b7 Thank You','Farmboy \\u00b7 Artwork Spec (Detail)'];
       removed.forEach(n => { if (IDML_MASTER_TEMPLATES.some(t => t.name === n)) throw new Error('old template still present: ' + n); });
-      if (IDML_MASTER_TEMPLATES.length !== 34) throw new Error('expected exactly 34 templates, got ' + IDML_MASTER_TEMPLATES.length);
+      if (IDML_MASTER_TEMPLATES.length !== 52) throw new Error('expected exactly 52 templates, got ' + IDML_MASTER_TEMPLATES.length);
     });
 
     __check('Founder\\'s Letter template now has its real baked-in photo and signature', () => {

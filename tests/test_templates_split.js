@@ -31,10 +31,10 @@ const load = (withTemplates) => {
   return w;
 };
 
-check('with templates.js loaded first, app.js sees all 34 masters', () => {
+check('with templates.js loaded first, app.js sees all 52 masters', () => {
   const w = load(true);
   const list = w.__list;
-  if (!Array.isArray(list) || list.length !== 34) throw new Error('got ' + (list && list.length));
+  if (!Array.isArray(list) || list.length !== 52) throw new Error('got ' + (list && list.length));
   if (list[0].name.indexOf('Cover Page') < 0) throw new Error('first master is ' + list[0].name);
   if (list !== w.FRAME_MASTER_TEMPLATES) throw new Error('app.js copied the list, so a master edit would not persist on the shared one');
 });
