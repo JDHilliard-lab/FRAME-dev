@@ -37,7 +37,7 @@ const OVERLAY = `(() => {
   window.__clipCap = (h) => { cap.innerHTML = h || ''; cap.style.opacity = h ? '1' : '0'; };
 })()`;
 class Clip {
-  constructor(s) { this.s = s; this.x = 720; this.y = 450; this.frames = []; this.t0 = 0; this.cam = []; this.caps = []; this.callouts = []; this.chapters = []; this.splits = []; this.off = 0; this.paused = false; }
+  constructor(s) { this.s = s; this.x = 720; this.y = 450; this.frames = []; this.t0 = 0; this.cam = []; this.caps = []; this.callouts = []; this.chapters = []; this.splits = []; this.side = []; this.siding = false; this.off = 0; this.paused = false; }
   // the clip's clock: wall time less every paused stretch, so a cut leaves no gap
   now() { return Date.now() - this.off; }
   // CUTS: pause, set the next scene up off camera, resume. Frames sent while paused are dropped.
@@ -50,11 +50,17 @@ class Clip {
   full(ms) { return this.zoom(0, 0, this.W, ms); }
   // split screen: two live areas of the page side by side (CSS px rects), labelled, until unsplit()
   split(a, b, la, lb, ms) { this.splits.push({ t: this.now(), a: a, b: b, la: la || '', lb: lb || '', end: 1e12 }); return sleep(ms || 500); }
+  // A SECOND TAKE for the split's right pane: filmed while the clip is paused, played beside the
+  // main take in step (its frame at sideT0 + time since the split began). Both are the real app.
+  async sideStart() { this.side = []; this.siding = true; this.sideT0 = Date.now(); }
+  sideStop() { this.siding = false; }
+  // the split whose right pane is the side take
+  splitSide(a, b, la, lb, ms) { this.splits.push({ t: this.now(), a: a, b: b, la: la || '', lb: lb || '', end: 1e12, side: true }); return sleep(ms || 500); }
   unsplit(ms) { const k = this.splits[this.splits.length - 1]; if (k && k.end > 1e11) k.end = this.now(); return sleep(ms || 400); }
   async overlay() { await this.s.ev(OVERLAY); await this.s.ev(`__clipMove(${this.x},${this.y})`); }
   async start() {
     this.frames = [];
-    this.s.on['Page.screencastFrame'] = (p) => { if (!this.paused) this.frames.push({ data: p.data, t: p.metadata.timestamp * 1000 - this.off }); this.s.cdp('Page.screencastFrameAck', { sessionId: p.sessionId }); };
+    this.s.on['Page.screencastFrame'] = (p) => { if (this.siding) this.side.push({ data: p.data, t: p.metadata.timestamp * 1000 }); if (!this.paused) this.frames.push({ data: p.data, t: p.metadata.timestamp * 1000 - this.off }); this.s.cdp('Page.screencastFrameAck', { sessionId: p.sessionId }); };
     this.off = 0; this.paused = false; this.cam = [{ t: this.now(), dur: 0, x: 0, y: 0, w: this.W, h: this.H }]; this.caps = []; this.callouts = []; this.chapters = [];
     await this.s.cdp('Page.startScreencast', { format: 'jpeg', quality: 85, maxWidth: this.W * this.dsf, maxHeight: this.H * this.dsf, everyNthFrame: 1 });
     await sleep(400);
@@ -172,8 +178,9 @@ class Clip {
     const { sock } = await connect(x => x.id === tg.result.targetId);
     const cam = this.cam.map(k => Object.assign({}, k, { t: k.t - t0 }));
     const caps = this.caps.map(k => Object.assign({}, k, { t: k.t - t0 }));
+    const side = this.side.map((f, i) => { const p = path.join(dir, 's' + String(i).padStart(5, '0') + '.jpg'); fs.writeFileSync(p, Buffer.from(f.data, 'base64')); return { src: STATE.app + '/__file?p=' + encodeURIComponent(p), t: Math.round(f.t - (this.sideT0 || 0)) }; });
     const callouts = this.callouts.map((k, i) => { const p = path.join(dir, 'callout' + i + '.png'); fs.writeFileSync(p, Buffer.from(k.data, 'base64')); return { t: k.t - t0, dur: k.dur, label: k.label, src: STATE.app + '/__file?p=' + encodeURIComponent(p) }; });
-    const info = await sock.ev(`__encode(${JSON.stringify(list)}, ${this.W}, ${this.H}, 30, ${JSON.stringify(cam)}, ${JSON.stringify(caps)}, ${this.tEnd - t0}, ${JSON.stringify(callouts)}, ${JSON.stringify(this.chapters.map(k => Object.assign({}, k, { t: k.t - t0 })))}, ${JSON.stringify(this.splits.map(k => Object.assign({}, k, { t: k.t - t0, end: Math.min(k.end, this.tEnd) - t0 })))})`);
+    const info = await sock.ev(`__encode(${JSON.stringify(list)}, ${this.W}, ${this.H}, 30, ${JSON.stringify(cam)}, ${JSON.stringify(caps)}, ${this.tEnd - t0}, ${JSON.stringify(callouts)}, ${JSON.stringify(this.chapters.map(k => Object.assign({}, k, { t: k.t - t0 })))}, ${JSON.stringify(this.splits.map(k => Object.assign({}, k, { t: k.t - t0, end: Math.min(k.end, this.tEnd) - t0 })))}, ${JSON.stringify(side)})`);
     const len = await sock.ev('__out.length'); let s = '';
     for (let i = 0; i < len; i += 4000000) s += await sock.ev(`__out.slice(${i}, ${i + 4000000})`);
     fs.writeFileSync(outFile, Buffer.from(s.split(',')[1], 'base64'));

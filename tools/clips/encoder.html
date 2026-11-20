@@ -2,8 +2,10 @@
 <script>
 // Plays a list of frames [{src, t}] (t in ms from start) onto a canvas in real time and
 // records it with MediaRecorder. window.__encode(list, w, h, fps) resolves to a data URL.
-window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts, chapters, splits) {
-  splits = splits || [];
+window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts, chapters, splits, side) {
+  splits = splits || []; side = side || [];
+  const sideImgs = await Promise.all(side.map(f => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('side ' + f.src)); i.src = f.src; })));
+  const sideAt = (st) => { let k = 0; while (k + 1 < side.length && side[k + 1].t <= st) k++; return sideImgs[k]; };
   // Split screen: two areas of the same live frame side by side, each fitted into half the
   // video under its label, over a dark backdrop; eases in and out.
   const drawSplit = (img, t) => splits.forEach(k => {
@@ -13,13 +15,15 @@ window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts, ch
     const pw = (w - M * 2 - G) / 2, ph = h - top - bottom;
     ctx.save(); ctx.globalAlpha = a;
     ctx.fillStyle = 'rgba(14,15,19,0.96)'; ctx.fillRect(0, 0, w, h);
-    [[k.a, k.la, M], [k.b, k.lb, M + pw + G]].forEach(([r, lab, x0]) => {
+    const imB = (k.side && sideImgs.length) ? sideAt(t - k.t) : img;
+    [[k.a, k.la, M, img], [k.b, k.lb, M + pw + G, imB]].forEach(([r, lab, x0, src]) => {
+      const s = src.naturalWidth / w;
       const f = Math.min(pw / r.w, ph / r.h), dw = r.w * f, dh = r.h * f;
       const x = x0 + (pw - dw) / 2, y = top + (ph - dh) / 2;
       ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 6;
       ctx.fillStyle = '#000'; ctx.beginPath(); ctx.roundRect(x - 2, y - 2, dw + 4, dh + 4, 10); ctx.fill(); ctx.shadowColor = 'transparent';
       ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, dw, dh, 8); ctx.clip();
-      ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, r.x * s, r.y * s, r.w * s, r.h * s, x, y, dw, dh); ctx.restore();
+      ctx.imageSmoothingQuality = 'high'; ctx.drawImage(src, r.x * s, r.y * s, r.w * s, r.h * s, x, y, dw, dh); ctx.restore();
       ctx.strokeStyle = '#4f8cff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(x, y, dw, dh, 8); ctx.stroke();
       if (lab) { ctx.fillStyle = '#9dbdff'; ctx.font = '700 17px ' + FONT; ctx.textAlign = 'left'; ctx.textBaseline = 'bottom'; ctx.fillText(lab.toUpperCase(), x, y - 10); }
     });

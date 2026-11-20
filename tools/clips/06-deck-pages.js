@@ -118,8 +118,37 @@ const prep6 = require('./prep6.js');
   // 9. Project tab: Include pages, split with the page preview, then a presentation type
   await c.cap('<span class="n">9</span><b>Project</b>: untick a page and it leaves the deck', 200);
   await c.click('#dsTabBtnProject', { ms: 450, after: 700 });
-  await c.split({ x: 272, y: 335, w: 420, h: 382 }, { x: 698, y: 118, w: 732, h: 520 }, 'Include pages', 'Page preview: the pages in the deck', 700);
-  for (const id of ['specInc_timeline', 'specInc_understanding', 'specInc_strategy']) await c.click('#' + id, { ms: 500, after: 900 });
+  // Left: the Project tab, filmed live. Right: the Pages rail, filmed as a second take while the
+  // clip is paused, unticking the same pages at the same moments (see rec.splitSide).
+  const IDS = ['specInc_timeline', 'specInc_understanding', 'specInc_strategy'];
+  const sT = c.now();
+  await c.splitSide({ x: 12, y: 112, w: 680, h: 610 }, { x: 0, y: 125, w: 225, h: 600 }, 'Project: Include pages', 'Pages: the deck', 900);
+  const offs = [];
+  for (const id of IDS) { await c.click('#' + id, { ms: 500, after: 0 }); offs.push(c.now() - sT); await sleep(1000); }
+  await sleep(500);
+  const dur = c.now() - sT;
+  const back = { x: c.x, y: c.y };
+  c.pause();
+  await c.s.ev(`(() => { ${JSON.stringify(IDS)}.forEach(id => { const e = document.getElementById(id); if (e && !e.checked) e.click(); }); _dsTab('pages'); })()`);
+  await sleep(1800);
+  await c.s.ev(`(() => { const r = document.querySelector('#dsRail'); if (r) r.scrollTop = 0; const s = r && r.querySelector('.ds-rail-scroll, [data-railscroll]'); if (s) s.scrollTop = 0; })()`);
+  await c.move(760, 520, 150);
+  await sleep(1500);
+  await c.sideStart();
+  await c.move(770, 530, 120);   // a screen change, so the take has a first frame
+  const s0 = Date.now();
+  for (let i = 0; i < IDS.length; i++) {
+    const wait = offs[i] - (Date.now() - s0); if (wait > 0) await sleep(wait);
+    await c.s.ev(`(() => { document.getElementById(${JSON.stringify(IDS[i])}).click(); _dsRefresh(); const r = document.querySelector('#dsRail'); if (r) r.scrollTop = 0; })()`);   // the rail rebuilds as it does when Pages opens
+  }
+  { const wait = dur + 1500 - (Date.now() - s0); if (wait > 0) await sleep(wait); }
+  c.sideStop();
+  console.log('side take', c.side.length, 'frames; rail', await c.s.ev(`Array.from(document.querySelectorAll('[data-railcell]')).map(e => e.getAttribute('data-railtext').split(' ').slice(0, 3).join(' ')).join(' | ')`));
+  await c.s.ev(`_dsTab('project')`);
+  await sleep(1500);
+  await c.move(back.x, back.y, 100);
+  await sleep(300);
+  c.resume();
   await c.unsplit(500);
   await c.cap('<span class="n">9</span>A <b>presentation type</b> sets the pages for you', 200);
   await c.zoom(10, 110, 640, 700);
