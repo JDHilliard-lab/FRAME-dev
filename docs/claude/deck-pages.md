@@ -747,3 +747,15 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   `opts.border === false`; the caller passes `_planBorderPrints(desc.level)`. Deck default absent = ON, `false` = off;
   per level boolean, absent = follow the deck. `_setPlanBorderLevel` stores nothing when it matches the deck,
   `_setPlanBorderAll` sets the deck and deletes every level's own value. UI: Plan tab, `_planBorderToggle`.
+- **A preview's cache key holds the piece (20.77).** `_dsThumbCacheKey` adds `_specRowSig` of the
+  page's row and every set member, and Frame Recommendations adds `_projFramesSignature()`. Never
+  rely on an edit path to clear the cache: the scripting API (`FRAME_API`) and imports change rows
+  without `_dsClearBuiltAll`, and the old key kept a default-frame, no-art render
+  (`test_thumb_key_row_data`).
+- **A busy wall is not a failed capture (20.77).** `_igElevCapture` waits for `_elevCapInFlight`
+  before its own try and only sets `failed` when the wall was free; "Elevation capture failed" is
+  for a real failure, a busy wall draws "Updating…" and renders again (`test_breaker_capture_busy`).
+- **A + page takes the applied template's name** while it is still "New Page"; a named page keeps
+  its own (`test_new_page_takes_template_name`).
+- **Presentation layout is deck-wide** and its label says "(whole deck)"; a set whose own One page /
+  Page per piece differs from the deck says so under the set (`#dsUnitOverrideNote`).

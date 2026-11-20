@@ -2,7 +2,29 @@
 <script>
 // Plays a list of frames [{src, t}] (t in ms from start) onto a canvas in real time and
 // records it with MediaRecorder. window.__encode(list, w, h, fps) resolves to a data URL.
-window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts, chapters) {
+window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts, chapters, splits) {
+  splits = splits || [];
+  // Split screen: two areas of the same live frame side by side, each fitted into half the
+  // video under its label, over a dark backdrop; eases in and out.
+  const drawSplit = (img, t) => splits.forEach(k => {
+    if (t < k.t || t > k.end + 350) return;
+    const a = Math.max(0, Math.min(1, (t - k.t) / 350, (k.end + 350 - t) / 350));
+    const s = img.naturalWidth / w, M = 36, G = 28, top = 64, bottom = 118;
+    const pw = (w - M * 2 - G) / 2, ph = h - top - bottom;
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.fillStyle = 'rgba(14,15,19,0.96)'; ctx.fillRect(0, 0, w, h);
+    [[k.a, k.la, M], [k.b, k.lb, M + pw + G]].forEach(([r, lab, x0]) => {
+      const f = Math.min(pw / r.w, ph / r.h), dw = r.w * f, dh = r.h * f;
+      const x = x0 + (pw - dw) / 2, y = top + (ph - dh) / 2;
+      ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 6;
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.roundRect(x - 2, y - 2, dw + 4, dh + 4, 10); ctx.fill(); ctx.shadowColor = 'transparent';
+      ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, dw, dh, 8); ctx.clip();
+      ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, r.x * s, r.y * s, r.w * s, r.h * s, x, y, dw, dh); ctx.restore();
+      ctx.strokeStyle = '#4f8cff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(x, y, dw, dh, 8); ctx.stroke();
+      if (lab) { ctx.fillStyle = '#9dbdff'; ctx.font = '700 17px ' + FONT; ctx.textAlign = 'left'; ctx.textBaseline = 'bottom'; ctx.fillText(lab.toUpperCase(), x, y - 10); }
+    });
+    ctx.restore();
+  });
   chapters = chapters || [];
   const drawChapter = (t) => chapters.forEach(k => {
     if (t < k.t || t > k.t + k.dur) return;
@@ -61,7 +83,7 @@ window.__encode = async function (list, w, h, fps, cam, caps, tEnd, callouts, ch
     }
     return cur;
   };
-  const draw = (img, t) => { const s = img.naturalWidth / w, b = camAt(t); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, b.x * s, b.y * s, b.w * s, b.h * s, 0, 0, w, h); drawCallouts(t); drawCap(t); drawChapter(t); };
+  const draw = (img, t) => { const s = img.naturalWidth / w, b = camAt(t); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, b.x * s, b.y * s, b.w * s, b.h * s, 0, 0, w, h); drawSplit(img, t); drawCallouts(t); drawCap(t); drawChapter(t); };
   const c = document.getElementById('c'); c.width = w; c.height = h;
   const ctx = c.getContext('2d');
   const imgs = await Promise.all(list.map(f => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('load ' + f.src)); i.src = f.src; })));

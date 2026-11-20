@@ -37,7 +37,7 @@ const OVERLAY = `(() => {
   window.__clipCap = (h) => { cap.innerHTML = h || ''; cap.style.opacity = h ? '1' : '0'; };
 })()`;
 class Clip {
-  constructor(s) { this.s = s; this.x = 720; this.y = 450; this.frames = []; this.t0 = 0; this.cam = []; this.caps = []; this.callouts = []; this.chapters = []; this.off = 0; this.paused = false; }
+  constructor(s) { this.s = s; this.x = 720; this.y = 450; this.frames = []; this.t0 = 0; this.cam = []; this.caps = []; this.callouts = []; this.chapters = []; this.splits = []; this.off = 0; this.paused = false; }
   // the clip's clock: wall time less every paused stretch, so a cut leaves no gap
   now() { return Date.now() - this.off; }
   // CUTS: pause, set the next scene up off camera, resume. Frames sent while paused are dropped.
@@ -48,6 +48,9 @@ class Clip {
   // camera: ease to show the screen box (x, y, w; h follows the video's shape) over `ms`
   zoom(x, y, w, ms) { const h = w * this.H / this.W; this.cam.push({ t: this.now(), dur: ms || 900, x: Math.max(0, Math.min(this.W - w, x)), y: Math.max(0, Math.min(this.H - h, y)), w: w, h: h }); return sleep(ms || 900); }
   full(ms) { return this.zoom(0, 0, this.W, ms); }
+  // split screen: two live areas of the page side by side (CSS px rects), labelled, until unsplit()
+  split(a, b, la, lb, ms) { this.splits.push({ t: this.now(), a: a, b: b, la: la || '', lb: lb || '', end: 1e12 }); return sleep(ms || 500); }
+  unsplit(ms) { const k = this.splits[this.splits.length - 1]; if (k && k.end > 1e11) k.end = this.now(); return sleep(ms || 400); }
   async overlay() { await this.s.ev(OVERLAY); await this.s.ev(`__clipMove(${this.x},${this.y})`); }
   async start() {
     this.frames = [];
@@ -170,7 +173,7 @@ class Clip {
     const cam = this.cam.map(k => Object.assign({}, k, { t: k.t - t0 }));
     const caps = this.caps.map(k => Object.assign({}, k, { t: k.t - t0 }));
     const callouts = this.callouts.map((k, i) => { const p = path.join(dir, 'callout' + i + '.png'); fs.writeFileSync(p, Buffer.from(k.data, 'base64')); return { t: k.t - t0, dur: k.dur, label: k.label, src: STATE.app + '/__file?p=' + encodeURIComponent(p) }; });
-    const info = await sock.ev(`__encode(${JSON.stringify(list)}, ${this.W}, ${this.H}, 30, ${JSON.stringify(cam)}, ${JSON.stringify(caps)}, ${this.tEnd - t0}, ${JSON.stringify(callouts)}, ${JSON.stringify(this.chapters.map(k => Object.assign({}, k, { t: k.t - t0 })))})`);
+    const info = await sock.ev(`__encode(${JSON.stringify(list)}, ${this.W}, ${this.H}, 30, ${JSON.stringify(cam)}, ${JSON.stringify(caps)}, ${this.tEnd - t0}, ${JSON.stringify(callouts)}, ${JSON.stringify(this.chapters.map(k => Object.assign({}, k, { t: k.t - t0 })))}, ${JSON.stringify(this.splits.map(k => Object.assign({}, k, { t: k.t - t0, end: Math.min(k.end, this.tEnd) - t0 })))})`);
     const len = await sock.ev('__out.length'); let s = '';
     for (let i = 0; i < len; i += 4000000) s += await sock.ev(`__out.slice(${i}, ${i + 4000000})`);
     fs.writeFileSync(outFile, Buffer.from(s.split(',')[1], 'base64'));
