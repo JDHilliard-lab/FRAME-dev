@@ -63,7 +63,9 @@ const fs = require('fs');
 
     __check('the build cannot hand back a truncated PDF after a cancel', () => {
       const S = window.__appSrc;
-      const save = S.indexOf('doc.save(fname)');
+      // 20.81: the build saves through _deliverPdf (design folder or download), so the
+      // landmark is that call; the guard it needs in front of it is unchanged.
+      const save = S.indexOf('await _deliverPdf(doc, fname)');
       if (save < 0) throw new Error('PDF save call not found');
       // A checkpoint must sit between the page walk and the save/preview, so a
       // swallowed sentinel upstream still cannot produce a partial document.

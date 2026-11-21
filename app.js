@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.80';
+const APP_VERSION = '20.81';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -379,7 +379,9 @@ function _startScreenNewForm(body, cards, peek) {
     const form = document.createElement('form'); form.className = 'ss-form';
     form.innerHTML = '<label>Project name<input type="text" name="name" autocomplete="off" placeholder="e.g. Marriott Downtown"></label>'
         + '<label>Client<input type="text" name="client" autocomplete="off" placeholder="Optional"></label>'
+        + '<label>Job code<input type="text" name="code" autocomplete="off" placeholder="e.g. BEYE-HILT-WAIL-2024" style="font-family:monospace;"><span class="ss-hint"></span></label>'
         + '<div class="ss-units-row"><span>Units</span><div class="frame-tabs ss-units"></div></div>'
+        + '<label class="ss-check"><input type="checkbox" name="folder" checked><span>Make the project folder (in my work folder, not Dropbox)</span></label>'
         + '<div class="ss-actions"><button type="button" class="action-btn btn-secondary ss-back">Back</button><button type="submit" class="action-btn ss-go">Start</button></div>';
     let unit = (typeof dashUnit !== 'undefined' && UNIT_INFO[dashUnit]) ? dashUnit : 'in';
     const ub = form.querySelector('.ss-units');
@@ -390,9 +392,17 @@ function _startScreenNewForm(body, cards, peek) {
         ub.appendChild(b);
     });
     form.querySelector('.ss-back').onclick = () => { form.remove(); cards.style.display = ''; };
+    const hint = form.querySelector('.ss-hint');
+    form.elements.code.oninput = () => {
+        const v = form.elements.code.value.trim();
+        hint.textContent = (v && !_jobCodeLooksRight(v)) ? 'Usually CLIENT-BRAND-CITY-####. Fine to keep if this job differs.' : '';
+    };
     form.onsubmit = (e) => {
         e.preventDefault();
-        _startNewProject({ name: form.elements.name.value, client: form.elements.client.value, unit: unit });
+        const code = form.elements.code.value.trim().toUpperCase();
+        _startNewProject({ name: form.elements.name.value, client: form.elements.client.value, code: code, unit: unit });
+        // The dialog previews the folders; nothing is made until its Create.
+        if (form.elements.folder.checked) openProjectFolderDialog({ project: form.elements.name.value, client: form.elements.client.value });
     };
     cards.style.display = 'none';
     body.insertBefore(form, cards);
@@ -404,6 +414,8 @@ function _startNewProject(o) {
     const name = String((o && o.name) || '').trim() || 'Untitled project';
     setVal('g_projName', name);
     if (o && String(o.client || '').trim()) setVal('g_client', String(o.client).trim());
+    // The job code is the deck's Project code: PDF names (YYMMDD.CODE.V#) and the design folder read it.
+    if (o && String(o.code || '').trim()) setVal('specPdfCode', String(o.code).trim().toUpperCase());
     // The client typed here goes on the cover (18.56), replacing ONLY the starter's own
     // CLIENT NAME placeholder, so a cover a designer has already written is never touched.
     // The big heading is left alone: at its size a long project name would wrap into the
@@ -7857,6 +7869,9 @@ function openSaveMenu() {
         _dsFlySep(menu);
         _dsFlyItem(menu, { label: 'Images\u2026', hint: 'Every image in the project, and whether it exports', icon: '<rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/>', run: () => openImagesModal() });
         _dsFlyItem(menu, { label: 'Package\u2026', hint: 'One zip: the project file and every image', icon: '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>', run: () => packageProject() });
+        _dsFlySep(menu);
+        _dsFlyItem(menu, { label: 'New project folder\u2026', hint: 'Client and project folders in your work folder (never Dropbox); Save and PDFs go there', icon: '<path d="M3 7h6l2 2h10v10H3z"/><path d="M12 12v5M9.5 14.5h5"/>', run: () => openProjectFolderDialog() });
+        _dsFlyItem(menu, { label: 'Set up my work folder\u2026', hint: 'Once per computer: where 00 ACTIVE PROJECTS lives, like Documents', icon: '<path d="M3 7h6l2 2h10v10H3z"/>', run: () => setupWorkFolder() });
     });
 }
 function renderNavTabs() {
@@ -8821,6 +8836,481 @@ async function saveMasterProject(opts) {
 }
 
 function saveMasterProjectAs() { return saveMasterProject({ saveAs: true }); }
+
+// ── PROJECT FOLDERS (20.81) ─────────────────────────────────────────────────
+// Designers work LOCALLY in a tree that mirrors Dropbox (00 ACTIVE PROJECTS / CLIENT (CODE) /
+// PROJECT / the studio template) and copy finished presentations into Dropbox themselves.
+// FARMHAND NEVER WRITES INTO DROPBOX: work in progress (wrong image codes, PSDs saved all
+// day) must not sync to the team. The browser only gives a folder's NAME, never its path, so
+// _pjfLooksLikeDropbox recognises the studio's Dropbox by what is in it and refuses it.
+// Two ways in: Set up my work folder (once; the handle is remembered in the frame-links
+// store) and New project folder (client, project, levels). Both ONLY ADD: an existing
+// folder is found by a loose name match (00. Active Projects = 00 ACTIVE PROJECTS, 01.PDF =
+// 01. PDF) and reused, nothing is renamed, moved or written over, and the dialog previews
+// every folder as new or already there before Create.
+// The template is Dropbox's 00. FILE TEMPLATE 2026 (DUPLICATE ONLY) + the Farmboy Design
+// Post Haste template + 06. FARMHAND. test_design_folder pins it; change all three together.
+const DESIGN_FOLDER_ROOT = '01. Design';
+const DESIGN_SUBFOLDERS = ['00. ARCHIVE', '01. PDF', '02. INDESIGN', '03. LINKS', '04. SOURCE', '05. PRINT FILES', '06. FARMHAND'];
+const DESIGN_PROJECT_SUB = '06. FARMHAND';
+const DESIGN_PDF_SUB = '01. PDF';
+// With "ARTWORK and EGD folders" ticked these get an ARTWORK and an EGD folder each, the way
+// Ford Hub's levels are filed on Dropbox (EGD = window film and wallcoverings).
+const DESIGN_SPLIT_SUBS = ['01. PDF', '02. INDESIGN', '03. LINKS', '04. SOURCE', '05. PRINT FILES'];
+const DESIGN_SPLIT_KINDS = ['ARTWORK', 'EGD'];
+const PJF_WORK_ROOT = '00 ACTIVE PROJECTS';
+const PJF_STORE_KEY = 'farmhand-work-root';
+const PJF_TEMPLATE_TOP = [
+    { name: '00. BDQ' },
+    { name: DESIGN_FOLDER_ROOT, design: true },
+    { name: '02. Project Management', kids: [
+        { name: '01. Financials', kids: [
+            { name: '00. Quoting & Estimates', kids: [{ name: 'Farmboy Quotes' }, { name: 'Vendor Quotes' }] },
+            { name: '01. Purchase Orders', kids: [{ name: 'Client' }, { name: 'Vendor' }] },
+            { name: '02. Invoicing', kids: [{ name: 'Farmboy Invoices' }, { name: 'Vendor Invoices' }] },
+            { name: '03. Expenses', kids: [{ name: '00.Receipts' }, { name: '01.Reimbursable' }] },
+        ] },
+        { name: '02. Sampling' },
+    ] },
+    { name: '03. Production & Procurement', kids: [
+        { name: '00. Installation' }, { name: '01. Vendor Docs (BOLs, Proofs, Production Images etc)' }, { name: '02. RFI' },
+    ] },
+    { name: '04. References' },
+    { name: '05. Transfer Out' },
+];
+// The job code finished projects are filed under: CLIENT-BRAND-CITY-#### (BEYE-HILT-WAIL-2024).
+// A hint only; plenty of real jobs differ (ALGR-DELT-NORM-001), so it never blocks.
+const JOB_CODE_RE = /^[A-Z0-9+&]{3,5}-[A-Z0-9+&]{3,5}-[A-Z0-9+&]{3,5}-[0-9X]{3,7}$/;
+let _designFolder = null;   // { project, pdf } directory handles Save and PDFs go to, this session only
+let _pjfRoot = null;        // the work folder's 00 ACTIVE PROJECTS handle, once loaded
+
+function _dirPickerAvailable() {
+    try { return typeof window !== 'undefined' && typeof window.showDirectoryPicker === 'function'; } catch (e) { return false; }
+}
+function _jobCode() {
+    const el = document.getElementById('specPdfCode');
+    return String((el && el.value) || '').trim().toUpperCase();
+}
+function _jobCodeLooksRight(code) { return JOB_CODE_RE.test(String(code || '').trim().toUpperCase()); }
+// The studio's file naming, YYMMDD.JOBCODE.V#: the same stamp the deck PDF uses.
+function _designProjectFileName(code) {
+    let tag = code ? _prodSafe(code) : '';
+    if (!tag) { const el = document.getElementById('g_projName'); tag = slugifyForFilename((el && el.value) || 'Untitled'); }
+    let ver = ''; try { ver = String(_deckFooterMeta().version || '').trim(); } catch (e) {}
+    return _prodStamp() + '.' + tag + '.' + (ver ? _prodSafe(ver) : 'V1') + '.json';
+}
+async function _designFileExists(dir, name) {
+    try { await dir.getFileHandle(name); return true; } catch (e) { return false; }
+}
+
+// Names compare loosely: case, dots, dashes, underscores and runs of spaces do not count.
+function _pjfKey(s) { return String(s || '').toUpperCase().replace(/[.\s_\-]+/g, ' ').trim(); }
+// A folder name Mac AND Windows accept: Windows refuses \ / : * ? " < > |, a trailing dot
+// or space, and the device names (CON, NUL, COM1...). Dropbox already holds names with a
+// colon ("level 01:02") that break on Windows, so a new one never gets one.
+function _pjfSafeName(s) {
+    let n = String(s || '').replace(/[\\/:*?"<>|\u0000-\u001f]+/g, '-').replace(/\s+/g, ' ').trim().replace(/[. ]+$/, '');
+    if (/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/i.test(n)) n += '_';
+    return n;
+}
+// "01-04", "1 2 3", "01, 02, P1" -> ['01', '02', '03', '04'] / ... ; non-numbers kept as typed.
+function _pjfParseLevels(s) {
+    const out = [];
+    String(s || '').split(/[,;\s]+/).forEach(tok => {
+        if (!tok) return;
+        const m = tok.match(/^(\d{1,2})-(\d{1,2})$/);
+        if (m) {
+            let a = parseInt(m[1], 10), b = parseInt(m[2], 10);
+            if (a > b) { const t = a; a = b; b = t; }
+            for (let i = a; i <= b && i - a < 60; i++) out.push(String(i).padStart(2, '0'));
+        } else if (/^\d{1,2}$/.test(tok)) out.push(tok.padStart(2, '0'));
+        else { const n = _pjfSafeName(tok.toUpperCase()); if (n) out.push(n); }
+    });
+    return out.filter((v, i) => out.indexOf(v) === i);
+}
+function _pjfDesignKids(levels, split) {
+    const subs = () => DESIGN_SUBFOLDERS.map(s => ({ name: s, kids: (split && DESIGN_SPLIT_SUBS.indexOf(s) >= 0) ? DESIGN_SPLIT_KINDS.map(k => ({ name: k })) : undefined }));
+    return (levels && levels.length) ? levels.map(l => ({ name: 'LEVEL ' + l, level: l, kids: subs() })) : subs();
+}
+function _pjfProjectKids(levels, split) {
+    return PJF_TEMPLATE_TOP.map(n => n.design ? { name: n.name, kids: _pjfDesignKids(levels, split) } : n);
+}
+// Where the project file and PDFs go for a "save to" choice like { level: '01', kind: 'ARTWORK' }.
+function _pjfSavePaths(to) {
+    const lv = to && to.level ? ['LEVEL ' + to.level] : [];
+    const pdf = [DESIGN_FOLDER_ROOT].concat(lv, [DESIGN_PDF_SUB]).concat(to && to.kind ? [to.kind] : []);
+    return { project: [DESIGN_FOLDER_ROOT].concat(lv, [DESIGN_PROJECT_SUB]).join('/'), pdf: pdf.join('/') };
+}
+
+async function _pjfDirs(dir) {
+    const out = [];
+    if (!dir) return out;
+    try {
+        if (typeof dir.values === 'function') { for await (const h of dir.values()) if (h && h.kind === 'directory') out.push(h); }
+    } catch (e) {}
+    return out;
+}
+// The existing child folder this name means: the exact name first, then a loose match.
+async function _pjfFind(dir, name) {
+    if (!dir) return null;
+    try { return await dir.getDirectoryHandle(name); } catch (e) {}
+    const k = _pjfKey(name);
+    const all = await _pjfDirs(dir);
+    for (const h of all) if (_pjfKey(h.name) === k) return h;
+    return null;
+}
+// Walks a folder spec under `base`. dry: only looks. Otherwise makes what is missing
+// (create: true never touches an existing folder). Each row: the path as it is on disk,
+// 'new' or 'there', the spec path (template names), and the handle when there is one.
+async function _pjfApply(base, kids, dry, rows, prefix, specPrefix) {
+    rows = rows || [];
+    for (const n of kids || []) {
+        let h = await _pjfFind(base, n.name);
+        const status = h ? 'there' : 'new';
+        if (!h && !dry && base) h = await base.getDirectoryHandle(n.name, { create: true });
+        const path = (prefix ? prefix + '/' : '') + (h ? h.name : n.name);
+        const spec = (specPrefix ? specPrefix + '/' : '') + n.name;
+        rows.push({ path: path, spec: spec, status: status, handle: h || null, depth: spec.split('/').length - 1 });
+        if (n.kids) await _pjfApply(h, n.kids, dry, rows, path, spec);
+    }
+    return rows;
+}
+// The studio's Dropbox, recognised by what only it has. Picking it is refused.
+async function _pjfLooksLikeDropbox(dir) {
+    if (!dir) return false;
+    if (/dropbox/i.test(String(dir.name || ''))) return true;
+    const keys = (await _pjfDirs(dir)).map(h => _pjfKey(h.name));
+    if (keys.some(k => k.indexOf('00 FILE TEMPLATE') === 0 || k.indexOf('00 PROJECT ARCHIVE') === 0)) return true;
+    if (keys.indexOf('01 CREATIVE TEAM') >= 0 && keys.indexOf('03 SALES') >= 0) return true;
+    if (keys.some(k => /DROPBOX/.test(k))) return true;
+    return false;
+}
+async function _pjfPermitted(dir, ask) {
+    if (!dir) return false;
+    try {
+        let p = typeof dir.queryPermission === 'function' ? await dir.queryPermission({ mode: 'readwrite' }) : 'granted';
+        if (p === 'prompt' && ask && typeof dir.requestPermission === 'function') p = await dir.requestPermission({ mode: 'readwrite' });
+        return p === 'granted';
+    } catch (e) { return false; }
+}
+async function _pjfLoadRoot() {
+    if (_pjfRoot) return _pjfRoot;
+    try { _pjfRoot = await _linkStoreGet(PJF_STORE_KEY); } catch (e) { _pjfRoot = null; }
+    return _pjfRoot;
+}
+// What a picked folder is: the work folder itself, a folder holding it, a project (it has
+// template folders), its 01. Design, or else a client folder.
+async function _pjfClassify(dir) {
+    const k = _pjfKey(dir.name);
+    if (k === _pjfKey(PJF_WORK_ROOT)) return { kind: 'root', root: dir };
+    if (k === _pjfKey(DESIGN_FOLDER_ROOT)) return { kind: 'design', design: dir };
+    const kids = (await _pjfDirs(dir)).map(h => ({ h: h, k: _pjfKey(h.name) }));
+    const root = kids.find(c => c.k === _pjfKey(PJF_WORK_ROOT));
+    if (root) return { kind: 'root', root: root.h };
+    const top = PJF_TEMPLATE_TOP.map(n => _pjfKey(n.name));
+    if (kids.some(c => top.indexOf(c.k) >= 0)) return { kind: 'project', project: dir };
+    return { kind: 'client', client: dir };
+}
+
+// SET UP MY WORK FOLDER. Pick Documents (or anywhere local): its 00 ACTIVE PROJECTS is used
+// if it has one (or if that is what was picked), otherwise one is made after asking.
+// Returns 'ok' / 'cancelled' / 'dropbox' / 'failed' / 'nopicker'.
+async function setupWorkFolder() {
+    if (!_dirPickerAvailable()) {
+        showInfoModal('Work folder', 'This browser cannot make folders. Use Chrome or Edge (Mac or Windows) to set up your work folder.');
+        return 'nopicker';
+    }
+    let picked;
+    try { picked = await window.showDirectoryPicker({ id: 'farmhand-work', mode: 'readwrite', startIn: 'documents' }); }
+    catch (err) {
+        if (err && err.name === 'AbortError') return 'cancelled';
+        try { showInfoModal('Could not open the folder', 'Farmhand could not get to that folder: ' + ((err && err.message) || 'unknown error') + '.'); } catch (e) {}
+        return 'failed';
+    }
+    try {
+        const refuse = () => {
+            showInfoModal('That looks like Dropbox', '"' + picked.name + '" looks like the studio Dropbox. Farmhand only makes folders in your own work folder (Documents is a good place). Copy finished presentations into Dropbox yourself.');
+            return 'dropbox';
+        };
+        if (await _pjfLooksLikeDropbox(picked)) return refuse();
+        const c = await _pjfClassify(picked);
+        let root = c.kind === 'root' ? c.root : null;
+        if (root && root !== picked && await _pjfLooksLikeDropbox(root)) return refuse();
+        if (!root) {
+            if (c.kind === 'project' || c.kind === 'design') {
+                showInfoModal('Pick the folder above', '"' + picked.name + '" is a project folder. Pick the folder that holds 00 ACTIVE PROJECTS (or should), such as Documents.');
+                return 'failed';
+            }
+            const ok = await _askYesNo('Make ' + PJF_WORK_ROOT + '?', 'There is no ' + PJF_WORK_ROOT + ' folder in "' + picked.name + '". Make one there? Your client and project folders go inside it, named the same as on Dropbox.', 'Make it', 'Cancel', {});
+            if (!ok) return 'cancelled';
+            root = await picked.getDirectoryHandle(PJF_WORK_ROOT, { create: true });
+        }
+        _pjfRoot = root;
+        try { await _linkStorePut(PJF_STORE_KEY, root); } catch (e) {}
+        _toast('Work folder set', (root === picked ? root.name : picked.name + '/' + root.name) + '. New project folders go here.');
+        return 'ok';
+    } catch (err) {
+        try { showInfoModal('Could not set up the work folder', 'Farmhand could not write to that folder: ' + ((err && err.message) || 'unknown error') + '.'); } catch (e) {}
+        return 'failed';
+    }
+}
+
+// The rows a New project folder would make or reuse. ctx: { root?, client?, project?, design? }
+// handles (the deepest one given is where it starts); o: { client, project, levels, split }.
+function _pjfSpec(ctx, o) {
+    const levels = _pjfParseLevels(o.levels);
+    if (ctx.design) return { base: ctx.design, kids: _pjfDesignKids(levels, o.split), prefix: ctx.design.name, specPrefix: DESIGN_FOLDER_ROOT };
+    if (ctx.project) return { base: ctx.project, kids: _pjfProjectKids(levels, o.split), prefix: ctx.project.name, specPrefix: '', projectAt: -1 };
+    const proj = { name: _pjfSafeName(o.project), kids: _pjfProjectKids(levels, o.split) };
+    if (ctx.client) return { base: ctx.client, kids: [proj], prefix: ctx.client.name, specPrefix: '', projectAt: 0 };
+    return { base: ctx.root || null, kids: [{ name: _pjfSafeName(o.client), kids: [proj] }], prefix: ctx.root ? ctx.root.name : PJF_WORK_ROOT, specPrefix: '', projectAt: 1 };
+}
+// The template path inside the project for a spec row ("01. Design/LEVEL 01/06. FARMHAND").
+function _pjfInProject(spec, sp) {
+    if (sp.specPrefix) return sp.specPrefix + '/' + spec;
+    const parts = spec.split('/');
+    return parts.slice((sp.projectAt == null ? 0 : sp.projectAt) + 1).join('/');
+}
+// Makes the folders. o.saveTo: null, or { level, kind } -> the project file goes into that
+// 06. FARMHAND, and deck PDFs into that 01. PDF (ARTWORK/EGD) for the rest of the session.
+// Returns { result, rows, made }.
+async function createProjectFolder(ctx, o) {
+    const sp = _pjfSpec(ctx, o);
+    if (!sp.base) return { result: 'failed', rows: [], made: 0 };
+    if (!ctx.design && !ctx.project && !_pjfSafeName(o.project)) return { result: 'failed', rows: [], made: 0 };
+    if (!ctx.design && !ctx.project && !ctx.client && !_pjfSafeName(o.client)) return { result: 'failed', rows: [], made: 0 };
+    const rows = await _pjfApply(sp.base, sp.kids, false, [], sp.prefix, sp.specPrefix);
+    const made = rows.filter(r => r.status === 'new').length;
+    const find = (p) => { const r = rows.find(x => _pjfInProject(x.spec, sp) === p); return r ? r.handle : null; };
+    const projRow = (sp.specPrefix || ctx.project) ? null : rows.find(r => r.depth === (sp.projectAt || 0));
+    const where = ctx.project || ctx.design ? sp.prefix : (projRow ? projRow.path : sp.prefix);
+    if (!o.saveTo) {
+        _toast('Project folder ready', where + (made ? ' (' + made + ' new folders)' : ' (nothing was missing)'));
+        return { result: 'ok', rows: rows, made: made };
+    }
+    const paths = _pjfSavePaths(o.saveTo);
+    const projDir = find(paths.project), pdfDir = find(paths.pdf);
+    if (!projDir) return { result: 'failed', rows: rows, made: made };
+    _designFolder = { project: projDir, pdf: pdfDir || null };
+    const fname = _designProjectFileName(_jobCode());
+    if (await _designFileExists(projDir, fname)) {
+        const replace = await _askYesNo('That project file already exists',
+            fname + ' is already in ' + paths.project + '. Replace it with this project, or keep it and leave this project unsaved?',
+            'Replace', 'Keep it', { danger: true });
+        if (!replace) { _toast('Project folder ready', where + '. The project was not saved there.'); return { result: 'ok', rows: rows, made: made }; }
+    }
+    _flushElevationInputs();
+    const fh = await projDir.getFileHandle(fname, { create: true });
+    await _fsaWrite(fh, _projectFileText(_projectPayload()));
+    _setProjectFile(fh, fname);
+    _afterSave();
+    _toast('Project folder ready', where + '. Saved ' + fname + ' in ' + paths.project + '; Save writes there and PDFs go to ' + paths.pdf + '.');
+    return { result: 'ok', rows: rows, made: made };
+}
+
+// NEW PROJECT FOLDER: the dialog. o: { project, client } to prefill (the start screen).
+// Resolves to 'ok' / 'cancelled' / 'zip' / 'failed'. Nothing is made before Create.
+function openProjectFolderDialog(opts) {
+    const o = opts || {};
+    return new Promise((resolve) => {
+        const ov = document.createElement('div');
+        ov.className = 'frame-modal fm-nested ask-fields pjf-modal'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+        const card = document.createElement('form'); card.className = 'ask-card pjf-card';
+        card.innerHTML = '<h3 class="ask-title">New project folder</h3>'
+            + '<div class="ask-body pjf-where"></div>'
+            + '<label class="ask-field pjf-client-row"><span>Client folder</span><input type="text" name="client" autocomplete="off" placeholder="e.g. FORD MOTOR COMPANY (FORD)"><span class="pjf-hint">Same name as the client folder on Dropbox.</span></label>'
+            + '<label class="ask-field pjf-project-row"><span>Project folder</span><input type="text" name="project" autocomplete="off" placeholder="e.g. FORD - HUB PHASE 1B"><span class="pjf-hint">Same name as on Dropbox.</span></label>'
+            + '<div class="pjf-fixed"></div>'
+            + '<label class="ask-field"><span>Levels (optional)</span><input type="text" name="levels" autocomplete="off" placeholder="e.g. 01-04, or leave empty"></label>'
+            + '<label class="pjf-check"><input type="checkbox" name="split"><span>ARTWORK and EGD folders inside PDF, INDESIGN, LINKS, SOURCE and PRINT FILES</span></label>'
+            + '<label class="ask-field"><span>Save this project into</span><select name="saveTo"></select></label>'
+            + '<div class="pjf-preview-head"></div><div class="pjf-preview"></div>'
+            + '<div class="ask-actions"><button type="button" class="action-btn btn-secondary pjf-pick">Pick an existing folder…</button><span style="flex:1"></span><button type="button" class="action-btn btn-secondary pjf-cancel">Cancel</button><button type="submit" class="action-btn pjf-go">Create</button></div>';
+        ov.appendChild(card);
+        const f = card.elements;
+        const $ = (s) => card.querySelector(s);
+        const ctx = { root: null, rootOk: false, client: null, project: null, design: null };
+        const canFolders = _dirPickerAvailable();
+        let done = false, seq = 0, splitTouched = false, saveChosen = false, timer = null;
+        const finish = (v) => { if (done) return; done = true; ov.remove(); resolve(v); };
+        f.project.value = o.project ? _pjfSafeName(o.project) : '';
+        f.split.onchange = () => { splitTouched = true; fillSaveTo(); refresh(); };
+        f.levels.oninput = () => { if (!splitTouched) f.split.checked = _pjfParseLevels(f.levels.value).length > 0; fillSaveTo(); refresh(); };
+        f.client.oninput = refresh; f.project.oninput = refresh; f.saveTo.onchange = () => { saveChosen = true; };
+        function fillSaveTo() {
+            const keep = saveChosen ? f.saveTo.value : null;   // only a choice the designer made
+            const levels = _pjfParseLevels(f.levels.value);
+            const kinds = f.split.checked ? DESIGN_SPLIT_KINDS : [null];
+            const opts2 = [];
+            (levels.length ? levels : [null]).forEach(l => kinds.forEach(k => {
+                const label = [l ? 'LEVEL ' + l : DESIGN_FOLDER_ROOT, k].filter(Boolean).join(' · ');
+                opts2.push({ v: JSON.stringify({ level: l, kind: k }), label: label });
+            }));
+            opts2.push({ v: '', label: 'Don’t save the project there' });
+            f.saveTo.innerHTML = '';
+            opts2.forEach(x => { const op = document.createElement('option'); op.value = x.v; op.textContent = x.label; f.saveTo.appendChild(op); });
+            if (keep != null && opts2.some(x => x.v === keep)) f.saveTo.value = keep; else f.saveTo.selectedIndex = 0;
+        }
+        function showWhere() {
+            const w = $('.pjf-where'); w.innerHTML = '';
+            const fixed = $('.pjf-fixed'); fixed.innerHTML = '';
+            const deep = ctx.design || ctx.project || ctx.client;
+            $('.pjf-client-row').style.display = (ctx.client || ctx.project || ctx.design) ? 'none' : '';
+            $('.pjf-project-row').style.display = (ctx.project || ctx.design) ? 'none' : '';
+            if (deep) {
+                fixed.textContent = (ctx.design ? 'Filling in ' : ctx.project ? 'Adding what is missing to ' : 'New project inside ') + '"' + deep.name + '"';
+            }
+            if (!canFolders) { w.textContent = 'This browser cannot make folders: Create downloads them as a zip to unzip into your work folder. Chrome or Edge make them directly.'; return; }
+            if (deep) { w.textContent = 'Only adds folders. Nothing already there is renamed, moved or replaced.'; return; }
+            if (ctx.root && !ctx.rootOk) {
+                w.appendChild(document.createTextNode('Work folder: ' + ctx.root.name + '. The browser needs your OK to open it again this session. '));
+                const al = document.createElement('button'); al.type = 'button'; al.className = 'pjf-link pjf-allow'; al.textContent = 'Allow access';
+                al.onclick = async () => { ctx.rootOk = await _pjfPermitted(ctx.root, true); if (ctx.rootOk) await loadClients(); showWhere(); refresh(); };
+                w.appendChild(al);
+            } else if (ctx.root) {
+                w.appendChild(document.createTextNode('Work folder: ' + ctx.root.name + ' (on this computer, never Dropbox). '));
+                const ch = document.createElement('button'); ch.type = 'button'; ch.className = 'pjf-link'; ch.textContent = 'Change…';
+                ch.onclick = async () => { if (await setupWorkFolder() === 'ok') { ctx.root = _pjfRoot; ctx.rootOk = true; await loadClients(); showWhere(); refresh(); } };
+                w.appendChild(ch);
+            } else {
+                w.appendChild(document.createTextNode('No work folder yet. Set one up once (Documents is a good place); Farmhand never writes into Dropbox. '));
+                const su = document.createElement('button'); su.type = 'button'; su.className = 'pjf-link'; su.textContent = 'Set up…';
+                su.onclick = async () => { if (await setupWorkFolder() === 'ok') { ctx.root = _pjfRoot; ctx.rootOk = true; await loadClients(); showWhere(); refresh(); } };
+                w.appendChild(su);
+            }
+        }
+        async function loadClients() {
+            if (!ctx.root || !ctx.rootOk) return;
+            const names = (await _pjfDirs(ctx.root)).map(h => h.name).filter(n => !/^00[ .]/.test(n)).sort();
+            let dl = card.querySelector('datalist');
+            if (!dl) { dl = document.createElement('datalist'); dl.id = 'pjfClients' + Math.random().toString(36).slice(2, 8); card.appendChild(dl); f.client.setAttribute('list', dl.id); }
+            dl.innerHTML = ''; names.forEach(n => { const op = document.createElement('option'); op.value = n; dl.appendChild(op); });
+            // "Ford" typed on the start screen finds FORD MOTOR COMPANY (FORD).
+            if (o.client && !f.client.value) {
+                const k = _pjfKey(o.client);
+                const hit = names.find(n => _pjfKey(n) === k || _pjfKey(n.replace(/\s*\([^)]*\)\s*$/, '')) === k || (_pjfKey((n.match(/\(([^)]*)\)\s*$/) || [])[1]) === k));
+                f.client.value = hit || '';
+            }
+        }
+        const input = () => ({ client: f.client.value, project: f.project.value, levels: f.levels.value, split: f.split.checked });
+        const missing = () => {
+            if (ctx.project || ctx.design) return '';
+            if (!_pjfSafeName(f.project.value)) return 'Type the project folder name.';
+            if (!ctx.client && !_pjfSafeName(f.client.value)) return 'Type or pick the client folder.';
+            if (canFolders && !ctx.root && !ctx.client) return 'Set up your work folder first.';
+            if (canFolders && !ctx.client && !ctx.rootOk) return 'Press Allow access to see what will be made.';
+            return '';
+        };
+        function refresh() { clearTimeout(timer); timer = setTimeout(run, 150); }
+        async function run() {
+            const my = ++seq;
+            const why = missing();
+            $('.pjf-go').disabled = !!why;
+            const head = $('.pjf-preview-head'), box = $('.pjf-preview');
+            if (why) { head.textContent = why; box.innerHTML = ''; return; }
+            const sp = _pjfSpec(canFolders ? ctx : {}, input());
+            const rows = await _pjfApply(canFolders ? sp.base : null, sp.kids, true, [], sp.prefix, sp.specPrefix);
+            if (my !== seq) return;
+            const nNew = rows.filter(r => r.status === 'new').length;
+            head.textContent = nNew + ' new folder' + (nNew === 1 ? '' : 's') + (rows.length - nNew ? ', ' + (rows.length - nNew) + ' already there' : '');
+            const renamed = [f.client.value, f.project.value].filter(v => v && _pjfSafeName(v) !== v.trim().replace(/\s+/g, ' '));
+            if (renamed.length) head.textContent += '. Characters Windows does not allow were changed to -';
+            box.innerHTML = '';
+            rows.forEach(r => {
+                const d = document.createElement('div'); d.className = 'pjf-row pjf-' + r.status;
+                d.style.paddingLeft = (r.depth * 14) + 'px';
+                d.textContent = r.path.split('/').pop();
+                const t = document.createElement('span'); t.className = 'pjf-tag'; t.textContent = r.status === 'new' ? 'new' : 'already there';
+                d.appendChild(t); box.appendChild(d);
+            });
+        }
+        $('.pjf-cancel').onclick = () => finish('cancelled');
+        $('.pjf-pick').style.display = canFolders ? '' : 'none';
+        $('.pjf-pick').onclick = async () => {
+            let picked;
+            try { picked = await window.showDirectoryPicker({ id: 'farmhand-work', mode: 'readwrite', startIn: 'documents' }); } catch (e) { return; }
+            if (await _pjfLooksLikeDropbox(picked)) { showInfoModal('That looks like Dropbox', '"' + picked.name + '" looks like the studio Dropbox. Pick the folder in your own work folder instead.'); return; }
+            const c = await _pjfClassify(picked);
+            ctx.client = ctx.project = ctx.design = null;
+            if (c.kind === 'root') {
+                if (await _pjfLooksLikeDropbox(c.root)) { showInfoModal('That looks like Dropbox', 'That 00 ACTIVE PROJECTS looks like the studio Dropbox. Pick your own work folder.'); return; }
+                ctx.root = _pjfRoot = c.root; ctx.rootOk = true; try { await _linkStorePut(PJF_STORE_KEY, c.root); } catch (e) {}
+                await loadClients();
+            } else ctx[c.kind] = c[c.kind];
+            showWhere(); refresh();
+        };
+        card.onsubmit = async (e) => {
+            e.preventDefault();
+            if ($('.pjf-go').disabled) return;
+            const inp = input();
+            let saveTo = null; try { saveTo = f.saveTo.value ? JSON.parse(f.saveTo.value) : null; } catch (er) {}
+            if (!canFolders) { await _downloadProjectFolderZip(inp); finish('zip'); return; }
+            const base = ctx.design || ctx.project || ctx.client || ctx.root;
+            if (!(await _pjfPermitted(base, true))) { showInfoModal('Farmhand needs your OK', 'Allow Farmhand to edit that folder (the browser asks once per session), then press Create again.'); return; }
+            $('.pjf-go').disabled = true;
+            try {
+                const r = await createProjectFolder(ctx, Object.assign(inp, { saveTo: saveTo }));
+                finish(r.result);
+            } catch (err) {
+                $('.pjf-go').disabled = false;
+                showInfoModal('Could not make the project folder', 'Farmhand could not write to that folder: ' + ((err && err.message) || 'unknown error') + '.');
+            }
+        };
+        try { new MutationObserver(() => { if (!ov.isConnected) finish('cancelled'); }).observe(document.body, { childList: true }); } catch (e) {}
+        document.body.appendChild(ov);
+        fillSaveTo();
+        (async () => {
+            if (canFolders) {
+                const r = await _pjfLoadRoot();
+                // Remembered; when the browser wants a fresh OK, the dialog shows Allow access.
+                if (r) { ctx.root = r; ctx.rootOk = await _pjfPermitted(r, false); }
+                await loadClients();
+            }
+            showWhere(); run();
+            try { (f.project.value ? f.client : f.project).focus(); } catch (e) {}
+        })();
+    });
+}
+// Kept for the Save menu and old callers: the dialog, never a straight write.
+function createDesignFolder(o) { return openProjectFolderDialog(o || {}); }
+// Safari and Firefox cannot make folders from a web page: hand over the empty structure.
+async function _downloadProjectFolderZip(o) {
+    if (typeof JSZip === 'undefined') { showInfoModal('Project folder', 'This browser cannot make folders. Use Chrome or Edge.'); return 'failed'; }
+    const zip = new JSZip();
+    const sp = _pjfSpec({}, o);
+    const rows = await _pjfApply(null, sp.kids, true, [], '', '');
+    rows.forEach(r => zip.folder(r.path));
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const fileName = (_pjfSafeName(o.project) || 'Project') + ' folders.zip';
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName; a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (er) {} }, 8000);
+    _toast('Project folders downloaded', fileName + ': unzip it into your work folder (00 ACTIVE PROJECTS), not Dropbox.');
+    return 'zip';
+}
+
+// Every deck PDF goes through here. With a design folder this session it lands in
+// 01. PDF; without one, or if the folder stopped letting us write, it downloads as before.
+async function _deliverPdf(doc, fname) {
+    const dir = _designFolder && _designFolder.pdf;
+    if (dir) {
+        try {
+            let perm = 'granted';
+            if (typeof dir.queryPermission === 'function') perm = await dir.queryPermission({ mode: 'readwrite' });
+            if (perm === 'granted') {
+                if (await _designFileExists(dir, fname)) {
+                    const replace = await _askYesNo('Replace the PDF?', fname + ' is already in ' + DESIGN_PDF_SUB + '. Replace it?', 'Replace', 'Download instead', {});
+                    if (!replace) { doc.save(fname); return 'download'; }
+                }
+                const fh = await dir.getFileHandle(fname, { create: true });
+                await _fsaWrite(fh, doc.output('blob'));
+                _toast('PDF saved', DESIGN_PDF_SUB + '/' + fname);
+                return 'folder';
+            }
+        } catch (e) {}
+    }
+    doc.save(fname);
+    return 'download';
+}
 
 // LOADING USED TO DISCARD UNSAVED WORK WITHOUT ASKING. beforeunload covers
 // closing the tab and covered nothing here, so opening a second project over an
@@ -21875,7 +22365,7 @@ async function exportSpecPagePDF(opts) {
                     'Save anyway', 'Cancel', { danger: true });
             }
             if (opts.returnPdf) result = { blob: built.doc.output('blob'), fileName: built.fname, pages: built.doc.getNumberOfPages(), missing: missing.map(m => ({ page: m.page, name: m.name || '' })) };
-            else if (deliver) { if (opts.preview) showSpecPdfPreview(built.doc, built.fname); else built.doc.save(built.fname); }
+            else if (deliver) { if (opts.preview) showSpecPdfPreview(built.doc, built.fname); else await _deliverPdf(built.doc, built.fname); }
         }
     } catch (e) {
         // A cancel is a deliberate user action, not a failure — unwinding via a
@@ -41670,7 +42160,7 @@ function closeSpecPdfPreview() {
     if (frame) frame.src = 'about:blank';
 }
 function downloadSpecPdfPreview() {
-    if (window._lastSpecDoc) { try { window._lastSpecDoc.save(window._lastSpecName || 'FRAME_Presentation.pdf'); } catch (e) {} }
+    if (window._lastSpecDoc) { try { _deliverPdf(window._lastSpecDoc, window._lastSpecName || 'FRAME_Presentation.pdf'); } catch (e) {} }
 }
 
 // ── Moodboard image manager ───────────────────────────────────────────────
@@ -50033,7 +50523,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // The fail-safe holds the finished document so it can check the ledger first.
     if (opts._hold) return { doc: doc, fname: fname };
     if (opts.preview) { showSpecPdfPreview(doc, fname); }
-    else { doc.save(fname); }
+    else { await _deliverPdf(doc, fname); }
 }
 
 async function exportDashNativePNG() {
@@ -53900,7 +54390,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Saving your work',
-                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Open Project</strong> opens the file and Farmhand remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>Farmhand also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> (in the menu beside Save) keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.`
+                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Open Project</strong> opens the file and Farmhand remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>Farmhand also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> (in the menu beside Save) keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.<br><br><strong>Project folders</strong> keep your work on this computer, filed the same way as Dropbox, until a presentation is done. <strong>Set up my work folder</strong> (menu beside Save) is done once: pick Documents (or wherever you keep work) and Farmhand uses its <strong>00 ACTIVE PROJECTS</strong>, or makes one. <strong>New project folder</strong> (same menu, or tick it on the New project screen) asks for the client folder and project folder, named the same as on Dropbox (FORD MOTOR COMPANY (FORD), FORD - HUB PHASE 1B), and optional levels (01-04), and builds the studio template: 00. BDQ, 01. Design, 02. Project Management, 03. Production &amp; Procurement, 04. References and 05. Transfer Out, with 06. FARMHAND in 01. Design. Tick <strong>ARTWORK and EGD folders</strong> for separate art and EGD presentations. Before anything is made it lists every folder as <strong>new</strong> or <strong>already there</strong>: folders you already have are used (00. Active Projects counts as 00 ACTIVE PROJECTS), and nothing is renamed, moved or replaced. Already have the client or project folder? <strong>Pick an existing folder</strong> and Farmhand starts from there. Choose where to save the project and it goes into that 06. FARMHAND as YYMMDD.JOBCODE.V1.json; Save writes there and deck PDFs go to its 01. PDF for the rest of the session. <strong>Farmhand never writes into Dropbox</strong> and refuses a folder that looks like the studio Dropbox: copy finished presentations across yourself. Names that Windows does not allow (a colon, a slash) are changed to a dash. Chrome and Edge on Mac and Windows; Safari and Firefox download the empty folders as a zip.`
             },
             {
                 title: 'Undo',
@@ -54260,7 +54750,8 @@ The <strong>image size with bleed</strong> is worked out at RFI and never shown 
             },
             {
                 title: `What's new`,
-                body: `<strong>20.80</strong> <b>18 new moodboard templates.</b> Templates > Moodboard has the studio's real moodboard layouts, measured from 144 pages across 27 projects: Bleed Mosaic (with or without artist captions), Inset Mosaic, Framed Row 3-Up and 4-Up, Featured Artists 4-Up, Even Grid 2x3, Free Collage + Notes, Gallery Wall, Hero + Stack, Reference Inset + Feature Artworks, Narrative Split, Style Wall, Palette Strip + Interiors, Keyword Overlay, Object Curation, Concept Columns and Material Bands. Each one uses the house heading, keyword line and image area, so pages made from different templates line up. The disclaimer on the older moodboard templates now reads "reference only" (it said "refernence").
+                body: `<strong>20.81</strong> <b>Project folders on your computer, filed like Dropbox.</b> <b>Set up my work folder</b> (once) finds or makes 00 ACTIVE PROJECTS in Documents or wherever you pick. <b>New project folder</b> takes the client and project folder names from Dropbox and optional levels (01-04, with ARTWORK and EGD folders if you want them) and builds the studio template, showing every folder as new or already there before Create. Existing folders are reused, even with slightly different names, and nothing is replaced. Pick an existing client or project folder to start from there. Farmhand <b>never writes into Dropbox</b> and refuses a folder that looks like it. New project also asks for the <b>Job code</b> (like BEYE-HILT-WAIL-2024, filled into the Project code so PDF names come out right). Choose a level to save into and the project is saved in its 06. FARMHAND, and deck PDFs go to its 01. PDF. Chrome and Edge on Mac and Windows; Safari downloads the folders as a zip.<br><br>
+<strong>20.80</strong> <b>18 new moodboard templates.</b> Templates > Moodboard has the studio's real moodboard layouts, measured from 144 pages across 27 projects: Bleed Mosaic (with or without artist captions), Inset Mosaic, Framed Row 3-Up and 4-Up, Featured Artists 4-Up, Even Grid 2x3, Free Collage + Notes, Gallery Wall, Hero + Stack, Reference Inset + Feature Artworks, Narrative Split, Style Wall, Palette Strip + Interiors, Keyword Overlay, Object Curation, Concept Columns and Material Bands. Each one uses the house heading, keyword line and image area, so pages made from different templates line up. The disclaimer on the older moodboard templates now reads "reference only" (it said "refernence").
 <strong>20.79</strong> Help's Video guides has <b>7. Preflight and Generate PDF</b>. Fixed while filming it: Preflight's <b>Page</b> button opened Deck Studio on the Project tab instead of the page; it now opens that page on the Pages tab. Preflight's spelling check no longer lists the starter deck's own filler text (a new project showed dozens of "possible misspellings" nobody wrote); text you have edited is still checked. The PDF carries its file name as its title, so the preview, Acrobat and Preview show <b>261119.Project.V1</b> instead of a random id.<br><br><strong>20.78</strong> In Help's <b>6. Deck Studio pages</b> video, the split screen now shows the Project tab's Include pages on the left and the Pages rail on the right: untick a page and its thumbnail leaves the deck.<br><br><strong>20.77</strong> Help's <b>6. Deck Studio pages</b> video is rebuilt and longer (about 80 seconds): the four Deck Studio buttons, adding a page with <b>+</b> and turning it into Keywords, a dark page, Group A/B/C, an elevation breaker, making your own template category, and a split screen of Include pages beside the page preview. Fixed while filming it: a spec page could show an old render (a default black frame and no artwork) after a piece was changed outside the Frame Dashboard, and Frame Recommendations could show old frames, until something rebuilt every preview; previews are now keyed on the piece itself. A new elevation breaker could say <b>Elevation capture failed</b> while the wall was only busy being drawn for another page; it now waits its turn. A page added with <b>+</b> takes the name of the template you apply (Keywords instead of New Page). The spec page panel says <b>Presentation layout (whole deck)</b>, and when one set differs from the deck (its own <b>One page</b>) it says so under the set.<br><br><strong>20.76</strong> Help's Video guides has <b>6. Deck Studio pages</b>: edit text on a page, drag a page in the rail, put a set on one page, and choose the presentation type and the pages it includes, in 30 seconds. Fixed while filming it: a page edited on the Pages tab (a retyped cover heading) still showed its old words in the Project tab's page preview until <b>Refresh preview</b>; the preview now redraws when you open the tab.<br><br><strong>20.75</strong> Help's Video guides has <b>5. The Elevation, start to finish</b> (about 2 minutes, in chapters): adding frames to a blank wall, spacing tips, every guide on the Guides tab, dragging the figure and dimensions clear of the art, a 7-piece salon hang, the Wall, Context and Glass tabs, and Elevation settings. Video 4 was re-recorded with a corrected caption.<br><br><strong>20.74</strong> <b>Spacing shows the gaps when you switch it on.</b> On the Elevation tab, Guides, <b>Spacing</b> on a wall with no gaps picked now dimensions every gap between neighbouring frames (the same as <b>Auto space</b> for that wall). It used to show nothing until a gap was picked with the letter chips on the Art tab; the chips still add or remove single gaps.<br><br><strong>20.73</strong> Help's Video guides has <b>4. Lay out the wall</b>: even gaps, hang height, centring, and the dimensions the install page prints, in 30 seconds. A gap is dimensioned by picking the next frame's letter on the Art tab, with <b>Spacing</b> on in Guides.<br><br><strong>20.72</strong> Help's Video guides has <b>3. Spec a piece</b>: on the Frame Dashboard, the overall size, a moulding from the frame library, the mat and the artwork, in 30 seconds.<br><br><strong>20.71</strong> <b>The footer updates as you type it.</b> In Deck Studio's <b>Project</b> tab, the page preview now shows the footer change the moment you type the Project Name, Project Code, Location or Version (it used to wait for <b>Refresh preview</b>). The footer reads: page number, PROJECT NAME – LOCATION | CODE.VERSION. Help's Video guides has a new one: <b>0. Start a new project</b>.<br><br><strong>20.70</strong> <b>Video guides in Help.</b> Help has a new <b>Video guides</b> section with short screen recordings: <b>1. Build the floor plan</b> (upload the plan, pin a placement, draw its wall line, pick a triptych) and <b>2. Add the client elevation</b> (add the sheet, crop what prints, scale it off a printed dimension, fit the art wall, measure the art). The Floor plan guide's Start here tab opens with the first one. They are recorded by Farmhand itself on a made-up hotel, so they can be re-made whenever the screens change.<br><br><strong>20.69</strong> <b>Build your own code style.</b> Categories tab, Item codes, <b>Build your own code…</b> (or Custom in the menu) opens the <b>code builder</b>: put a client's code together from parts, Category, Level (L1, 1 or 01), Plan fields you name yourself (Sector, Zone, Building, Wing...; up to four, each with its own letters such as S or Z), Fixed text and the Number (1, 01 or 001), with the separator you want between each. Drag a part by its grip to move it. A live preview and a table of plans, one column per plan field, show the first code on every plan. <b>Start from</b> has House, Category + number, Level, Level + Sector, Level + Zone and Building + Level. To turn Sector S16 into Zone Z16, rename the part and change its letters. A plan named Level 02 | Building A fills Building A by itself, and + Add code on a plan with no value asks once and keeps it. Item codes shows a column for each new field. The Floor plan guide's Code styles tab explains it, with examples from other kinds of projects.<br><br><strong>20.68</strong> <b>The floor plan says what to do first, and how codes are made.</b> The Items tab on a floor plan page now opens with <b>Set up this floor plan</b>: three steps that tick themselves off. <b>Plans</b> (one plan page per level, or per sector; <b>Plans…</b> opens the markup tool), <b>Code style</b> (<b>Codes…</b> goes to Item codes) and <b>Add and pin</b> (how many on this plan still need a pin, and <b>Show them</b>). It folds to one line once all three are done. Its <b>Guide</b> button opens the <b>Floor plan guide</b>, a small window that stays beside your work: Start here, Plans and sectors, Code styles (which to use for which kind of deck) and the Ford Hub L01 deck as a worked example; it is in Help too. Item codes on the Categories tab says what it does, says when to use the style you picked, and has <b>Which style?</b>. A plan named <b>Level 01 | Sector 10</b> now takes sector 10 the moment you name it (it used to wait until the project was opened again). <b>Size</b>, <b>Sketch</b> and the rate card line are off the floor plan: they are a PM's budget tool, and now appear only after <b>Budget sketch on the floor plan</b> in Production, Pricing (<b>Done budgeting</b> puts them away). The Categories tab's Quick set buttons read <b>Product types</b> and <b>Tiers</b>, so they fit.<br><br><strong>20.67</strong> <b>Fit the crop and the art wall with handles, and a clearer Client elevation panel.</b> The client sheet window no longer asks for one-shot clicks. <b>Crop the elevation</b> opens with a red box: drag it onto the elevation, drag its handles to trim, or drag on the sheet for a new box. In <b>Scale</b>, drag either end of the measure to fine-tune it. <b>The art wall</b> is now a green box at the wall's current size: drag it onto the wall in the drawing and drag its handles so the bottom edge sits on the floor, or type the width and height. A magnifier follows the handle you drag, and the arrow keys nudge (Shift for ten). On the Elevation tab, Wall tab, the Client elevation panel shows <b>Calibrated</b> or <b>Not calibrated</b> at the top and has one button, <b>Edit crop, scale &amp; wall</b>, which reopens the window with everything where you left it (a picture added on its own opens the same way). Page settings are grouped under <b>On the page</b>; the numbers and Place by hand are under <b>Advanced</b>. The red handles round the print area on the wall are gone (crop in the window instead); the wall-size handles stay. <b>Add a cropped image instead</b> is now a readable button.<br><br><strong>20.66</strong> <b>Crop the client drawing on the wall, give it a grey border, and drop a sheet straight in.</b> On the Elevation tab, Wall tab, a drawing that prints whole has <b>Crop the print area</b>: the whole sheet appears faded on the wall with the print area as a red box; drag an edge or corner to trim it (a long elevation trimmed down prints bigger, so its dimensions read), drag inside to slide to another part, then <b>Done cropping</b>. It is cut again from the full sheet, and the scale never changes. Or skip the button: the dashed box on the wall has <b>handles</b>; grab one, drag, and let go. The wall has handles too, on its right edge, top edge and top-right corner: drag to size the wall (quarter inches; the left end and the floor stay put). <b>Grey border</b> puts a thin light grey line round the drawing on the page, like the plan border (on by default; untick per wall, or <b>All walls</b>). Drag a sheet image from Finder onto the Client elevation panel to add it.<br><br><strong>20.65</strong> <b>Add the client's full sheet, pick the elevation on it, and calibrate: always.</b> On the Elevation tab, Wall tab, <b>+ Add client sheet</b> takes the whole elevation sheet as it came (a PNG or JPG of the PDF page) and opens it full screen in three steps: <b>Pick the elevation</b> (drag a box round it; the box is exactly what prints on the page), <b>Scale</b> (click both ends of a dimension printed on the drawing and type it, 11'-0" or 132"), and <b>The art wall</b> (click the floor at the wall's left and right ends, then the ceiling). Finish puts the drawing on the wall to scale, its floor on the wall's floor, and can set the wall to the drawing's size. The sheet is kept whole in the project; <b>Re-crop or recalibrate</b> reopens it, and other walls can <b>Use a sheet in this project</b> without adding it again. On the Elevations tab a dashed red box shows what <b>prints on the page</b>. <b>Calibration is required:</b> a client elevation added any way is marked <b>Not calibrated</b> (a red banner on the wall, Preflight lists it) and cannot be shown in the deck until it is. <b>Calibrate</b> now says on the wall what to click, draws the line it measured, and stops after two clicks.<br><br><strong>20.64</strong> <b>Frames printed as outlines show what's inside them again.</b> On a wall set to <b>Frames as outlines</b>, the install page printed empty black boxes with the client drawing showing through, while the Elevations tab showed the grey blocks lettered A, B, C. Each outline now has a white inside with the grey block and its letter when Wireframe is on, or the artwork once it's placed, the same as the Elevations tab. The frame itself is still a plain black outline with no shadow.<br><br><strong>20.63</strong> <b>The client elevation is cropped to the wall in the editor too, and the caption is plain Elevation again.</b> On a wall whose client elevation prints cropped to the wall, the Elevations tab now crops it at the wall the same way, so the editor shows what the page prints (the whole image still shows while you Place or Calibrate it). The caption under the drawing reads just <b>Elevation</b>; the source sheet is only added when you type one on the Wall tab.<br><br><strong>20.62</strong> <b>A wall page can print the client's whole drawing, with the art as outlines.</b> On the Elevation tab, Wall tab, once a client elevation is <b>Shown in deck</b>: choose <b>Print the whole drawing</b> to print everything you placed (the doors, returns and cabinets either side of the art wall) instead of cutting it off at the wall, so the install team sees the wall in its room and a wrong elevation is easy to spot. Beside it, <b>Frames as outlines</b> prints each piece as a plain black outline so the drawing reads through. The caption under the drawing now names the source sheet (Elevation \u00b7 AI4101-02), read off the drawing's name; type your own, or clear it to print just Elevation. <b>All walls</b> sets the drawing and the frame style on every wall at once.<br><br><strong>20.61</strong> <b>A border on a picture box now prints in the PDF.</b> A stroke set on an image box (a plan, a site photo) showed in Deck Studio but was left out of the exported PDF; it now prints in the same colour and weight.<br><br><strong>20.60</strong> <b>A thin grey border round the plan on floorplan pages.</b> A plan cropped to a section used to end in lines running off into space; a light 0.5 pt grey line round it now shows the crop is on purpose. It is on by default. To turn it off, open a floorplan page in Deck Studio, Plan tab: untick <b>Border round the plan</b> for that page, or use <b>All plans</b> to switch it on or off on every floorplan page at once.<br><br><strong>20.59</strong> <b>The red ELEVATION REQUIRED stamp no longer runs into the plan, and you can click it.</b> On a wall page, a note under the stamp that wraps to two lines now lifts the stamp up instead of growing down into the floor plan thumbnail. In Deck Studio, click the stamp for three choices: <b>Edit the note on this wall</b> (opens the wall in Elevations with the note ready to type), <b>Remove Elevation required</b>, or <b>Make it a movable note on this page</b>, which turns this page's stamp into two ordinary notes you can drag, nudge and retype (the wall's own stamp steps aside on that page).<br><br><strong>20.58</strong> <b>A client or brand logo uploaded as an SVG prints sharp at any zoom.</b> If the logo is one colour, the footer draws it as shapes, the same way it draws the Farmboy logo: in its own colour on light pages, white on dark ones. Logos exported from Illustrator work, rounded corners, circles and transforms included. An SVG with more than one colour, outlines (strokes), gradients, clipping masks or embedded pictures prints as a picture, as before. PNG and JPG logos still print as pictures; for the sharpest footer, upload a one-colour SVG.<br><br><strong>20.57</strong> <b>The Farmboy logo in the PDF is now vector.</b> It used to go in as a picture, which some PDF viewers drew with jagged edges at normal zoom (zoomed in it looked fine). The footer and cover logo are now drawn as shapes, so they stay sharp at any zoom, in any viewer and in print. A client or brand logo you add to the footer is now smoothly scaled to print size when it's added, instead of going in at full upload size, and its white version on dark pages keeps soft edges instead of a stair-stepped outline.<br><br><strong>20.56</strong> <b>Order workbook: one Excel file a PM can start the purchase order from.</b> Frame Dashboard, Export menu, <b>Order workbook (Excel)</b> (also on Production, Pricing). The first tab is a Farmboy-branded order sheet: our logo, the project and client, yellow cells for the PM (Salesforce opportunity, PO, status, dates), then every piece with its picture, item and image code, title, location, sizes, frame, mat, glass, paper, vendor, quantity and prices, with totals that stay live in Excel (shipping, installation and tax are yellow for the PM). The second tab is the Salesforce SF Import Template, its 11 columns at the top and nothing else, so it can be imported as it stands or saved as a CSV; the third is the Vendor codes list. The Salesforce CSV button still works and matches the tab line for line.<br><br><strong>20.55</strong> <b>Clicking a pin on a floor plan highlights it instead of opening its spec page.</b> In Deck Studio, a click on a pin lights it up along with its line in the legend, so a small nudge while moving a pin no longer jumps you to the spec page. The highlighted legend line gets a diamond grip on the left (drag it up or down the list) and up and down arrows on the right (move it one place per click). The pin number and the legend update together and stay highlighted as the code changes. Click the legend line itself to open the spec page. Click the picked pin again, click empty plan, or press Esc to let it go. Hover a legend line to see its pin. Pins in the exported PDF still link to their spec pages.<br><br><strong>20.54</strong> <b>The Coding cheat sheet opens as a popup.</b> The <b>Coding cheat sheet</b> button at the top of Help (or <b>Open as a popup</b> in its Reference section) opens the sheet in a small window that floats over your work and stays open: drag it by its title bar, pick a part from its tabs (naming supporting files, art types, public domain sources and rules, remixing, new asset codes, spec page fields), close it with the x or Esc. Supporting file names now say why the date is the drawing set's: a client's updated set shows at a glance which plan or elevation is current.
 <strong>20.53</strong> <b>The studio's Coding cheat sheet is in Help.</b> Help > Reference has a <b>Coding cheat sheet</b> section: how to name supporting files (PLAN, ELEV, REND, MOCK, FINISH, FRAME and REF codes), the art types and their image codes with Medium or Application, the approved public domain sources, the public domain and Creative Commons rules, which assets can be remixed and under what code, how a new asset is coded, and what each spec page row holds.
 <strong>20.52</strong> <b>A placement left on the wrong sector's plan is easy to fix.</b> When a plan holds placements still coded for another sector (moved by an older build, or by pinning before 20.51), its Items tab says so at the top with <b>Recode</b> (or <b>Recode all</b>): each takes the next code in this plan's sector and its pin comes across, in one Ctrl+Z. Picking the plan it already sits on under <b>Move to level</b> now recodes it too, instead of doing nothing.\n<strong>20.51</strong> <b>Set the order of the pages, and the codes follow.</b> On a floor plan page, drag a line of the legend up or down: drop 12 between 04 and 05 and it becomes 05, the old 05 to 11 become 06 to 12, and the pins, the legend and the spec pages all follow (Ctrl+Z undoes it). Rows on the Items tab drag the same way, now in sector projects too. <b>Order</b> on the Items tab (also on each placement's arrows menu, the floor plans button and Ctrl+K) opens a full-screen window of a plan's spec pages to drag into the order the story runs; drop a page on another plan's tab to move it there. <b>Gaps ask first.</b> When removing or moving a placement leaves a gap in a sector's codes (S16-01, 02, 04), Farmhand asks: keep the gap so every code matches what the client has, or close it and renumber. <b>Floor plans print in level, then sector order</b> (Sector 16, 23, 24), however they were added; Manual plan order still overrides. <b>Getting around:</b> the floor plans button beside Project, Pages and Templates jumps to any plan's page; the Items tab has a button per plan and shows <b>This plan</b> or <b>All plans</b> (each under its own heading), so a three-sector project no longer lists 01 to 10 three times. <b>Pinning a piece on another sector's plan asks</b>: Move it there (it takes the next code in that sector and its old pin comes off) or show it on both plans with its code unchanged. Fixed: in a project saved before item code patterns, moving a placement to another sector kept its old code; Farmhand now reads the pattern your codes follow and each plan's sector from its name. A placement left on the wrong plan by an older build is listed in Preflight with <b>Recode</b>.\n<strong>20.50</strong> <b>A moved placement brings its pin, and says when the spot needs you.</b> <b>Move to level</b> takes the pin off the old plan and drops an amber <b>?</b> pin on the new one, in the middle of that sector's pieces (or the middle of the plan). Drag it to its spot, or click it to keep it where it landed. Until then it is not printed, it counts as unplaced, the Items row shows an amber <b>?</b>, and Preflight lists it (an error in a final spec or install guide). Changing a placement's <b>sector</b> keeps its pin but rings it in amber with <b>Check</b> on the Items row until you confirm it or drag it. Fixed: pinning a moved piece on its new plan used to snap it back to its old level.\n<strong>20.49</strong> <b>Move and remove from the floorplan's Items list.</b> Each row has two new buttons. The <b>arrows</b> between the code and the category open one menu for moving or changing that placement: rename or swap its code, move it to another level (its code follows), change its sector, move its art to another piece or put it on hold, and open Art on hold. The <b>x</b> at the far right removes the placement and asks what to do with its art: <b>Remove, keep the art on hold</b> for another placement later, or <b>Delete everything, art too</b>. The list of set-aside art is now called <b>Art on hold</b>, so it is not confused with pieces not yet pinned on the plan (Unplaced). Fixed: in a sector project, <b>+ Add code</b> on the floorplan made a house code (ART.1) when the plan had no sector set. A new code now takes the plan's sector, else the sector of the last piece on that plan, and asks only when there is none anywhere.\n<strong>20.48</strong> <b>Art on hold: nothing you picked is lost when a placement goes.</b> Deleting a piece, deleting a placement, deleting a wall with its pieces, making a set smaller or pressing Remove on the artwork used to throw the picture away. Now it goes to <b>Art on hold</b> (Frame Dashboard, Edit menu; the floorplan's Items tab shows how many are waiting), with its title, artist, image code and where it came from. From there put it on another piece (that piece's art takes its place in the list), start a <b>New placement</b> for it, or delete it for good. <b>Delete placement…</b> on the Edit menu removes every piece of the selected code at once. Beside Remove on the artwork, <b>Move</b> puts the art on another piece, swapping if that piece already has art. Changing an item's <b>Level</b> moves its whole placement, its sector follows the plan, and a level code updates (L3.ART.S16-04 becomes L4.ART.S16-01). Art on hold is in the project file, Ctrl+Z, and Images and Package.\n<strong>20.47</strong> <b>One coding system per project, and switching it recodes everything.</b> Pick another pattern under Item codes (ART.1, level, level and sector, or your own) and every placement takes a code in it at once, in the order they were in, so a project never mixes L1.ART.S22-02 with L1.ART-01. If the new pattern needs a sector and some pieces have none, Farmhand asks which sector they are in first (Cancel keeps the old system). Changing a level's code or Sector updates its pieces' codes, keeping their numbers. Changing an item's Sector moves it to the end of that sector. A code typed by hand has to fit the pattern. In a sector project, + Add Item will not create a code until it has a sector. <b>+ Add Item picks its frame set from pictures</b>, the same grid as on the floorplan, and a set of more than one piece is hung on its own wall (untick <b>Hang it on its own wall</b> to skip), so the elevation and the spec page's As hung layout show the real arrangement instead of a straight row.\n<strong>20.46</strong> <b>Sectors fill themselves in, and two codes can swap.</b> Under <b>Item codes</b> on the Deck Studio floorplan's Categories tab, each plan level now has a <b>Sector</b> box beside its code. Every piece on that plan with no Sector of its own is in that sector, so + Add Item makes L3.ART.S16-01 straight away and <b>Recode</b> works without typing a sector on every item (a piece's own Sector still wins). The box that names the sector now says <b>{zone} is called</b>, so it is clear it holds a word like Sector or Zone, not a number. To swap two codes, double-click a code on the Items tab (or edit it in the item's code field) and type the other placement's code: Farmhand asks, then the two trade codes, each keeping its artwork, frame, wall and plan pin. For ART.1-style codes, <b>Move to</b> is still there to move a piece to that number and renumber the rest.\n<strong>20.45</strong> <b>FRAME is now Farmhand everywhere you read it.</b> The browser tab, the home-screen app name, the start screen, Help, the tour, messages and file pickers all say Farmhand. Project files are unchanged: files saved before open as they always did, and older builds still open new ones. On the start screen, <b>New to Farmhand? Take the guided tour</b> is now a button with a play mark and a ring that pulses a few times once the screen has settled, so it is easy to find.\n<strong>20.44</strong> <b>The start screen quote is bigger.</b> “Many hands make light work” now runs wider than the Farmhand logo beneath it, with – Thomas Gordon Towers set right-aligned under it.\n<strong>20.43</strong> <b>Farmhand.</b> The start screen and the header carry the new FARMHAND logo, one drawing that follows the theme (dark ink in light mode, light ink in dark mode). The start screen opens with a quote that fades in above the logo as it comes together: “Many hands make light work”, Thomas Gordon Towers.\n<strong>20.42</strong> <b>Frame Recommendations keeps its picture size at 3 and 4 columns.</b> The frame profile drawing (and the corner) used to shrink as you added columns. At 3 and 4 columns each frame now shows its corner and profile at the same size as in 1 column, with the name, vendor and size underneath at full width, so the size line is no longer cut off. A stacked card is taller, so a page holds 6 frames at 3 columns and 8 at 4 columns. 1 and 2 columns are unchanged.\n<strong>20.41</strong> <b>A Wall tab, and every wall setting has All walls.</b> On the Elevation tab, the wall type, the client elevation, Elevation required, the wall finish and the paint are together on a new <b>Wall</b> tab (they were above the tabs and on Context). Only the wall size, zoom and export stay above the tabs, so the Art tab has more room. Wall finish now prints per wall (the <b>Print</b> tick), and <b>All walls</b> beside it, beside Elevation required and beside Show in deck sets every wall at once. Adding a client elevation to a wall marked Elevation required offers to untick it. Deck Studio's breaker page has the same Print wall finish tick for that wall, with All walls.\n<strong>20.40</strong> <b>Wall finish can be switched off.</b> The WALL: line under ELEVATION DETAIL (WALL: WOOD · WD-1) has an on/off switch for the whole deck: <b>Print on pages</b> beside WALL FINISH on the Elevation tab, or <b>Print wall finish</b> on an elevation breaker page in Deck Studio. Off hides it on every wall page; each wall keeps what you typed, so turning it back on brings it all back.\n<strong>20.39</strong> <b>Drag a project file in to open it.</b> Drop a FRAME project .json from Finder anywhere on the FRAME window (the start screen or the app) and it opens, the same as Open Project. If the open project has unsaved changes, FRAME asks first. In Chrome, Save then writes back to the file you dropped.\n<strong>20.38</strong> <b>Client groupings.</b> In the frame browser, Team groupings is now <b>Client groupings</b>, and a client opens like a vendor: click <b>Ford</b> to see all of Ford's frames, with <b>Standard</b>, <b>Floater</b> and <b>Shadowbox</b> listed under it. Framerica's BW26-409 Gallery White is now in the library and in Ford Standard.\n<strong>20.37</strong> <b>See every image in the project, and package them.</b> The Save menu (the arrow beside Save Project) has <b>Images</b>: every picture in the project, grouped as client elevations, artwork, floorplans, Deck Studio images and so on, each with its image code or name, where it is used, its size, and whether it can be exported (in the file, linked, or missing). <b>Package</b> downloads one zip with the project file, every image in a folder per kind, and a list of what is in it, like packaging an InDesign file. Client elevations now keep the name of the file you added, shown and editable on the Context tab.\n<strong>20.36</strong> <b>The client elevation shows in the spec page thumbnail too.</b> A wall set to <b>Show in deck</b> now has its client elevation in the small Elevation picture on its spec pages, cropped to the wall and behind the art, the same as on the wall's own page. Before, only the wall page and the exports showed it.\n<strong>20.35</strong> <b>Wall paint uses the usual colour picker, and stops at the baseboard.</b> Under Wall Finish, <b>Paint</b> is now a row of round swatches like every other colour choice in FRAME: no paint, whites, greys, charcoal, navy, light oak and walnut, then the colour wheel for anything else. The paint covers the wall down to the top of the baseboard; the baseboard itself stays unpainted, in the editor, on the pages and in exports.\n<strong>20.34</strong> <b>Elevation required sits clear of the size legend.</b> On wall pages the stamp now prints low in the left column, just above the floorplan thumbnail, instead of straight under the WALL: line, where an install page's size legend is and the two overlapped.\n<strong>20.33</strong> <b>Elevation required, stamped for you.</b> When the client has not sent an elevation for a wall, tick <b>Elevation required</b> under Wall Finish. That wall's pages and the spec pages of the art on it print <b>ELEVATION REQUIRED</b> in red with a line under it (Artwork size to be confirmed, or your own words): top right on spec pages, under the title on wall pages, where it stays clear of the drawing. Untick it when the drawing arrives and every page is clean again; nothing is left behind on the pages.\n<strong>20.32</strong> <b>Walls can be painted.</b> Under Wall Finish there is a <b>Wall colour</b> swatch. Pick the wall's paint and the wall shows in that colour in the editor, on its deck pages, in the elevation thumbnail on spec pages, and in SVG, PDF and PNG exports, so the art is seen against the wall it hangs on. <b>Clear</b> puts it back to a plain wall. Catalogue options take it from their wall like the finish.\n<strong>20.31</strong> <b>The client's elevation can be the drawing.</b> On a wall's Context tab, a client elevation you have dropped in and calibrated has a new <b>Show in deck</b> switch. With it on, the drawing prints behind your art on that wall's deck pages and exports, at full strength and cropped to the wall, so the page shows the architect's wall with the art on it and no InDesign step is needed. Off, it stays a faded tracing guide that never prints, as before. Calibrate first (click the two ends of a dimension printed on the drawing and type it) so the art is to scale.\n<strong>20.30</strong> <b>Item codes can follow the client's pattern.</b> On the Deck Studio floorplan, the Categories tab has <b>Item codes</b>: pick a pattern such as <b>L3.ART.S16-01</b> (level, type, sector) or type your own with {level}, {type}, {zone} and {nn}. New codes follow it: <b>+ Add Item</b> asks for the sector and shows the code it will make, and each level's code (Level 03 is L3) can be changed there. Each category has its own prefix box, so a project can call glass GLA. Items have a <b>Sector</b> field beside Location, and <b>Recode</b> moves a project's ART.1 codes to the pattern in one go (pieces keep their letters; walls named after a code follow).\n<strong>20.29</strong> <b>A client's level-first codes sort and duplicate properly.</b> Codes like <b>L3.ART.S16-10A</b> (level, type, sector, placement, piece) were read as type L, number 3, so the item list and the deck listed every A piece first, then every B. They now sort by sector and placement. Duplicating one gives the next placement in that code (L3.ART.S16-11), not L3.1.

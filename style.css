@@ -2617,6 +2617,9 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .ss-form { width: min(400px, 92vw); margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .ss-form label { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-65); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
 .ss-form input[type=text] { height: 34px; padding: 0 10px; font-size: var(--fs-85); text-transform: none; letter-spacing: 0; }
+.ss-hint { min-height: 0; font-size: var(--fs-60); text-transform: none; letter-spacing: 0; color: var(--warn); }
+.ss-hint:empty { display: none; }
+.ss-form label.ss-check { flex-direction: row; align-items: center; gap: 8px; text-transform: none; letter-spacing: 0; font-size: var(--fs-75); color: var(--text-main); cursor: pointer; }
 .ss-units-row { display: flex; align-items: center; gap: 12px; font-size: var(--fs-65); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
 .ss-units { flex: 0 0 180px; }
 .ss-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
@@ -2663,6 +2666,23 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .ask-section { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-subpanel); }
 .ask-section-title { font-size: var(--fs-65); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-strong); }
 .ask-field select { height: 32px; font-size: var(--fs-80); text-transform: none; letter-spacing: 0; }
+/* New project folder (20.81): the folder preview marks each folder new or already there. */
+.pjf-card { width: min(520px, 94vw); max-height: 92vh; overflow: auto; }
+.pjf-where { display: block; }
+.pjf-link { background: none; border: 0; padding: 0; color: var(--ui-active); font: inherit; text-decoration: underline; cursor: pointer; }
+.pjf-hint { font-size: var(--fs-60); text-transform: none; letter-spacing: 0; color: var(--text-muted); }
+.pjf-fixed { font-size: var(--fs-75); color: var(--text-main); }
+.pjf-fixed:empty { display: none; }
+.pjf-modal .pjf-check, .pjf-modal .pjf-check span { display: flex; align-items: center; gap: 8px; font-size: var(--fs-70); font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text-main); cursor: pointer; }
+.pjf-preview-head { font-size: var(--fs-65); color: var(--text-muted); }
+.pjf-preview { max-height: 220px; overflow: auto; border: 1px solid var(--border-color); border-radius: var(--r-4, 4px); padding: 6px 8px; font-size: var(--fs-65); line-height: 1.55; }
+.pjf-preview:empty { display: none; }
+.pjf-row { display: flex; justify-content: space-between; gap: 10px; white-space: nowrap; }
+.pjf-row.pjf-there { color: var(--text-muted); }
+.pjf-row.pjf-new { color: var(--text-main); }
+.pjf-tag { font-size: var(--fs-60); color: var(--text-muted); }
+.pjf-new .pjf-tag { color: var(--ui-active); }
+.ask-actions .pjf-pick { padding: 0 10px; }
 .ask-section > .action-btn { align-self: flex-start; width: auto; height: 30px; padding: 0 14px; }
 /* 20.47: + Add Item picks its frame set from pictures, like the floorplan. */
 .ask-set-pick { display: flex; align-items: center; gap: 10px; width: 100%; padding: 6px 10px 6px 6px; text-align: left; cursor: pointer; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-6); text-transform: none; letter-spacing: 0; }

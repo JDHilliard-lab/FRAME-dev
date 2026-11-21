@@ -49,6 +49,17 @@ Same format as `CLAUDE.md`: the rule, the names, the trap, one clause of why. Ad
   listeners take only a drag whose item type is `application/json` (blank type is a folder,
   the library zone's); everything else passes through to the image zones. The handle is
   asked for synchronously in the drop (`getAsFileSystemHandle`), awaited after the confirm.
+- **PROJECT FOLDERS (20.81, `setupWorkFolder`, `openProjectFolderDialog`, `createProjectFolder`, `_designFolder` ({project, pdf}), `_deliverPdf`).**
+  Local work tree mirroring Dropbox: `00 ACTIVE PROJECTS/CLIENT (CODE)/PROJECT/` + `PJF_TEMPLATE_TOP` (Dropbox
+  `00. FILE TEMPLATE 2026`; 01. Design = `DESIGN_SUBFOLDERS` incl. `06. FARMHAND`, optional `LEVEL nn`, optional
+  ARTWORK/EGD in `DESIGN_SPLIT_SUBS`). `test_design_folder` pins it; change the Dropbox and Post Haste templates too.
+  **NEVER WRITES INTO DROPBOX**: the browser gives names, not paths, so `_pjfLooksLikeDropbox` refuses a folder by
+  its contents (00. FILE TEMPLATE…, 00 PROJECT ARCHIVE…, 01 CREATIVE TEAM + 03 SALES, "dropbox" in a name). Add-only:
+  `_pjfFind` reuses an existing folder by exact then loose name (`_pjfKey`), `create: true` only, files are never
+  written over without `_askYesNo`. The dialog previews (`_pjfApply` dry) before Create. New names go through
+  `_pjfSafeName` (Windows-illegal characters to "-"). The work-root handle is persisted in the frame-links store
+  (`PJF_STORE_KEY`); a later session needs `requestPermission`, which needs a click (the dialog's Allow access).
+  Every deck PDF save goes through `_deliverPdf` (folder if bound and permitted, else `doc.save`).
 - **ONE AUTOSAVE PER TAB (18.82).** Records are keyed by `_autosaveSession` (the old
   shared `ADB_ID = 'current'` is read and cleared, never written). `_aPrune` keeps the
   newest `AUTOSAVE_KEEP` (5), max `AUTOSAVE_MAX_DAYS`, never this tab's. `clearAutosave`
